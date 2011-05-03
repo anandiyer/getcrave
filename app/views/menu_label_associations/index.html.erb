@@ -1,0 +1,27 @@
+<h1>Listing menu_label_associations</h1>
+
+<table>
+  <tr>
+    <th>Menu item</th>
+    <th>Menu label</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @menu_label_associations.each do |menu_label_association| %>
+  <tr>
+    <td><%= menu_label_association.menu_item_id %></td>
+    <td><%= menu_label_association.menu_label_id %></td>
+    <td><%= menu_label_association.user_id %></td>
+    <td><%= link_to 'Show', menu_label_association %></td>
+    <td><%= link_to 'Edit', edit_menu_label_association_path(menu_label_association) %></td>
+    <td><%= link_to 'Destroy', menu_label_association, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Menu label association', new_menu_label_association_path %>

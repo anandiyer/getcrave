@@ -1,0 +1,27 @@
+<h1>Listing menu_item_photos</h1>
+
+<table>
+  <tr>
+    <th>Menu item</th>
+    <th>Photo</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @menu_item_photos.each do |menu_item_photo| %>
+  <tr>
+    <td><%= menu_item_photo.menu_item_id %></td>
+    <td><%= menu_item_photo.photo %></td>
+    <td><%= menu_item_photo.user_id %></td>
+    <td><%= link_to 'Show', menu_item_photo %></td>
+    <td><%= link_to 'Edit', edit_menu_item_photo_path(menu_item_photo) %></td>
+    <td><%= link_to 'Destroy', menu_item_photo, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Menu item photo', new_menu_item_photo_path %>

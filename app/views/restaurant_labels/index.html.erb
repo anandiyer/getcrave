@@ -1,0 +1,23 @@
+<h1>Listing restaurant_labels</h1>
+
+<table>
+  <tr>
+    <th>Restaurant label</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @restaurant_labels.each do |restaurant_label| %>
+  <tr>
+    <td><%= restaurant_label.restaurant_label %></td>
+    <td><%= link_to 'Show', restaurant_label %></td>
+    <td><%= link_to 'Edit', edit_restaurant_label_path(restaurant_label) %></td>
+    <td><%= link_to 'Destroy', restaurant_label, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Restaurant label', new_restaurant_label_path %>

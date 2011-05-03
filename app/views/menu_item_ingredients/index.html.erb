@@ -1,0 +1,27 @@
+<h1>Listing menu_item_ingredients</h1>
+
+<table>
+  <tr>
+    <th>Menu item</th>
+    <th>Ingredient</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @menu_item_ingredients.each do |menu_item_ingredient| %>
+  <tr>
+    <td><%= menu_item_ingredient.menu_item_id %></td>
+    <td><%= menu_item_ingredient.ingredient_id %></td>
+    <td><%= menu_item_ingredient.user_id %></td>
+    <td><%= link_to 'Show', menu_item_ingredient %></td>
+    <td><%= link_to 'Edit', edit_menu_item_ingredient_path(menu_item_ingredient) %></td>
+    <td><%= link_to 'Destroy', menu_item_ingredient, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Menu item ingredient', new_menu_item_ingredient_path %>

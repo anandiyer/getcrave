@@ -1,0 +1,27 @@
+<h1>Listing restaurant_label_associations</h1>
+
+<table>
+  <tr>
+    <th>Restaurant</th>
+    <th>Restaurant label</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @restaurant_label_associations.each do |restaurant_label_association| %>
+  <tr>
+    <td><%= restaurant_label_association.restaurant_id %></td>
+    <td><%= restaurant_label_association.restaurant_label_id %></td>
+    <td><%= restaurant_label_association.user_id %></td>
+    <td><%= link_to 'Show', restaurant_label_association %></td>
+    <td><%= link_to 'Edit', edit_restaurant_label_association_path(restaurant_label_association) %></td>
+    <td><%= link_to 'Destroy', restaurant_label_association, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Restaurant label association', new_restaurant_label_association_path %>

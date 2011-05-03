@@ -1,0 +1,2 @@
+module MenuItemIngredientsHelper
+end

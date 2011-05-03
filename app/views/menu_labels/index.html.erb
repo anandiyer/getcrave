@@ -1,0 +1,23 @@
+<h1>Listing menu_labels</h1>
+
+<table>
+  <tr>
+    <th>Menu label</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @menu_labels.each do |menu_label| %>
+  <tr>
+    <td><%= menu_label.menu_label %></td>
+    <td><%= link_to 'Show', menu_label %></td>
+    <td><%= link_to 'Edit', edit_menu_label_path(menu_label) %></td>
+    <td><%= link_to 'Destroy', menu_label, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Menu label', new_menu_label_path %>

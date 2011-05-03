@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Restaurant:</b>
+  <%= @restaurant_cuisine_association.restaurant_id %>
+</p>
+
+<p>
+  <b>Restaurant cuisine:</b>
+  <%= @restaurant_cuisine_association.restaurant_cuisine_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_restaurant_cuisine_association_path(@restaurant_cuisine_association) %> |
+<%= link_to 'Back', restaurant_cuisine_associations_path %>

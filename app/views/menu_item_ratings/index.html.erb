@@ -1,0 +1,29 @@
+<h1>Listing menu_item_ratings</h1>
+
+<table>
+  <tr>
+    <th>Menu item</th>
+    <th>User</th>
+    <th>Rating</th>
+    <th>Review</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @menu_item_ratings.each do |menu_item_rating| %>
+  <tr>
+    <td><%= menu_item_rating.menu_item_id %></td>
+    <td><%= menu_item_rating.user_id %></td>
+    <td><%= menu_item_rating.rating %></td>
+    <td><%= menu_item_rating.review %></td>
+    <td><%= link_to 'Show', menu_item_rating %></td>
+    <td><%= link_to 'Edit', edit_menu_item_rating_path(menu_item_rating) %></td>
+    <td><%= link_to 'Destroy', menu_item_rating, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Menu item rating', new_menu_item_rating_path %>

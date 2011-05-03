@@ -1,0 +1,2 @@
+module MenuItemPhotosHelper
+end

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Menu item rating:</b>
+  <%= @menu_item_rating_helpful.menu_item_rating_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @menu_item_rating_helpful.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_menu_item_rating_helpful_path(@menu_item_rating_helpful) %> |
+<%= link_to 'Back', menu_item_rating_helpfuls_path %>

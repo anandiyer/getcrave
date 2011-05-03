@@ -1,0 +1,2 @@
+module MenuLabelsHelper
+end

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Restaurant:</b>
+  <%= @restaurant_label_association.restaurant_id %>
+</p>
+
+<p>
+  <b>Restaurant label:</b>
+  <%= @restaurant_label_association.restaurant_label_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @restaurant_label_association.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_restaurant_label_association_path(@restaurant_label_association) %> |
+<%= link_to 'Back', restaurant_label_associations_path %>

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Menu item:</b>
+  <%= @menu_item_rating.menu_item_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @menu_item_rating.user_id %>
+</p>
+
+<p>
+  <b>Rating:</b>
+  <%= @menu_item_rating.rating %>
+</p>
+
+<p>
+  <b>Review:</b>
+  <%= @menu_item_rating.review %>
+</p>
+
+
+<%= link_to 'Edit', edit_menu_item_rating_path(@menu_item_rating) %> |
+<%= link_to 'Back', menu_item_ratings_path %>

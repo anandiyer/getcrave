@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Menu item:</b>
+  <%= @menu_item_price.menu_item_id %>
+</p>
+
+<p>
+  <b>Price for:</b>
+  <%= @menu_item_price.price_for %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @menu_item_price.price %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @menu_item_price.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_menu_item_price_path(@menu_item_price) %> |
+<%= link_to 'Back', menu_item_prices_path %>

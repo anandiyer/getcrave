@@ -1,0 +1,29 @@
+<h1>Listing menu_item_prices</h1>
+
+<table>
+  <tr>
+    <th>Menu item</th>
+    <th>Price for</th>
+    <th>Price</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @menu_item_prices.each do |menu_item_price| %>
+  <tr>
+    <td><%= menu_item_price.menu_item_id %></td>
+    <td><%= menu_item_price.price_for %></td>
+    <td><%= menu_item_price.price %></td>
+    <td><%= menu_item_price.user_id %></td>
+    <td><%= link_to 'Show', menu_item_price %></td>
+    <td><%= link_to 'Edit', edit_menu_item_price_path(menu_item_price) %></td>
+    <td><%= link_to 'Destroy', menu_item_price, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Menu item price', new_menu_item_price_path %>
