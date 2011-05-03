@@ -50,8 +50,9 @@ production:
   database: getcrave_production
   template: template_postgis
   pool: 5
-  username: postgres
-  password: P@ssw0rd
+  host: ec2-204-236-239-4.compute-1.amazonaws.com
+  username: nfkaxplqsb
+  password: 98Y4WqMUJ8xED8bcj8HI
 
 cucumber:
   <<: *test

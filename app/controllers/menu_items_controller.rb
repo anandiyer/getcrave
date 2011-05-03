@@ -7,6 +7,7 @@ class MenuItemsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @menu_items }
+      format.json { render :json => @menu_items }
     end
   end
 
@@ -18,6 +19,7 @@ class MenuItemsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @menu_item }
+      format.json { render :json => @menu_item }
     end
   end
 
@@ -29,6 +31,7 @@ class MenuItemsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @menu_item }
+      format.json { render :json => @menu_item }
     end
   end
 
