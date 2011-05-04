@@ -27,7 +27,9 @@ Crave::Application.routes.draw do
 
   resources :restaurant_cuisines
 
-  resources :restaurants
+  resources :restaurants do
+    resources :menu_items
+  end
 
   resources :users
 

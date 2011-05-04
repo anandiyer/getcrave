@@ -1,4 +1,6 @@
 class MenuItemsController < ApplicationController
+  before_filter :get_restaurant
+  
   # GET /menu_items
   # GET /menu_items.xml
   def index
@@ -7,13 +9,18 @@ class MenuItemsController < ApplicationController
     @lat = params[:lat].to_f
     @long = params[:long].to_f
     
-    # Lookup all the restaurants near the given lat/long and get 50 of the menu_items
-    @menu_items = Restaurant.find(:all, 
-      :origin => [@lat, @long], 
-      :order=>'distance asc',  
-      :joins => [ :menu_items ],
-      :limit => 500)
-
+    # FIXME - lat & long could be specified erroneously as could the restaurant_id
+    if (@lat == 0 || @long == 0)
+      @menu_items = @restaurant.menu_items.find(:all)
+    else 
+      # Lookup all the restaurants near the given lat/long and get 50 of the menu_items
+      @menu_items = Restaurant.find(:all, 
+        :origin => [@lat, @long], 
+        :order=>'distance asc',  
+        :joins => [ :menu_items ],
+        :limit => 500)
+    end
+    
     # Now find the menu items for each of those restaurants
     #@menu_items = MenuItem.find(:all, 
       #:joins => " INNER JOIN restaurants ON restaurants.id = menu_items.restaurant_id")
@@ -98,4 +105,9 @@ class MenuItemsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  private
+    def get_restaurant
+      @restaurant = Restaurant.find_by_id(params[:restaurant_id]) unless params[:restaurant_id].blank?
+    end
 end
