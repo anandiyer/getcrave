@@ -17,7 +17,9 @@ Crave::Application.routes.draw do
 
   resources :menu_item_prices
 
-  resources :menu_items
+  resources :menu_items do
+    resources :menu_item_ratings
+  end
 
   resources :restaurant_label_associations
 

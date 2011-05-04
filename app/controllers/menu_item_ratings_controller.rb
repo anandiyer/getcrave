@@ -1,23 +1,31 @@
 class MenuItemRatingsController < ApplicationController
+  before_filter :get_menu_item
+  
   # GET /menu_item_ratings
   # GET /menu_item_ratings.xml
   def index
-    @menu_item_ratings = MenuItemRating.all
+    #@menu_item_ratings = MenuItemRating.all
+   
+    @menu_item_ratings = @menu_item.menu_item_ratings.find(:all)
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @menu_item_ratings }
+      format.json { render :json => @menu_item_ratings }
     end
   end
 
   # GET /menu_item_ratings/1
   # GET /menu_item_ratings/1.xml
   def show
+    #@menu_item_rating = @menu_item.menu_item_ratings.find(params[:id])
+
     @menu_item_rating = MenuItemRating.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @menu_item_rating }
+      format.json { render :json => @menu_item_rating }
     end
   end
 
@@ -25,10 +33,13 @@ class MenuItemRatingsController < ApplicationController
   # GET /menu_item_ratings/new.xml
   def new
     @menu_item_rating = MenuItemRating.new
+    @menu_item_rating.menu_item_id = @menu_item.id
 
     respond_to do |format|
+      # FIXME
       format.html # new.html.erb
       format.xml  { render :xml => @menu_item_rating }
+      format.json { render :json => @menu_item_rating }
     end
   end
 
@@ -80,4 +91,10 @@ class MenuItemRatingsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  private
+    def get_menu_item
+      @menu_item = MenuItem.find(params[:menu_item_id]) unless params[:menu_item_id].blank?
+    end
+  
 end
