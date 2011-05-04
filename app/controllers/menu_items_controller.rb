@@ -108,6 +108,6 @@ class MenuItemsController < ApplicationController
   
   private
     def get_restaurant
-      @restaurant = Restaurant.find_by_id(params[:restaurant_id]) unless params[:restaurant_id].blank?
+      @restaurant = Restaurant.find(params[:restaurant_id]) unless params[:restaurant_id].blank?
     end
 end

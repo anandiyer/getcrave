@@ -30,6 +30,7 @@ GEM
       activesupport (= 3.0.7)
     activesupport (3.0.7)
     arel (2.0.9)
+    babosa (0.3.3)
     builder (2.1.2)
     capybara (0.4.1.2)
       celerity (>= 0.7.9)
@@ -59,6 +60,8 @@ GEM
       abstract (>= 1.0.0)
     ffi (1.0.7)
       rake (>= 0.8.7)
+    friendly_id (3.2.1.1)
+      babosa (~> 0.3.0)
     geokit (1.5.0)
     gherkin (2.3.6)
       json (>= 1.4.6)
@@ -133,6 +136,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   cucumber-rails
+  friendly_id (~> 3.2.1)
   geokit
   pg
   rails (= 3.0.7)
