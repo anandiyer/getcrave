@@ -2,7 +2,22 @@ class MenuItemsController < ApplicationController
   # GET /menu_items
   # GET /menu_items.xml
   def index
-    @menu_items = MenuItem.all
+    # @menu_items = MenuItem.all
+
+    @lat = params[:lat].to_f
+    @long = params[:long].to_f
+    
+    # Lookup all the restaurants near the given lat/long and get 50 of the menu_items
+    @menu_items = Restaurant.find(:all, 
+      :origin => [@lat, @long], 
+      :order=>'distance asc',  
+      :joins => [ :menu_items ],
+      :limit => 500)
+
+    # Now find the menu items for each of those restaurants
+    #@menu_items = MenuItem.find(:all, 
+      #:joins => " INNER JOIN restaurants ON restaurants.id = menu_items.restaurant_id")
+      #:conditions => { :restaurants => { :origin => [@lat, @long], :order => 'distance asc', :limit => 5 } })
 
     respond_to do |format|
       format.html # index.html.erb
