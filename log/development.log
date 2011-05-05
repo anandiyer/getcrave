@@ -30536,3 +30536,48 @@ Started GET "/restaurants/lavash/menu_items.json" for 127.0.0.1 at Thu May 05 13
  ORDER BY a.attnum
 [0m
 Completed 200 OK in 221ms (Views: 102.6ms | ActiveRecord: 83.3ms)
+
+
+Started GET "/restaurants?lat=37.79959&long=-122.44454&limit=1" for 127.0.0.1 at Thu May 05 13:23:57 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  Parameters: {"limit"=>"1", "lat"=>"37.79959", "long"=>"-122.44454"}
+  [1m[35mRestaurant Load (11.9ms)[0m  SELECT *, 
+ (ACOS(least(1,COS(0.659727301403923)*COS(-2.1370603740899)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.659727301403923)*SIN(-2.1370603740899)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.659727301403923)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSlug Load (0.9ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1621 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+Rendered restaurants/index.html.erb within layouts/application (97.6ms)
+Completed 200 OK in 130ms (Views: 102.2ms | ActiveRecord: 14.1ms)
+
+
+Started GET "/restaurants?lat=37.79959&long=-122.44454&limit=6" for 127.0.0.1 at Thu May 05 13:24:01 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  Parameters: {"limit"=>"6", "lat"=>"37.79959", "long"=>"-122.44454"}
+  [1m[35mRestaurant Load (11.9ms)[0m  SELECT *, 
+ (ACOS(least(1,COS(0.659727301403923)*COS(-2.1370603740899)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.659727301403923)*SIN(-2.1370603740899)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.659727301403923)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 6
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSlug Load (0.6ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1621 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 149 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1417 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 114 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.6ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2289 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 20 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (113.9ms)
+Completed 200 OK in 147ms (Views: 116.3ms | ActiveRecord: 16.3ms)

@@ -14,8 +14,6 @@ class MenuItemsController < ApplicationController
       @limit = params[:limit].to_i
     end
 
-    p @limit
-
     # FIXME - lat & long could be specified erroneously as could the restaurant_id
     if (@lat == 0 || @long == 0)
       @menu_items = @restaurant.menu_items.find(:all, :limit => @limit)

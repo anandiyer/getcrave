@@ -8,8 +8,13 @@ class RestaurantsController < ApplicationController
     
     @lat = params[:lat].to_f
     @long = params[:long].to_f
+    @limit = 50
     
-    @restaurants = Restaurant.find(:all, :origin => [@lat, @long], :order=>'distance asc', :limit => 100)
+    if params[:limit] && !params[:limit].empty?
+      @limit = params[:limit].to_i
+    end
+    
+    @restaurants = Restaurant.find(:all, :origin => [@lat, @long], :order=>'distance asc', :limit => @limit)
 
     respond_to do |format|
       format.html # index.html.erb
