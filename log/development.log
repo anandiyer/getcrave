@@ -25761,3 +25761,2315 @@ Started GET "/menu_items/60/menu_item_ratings" for 127.0.0.1 at Wed May 04 16:16
  ORDER BY a.attnum
 Rendered menu_item_ratings/index.html.erb within layouts/application (96.1ms)
 Completed 200 OK in 128ms (Views: 101.9ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at Wed May 04 20:06:03 -0700 2011
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW client_min_messages[0m
+  [1m[35mSQL (0.1ms)[0m  SET client_min_messages TO 'panic'
+  [1m[36mSQL (0.1ms)[0m  [1mSET standard_conforming_strings = on[0m
+  [1m[35mSQL (0.1ms)[0m  SET client_min_messages TO 'notice'
+  [1m[36mSQL (0.4ms)[0m  [1mSET time zone 'UTC'[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW TIME ZONE
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (19.2ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (1.7ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (2.4ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (2.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'slugs'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"slugs"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSlug Load (0.6ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1837 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1065 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 560 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1977 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 876 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2052 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2023 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1630 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSQL (2.5ms)[0m  [1m SELECT tablename
+ FROM pg_tables
+ WHERE schemaname = ANY (current_schemas(false))
+[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1630 LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2412 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 821 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2358 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 2358 LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1764 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1794 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1794 LIMIT 1[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1937 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.7ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1262 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 551 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (3.1ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 605 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (5.3ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1665 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (3.6ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1642 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.8ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1642 LIMIT 1
+  [1m[36mSlug Load (0.6ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 959 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1777 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.6ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1424 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.6ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1424 LIMIT 1
+  [1m[36mSlug Load (0.8ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 499 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1725 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.5ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1725 LIMIT 1[0m
+Rendered restaurants/index.html.erb within layouts/application (253.9ms)
+Completed 200 OK in 307ms (Views: 223.5ms | ActiveRecord: 57.8ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at Wed May 04 20:06:03 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[35mRestaurant Load (13.3ms)[0m  SELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25
+  [1m[36mSQL (0.5ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSlug Load (0.8ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1837 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1065 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 560 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1977 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (1.2ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 876 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2052 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2023 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1630 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1630 LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2412 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 821 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2358 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 2358 LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1764 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.7ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1794 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1794 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1937 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1262 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 551 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 605 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1665 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1642 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.5ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1642 LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 959 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1777 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1424 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1424 LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 499 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1725 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.3ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1725 LIMIT 1[0m
+Rendered restaurants/index.html.erb within layouts/application (149.2ms)
+Completed 200 OK in 187ms (Views: 138.9ms | ActiveRecord: 30.9ms)
+
+
+Started GET "/restaurants/birley-sandwiches" for 127.0.0.1 at Wed May 04 20:06:07 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"birley-sandwiches"}
+  [1m[35mSQL (0.5ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.9ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.6ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'birley-sandwiches' AND slugs.sequence = 1))
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 221 LIMIT 1[0m
+Rendered restaurants/show.html.erb within layouts/application (95.0ms)
+Completed 200 OK in 119ms (Views: 101.8ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 20:37:46 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[35mRestaurant Load (12.0ms)[0m  SELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSlug Load (0.6ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1837 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1065 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 560 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1977 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 876 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2052 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2023 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1630 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1630 LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2412 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 821 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2358 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 2358 LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1764 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1794 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1794 LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1937 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1262 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 551 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 605 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1665 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1642 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1642 LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 959 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1777 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1424 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1424 LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 499 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1725 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.3ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1725 LIMIT 1[0m
+Rendered restaurants/index.html.erb within layouts/application (138.7ms)
+Completed 200 OK in 173ms (Views: 129.9ms | ActiveRecord: 27.9ms)
+
+
+Started GET "/restaurants/60" for 127.0.0.1 at Wed May 04 20:37:47 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"60"}
+  [1m[35mSQL (0.5ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.9ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = '60' AND slugs.sequence = 1))
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 60 LIMIT 1[0m
+Rendered restaurants/show.html.erb within layouts/application (16.7ms)
+Completed 200 OK in 118ms (Views: 23.3ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/restaurants/60m" for 127.0.0.1 at Wed May 04 20:37:47 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"60m"}
+  [1m[35mSQL (0.5ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = '60m' AND slugs.sequence = 1))
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 60 LIMIT 1[0m
+Rendered restaurants/show.html.erb within layouts/application (19.2ms)
+Completed 200 OK in 44ms (Views: 26.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/restaurants/60/" for 127.0.0.1 at Wed May 04 20:37:48 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"60"}
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.9ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = '60' AND slugs.sequence = 1))
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 60 LIMIT 1[0m
+Rendered restaurants/show.html.erb within layouts/application (75.7ms)
+Completed 200 OK in 102ms (Views: 83.2ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/restaurants/60/menu" for 127.0.0.1 at Wed May 04 20:37:48 -0700 2011
+
+ActionController::RoutingError (No route matches "/restaurants/60/menu"):
+  
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/restaurants/60/menu_" for 127.0.0.1 at Wed May 04 20:37:48 -0700 2011
+
+ActionController::RoutingError (No route matches "/restaurants/60/menu_"):
+  
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/restaurants/60/menu_items" for 127.0.0.1 at Wed May 04 20:37:49 -0700 2011
+  Processing by MenuItemsController#index as HTML
+  Parameters: {"restaurant_id"=>"60"}
+  [1m[35mSQL (0.5ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.9ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = '60' AND slugs.sequence = 1))
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 60 LIMIT 1[0m
+  [1m[35mMenuItem Load (88.9ms)[0m  SELECT "menu_items".* FROM "menu_items" WHERE ("menu_items".restaurant_id = 60)
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'menu_items'[0m
+  [1m[35mSQL (0.7ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"menu_items"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+Rendered menu_items/index.html.erb within layouts/application (30.5ms)
+Completed 200 OK in 253ms (Views: 36.2ms | ActiveRecord: 93.2ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 20:40:56 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (12.0ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (1.9ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1837 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1065 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 560 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1977 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 876 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2052 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2023 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1630 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1630 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2412 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 821 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2358 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 2358 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1764 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1794 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (1.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1794 LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1937 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1262 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 551 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 605 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1665 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1642 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1642 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 959 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1777 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1424 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.3ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1424 LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 499 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1725 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1725 LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (167.1ms)
+Completed 200 OK in 201ms (Views: 154.6ms | ActiveRecord: 31.4ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 20:40:57 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (12.7ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1837 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1065 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 560 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1977 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 876 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2052 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2023 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1630 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1630 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2412 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 821 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2358 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 2358 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1764 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1794 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.3ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1794 LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1937 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1262 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 551 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 605 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1665 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (1.9ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1642 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1642 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 959 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1777 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1424 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1424 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 499 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1725 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1725 LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (177.4ms)
+Completed 200 OK in 216ms (Views: 166.4ms | ActiveRecord: 30.4ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 20:51:28 -0700 2011
+  [1m[36mSQL (0.2ms)[0m  [1mSHOW client_min_messages[0m
+  [1m[35mSQL (0.1ms)[0m  SET client_min_messages TO 'panic'
+  [1m[36mSQL (0.1ms)[0m  [1mSET standard_conforming_strings = on[0m
+  [1m[35mSQL (0.1ms)[0m  SET client_min_messages TO 'notice'
+  [1m[36mSQL (0.5ms)[0m  [1mSET time zone 'UTC'[0m
+  [1m[35mSQL (0.1ms)[0m  SHOW TIME ZONE
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (19.1ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (1.7ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (2.4ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (1.3ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'slugs'[0m
+  [1m[35mSQL (0.7ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"slugs"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+Rendered restaurants/index.html.erb within layouts/application (115.9ms)
+Completed   in 170ms
+
+ActionView::Template::Error (No route matches {:controller=>"menu_items"}):
+    20:     <td><%= restaurant.country %></td>
+    21:     <td><%= restaurant.cross_street %></td>
+    22:     <td><%= link_to 'Show', restaurant %></td>
+    23: 	<td><%= link_to 'Menu', restaurant_menu_items_path %>
+    24:   </tr>
+    25: <% end %>
+    26: </table>
+  app/views/restaurants/index.html.erb:23:in `_app_views_restaurants_index_html_erb___656638871_2172756720_0'
+  app/views/restaurants/index.html.erb:15:in `each'
+  app/views/restaurants/index.html.erb:15:in `_app_views_restaurants_index_html_erb___656638871_2172756720_0'
+  app/controllers/restaurants_controller.rb:14:in `index'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (22.4ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (28.7ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 20:52:26 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (12.9ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (90.4ms)
+Completed   in 127ms
+
+ActionView::Template::Error (No route matches {:controller=>"menu_items"}):
+    21:     <td><%= restaurant.country %></td>
+    22:     <td><%= restaurant.cross_street %></td>
+    23:     <td><%= link_to 'Show', restaurant %></td>
+    24: 	<td><%= link_to 'Menu', restaurant_menu_items_path %>
+    25:   </tr>
+    26: <% end %>
+    27: </table>
+  app/views/restaurants/index.html.erb:24:in `_app_views_restaurants_index_html_erb___656638871_2172915760_0'
+  app/views/restaurants/index.html.erb:16:in `each'
+  app/views/restaurants/index.html.erb:16:in `_app_views_restaurants_index_html_erb___656638871_2172915760_0'
+  app/controllers/restaurants_controller.rb:14:in `index'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (24.3ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (30.0ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 20:52:28 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (12.5ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (86.0ms)
+Completed   in 122ms
+
+ActionView::Template::Error (No route matches {:controller=>"menu_items"}):
+    21:     <td><%= restaurant.country %></td>
+    22:     <td><%= restaurant.cross_street %></td>
+    23:     <td><%= link_to 'Show', restaurant %></td>
+    24: 	<td><%= link_to 'Menu', restaurant_menu_items_path %>
+    25:   </tr>
+    26: <% end %>
+    27: </table>
+  app/views/restaurants/index.html.erb:24:in `_app_views_restaurants_index_html_erb___656638871_2175217820_0'
+  app/views/restaurants/index.html.erb:16:in `each'
+  app/views/restaurants/index.html.erb:16:in `_app_views_restaurants_index_html_erb___656638871_2175217820_0'
+  app/controllers/restaurants_controller.rb:14:in `index'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (23.8ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (29.7ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 20:52:57 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (12.6ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (105.0ms)
+Completed   in 141ms
+
+ActionView::Template::Error (No route matches {:controller=>"menu_items"}):
+    21:     <td><%= restaurant.country %></td>
+    22:     <td><%= restaurant.cross_street %></td>
+    23:     <td><%= link_to 'Show', restaurant %></td>
+    24: 	<td><%= link_to 'Menu', restaurant_menu_items_path %></td>
+    25:   </tr>
+    26: <% end %>
+    27: </table>
+  app/views/restaurants/index.html.erb:24:in `_app_views_restaurants_index_html_erb___656638871_2172349420_0'
+  app/views/restaurants/index.html.erb:16:in `each'
+  app/views/restaurants/index.html.erb:16:in `_app_views_restaurants_index_html_erb___656638871_2172349420_0'
+  app/controllers/restaurants_controller.rb:14:in `index'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (23.9ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (29.4ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 20:53:49 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (12.1ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.7ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (152.2ms)
+Completed   in 186ms
+
+ActionView::Template::Error (undefined local variable or method `restaurant_menu_items' for #<#<Class:0x10340b5b0>:0x1034011f0>):
+    21:     <td><%= restaurant.country %></td>
+    22:     <td><%= restaurant.cross_street %></td>
+    23:     <td><%= link_to 'Show', restaurant %></td>
+    24: 	<td><%= link_to 'Menu', restaurant_menu_items %></td>
+    25:   </tr>
+    26: <% end %>
+    27: </table>
+  app/views/restaurants/index.html.erb:24:in `_app_views_restaurants_index_html_erb___656638871_2174729660_0'
+  app/views/restaurants/index.html.erb:16:in `each'
+  app/views/restaurants/index.html.erb:16:in `_app_views_restaurants_index_html_erb___656638871_2174729660_0'
+  app/controllers/restaurants_controller.rb:14:in `index'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (22.5ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (28.3ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 20:56:23 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (12.5ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (83.9ms)
+Completed   in 119ms
+
+ActionView::Template::Error (No route matches {:controller=>"menu_items"}):
+    21:     <td><%= restaurant.country %></td>
+    22:     <td><%= restaurant.cross_street %></td>
+    23:     <td><%= link_to 'Show', restaurant %></td>
+    24: 	<td><%= link_to 'Menu', restaurant_menu_items_path(@restaurant) %></td>
+    25:   </tr>
+    26: <% end %>
+    27: </table>
+  app/views/restaurants/index.html.erb:24:in `_app_views_restaurants_index_html_erb___656638871_2175431340_0'
+  app/views/restaurants/index.html.erb:16:in `each'
+  app/views/restaurants/index.html.erb:16:in `_app_views_restaurants_index_html_erb___656638871_2175431340_0'
+  app/controllers/restaurants_controller.rb:14:in `index'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (23.3ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (28.8ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 20:57:03 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (13.7ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (241.3ms)
+Completed   in 277ms
+
+ActionView::Template::Error (undefined method `restaurant_menu_items' for #<#<Class:0x102f79b28>:0x102f773a0>):
+    21:     <td><%= restaurant.country %></td>
+    22:     <td><%= restaurant.cross_street %></td>
+    23:     <td><%= link_to 'Show', restaurant %></td>
+    24: 	<td><%= link_to 'Menu', restaurant_menu_items(@restaurant) %></td>
+    25:   </tr>
+    26: <% end %>
+    27: </table>
+  app/views/restaurants/index.html.erb:24:in `_app_views_restaurants_index_html_erb___656638871_2172363080_0'
+  app/views/restaurants/index.html.erb:16:in `each'
+  app/views/restaurants/index.html.erb:16:in `_app_views_restaurants_index_html_erb___656638871_2172363080_0'
+  app/controllers/restaurants_controller.rb:14:in `index'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (22.3ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (28.2ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 20:59:36 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (12.4ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (111.5ms)
+Completed   in 147ms
+
+ActionView::Template::Error (No route matches {:controller=>"menu_items"}):
+    21:     <td><%= restaurant.country %></td>
+    22:     <td><%= restaurant.cross_street %></td>
+    23:     <td><%= link_to 'Show', restaurant %></td>
+    24: 	<td><%= link_to 'Menu', restaurant_menu_items_path(@restaurant, @menu_item) %></td>
+    25:   </tr>
+    26: <% end %>
+    27: </table>
+  app/views/restaurants/index.html.erb:24:in `_app_views_restaurants_index_html_erb___656638871_2172435620_0'
+  app/views/restaurants/index.html.erb:16:in `each'
+  app/views/restaurants/index.html.erb:16:in `_app_views_restaurants_index_html_erb___656638871_2172435620_0'
+  app/controllers/restaurants_controller.rb:14:in `index'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (22.3ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (28.0ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 21:03:18 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (12.0ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (82.8ms)
+Completed   in 117ms
+
+ActionView::Template::Error (No route matches {:controller=>"menu_items"}):
+    21:     <td><%= restaurant.country %></td>
+    22:     <td><%= restaurant.cross_street %></td>
+    23:     <td><%= link_to 'Show', restaurant %></td>
+    24: 	<td><%= link_to 'Menu', restaurant_menu_items_path %></td>
+    25:   </tr>
+    26: <% end %>
+    27: </table>
+  app/views/restaurants/index.html.erb:24:in `_app_views_restaurants_index_html_erb___656638871_2175220960_0'
+  app/views/restaurants/index.html.erb:16:in `each'
+  app/views/restaurants/index.html.erb:16:in `_app_views_restaurants_index_html_erb___656638871_2175220960_0'
+  app/controllers/restaurants_controller.rb:14:in `index'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (22.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (27.7ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 21:07:45 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (12.4ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mMenuItem Load (89.9ms)[0m  [1mSELECT "menu_items".* FROM "menu_items" WHERE ("menu_items".restaurant_id = 221)[0m
+  [1m[35mSQL (0.5ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'menu_items'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"menu_items"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+Rendered restaurants/index.html.erb within layouts/application (362.2ms)
+Completed   in 397ms
+
+ActionView::Template::Error (undefined method `menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_menu_item_path' for #<#<Class:0x102f7b130>:0x102f77990>):
+    21:     <td><%= restaurant.country %></td>
+    22:     <td><%= restaurant.cross_street %></td>
+    23:     <td><%= link_to 'Show', restaurant %></td>
+    24: 	<td><%= link_to 'Menu', restaurant.menu_items %></td>
+    25:   </tr>
+    26: <% end %>
+    27: </table>
+  app/views/restaurants/index.html.erb:24:in `_app_views_restaurants_index_html_erb___656638871_2172363480_0'
+  app/views/restaurants/index.html.erb:16:in `each'
+  app/views/restaurants/index.html.erb:16:in `_app_views_restaurants_index_html_erb___656638871_2172363480_0'
+  app/controllers/restaurants_controller.rb:14:in `index'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (22.5ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (27.9ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 21:08:20 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[35mRestaurant Load (12.0ms)[0m  SELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSlug Load (0.6ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+Rendered restaurants/index.html.erb within layouts/application (152.5ms)
+Completed   in 187ms
+
+ActionView::Template::Error (undefined local variable or method `menu_items' for #<#<Class:0x1033899c0>:0x103382300>):
+    21:     <td><%= restaurant.country %></td>
+    22:     <td><%= restaurant.cross_street %></td>
+    23:     <td><%= link_to 'Show', restaurant %></td>
+    24: 	<td><%= link_to 'Menu', menu_items %></td>
+    25:   </tr>
+    26: <% end %>
+    27: </table>
+  app/views/restaurants/index.html.erb:24:in `_app_views_restaurants_index_html_erb___656638871_2174460620_0'
+  app/views/restaurants/index.html.erb:16:in `each'
+  app/views/restaurants/index.html.erb:16:in `_app_views_restaurants_index_html_erb___656638871_2174460620_0'
+  app/controllers/restaurants_controller.rb:14:in `index'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.3ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (21.8ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (28.0ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 21:09:00 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[35mRestaurant Load (12.2ms)[0m  SELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25
+  [1m[36mSQL (0.5ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSlug Load (0.6ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mMenuItem Load (83.2ms)[0m  SELECT "menu_items".* FROM "menu_items" WHERE ("menu_items".restaurant_id = 221)
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'menu_items'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"menu_items"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+Rendered restaurants/index.html.erb within layouts/application (205.1ms)
+Completed   in 240ms
+
+ActionView::Template::Error (No route matches {:controller=>"menu_items", :restaurant_id=>[#<MenuItem id: 22113, restaurant_id: 221, name: "Albacore Tuna Salad", description: "with Sun dried Tomato Mayo ", user_id: nil, created_at: nil, updated_at: nil, price: 5.95>, #<MenuItem id: 22114, restaurant_id: 221, name: "Freshwater Shrimp", description: "with Citrus Mayo ", user_id: nil, created_at: nil, updated_at: nil, price: 6.95>, #<MenuItem id: 22115, restaurant_id: 221, name: "Norwegian Smoked Salmon & Dill Cream Cheese", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 6.25>, #<MenuItem id: 22116, restaurant_id: 221, name: "Poached Salmon", description: "with Lemon Dill Mayo ", user_id: nil, created_at: nil, updated_at: nil, price: 6.25>, #<MenuItem id: 22117, restaurant_id: 221, name: "Natural Roast Turkey", description: "with Cranberry Pecan Relish ", user_id: nil, created_at: nil, updated_at: nil, price: 5.95>, #<MenuItem id: 22118, restaurant_id: 221, name: "with Crisped Bacon, Avocado & Pesto Mayo ", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 6.95>, #<MenuItem id: 22119, restaurant_id: 221, name: "Curried Chicken", description: "with Fragrant Mango Chutney ", user_id: nil, created_at: nil, updated_at: nil, price: 5.95>, #<MenuItem id: 22120, restaurant_id: 221, name: "Natural Roast Rib Eye of Beef", description: "with Creamed Horseradish ", user_id: nil, created_at: nil, updated_at: nil, price: 6.5>, #<MenuItem id: 22121, restaurant_id: 221, name: "Crisped Bacon, Lettuce & Tomato", description: "with Lemon Mayo ", user_id: nil, created_at: nil, updated_at: nil, price: 5.75>, #<MenuItem id: 22122, restaurant_id: 221, name: "Avocado", description: "with Field Green & Citrus Mayo (with bacon add )", user_id: nil, created_at: nil, updated_at: nil, price: 5.25>, #<MenuItem id: 22123, restaurant_id: 221, name: "Farmhouse Aged English Cheddar", description: "with Tomato & Leek Chutney ", user_id: nil, created_at: nil, updated_at: nil, price: 5.5>, #<MenuItem id: 22124, restaurant_id: 221, name: "Emmenthal Cheese", description: "with Roasted Sweet Pepper Mayo ", user_id: nil, created_at: nil, updated_at: nil, price: 5.5>, #<MenuItem id: 22125, restaurant_id: 221, name: "Seasonal Roasted Vegetables", description: "with Hazelnut Pesto ", user_id: nil, created_at: nil, updated_at: nil, price: 6.5>, #<MenuItem id: 22127, restaurant_id: 221, name: "Roasted Breast of Chicken", description: "with Grilled Portobello Mushrooms on French Herb Ro...", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22128, restaurant_id: 221, name: "Proscuitto Di Parma", description: "with Smoked Mozzarella & Olive Tapenade on Focacett...", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22129, restaurant_id: 221, name: "Duck Rillet", description: "with Red Onion Marmalade on French Herb Roll ", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22130, restaurant_id: 221, name: "Mediterranean Tuna Salata", description: "with Feta Cheese on Foccacia ", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22131, restaurant_id: 221, name: "Cuban Sandwich", description: "with Pork Carnitas, Ham, Swiss Cheese, Pickles & To...", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22132, restaurant_id: 221, name: "Salami Milano, Prosciutto Di Parma, Roasted Eggplan...", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22133, restaurant_id: 221, name: "Albacore Tuna", description: "with Artichokes & Fresh Mozzarella on Foccacia ", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22134, restaurant_id: 221, name: "Bbq Chicken", description: "with White Chedder Cheese & Caramelized Shallots ", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22135, restaurant_id: 221, name: "Roasted Market Vegetables", description: "with Goats Cheese on Foccacia ", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22136, restaurant_id: 221, name: "Roasted Salmon", description: "with Pumpkin Seed Crust with Lemon Aioli ", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22137, restaurant_id: 221, name: "Calamari", description: "with Chili & Lime Dressing ", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22138, restaurant_id: 221, name: "Albacore Tuna Nicoise", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22139, restaurant_id: 221, name: "Smoked Turkey Cobb", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22140, restaurant_id: 221, name: "House Green Salad", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22141, restaurant_id: 221, name: "Chicken", description: "with Grapefruit, Jicama and Spiced Pecans ", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22142, restaurant_id: 221, name: "Spiced Corn Chowder", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22143, restaurant_id: 221, name: "Cream of Mushroom", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22144, restaurant_id: 221, name: "Mediterranean Vegetable", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22145, restaurant_id: 221, name: "Clam Chowder", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22146, restaurant_id: 221, name: "Tomato Florentine", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22147, restaurant_id: 221, name: "Chicken and Couscous", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22148, restaurant_id: 221, name: "Baked Gammon Ham", description: "with Aged White Cheddar ", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22149, restaurant_id: 221, name: "Poached Salmon, Cucumber & Lemon Dill Mayo", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22150, restaurant_id: 221, name: "Emmenthal with Sun Dried Tomato Chutney", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22151, restaurant_id: 221, name: "Tarragon Chicken with Arugula", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22152, restaurant_id: 221, name: "Mediterranean Egg Salad", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22153, restaurant_id: 221, name: "Salami Milano with Pesto Mayo", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22154, restaurant_id: 221, name: "Smoked Duck with Fig Chutney", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22155, restaurant_id: 221, name: "Champagne Chicken Liver Pate", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22156, restaurant_id: 221, name: "Roasted Turkey", description: "with Cranberry & Walnut Relish ", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22157, restaurant_id: 221, name: "Smoked Idaho Trout", description: "with Cream Horseradish ", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22158, restaurant_id: 221, name: "Stilton Cheese", description: "with Walnut and Apple ", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22159, restaurant_id: 221, name: "Proscuitto Di Parma", description: "with Goat Cheese ", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22160, restaurant_id: 221, name: "With Cream Cheese Add", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 0.75>, #<MenuItem id: 22161, restaurant_id: 221, name: "Smoked Salmon Add", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 2.5>, #<MenuItem id: 22162, restaurant_id: 221, name: "Fresh Fruit Salad", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 2.5>, #<MenuItem id: 22164, restaurant_id: 221, name: "Plain or Buttered Assorted Bagels", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 0.75>, #<MenuItem id: 22165, restaurant_id: 221, name: "Fresh Fruit Salads", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22166, restaurant_id: 221, name: "Greek Yoghurt", description: "with Toast Granola ", user_id: nil, created_at: nil, updated_at: nil, price: 2.75>, #<MenuItem id: 22167, restaurant_id: 221, name: "Fried Egg & English Muffin", description: "with Ham & Choice of Cheese ", user_id: nil, created_at: nil, updated_at: nil, price: 3.25>, #<MenuItem id: 22168, restaurant_id: 221, name: "Scrambled or Fried Eggs", description: "with Bacon & Toast ", user_id: nil, created_at: nil, updated_at: nil, price: 5.75>, #<MenuItem id: 22170, restaurant_id: 221, name: "Breakfast Burrito", description: "with Scrambled Eggs, Black Beans & Cheddar Cheese ", user_id: nil, created_at: nil, updated_at: nil, price: 3.95>, #<MenuItem id: 22171, restaurant_id: 221, name: "Smoked Salmon Croque Monsieur", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 4.95>, #<MenuItem id: 22172, restaurant_id: 221, name: "Double Chocolate Brownie", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 1.75>, #<MenuItem id: 22173, restaurant_id: 221, name: "Fresh Fruit Salad", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 2.75>, #<MenuItem id: 22174, restaurant_id: 221, name: "Dessert of The Month", description: "Prices Vary ", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22175, restaurant_id: 221, name: "Oven Fresh Assorted Cookies", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 1.5>, #<MenuItem id: 22176, restaurant_id: 221, name: "Kettle Chips", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 1.5>, #<MenuItem id: 22177, restaurant_id: 221, name: "Illy Espresso (single/double)", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>, #<MenuItem id: 22178, restaurant_id: 221, name: "Americano/reg. Coffee (12/16oz)", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 1.75>, #<MenuItem id: 22179, restaurant_id: 221, name: "Cappuccino (12/16oz)", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 2.65>, #<MenuItem id: 22181, restaurant_id: 221, name: "Organic Teas", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 1.15>, #<MenuItem id: 22182, restaurant_id: 221, name: "Odwalla Orange Juice (reg./lg)", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 1.95>, #<MenuItem id: 22183, restaurant_id: 221, name: "Fresh Fruit Juices & Odwalla Smoothies", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 1.95>, #<MenuItem id: 22184, restaurant_id: 221, name: "Mineral Water (carbonated or Non)", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 1.5>, #<MenuItem id: 22185, restaurant_id: 221, name: "Soft Drinks Prices", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: 1.0>, #<MenuItem id: 22186, restaurant_id: 221, name: "Coffee service for meetings is available.   \n", description: "null", user_id: nil, created_at: nil, updated_at: nil, price: nil>]}):
+    21:     <td><%= restaurant.country %></td>
+    22:     <td><%= restaurant.cross_street %></td>
+    23:     <td><%= link_to 'Show', restaurant %></td>
+    24: 	<td><%= link_to 'Menu', restaurant_menu_items_path(restaurant.menu_items) %></td>
+    25:   </tr>
+    26: <% end %>
+    27: </table>
+  app/views/restaurants/index.html.erb:24:in `_app_views_restaurants_index_html_erb___656638871_2175368940_0'
+  app/views/restaurants/index.html.erb:16:in `each'
+  app/views/restaurants/index.html.erb:16:in `_app_views_restaurants_index_html_erb___656638871_2175368940_0'
+  app/controllers/restaurants_controller.rb:14:in `index'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (22.6ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (29.3ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 21:09:36 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (12.1ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1837 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1065 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 560 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1977 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 876 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2052 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2023 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1630 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSQL (2.6ms)[0m  [1m SELECT tablename
+ FROM pg_tables
+ WHERE schemaname = ANY (current_schemas(false))
+[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1630 LIMIT 1
+  [1m[36mSlug Load (0.6ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2412 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 821 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2358 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 2358 LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1764 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1794 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.5ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1794 LIMIT 1[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1937 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1262 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 551 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.7ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 605 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1665 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1642 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.6ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1642 LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 959 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1777 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1424 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1424 LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 499 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1725 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1725 LIMIT 1[0m
+Rendered restaurants/index.html.erb within layouts/application (162.5ms)
+Completed 200 OK in 196ms (Views: 148.8ms | ActiveRecord: 32.7ms)
+
+
+Started GET "/restaurants/sens/menu_items" for 127.0.0.1 at Wed May 04 21:09:44 -0700 2011
+  Processing by MenuItemsController#index as HTML
+  Parameters: {"restaurant_id"=>"sens"}
+  [1m[35mSQL (0.5ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.5ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'sens' AND slugs.sequence = 1))
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 2023 LIMIT 1[0m
+  [1m[35mMenuItem Load (83.4ms)[0m  SELECT "menu_items".* FROM "menu_items" WHERE ("menu_items".restaurant_id = 2023)
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'menu_items'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"menu_items"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+Rendered menu_items/index.html.erb within layouts/application (128.7ms)
+Completed 200 OK in 341ms (Views: 135.3ms | ActiveRecord: 87.9ms)
+
+
+Started GET "/restaurants/p" for 127.0.0.1 at Wed May 04 21:09:57 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"p"}
+  [1m[36mSQL (0.5ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'p' AND slugs.sequence = 1))[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.3ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 0 LIMIT 1
+Completed   in 16ms
+
+ActiveRecord::RecordNotFound (Couldn't find Restaurant with ID=p):
+  app/controllers/restaurants_controller.rb:24:in `show'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (5.1ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (10.9ms)
+
+
+Started GET "/restaurants/primo-patio" for 127.0.0.1 at Wed May 04 21:09:58 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"primo-patio"}
+  [1m[36mSQL (0.5ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'primo-patio' AND slugs.sequence = 1))[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.3ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 0 LIMIT 1
+Completed   in 17ms
+
+ActiveRecord::RecordNotFound (Couldn't find Restaurant with ID=primo-patio):
+  app/controllers/restaurants_controller.rb:24:in `show'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (5.2ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (10.7ms)
+
+
+Started GET "/restaurants/primo-patio." for 127.0.0.1 at Wed May 04 21:10:01 -0700 2011
+
+ActionController::RoutingError (No route matches "/restaurants/primo-patio."):
+  
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.6ms)
+
+
+Started GET "/restaurants/primo-patio.me" for 127.0.0.1 at Wed May 04 21:10:01 -0700 2011
+  Processing by RestaurantsController#show as 
+  Parameters: {"id"=>"primo-patio"}
+  [1m[36mSQL (0.5ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'primo-patio' AND slugs.sequence = 1))[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.3ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 0 LIMIT 1
+Completed   in 16ms
+
+ActiveRecord::RecordNotFound (Couldn't find Restaurant with ID=primo-patio):
+  app/controllers/restaurants_controller.rb:24:in `show'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (81.1ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (86.5ms)
+
+
+Started GET "/restaurants/primo-patio." for 127.0.0.1 at Wed May 04 21:10:02 -0700 2011
+
+ActionController::RoutingError (No route matches "/restaurants/primo-patio."):
+  
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.8ms)
+
+
+Started GET "/restaurants/primo-patio." for 127.0.0.1 at Wed May 04 21:10:03 -0700 2011
+
+ActionController::RoutingError (No route matches "/restaurants/primo-patio."):
+  
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.8ms)
+
+
+Started GET "/restaurants/primo-patio/" for 127.0.0.1 at Wed May 04 21:10:04 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"primo-patio"}
+  [1m[36mSQL (0.5ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'primo-patio' AND slugs.sequence = 1))[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.3ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 0 LIMIT 1
+Completed   in 17ms
+
+ActiveRecord::RecordNotFound (Couldn't find Restaurant with ID=primo-patio):
+  app/controllers/restaurants_controller.rb:24:in `show'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (4.9ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (10.2ms)
+
+
+Started GET "/restaurants/primo-patio/menu-" for 127.0.0.1 at Wed May 04 21:10:05 -0700 2011
+
+ActionController::RoutingError (No route matches "/restaurants/primo-patio/menu-"):
+  
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/restaurants/primo-patio/menu_items" for 127.0.0.1 at Wed May 04 21:10:06 -0700 2011
+  Processing by MenuItemsController#index as HTML
+  Parameters: {"restaurant_id"=>"primo-patio"}
+  [1m[36mSQL (0.6ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'primo-patio' AND slugs.sequence = 1))[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 0 LIMIT 1
+Completed   in 18ms
+
+ActiveRecord::RecordNotFound (Couldn't find Restaurant with ID=primo-patio):
+  app/controllers/menu_items_controller.rb:111:in `get_restaurant'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (4.9ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (10.3ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at Wed May 04 21:10:09 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (12.7ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.5ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.9ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1837 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1065 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 560 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1977 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 876 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2052 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2023 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1630 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1630 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2412 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 821 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2358 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 2358 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1764 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1794 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1794 LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1937 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1262 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.6ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 551 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 605 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1665 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1642 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1642 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 959 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1777 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1424 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (2.0ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1424 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 499 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1725 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1725 LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (225.5ms)
+Completed 200 OK in 262ms (Views: 215.2ms | ActiveRecord: 46.5ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at Wed May 04 21:10:09 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (12.1ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1837 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1065 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 560 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1977 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 876 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2052 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2023 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1630 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1630 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2412 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 821 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2358 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 2358 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1764 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1794 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1794 LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1937 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1262 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.6ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 551 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 605 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1665 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1642 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1642 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 959 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1777 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1424 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1424 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 499 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1725 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1725 LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (148.8ms)
+Completed 200 OK in 182ms (Views: 138.7ms | ActiveRecord: 29.0ms)
+
+
+Started GET "/restaurants/out-the-door--3/menu_items" for 127.0.0.1 at Wed May 04 21:10:17 -0700 2011
+  Processing by MenuItemsController#index as HTML
+  Parameters: {"restaurant_id"=>"out-the-door--3"}
+  [1m[36mSQL (0.5ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'out-the-door' AND slugs.sequence = 3))[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (1.2ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1642 LIMIT 1
+  [1m[36mMenuItem Load (83.1ms)[0m  [1mSELECT "menu_items".* FROM "menu_items" WHERE ("menu_items".restaurant_id = 1642)[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'menu_items'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"menu_items"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+Rendered menu_items/index.html.erb within layouts/application (91.9ms)
+Completed 200 OK in 318ms (Views: 98.3ms | ActiveRecord: 87.8ms)
+
+
+Started GET "/restaurants/out-the-door--3/menu_items" for 127.0.0.1 at Wed May 04 21:11:32 -0700 2011
+  Processing by MenuItemsController#index as HTML
+  Parameters: {"restaurant_id"=>"out-the-door--3"}
+  [1m[35mSQL (0.5ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.9ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'out-the-door' AND slugs.sequence = 3))
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1642 LIMIT 1[0m
+  [1m[35mMenuItem Load (83.2ms)[0m  SELECT "menu_items".* FROM "menu_items" WHERE ("menu_items".restaurant_id = 1642)
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'menu_items'[0m
+  [1m[35mSQL (0.7ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"menu_items"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+Rendered menu_items/index.html.erb within layouts/application (32.3ms)
+Completed 200 OK in 245ms (Views: 37.7ms | ActiveRecord: 87.5ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 21:11:40 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (12.1ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (1.1ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1837 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1065 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 560 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1977 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 876 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2052 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2023 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1630 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1630 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2412 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 821 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2358 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 2358 LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1764 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1794 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1794 LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1937 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1262 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 551 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 605 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1665 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1642 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.3ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1642 LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 959 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1777 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1424 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.3ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1424 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 499 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1725 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1725 LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (151.4ms)
+Completed 200 OK in 186ms (Views: 142.2ms | ActiveRecord: 28.5ms)
+
+
+Started GET "/restaurants/a" for 127.0.0.1 at Wed May 04 21:11:40 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"a"}
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'a' AND slugs.sequence = 1))[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.3ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 0 LIMIT 1
+Completed   in 98ms
+
+ActiveRecord::RecordNotFound (Couldn't find Restaurant with ID=a):
+  app/controllers/restaurants_controller.rb:24:in `show'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (5.1ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (10.7ms)
+
+
+Started GET "/restaurants/al" for 127.0.0.1 at Wed May 04 21:11:40 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"al"}
+  [1m[36mSQL (0.7ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'al' AND slugs.sequence = 1))[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.3ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 0 LIMIT 1
+Completed   in 17ms
+
+ActiveRecord::RecordNotFound (Couldn't find Restaurant with ID=al):
+  app/controllers/restaurants_controller.rb:24:in `show'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (4.8ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (10.1ms)
+
+
+Started GET "/restaurants/alor" for 127.0.0.1 at Wed May 04 21:11:41 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"alor"}
+  [1m[36mSQL (0.5ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'alor' AND slugs.sequence = 1))[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 0 LIMIT 1
+Completed   in 17ms
+
+ActiveRecord::RecordNotFound (Couldn't find Restaurant with ID=alor):
+  app/controllers/restaurants_controller.rb:24:in `show'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (4.9ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.9ms)
+
+
+Started GET "/restaurants/alborz/menu_items" for 127.0.0.1 at Wed May 04 21:11:43 -0700 2011
+  Processing by MenuItemsController#index as HTML
+  Parameters: {"restaurant_id"=>"alborz"}
+  [1m[36mSQL (0.5ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'alborz' AND slugs.sequence = 1))[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 49 LIMIT 1
+  [1m[36mMenuItem Load (83.5ms)[0m  [1mSELECT "menu_items".* FROM "menu_items" WHERE ("menu_items".restaurant_id = 49)[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'menu_items'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"menu_items"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+Rendered menu_items/index.html.erb within layouts/application (107.4ms)
+Completed 200 OK in 309ms (Views: 113.0ms | ActiveRecord: 97.1ms)
+
+
+Started GET "/restaurants/alborz" for 127.0.0.1 at Wed May 04 21:11:48 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"alborz"}
+  [1m[35mSQL (0.5ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (1.2ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.5ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'alborz' AND slugs.sequence = 1))
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (1.0ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.5ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 49 LIMIT 1[0m
+Rendered restaurants/show.html.erb within layouts/application (88.8ms)
+Completed 200 OK in 121ms (Views: 97.3ms | ActiveRecord: 4.2ms)
+
+
+Started GET "/restaurants/alborz" for 127.0.0.1 at Wed May 04 21:11:48 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"alborz"}
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'alborz' AND slugs.sequence = 1))
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.3ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 49 LIMIT 1[0m
+Rendered restaurants/show.html.erb within layouts/application (18.4ms)
+Completed 200 OK in 121ms (Views: 104.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/restaurants/albor" for 127.0.0.1 at Wed May 04 21:11:51 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"albor"}
+  [1m[35mSQL (0.5ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.9ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'albor' AND slugs.sequence = 1))
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (1.1ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 0 LIMIT 1[0m
+Completed   in 92ms
+
+ActiveRecord::RecordNotFound (Couldn't find Restaurant with ID=albor):
+  app/controllers/restaurants_controller.rb:24:in `show'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (5.1ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (10.4ms)
+
+
+Started GET "/restaurants/al" for 127.0.0.1 at Wed May 04 21:11:52 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"al"}
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.5ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'al' AND slugs.sequence = 1))
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.3ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 0 LIMIT 1[0m
+Completed   in 26ms
+
+ActiveRecord::RecordNotFound (Couldn't find Restaurant with ID=al):
+  app/controllers/restaurants_controller.rb:24:in `show'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (4.8ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.9ms)
+
+
+Started GET "/restaurants/a" for 127.0.0.1 at Wed May 04 21:11:52 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"a"}
+  [1m[35mSQL (0.8ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (1.2ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.5ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'a' AND slugs.sequence = 1))
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 0 LIMIT 1[0m
+Completed   in 21ms
+
+ActiveRecord::RecordNotFound (Couldn't find Restaurant with ID=a):
+  app/controllers/restaurants_controller.rb:24:in `show'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (5.5ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.1ms)
+
+
+Started GET "/restaurants/lavash/menu" for 127.0.0.1 at Wed May 04 21:11:54 -0700 2011
+
+ActionController::RoutingError (No route matches "/restaurants/lavash/menu"):
+  
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.2ms)
+
+
+Started GET "/restaurants/lavash/menu_items" for 127.0.0.1 at Wed May 04 21:11:54 -0700 2011
+  Processing by MenuItemsController#index as HTML
+  Parameters: {"restaurant_id"=>"lavash"}
+  [1m[35mSQL (0.5ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.9ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'lavash' AND slugs.sequence = 1))
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1230 LIMIT 1[0m
+  [1m[35mMenuItem Load (84.0ms)[0m  SELECT "menu_items".* FROM "menu_items" WHERE ("menu_items".restaurant_id = 1230)
+  [1m[36mSQL (0.5ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'menu_items'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"menu_items"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+Rendered menu_items/index.html.erb within layouts/application (99.5ms)
+Completed 200 OK in 305ms (Views: 105.4ms | ActiveRecord: 99.2ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at Wed May 04 21:12:13 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (12.0ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1837 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1065 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 560 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1977 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 876 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2052 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2023 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1630 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.3ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1630 LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2412 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 821 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2358 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.3ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 2358 LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1764 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1794 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.3ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1794 LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1937 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1262 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 551 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 605 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1665 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1642 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.3ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1642 LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 959 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1777 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1424 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1424 LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 499 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1725 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.3ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1725 LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (145.8ms)
+Completed 200 OK in 179ms (Views: 137.5ms | ActiveRecord: 27.2ms)
+
+
+Started GET "/restaurants?lat=37.79959&long=-122.44454" for 127.0.0.1 at Wed May 04 21:12:14 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  Parameters: {"lat"=>"37.79959", "long"=>"-122.44454"}
+  [1m[36mRestaurant Load (12.3ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.659727301403923)*COS(-2.1370603740899)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.659727301403923)*SIN(-2.1370603740899)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.659727301403923)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1621 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 149 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1417 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 114 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2289 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 20 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 197 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1801 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 458 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1899 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1348 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2504 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2036 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1288 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2396 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1812 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1119 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1043 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1043 LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1573 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 219 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2338 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 719 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2581 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1106 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2113 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 2113 LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (144.2ms)
+Completed 200 OK in 180ms (Views: 136.1ms | ActiveRecord: 27.2ms)
+
+
+Started GET "/restaurants/mamacita/menu_items" for 127.0.0.1 at Wed May 04 21:12:22 -0700 2011
+  Processing by MenuItemsController#index as HTML
+  Parameters: {"restaurant_id"=>"mamacita"}
+  [1m[36mSQL (0.5ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'mamacita' AND slugs.sequence = 1))[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1348 LIMIT 1
+  [1m[36mMenuItem Load (82.4ms)[0m  [1mSELECT "menu_items".* FROM "menu_items" WHERE ("menu_items".restaurant_id = 1348)[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'menu_items'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"menu_items"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+Rendered menu_items/index.html.erb within layouts/application (136.6ms)
+Completed 200 OK in 354ms (Views: 142.4ms | ActiveRecord: 86.6ms)
+
+
+Started GET "/restaurants/mamacita" for 127.0.0.1 at Wed May 04 21:14:18 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"mamacita"}
+  [1m[35mSQL (0.5ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (1.1ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.5ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'mamacita' AND slugs.sequence = 1))
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.5ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1348 LIMIT 1[0m
+Rendered restaurants/show.html.erb within layouts/application (111.5ms)
+Completed   in 141ms
+
+ActionView::Template::Error (undefined local variable or method `restaurant' for #<#<Class:0x103060dc0>:0x10305bf50>):
+    26: </p>
+    27: 
+    28: <%= link_to 'Back', restaurants_path %>
+    29: <%= link_to 'Menu', restaurant_menu_items_path(restaurant) %>
+  app/views/restaurants/show.html.erb:29:in `_app_views_restaurants_show_html_erb__1213733008_2172827980_0'
+  app/controllers/restaurants_controller.rb:26:in `show'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (6.3ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (11.7ms)
+
+
+Started GET "/restaurants/mamacita" for 127.0.0.1 at Wed May 04 21:14:18 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"mamacita"}
+  [1m[35mSQL (0.5ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'mamacita' AND slugs.sequence = 1))
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (1.7ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1348 LIMIT 1[0m
+Rendered restaurants/show.html.erb within layouts/application (87.2ms)
+Completed   in 114ms
+
+ActionView::Template::Error (undefined local variable or method `restaurant' for #<#<Class:0x103341260>:0x1033396a0>):
+    26: </p>
+    27: 
+    28: <%= link_to 'Back', restaurants_path %>
+    29: <%= link_to 'Menu', restaurant_menu_items_path(restaurant) %>
+  app/views/restaurants/show.html.erb:29:in `_app_views_restaurants_show_html_erb__1213733008_2174331140_0'
+  app/controllers/restaurants_controller.rb:26:in `show'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (6.3ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (11.6ms)
+
+
+Started GET "/restaurants/mamacita" for 127.0.0.1 at Wed May 04 21:14:34 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"mamacita"}
+  [1m[35mSQL (0.5ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.9ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'mamacita' AND slugs.sequence = 1))
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1348 LIMIT 1[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1348 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+Rendered restaurants/show.html.erb within layouts/application (98.7ms)
+Completed 200 OK in 123ms (Views: 105.2ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/restaurants/mamacita/menu_items" for 127.0.0.1 at Wed May 04 21:14:37 -0700 2011
+  Processing by MenuItemsController#index as HTML
+  Parameters: {"restaurant_id"=>"mamacita"}
+  [1m[36mSQL (0.5ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'mamacita' AND slugs.sequence = 1))[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1348 LIMIT 1
+  [1m[36mMenuItem Load (83.9ms)[0m  [1mSELECT "menu_items".* FROM "menu_items" WHERE ("menu_items".restaurant_id = 1348)[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'menu_items'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"menu_items"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+Rendered menu_items/index.html.erb within layouts/application (200.6ms)
+Completed 200 OK in 335ms (Views: 206.4ms | ActiveRecord: 88.2ms)
+
+
+Started GET "/restaurants/mamacita/menu_items" for 127.0.0.1 at Wed May 04 21:14:45 -0700 2011
+  Processing by MenuItemsController#index as HTML
+  Parameters: {"restaurant_id"=>"mamacita"}
+  [1m[35mSQL (0.5ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.9ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'mamacita' AND slugs.sequence = 1))
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1348 LIMIT 1[0m
+  [1m[35mMenuItem Load (83.4ms)[0m  SELECT "menu_items".* FROM "menu_items" WHERE ("menu_items".restaurant_id = 1348)
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'menu_items'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"menu_items"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+Rendered menu_items/index.html.erb within layouts/application (139.1ms)
+Completed 200 OK in 354ms (Views: 144.9ms | ActiveRecord: 87.7ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 21:16:28 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (15.5ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.6ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.7ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.6ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1837 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1065 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 560 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1977 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 876 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2052 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2023 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1630 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.3ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1630 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2412 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 821 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2358 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 2358 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1764 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1794 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.3ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1794 LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1937 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.4ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1262 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 551 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 605 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1665 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1642 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1642 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 959 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1777 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1424 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1424 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 499 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1725 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1725 LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (178.8ms)
+Completed 200 OK in 224ms (Views: 171.1ms | ActiveRecord: 32.5ms)
+
+
+Started GET "/restaurants/" for 127.0.0.1 at Wed May 04 21:16:28 -0700 2011
+  Processing by RestaurantsController#index as HTML
+  [1m[36mRestaurant Load (12.2ms)[0m  [1mSELECT *, 
+ (ACOS(least(1,COS(0.0)*COS(0.0)*COS(RADIANS(restaurants.latitude))*COS(RADIANS(restaurants.longitude))+
+ COS(0.0)*SIN(0.0)*COS(RADIANS(restaurants.latitude))*SIN(RADIANS(restaurants.longitude))+
+ SIN(0.0)*SIN(RADIANS(restaurants.latitude))))*3963.19)
+ AS distance FROM "restaurants" ORDER BY distance asc LIMIT 25[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 221 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (1.9ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1837 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1065 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.4ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 560 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1977 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 876 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2052 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2023 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1630 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1630 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2412 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 821 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 2358 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 2358 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1764 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1794 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1794 LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1937 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1262 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 551 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 605 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1665 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1642 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.5ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1642 LIMIT 1[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 959 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1777 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mSlug Load (0.8ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1424 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mRestaurant Load (0.5ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1424 LIMIT 1[0m
+  [1m[35mSlug Load (0.5ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 499 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+  [1m[36mSlug Load (0.5ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1725 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1725 LIMIT 1
+Rendered restaurants/index.html.erb within layouts/application (154.4ms)
+Completed 200 OK in 190ms (Views: 142.3ms | ActiveRecord: 31.2ms)
+
+
+Started GET "/restaurants/l" for 127.0.0.1 at Wed May 04 21:16:44 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"l"}
+  [1m[36mSQL (0.5ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'l' AND slugs.sequence = 1))[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 0 LIMIT 1
+Completed   in 19ms
+
+ActiveRecord::RecordNotFound (Couldn't find Restaurant with ID=l):
+  app/controllers/restaurants_controller.rb:24:in `show'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (5.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (10.2ms)
+
+
+Started GET "/restaurants/lers-" for 127.0.0.1 at Wed May 04 21:16:45 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"lers-"}
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'lers-' AND slugs.sequence = 1))[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 0 LIMIT 1
+Completed   in 17ms
+
+ActiveRecord::RecordNotFound (Couldn't find Restaurant with ID=lers-):
+  app/controllers/restaurants_controller.rb:24:in `show'
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (5.0ms)
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (10.1ms)
+
+
+Started GET "/restaurants/lers-ros" for 127.0.0.1 at Wed May 04 21:16:45 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"lers-ros"}
+  [1m[36mSQL (0.5ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSQL (0.4ms)[0m  [1mSELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'lers-ros' AND slugs.sequence = 1))[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.7ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1259 LIMIT 1
+  [1m[36mSlug Load (0.6ms)[0m  [1mSELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1259 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1[0m
+Rendered restaurants/show.html.erb within layouts/application (90.2ms)
+Completed 200 OK in 114ms (Views: 96.4ms | ActiveRecord: 10.0ms)
+
+
+Started GET "/restaurants/lers-ros/" for 127.0.0.1 at Wed May 04 21:16:46 -0700 2011
+  Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"lers-ros"}
+  [1m[35mSQL (0.5ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.9ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mSQL (0.3ms)[0m  SELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'lers-ros' AND slugs.sequence = 1))
+  [1m[36mSQL (0.2ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.8ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mRestaurant Load (0.4ms)[0m  [1mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1259 LIMIT 1[0m
+  [1m[35mSlug Load (0.6ms)[0m  SELECT "slugs".* FROM "slugs" WHERE ("slugs".sluggable_id = 1259 AND "slugs".sluggable_type = 'Restaurant') ORDER BY id DESC LIMIT 1
+Rendered restaurants/show.html.erb within layouts/application (19.7ms)
+Completed 200 OK in 106ms (Views: 25.8ms | ActiveRecord: 3.7ms)
+
+
+Started GET "/restaurants/lers-ros/me" for 127.0.0.1 at Wed May 04 21:16:46 -0700 2011
+
+ActionController::RoutingError (No route matches "/restaurants/lers-ros/me"):
+  
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/restaurants/lers-ros/menu" for 127.0.0.1 at Wed May 04 21:16:47 -0700 2011
+
+ActionController::RoutingError (No route matches "/restaurants/lers-ros/menu"):
+  
+
+Rendered /Library/Ruby/Gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/restaurants/lers-ros/menu_items" for 127.0.0.1 at Wed May 04 21:16:47 -0700 2011
+  Processing by MenuItemsController#index as HTML
+  Parameters: {"restaurant_id"=>"lers-ros"}
+  [1m[36mSQL (0.5ms)[0m  [1mSELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'[0m
+  [1m[35mSQL (0.9ms)[0m   SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+  [1m[36mSQL (0.5ms)[0m  [1mSELECT sluggable_id FROM slugs WHERE ((slugs.sluggable_type = 'Restaurant' AND slugs.name = 'lers-ros' AND slugs.sequence = 1))[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'restaurants'
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"restaurants"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+  [1m[35mRestaurant Load (0.4ms)[0m  SELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = 1259 LIMIT 1
+  [1m[36mMenuItem Load (82.6ms)[0m  [1mSELECT "menu_items".* FROM "menu_items" WHERE ("menu_items".restaurant_id = 1259)[0m
+  [1m[35mSQL (0.4ms)[0m  SELECT * FROM geometry_columns WHERE f_table_name = 'menu_items'
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+ FROM pg_attribute a LEFT JOIN pg_attrdef d
+ ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+ WHERE a.attrelid = '"menu_items"'::regclass
+ AND a.attnum > 0 AND NOT a.attisdropped
+ ORDER BY a.attnum
+[0m
+Rendered menu_items/index.html.erb within layouts/application (137.6ms)
+Completed 200 OK in 345ms (Views: 219.4ms | ActiveRecord: 87.3ms)

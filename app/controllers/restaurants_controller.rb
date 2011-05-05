@@ -81,8 +81,8 @@ class RestaurantsController < ApplicationController
   # DELETE /restaurants/1
   # DELETE /restaurants/1.xml
   def destroy
-    @restaurant = Restaurant.find(params[:id])
-    @restaurant.destroy
+    # @restaurant = Restaurant.find(params[:id])
+    # @restaurant.destroy
 
     respond_to do |format|
       format.html { redirect_to(restaurants_url) }

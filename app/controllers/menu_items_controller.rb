@@ -97,8 +97,8 @@ class MenuItemsController < ApplicationController
   # DELETE /menu_items/1
   # DELETE /menu_items/1.xml
   def destroy
-    @menu_item = MenuItem.find(params[:id])
-    @menu_item.destroy
+    # @menu_item = MenuItem.find(params[:id])
+    # @menu_item.destroy
 
     respond_to do |format|
       format.html { redirect_to(menu_items_url) }
