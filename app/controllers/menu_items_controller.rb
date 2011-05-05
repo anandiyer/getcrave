@@ -8,17 +8,24 @@ class MenuItemsController < ApplicationController
 
     @lat = params[:lat].to_f
     @long = params[:long].to_f
+    @limit = 200
     
+    if params[:limit] && !params[:limit].empty?
+      @limit = params[:limit].to_i
+    end
+
+    p @limit
+
     # FIXME - lat & long could be specified erroneously as could the restaurant_id
     if (@lat == 0 || @long == 0)
-      @menu_items = @restaurant.menu_items.find(:all)
+      @menu_items = @restaurant.menu_items.find(:all, :limit => @limit)
     else 
       # Lookup all the restaurants near the given lat/long and get 50 of the menu_items
       @menu_items = Restaurant.find(:all, 
         :origin => [@lat, @long], 
         :order=>'distance asc',  
         :joins => [ :menu_items ],
-        :limit => 500)
+        :limit => @limit)
     end
     
     # Now find the menu items for each of those restaurants
