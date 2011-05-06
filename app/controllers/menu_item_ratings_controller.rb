@@ -57,9 +57,11 @@ class MenuItemRatingsController < ApplicationController
       if @menu_item_rating.save
         format.html { redirect_to(@menu_item_rating, :notice => 'Menu item rating was successfully created.') }
         format.xml  { render :xml => @menu_item_rating, :status => :created, :location => @menu_item_rating }
+        format.json  { render :json => @menu_item_rating, :status => :created, :location => @menu_item_rating }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @menu_item_rating.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @menu_item_rating.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -73,9 +75,11 @@ class MenuItemRatingsController < ApplicationController
       if @menu_item_rating.update_attributes(params[:menu_item_rating])
         format.html { redirect_to(@menu_item_rating, :notice => 'Menu item rating was successfully updated.') }
         format.xml  { head :ok }
+        format.json  { head :ok }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @menu_item_rating.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @menu_item_rating.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -89,6 +93,7 @@ class MenuItemRatingsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(menu_item_ratings_url) }
       format.xml  { head :ok }
+      format.json  { head :ok }
     end
   end
   

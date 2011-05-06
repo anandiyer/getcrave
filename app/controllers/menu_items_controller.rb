@@ -76,9 +76,11 @@ class MenuItemsController < ApplicationController
       if @menu_item.save
         format.html { redirect_to(@menu_item, :notice => 'Menu item was successfully created.') }
         format.xml  { render :xml => @menu_item, :status => :created, :location => @menu_item }
+        format.json  { render :json => @menu_item, :status => :created, :location => @menu_item }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @menu_item.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @menu_item.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -92,9 +94,11 @@ class MenuItemsController < ApplicationController
       if @menu_item.update_attributes(params[:menu_item])
         format.html { redirect_to(@menu_item, :notice => 'Menu item was successfully updated.') }
         format.xml  { head :ok }
+        format.json  { head :ok }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @menu_item.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @menu_item.errors, :status => :unprocessable_entity }
       end
     end
   end

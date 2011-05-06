@@ -43,6 +43,7 @@ class RestaurantsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @restaurant }
+      format.json { render :json => @restaurant }
     end
   end
 
@@ -60,9 +61,10 @@ class RestaurantsController < ApplicationController
       if @restaurant.save
         format.html { redirect_to(@restaurant, :notice => 'Restaurant was successfully created.') }
         format.xml  { render :xml => @restaurant, :status => :created, :location => @restaurant }
+        format.json  { render :json => @restaurant, :status => :created, :location => @restaurant }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @restaurant.errors, :status => :unprocessable_entity }
+        format.xml  { render :json => @restaurant.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -76,9 +78,11 @@ class RestaurantsController < ApplicationController
       if @restaurant.update_attributes(params[:restaurant])
         format.html { redirect_to(@restaurant, :notice => 'Restaurant was successfully updated.') }
         format.xml  { head :ok }
+        format.json  { head :ok }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @restaurant.errors, :status => :unprocessable_entity }
+        format.json  { render :xml => @restaurant.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -92,6 +96,7 @@ class RestaurantsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(restaurants_url) }
       format.xml  { head :ok }
+      format.json  { head :ok }
     end
   end
 end
