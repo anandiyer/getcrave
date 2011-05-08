@@ -115,6 +115,21 @@ class MenuItemsController < ApplicationController
     end
   end
   
+  # Search
+  def search
+      @search  = MenuItem.search() do
+        fulltext(params[:q])
+      end
+      
+      @menu_items = @search.results
+      
+      respond_to do |format|
+        format.html # search.html.erb
+        format.xml  { render :xml => @restaurants }
+        format.json { render :json => @restaurants }
+      end
+  end
+  
   private
     def get_restaurant
       @restaurant = Restaurant.find(params[:restaurant_id]) unless params[:restaurant_id].blank?

@@ -99,4 +99,23 @@ class RestaurantsController < ApplicationController
       format.json  { head :ok }
     end
   end
+  
+  # Search
+  def search
+      @search  = Restaurant.search() do
+        fulltext(params[:q])
+        # 6 and lower is the only precision that seems to work
+        with(:coordinates).near(params[:lat], params[:long], :precision => 5)
+        # , :boost => 2, :precision => 6)
+      end
+      
+      @restaurants = @search.results
+      
+      respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml => @restaurants }
+        format.json { render :json => @restaurants }
+      end
+  end
+    
 end

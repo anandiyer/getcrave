@@ -5,4 +5,10 @@ class Restaurant < ActiveRecord::Base
                    :default_formula => :sphere, 
                    :lat_column_name => :latitude,
                    :lng_column_name => :longitude
+  searchable do
+      text :name
+      location :coordinates do
+        Sunspot::Util::Coordinates.new(latitude, longitude) 
+      end 
+  end     
 end

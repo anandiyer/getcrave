@@ -1,4 +1,7 @@
-Crave::Application.routes.draw do
+Crave::Application.routes.draw do  
+  match "/restaurants/search" => 'restaurants#search'
+  match "/menu_items/search" => 'menu_items#search'
+  
   resources :menu_item_review_comments
 
   resources :menu_item_rating_helpfuls
@@ -29,6 +32,7 @@ Crave::Application.routes.draw do
 
   resources :restaurant_cuisines
 
+  
   resources :restaurants do
     resources :menu_items
   end

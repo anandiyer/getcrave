@@ -9,6 +9,7 @@ gem 'pg'
 gem 'spatial_adapter' # To handle PostGIS datatypes
 gem 'geokit'
 gem 'friendly_id', "~> 3.2.1"
+gem 'sunspot_rails', '~> 1.2.1'
 
 # Use unicorn as the web server
 # gem 'unicorn'
