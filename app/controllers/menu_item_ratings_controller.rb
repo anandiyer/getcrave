@@ -18,7 +18,11 @@ class MenuItemRatingsController < ApplicationController
   def index
     #@menu_item_ratings = MenuItemRating.all
    
-    @menu_item_ratings = @menu_item.menu_item_ratings.find(:all)
+    if (@menu_item)
+      @menu_item_ratings = @menu_item.menu_item_ratings.find(:all)
+    else 
+      @menu_item_ratings = MenuItemRating.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -45,7 +49,8 @@ class MenuItemRatingsController < ApplicationController
   # GET /menu_item_ratings/new.xml
   def new
     @menu_item_rating = MenuItemRating.new
-    @menu_item_rating.menu_item_id = @menu_item.id
+    @menu_item_rating.menu_item_id = params[:menu_item_id]
+    @menu_item_rating.user_id = current_user.id if current_user
 
     respond_to do |format|
       # FIXME

@@ -3,8 +3,6 @@
 <table>
   <tr>
     <th>User name</th>
-    <th>Facebook</th>
-    <th>Twitter</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,11 +11,7 @@
 <% @users.each do |user| %>
   <tr>
     <td><%= user.user_name %></td>
-    <td><%= user.facebook_id %></td>
-    <td><%= user.twitter_id %></td>
     <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
