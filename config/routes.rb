@@ -1,13 +1,13 @@
 Crave::Application.routes.draw do  
-  match "/restaurants/search" => 'restaurants#search'
-  match "/menu_items/search" => 'menu_items#search'
-  
+  # match "/restaurants/search" => 'restaurants#search'
+  # match "/menu_items/search" => 'menu_items#search'
+    
   resources :menu_item_review_comments
 
   resources :menu_item_rating_helpfuls
 
-  resources :menu_item_ratings
-
+  resources :menu_item_ratings 
+  
   resources :menu_label_associations
 
   resources :menu_labels
@@ -21,7 +21,14 @@ Crave::Application.routes.draw do
   resources :menu_item_prices
 
   resources :menu_items do
-    resources :menu_item_ratings
+    resources :menu_item_ratings do
+      collection do
+        get 'avg_rating'
+      end 
+    end
+    collection do
+      get 'search'
+    end
   end
 
   resources :restaurant_label_associations
@@ -32,9 +39,11 @@ Crave::Application.routes.draw do
 
   resources :restaurant_cuisines
 
-  
   resources :restaurants do
     resources :menu_items
+    collection do
+      get 'search'
+    end
   end
 
   resources :users

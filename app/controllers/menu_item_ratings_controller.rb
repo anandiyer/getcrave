@@ -1,6 +1,18 @@
 class MenuItemRatingsController < ApplicationController
   before_filter :get_menu_item
   
+  # GET /menu_items_ratings/avg_rating
+  def avg_rating
+    average = @menu_item.menu_item_ratings.average(:rating)
+    count = @menu_item.menu_item_ratings.count
+    
+    @response = { :average => average, :count => count}
+        
+    respond_to do |format|
+      format.json { render :json => @response.to_json }
+    end 
+  end
+  
   # GET /menu_item_ratings
   # GET /menu_item_ratings.xml
   def index

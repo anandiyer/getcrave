@@ -1,6 +1,6 @@
 class MenuItemsController < ApplicationController
   before_filter :get_restaurant
-  
+
   # GET /menu_items
   # GET /menu_items.xml
   def index
