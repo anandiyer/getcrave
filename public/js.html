@@ -173,12 +173,12 @@ padding: 12px;}
                console.log('location got');
                //console.log(restaurants);
                console.log('http://blooming-water-228.heroku.com/restaurants.json?lat='+position.coords.latitude+'&long='+position.coords.longitude);
-               store.proxy.url = escape('http://blooming-water-228.heroku.com/menu_items.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+               store.proxy.url = ('http://blooming-water-228.heroku.com/menu_items.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                store.load();
                console.log('here is store');
                console.log(store);
                console.log('dishes data request made');
-               restaurants.proxy.url = escape('http://blooming-water-228.heroku.com/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+               restaurants.proxy.url = ('http://blooming-water-228.heroku.com/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                restaurants.load();
            });
            var aRestaurantList = new Ext.List({
@@ -186,7 +186,7 @@ padding: 12px;}
                onItemDisclosure: {
                    handler: function(record, btn, index) {
                        Ext.Ajax.request({
-                           url: escape('http://blooming-water-228.heroku.com/menu_items/'+record.data.id+'.json'),
+                           url: ('http://blooming-water-228.heroku.com/menu_items/'+record.data.id+'.json'),
                            reader: {
                                 type: 'json'
                            },
@@ -219,7 +219,7 @@ padding: 12px;}
            var placesList = new Ext.List({
                onItemDisclosure: {
                    handler: function(record, btn, index) {
-                       singleRestaurantStore.proxy.url = escape('http://blooming-water-228.heroku.com/restaurants/'+record.data.id+'/menu_items.json');
+                       singleRestaurantStore.proxy.url = ('http://blooming-water-228.heroku.com/restaurants/'+record.data.id+'/menu_items.json');
                        singleRestaurantStore.load(function(){
                            Ext.getCmp('mainPnl').setActiveItem(2);
                            //$("#aRestaurantList").removeClass("x-hidden-display");
@@ -228,7 +228,7 @@ padding: 12px;}
                        console.log(singleRestaurantStore);
 
                        Ext.Ajax.request({
-                           url: escape('http://blooming-water-228.heroku.com/restaurants/'+record.data.id+'.json'),
+                           url: ('http://blooming-water-228.heroku.com/restaurants/'+record.data.id+'.json'),
                            reader: {
                                 type: 'json'
                            },
@@ -274,7 +274,7 @@ padding: 12px;}
                        });
                        */
                        Ext.Ajax.request({
-                           url: escape('http://blooming-water-228.heroku.com/menu_items/'+record.data.id+'.json'),
+                           url: ('http://blooming-water-228.heroku.com/menu_items/'+record.data.id+'.json'),
                            reader: {
                                 type: 'json'
                            },
