@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crave</title>
+    <link rel="stylesheet"
+     href="apple.css"
+     type="text/css" />
+
+<style type="text/css">
+.foodImg {
+    display:block;
+    width:110px;
+    height:110px;
+    padding:5px;
+    margin:12px auto;
+}
+.dishinfo {padding:12px;}
+.picanddata .pic {float:left;padding:12px}
+.picanddata .data {float:left;}
+.reviewtext {clear:both;float:none;padding:12px}
+.restaurantInfo {width: 100%;
+height: 100px;
+background-color: #f9ecc0;
+padding: 12px;}
+.dashedBorder {border:dashed 1px;}
+/*sencha overrides */
+.x-toolbar-light {
+    background-image:
+        -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0.25, rgb(245,114,91)),
+        color-stop(0.63, rgb(245,114,91)),
+        color-stop(0.82, rgb(231,82,56))
+        );
+}
+.x-toolbar-dark {
+    background-color:#404042;
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0.25, rgb(64,64,66)),
+        color-stop(0.63, rgb(64,64,66)),
+        color-stop(0.82, rgb(38,40,37))
+    );
+}
+
+.x-toolbar-light .x-button.x-button-pressed,
+.x-toolbar-light .x-button.x-button-pressed::after,
+.x-toolbar-light .x-button.x-button-active,
+.x-toolbar-light .x-button.x-button-active::after,
+.x-toolbar .x-toolbar-light .x-button.x-button-pressed,
+.x-toolbar .x-toolbar-light .x-button.x-button-pressed::after,
+.x-toolbar .x-toolbar-light .x-button.x-button-active,
+.x-toolbar .x-toolbar-light .x-button.x-button-active::after {
+    background-color:#dd4f3c;
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0.25, rgb(221,79,60)),
+        color-stop(0.63, rgb(221,79,60)),
+        color-stop(0.82, rgb(212,61,38))
+    );
+}
+.x-toolbar-light .x-button.x-button-pressed, .x-toolbar-light .x-button.x-button-active, .x-toolbar .x-toolbar-light .x-button.x-button-pressed, .x-toolbar .x-toolbar-light .x-button.x-button-active, .x-toolbar-light .x-field-select .x-input-text.x-button-pressed, .x-toolbar-light .x-field-select .x-input-text.x-button-active, .x-toolbar .x-toolbar-light .x-field-select .x-input-text.x-button-pressed, .x-toolbar .x-toolbar-light .x-field-select .x-input-text.x-button-active, .x-toolbar-light .x-field-select::before.x-button-pressed, .x-toolbar-light .x-field-select::before.x-button-active, .x-toolbar .x-toolbar-light .x-field-select::before.x-button-pressed, .x-toolbar .x-toolbar-light .x-field-select::before.x-button-active
+{
+    -webkit-box-shadow:inset #b1422e 0 0 0.1em;
+}
+.x-toolbar-light .x-button, .x-toolbar-light .x-button.x-button-back::after, .x-toolbar-light .x-button.x-button-forward::after, .x-toolbar .x-toolbar-light .x-button, .x-toolbar .x-toolbar-light .x-button.x-button-back::after, .x-toolbar .x-toolbar-light .x-button.x-button-forward::after, .x-toolbar-light .x-field-select .x-input-text, .x-toolbar-light .x-field-select .x-input-text.x-button-back::after, .x-toolbar-light .x-field-select .x-input-text.x-button-forward::after, .x-toolbar .x-toolbar-light .x-field-select .x-input-text, .x-toolbar .x-toolbar-light .x-field-select .x-input-text.x-button-back::after, .x-toolbar .x-toolbar-light .x-field-select .x-input-text.x-button-forward::after, .x-toolbar-light .x-field-select::before, .x-toolbar-light .x-field-select::before.x-button-back::after, .x-toolbar-light .x-field-select::before.x-button-forward::after, .x-toolbar .x-toolbar-light .x-field-select::before, .x-toolbar .x-toolbar-light .x-field-select::before.x-button-back::after, .x-toolbar .x-toolbar-light .x-field-select::before.x-button-forward::after
+{
+    background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0.25, rgb(234,112,94)),
+    color-stop(0.63, rgb(234,112,94)),
+    color-stop(0.82, rgb(214,62,39))
+    );
+}
+.x-toolbar-light .x-button, .x-toolbar .x-toolbar-light .x-button, .x-toolbar-light .x-field-select .x-input-text, .x-toolbar .x-toolbar-light .x-field-select .x-input-text, .x-toolbar-light .x-field-select::before, .x-toolbar .x-toolbar-light .x-field-select::before
+{
+    border:0.1em solid #b1422e;
+    border-top-color:#b1422e;
+}
+.x-list .x-list-disclosure {
+    background:#d3d3d3 none;
+}
+.x-list .x-list-item.x-item-selected {
+    background-color:#c6c0bf;
+    background-image:none;
+    border-top-color:#C6C0BF;
+    border-bottom-color:none;
+}
+.x-toolbar-light .x-button.x-button-back::before, .x-toolbar-light .x-button.x-button-forward::before, .x-toolbar .x-toolbar-light .x-button.x-button-back::before, .x-toolbar .x-toolbar-light .x-button.x-button-forward::before, .x-toolbar-light .x-field-select .x-input-text.x-button-back::before, .x-toolbar-light .x-field-select .x-input-text.x-button-forward::before, .x-toolbar .x-toolbar-light .x-field-select .x-input-text.x-button-back::before, .x-toolbar .x-toolbar-light .x-field-select .x-input-text.x-button-forward::before, .x-toolbar-light .x-field-select::before.x-button-back::before, .x-toolbar-light .x-field-select::before.x-button-forward::before, .x-toolbar .x-toolbar-light .x-field-select::before.x-button-back::before, .x-toolbar .x-toolbar-light .x-field-select::before.x-button-forward::before
+{
+    background:#b1422e;
+}
+.x-toolbar-light .x-toolbar-title {color:#ffffff;}
+</style>
+</head>
+
+<body>
+
+<img src="crave-startup.png" border="0" class="startuppic"/>
+
+<script type="text/javascript"
+     src="sencha-touch.js"></script>
+<script type="text/javascript"
+     src="/static/jquery.js"></script>
+
+<script type="text/javascript">
+    Ext.setup({
+       glossOnIcon: false,
+       onReady: function() {
+
+
+           Ext.regModel('Dish',
+           {
+               fields: ['city','distance','name','id', 'restaurant_id']
+           });
+
+           Ext.regModel('RestaurantDish',
+           {
+               fields: ['name','id','price','description','restaurant_id']
+           });
+
+           Ext.regModel('Restaurants',
+           {
+               fields: ['distance','name','id']
+           });
+
+           var restaurants = new Ext.data.Store({
+              model: 'Restaurants',
+               id: 'restaurants',
+
+              proxy: {
+                  type:'ajax',
+                  url:'',
+                  reader: {
+                      type:'json',
+                      record:'restaurant'
+                  }
+              }
+          });
+
+           var singleRestaurantStore = new Ext.data.Store({
+               model: 'Dish',
+               proxy: {
+                   type:'ajax',
+                   url:'',
+                  reader: {
+                      type:'json',
+                      record:'menu_item'
+                  }
+               }
+          });
+
+           var store = new Ext.data.Store({
+               model: 'Dish',
+               proxy: {
+                   type:'ajax',
+                   url:'',
+                  reader: {
+                      type:'json',
+                      record:'restaurant'
+                  }
+               }
+           });
+           navigator.geolocation.getCurrentPosition(function(position) {
+               console.log('location got');
+               //console.log(restaurants);
+               console.log('http://blooming-water-228.heroku.com/restaurants.json?lat='+position.coords.latitude+'&long='+position.coords.longitude);
+               store.proxy.url = escape('http://blooming-water-228.heroku.com/menu_items.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+               store.load();
+               console.log('here is store');
+               console.log(store);
+               console.log('dishes data request made');
+               restaurants.proxy.url = escape('http://blooming-water-228.heroku.com/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+               restaurants.load();
+           });
+           var aRestaurantList = new Ext.List({
+               id:'aRestaurantList',
+               onItemDisclosure: {
+                   handler: function(record, btn, index) {
+                       Ext.Ajax.request({
+                           url: escape('http://blooming-water-228.heroku.com/menu_items/'+record.data.id+'.json'),
+                           reader: {
+                                type: 'json'
+                           },
+                           success: function(response) {
+                               var responseObject = eval('(' + response.responseText + ')');
+                               htmlString = '<div class="dishinfo"><b>'+responseObject.menu_item.name+'</b><br/>';
+                               htmlString += '$ '+responseObject.menu_item.price+'<br>';
+                               htmlString += '<br><br>'+responseObject.menu_item.description+'<br>';
+                               htmlString += "</div>";
+                               Ext.getCmp('infoPnl').update(htmlString);
+                           }
+                       });
+                       Ext.getCmp('mainPnl').setActiveItem(1);
+                   }
+               },
+               itemTpl: '<tpl for="."><div class="thisdish"><b>{name}</b></div></tpl>',
+               singleSelect: true,
+               grouped: false,
+               indexBar: false,
+               layout:{type:'vbox'},
+               fullscreen:false,
+               store: singleRestaurantStore,
+
+               width:'100%',
+               height:'100%',
+               modal:true,
+               hideOnMaskTap: false
+           });
+
+           var placesList = new Ext.List({
+               onItemDisclosure: {
+                   handler: function(record, btn, index) {
+                       singleRestaurantStore.proxy.url = escape('http://blooming-water-228.heroku.com/restaurants/'+record.data.id+'/menu_items.json');
+                       singleRestaurantStore.load(function(){
+                           Ext.getCmp('mainPnl').setActiveItem(2);
+                           //$("#aRestaurantList").removeClass("x-hidden-display");
+                       });
+                       console.log('see '+singleRestaurantStore.proxy.url);
+                       console.log(singleRestaurantStore);
+
+                       Ext.Ajax.request({
+                           url: escape('http://blooming-water-228.heroku.com/restaurants/'+record.data.id+'.json'),
+                           reader: {
+                                type: 'json'
+                           },
+                           success: function(response) {
+                                //populate top panel with restaurant data, map
+                                var responseObject = eval('(' + response.responseText + ')');
+                               console.log(responseObject);
+                                htmlString = '<div class="restaurantInfo">'+responseObject.restaurant.name+'</div>';
+                                Ext.getCmp('restPnl').update(htmlString);
+                           }
+                       });
+                   }
+               },
+               itemTpl: '<tpl for="."><div class="aplace"><b>{name}</b><br/>{distance}</div></tpl>',
+               singleSelect: true,
+               grouped: false,
+               indexBar: false,
+               store: restaurants,
+
+               floating:true,
+               centered:true,
+               modal:true,
+               hideOnMaskTap: false,
+               clearSectionOnDeactivate:true
+           });
+
+           var list = new Ext.List({
+               onItemDisclosure: {
+                   handler: function(record, btn, index) {
+                       console.log(record.data.id);
+                       /*
+                       console.log(Ext.getCmp('carouselPnl')!=undefined);
+                        if(Ext.getCmp('carouselPnl')) {
+                            Ext.getCmp('carouselPnl').destroy();
+                        }
+                       var carouselPnl = new Ext.Carousel({
+                           id: 'carouselPnl',
+                           direction: 'horizontal',
+                           items: [
+                           ],
+                           width:'100%',
+                           height:'150px'
+                       });
+                       */
+                       Ext.Ajax.request({
+                           url: escape('http://blooming-water-228.heroku.com/menu_items/'+record.data.id+'.json'),
+                           reader: {
+                                type: 'json'
+                           },
+                           success: function(response) {
+                               var responseObject = eval('(' + response.responseText + ')');
+                               console.log(responseObject);
+                               htmlString = '<div class="dishinfo"><b>'+responseObject.menu_item.name+'</b><br/>';
+                               htmlString += '$ '+responseObject.menu_item.price+'<br>';
+                               htmlString += '<br><br>'+responseObject.menu_item.description+'<br>';
+                               /*for(i=0;i<responseObject[0].ingredients.length;i++) {
+                                htmlString += responseObject[0].ingredients[i].item;
+                                   if(i<responseObject[0].ingredients.length - 1) {
+                                       htmlString += ", ";
+                                   }
+                               }*/
+                               htmlString += "</div>";
+                               /*
+                               for(i=0;i<responseObject[0].images.length;i++) {
+                                   object = new Object();
+                                   object.html = '<div class="foodImg"><img width="100" src="'+responseObject[0].images[i].file+'"></div>';
+                                   object.xtype = 'panel';
+                                   Ext.getCmp('carouselPnl').add(object);
+                               }
+                               reviewString = "<br><br><b>Reviews</b><br><br>";
+                               for(i=0;i<responseObject[0].reviews.length;i++) {
+                                   if(responseObject[0].reviews[i].pic==""){
+                                       pic = "nothing.jpg";
+                                   } else {
+                                       pic = responseObject[0].reviews[i].pic;
+                                   }
+                                   reviewString += '<div class="picanddata"><img class="pic" src="'+pic+'" width="70"><div class="data">'+responseObject[0].reviews[i].reviewer+'<br>'+responseObject[0].reviews[i].rating+' stars</div><br><div class="reviewtext">'+responseObject[0].reviews[i].text+'</div></div>';
+                               }
+                               */
+                               //Ext.getCmp('detailPnl').add(carouselPnl);
+                               Ext.getCmp('detailPnl').add(infoPnl);
+                               //Ext.getCmp('detailPnl').add(reviewPnl);
+                               Ext.getCmp('infoPnl').update(htmlString);
+                               //Ext.getCmp('reviewPnl').update(reviewString);
+                           }
+                       });
+                       Ext.getCmp('mainPnl').setActiveItem(1);
+                       //Ext.getCmp('detailPnl').setLoading(false);
+
+                   }
+               },
+               itemTpl: '<tpl for="."><div class="adish"><b>{name}</b><br/>{distance}</div></tpl>',
+               //itemSelector: 'div.adish',
+               //this breaks my onItemDisclosure activity
+               singleSelect: true,
+               grouped: false,
+               indexBar: false,
+               store: store,
+
+               floating:true,
+               width:350,
+               height:370,
+               centered:true,
+               modal:true,
+               hideOnMaskTap: false,
+               clearSectionOnDeactivate:true
+           });
+
+           var infoPnl = new Ext.Panel({
+               html: '',
+               id: 'infoPnl'
+           });
+           var restPnl = new Ext.Panel({
+               html: '',
+               id: 'restPnl',
+               width:'100%',
+               height:100,
+               ExtraCls: 'dashedBorder'
+
+           });
+           var reviewPnl = new Ext.Panel({
+               html: '',
+               scroll: 'vertical',
+               id: 'reviewPnl'
+           });
+
+           var backHandler = function(b,e) {
+               if(b.getText() == "Back") {
+                   Ext.getCmp('mainPnl').setActiveItem(0);
+               }
+           }
+
+           var tapHandler = function(b,e) {
+               if(b.getText() == "Dishes") {
+                   Ext.getCmp('listPnl').setActiveItem(0);
+               }
+               if(b.getText() == "Restaurants") {
+                   Ext.getCmp('listPnl').setActiveItem(1);
+               }
+           }
+
+       var detailPnl = new Ext.Panel({
+           fullScreen: true,
+           items: [infoPnl,reviewPnl],
+           id: 'detailPnl',
+           layout: {
+               type: 'vbox',
+               align: 'start',
+               direction: 'normal'
+           },
+           dockedItems:[
+               {
+                   dock:'top',
+                   xtype:'toolbar',
+                   ui:'light',
+                   title:'Crave',
+                   items:[{text:'Back',ui:'back', handler:backHandler}]
+               }
+           ]
+       });
+
+       var listPnl = new Ext.Panel({
+           id: 'listPnl',
+           items: [list,placesList],
+           layout: {
+               type: 'card'
+           },
+           cardSwitchAnimation: 'slide',
+           direction:'horizontal',
+           dockedItems: [
+               {
+                   id: 'topPanel',
+                   xtype: 'toolbar',
+                   ui:'light',
+                   dock: 'top',
+                   layout:{pack:'center'},
+                   items:[
+                       {xtype:'segmentedbutton',
+                       items:[
+                           {text:'Dishes',pressed:true, handler:tapHandler},
+                           {text:'Restaurants', handler:tapHandler}
+                       ]}
+                   ]
+               }/*,
+               {
+                   id:'bottomPanel',
+                   xtype: 'toolbar',
+                   dock:'bottom',
+                   ui:'dark',
+                   items:[
+                       {xtype:'segmentedbutton',
+                       items:[
+                           {text:'Nearby',pressed:true}
+                       ]}
+                    ]
+               }
+                       */
+           ]
+       });
+
+           var restaurantPnl = new Ext.Panel({
+               id: 'restaurantPnl',
+               items: [restPnl,aRestaurantList],
+               fullscreen:true,
+               layout: {
+                   type: 'vbox',
+                   align: 'start',
+                   direction: 'normal'
+               },
+               dockedItems:[
+                   {
+                       dock:'top',
+                       xtype:'toolbar',
+                       ui:'light',
+                       title:'Crave',
+                       items:[{text:'Back',ui:'back', handler:backHandler}]
+                   }
+               ]
+           });
+
+           var mainPnl = new Ext.Panel({
+               fullscreen: true,
+               id: 'mainPnl',
+               items: [listPnl,detailPnl,restaurantPnl],
+               layout: {
+                   type: 'card'
+               },
+               cardSwitchAnimation: 'slide',
+               direction:'horizontal',
+           });
+
+   }
+
+});
+</script>
+
+</body>
+</html>
