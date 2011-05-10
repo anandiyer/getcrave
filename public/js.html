@@ -5,101 +5,10 @@
     <link rel="stylesheet"
      href="stylesheets/apple.css"
      type="text/css" />
+    <link rel="stylesheet"
+     href="stylesheets/custom.css"
+     type="text/css" />
 
-<style type="text/css">
-.foodImg {
-    display:block;
-    width:110px;
-    height:110px;
-    padding:5px;
-    margin:12px auto;
-}
-.dishinfo {padding:12px;}
-.picanddata .pic {float:left;padding:12px}
-.picanddata .data {float:left;}
-.reviewtext {clear:both;float:none;padding:12px}
-.restaurantInfo {width: 100%;
-height: 100px;
-background-color: #f9ecc0;
-padding: 12px;}
-.dashedBorder {border:dashed 1px;}
-/*sencha overrides */
-.x-toolbar-light {
-    background-image:
-        -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0.25, rgb(245,114,91)),
-        color-stop(0.63, rgb(245,114,91)),
-        color-stop(0.82, rgb(231,82,56))
-        );
-}
-.x-toolbar-dark {
-    background-color:#404042;
-    background-image: -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0.25, rgb(64,64,66)),
-        color-stop(0.63, rgb(64,64,66)),
-        color-stop(0.82, rgb(38,40,37))
-    );
-}
-
-.x-toolbar-light .x-button.x-button-pressed,
-.x-toolbar-light .x-button.x-button-pressed::after,
-.x-toolbar-light .x-button.x-button-active,
-.x-toolbar-light .x-button.x-button-active::after,
-.x-toolbar .x-toolbar-light .x-button.x-button-pressed,
-.x-toolbar .x-toolbar-light .x-button.x-button-pressed::after,
-.x-toolbar .x-toolbar-light .x-button.x-button-active,
-.x-toolbar .x-toolbar-light .x-button.x-button-active::after {
-    background-color:#dd4f3c;
-    background-image: -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0.25, rgb(221,79,60)),
-        color-stop(0.63, rgb(221,79,60)),
-        color-stop(0.82, rgb(212,61,38))
-    );
-}
-.x-toolbar-light .x-button.x-button-pressed, .x-toolbar-light .x-button.x-button-active, .x-toolbar .x-toolbar-light .x-button.x-button-pressed, .x-toolbar .x-toolbar-light .x-button.x-button-active, .x-toolbar-light .x-field-select .x-input-text.x-button-pressed, .x-toolbar-light .x-field-select .x-input-text.x-button-active, .x-toolbar .x-toolbar-light .x-field-select .x-input-text.x-button-pressed, .x-toolbar .x-toolbar-light .x-field-select .x-input-text.x-button-active, .x-toolbar-light .x-field-select::before.x-button-pressed, .x-toolbar-light .x-field-select::before.x-button-active, .x-toolbar .x-toolbar-light .x-field-select::before.x-button-pressed, .x-toolbar .x-toolbar-light .x-field-select::before.x-button-active
-{
-    -webkit-box-shadow:inset #b1422e 0 0 0.1em;
-}
-.x-toolbar-light .x-button, .x-toolbar-light .x-button.x-button-back::after, .x-toolbar-light .x-button.x-button-forward::after, .x-toolbar .x-toolbar-light .x-button, .x-toolbar .x-toolbar-light .x-button.x-button-back::after, .x-toolbar .x-toolbar-light .x-button.x-button-forward::after, .x-toolbar-light .x-field-select .x-input-text, .x-toolbar-light .x-field-select .x-input-text.x-button-back::after, .x-toolbar-light .x-field-select .x-input-text.x-button-forward::after, .x-toolbar .x-toolbar-light .x-field-select .x-input-text, .x-toolbar .x-toolbar-light .x-field-select .x-input-text.x-button-back::after, .x-toolbar .x-toolbar-light .x-field-select .x-input-text.x-button-forward::after, .x-toolbar-light .x-field-select::before, .x-toolbar-light .x-field-select::before.x-button-back::after, .x-toolbar-light .x-field-select::before.x-button-forward::after, .x-toolbar .x-toolbar-light .x-field-select::before, .x-toolbar .x-toolbar-light .x-field-select::before.x-button-back::after, .x-toolbar .x-toolbar-light .x-field-select::before.x-button-forward::after
-{
-    background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0.25, rgb(234,112,94)),
-    color-stop(0.63, rgb(234,112,94)),
-    color-stop(0.82, rgb(214,62,39))
-    );
-}
-.x-toolbar-light .x-button, .x-toolbar .x-toolbar-light .x-button, .x-toolbar-light .x-field-select .x-input-text, .x-toolbar .x-toolbar-light .x-field-select .x-input-text, .x-toolbar-light .x-field-select::before, .x-toolbar .x-toolbar-light .x-field-select::before
-{
-    border:0.1em solid #b1422e;
-    border-top-color:#b1422e;
-}
-.x-list .x-list-disclosure {
-    background:#d3d3d3 none;
-}
-.x-list .x-list-item.x-item-selected {
-    background-color:#c6c0bf;
-    background-image:none;
-    border-top-color:#C6C0BF;
-    border-bottom-color:none;
-}
-.x-toolbar-light .x-button.x-button-back::before, .x-toolbar-light .x-button.x-button-forward::before, .x-toolbar .x-toolbar-light .x-button.x-button-back::before, .x-toolbar .x-toolbar-light .x-button.x-button-forward::before, .x-toolbar-light .x-field-select .x-input-text.x-button-back::before, .x-toolbar-light .x-field-select .x-input-text.x-button-forward::before, .x-toolbar .x-toolbar-light .x-field-select .x-input-text.x-button-back::before, .x-toolbar .x-toolbar-light .x-field-select .x-input-text.x-button-forward::before, .x-toolbar-light .x-field-select::before.x-button-back::before, .x-toolbar-light .x-field-select::before.x-button-forward::before, .x-toolbar .x-toolbar-light .x-field-select::before.x-button-back::before, .x-toolbar .x-toolbar-light .x-field-select::before.x-button-forward::before
-{
-    background:#b1422e;
-}
-.x-toolbar-light .x-toolbar-title {color:#ffffff;}
-</style>
 </head>
 
 <body>
@@ -116,6 +25,16 @@ padding: 12px;}
        glossOnIcon: false,
        onReady: function() {
 
+           dishTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><b>{name}</b><br/>{[this.distDisplay(parent.distance)]}</div></tpl>',
+               {distDisplay: function(miles) {
+                   console.log(miles);
+                   feet = Math.round(miles * 5280);
+                   if(feet<1000) {
+                       return feet+" feet";
+                   } else {
+                       return miles.toFixed(1)+' miles';
+                   }
+               }});
 
            Ext.regModel('Dish',
            {
@@ -242,7 +161,7 @@ padding: 12px;}
                        });
                    }
                },
-               itemTpl: '<tpl for="."><div class="aplace"><b>{name}</b><br/>{distance}</div></tpl>',
+               itemTpl: dishTemplate,
                singleSelect: true,
                grouped: false,
                indexBar: false,
@@ -320,7 +239,7 @@ padding: 12px;}
 
                    }
                },
-               itemTpl: '<tpl for="."><div class="adish"><b>{name}</b><br/>{distance}</div></tpl>',
+               itemTpl: dishTemplate,
                //itemSelector: 'div.adish',
                //this breaks my onItemDisclosure activity
                singleSelect: true,
@@ -457,7 +376,7 @@ padding: 12px;}
                    type: 'card'
                },
                cardSwitchAnimation: 'slide',
-               direction:'horizontal',
+               direction:'horizontal'
            });
 
    }
