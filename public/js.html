@@ -16,14 +16,19 @@
 <img src="images/crave-startup.png" border="0" class="startuppic"/>
 
 <script type="text/javascript"
-     src="/javascripts/sencha-touch.js"></script>
+     src="javascripts/sencha-touch.js"></script>
 <script type="text/javascript"
-     src="/javascripts/jquery.js"></script>
+     src="javascripts/jquery.js"></script>
 
 <script type="text/javascript">
     Ext.setup({
        glossOnIcon: false,
        onReady: function() {
+
+           urlPrefix = "";
+           if(window.location.toString().indexOf("http://localhost")>-1) {
+               urlPrefix = '/wg/proxy.php?url=http://blooming-water-228.heroku.com';
+           }
 
            dishTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><b>{name}</b><br/>{[this.distDisplay(parent.distance)]}</div></tpl>',
                {distDisplay: function(miles) {
@@ -92,12 +97,10 @@
                console.log('location got');
                //console.log(restaurants);
                console.log('/restaurants.json?lat='+position.coords.latitude+'&long='+position.coords.longitude);
-               store.proxy.url = '/menu_items.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
+               store.proxy.url = urlPrefix+encodeURIComponent('/menu_items.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+               console.log(urlPrefix+'/menu_items.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                store.load();
-               console.log('here is store');
-               console.log(store);
-               console.log('dishes data request made');
-               restaurants.proxy.url = '/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
+               restaurants.proxy.url = urlPrefix+encodeURIComponent('/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                restaurants.load();
            });
            var aRestaurantList = new Ext.List({
@@ -105,7 +108,7 @@
                onItemDisclosure: {
                    handler: function(record, btn, index) {
                        Ext.Ajax.request({
-                           url: ('/menu_items/'+record.data.id+'.json'),
+                           url: (urlPrefix+'/menu_items/'+record.data.id+'.json'),
                            reader: {
                                 type: 'json'
                            },
@@ -138,16 +141,14 @@
            var placesList = new Ext.List({
                onItemDisclosure: {
                    handler: function(record, btn, index) {
-                       singleRestaurantStore.proxy.url = ('/restaurants/'+record.data.id+'/menu_items.json');
+                       singleRestaurantStore.proxy.url = (urlPrefix+'/restaurants/'+record.data.id+'/menu_items.json');
                        singleRestaurantStore.load(function(){
                            Ext.getCmp('mainPnl').setActiveItem(2);
                            //$("#aRestaurantList").removeClass("x-hidden-display");
                        });
-                       console.log('see '+singleRestaurantStore.proxy.url);
-                       console.log(singleRestaurantStore);
 
                        Ext.Ajax.request({
-                           url: ('/restaurants/'+record.data.id+'.json'),
+                           url: (urlPrefix+'/restaurants/'+record.data.id+'.json'),
                            reader: {
                                 type: 'json'
                            },
@@ -193,7 +194,7 @@
                        });
                        */
                        Ext.Ajax.request({
-                           url: ('/menu_items/'+record.data.id+'.json'),
+                           url: (urlPrefix+'/menu_items/'+record.data.id+'.json'),
                            reader: {
                                 type: 'json'
                            },
