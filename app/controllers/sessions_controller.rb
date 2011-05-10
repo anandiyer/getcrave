@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
   def create
+    session[:return_to] ||= request.referer
+    
+    p "referer = " + request.referer
+    
     auth = request.env['rack.auth']
     unless @auth = Authorization.find_from_hash(auth)
       # Create a new user or add an auth to existing user, depending on
@@ -10,13 +14,15 @@ class SessionsController < ApplicationController
     self.current_user = @auth.user
 
     # FIXME - redirect to the calling URL
-    render :text => "Welcome, #{current_user.user_name}."
+    # render :text => "Welcome, #{current_user.user_name}."
+    redirect_to session[:return_to]
   end
 
   def destroy
     session[:user_id] = nil
     
-    render :text => "Signed out!"
+    # render :text => "Signed out!"
     # redirect_to root_url, :notice => "Signed out!"
+    redirect_to :back
   end
 end

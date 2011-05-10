@@ -18,8 +18,7 @@
                 return;
             }
 
-			url = "http://blooming-water-228.heroku.com/restaurants?lat=" + 
-					position.coords.latitude + "&long=" + position.coords.longitude;
+			url = "/restaurants?lat=" + position.coords.latitude + "&long=" + position.coords.longitude;
             s.innerHTML = "<a href=\"" + url + "\">Restaurants</a>";
             s.className = 'success';
         }
