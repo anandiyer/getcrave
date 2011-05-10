@@ -46,6 +46,8 @@ Crave::Application.routes.draw do
     end
   end
 
-  resources :users
+  resources :users do
+    resources :menu_item_ratings
+  end
 
 end
