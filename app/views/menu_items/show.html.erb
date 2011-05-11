@@ -1,11 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Restaurant:</b>
-  <%= @menu_item.restaurant_id %>
-</p>
-
-<p>
   <b>Name:</b>
   <%= @menu_item.name %>
 </p>
@@ -15,5 +10,10 @@
   <%= @menu_item.description %>
 </p>
 
-<%= link_to 'Edit', edit_menu_item_path(@menu_item) %> |
-<%= link_to 'Back', menu_items_path %>
+<p>
+  <b>Restaurant:</b>
+  <a href="/restaurant/<%= @menu_item.restaurant_id %>"><%= @menu_item.restaurant_id %></a>
+</p>
+
+<%= link_to 'Back', menu_items_path %> |
+<%= link_to 'Rate', new_menu_item_menu_item_rating_path(@menu_item) %>

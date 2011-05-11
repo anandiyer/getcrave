@@ -19,9 +19,13 @@ class MenuItemsController < ApplicationController
       @menu_items = @restaurant.menu_items.find(:all, :limit => @limit)
     else 
       # Lookup all the restaurants near the given lat/long and get 50 of the menu_items
-      @menu_items = Restaurant.find(:all, 
+      # and order by rating
+      
+      #FIXME - need to join to return average menu_item_rating for each menu_item
+      #FIXME - need to limit returned data to restaurant data to id, name and distance only
+      @menu_items = Restaurant.find(:all,  
         :origin => [@lat, @long], 
-        :order=>'distance asc',  
+        :order =>'distance asc',  
         :joins => [ :menu_items ],
         :limit => @limit)
     end
@@ -41,8 +45,9 @@ class MenuItemsController < ApplicationController
   # GET /menu_items/1
   # GET /menu_items/1.xml
   def show
+    #FIXME - need to get all the menu item attributes like ratings, photos etc.
     @menu_item = MenuItem.find(params[:id])
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @menu_item }
