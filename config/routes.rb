@@ -27,7 +27,7 @@ Crave::Application.routes.draw do
       end 
     end
     collection do
-      get 'search'
+      get 'search', 'location'
     end
   end
 

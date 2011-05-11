@@ -12,7 +12,13 @@
 
 <p>
   <b>Restaurant:</b>
-  <a href="/restaurant/<%= @menu_item.restaurant_id %>"><%= @menu_item.restaurant_id %></a>
+  <a href="/restaurants/<%= @menu_item.restaurant_id %>"><%= @menu_item.restaurant_id %></a>
+</p>
+
+<p>
+	<%= @menu_item.menu_item_ratings.each do |m| %>
+		<%= m.user_id %> rated this <%= m.rating %>: <%= m.review %><br />
+	<% end %>
 </p>
 
 <%= link_to 'Back', menu_items_path %> |
