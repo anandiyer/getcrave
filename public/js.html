@@ -13,7 +13,7 @@
 
 <body>
 
-<img src="images/crave-startup.png" border="0" class="startuppic"/>
+<!--<img src="images/crave-startup.png" border="0" class="startuppic"/>-->
 
 <script type="text/javascript"
      src="javascripts/sencha-touch.js"></script>
@@ -32,7 +32,6 @@
 
            dishTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><b>{name}</b><br/>{[this.distDisplay(parent.distance)]}</div></tpl>',
                {distDisplay: function(miles) {
-                   console.log(miles);
                    feet = Math.round(miles * 5280);
                    if(feet<1000) {
                        return feet+" feet";
@@ -97,9 +96,9 @@
                console.log('location got');
                //console.log(restaurants);
                console.log('/restaurants.json?lat='+position.coords.latitude+'&long='+position.coords.longitude);
-               store.proxy.url = urlPrefix+encodeURIComponent('/menu_items.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
-               console.log(urlPrefix+'/menu_items.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+               store.proxy.url = urlPrefix+encodeURIComponent('/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                store.load();
+               Ext.getCmp("dishesNearbyList").scroller.on('scroll', this.onScroll, this);
                restaurants.proxy.url = urlPrefix+encodeURIComponent('/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                restaurants.load();
            });
@@ -155,7 +154,6 @@
                            success: function(response) {
                                 //populate top panel with restaurant data, map
                                 var responseObject = eval('(' + response.responseText + ')');
-                               console.log(responseObject);
                                 htmlString = '<div class="restaurantInfo">'+responseObject.restaurant.name+'</div>';
                                 Ext.getCmp('restPnl').update(htmlString);
                            }
@@ -180,7 +178,6 @@
                    handler: function(record, btn, index) {
                        console.log(record.data.id);
                        /*
-                       console.log(Ext.getCmp('carouselPnl')!=undefined);
                         if(Ext.getCmp('carouselPnl')) {
                             Ext.getCmp('carouselPnl').destroy();
                         }
@@ -200,7 +197,6 @@
                            },
                            success: function(response) {
                                var responseObject = eval('(' + response.responseText + ')');
-                               console.log(responseObject);
                                htmlString = '<div class="dishinfo"><b>'+responseObject.menu_item.name+'</b><br/>';
                                htmlString += '$ '+responseObject.menu_item.price+'<br>';
                                htmlString += '<br><br>'+responseObject.menu_item.description+'<br>';
@@ -247,6 +243,8 @@
                grouped: false,
                indexBar: false,
                store: store,
+               id:'dishesNearbyList',
+               scroll:'vertical',
 
                floating:true,
                width:350,
@@ -256,6 +254,13 @@
                hideOnMaskTap: false,
                clearSectionOnDeactivate:true
            });
+
+
+           var onScroll = new function(something) {
+               console.log('scrolling');
+           }
+
+           //Ext.getCmp("dishesNearbyList").scroller.on('scroll', this.onScroll, this);
 
            var infoPnl = new Ext.Panel({
                html: '',
