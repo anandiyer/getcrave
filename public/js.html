@@ -13,7 +13,7 @@
 
 <body>
 
-<!--<img src="images/crave-startup.png" border="0" class="startuppic"/>-->
+<img src="images/crave-startup.png" border="0" class="startuppic"/>
 
 <script type="text/javascript"
      src="javascripts/sencha-touch.js"></script>
@@ -26,9 +26,12 @@
        onReady: function() {
 
            urlPrefix = "";
+           urlPrefixSet=false;
            if(window.location.toString().indexOf("http://localhost")>-1) {
+               urlPrefixSet=true;
                urlPrefix = '/wg/proxy.php?url=http://blooming-water-228.heroku.com';
            }
+           console.log(urlPrefix);
 
            dishTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><b>{name}</b><br/>{[this.distDisplay(parent.distance)]}</div></tpl>',
                {distDisplay: function(miles) {
@@ -96,10 +99,15 @@
                console.log('location got');
                //console.log(restaurants);
                console.log('/restaurants.json?lat='+position.coords.latitude+'&long='+position.coords.longitude);
-               store.proxy.url = urlPrefix+encodeURIComponent('/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+               if(urlPrefixSet) {
+                   store.proxy.url = urlPrefix+encodeURIComponent('/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+                   restaurants.proxy.url = urlPrefix+encodeURIComponent('/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+               } else {
+                   store.proxy.url = '/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
+                   restaurants.proxy.url = '/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
+               }
                store.load();
                Ext.getCmp("dishesNearbyList").scroller.on('scroll', this.onScroll, this);
-               restaurants.proxy.url = urlPrefix+encodeURIComponent('/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                restaurants.load();
            });
            var aRestaurantList = new Ext.List({
