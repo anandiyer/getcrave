@@ -146,8 +146,8 @@ class MenuItemsController < ApplicationController
       
       respond_to do |format|
         format.html # search.html.erb
-        format.xml  { render :xml => @restaurants }
-        format.json { render :json => @restaurants }
+        format.xml  { render :xml => @menu_items }
+        format.json { render :json => @menu_items }
       end
   end
   

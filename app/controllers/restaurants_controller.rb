@@ -102,13 +102,22 @@ class RestaurantsController < ApplicationController
   
   # Search
   def search
-      @search  = Restaurant.search() do
-        fulltext(params[:q])
-        # 6 and lower is the only precision that seems to work
-        with(:coordinates).near(params[:lat], params[:long], :precision => 5)
-        # , :boost => 2, :precision => 6)
+      if params[:lat] && !params[:lat].empty? && params[:long] && !params[:long].empty?
+        @lat = params[:lat].to_f
+        @long = params[:long].to_f
+        
+        @search  = Restaurant.search() do
+          fulltext(params[:q])
+          # 6 and lower is the only precision that seems to work
+          with(:coordinates).near(@lat, @long, :precision => 5)
+          # , :boost => 2, :precision => 6)
+        end
+      else 
+          @search  = Restaurant.search() do
+            fulltext(params[:q])
+          end
       end
-      
+
       @restaurants = @search.results
       
       respond_to do |format|
