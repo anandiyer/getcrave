@@ -1,5 +1,6 @@
 class MenuItemsController < ApplicationController
   before_filter :get_restaurant
+  layout "general"
 
   # GET /menu_items
   # GET /menu_items.xml
@@ -44,10 +45,15 @@ class MenuItemsController < ApplicationController
     @menu_item = MenuItem.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.haml
       format.xml  { render :xml => @menu_item }
       format.json { render :json => @menu_item }
     end
+  end
+
+
+  def show_reviews
+    render :partial => "review"
   end
 
   # GET /menu_items/new

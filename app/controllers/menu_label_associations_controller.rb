@@ -16,7 +16,7 @@ class MenuLabelAssociationsController < ApplicationController
     @menu_label_association = MenuLabelAssociation.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.haml
       format.xml  { render :xml => @menu_label_association }
     end
   end

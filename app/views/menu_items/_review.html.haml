@@ -1,0 +1,36 @@
+
+- @menu_item ||= MenuItem.find(params[:id])
+
+-@menu_item.menu_item_ratings.reverse.each do |@mi_rating|
+  - user = User.find(@mi_rating.user_id)
+  -if @mi_rating.user_id?
+    .reviews_wrapper_block
+      .review_image_col
+        =image_tag "reviews_avatar_temp.png"
+        #click &nbsp;
+
+      .review_desc_col_wrapper
+        .before_start
+          .data_review
+            =@mi_rating.updated_at.strftime("%b %d, %Y")
+          %h3
+            -#TODO: refactor to somothings like @mi_rating.user.user_name
+            =user.user_name
+          %em
+            by
+            =link_to user.user_name, user
+        -rating = @mi_rating.rating ? @mi_rating.rating : 0
+        .star{:id => @mi_rating.id, :data => {:rating => rating, :model => "menu_item_ratings"}} &nbsp;
+        =@mi_rating.rating
+        .review_body_head
+          =@mi_rating.review
+          =link_to "Show more", "#"
+        .helpful_block
+          .before_answer_block
+            Was this review helpful?
+          %span.yes_answer
+            =link_to "Yes", "123"
+          %span.no_answer
+            =link_to "No", "123"
+          .found_helpfull
+            11 people found this helpfull

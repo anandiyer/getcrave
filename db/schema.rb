@@ -82,7 +82,6 @@ ActiveRecord::Schema.define(:version => 20110509173520) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "price"
   end
 
   create_table "menu_label_associations", :force => true do |t|
@@ -140,7 +139,6 @@ ActiveRecord::Schema.define(:version => 20110509173520) do
     t.point    "latitude_longitude", :limit => nil
     t.float    "latitude"
     t.float    "longitude"
-    t.point    "geom",               :limit => nil, :srid => 32661
   end
 
   add_index "restaurants", ["latitude_longitude"], :name => "index_restaurants_on_latitude_longitude", :spatial => true

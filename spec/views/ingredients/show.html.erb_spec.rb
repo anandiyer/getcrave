@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "ingredients/show.html.erb" do
+describe "ingredients/show.html.haml" do
   before(:each) do
     @ingredient = assign(:ingredient, stub_model(Ingredient,
       :ingredient => "Ingredient"

@@ -1,0 +1,86 @@
+!!!
+%html
+  %head
+    %title Crave  app layout
+    = javascript_include_tag :defaults
+    -#= javascript_include_tag "jquery-1.6.min.js"
+    = javascript_include_tag  "plugins/jquery.raty.min.js", "selectivizr-min.js", "coffee"
+    = include_gritter
+    = gflash
+
+    = stylesheet_link_tag "screen"
+    /[if IE]
+      = stylesheet_link_tag "ie"
+    = csrf_meta_tag
+  %body.two-col.bp
+    #page
+      #container
+        #header
+          #logo
+            =link_to(image_tag("logo.png"),"/")
+          #navigation_wrap
+            =image_tag "nav_left_corner.png", :class => "left_nav_corner"
+            =image_tag "nav_right_corner.png", :class => "right_nav_corner"
+            #navigation
+              =link_to(image_tag("fb_login_icon.png"), facebook_auth_path, :class => "fb_login")
+              %ul
+                %li.nearby=link_to "Nearby","#"
+                %li.saved=link_to "Saved","#"
+                %li.following=link_to "Following","#"
+                %li.profile=link_to "Profile","#"
+
+          #navigation_wrap_search
+            %form{:action =>"#"}
+              =text_field(:first, :second, :class =>"first_search_input")
+              =text_field(:first, :second, :class =>"second_search_input")
+              =image_tag "fileds_search_inputs.png", :class => "fields"
+              =image_submit_tag("search_button.png", :class => "search")
+              #in in
+
+        =yield
+        -#= add_gritter("This is a notification just for you!")
+        -#= js add_gritter("This is a notification just for you!")
+        :javascript
+          //#TODO place to refactor - move to external js file
+
+          function add_review(id_of_menu_item){
+            var obj = $("#reviews_wrapper");
+            $.ajax({
+              url: "/menu_items/"+id_of_menu_item+"/show_reviews",
+              context: document.body,
+              beforeSend: function(){
+                obj.fadeTo("normal",".5");
+              },
+              success: function(html){
+                obj.html(html);
+                obj.fadeTo("fast","1");
+              }
+            });
+
+            $.gritter.add({title:"Notification", text:"Review was succssecfully added!"});
+          }
+
+          function g_notice(type, text){
+            $.gritter.add({title:type, text:text});
+          }
+
+          $('.star').each(function(){
+            var data_rating = $(this).data("rating");
+            $(this).raty({
+              start: data_rating,
+              path: "/images/icons",
+              width: "180px",
+              click: function(score, evt) {
+                var data_rating = $(this).data("rating");
+                var data_model = $(this).data("model");
+                var id =  this.attr('id');
+                var score =  score;
+                $.gritter.add({title:'Notification',text:'Rating: ID='+id+"<br /> model = "+ data_model+ " <br/>score :"+ score});
+
+              }
+            })
+          })
+
+
+
+

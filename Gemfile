@@ -20,7 +20,7 @@ gem 'omniauth'
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
 # gem 'ruby-debug'
-# gem 'ruby-debug19', :require => 'ruby-debug'
+# gem 'rpuby-debug19', :require => 'ruby-debug'
 
 # Bundle the extra gems:
 # gem 'bj'
@@ -32,9 +32,39 @@ gem 'omniauth'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 
-group :development, :test do
+group :development do
   gem 'cucumber-rails'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'webrat'
+  gem 'barista'
+  gem 'json'
+  gem "gritter"
+#  gem 'therubyracer', :require => nil
+
+#  gem 'mysql2', "0.2.7"
+#  gem 'thin'
+#  gem "sqlite3"
+#  gem 'geokit-rails', :git => 'git://github.com/jlecour/geokit-rails.git', :branch => 'gem'
+
+
+  gem 'mongrel'
+  gem "erb2haml"
+
+  gem "rb-inotify"
+  gem "compass"
+  gem "compass-susy-plugin"
+
+
+  gem 'jquery-rails', '>= 0.2.6'
+  gem "haml"
+  gem "haml-rails"
+
 end
+
+
+#http://postgis.refractions.net/download/
+#http://postgis.refractions.net/docs/ch02.html
+
+#must install postgis and import postgis.sql(or postgis-64.sql) file
+# without postgis.sql import you can not rake db:migrate

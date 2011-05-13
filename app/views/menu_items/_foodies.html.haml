@@ -1,11 +1,10 @@
 .foodies_wraper
-
   .foodie_block_wrapper
     .image_foodie_1_col
       =image_tag "reviews_avatar_temp.png"
     .text_foodie_2_col
       .foodie_name
-        =link_to "steve-no-wonder", "#"
+        =link_to @user.user_name, "#"
       %em 123 followers
     .reviews_couner_3_col
       %h3 27
