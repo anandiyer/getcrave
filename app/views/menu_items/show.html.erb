@@ -16,6 +16,11 @@
 </p>
 
 <p>
+	Num Ratings: <%= @menu_item.menu_item_avg_rating_count.count %> 
+	Avg Rating:  <%= @menu_item.menu_item_avg_rating_count.avg_rating %> <br />
+</p>
+
+<p>
 	<%= @menu_item.menu_item_ratings.each do |m| %>
 		<%= m.user_id %> rated this <%= m.rating %>: <%= m.review %><br />
 	<% end %>
