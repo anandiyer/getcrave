@@ -16,8 +16,8 @@
 </p>
 
 <p>
-	Num Ratings: <%= @menu_item.menu_item_avg_rating_count.count %> 
-	Avg Rating:  <%= @menu_item.menu_item_avg_rating_count.avg_rating %> <br />
+	Num Ratings: <%= @menu_item.menu_item_avg_rating_count.count rescue nil %> 
+	Avg Rating:  <%= @menu_item.menu_item_avg_rating_count.avg_rating rescue nil %> <br />
 </p>
 
 <p>
