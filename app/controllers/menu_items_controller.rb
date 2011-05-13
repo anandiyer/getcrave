@@ -74,12 +74,12 @@ class MenuItemsController < ApplicationController
   # GET /menu_items/1.xml
   def show
     #FIXME - need to get all the menu item attributes like ratings, photos etc.
-    @menu_item = MenuItem.find(params[:id], :include => [:menu_item_ratings, :menu_item_avg_rating_count])
+    @menu_item = MenuItem.find(params[:id], :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings])
     
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @menu_item.to_xml( :include => [ :menu_item_ratings, :menu_item_avg_rating_count] ) }
-      format.json { render :json => @menu_item.to_json( :include => [ :menu_item_ratings, :menu_item_avg_rating_count] ) }
+      format.xml  { render :xml => @menu_item.to_xml( :include => [ :restaurant, :menu_item_avg_rating_count, :menu_item_ratings ] ) }
+      format.json { render :json => @menu_item.to_json( :include => [ :restaurant, :menu_item_avg_rating_count, :menu_item_ratings ] ) }
     end
   end
 
