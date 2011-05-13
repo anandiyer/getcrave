@@ -54,6 +54,7 @@
               success: function(html){
                 obj.html(html);
                 obj.fadeTo("fast","1");
+                starts_update();
               }
             });
 
@@ -64,22 +65,25 @@
             $.gritter.add({title:type, text:text});
           }
 
-          $('.star').each(function(){
-            var data_rating = $(this).data("rating");
-            $(this).raty({
-              start: data_rating,
-              path: "/images/icons",
-              width: "180px",
-              click: function(score, evt) {
-                var data_rating = $(this).data("rating");
-                var data_model = $(this).data("model");
-                var id =  this.attr('id');
-                var score =  score;
-                $.gritter.add({title:'Notification',text:'Rating: ID='+id+"<br /> model = "+ data_model+ " <br/>score :"+ score});
+          starts_update();
 
-              }
+          function starts_update(){
+            $('.star').each(function(){
+              var data_rating = $(this).data("rating");
+              $(this).raty({
+                start: data_rating,
+                path: "/images/icons",
+                width: "180px",
+                click: function(score, evt) {
+                  var data_rating = $(this).data("rating");
+                  var data_model = $(this).data("model");
+                  var id =  this.attr('id');
+                  var score =  score;
+                  $.gritter.add({title:'Notification',text:'Rating: ID='+id+"<br /> model = "+ data_model+ " <br/>score :"+ score});
+                }
+              })
             })
-          })
+          }
 
 
 
