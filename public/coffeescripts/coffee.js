@@ -1,0 +1,7 @@
+/* DO NOT MODIFY. This file was compiled Fri, 13 May 2011 15:15:11 GMT from
+ * /home/almazom/rails/elance/getcrave/app/scripts/coffee.coffee
+ */
+
+(function() {
+  $(document).ready(function() {});
+}).call(this);
