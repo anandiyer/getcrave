@@ -15,10 +15,10 @@
 
 <img src="images/crave-startup.png" border="0" class="startuppic"/>
 
-<script type="text/javascript"
-     src="javascripts/sencha-touch.js"></script>
-<script type="text/javascript"
-     src="javascripts/jquery.js"></script>
+<script type="text/javascript" src="sencha-touch.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="restaurants.js"></script>
+<script type="text/javascript" src="dishes.js"></script>
 
 <script type="text/javascript">
     Ext.setup({
@@ -31,48 +31,10 @@
                urlPrefixSet=true;
                urlPrefix = '/wg/proxy.php?url=http://blooming-water-228.heroku.com';
            }
-           console.log(urlPrefix);
 
-           dishTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><b>{name}</b><br/>{[this.distDisplay(parent.distance)]}</div></tpl>',
-               {distDisplay: function(miles) {
-                   feet = Math.round(miles * 5280);
-                   if(feet<1000) {
-                       return feet+" feet";
-                   } else {
-                       return miles.toFixed(1)+' miles';
-                   }
-               }});
 
-           Ext.regModel('Dish',
-           {
-               fields: ['city','distance','name','id', 'restaurant_id']
-           });
 
-           Ext.regModel('RestaurantDish',
-           {
-               fields: ['name','id','price','description','restaurant_id']
-           });
-
-           Ext.regModel('Restaurants',
-           {
-               fields: ['distance','name','id']
-           });
-
-           var restaurants = new Ext.data.Store({
-              model: 'Restaurants',
-               id: 'restaurants',
-
-              proxy: {
-                  type:'ajax',
-                  url:'',
-                  reader: {
-                      type:'json',
-                      record:'restaurant'
-                  }
-              }
-          });
-
-           var singleRestaurantStore = new Ext.data.Store({
+           var store = new Ext.data.Store({
                model: 'Dish',
                proxy: {
                    type:'ajax',
@@ -82,22 +44,9 @@
                       record:'menu_item'
                   }
                }
-          });
-
-           var store = new Ext.data.Store({
-               model: 'Dish',
-               proxy: {
-                   type:'ajax',
-                   url:'',
-                  reader: {
-                      type:'json',
-                      record:'restaurant'
-                  }
-               }
            });
            navigator.geolocation.getCurrentPosition(function(position) {
                console.log('location got');
-               //console.log(restaurants);
                console.log('/restaurants.json?lat='+position.coords.latitude+'&long='+position.coords.longitude);
                if(urlPrefixSet) {
                    store.proxy.url = urlPrefix+encodeURIComponent('/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
@@ -106,8 +55,8 @@
                    store.proxy.url = '/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
                    restaurants.proxy.url = '/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
                }
+               
                store.load();
-               Ext.getCmp("dishesNearbyList").scroller.on('scroll', this.onScroll, this);
                restaurants.load();
            });
            var aRestaurantList = new Ext.List({
@@ -181,7 +130,7 @@
                clearSectionOnDeactivate:true
            });
 
-           var list = new Ext.List({
+           var dishList = new Ext.List({
                onItemDisclosure: {
                    handler: function(record, btn, index) {
                        console.log(record.data.id);
@@ -268,8 +217,6 @@
                console.log('scrolling');
            }
 
-           //Ext.getCmp("dishesNearbyList").scroller.on('scroll', this.onScroll, this);
-
            var infoPnl = new Ext.Panel({
                html: '',
                id: 'infoPnl'
@@ -296,10 +243,10 @@
 
            var tapHandler = function(b,e) {
                if(b.getText() == "Dishes") {
-                   Ext.getCmp('listPnl').setActiveItem(0);
+                   Ext.getCmp('listPnl').setActiveItem(dishList);
                }
                if(b.getText() == "Restaurants") {
-                   Ext.getCmp('listPnl').setActiveItem(1);
+                   Ext.getCmp('listPnl').setActiveItem(placesList);
                }
            }
 
@@ -325,7 +272,7 @@
 
        var listPnl = new Ext.Panel({
            id: 'listPnl',
-           items: [list,placesList],
+           items: [dishList,placesList],
            layout: {
                type: 'card'
            },
