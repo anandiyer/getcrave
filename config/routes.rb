@@ -1,7 +1,4 @@
 Crave::Application.routes.draw do  
-  match '/auth/:provider/callback', :to => 'sessions#create'  
-  match '/signout' => 'sessions#destroy', :as => :signout
-  
   resources :menu_item_review_comments
 
   resources :menu_item_rating_helpfuls
@@ -49,5 +46,8 @@ Crave::Application.routes.draw do
   resources :users do
     resources :menu_item_ratings
   end
+  
+  match '/auth/:provider/callback', :to => 'sessions#create'  
+  match '/signout' => 'sessions#destroy', :as => :signout
 
 end

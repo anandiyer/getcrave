@@ -14,7 +14,10 @@ class RestaurantsController < ApplicationController
       @limit = params[:limit].to_i
     end
     
-    @restaurants = Restaurant.find(:all, :origin => [@lat, @long], :order=>'distance asc', :limit => @limit)
+    @restaurants = Restaurant.find(:all, 
+      :origin => [@lat, @long], 
+      :order=>'distance asc', 
+      :limit => @limit)
 
     respond_to do |format|
       format.html # index.html.erb

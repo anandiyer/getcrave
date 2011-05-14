@@ -268,3 +268,61 @@ May 12, 2011 6:47:21 AM org.apache.solr.core.SolrCore execute
 INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=shaw&qf=name_text^2+description_text&wt=ruby&fq=type:MenuItem&defType=dismax&rows=30} hits=0 status=0 QTime=22 
 May 12, 2011 6:47:21 AM org.apache.solr.core.SolrCore execute
 INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=shawarma&qf=name_text^2+description_text&wt=ruby&fq=type:MenuItem&defType=dismax&rows=30} hits=68 status=0 QTime=170 
+May 12, 2011 6:53:46 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=_query_:"{!dismax+qf%3D'name_text'}alborz"+(coordinates_s:7zzzzzzzzzzz^1.0+OR+coordinates_s:7zzzzzzzzzz*^0.0625+OR+coordinates_s:7zzzzzzzzz*^0.00391+OR+coordinates_s:7zzzzzzzz*^0.000244+OR+coordinates_s:7zzzzzzz*^0.0000153+OR+coordinates_s:7zzzzzz*^0.000000954+OR+coordinates_s:7zzzzz*^0.0000000596+OR+coordinates_s:7zzzz*^0.00000000373)&wt=ruby&fq=type:Restaurant&rows=30} hits=0 status=0 QTime=4 
+May 12, 2011 6:53:48 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=_query_:"{!dismax+qf%3D'name_text'}alborz"+(coordinates_s:7zzzzzzzzzzz^1.0+OR+coordinates_s:7zzzzzzzzzz*^0.0625+OR+coordinates_s:7zzzzzzzzz*^0.00391+OR+coordinates_s:7zzzzzzzz*^0.000244+OR+coordinates_s:7zzzzzzz*^0.0000153+OR+coordinates_s:7zzzzzz*^0.000000954+OR+coordinates_s:7zzzzz*^0.0000000596+OR+coordinates_s:7zzzz*^0.00000000373)&wt=ruby&fq=type:Restaurant&rows=30} hits=0 status=0 QTime=2 
+May 12, 2011 6:53:49 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=_query_:"{!dismax+qf%3D'name_text'}alborz"+(coordinates_s:7zzzzzzzzzzz^1.0+OR+coordinates_s:7zzzzzzzzzz*^0.0625+OR+coordinates_s:7zzzzzzzzz*^0.00391+OR+coordinates_s:7zzzzzzzz*^0.000244+OR+coordinates_s:7zzzzzzz*^0.0000153+OR+coordinates_s:7zzzzzz*^0.000000954+OR+coordinates_s:7zzzzz*^0.0000000596+OR+coordinates_s:7zzzz*^0.00000000373)&wt=ruby&fq=type:Restaurant&rows=30} hits=0 status=0 QTime=1 
+May 12, 2011 6:53:51 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=alborz&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=1 status=0 QTime=0 
+May 12, 2011 6:53:51 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=alborz&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=1 status=0 QTime=0 
+May 12, 2011 6:53:52 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=alborz&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=1 status=0 QTime=1 
+May 12, 2011 6:53:55 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=lavash&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=1 status=0 QTime=1 
+May 12, 2011 6:53:55 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=lavash&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=1 status=0 QTime=1 
+May 12, 2011 6:57:57 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=lavash&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=1 status=0 QTime=1 
+May 12, 2011 6:58:01 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=lavash&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=1 status=0 QTime=1 
+May 12, 2011 6:58:13 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=lavash&qf=name_text^2+description_text&wt=ruby&fq=type:MenuItem&defType=dismax&rows=30} hits=170 status=0 QTime=1 
+May 12, 2011 6:58:15 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=s&qf=name_text^2+description_text&wt=ruby&fq=type:MenuItem&defType=dismax&rows=30} hits=2147 status=0 QTime=1 
+May 12, 2011 6:58:16 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=shawarma&qf=name_text^2+description_text&wt=ruby&fq=type:MenuItem&defType=dismax&rows=30} hits=68 status=0 QTime=1 
+May 12, 2011 10:57:49 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=pizza&qf=name_text^2+description_text&wt=ruby&fq=type:MenuItem&defType=dismax&rows=30} hits=1480 status=0 QTime=227 
+May 12, 2011 10:57:50 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=pizza&qf=name_text^2+description_text&wt=ruby&fq=type:MenuItem&defType=dismax&rows=30} hits=1480 status=0 QTime=1 
+May 12, 2011 11:25:34 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=lavash&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=1 status=0 QTime=1 
+May 12, 2011 11:25:35 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=lavash&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=1 status=0 QTime=1 
+May 12, 2011 11:25:38 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=lavash&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=1 status=0 QTime=1 
+May 12, 2011 11:25:41 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=lavash&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=1 status=0 QTime=1 
+May 12, 2011 11:25:44 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=a&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=6 status=0 QTime=1 
+May 12, 2011 11:25:44 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=alborz&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=1 status=0 QTime=1 
+May 12, 2011 11:25:45 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=alborz&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=1 status=0 QTime=1 
+May 12, 2011 11:25:46 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=alborz&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=1 status=0 QTime=0 
+May 12, 2011 11:25:47 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=buckhorn&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=3 status=0 QTime=32 
+May 12, 2011 11:25:48 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=buckhorn&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=3 status=0 QTime=1 
+May 12, 2011 11:25:49 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=buckhorn&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=3 status=0 QTime=1 
+May 12, 2011 11:36:37 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=buck&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=1 status=0 QTime=13 
+May 12, 2011 11:37:37 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=buck&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=1 status=0 QTime=1 
+May 13, 2011 2:58:38 PM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=lavash&qf=name_text&wt=ruby&fq=type:Restaurant&defType=dismax&rows=30} hits=1 status=0 QTime=1 

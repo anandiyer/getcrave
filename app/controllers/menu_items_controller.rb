@@ -4,29 +4,41 @@ class MenuItemsController < ApplicationController
   def location
     @lat = params[:lat].to_f
     @long = params[:long].to_f
-    # Default of 25 Restaurants in the area
-    @limit = 10
+    @limit = 25
     
     if params[:limit] && !params[:limit].empty?
       @limit = params[:limit].to_i
     end
     
-    # Lookup all the restaurants near the given lat/long and get 50 of the menu_items
+    # Lookup all the restaurants near the given lat/long and get 25 of the menu_items
     # and order by rating
     
     #FIXME - need to join to return average menu_item_rating for each menu_item
-    #FIXME - need to limit returned data to restaurant data to id, name and distance only
-    @restaurants = Restaurant.find(:all,  
-      :select => 'id, name',
-      :origin => [@lat, @long], 
-      :order =>'distance asc',  
-      :include => :menu_items,
-      :limit => @limit)
+    #FIXME - assuming within 3 mile radius by default
+    #FIXME - also distance virtual column/field is currently being dropped because
+    # of a GeoKit problem
+    #FIXME - order by rating based on QS
+     @menu_items = MenuItem.find(:all, 
+          :origin => [@lat, @long], 
+          :conditions => "distance < 3",
+          :order => "distance asc",
+          # :include => :menu_item_avg_rating_count, 
+          :limit => @limit)
+          
+    # @menu_items.restaurant.sort_by_distance_from(:origin => [@lat, @long])
+      
+     # @menu_items = []
+     #@restaurants.each do |r|
+      #@item = {}
+       #@item = r.menu_items.find(:all, :include => [:menu_item_avg_rating_count, :restaurant])
+       # @item(:restaurant_name => r.name)
+       # @item(:distance => r.distance)
+       #@menu_items << @item
       
       respond_to do |format|
         format.html # location.html.erb
-        format.xml  { render :xml => @restaurants.to_xml ( :include => :menu_items ) }
-        format.json { render :json => @restaurants.to_json ( :include => :menu_items ) }
+        format.xml  { render :xml => @menu_items.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count])}
+        format.json  { render :json => @menu_items.to_json(:include => [:restaurant, :menu_item_avg_rating_count]) }
       end
   end 
 
@@ -62,12 +74,12 @@ class MenuItemsController < ApplicationController
   # GET /menu_items/1.xml
   def show
     #FIXME - need to get all the menu item attributes like ratings, photos etc.
-    @menu_item = MenuItem.find(params[:id], :include => :menu_item_ratings)
+    @menu_item = MenuItem.find(params[:id], :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings])
     
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @menu_item.to_xml( :include => :menu_item_ratings ) }
-      format.json { render :json => @menu_item.to_json( :include => :menu_item_ratings ) }
+      format.xml  { render :xml => @menu_item.to_xml( :include => [ :restaurant, :menu_item_avg_rating_count, :menu_item_ratings ] ) }
+      format.json { render :json => @menu_item.to_json( :include => [ :restaurant, :menu_item_avg_rating_count, :menu_item_ratings ] ) }
     end
   end
 
