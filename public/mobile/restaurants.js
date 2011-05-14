@@ -15,7 +15,7 @@ var restaurants = new Ext.data.Store({
            record:'restaurant'
        }
    }
-   });
+});
 
 var singleRestaurantStore = new Ext.data.Store({
     model: 'Dish',
@@ -27,4 +27,4 @@ var singleRestaurantStore = new Ext.data.Store({
            record:'menu_item'
        }
     }
-   });
+});

@@ -12,3 +12,15 @@ Ext.regModel('Dish',
 {
     fields: ['name','id','price','description','restaurant_id']
 });
+
+var dishStore = new Ext.data.Store({
+    model: 'Dish',
+    proxy: {
+        type:'ajax',
+        url:'',
+       reader: {
+           type:'json',
+           record:'menu_item'
+       }
+    }
+});

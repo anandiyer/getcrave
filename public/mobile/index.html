@@ -17,8 +17,10 @@
 
 <script type="text/javascript" src="sencha-touch.js"></script>
 <script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="restaurants.js"></script>
 <script type="text/javascript" src="dishes.js"></script>
+<script type="text/javascript" src="restaurants.js"></script>
+<script type="text/javascript" src="search.js"></script>
+<script type="text/javascript" src="navigation.js"></script>
 
 <script type="text/javascript">
     Ext.setup({
@@ -32,31 +34,18 @@
                urlPrefix = '/wg/proxy.php?url=http://blooming-water-228.heroku.com';
            }
 
-
-
-           var store = new Ext.data.Store({
-               model: 'Dish',
-               proxy: {
-                   type:'ajax',
-                   url:'',
-                  reader: {
-                      type:'json',
-                      record:'menu_item'
-                  }
-               }
-           });
            navigator.geolocation.getCurrentPosition(function(position) {
                console.log('location got');
                console.log('/restaurants.json?lat='+position.coords.latitude+'&long='+position.coords.longitude);
                if(urlPrefixSet) {
-                   store.proxy.url = urlPrefix+encodeURIComponent('/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+                   dishStore.proxy.url = urlPrefix+encodeURIComponent('/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                    restaurants.proxy.url = urlPrefix+encodeURIComponent('/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                } else {
-                   store.proxy.url = '/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
+                   dishStore.proxy.url = '/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
                    restaurants.proxy.url = '/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
                }
                
-               store.load();
+               dishStore.load();
                restaurants.load();
            });
            var aRestaurantList = new Ext.List({
@@ -98,9 +87,10 @@
                onItemDisclosure: {
                    handler: function(record, btn, index) {
                        singleRestaurantStore.proxy.url = (urlPrefix+'/restaurants/'+record.data.id+'/menu_items.json');
+
                        singleRestaurantStore.load(function(){
                            Ext.getCmp('mainPnl').setActiveItem(2);
-                           //$("#aRestaurantList").removeClass("x-hidden-display");
+                           console.log(singleRestaurantStore);
                        });
 
                        Ext.Ajax.request({
@@ -199,7 +189,7 @@
                singleSelect: true,
                grouped: false,
                indexBar: false,
-               store: store,
+               store: dishStore,
                id:'dishesNearbyList',
                scroll:'vertical',
 
@@ -235,12 +225,6 @@
                id: 'reviewPnl'
            });
 
-           var backHandler = function(b,e) {
-               if(b.getText() == "Back") {
-                   Ext.getCmp('mainPnl').setActiveItem(0);
-               }
-           }
-
            var tapHandler = function(b,e) {
                if(b.getText() == "Dishes") {
                    Ext.getCmp('listPnl').setActiveItem(dishList);
@@ -272,7 +256,7 @@
 
        var listPnl = new Ext.Panel({
            id: 'listPnl',
-           items: [dishList,placesList],
+           items: [dishList,placesList,searchPnl],
            layout: {
                type: 'card'
            },
@@ -292,7 +276,8 @@
                            {text:'Restaurants', handler:tapHandler}
                        ]}
                    ]
-               }/*,
+               },searchForm
+               /*,
                {
                    id:'bottomPanel',
                    xtype: 'toolbar',
