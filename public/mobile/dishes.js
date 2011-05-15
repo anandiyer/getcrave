@@ -24,3 +24,4 @@ var dishStore = new Ext.data.Store({
        }
     }
 });
+
