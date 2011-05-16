@@ -45,7 +45,9 @@ class MenuItemsController < ApplicationController
     @menu_item = MenuItem.find(params[:id])
 
 #    TODO: for ANAND @foodies_for_current_dish
+#    TODO: for ANAND @current_menu_item_reviews
     @foodies_for_current_dish = User.all.first(5)
+
 
     respond_to do |format|
       format.html # show.html.haml

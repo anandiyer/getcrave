@@ -45,52 +45,11 @@
           //#TODO place to refactor - move to external js file
 
 
-
-
-
-
-
-          function add_review(id_of_menu_item){
-            var obj = $("#reviews_wrapper");
-            $.ajax({
-              url: "/menu_items/"+id_of_menu_item+"/show_reviews",
-              context: document.body,
-              beforeSend: function(){
-                obj.fadeTo("normal",".5");
-              },
-              success: function(html){
-                obj.html(html);
-                obj.fadeTo("fast","1");
-                starts_update();
-              }
-            });
-
-            $.gritter.add({title:"Notification", text:"Review was succssecfully added!"});
-          }
-
           function g_notice(type, text){
             $.gritter.add({title:type, text:text});
           }
 
-          starts_update();
 
-          function starts_update(){
-            $('.star').each(function(){
-              var data_rating = $(this).data("rating");
-              $(this).raty({
-                start: data_rating,
-                path: "/images/icons",
-                width: "180px",
-                click: function(score, evt) {
-                  var data_rating = $(this).data("rating");
-                  var data_model = $(this).data("model");
-                  var id =  this.attr('id');
-                  var score =  score;
-                  $.gritter.add({title:'Notification',text:'Rating: ID='+id+"<br /> model = "+ data_model+ " <br/>score :"+ score});
-                }
-              })
-            })
-          }
 
 
 

@@ -39,11 +39,15 @@
               =f.text_field :review
               =f.hidden_field :menu_item_id, :value =>params[:id]
     #reviews_wrapper
-      %h3.review Reviews
-      #sorting
-        Sort by:
-        =image_tag "select_box.png"
-        =render :partial => "review"
+      #update_place
+        %h3.review Reviews
+        #sorting
+          Sort by:
+          =image_tag "select_box.png"
+          =render :partial => "review"
+
+
+
 
   #sidebar
     #map{:style => "width:297px; height:297px; border: 1px solid #ccc"}
@@ -52,9 +56,6 @@
       %h4 Foodies of the week
       -for @user in @foodies_for_current_dish
         =render :partial => "foodies"
-
-
-
 
 
 #footer

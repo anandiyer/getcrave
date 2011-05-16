@@ -88,7 +88,8 @@ class MenuItemRatingsController < ApplicationController
         format.xml { render :xml => @menu_item_rating, :status => :created, :location => @menu_item_rating }
         format.json { render :json => @menu_item_rating, :status => :created, :location => @menu_item_rating }
         format.js {
-          render :js=> "add_review(156434)"
+#          TODO: change temp number to real
+          render :js=> "window.add_review(156434)"
         }
       else
         format.html { render :action => "new" }
