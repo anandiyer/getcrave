@@ -50,7 +50,7 @@
       =image_tag "map_temp.png"
     #foodies_wraper_wrapper
       %h4 Foodies of the week
-      -for @user in User.all
+      -for @user in @foodies_for_current_dish
         =render :partial => "foodies"
 
 
