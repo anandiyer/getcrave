@@ -37,7 +37,6 @@ group :development do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'webrat'
-  gem 'barista'
   gem 'json'
   gem "gritter"
 #  gem 'therubyracer', :require => nil
@@ -51,10 +50,8 @@ group :development do
   gem 'mongrel'
   gem "erb2haml"
 
-  gem "rb-inotify"
   gem "compass"
   gem "compass-susy-plugin"
-
 
   gem 'jquery-rails', '>= 0.2.6'
   gem "haml"
