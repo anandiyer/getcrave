@@ -7,9 +7,9 @@
     = include_gritter
     = gflash
 
-    = stylesheet_link_tag "screen"
+    = stylesheet_link_tag "screen", "style"
     /[if IE]
-      = stylesheet_link_tag "ie"
+      = stylesheet_link_tag "ie", "ie_style"
     = csrf_meta_tag
   %body.two-col.bp
     #page

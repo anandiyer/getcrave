@@ -26,6 +26,18 @@ window.add_review = (id_of_menu_item, msg) ->
 
 $(document).ready ->
 
+
+    $("#select_box_hint").click () ->
+        $("#sort_by").find("ul").slideToggle("slow")
+
+    $("#sort_by ul li").live "click", () ->
+        $("#select_sorttype").val($(this).text());
+        $("#sort_by ul").slideUp()
+
+
+
+
+
      $("#reviews_wrapper #show_more_button").live 'click', (e) ->
         obj = $("#reviews_wrapper #update_place")
         id_of_menu_item = $(this).data("itemid")

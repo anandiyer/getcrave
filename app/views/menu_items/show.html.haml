@@ -47,11 +47,16 @@
     #reviews_wrapper
       %h3.review
         Reviews
+
+      #select_box_hint &nbsp;
       #sorting
         Sort by:
-      #update_place
-        =image_tag "select_box.png"
-        =render :partial => "review"
+        #sort_by
+          =text_field(:select, :sorttype, :value => "Newest", :disabled => true)
+          %ul
+            -["Rating", "Other"].each do |x|
+              %li= x
+      #update_place= render :partial => "review"
 
 
 

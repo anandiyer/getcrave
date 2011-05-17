@@ -57,7 +57,14 @@
     });
   };
   $(document).ready(function() {
-    return $("#reviews_wrapper #show_more_button").live('click', function(e) {
+    $("#select_box_hint").click(function() {
+      return $("#sort_by").find("ul").slideToggle("slow");
+    });
+    $("#sort_by ul li").live("click", function() {
+      $("#select_sorttype").val($(this).text());
+      return $("#sort_by ul").slideUp();
+    });
+    $("#reviews_wrapper #show_more_button").live('click', function(e) {
       var id_of_menu_item, new_limits, obj;
       obj = $("#reviews_wrapper #update_place");
       id_of_menu_item = $(this).data("itemid");
@@ -73,8 +80,8 @@
         }
       });
     });
-  });
-  $("input[type=text]").focus(function() {
-    return $(this).select();
+    return $("input[type=text]").focus(function() {
+      return $(this).select();
+    });
   });
 }).call(this);
