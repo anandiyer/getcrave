@@ -42,6 +42,7 @@ $(document).ready ->
         $(this).select()
 
 
+
 #
 #    $('#click').raty (score, evt) ->
 #        path: "/images/"

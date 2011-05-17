@@ -9,6 +9,8 @@
           #icons_img_wrapper
             %span.photos_inline
               =link_to "75 photos","@@"
+
+
             %span.add_photos_inline
               =link_to "add a photo","@@"
             #photos_icon &nbsp;
@@ -17,11 +19,11 @@
           #stars_wrap
             .star{:data =>{:rating => 5, :model => "menu_item"}} &nbsp;
           #rating
+            -#=@menu_item.menu_item_avg_rating_count.count
             103 Rating | 43 Reviews
           #desc_wrap
             %strong Description:
-            #description
-              Lettuce, tomatoes,
+            #description= @menu_item.description
             %strong Labels:
             #labels
               Gluten free
@@ -33,18 +35,19 @@
         #comment_wrapper
           #content_title
             Have you tied this?
-          .star_gray &nbsp;
+          .star_gray{:id => params[:id]} &nbsp;
           #input_comment
             =form_for(MenuItemRating.new, :remote => true) do |f|
               =f.text_field :review
               =f.hidden_field :menu_item_id, :value =>params[:id]
     #reviews_wrapper
+      %h3.review
+        Reviews
+      #sorting
+        Sort by:
       #update_place
-        %h3.review Reviews
-        #sorting
-          Sort by:
-          =image_tag "select_box.png"
-          =render :partial => "review"
+        =image_tag "select_box.png"
+        =render :partial => "review"
 
 
 

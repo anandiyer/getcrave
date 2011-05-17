@@ -1048,16 +1048,10 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
 
 /* line 490, ../../compass/sass/screen.scss */
 .star_gray {
-  background-image: url("/images/sprites/icon-sprite.png");
-  background-repeat: no-repeat;
-  background-position: 0 -905px;
-  width: 17px;
-  height: 17px;
-  float: left;
-  /*border: 1px solid red;*/
+  /*@include sprites($stars_gray_position);*/
   height: 27px;
   width: 150px;
-  float: none;
+  /*float: none;*/
 }
 
 /* line 497, ../../compass/sass/screen.scss */
