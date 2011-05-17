@@ -2,22 +2,35 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @users = User.all
-
+    
+    if params[:limit] && !params[:limit].empty?
+      @limit = params[:limit].to_i
+      @users = User.find(:all, :limit => @limit)
+    else
+      @users = User.find(:all)
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users }
+      format.xml  { render :json => @users }
     end
   end
 
   # GET /users/1
   # GET /users/1.xml
   def show
-    @user = User.find(params[:id])
-
+    @user = User.find(params[:id], :include => :menu_item_ratings)
+    
     respond_to do |format|
+<<<<<<< HEAD
       format.html # show.html.haml
       format.xml  { render :xml => @user }
+=======
+      format.html # show.html.erb
+      format.xml  { render :xml => @user.to_xml( :include => :menu_item_ratings ) }
+      format.json  { render :json => @user.to_json( :include => :menu_item_ratings ) }
+>>>>>>> ebb4153197554fefb4aed5839aa87400e38d4640
     end
   end
 
@@ -29,6 +42,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @user }
+      format.json  { render :json => @user }
     end
   end
 
@@ -46,9 +60,11 @@ class UsersController < ApplicationController
       if @user.save
         format.html { redirect_to(@user, :notice => 'User was successfully created.') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
+        format.json  { render :json => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        format.xml  { render :json => @user.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -62,9 +78,11 @@ class UsersController < ApplicationController
       if @user.update_attributes(params[:user])
         format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
         format.xml  { head :ok }
+        format.json  { head :ok }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @user.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -78,6 +96,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
+      format.json  { head :ok }
     end
   end
 end

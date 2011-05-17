@@ -1,9 +1,12 @@
 Crave::Application.routes.draw do  
+<<<<<<< HEAD
   match '/auth/:provider/callback', :to => 'sessions#create'
   match '/auth/facebook/'=> 'sessions#create', :as => :facebook_auth
 
   match '/signout' => 'sessions#destroy', :as => :signout
   
+=======
+>>>>>>> ebb4153197554fefb4aed5839aa87400e38d4640
   resources :menu_item_review_comments
 
   resources :menu_item_rating_helpfuls
@@ -32,7 +35,7 @@ Crave::Application.routes.draw do
       get 'show_reviews'
     end
     collection do
-      get 'search'
+      get 'search', 'location'
     end
   end
 
@@ -54,5 +57,8 @@ Crave::Application.routes.draw do
   resources :users do
     resources :menu_item_ratings
   end
+  
+  match '/auth/:provider/callback', :to => 'sessions#create'  
+  match '/signout' => 'sessions#destroy', :as => :signout
 
 end

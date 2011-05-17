@@ -1,10 +1,8 @@
 class SessionsController < ApplicationController
   def create
-    session[:return_to] ||= request.referer
-    
-    p "referer = " + request.referer
-    
-    auth = request.env['rack.auth']
+    session[:return_to] = request.referer
+
+    auth = request.env["omniauth.auth"]
     unless @auth = Authorization.find_from_hash(auth)
       # Create a new user or add an auth to existing user, depending on
       # whether there is already a user signed in.

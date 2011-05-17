@@ -15,10 +15,13 @@
 
 <img src="images/crave-startup.png" border="0" class="startuppic"/>
 
-<script type="text/javascript"
-     src="javascripts/sencha-touch.js"></script>
-<script type="text/javascript"
-     src="javascripts/jquery.js"></script>
+<script type="text/javascript" src="sencha-touch.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script type="text/javascript" src="dishes.js"></script>
+<script type="text/javascript" src="restaurants.js"></script>
+<script type="text/javascript" src="search.js"></script>
+<script type="text/javascript" src="navigation.js"></script>
 
 <script type="text/javascript">
     Ext.setup({
@@ -26,125 +29,35 @@
        onReady: function() {
 
            urlPrefix = "";
+           urlPrefixSet=false;
            if(window.location.toString().indexOf("http://localhost")>-1) {
+               urlPrefixSet=true;
                urlPrefix = '/wg/proxy.php?url=http://blooming-water-228.heroku.com';
            }
 
-           dishTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><b>{name}</b><br/>{[this.distDisplay(parent.distance)]}</div></tpl>',
-               {distDisplay: function(miles) {
-                   console.log(miles);
-                   feet = Math.round(miles * 5280);
-                   if(feet<1000) {
-                       return feet+" feet";
-                   } else {
-                       return miles.toFixed(1)+' miles';
-                   }
-               }});
-
-           Ext.regModel('Dish',
-           {
-               fields: ['city','distance','name','id', 'restaurant_id']
-           });
-
-           Ext.regModel('RestaurantDish',
-           {
-               fields: ['name','id','price','description','restaurant_id']
-           });
-
-           Ext.regModel('Restaurants',
-           {
-               fields: ['distance','name','id']
-           });
-
-           var restaurants = new Ext.data.Store({
-              model: 'Restaurants',
-               id: 'restaurants',
-
-              proxy: {
-                  type:'ajax',
-                  url:'',
-                  reader: {
-                      type:'json',
-                      record:'restaurant'
-                  }
-              }
-          });
-
-           var singleRestaurantStore = new Ext.data.Store({
-               model: 'Dish',
-               proxy: {
-                   type:'ajax',
-                   url:'',
-                  reader: {
-                      type:'json',
-                      record:'menu_item'
-                  }
-               }
-          });
-
-           var store = new Ext.data.Store({
-               model: 'Dish',
-               proxy: {
-                   type:'ajax',
-                   url:'',
-                  reader: {
-                      type:'json',
-                      record:'restaurant'
-                  }
-               }
-           });
            navigator.geolocation.getCurrentPosition(function(position) {
                console.log('location got');
-               //console.log(restaurants);
                console.log('/restaurants.json?lat='+position.coords.latitude+'&long='+position.coords.longitude);
-               store.proxy.url = urlPrefix+encodeURIComponent('/menu_items.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
-               console.log(urlPrefix+'/menu_items.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
-               store.load();
-               restaurants.proxy.url = urlPrefix+encodeURIComponent('/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+               if(urlPrefixSet) {
+                   dishStore.proxy.url = urlPrefix+encodeURIComponent('/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+                   restaurants.proxy.url = urlPrefix+encodeURIComponent('/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+               } else {
+                   dishStore.proxy.url = '/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
+                   restaurants.proxy.url = '/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
+               }
+               
+               dishStore.load();
                restaurants.load();
            });
-           var aRestaurantList = new Ext.List({
-               id:'aRestaurantList',
-               onItemDisclosure: {
-                   handler: function(record, btn, index) {
-                       Ext.Ajax.request({
-                           url: (urlPrefix+'/menu_items/'+record.data.id+'.json'),
-                           reader: {
-                                type: 'json'
-                           },
-                           success: function(response) {
-                               var responseObject = eval('(' + response.responseText + ')');
-                               htmlString = '<div class="dishinfo"><b>'+responseObject.menu_item.name+'</b><br/>';
-                               htmlString += '$ '+responseObject.menu_item.price+'<br>';
-                               htmlString += '<br><br>'+responseObject.menu_item.description+'<br>';
-                               htmlString += "</div>";
-                               Ext.getCmp('infoPnl').update(htmlString);
-                           }
-                       });
-                       Ext.getCmp('mainPnl').setActiveItem(1);
-                   }
-               },
-               itemTpl: '<tpl for="."><div class="thisdish"><b>{name}</b></div></tpl>',
-               singleSelect: true,
-               grouped: false,
-               indexBar: false,
-               layout:{type:'vbox'},
-               fullscreen:false,
-               store: singleRestaurantStore,
 
-               width:'100%',
-               height:'100%',
-               modal:true,
-               hideOnMaskTap: false
-           });
 
            var placesList = new Ext.List({
                onItemDisclosure: {
                    handler: function(record, btn, index) {
                        singleRestaurantStore.proxy.url = (urlPrefix+'/restaurants/'+record.data.id+'/menu_items.json');
+
                        singleRestaurantStore.load(function(){
                            Ext.getCmp('mainPnl').setActiveItem(2);
-                           //$("#aRestaurantList").removeClass("x-hidden-display");
                        });
 
                        Ext.Ajax.request({
@@ -157,7 +70,27 @@
                                 var responseObject = eval('(' + response.responseText + ')');
                                console.log(responseObject);
                                 htmlString = '<div class="restaurantInfo">'+responseObject.restaurant.name+'</div>';
-                                Ext.getCmp('restPnl').update(htmlString);
+                                Ext.getCmp('restInfoPnl').update(htmlString);
+
+                               var placeholder = new google.maps.Marker(
+                                   {
+                                       position: new google.maps.LatLng(responseObject.restaurant.latitude,responseObject.restaurant.longitude),
+                                       map: Ext.getCmp('googleMap').map,
+                                       title: 'restaurant'
+                                   }
+                               );
+                               var initialLocation = new google.maps.LatLng(responseObject.restaurant.latitude,responseObject.restaurant.longitude);
+                               Ext.getCmp('googleMap').update(initialLocation)
+                               // woah baby, this is a nasty hack but the map refuses to behave unless you trigger resize after a delay AFTER the initial ajax returns
+                               Ext.Ajax.request({
+                                   url: (urlPrefix+'/restaurants/'+record.data.id+'.json'),
+                                   reader: {
+                                        type: 'json'
+                                   },
+                                   success: function(response) {
+                                       google.maps.event.trigger(Ext.getCmp('googleMap').map, 'resize');
+                                   }
+                               });
                            }
                        });
                    }
@@ -175,12 +108,11 @@
                clearSectionOnDeactivate:true
            });
 
-           var list = new Ext.List({
+           var dishList = new Ext.List({
                onItemDisclosure: {
                    handler: function(record, btn, index) {
                        console.log(record.data.id);
                        /*
-                       console.log(Ext.getCmp('carouselPnl')!=undefined);
                         if(Ext.getCmp('carouselPnl')) {
                             Ext.getCmp('carouselPnl').destroy();
                         }
@@ -200,7 +132,6 @@
                            },
                            success: function(response) {
                                var responseObject = eval('(' + response.responseText + ')');
-                               console.log(responseObject);
                                htmlString = '<div class="dishinfo"><b>'+responseObject.menu_item.name+'</b><br/>';
                                htmlString += '$ '+responseObject.menu_item.price+'<br>';
                                htmlString += '<br><br>'+responseObject.menu_item.description+'<br>';
@@ -246,7 +177,9 @@
                singleSelect: true,
                grouped: false,
                indexBar: false,
-               store: store,
+               store: dishStore,
+               id:'dishesNearbyList',
+               scroll:'vertical',
 
                floating:true,
                width:350,
@@ -257,36 +190,64 @@
                clearSectionOnDeactivate:true
            });
 
+
+           var onScroll = new function(something) {
+               console.log('scrolling');
+           }
+
            var infoPnl = new Ext.Panel({
                html: '',
                id: 'infoPnl'
            });
-           var restPnl = new Ext.Panel({
+
+           //add pin to map at address
+           var restMapPnl = new Ext.Panel ({
+               //need to pass in coords
+               items: [
+                   {
+                   id: 'googleMap',
+                   xtype: 'map',
+                   useCurrentLocation: false,
+                   mapOptions : {
+                       center : new google.maps.LatLng(37.774518,-122.420101),  //SF
+                       //not really centering here, just putting it in top right corner
+                       zoom : 17,
+                       mapTypeId : google.maps.MapTypeId.ROADMAP,
+                       disableDefaultUI: true,
+                       navigationControl: false
+                     }
+                   }
+               ],
+               height:'100px',
+               flex:1
+           });
+           var restInfoPnl = new Ext.Panel({
                html: '',
+               id: 'restInfoPnl',
+               flex:2,
+               height:'100%'
+           });
+           var restPnl = new Ext.Panel({
                id: 'restPnl',
+               layout: 'hbox',
+               items:[restMapPnl,restInfoPnl],
                width:'100%',
-               height:100,
-               ExtraCls: 'dashedBorder'
+               height:100
 
            });
+
            var reviewPnl = new Ext.Panel({
                html: '',
                scroll: 'vertical',
                id: 'reviewPnl'
            });
 
-           var backHandler = function(b,e) {
-               if(b.getText() == "Back") {
-                   Ext.getCmp('mainPnl').setActiveItem(0);
-               }
-           }
-
            var tapHandler = function(b,e) {
                if(b.getText() == "Dishes") {
-                   Ext.getCmp('listPnl').setActiveItem(0);
+                   Ext.getCmp('listPnl').setActiveItem(dishList);
                }
                if(b.getText() == "Restaurants") {
-                   Ext.getCmp('listPnl').setActiveItem(1);
+                   Ext.getCmp('listPnl').setActiveItem(placesList);
                }
            }
 
@@ -312,7 +273,7 @@
 
        var listPnl = new Ext.Panel({
            id: 'listPnl',
-           items: [list,placesList],
+           items: [dishList,placesList,searchPnl],
            layout: {
                type: 'card'
            },
@@ -332,7 +293,8 @@
                            {text:'Restaurants', handler:tapHandler}
                        ]}
                    ]
-               }/*,
+               },searchForm
+               /*,
                {
                    id:'bottomPanel',
                    xtype: 'toolbar',

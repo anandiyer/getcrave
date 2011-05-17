@@ -2,7 +2,15 @@
 
 <p>
   <b>User name:</b>
-  <%= @user.user_name %>
+  <%= @user.user_name %> <br />
+  Picture: <%= @user.user_profile_pic_url %>
+
+<p>
+	<%= @user.menu_item_ratings.each do |m| %>
+		rated <%= m.menu_item_id %> a <%= m.rating %>: <%= m.review %><br />
+	<% end %>
+</p>
+
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

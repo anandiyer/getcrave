@@ -1,5 +1,6 @@
 class Restaurant < ActiveRecord::Base
   has_many :menu_items
+  has_many :menu_item_ratings, :through => :menu_items
   has_friendly_id :name, :use_slug => true
   acts_as_mappable :default_units => :miles, 
                    :default_formula => :sphere, 

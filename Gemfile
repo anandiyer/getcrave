@@ -12,6 +12,7 @@ gem 'friendly_id', "~> 3.2.1"
 gem 'sunspot_rails', '~> 1.2.1'
 gem 'omniauth'
 
+<<<<<<< HEAD
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -33,6 +34,9 @@ gem 'omniauth'
 # and rake tasks are available in development mode:
 
 group :development do
+=======
+group :development, :test do
+>>>>>>> ebb4153197554fefb4aed5839aa87400e38d4640
   gem 'cucumber-rails'
   gem 'rspec-rails'
   gem 'capybara'
