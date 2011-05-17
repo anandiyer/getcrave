@@ -1097,11 +1097,34 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   height: 17px;
   float: left;
   /*border: 1px solid red;*/
+}
+
+/* line 511, ../../compass/sass/screen.scss */
+.stars_2 {
+  background-image: url("/images/sprites/icon-sprite.png");
+  background-repeat: no-repeat;
+  background-position: 0 -701px;
+  width: 17px;
+  height: 17px;
+  float: left;
+  /*border: 1px solid red;*/
   width: 180px;
 }
 
-/* line 510, ../../compass/sass/screen.scss */
-.star {
+/* line 515, ../../compass/sass/screen.scss */
+.stars_3 {
+  background-image: url("/images/sprites/icon-sprite.png");
+  background-repeat: no-repeat;
+  background-position: 0 -679px;
+  width: 17px;
+  height: 17px;
+  float: left;
+  /*border: 1px solid red;*/
+  width: 180px;
+}
+
+/* line 520, ../../compass/sass/screen.scss */
+.stars_5 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
   background-position: 0 -635px;
@@ -1112,7 +1135,43 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 514, ../../compass/sass/screen.scss */
+/* line 524, ../../compass/sass/screen.scss */
+.stars_4 {
+  background-image: url("/images/sprites/icon-sprite.png");
+  background-repeat: no-repeat;
+  background-position: 0 -657px;
+  width: 17px;
+  height: 17px;
+  float: left;
+  /*border: 1px solid red;*/
+  width: 180px;
+}
+
+/* line 528, ../../compass/sass/screen.scss */
+.stars_1 {
+  background-image: url("/images/sprites/icon-sprite.png");
+  background-repeat: no-repeat;
+  background-position: 0 -723px;
+  width: 17px;
+  height: 17px;
+  float: left;
+  /*border: 1px solid red;*/
+  width: 180px;
+}
+
+/* line 532, ../../compass/sass/screen.scss */
+.stars_0 {
+  background-image: url("/images/sprites/icon-sprite.png");
+  background-repeat: no-repeat;
+  background-position: 0 -745px;
+  width: 17px;
+  height: 17px;
+  float: left;
+  /*border: 1px solid red;*/
+  width: 180px;
+}
+
+/* line 539, ../../compass/sass/screen.scss */
 .star_gray {
   /*@include sprites($stars_gray_position);*/
   height: 27px;
@@ -1120,7 +1179,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   /*float: none;*/
 }
 
-/* line 521, ../../compass/sass/screen.scss */
+/* line 546, ../../compass/sass/screen.scss */
 .flag_icon {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1131,7 +1190,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   /*border: 1px solid red;*/
 }
 
-/* line 525, ../../compass/sass/screen.scss */
+/* line 550, ../../compass/sass/screen.scss */
 .save_icon {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1142,7 +1201,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   /*border: 1px solid red;*/
 }
 
-/* line 529, ../../compass/sass/screen.scss */
+/* line 554, ../../compass/sass/screen.scss */
 .h {
   dispay: none;
 }

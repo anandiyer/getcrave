@@ -30,8 +30,7 @@
               by
               =link_to user.user_name, user
           -rating = @mi_rating.rating ? @mi_rating.rating : 0
-          .star{:id => @mi_rating.id, :data => {:rating => rating, :model => "menu_item_ratings"}} &nbsp;
-          =@mi_rating.rating
+          .star_sm{:class => "star_sm stars_"+@mi_rating.rating.to_s.gsub(/[.]/, '_'), :id => @mi_rating.id, :data => {:rating => rating, :model => "menu_item_ratings"}} &nbsp;
           .review_body_head
             =@mi_rating.review
             =link_to "Show more", "#"
