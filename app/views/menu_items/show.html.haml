@@ -15,7 +15,7 @@
         #text_column
           %h1.current_title= @menu_item.name
           #stars_wrap
-            -avg = @menu_item.menu_item_avg_rating_count.avg_rating
+            =avg = @menu_item.menu_item_avg_rating_count.avg_rating
             -class_name ="stars_"+avg.to_s
             #star_average{:class => class_name.gsub(/[.]/, '_'), :data =>{:rating => avg}} &nbsp;
           #rating
@@ -41,8 +41,7 @@
             =f.hidden_field :rating
             =f.hidden_field :menu_item_id, :value =>params[:id]
             .star_gray{:id => params[:id], :data =>{:model => "user_menu_item_ratings"}} &nbsp;
-          #input_comment
-            =form_for(MenuItemRating.new, :remote => true) do |f|
+            #input_comment
               =f.text_field :review
               =f.hidden_field :menu_item_id, :value =>params[:id]
     #reviews_wrapper
