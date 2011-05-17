@@ -49,11 +49,11 @@
       }
     });
   };
-  window.add_review = function(id_of_menu_item) {
+  window.add_review = function(id_of_menu_item, msg) {
     update_reviews(id_of_menu_item);
     return $.gritter.add({
       title: "Notification",
-      text: "Review was succssecfully added!"
+      text: msg
     });
   };
   $(document).ready(function() {

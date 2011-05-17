@@ -9,18 +9,20 @@
           #icons_img_wrapper
             %span.photos_inline
               =link_to "75 photos","@@"
-
-
             %span.add_photos_inline
               =link_to "add a photo","@@"
             #photos_icon &nbsp;
         #text_column
           %h1.current_title= @menu_item.name
           #stars_wrap
-            .star{:data =>{:rating => 5, :model => "menu_item"}} &nbsp;
+            -avg = @menu_item.menu_item_avg_rating_count.avg_rating
+            -class_name ="stars_"+avg.to_s
+            #star_average{:class => class_name.gsub(/[.]/, '_'), :data =>{:rating => avg}} &nbsp;
           #rating
-            -#=@menu_item.menu_item_avg_rating_count.count
-            103 Rating | 43 Reviews
+            -if @menu_item.menu_item_avg_rating_count
+              =@menu_item.menu_item_avg_rating_count.count
+              Rating
+            | 43 Reviews
           #desc_wrap
             %strong Description:
             #description= @menu_item.description
@@ -35,7 +37,10 @@
         #comment_wrapper
           #content_title
             Have you tied this?
-          .star_gray{:id => params[:id]} &nbsp;
+          =form_for(MenuItemRating.new, :remote => true) do |f|
+            =f.hidden_field :rating
+            =f.hidden_field :menu_item_id, :value =>params[:id]
+            .star_gray{:id => params[:id], :data =>{:model => "user_menu_item_ratings"}} &nbsp;
           #input_comment
             =form_for(MenuItemRating.new, :remote => true) do |f|
               =f.text_field :review

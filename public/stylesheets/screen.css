@@ -1040,13 +1040,79 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   *zoom: 1;
 }
 
-/* line 486, ../../compass/sass/screen.scss */
-.star {
-  /*@include sprites($stars_position);*/
+/* line 487, ../../compass/sass/screen.scss */
+.stars_1_0, .stars_1_5 {
+  background-image: url("/images/sprites/icon-sprite.png");
+  background-repeat: no-repeat;
+  background-position: 0px -722px;
+  width: 17px;
+  height: 17px;
+  float: left;
+  /*border: 1px solid red;*/
   width: 180px;
 }
 
-/* line 490, ../../compass/sass/screen.scss */
+/* line 491, ../../compass/sass/screen.scss */
+.stars_2_0, .stars_2_5 {
+  background-image: url("/images/sprites/icon-sprite.png");
+  background-repeat: no-repeat;
+  background-position: 0px -701px;
+  width: 17px;
+  height: 17px;
+  float: left;
+  /*border: 1px solid red;*/
+  width: 180px;
+}
+
+/* line 495, ../../compass/sass/screen.scss */
+.stars_3_0, .stars_3_5 {
+  background-image: url("/images/sprites/icon-sprite.png");
+  background-repeat: no-repeat;
+  background-position: 0px -679px;
+  width: 17px;
+  height: 17px;
+  float: left;
+  /*border: 1px solid red;*/
+  width: 180px;
+}
+
+/* line 500, ../../compass/sass/screen.scss */
+.stars_4_0, .stars_4_5 {
+  background-image: url("/images/sprites/icon-sprite.png");
+  background-repeat: no-repeat;
+  background-position: 0px -657px;
+  width: 17px;
+  height: 17px;
+  float: left;
+  /*border: 1px solid red;*/
+  width: 180px;
+}
+
+/* line 505, ../../compass/sass/screen.scss */
+.stars_5_0 {
+  background-image: url("/images/sprites/icon-sprite.png");
+  background-repeat: no-repeat;
+  background-position: 0px -635px;
+  width: 17px;
+  height: 17px;
+  float: left;
+  /*border: 1px solid red;*/
+  width: 180px;
+}
+
+/* line 510, ../../compass/sass/screen.scss */
+.star {
+  background-image: url("/images/sprites/icon-sprite.png");
+  background-repeat: no-repeat;
+  background-position: 0 -635px;
+  width: 17px;
+  height: 17px;
+  float: left;
+  /*border: 1px solid red;*/
+  width: 180px;
+}
+
+/* line 514, ../../compass/sass/screen.scss */
 .star_gray {
   /*@include sprites($stars_gray_position);*/
   height: 27px;
@@ -1054,7 +1120,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   /*float: none;*/
 }
 
-/* line 497, ../../compass/sass/screen.scss */
+/* line 521, ../../compass/sass/screen.scss */
 .flag_icon {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1065,7 +1131,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   /*border: 1px solid red;*/
 }
 
-/* line 501, ../../compass/sass/screen.scss */
+/* line 525, ../../compass/sass/screen.scss */
 .save_icon {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1074,4 +1140,9 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   height: 32px;
   float: left;
   /*border: 1px solid red;*/
+}
+
+/* line 529, ../../compass/sass/screen.scss */
+.h {
+  dispay: none;
 }

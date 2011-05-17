@@ -19,9 +19,9 @@ window.update_reviews = (id_of_menu_item, limits = $("#show_more_button").data("
     beforeSend: () -> before_send(obj),
     success: (html) -> after_send(obj, html)})
 
-window.add_review = (id_of_menu_item) ->
+window.add_review = (id_of_menu_item, msg) ->
     update_reviews(id_of_menu_item)
-    $.gritter.add({title:"Notification", text:"Review was succssecfully added!"});
+    $.gritter.add({title:"Notification", text:msg});
 
 
 $(document).ready ->

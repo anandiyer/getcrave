@@ -67,20 +67,12 @@ class MenuItemsController < ApplicationController
   # GET /menu_items/1
   # GET /menu_items/1.xml
   def show
-<<<<<<< HEAD
-    @menu_item = MenuItem.find(params[:id])
 
-#    TODO: for ANAND @foodies_for_current_dish
-#    TODO: for ANAND @current_menu_item_reviews
+    #FIXME - need to get all the menu item attributes like ratings, photos etc.
+#   TODO: for ANAND @foodies_for_current_dish
+
     @foodies_for_current_dish = User.all.first(5)
 
-
-    respond_to do |format|
-      format.html # show.html.haml
-      format.xml  { render :xml => @menu_item }
-      format.json { render :json => @menu_item }
-=======
-    #FIXME - need to get all the menu item attributes like ratings, photos etc.
     @menu_item = MenuItem.find(params[:id],
       :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings])
     
@@ -88,7 +80,6 @@ class MenuItemsController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @menu_item.to_xml( :include => [ :restaurant, :menu_item_avg_rating_count, :menu_item_ratings ] ) }
       format.json { render :json => @menu_item.to_json( :include => [ :restaurant, :menu_item_avg_rating_count, :menu_item_ratings ] ) }
->>>>>>> ebb4153197554fefb4aed5839aa87400e38d4640
     end
   end
 

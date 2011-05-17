@@ -91,7 +91,12 @@ class MenuItemRatingsController < ApplicationController
         format.json { render :json => @menu_item_rating, :status => :created, :location => @menu_item_rating }
         format.js {
 #          TODO: change temp number to real
-          render :js=> "window.add_review(156434)"
+          if params[:menu_item_rating][:rating]
+            message = "You rated this dish with <b>"+params[:menu_item_rating][:rating]+"</b> stars!"
+          else
+            message = "Your review was successfully added"
+          end
+          render :js=> "window.add_review(#{params[:menu_item_rating][:menu_item_id]},'#{message}')"
         }
       else
         format.html { render :action => "new" }
