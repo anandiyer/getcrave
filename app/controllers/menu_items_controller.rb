@@ -13,28 +13,19 @@ class MenuItemsController < ApplicationController
     # Lookup all the restaurants near the given lat/long and get 25 of the menu_items
     # and order by rating
     
-    #FIXME - need to join to return average menu_item_rating for each menu_item
     #FIXME - assuming within 3 mile radius by default
     #FIXME - also distance virtual column/field is currently being dropped because
     # of a GeoKit problem
     #FIXME - order by rating based on QS
-     @menu_items = MenuItem.find(:all, 
-          :origin => [@lat, @long], 
-          :conditions => "distance < 3",
-          :order => "distance asc",
-          # :include => :menu_item_avg_rating_count, 
-          :limit => @limit)
-          
-    # @menu_items.restaurant.sort_by_distance_from(:origin => [@lat, @long])
-      
-     # @menu_items = []
-     #@restaurants.each do |r|
-      #@item = {}
-       #@item = r.menu_items.find(:all, :include => [:menu_item_avg_rating_count, :restaurant])
-       # @item(:restaurant_name => r.name)
-       # @item(:distance => r.distance)
-       #@menu_items << @item
-      
+    
+    @menu_items = MenuItem.find(:all, 
+         :origin => [@lat, @long], 
+         :conditions => "distance < 3",
+         :joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id",
+         :order => "distance ASC, (menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
+         # :include => :menu_item_avg_rating_count, 
+         :limit => @limit)
+    
       respond_to do |format|
         format.html # location.html.erb
         format.xml  { render :xml => @menu_items.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count])}
@@ -45,8 +36,6 @@ class MenuItemsController < ApplicationController
   # GET /menu_items
   # GET /menu_items.xml
   def index
-    # @menu_items = MenuItem.all
-    
     # Assuming that no menu has more than 500 items - this is the MAX
     @limit = 500
     
@@ -55,12 +44,16 @@ class MenuItemsController < ApplicationController
     end
 
     # FIXME - handle restaurant = nil case 
-    @menu_items = @restaurant.menu_items.find(:all, :limit => @limit)
-        
+    @menu_items = MenuItem.find_by_sql(["SELECT menu_items.* FROM menu_items
+    LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id
+    WHERE menu_items.restaurant_id = ? 
+    ORDER BY (menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
+    @restaurant.id])
+    
     respond_to do |format|
-          format.html # index.html.erb
-          format.xml  { render :xml => @menu_items }
-          format.json { render :json => @menu_items }
+      format.html # location.html.erb
+      format.xml  { render :xml => @menu_items.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count])}
+      format.json  { render :json => @menu_items.to_json(:include => [:restaurant, :menu_item_avg_rating_count]) }
     end
     
     # Now find the menu items for each of those restaurants
@@ -74,7 +67,8 @@ class MenuItemsController < ApplicationController
   # GET /menu_items/1.xml
   def show
     #FIXME - need to get all the menu item attributes like ratings, photos etc.
-    @menu_item = MenuItem.find(params[:id], :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings])
+    @menu_item = MenuItem.find(params[:id],
+      :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings])
     
     respond_to do |format|
       format.html # show.html.erb

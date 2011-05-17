@@ -2,8 +2,14 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @users = User.all
-
+    
+    if params[:limit] && !params[:limit].empty?
+      @limit = params[:limit].to_i
+      @users = User.find(:all, :limit => @limit)
+    else
+      @users = User.find(:all)
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users }

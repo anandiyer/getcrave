@@ -1,21 +1,21 @@
 <h1>Listing menu_items</h1>
 <br />
 
-<% @restaurants.each do |r| %>
-	<strong><a href="/restaurants/<%= r.id %>"><%= r.name %></a></strong>
-	
+
 	<table>
 	  <tr>
 	    <th>Name</th>
 	    <th>Description</th>
+		<th>Restaurant</th>
 	    <th></th>
 		<th></th>
 	  </tr>
 
-	<% r.menu_items.each do |menu_item| %>
+	<% @menu_items.each do |menu_item| %>
 	  <tr>
 	    <td><%= menu_item.name %></td>
 	    <td><%= menu_item.description %></td>
+		<td><%= menu_item.restaurant_id %></td>		
 	    <td><%= link_to 'Show', menu_item %></td>
 	    <td><%= link_to 'Rate', new_menu_item_menu_item_rating_path(menu_item) %></td>
 	  </tr>
@@ -23,6 +23,5 @@
 	</table>
 
 	<br />
-<% end %>
 
 <%= link_to 'New Menu item', new_menu_item_path %>
