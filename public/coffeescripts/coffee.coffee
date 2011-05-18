@@ -26,7 +26,12 @@ window.add_review = (id_of_menu_item, msg) ->
     $("#comment_wrapper").slideUp("slow",() ->
         $(this).empty()
         $("<h1>#{msg}<h1>").appendTo("#comment_wrapper");
-        $("#comment_wrapper").slideDown("slow")
+
+
+
+        couner_reviews = $("#text_column #rating span").text()
+        $("#text_column #rating span").html(parseInt(couner_reviews)+1)
+        $("#comment_wrapper").slideDown("normal")
 
     )
 

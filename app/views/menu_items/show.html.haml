@@ -21,7 +21,7 @@
             #star_average{:class => class_name.gsub(/[.]/, '_'), :data =>{:rating => avg}} &nbsp;
           #rating
             -if @menu_item.menu_item_avg_rating_count
-              =@menu_item.menu_item_avg_rating_count.count
+              %span= @menu_item.menu_item_avg_rating_count.count
               Rating
             | 43 Reviews
           #desc_wrap

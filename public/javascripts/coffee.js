@@ -52,9 +52,12 @@
   window.add_review = function(id_of_menu_item, msg) {
     update_reviews(id_of_menu_item);
     return $("#comment_wrapper").slideUp("slow", function() {
+      var couner_reviews;
       $(this).empty();
       $("<h1>" + msg + "<h1>").appendTo("#comment_wrapper");
-      return $("#comment_wrapper").slideDown("slow");
+      couner_reviews = $("#text_column #rating span").text();
+      $("#text_column #rating span").html(parseInt(couner_reviews) + 1);
+      return $("#comment_wrapper").slideDown("normal");
     });
   };
   $(document).ready(function() {
