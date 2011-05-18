@@ -51,9 +51,10 @@
   };
   window.add_review = function(id_of_menu_item, msg) {
     update_reviews(id_of_menu_item);
-    return $.gritter.add({
-      title: "Notification",
-      text: msg
+    return $("#comment_wrapper").slideUp("slow", function() {
+      $(this).empty();
+      $("<h1>" + msg + "<h1>").appendTo("#comment_wrapper");
+      return $("#comment_wrapper").slideDown("slow");
     });
   };
   $(document).ready(function() {

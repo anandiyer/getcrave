@@ -21,7 +21,14 @@ window.update_reviews = (id_of_menu_item, limits = $("#show_more_button").data("
 
 window.add_review = (id_of_menu_item, msg) ->
     update_reviews(id_of_menu_item)
-    $.gritter.add({title:"Notification", text:msg});
+#    $.gritter.add({title:"Notification", text:msg});
+
+    $("#comment_wrapper").slideUp("slow",() ->
+        $(this).empty()
+        $("<h1>#{msg}<h1>").appendTo("#comment_wrapper");
+        $("#comment_wrapper").slideDown("slow")
+
+    )
 
 
 $(document).ready ->

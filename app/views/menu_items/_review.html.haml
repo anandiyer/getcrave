@@ -33,16 +33,14 @@
           .star_sm{:class => "star_sm stars_"+@mi_rating.rating.to_s.gsub(/[.]/, '_'), :id => @mi_rating.id, :data => {:rating => rating, :model => "menu_item_ratings"}} &nbsp;
           .review_body_head
             =@mi_rating.review
-            =link_to "Show more", "#"
+            -#=link_to "Show more", "#"
           .helpful_block
             .before_answer_block
               Was this review helpful?
             %span.yes_answer
               =link_to "Yes", "123"
-            %span.no_answer
-              =link_to "No", "123"
             .found_helpfull
-              11 people found this helpfull
+              (11)
 
 =link_to("#limit="+(@show_more_step*2).to_s) do
   #show_more_button{:data =>{:step => @show_more_step, :next => @show_more_step*2, :itemid => params[:id]}}
