@@ -27,12 +27,9 @@ window.add_review = (id_of_menu_item, msg) ->
         $(this).empty()
         $("<h1>#{msg}<h1>").appendTo("#comment_wrapper");
 
-
-
         couner_reviews = $("#text_column #rating span").text()
         $("#text_column #rating span").html(parseInt(couner_reviews)+1)
         $("#comment_wrapper").slideDown("normal")
-
     )
 
 
@@ -42,7 +39,7 @@ $(document).ready ->
     lat =  $("#current_info_wrapper").data("latitude")
     long =  $("#current_info_wrapper").data("longitude")
 
-    gmap(lat, long, 7)
+    gmap(lat, long)
 
 
 

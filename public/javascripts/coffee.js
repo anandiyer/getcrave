@@ -64,7 +64,7 @@
     var lat, long;
     lat = $("#current_info_wrapper").data("latitude");
     long = $("#current_info_wrapper").data("longitude");
-    gmap(lat, long, 7);
+    gmap(lat, long);
     $("#select_box_hint").click(function() {
       return $("#sort_by").find("ul").slideToggle("slow");
     });

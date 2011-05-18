@@ -24,7 +24,7 @@ class UserSavedMenuItemsController < ApplicationController
     @user_saved_menu_item = UserSavedMenuItem.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.haml
       format.xml  { render :xml => @user_saved_menu_item }
       format.json  { render :json => @user_saved_menu_item }
     end

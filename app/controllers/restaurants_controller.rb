@@ -1,6 +1,9 @@
 class RestaurantsController < ApplicationController
   # GET /restaurants
   # GET /restaurants.xml
+
+  layout "general"
+
   def index
     # @restaurants = Restaurant.find(:all, :origin => [37.77859, -122.39142], :within=>1)
     # @restaurants = Restaurant.find(:all, :origin => [37.77859, -122.39142], :order=>'distance asc', :limit => 25)

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "user_saved_menu_items/show.html.erb" do
+describe "user_saved_menu_items/show.html.haml" do
   before(:each) do
     @user_saved_menu_item = assign(:user_saved_menu_item, stub_model(UserSavedMenuItem,
       :user_id => 1,
