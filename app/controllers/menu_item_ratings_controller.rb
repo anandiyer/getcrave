@@ -3,7 +3,7 @@ class MenuItemRatingsController < ApplicationController
   
   # GET /menu_items_ratings/avg_rating
   def avg_rating
-    #FIXME - use the view instead
+    #FIXME - use the SQL view instead
     
     average = @menu_item.menu_item_ratings.average(:rating)
     count = @menu_item.menu_item_ratings.count

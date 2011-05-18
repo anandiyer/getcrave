@@ -1,9 +1,15 @@
 Crave::Application.routes.draw do  
   resources :menu_item_review_comments
+  
+  resources :menu_item_ratings do
+    resources :menu_item_rating_helpfuls do
+      collection do
+        get 'count'
+      end
+    end
+  end
 
   resources :menu_item_rating_helpfuls
-
-  resources :menu_item_ratings 
   
   resources :menu_label_associations
 
