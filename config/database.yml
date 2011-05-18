@@ -16,7 +16,6 @@ development:
 #  template: template1
   pool: 5
   username: almazom
-  #password: P@ssw0rd
 
 #  adapter: mysql2
 #  encoding: utf8

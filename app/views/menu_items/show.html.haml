@@ -36,15 +36,16 @@
         #text_column
           %h1.current_title= @menu_item.name
           #stars_wrap
-            -#TODO: ANAND please change .round to real rounder, i tryed... but
-            -avg = @menu_item.menu_item_avg_rating_count.avg_rating.round
+            -if @menu_item.menu_item_avg_rating_count            
+              -avg = @menu_item.menu_item_avg_rating_count.avg_rating.round
+            -else
+              -avg = 0
             -class_name ="stars_"+avg.to_s
             #star_average{:class => class_name.gsub(/[.]/, '_'), :data =>{:rating => avg}} &nbsp;
           #rating
             -if @menu_item.menu_item_avg_rating_count
               %span= @menu_item.menu_item_avg_rating_count.count
-              Rating
-            | 43 Reviews
+              Reviews
           #desc_wrap
             #description= @menu_item.description
             #dishlabels
@@ -59,16 +60,16 @@
                 Add a label
 
           =image_tag "social.png"
-        -#-@user_saved_menu_item = UserSavedMenuItem.find()
-        -@menu_item_rating_helpful = MenuItemRatingHelpful.find(@menu_item.menu_item_ratings.id)
+		-#TODO: Almaz, look at this code below to get the user_saved_menu_item. Then
+        -#if @user_saved_menu_item is not null, then the icon should be green and 
+        -#the link should be disabled.
+        -#-@user_saved_menu_item = UserSavedMenuItem.where(:user_id=>, :menu_item_id=>)
         #flag_icons
-
           .save_icon &nbsp;
-          -#.flag_icon &nbsp;
       #comment_wrapper_wrapper
         #comment_wrapper
           #content_title
-            Have you tied this?
+            Have you tried this?
           =form_for(MenuItemRating.new, :remote => true) do |f|
             =f.hidden_field :rating
             =f.hidden_field :menu_item_id, :value =>params[:id]

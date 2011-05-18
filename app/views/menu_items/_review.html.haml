@@ -2,7 +2,7 @@
 
   - @menu_item ||= MenuItem.find(params[:id])
   - @current_menu_item_reviews = @menu_item.menu_item_ratings.reverse
-  - @show_more_step = 3
+  - @show_more_step = 10
 
 
   -if !params[:limit]
@@ -39,10 +39,19 @@
             .before_answer_block
               Was this review helpful?
             %span.yes_answer
+              -#TODO: Almaz: this yes link should create a new menu_item_rating_helpful with
+              -#menu_item_rating_id = @mi_rating.id, user_id = @current_user.id
+              =link_to "Yes", "/menu_item_rating_helpfuls/new"
 
-              =link_to "Yes", "123"
+			-#TODO: Almaz, take a look at this. This is how you will get the helpful count
+            -if @mi_rating.menu_item_rating_helpfuls            
+              -helpfulcount = @mi_rating.menu_item_rating_helpfuls.count
+            -else
+              -helpfulcount = 0
             .found_helpfull
-              (11)
+              (helpfulcount.to_s)
+
+			-#TODO: Almaz, when the Yes link is clicked, only then should we do a POST.
             =@mi_rating.menu_item_rating_helpfuls
             -#=form_for(MenuItemRatingHelpful.new, :remote => true) do |f|
               =f.text_field :menu_item_rating_id, :value => @mi_rating.id
