@@ -1,6 +1,0 @@
-solr/data
-config/database.yml
-/.bundle/
-/.idea/
-/*.rvmrc
-/compass/

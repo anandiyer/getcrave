@@ -1,0 +1,25 @@
+<h1>Listing user_saved_menu_items</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Menu item</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @user_saved_menu_items.each do |user_saved_menu_item| %>
+  <tr>
+    <td><%= user_saved_menu_item.user_id %></td>
+    <td><%= user_saved_menu_item.menu_item_id %></td>
+    <td><%= link_to 'Show', user_saved_menu_item %></td>
+    <td><%= link_to 'Edit', edit_user_saved_menu_item_path(user_saved_menu_item) %></td>
+    <td><%= link_to 'Destroy', user_saved_menu_item, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User saved menu item', new_user_saved_menu_item_path %>

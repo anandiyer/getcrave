@@ -2,6 +2,7 @@ class MenuItem < ActiveRecord::Base
     belongs_to  :restaurant
     has_many    :menu_item_ratings
     has_many    :menu_item_phtos
+    has_many    :user_saved_menu_items
     has_one     :menu_item_avg_rating_count
     acts_as_mappable :through => :restaurant
     

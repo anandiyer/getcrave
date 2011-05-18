@@ -5,3 +5,6 @@ config/database.yml
 /*.rvmrc
 /compass/
 /log/
+log/development.log
+tmp
+

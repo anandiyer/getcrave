@@ -11,6 +11,12 @@
 	<% end %>
 </p>
 
+<p>
+	<%= @user.user_saved_menu_items.each do |u| %>
+		<%= u.menu_item_id %> <br />
+	<% end %>
+</p>
+
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
