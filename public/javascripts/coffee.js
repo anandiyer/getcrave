@@ -22,7 +22,7 @@
     };
     map = new google.maps.Map(document.getElementById("map"), myOptions);
     return marker = new google.maps.Marker({
-      position: new google.maps.LatLng(55.729999, 52.433219),
+      position: new google.maps.LatLng(lat, long),
       map: map
     });
   };
@@ -61,6 +61,10 @@
     });
   };
   $(document).ready(function() {
+    var lat, long;
+    lat = $("#current_info_wrapper").data("latitude");
+    long = $("#current_info_wrapper").data("longitude");
+    gmap(lat, long, 7);
     $("#select_box_hint").click(function() {
       return $("#sort_by").find("ul").slideToggle("slow");
     });

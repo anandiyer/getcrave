@@ -13,6 +13,7 @@
   - @current_menu_item_reviews_limits = @current_menu_item_reviews.first(review_limit)
   - @current_menu_item_reviews_limits.each do |@mi_rating|
     - user = User.find(@mi_rating.user_id)
+
     - if @mi_rating.user_id?
       .reviews_wrapper_block
         .review_image_col
@@ -38,9 +39,21 @@
             .before_answer_block
               Was this review helpful?
             %span.yes_answer
+
               =link_to "Yes", "123"
             .found_helpfull
               (11)
+            =@mi_rating.menu_item_rating_helpfuls
+            -#=form_for(MenuItemRatingHelpful.new, :remote => true) do |f|
+              =f.text_field :menu_item_rating_id, :value => @mi_rating.id
+
+
+  -#              create_table "menu_item_rating_helpfuls", :force => true do |t|
+  -#  t.integer  "menu_item_rating_id"
+  -#  t.integer  "user_id"
+  -#  t.datetime "created_at"
+  -#  t.datetime "updated_at"
+  -#end
 
 =link_to("#limit="+(@show_more_step*2).to_s) do
   #show_more_button{:data =>{:step => @show_more_step, :next => @show_more_step*2, :itemid => params[:id]}}
