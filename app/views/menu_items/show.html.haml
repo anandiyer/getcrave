@@ -59,7 +59,10 @@
                 Add a label
 
           =image_tag "social.png"
+        -#-@user_saved_menu_item = UserSavedMenuItem.find()
+        -@menu_item_rating_helpful = MenuItemRatingHelpful.find(@menu_item.menu_item_ratings.id)
         #flag_icons
+
           .save_icon &nbsp;
           -#.flag_icon &nbsp;
       #comment_wrapper_wrapper

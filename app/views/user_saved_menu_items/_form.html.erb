@@ -1,4 +1,4 @@
-<%= form_for(@user_saved_menu_item) do |f| %>
+<%= form_for(@user_saved_menu_item, :remore => true) do |f| %>
   <% if @user_saved_menu_item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user_saved_menu_item.errors.count, "error") %> prohibited this user_saved_menu_item from being saved:</h2>
