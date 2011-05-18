@@ -1,0 +1,25 @@
+<%= form_for(@user_saved_menu_item) do |f| %>
+  <% if @user_saved_menu_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_saved_menu_item.errors.count, "error") %> prohibited this user_saved_menu_item from being saved:</h2>
+
+      <ul>
+      <% @user_saved_menu_item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :menu_item_id %><br />
+    <%= f.text_field :menu_item_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

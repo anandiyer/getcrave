@@ -1,4 +1,6 @@
 Crave::Application.routes.draw do  
+  resources :user_saved_menu_items
+
   resources :menu_item_review_comments
   
   resources :menu_item_ratings do
@@ -51,6 +53,7 @@ Crave::Application.routes.draw do
 
   resources :users do
     resources :menu_item_ratings
+    resources :user_saved_menu_items
   end
   
   match '/auth/:provider/callback', :to => 'sessions#create'  
