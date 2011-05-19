@@ -3,7 +3,8 @@
 <p>
   <b>User name:</b>
   <%= @user.user_name %> <br />
-  Picture: <%= @user.user_profile_pic_url %>
+  Picture: <%= @user.user_profile_pic_url %> <br />
+  Num Reviews: <%= @user.menu_item_ratings.count %>
 
 <p>
 	<%= @user.menu_item_ratings.each do |m| %>
