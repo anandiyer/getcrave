@@ -58,7 +58,7 @@ $(document).ready ->
 #    gmap(lat, long)
 
 
-    $(".yes_answer").click (event) ->
+    $(".yes_answer").live "click", (event) ->
         if $(this).find("a").length > 0
             event.preventDefault()
             link = $(this).find("a")

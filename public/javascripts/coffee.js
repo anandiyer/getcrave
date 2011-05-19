@@ -77,7 +77,7 @@
     var lat, long;
     lat = $("#current_info_wrapper").data("latitude");
     long = $("#current_info_wrapper").data("longitude");
-    $(".yes_answer").click(function(event) {
+    $(".yes_answer").live("click", function(event) {
       var form, found_helpfull_number, increment, link, link_text;
       if ($(this).find("a").length > 0) {
         event.preventDefault();

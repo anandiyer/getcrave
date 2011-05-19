@@ -49,18 +49,18 @@
       #update_place_restaurants
         .star_sm.stars_3 &nbsp;
         - @menu_items.each do |@menu_item|
+
+
+          -#%b= @menu_item.menu_item_avg_rating_count.to_json
+
           = render :partial => "menu_item"
-
-
-
-
   #sidebar
     #map{:style => "width:297px; height:297px; border: 1px solid #ccc"}
       =image_tag "map_temp.png"
     #foodies_wraper_wrapper
       %h4 Foodies of the week
-      -#-for @user in @foodies_for_current_dish
-      -#  =render :partial => "foodies"
+      -for @user in User.all.first(5)
+        =render :partial => "foodies"
 
 
 #footer
