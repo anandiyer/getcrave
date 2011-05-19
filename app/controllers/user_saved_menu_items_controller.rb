@@ -57,10 +57,7 @@ class UserSavedMenuItemsController < ApplicationController
         format.html { redirect_to(@user_saved_menu_item, :notice => 'User saved menu item was successfully created.') }
         format.xml  { render :xml => @user_saved_menu_item, :status => :created, :location => @user_saved_menu_item }
         format.json  { render :json => @user_saved_menu_item, :status => :created, :location => @user_saved_menu_item }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @user_saved_menu_item.errors, :status => :unprocessable_entity }
-        format.json  { render :json => @user_saved_menu_item.errors, :status => :unprocessable_entity }
+        format.js  { render :js => "window.save_menu_item()" }
       end
     end
   end

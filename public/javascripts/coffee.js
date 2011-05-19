@@ -49,6 +49,16 @@
       }
     });
   };
+  window.g_notice = function(type, text) {
+    return $.gritter.add({
+      title: type,
+      text: text
+    });
+  };
+  window.save_menu_item = function() {
+    $("#flag_icons div.save_icon").removeClass("not_saved_item").addClass("saved_item");
+    return g_notice("Notification", "Item saved!");
+  };
   window.add_review = function(id_of_menu_item, msg) {
     update_reviews(id_of_menu_item);
     return $("#comment_wrapper").slideUp("slow", function() {
@@ -65,6 +75,10 @@
     lat = $("#current_info_wrapper").data("latitude");
     long = $("#current_info_wrapper").data("longitude");
     gmap(lat, long);
+    $(".not_saved_item.save_icon").click(function() {
+      $(this).find("form").submit();
+      return $(this).unbind('click');
+    });
     $("#select_box_hint").click(function() {
       return $("#sort_by").find("ul").slideToggle("slow");
     });

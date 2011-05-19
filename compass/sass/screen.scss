@@ -40,6 +40,7 @@ $stars_position: 0 -635px;
 $stars_gray_position: 0 -905px;
 $flag_position: 0 -371px;
 $save_position: 0 -299px;
+$save_position_saved: 0 -335px;
 $photos_counter_position: 0 -596px;
 $add_photos_counter_position: 0 -614px;
 $yes_position: 0 -551px;
@@ -691,8 +692,13 @@ body.two-col.bp{
     @include sprites($flag_position, 16px, 32px);
 
 }
-.save_icon{
-  @include sprites($save_position, 16px, 32px);
+.save_icon.saved_item{
+    @include sprites($save_position_saved, 16px, 32px);
+
+}
+.save_icon.not_saved_item{
+    @include sprites($save_position, 16px, 32px);
+    cursor: pointer;
 }
 
 .h{

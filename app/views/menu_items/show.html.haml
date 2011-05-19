@@ -1,11 +1,18 @@
 #header
+  -#= is_item_saved? params[:id]
+  -#= @user_saved_menu_item = UserSavedMenuItem.where(:user_id=> current_user.id, :menu_item_id => params[:id]).to_json
+
+
+
   #logo
-    =link_to(image_tag("logo.png"),"/")
+    = link_to(image_tag("logo.png"),"/")
+
+
   #navigation_wrap
-    =image_tag "nav_left_corner.png", :class => "left_nav_corner"
-    =image_tag "nav_right_corner.png", :class => "right_nav_corner"
+    = image_tag "nav_left_corner.png", :class => "left_nav_corner"
+    = image_tag "nav_right_corner.png", :class => "right_nav_corner"
     #navigation
-      =link_to(image_tag("fb_login_icon.png"), facebook_auth_path, :class => "fb_login")
+      = link_to(image_tag("fb_login_icon.png"), facebook_auth_path, :class => "fb_login")
       %ul
         %li.nearby=link_to "Nearby","#"
         %li.saved=link_to "Saved","#"
@@ -14,22 +21,22 @@
 
   #navigation_wrap_search
     %form{:action =>"#"}
-      =text_field(:first, :second, :class =>"first_search_input")
-      =text_field(:first, :second, :class =>"second_search_input")
-      =image_tag "fileds_search_inputs.png", :class => "fields"
-      =image_submit_tag("search_button.png", :class => "search")
+      = text_field(:first, :second, :class =>"first_search_input")
+      = text_field(:first, :second, :class =>"second_search_input")
+      = image_tag "fileds_search_inputs.png", :class => "fields"
+      = image_submit_tag("search_button.png", :class => "search")
       #in in
 #content_wrap
   #content
     #current_content_block
       #bread_crumbs
-        =link_to("← "+@menu_item.restaurant.name, @menu_item.restaurant)
+        = link_to("← "+@menu_item.restaurant.name, @menu_item.restaurant)
       #current_info_wrapper{:data => {:latitude=> @menu_item.restaurant.latitude, :longitude => @menu_item.restaurant.longitude}}
         #img_column
-          =image_tag "temp_image.png"
+          = image_tag "temp_image.png"
           #icons_img_wrapper
             %span.photos_inline
-              =link_to "75 photos","@@"
+              = link_to "75 photos","@@"
             %span.add_photos_inline
               =link_to "add a photo","@@"
             #photos_icon &nbsp;
@@ -60,12 +67,22 @@
                 Add a label
 
           =image_tag "social.png"
-		-#TODO: Almaz, look at this code below to get the user_saved_menu_item. Then
-        -#if @user_saved_menu_item is not null, then the icon should be green and 
-        -#the link should be disabled.
-        -#-@user_saved_menu_item = UserSavedMenuItem.where(:user_id=>, :menu_item_id=>)
-        #flag_icons
-          .save_icon &nbsp;
+
+
+        - if is_item_saved? params[:id]
+          - flag_class = "saved_item"
+        - else
+          - flag_class = "not_saved_item"
+
+        #flag_icons{:title => "Save me!"}
+          .save_icon{:class=> "save_icon "+flag_class}
+            - @user_saved_menu_item = UserSavedMenuItem.new
+            = form_for(@user_saved_menu_item, :remote => true) do |f|
+              = f.hidden_field :user_id, :value => current_user.id
+              = f.hidden_field :menu_item_id, :value => params[:id]
+            &nbsp;
+
+
       #comment_wrapper_wrapper
         #comment_wrapper
           #content_title

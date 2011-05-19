@@ -19,6 +19,16 @@ window.update_reviews = (id_of_menu_item, limits = $("#show_more_button").data("
     beforeSend: () -> before_send(obj),
     success: (html) -> after_send(obj, html)})
 
+
+
+window.g_notice = (type, text) ->
+    $.gritter.add({title:type, text:text});
+
+
+window.save_menu_item = () ->
+    $("#flag_icons div.save_icon").removeClass("not_saved_item").addClass("saved_item")
+    g_notice("Notification", "Item saved!")
+
 window.add_review = (id_of_menu_item, msg) ->
     update_reviews(id_of_menu_item)
 #    $.gritter.add({title:"Notification", text:msg});
@@ -40,6 +50,16 @@ $(document).ready ->
     long =  $("#current_info_wrapper").data("longitude")
 
     gmap(lat, long)
+
+
+    $(".not_saved_item.save_icon").click () ->
+        $(this).find("form").submit()
+        $(this).unbind('click');
+
+
+
+
+
 
 
 

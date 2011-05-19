@@ -43,18 +43,18 @@
               -#menu_item_rating_id = @mi_rating.id, user_id = @current_user.id
               =link_to "Yes", "/menu_item_rating_helpfuls/new"
 
-			-#TODO: Almaz, take a look at this. This is how you will get the helpful count
-            -if @mi_rating.menu_item_rating_helpfuls            
-              -helpfulcount = @mi_rating.menu_item_rating_helpfuls.count
-            -else
-              -helpfulcount = 0
-            .found_helpfull
-              (helpfulcount.to_s)
-
-			-#TODO: Almaz, when the Yes link is clicked, only then should we do a POST.
-            =@mi_rating.menu_item_rating_helpfuls
-            -#=form_for(MenuItemRatingHelpful.new, :remote => true) do |f|
-              =f.text_field :menu_item_rating_id, :value => @mi_rating.id
+            -#-#TODO: Almaz, take a look at this. This is how you will get the helpful count
+            -#-if @mi_rating.menu_item_rating_helpfuls
+            -#  -helpfulcount = @mi_rating.menu_item_rating_helpfuls.count
+            -#-else
+            -#  -helpfulcount = 0
+            -#.found_helpfull
+            -#  (helpfulcount.to_s)
+            -#
+            -#-#TODO: Almaz, when the Yes link is clicked, only then should we do a POST.
+            -#=@mi_rating.menu_item_rating_helpfuls
+            -#-#=form_for(MenuItemRatingHelpful.new, :remote => true) do |f|
+            -#  =f.text_field :menu_item_rating_id, :value => @mi_rating.id
 
 
   -#              create_table "menu_item_rating_helpfuls", :force => true do |t|

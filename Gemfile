@@ -27,8 +27,8 @@ group :development, :test do
   gem 'mongrel'
   gem "erb2haml"
 
-  gem "compass"
-  gem "compass-susy-plugin"
+  gem "compass", :require => false
+#  gem "compass-susy-plugin"
 
   gem 'jquery-rails', '>= 0.2.6'
   gem "haml"
