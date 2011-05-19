@@ -1,5 +1,5 @@
 = render :partial => "head"
-- @menu_item = @restaurant
+-#- @menu_item = @restaurant
 #content_wrap
   #content
     #current_content_block
@@ -33,12 +33,6 @@
                 .col2_pn= image_tag "social.png"
 
 
-
-
-
-
-
-
     #reviews_wrapper.restaurant
       %h3.review
         Menu
@@ -52,7 +46,10 @@
           %ul
             -["Rating", "Other"].each do |x|
               %li= x
-      -##update_place= render :partial => "review"
+      #update_place_restaurants
+        .star_sm.stars_3 &nbsp;
+        - 5.times do |x|
+          = render :partial => "menu_item"
 
 
 
