@@ -1387,7 +1387,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
 }
 
 /* line 720, ../../compass/sass/screen.scss */
-.stars_ {
+.stars_, .stars_0 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
   background-position: 0 -745px;

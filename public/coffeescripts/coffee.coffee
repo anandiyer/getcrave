@@ -27,8 +27,11 @@ window.g_notice = (type, text) ->
 
 window.save_helpfull = () ->
 
-window.save_menu_item = () ->
-    $("#flag_icons div.save_icon").removeClass("not_saved_item").addClass("saved_item")
+window.save_menu_item = (mid) ->
+
+    path = $("#flag_icons div.save_icon[id=mid_"+mid+"]")
+
+    $(path).removeClass("not_saved_item").addClass("saved_item")
     g_notice("Notification", "Item saved!")
 
 window.add_review = (id_of_menu_item, msg) ->

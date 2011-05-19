@@ -56,8 +56,10 @@
     });
   };
   window.save_helpfull = function() {};
-  window.save_menu_item = function() {
-    $("#flag_icons div.save_icon").removeClass("not_saved_item").addClass("saved_item");
+  window.save_menu_item = function(mid) {
+    var path;
+    path = $("#flag_icons div.save_icon[id=mid_" + mid + "]");
+    $(path).removeClass("not_saved_item").addClass("saved_item");
     return g_notice("Notification", "Item saved!");
   };
   window.add_review = function(id_of_menu_item, msg) {

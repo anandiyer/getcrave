@@ -43,10 +43,16 @@
         #text_column
           %h1.current_title= @menu_item.name
           #stars_wrap
-            -if @menu_item.menu_item_avg_rating_count            
-              -avg = @menu_item.menu_item_avg_rating_count.avg_rating.round
-            -else
-              -avg = 0
+
+            -#TODO: almazom. bad catching exception (((
+            - begin
+              - if @menu_item.menu_item_avg_rating_count
+                - avg = @menu_item.menu_item_avg_rating_count.avg_rating.round
+              - else
+                - avg = 0
+            - rescue
+              - avg = 0
+
             -class_name ="stars_"+avg.to_s
             #star_average{:class => class_name.gsub(/[.]/, '_'), :data =>{:rating => avg}} &nbsp;
           #rating
@@ -67,20 +73,8 @@
                 Add a label
 
           =image_tag "social.png"
-
-
-        - if is_item_saved? params[:id]
-          - flag_class = "saved_item"
-        - else
-          - flag_class = "not_saved_item"
-
-        #flag_icons{:title => "Save me!"}
-          .save_icon{:class=> "save_icon "+flag_class}
-            - @user_saved_menu_item = UserSavedMenuItem.new
-            = form_for(@user_saved_menu_item, :remote => true) do |f|
-              = f.hidden_field :user_id, :value => current_user.id
-              = f.hidden_field :menu_item_id, :value => params[:id]
-            &nbsp;
+        000
+        = render :partial => "/save"
 
 
       #comment_wrapper_wrapper

@@ -1,11 +1,10 @@
-%pre= @mi.id
 .restaurant_menu_item_wrapper
   .img_column_mi_1_col
     =image_tag "item_rest_temp_image.png"
   .desc_block_2_col
     .b
-      %h1= @mi.name
-    .b.i= @mi.description
+      %h1= @menu_item.name
+    .b.i= @menu_item.description
     .b.i Steve M and 3 other friends have rated this
 
 
