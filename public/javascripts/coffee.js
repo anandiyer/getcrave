@@ -79,15 +79,17 @@
     long = $("#current_info_wrapper").data("longitude");
     $(".yes_answer").click(function(event) {
       var form, found_helpfull_number, increment, link, link_text;
-      event.preventDefault();
-      link = $(this).find("a");
-      link_text = $(link).text();
-      $(this).find("span").html(link_text);
-      found_helpfull_number = $(this).next();
-      increment = parseInt(found_helpfull_number.text().replace(/[(|)]/ig, ""), 10) + 1;
-      $(found_helpfull_number).text("(" + increment + ")");
-      form = $(this).find("form");
-      return form.submit();
+      if ($(this).find("a").length > 0) {
+        event.preventDefault();
+        link = $(this).find("a");
+        link_text = $(link).text();
+        $(this).find("span").html(link_text);
+        found_helpfull_number = $(this).next();
+        increment = parseInt(found_helpfull_number.text().replace(/[(|)]/ig, ""), 10) + 1;
+        $(found_helpfull_number).text("(" + increment + ")");
+        form = $(this).find("form");
+        return form.submit();
+      }
     });
     $(".not_saved_item.save_icon").click(function() {
       $(this).find("form").submit();

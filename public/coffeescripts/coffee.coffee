@@ -59,17 +59,18 @@ $(document).ready ->
 
 
     $(".yes_answer").click (event) ->
-        event.preventDefault()
-        link = $(this).find("a")
-        link_text = $(link).text()
+        if $(this).find("a").length > 0
+            event.preventDefault()
+            link = $(this).find("a")
+            link_text = $(link).text()
 
-        $(this).find("span").html(link_text)
+            $(this).find("span").html(link_text)
 
-        found_helpfull_number = $(this).next()
-        increment = parseInt(found_helpfull_number.text().replace(/[(|)]/ig,""),10)+1
-        $(found_helpfull_number).text("("+increment+")")
-        form = $(this).find("form")
-        form.submit()
+            found_helpfull_number = $(this).next()
+            increment = parseInt(found_helpfull_number.text().replace(/[(|)]/ig,""),10)+1
+            $(found_helpfull_number).text("("+increment+")")
+            form = $(this).find("form")
+            form.submit()
 
 
     $(".not_saved_item.save_icon").click () ->
