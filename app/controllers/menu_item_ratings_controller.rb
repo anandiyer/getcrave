@@ -52,7 +52,7 @@ class MenuItemRatingsController < ApplicationController
   def new
     @menu_item_rating = MenuItemRating.new
     @menu_item_rating.menu_item_id = params[:menu_item_id]
-    @menu_item_rating.user_id = current_user.id if current_user
+    # @menu_item_rating.user_id = current_user.id if current_user
 
     respond_to do |format|
       # FIXME
