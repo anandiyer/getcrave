@@ -51,7 +51,8 @@ $(document).ready ->
     lat =  $("#current_info_wrapper").data("latitude")
     long =  $("#current_info_wrapper").data("longitude")
 
-    gmap(lat, long)
+#    TODO: uncomment me on production
+#    gmap(lat, long)
 
 
     $(".yes_answer").click (event) ->

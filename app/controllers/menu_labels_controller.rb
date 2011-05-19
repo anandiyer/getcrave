@@ -5,7 +5,7 @@ class MenuLabelsController < ApplicationController
     @menu_labels = MenuLabel.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.xml  { render :xml => @menu_labels }
     end
   end
@@ -16,7 +16,7 @@ class MenuLabelsController < ApplicationController
     @menu_label = MenuLabel.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.haml
+      format.html # _unused_show.html.haml
       format.xml  { render :xml => @menu_label }
     end
   end

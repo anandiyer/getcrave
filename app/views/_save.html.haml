@@ -1,0 +1,13 @@
+
+- if is_item_saved? params[:id]
+  - flag_class = "saved_item"
+- else
+  - flag_class = "not_saved_item"
+
+#flag_icons{:title => "Save me!"}
+  .save_icon{:class=> "save_icon "+flag_class}
+    - @user_saved_menu_item = UserSavedMenuItem.new
+    = form_for(@user_saved_menu_item, :remote => true) do |f|
+      = f.text_field :user_id, :value => current_user.id
+      = f.text_field :menu_item_id, :value => params[:id]
+    &nbsp;

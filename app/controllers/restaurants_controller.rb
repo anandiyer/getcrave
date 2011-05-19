@@ -4,27 +4,22 @@ class RestaurantsController < ApplicationController
 
   layout "general"
 
+
+
+
+
   def index
     # @restaurants = Restaurant.find(:all, :origin => [37.77859, -122.39142], :within=>1)
     # @restaurants = Restaurant.find(:all, :origin => [37.77859, -122.39142], :order=>'distance asc', :limit => 25)
     # @restaurants = Restaurant.all
-    
-    @lat = params[:lat].to_f
-    @long = params[:long].to_f
-    @limit = 50
-    
-    if params[:limit] && !params[:limit].empty?
-      @limit = params[:limit].to_i
-    end
-    
-    @restaurants = Restaurant.find(:all, 
-      :origin => [@lat, @long], 
-      :order=>'distance asc', 
-      :limit => @limit)
+
+
+    get_closest_restaurants params[:lat], params[:long]
+
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @restaurants }
+      format.html # index.html.haml
+      format.xml { render :xml => @restaurants }
       format.json { render :json => @restaurants }
     end
   end
@@ -34,9 +29,12 @@ class RestaurantsController < ApplicationController
   def show
     @restaurant = Restaurant.find(params[:id])
 
+#    get_closest_restaurants params[:lat], params[:long]
+
+
     respond_to do |format|
-      format.html # show.html.haml
-      format.xml  { render :xml => @restaurant }
+      format.html # _unused_show.html.haml
+      format.xml { render :xml => @restaurant }
       format.json { render :json => @restaurant }
     end
   end
@@ -48,7 +46,7 @@ class RestaurantsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @restaurant }
+      format.xml { render :xml => @restaurant }
       format.json { render :json => @restaurant }
     end
   end
@@ -66,11 +64,11 @@ class RestaurantsController < ApplicationController
     respond_to do |format|
       if @restaurant.save
         format.html { redirect_to(@restaurant, :notice => 'Restaurant was successfully created.') }
-        format.xml  { render :xml => @restaurant, :status => :created, :location => @restaurant }
-        format.json  { render :json => @restaurant, :status => :created, :location => @restaurant }
+        format.xml { render :xml => @restaurant, :status => :created, :location => @restaurant }
+        format.json { render :json => @restaurant, :status => :created, :location => @restaurant }
       else
         format.html { render :action => "new" }
-        format.xml  { render :json => @restaurant.errors, :status => :unprocessable_entity }
+        format.xml { render :json => @restaurant.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -83,12 +81,12 @@ class RestaurantsController < ApplicationController
     respond_to do |format|
       if @restaurant.update_attributes(params[:restaurant])
         format.html { redirect_to(@restaurant, :notice => 'Restaurant was successfully updated.') }
-        format.xml  { head :ok }
-        format.json  { head :ok }
+        format.xml { head :ok }
+        format.json { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @restaurant.errors, :status => :unprocessable_entity }
-        format.json  { render :xml => @restaurant.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @restaurant.errors, :status => :unprocessable_entity }
+        format.json { render :xml => @restaurant.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -101,36 +99,55 @@ class RestaurantsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(restaurants_url) }
-      format.xml  { head :ok }
-      format.json  { head :ok }
+      format.xml { head :ok }
+      format.json { head :ok }
     end
   end
-  
+
   # Search
   def search
-      if params[:lat] && !params[:lat].empty? && params[:long] && !params[:long].empty?
-        @lat = params[:lat].to_f
-        @long = params[:long].to_f
-        
-        @search  = Restaurant.search() do
-          fulltext(params[:q])
-          # 6 and lower is the only precision that seems to work
-          with(:coordinates).near(@lat, @long, :precision => 5)
-          # , :boost => 2, :precision => 6)
-        end
-      else 
-          @search  = Restaurant.search() do
-            fulltext(params[:q])
-          end
-      end
+    if params[:lat] && !params[:lat].empty? && params[:long] && !params[:long].empty?
+      @lat = params[:lat].to_f
+      @long = params[:long].to_f
 
-      @restaurants = @search.results
-      
-      respond_to do |format|
-        format.html # index.html.erb
-        format.xml  { render :xml => @restaurants }
-        format.json { render :json => @restaurants }
+      @search = Restaurant.search() do
+        fulltext(params[:q])
+        # 6 and lower is the only precision that seems to work
+        with(:coordinates).near(@lat, @long, :precision => 5)
+        # , :boost => 2, :precision => 6)
       end
+    else
+      @search = Restaurant.search() do
+        fulltext(params[:q])
+      end
+    end
+
+    @restaurants = @search.results
+
+    respond_to do |format|
+      format.html # index.html.haml
+      format.xml { render :xml => @restaurants }
+      format.json { render :json => @restaurants }
+    end
   end
-    
+
+
+
+  private
+
+  def get_closest_restaurants lat, log, limit = 50
+    @lat = lat.to_f
+    @long = log.to_f
+    @limit = limit
+
+    if params[:limit] && !params[:limit].empty?
+      @limit = params[:limit].to_i
+    end
+
+    @restaurants = Restaurant.find(:all,:origin => [@lat, @long], :order=>'distance asc', :limit => @limit)
+  end
+
+
 end
+
+

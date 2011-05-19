@@ -75,7 +75,6 @@
     var lat, long;
     lat = $("#current_info_wrapper").data("latitude");
     long = $("#current_info_wrapper").data("longitude");
-    gmap(lat, long);
     $(".yes_answer").click(function(event) {
       var form, found_helpfull_number, increment, link, link_text;
       event.preventDefault();

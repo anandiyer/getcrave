@@ -5,7 +5,7 @@ class MenuItemPhotosController < ApplicationController
     @menu_item_photos = MenuItemPhoto.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.xml  { render :xml => @menu_item_photos }
     end
   end
@@ -16,7 +16,7 @@ class MenuItemPhotosController < ApplicationController
     @menu_item_photo = MenuItemPhoto.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.haml
+      format.html # _unused_show.html.haml
       format.xml  { render :xml => @menu_item_photo }
     end
   end

@@ -12,4 +12,5 @@ class Restaurant < ActiveRecord::Base
         Sunspot::Util::Coordinates.new(latitude, longitude)
       end
   end
+
 end

@@ -35,6 +35,7 @@ $orange: #f2663a;
 $body_back_gray: #f4f4f4;
 $light_gray: #ececec;
 $gray: #a0a0a0;
+$blue: #2e70a4;
 
 $stars_position: 0 -635px;
 $stars_gray_position: 0 -905px;
@@ -324,7 +325,7 @@ body.two-col.bp{
                 }
                 #current_info_wrapper.restaurant{
                     position: relative;
-                    height: 178px;
+                    height: 163px;
 
                     .phone_number{
                         padding: 20px 0 0 0;
@@ -422,6 +423,45 @@ body.two-col.bp{
 
             #reviews_wrapper.restaurant{
                 border-top: 3px solid $light_gray;
+                padding:17px 0 0 8px;
+
+                #update_place_restaurants{
+                    padding: 8px 0 0 0;
+                    .star_sm{
+                        margin-bottom: 7px;
+                    }
+
+                    .restaurant_menu_item_wrapper{
+                        @include container;
+                        height: 95px;
+                        border-top: 1px solid $light_gray;
+                        padding:10px 0 0 0;
+                        $content-columns: ceil(15);
+                        @include column($content-columns, true);
+                        .img_column_mi_1_col{
+                            $content-columns: ceil(2);
+                            @include column($content-columns, true);
+                            padding:0 15px 0 0;
+                        }
+                        .desc_block_2_col{
+                            $content-columns: ceil(11);
+                            @include column($content-columns, true);
+                            padding:10px 21px 10px 10px;
+                            h1{
+                                color: $blue;
+                                padding:0 0 3px 0;
+                                margin:0;
+                                font-size: 18px;
+                            }
+                        }
+                        .save_n_review_3_col{
+                            $content-columns: ceil(1);
+                            @include column($content-columns, true);
+                            padding: 0 0 0 10px;
+                        }
+                    }
+                }
+
             }
             #reviews_wrapper{
                 margin: 12px 0 0 0;
@@ -692,15 +732,15 @@ body.two-col.bp{
 }
 
 .flag_icon{
-    @include sprites($flag_position, 16px, 32px);
+    @include sprites($flag_position, 27px, 32px);
 
 }
 .save_icon.saved_item{
-    @include sprites($save_position_saved, 16px, 32px);
+    @include sprites($save_position_saved, 27px, 32px);
 
 }
 .save_icon.not_saved_item{
-    @include sprites($save_position, 16px, 32px);
+    @include sprites($save_position, 27px, 32px);
     cursor: pointer;
 }
 
@@ -725,3 +765,6 @@ body.two-col.bp{
 
 }
 
+.i{
+    font-style: italic;
+}
