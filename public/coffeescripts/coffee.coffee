@@ -25,6 +25,8 @@ window.g_notice = (type, text) ->
     $.gritter.add({title:type, text:text});
 
 
+window.save_helpfull = () ->
+
 window.save_menu_item = () ->
     $("#flag_icons div.save_icon").removeClass("not_saved_item").addClass("saved_item")
     g_notice("Notification", "Item saved!")
@@ -50,6 +52,20 @@ $(document).ready ->
     long =  $("#current_info_wrapper").data("longitude")
 
     gmap(lat, long)
+
+
+    $(".yes_answer").click (event) ->
+        event.preventDefault()
+        link = $(this).find("a")
+        link_text = $(link).text()
+
+        $(this).find("span").html(link_text)
+
+        found_helpfull_number = $(this).next()
+        increment = parseInt(found_helpfull_number.text().replace(/[(|)]/ig,""),10)+1
+        $(found_helpfull_number).text("("+increment+")")
+        form = $(this).find("form")
+        form.submit()
 
 
     $(".not_saved_item.save_icon").click () ->

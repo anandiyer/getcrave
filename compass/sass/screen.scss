@@ -585,8 +585,11 @@ body.two-col.bp{
                                 height: 15px;
                                 margin:2px 0 0 7px;
                             }
+
+
                             .found_helpfull{
-                                color: $gray
+                                color: $gray;
+                                padding-left: 3px;
                             }
                             span.no_answer{
                                 @include inline-block;

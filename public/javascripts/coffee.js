@@ -55,6 +55,7 @@
       text: text
     });
   };
+  window.save_helpfull = function() {};
   window.save_menu_item = function() {
     $("#flag_icons div.save_icon").removeClass("not_saved_item").addClass("saved_item");
     return g_notice("Notification", "Item saved!");
@@ -75,6 +76,18 @@
     lat = $("#current_info_wrapper").data("latitude");
     long = $("#current_info_wrapper").data("longitude");
     gmap(lat, long);
+    $(".yes_answer").click(function(event) {
+      var form, found_helpfull_number, increment, link, link_text;
+      event.preventDefault();
+      link = $(this).find("a");
+      link_text = $(link).text();
+      $(this).find("span").html(link_text);
+      found_helpfull_number = $(this).next();
+      increment = parseInt(found_helpfull_number.text().replace(/[(|)]/ig, ""), 10) + 1;
+      $(found_helpfull_number).text("(" + increment + ")");
+      form = $(this).find("form");
+      return form.submit();
+    });
     $(".not_saved_item.save_icon").click(function() {
       $(this).find("form").submit();
       return $(this).unbind('click');
