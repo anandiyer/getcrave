@@ -1,0 +1,126 @@
+#header
+  -#= is_item_saved? params[:id]
+  -#= @user_saved_menu_item = UserSavedMenuItem.where(:user_id=> current_user.id, :menu_item_id => params[:id]).to_json
+
+
+
+  #logo
+    = link_to(image_tag("logo.png"),"/")
+
+
+  #navigation_wrap
+    = image_tag "nav_left_corner.png", :class => "left_nav_corner"
+    = image_tag "nav_right_corner.png", :class => "right_nav_corner"
+    #navigation
+      = link_to(image_tag("fb_login_icon.png"), facebook_auth_path, :class => "fb_login")
+      %ul
+        %li.nearby=link_to "Nearby","#"
+        %li.saved=link_to "Saved","#"
+        %li.following=link_to "Following","#"
+        %li.profile=link_to "Profile","#"
+
+  #navigation_wrap_search
+    %form{:action =>"#"}
+      = text_field(:first, :second, :class =>"first_search_input")
+      = text_field(:first, :second, :class =>"second_search_input")
+      = image_tag "fileds_search_inputs.png", :class => "fields"
+      = image_submit_tag("search_button.png", :class => "search")
+      #in in
+#content_wrap
+  #content
+    #current_content_block
+      #bread_crumbs
+        = link_to("← "+@menu_item.restaurant.name, @menu_item.restaurant)
+      #current_info_wrapper{:data => {:latitude=> @menu_item.restaurant.latitude, :longitude => @menu_item.restaurant.longitude}}
+        #img_column
+          = image_tag "temp_image.png"
+          #icons_img_wrapper
+            %span.photos_inline
+              = link_to "75 photos","@@"
+            %span.add_photos_inline
+              =link_to "add a photo","@@"
+            #photos_icon &nbsp;
+        #text_column
+          %h1.current_title= @menu_item.name
+          #stars_wrap
+            -if @menu_item.menu_item_avg_rating_count            
+              -avg = @menu_item.menu_item_avg_rating_count.avg_rating.round
+            -else
+              -avg = 0
+            -class_name ="stars_"+avg.to_s
+            #star_average{:class => class_name.gsub(/[.]/, '_'), :data =>{:rating => avg}} &nbsp;
+          #rating
+            -if @menu_item.menu_item_avg_rating_count
+              %span= @menu_item.menu_item_avg_rating_count.count
+              Reviews
+          #desc_wrap
+            #description= @menu_item.description
+            #dishlabels
+              %strong Dish labels:
+            #labels
+              -%W{Meal Bread Tasty}.each do |x|
+                .birdy &nbsp;
+                =link_to(x+"(12)","#", :class => "label")
+                ,
+              .plus &nbsp;
+              =link_to "#" do
+                Add a label
+
+          =image_tag "social.png"
+
+
+        - if is_item_saved? params[:id]
+          - flag_class = "saved_item"
+        - else
+          - flag_class = "not_saved_item"
+
+        #flag_icons{:title => "Save me!"}
+          .save_icon{:class=> "save_icon "+flag_class}
+            - @user_saved_menu_item = UserSavedMenuItem.new
+            = form_for(@user_saved_menu_item, :remote => true) do |f|
+              = f.hidden_field :user_id, :value => current_user.id
+              = f.hidden_field :menu_item_id, :value => params[:id]
+            &nbsp;
+
+
+      #comment_wrapper_wrapper
+        #comment_wrapper
+          #content_title
+            Have you tried this?
+          =form_for(MenuItemRating.new, :remote => true) do |f|
+            =f.hidden_field :rating
+            =f.hidden_field :menu_item_id, :value =>params[:id]
+            .star_gray{:id => params[:id], :data =>{:model => "user_menu_item_ratings"}} &nbsp;
+            #input_comment
+              =f.text_field :review
+              =f.hidden_field :menu_item_id, :value =>params[:id]
+    #reviews_wrapper
+      %h3.review
+        Reviews
+
+      #select_box_hint &nbsp;
+      #sorting
+        #before_sort_by
+          Sort by:
+        #sort_by
+          =text_field(:select, :sorttype, :value => "Newest", :disabled => true)
+          %ul
+            -["Rating", "Other"].each do |x|
+              %li= x
+      #update_place= render :partial => "review"
+
+
+
+
+  #sidebar
+    #map{:style => "width:297px; height:297px; border: 1px solid #ccc"}
+      =image_tag "map_temp.png"
+    #foodies_wraper_wrapper
+      %h4 Foodies of the week
+      -for @user in @foodies_for_current_dish
+        =render :partial => "foodies"
+
+
+#footer
+  %p footer
+
