@@ -8,6 +8,6 @@
   .save_icon{:class=> "save_icon "+flag_class, :id => "mid_"+@menu_item.id.to_s}
     - @user_saved_menu_item = UserSavedMenuItem.new
     = form_for(@user_saved_menu_item, :remote => true) do |f|
-      = f.hidden_field :user_id, :value => current_user.id
+      = f.hidden_field :user_id, :value => current_user.id if current_user
       = f.hidden_field :menu_item_id, :value => @menu_item.id
     &nbsp;
