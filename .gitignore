@@ -1,3 +1,4 @@
 solr/data
 log/development.log
 tmp
+tmp/pids/sunspot-solr-development.pid
