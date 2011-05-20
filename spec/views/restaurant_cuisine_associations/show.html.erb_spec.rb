@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "restaurant_cuisine_associations/show.html.erb" do
+describe "restaurant_cuisine_associations/show.html.haml" do
   before(:each) do
     @restaurant_cuisine_association = assign(:restaurant_cuisine_association, stub_model(RestaurantCuisineAssociation,
       :restaurant_id => 1,

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "menu_item_rating_helpfuls/show.html.erb" do
+describe "menu_item_rating_helpfuls/show.html.haml" do
   before(:each) do
     @menu_item_rating_helpful = assign(:menu_item_rating_helpful, stub_model(MenuItemRatingHelpful,
       :menu_item_rating_id => 1,

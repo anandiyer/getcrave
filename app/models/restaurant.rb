@@ -9,7 +9,7 @@ class Restaurant < ActiveRecord::Base
   searchable do
       text :name
       location :coordinates do
-        Sunspot::Util::Coordinates.new(latitude, longitude) 
-      end 
-  end     
+        Sunspot::Util::Coordinates.new(latitude, longitude)
+      end
+  end
 end

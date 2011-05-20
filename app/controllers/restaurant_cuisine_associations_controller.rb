@@ -16,7 +16,7 @@ class RestaurantCuisineAssociationsController < ApplicationController
     @restaurant_cuisine_association = RestaurantCuisineAssociation.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.haml
       format.xml  { render :xml => @restaurant_cuisine_association }
     end
   end

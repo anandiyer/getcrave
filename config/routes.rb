@@ -31,6 +31,9 @@ Crave::Application.routes.draw do
         get 'avg_rating'
       end 
     end
+    member do
+      get 'show_reviews'
+    end
     collection do
       get 'search', 'location'
     end

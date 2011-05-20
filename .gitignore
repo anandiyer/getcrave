@@ -1,5 +1,10 @@
 solr/data
 log/development.log
-tmp
+tmp/
 tmp/pids/sunspot-solr-development.pid
 log/sunspot-solr-development.log
+config/database.yml
+/.bundle/
+/.idea/
+/*.rvmrc
+/log/

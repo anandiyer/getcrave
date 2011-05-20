@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id], :include => :menu_item_ratings)
     
     respond_to do |format|
+
       format.html # show.html.erb
       format.xml  { render :xml => @user.to_xml( :include => :menu_item_ratings ) }
       format.json  { render :json => @user.to_json( :include => :menu_item_ratings ) }
