@@ -1,23 +1,8 @@
 #header
-  -#= is_item_saved? params[:id]
-  -#= @user_saved_menu_item = UserSavedMenuItem.where(:user_id=> current_user.id, :menu_item_id => params[:id]).to_json
-
-
-
   #logo
     = link_to(image_tag("logo.png"),"/")
+  #navigation_wrap= render :partial => "/navigation"
 
-
-  #navigation_wrap
-    = image_tag "nav_left_corner.png", :class => "left_nav_corner"
-    = image_tag "nav_right_corner.png", :class => "right_nav_corner"
-    #navigation
-      = link_to(image_tag("fb_login_icon.png"), "/auth/facebook", :class => "fb_login")
-      %ul
-        %li.nearby=link_to "Nearby","#"
-        %li.saved=link_to "Saved","#"
-        %li.following=link_to "Following","#"
-        %li.profile=link_to "Profile","#"
 
   #navigation_wrap_search
     %form{:action =>"#"}

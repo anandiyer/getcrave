@@ -1,0 +1,20 @@
+= image_tag "nav_left_corner.png", :class => "left_nav_corner"
+= image_tag "nav_right_corner.png", :class => "right_nav_corner"
+#navigation
+
+  .fb_login
+    - if current_user
+      Welcome,
+      = current_user.user_name
+      = link_to "Sign Out", signout_path
+    - else
+      -#= link_to "Sign in with Facebook", "/auth/facebook"
+      = link_to(image_tag("fb_login_icon.png"), "/auth/facebook")
+
+
+
+  %ul
+    %li.nearby=link_to "Nearby","#"
+    %li.saved=link_to "Saved","#"
+    %li.following=link_to "Following","#"
+    %li.profile=link_to "Profile","#"

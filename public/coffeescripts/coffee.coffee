@@ -55,7 +55,7 @@ $(document).ready ->
     long =  $("#current_info_wrapper").data("longitude")
 
 #    TODO: uncomment me on production
-#    gmap(lat, long)
+    gmap(lat, long)
 
 
     $(".yes_answer").live "click", (event) ->
