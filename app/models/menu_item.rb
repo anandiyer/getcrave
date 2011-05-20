@@ -9,8 +9,5 @@ class MenuItem < ActiveRecord::Base
     searchable do
         text :name, :default_boost => 2
         text :description
-        location :coordinates do
-          Sunspot::Util::Coordinates.new(restaurant.latitude, restaurant.longitude)
-        end
     end
 end
