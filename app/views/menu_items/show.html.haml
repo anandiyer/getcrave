@@ -12,7 +12,7 @@
     = image_tag "nav_left_corner.png", :class => "left_nav_corner"
     = image_tag "nav_right_corner.png", :class => "right_nav_corner"
     #navigation
-      = link_to(image_tag("fb_login_icon.png"), facebook_auth_path, :class => "fb_login")
+      = link_to(image_tag("fb_login_icon.png"), "/auth/facebook", :class => "fb_login")
       %ul
         %li.nearby=link_to "Nearby","#"
         %li.saved=link_to "Saved","#"

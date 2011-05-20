@@ -1,12 +1,4 @@
-Crave::Application.routes.draw do  
-
-
-  match '/auth/:provider/callback', :to => 'sessions#create'
-  match '/auth/facebook/'=> 'sessions#create', :as => :facebook_auth
-
-  match '/signout' => 'sessions#destroy', :as => :signout
-  
-
+Crave::Application.routes.draw do 
   resources :user_saved_menu_items
 
   resources :menu_item_review_comments

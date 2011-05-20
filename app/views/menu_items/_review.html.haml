@@ -56,7 +56,7 @@
                 %span= link_to "Yes","#"
                 = form_for(MenuItemRatingHelpful.new(@mi_rating.id), :remote => true) do |f|
                   = f.hidden_field :menu_item_rating_id, :value => @mi_rating.id
-                  = f.hidden_field :user_id, :value => current_user.id
+                  = f.hidden_field :user_id, :value => current_user.id if current_user
             .found_helpfull
               =" (" + @mi_rating.menu_item_rating_helpfuls.count.to_s+")"
 =link_to("#limit="+(@show_more_step*2).to_s) do
