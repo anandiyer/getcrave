@@ -50,6 +50,10 @@ window.add_review = (id_of_menu_item, msg) ->
 
 $(document).ready ->
 
+    $(document).ajaxError () ->
+
+        $.gritter.add({title:"Error", text: "Ajax error!", image: "/images/error_icon.png", sticky: => true});
+
 #    gmap in dish reviews
     lat =  $("#current_info_wrapper").data("latitude")
     long =  $("#current_info_wrapper").data("longitude")

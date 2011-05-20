@@ -1,5 +1,6 @@
 (function() {
   var after_send, before_send, disher_review_wrapper;
+  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   disher_review_wrapper = $("#reviews_wrapper");
   window.gmap = function(lat, long, zoom) {
     var latlng, map, marker, myOptions;
@@ -75,6 +76,16 @@
   };
   $(document).ready(function() {
     var lat, long;
+    $(document).ajaxError(function() {
+      return $.gritter.add({
+        title: "Error",
+        text: "Ajax error!",
+        image: "/images/error_icon.png",
+        sticky: __bind(function() {
+          return true;
+        }, this)
+      });
+    });
     lat = $("#current_info_wrapper").data("latitude");
     long = $("#current_info_wrapper").data("longitude");
     gmap(lat, long);
