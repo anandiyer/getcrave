@@ -428,7 +428,9 @@ body.two-col.bp{
                 #update_place_restaurants{
                     padding: 8px 0 0 0;
                     .star_sm{
-                        margin-bottom: 7px;
+                        width: 150px;
+                        @include container;
+                        margin: 0 0 10px 0;
                     }
 
                     .restaurant_menu_item_wrapper{

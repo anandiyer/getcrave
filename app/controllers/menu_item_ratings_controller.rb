@@ -7,7 +7,6 @@ class MenuItemRatingsController < ApplicationController
     
     average = @menu_item.menu_item_ratings.average(:rating)
     count = @menu_item.menu_item_ratings.count
-    
     @response = { :average => average, :count => count}
         
     respond_to do |format|
