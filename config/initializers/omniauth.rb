@@ -6,5 +6,5 @@ APP_SECRET = CONFIG['app_secret']
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   # This cert location is only for Heroku
-    provider :facebook, APP_ID, APP_SECRET {:client_options => {:ssl => {:ca_path => "/usr/lib/ssl/certs/ca-certificates.crt"}}}
+    provider :facebook, APP_ID, APP_SECRET, {:client_options => {:ssl => {:ca_path => "/usr/lib/ssl/certs/ca-certificates.crt"}}}
 end
