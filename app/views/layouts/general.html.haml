@@ -14,39 +14,18 @@
   %body.two-col.bp
     #page
       #container
-        #header
-          #logo
-            =link_to(image_tag("logo.png"),"/")
-          #navigation_wrap
-            =image_tag "nav_left_corner.png", :class => "left_nav_corner"
-            =image_tag "nav_right_corner.png", :class => "right_nav_corner"
-            #navigation
-              =link_to(image_tag("fb_login_icon.png"), facebook_auth_path, :class => "fb_login")
-              %ul
-                %li.nearby=link_to "Nearby","#"
-                %li.saved=link_to "Saved","#"
-                %li.following=link_to "Following","#"
-                %li.profile=link_to "Profile","#"
 
-          #navigation_wrap_search
-            %form{:action =>"#"}
-              =text_field(:first, :second, :class =>"first_search_input")
-              =text_field(:first, :second, :class =>"second_search_input")
-              =image_tag "fileds_search_inputs.png", :class => "fields"
-              =image_submit_tag("search_button.png", :class => "search")
-              #in in
 
         =yield
         -#= add_gritter("This is a notification just for you!")
         -#= js add_gritter("This is a notification just for you!")
         :javascript
-          gmap(55.729999, 52.433219, 7)
+
           //#TODO place to refactor - move to external js file
 
 
-          function g_notice(type, text){
-            $.gritter.add({title:type, text:text});
-          }
+
+
 
           starts_update();
 
@@ -57,14 +36,14 @@
                 start: data_rating,
                 path: "/images/icons",
                 width: "180px",
-                half: true,
+                //#half: true,
                 click: function(score, evt) {
                   var data_rating = $(this).data("rating");
                   var data_model = $(this).data("model");
                   var id =  this.attr('id');
                   var score =  score;
                   $("form.new_menu_item_rating input#menu_item_rating_rating").val(score);
-                  $(this).parents("form").submit()
+                  //#$(this).parents("form").submit()
 
 
                   //$.gritter.add({title:'Notification',text:'Rating: ID='+id+"<br /> model = "+ data_model+ " <br/>score :"+ score});

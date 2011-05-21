@@ -1,4 +1,4 @@
-Crave::Application.routes.draw do  
+Crave::Application.routes.draw do 
   resources :user_saved_menu_items
 
   resources :menu_item_review_comments

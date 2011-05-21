@@ -5,7 +5,7 @@ class MenuItemReviewCommentsController < ApplicationController
     @menu_item_review_comments = MenuItemReviewComment.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.xml  { render :xml => @menu_item_review_comments }
     end
   end
@@ -16,7 +16,7 @@ class MenuItemReviewCommentsController < ApplicationController
     @menu_item_review_comment = MenuItemReviewComment.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.haml
+      format.html # _unused_show.html.haml
       format.xml  { render :xml => @menu_item_review_comment }
     end
   end

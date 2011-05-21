@@ -5,7 +5,7 @@ class RestaurantLabelAssociationsController < ApplicationController
     @restaurant_label_associations = RestaurantLabelAssociation.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.xml  { render :xml => @restaurant_label_associations }
     end
   end
@@ -16,7 +16,7 @@ class RestaurantLabelAssociationsController < ApplicationController
     @restaurant_label_association = RestaurantLabelAssociation.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.haml
+      format.html # _unused_show.html.haml
       format.xml  { render :xml => @restaurant_label_association }
     end
   end

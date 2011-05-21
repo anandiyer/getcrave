@@ -1,0 +1,796 @@
+
+
+// This import applies a global reset to any page that imports this stylesheet.
+@import "blueprint/reset";
+
+/*@import "link_icons";*/
+@import "compass/css3/inline-block";
+
+// To configure blueprint, edit the partials/base.sass file.
+@import "partials/base";
+
+// Import all the default blueprint modules so that we can access their mixins.
+@import "blueprint";
+
+// Combine the partials into a single screen stylesheet.
+@import "partials/page";
+@import "partials/form";
+@import "partials/two_col";
+
+@import "blueprint/grid";
+@import "compass/utilities/general/hacks";
+
+@import "compass/utilities/general/clearfix";
+/*@import "blueprint/typography";*/
+
+
+@import "compass/utilities/general/float";
+
+@import "compass/layout/grid-background";
+@import "compass/css3/box-shadow";
+
+
+
+$orange: #f2663a;
+$body_back_gray: #f4f4f4;
+$light_gray: #ececec;
+$gray: #a0a0a0;
+$blue: #2e70a4;
+
+$stars_position: 0 -635px;
+$stars_gray_position: 0 -905px;
+$flag_position: 0 -371px;
+$save_position: 0 -299px;
+$save_position_saved: 0 -335px;
+$photos_counter_position: 0 -596px;
+$add_photos_counter_position: 0 -614px;
+$yes_position: 0 -551px;
+$no_position: 0 -564px;
+$nav_nearby_position: 0 -18px;
+$nav_saved_position: 0 -60px;
+$nav_following_position: 0 -103px;
+$nav_profile_position: 0 -143px;
+$plus_position: 0 -581px;
+$birdy_position: 0 -552px;
+
+$small_font_size: 12px;
+
+
+  /*color: #464646;*/
+  /*color: #666766;*/
+  /*color: #2e70a7;*/
+  /*color: #464646;*/
+  /*color: #464646;*/
+  /*color: #2e70a7;*/
+
+
+@mixin sprites($position, $weight:17px, $height:17px) {
+    background-image: url("/images/sprites/icon-sprite.png");
+    background-repeat: no-repeat;
+    background-position: $position;
+    width: $weight;
+    height: $height;
+    float: left;
+    /*border: 1px solid red;*/
+}
+
+
+body.two-col.bp{
+    h1, h2, h3, h4{
+        color: #464646;
+    }
+    background-color: $body_back_gray;
+    font-size: 14px;
+    color: #464646;
+    text-align: left;
+
+    h1.current_title{
+       font-size: 24px;
+       font-weight: 200;
+    }
+    h1.current_title {
+          margin: 0;
+          padding-bottom:7px;
+    }
+
+    #header{
+        float: none;
+        clear: both;
+        display: block;
+
+        #navigation_wrap{
+          padding: 0 0 0 5px;
+          float: none;
+          clear: both;
+
+          img.left_nav_corner{
+            float:left;
+          }
+          img.right_nav_corner{
+            float:right;
+          }
+
+        }
+
+        #navigation{
+            background: url(/images/nav_orange_wrap.png) repeat-x 0 0;
+            padding: 12px 3px 10px 15px;
+            margin:0 11px 0 11px;
+            height:20px;
+
+            .fb_login{
+                width: 200px;
+                float: right;
+                color: white;
+                text-align: right;
+            }
+
+
+            ul{
+                margin:0px;
+                padding: 0;
+                 li{
+                    display: inline;
+                    padding: 0;
+                    margin: 0;
+                    @include inline-block;
+                    white-space: nowrap;
+
+                    padding:0 0 0 16px;
+                    color: white;
+                    a{
+                        color: white;
+                        text-decoration: none;
+                    }
+
+                }
+                li.nearby{
+                    @include sprites($nav_nearby_position);
+                     width: 65px;
+                }
+                li.saved{
+                    @include sprites($nav_saved_position);
+                     width: 57px;
+                }
+                li.following{
+                    @include sprites($nav_following_position);
+                     width:79px;
+                     padding-left:27px;
+                }li.profile{
+                    @include sprites($nav_profile_position);
+                    padding-left:25px;
+                    width: 52px;
+                }
+            }
+
+        }
+
+        #logo{
+            margin: 12px 0 2px 18px;
+        }
+
+        #navigation_wrap_search{
+            background:url(/images/gray_back.png) no-repeat -3px 0;
+            height: 48px;
+            position: relative;
+            margin: 0 0 0 8px;
+            img.fields{
+                padding: 5px 4px 0 11px;
+
+            }
+            input:not([class="search"]){
+                 position: absolute;
+                 color: #999999;
+                 border: none;
+                 top: 10px;
+                 font-size: 16px;
+            }
+            input.first_search_input{
+                left: 19px;
+                width: 365px;
+            }
+            input.second_search_input{
+                left: 438px;
+                width: 166px;
+
+            }
+
+            div#in{
+                position: absolute;
+                top:12px;
+                left:403px;
+            }
+        }
+    }
+
+    #content_wrap{
+        background:  url(/images/white_w_gray_borders.png) repeat-y 0 0;
+        @include container;
+        padding: 0 0 0 8px;
+        margin-left: 5px;
+
+        #sidebar{
+
+
+            #foodies_wraper_wrapper{
+                border-top: 3px solid $light_gray;
+                $sidebar-columns: floor(7);
+
+                @include column($sidebar-columns);
+                padding-right:18px;
+                margin-top: 20px;
+                h4{
+                    font-weight: bold;
+                    margin: 0;
+                    padding: 3px 0 10px 10px;
+                }
+
+            }
+            .foodies_wraper{
+                @include container;
+
+                padding: 3px 10px 0 10px;
+                div.image_foodie_1_col{
+                    $content-columns: ceil(1);
+                    @include column($content-columns, true);
+                    padding-right: 28px;
+                }
+                .text_foodie_2_col{
+                    $content-columns: ceil(3);
+                    @include column($content-columns, true);
+                    white-space: nowrap;
+
+                    padding: 2px 40px 0 0;
+                    a{
+                        font-weight:bold;
+                        text-decoration: none;
+                    }
+                    em{
+                        font-style:normal;
+                        color: $gray;
+                    }
+
+                }
+
+                .reviews_couner_3_col{
+                    $content-columns: ceil(2);
+                    @include column($content-columns, true);
+                    text-align: center;
+                    padding:3px 0 0 6px;
+                    h3{
+                        font-size:18px;
+                        font-weight: bold;
+                        margin:0;
+                        padding:0;
+                    }
+                }
+
+
+            }
+        }
+
+        #content{
+            padding:0 0 0 5px;
+            #current_content_block{
+                @include container;
+
+                #bread_crumbs{
+                    height: 10px;
+                    padding:13px 0 9px 2px;
+
+                    a{
+                        font-size: 12px;
+                    }
+                }
+
+                #comment_wrapper_wrapper{
+                    @include container;
+                    $content-columns: ceil(15);
+                    @include column($content-columns, true);
+                    padding-bottom: 9px;
+                    padding-right: 16px;
+                    border-bottom: 3px solid $light_gray;
+
+                    #comment_wrapper{
+                        @include container;
+                        float: none;
+                        clear: both;
+                        background-color:#f9f0c9;
+                        margin: 5px 0 0 0;
+                        padding: 8px 16px 0 10px;
+                        $content-columns: ceil(15);
+                        @include column($content-columns, true);
+
+                        h1{
+                            font-size:17px;
+                        }
+
+                        #content_title{
+                            color: #282828;
+                            padding:0 0 4px 0;
+                        }
+                        #input_comment{
+                            background-color:#fff;
+                            border-top:1px solid #ccc;
+                            border-left:1px solid #ccc;
+                            margin:7px 0 8px 0;
+                            padding:5px 5px 5px 8px;
+
+
+                            input{
+                                width: 100%;
+                                border: none;
+                            }
+
+                        }
+                    }
+                }
+                #current_info_wrapper.restaurant{
+                    position: relative;
+                    height: 163px;
+
+                    .phone_number{
+                        padding: 20px 0 0 0;
+                        @include container;
+                        $content-columns: ceil(15);
+                        @include column($content-columns, true);
+                        .col1_pn{
+                            $content-columns: ceil(3);
+                            @include column($content-columns, true);
+                        }
+                        .col2_pn{
+                            $content-columns: ceil(12);
+                            @include column($content-columns, false);
+                            text-align: right;
+                            padding-top: 21px;
+
+                        }
+                    }
+                    /*border-bottom: 3px solid $light_gray;*/
+
+
+                }
+                #current_info_wrapper{
+                    @include container;
+                    #img_column{
+                        $content-columns: ceil(3);
+                        // true means it's the last column in the row
+                        @include column($content-columns, true);
+                        padding: 6px 44px 0 2px;
+                        .photos_inline{
+                            @include inline-block;
+                            white-space: nowrap;
+                            padding: 0 50px 3px 16px;
+                            font-size:12px;
+                            @include sprites($photos_counter_position);
+                            a{
+                                text-decoration: none;
+                            }
+                        }
+                        .add_photos_inline{
+                            @extend .photos_inline;
+                            @include sprites($add_photos_counter_position);
+
+                        }
+                    }
+
+                    #text_column.restaurant{
+                        padding-left: 10px;
+                    }
+                    #text_column{
+                        $content-columns: ceil(10);
+                        // true means it's the last column in the row
+                        @include column($content-columns, true);
+                        padding: 7px 0 0 0;
+                        #rating{
+                            padding: 5px 0 0 0;
+                        }
+                        #desc_wrap_rest{
+                            #description{
+                                p{
+                                    padding:0;
+                                    margin: 0;
+                                }
+                            }
+                        }
+                        #desc_wrap{
+                           /*@include container;*/
+                           padding: 5px 0 5px 0;
+                           margin-top: 7px;
+                           border-top:1px solid $light_gray;
+                           width: 457px;
+                           font-size:12px;
+
+                           div{
+                                padding:0 0 5px 0;
+                           }
+                           #labels{
+                               a{
+                                text-decoration: none;
+                               }
+                           }
+                        }
+                    }
+
+                    #flag_icons{
+                        $content-columns: ceil(3);
+                        @include column($content-columns, true);
+                        padding: 10px 0 0 37px;
+                        div{
+                            padding-right:30px;
+                        }
+                    }
+                }
+            }
+
+            #reviews_wrapper.restaurant{
+                border-top: 3px solid $light_gray;
+                padding:17px 0 0 8px;
+
+                #update_place_restaurants{
+                    padding: 8px 0 0 0;
+                    .star_sm{
+                        width: 150px;
+                        @include container;
+                        margin: 0 0 10px 0;
+                    }
+
+                    .restaurant_menu_item_wrapper{
+                        @include container;
+                        height: 95px;
+                        border-top: 1px solid $light_gray;
+                        padding:10px 0 0 0;
+                        $content-columns: ceil(15);
+                        @include column($content-columns, true);
+                        position: relative;
+
+                        .review_counter_for_item{
+                            position: absolute;
+                            text-align: center;
+                            width:40px;
+                            height:30px;
+                            font-size: 12px;
+                            font-weight: normal;
+                            line-height: 16px;
+                            top: 71px;
+                            left: 560px;
+                            div{
+                                font-size: 15px;
+                                font-weight: bold;
+
+                            }
+                        }
+                        .img_column_mi_1_col{
+                            $content-columns: ceil(2);
+                            @include column($content-columns, true);
+                            padding:0 15px 0 0;
+                        }
+                        .desc_block_2_col{
+                            $content-columns: ceil(11);
+                            @include column($content-columns, true);
+                            padding:10px 21px 10px 10px;
+                            h1{
+                                color: $blue;
+                                padding:0 0 3px 0;
+                                margin:0;
+                                font-size: 18px;
+                            }
+                            a{
+                                text-decoration: none;
+                            }
+                        }
+                        .save_n_review_3_col{
+                            $content-columns: ceil(1);
+                            @include column($content-columns, true);
+                            padding: 0 0 0 10px;
+                        }
+                    }
+                }
+
+            }
+            #reviews_wrapper{
+                margin: 12px 0 0 0;
+                padding:8px;
+                $content-columns: ceil(15);
+                @include column($content-columns, true);
+                position: relative;
+                h3.review{
+                    font-size: 23px;
+                    margin-bottom:6px;
+                }
+
+                #select_box_hint{
+                    width: 140px;
+                    height:30px;
+                    position: absolute;
+                    z-index: 1000;
+                    cursor: pointer;
+                    top:43px;
+                    left: 69px;
+                    background-color: transparent;
+                }
+
+
+                #show_more_button{
+                    height: 25px;
+                    border: 1px solid #ccc;
+                    $content-columns: ceil(15);
+                    background: url("/images/show_more_back.png");
+                    text-align: center;
+                    padding: 5px 0 0 0;
+                    margin-top: 10px;
+                    cursor: pointer;
+                }
+                #update_place{
+                    /*border: 1px solid red;*/
+                }
+                #sorting{
+                    margin-bottom: 8px;
+                    width: 200px;
+                    @include clearfix;
+                    float: none;
+
+                    #before_sort_by{
+                        width: 50px;
+                        float: left;
+                        padding-top: 7px;
+                    }
+
+
+
+                    #sort_by{
+                        cursor: pointer;
+                        float:right;
+                        vertical-align: middle;
+                        background: url("/images/select_box.png") no-repeat 0 0;
+                        width: 140px;
+                        margin: 4px 0 0 0;
+                        height: 30px;
+                        background-color: #fff;
+                        input{
+                            width: 100px;
+                            border:none;
+                            background: transparent;
+                            padding: 6px 0 0 9px;
+                            color: black;
+                        }
+                        ul{
+                            -moz-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+                            -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+                            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+                            display: none;
+                            position: absolute;
+                            z-index: 101;
+                            margin:4px 0 0 0;
+                            padding:0;
+                            width: 140px;
+
+                            li{
+                                color:black;
+                                list-style-type: none;
+                                padding:5px 0 4px 10px;
+                                border-right: 1px solid $light_gray;
+                                border-left: 1px solid $light_gray;
+                                border-bottom: 1px solid $light_gray;
+                                background-color: #fff;
+
+                            }
+                            li:hover{
+                                background-color: $light_gray;
+                            }
+                        }
+                    }
+
+
+
+
+                }
+
+
+                #reviews_wrapper_bloc_wrapper{
+                    @include clearfix;
+                }
+                .reviews_wrapper_block:first-of-type{
+                    border-top: 1px solid $light_gray;
+                    /*margin-top: 15px;*/
+                }
+                .reviews_wrapper_block{
+                    @include container;
+                    $content-columns: ceil(15);
+                    @include column($content-columns, true);
+                    border-bottom: 1px solid $light_gray;
+                    padding: 10px 0 5px 0;
+
+
+
+                    .review_image_col{
+                        $content-columns: ceil(1);
+                        padding-right:28px;
+                        @include column($content-columns, true);
+
+                    }
+                    .review_desc_col_wrapper{
+                        @include column($content-columns, true);
+                        width: 539px;
+
+                        .before_start{
+                            line-height:24px;
+
+                        }
+
+                        #review_body_head{
+                            float: none;
+                            clear:both;
+                        }
+
+                        h3{
+                            font-size: 18px;
+                            margin-bottom:0px;
+                        }
+                        .star{
+                            margin:4px 0 5px 0;
+                            float: none;
+                        }
+
+                        .helpful_block{
+                            margin-top: 11px;
+
+                            .before_answer_block{
+                                float: left;
+                                font-size: 11px;
+                                padding-top: 3px;
+                            }
+                            span.yes_answer{
+                                @include inline-block;
+                                white-space: nowrap;
+                                padding: 0 10px 3px 16px;
+                                font-size:12px;
+
+                                @include sprites($yes_position);
+                                height: 15px;
+                                margin:2px 0 0 7px;
+                            }
+
+
+                            .found_helpfull{
+                                color: $gray;
+                                padding-left: 3px;
+                            }
+                            span.no_answer{
+                                @include inline-block;
+                                white-space: nowrap;
+                                padding: 0 10px 3px 16px;
+                                font-size:12px;
+
+                                @include sprites($no_position);
+                                height: 15px;
+                                margin:2px 0 0 7px;
+                            }
+                        }
+
+                        .data_review{
+                            width: 90px;
+                            text-align: right;
+                            float: right;
+                            white-space: nowrap;
+                            color: $gray;
+                            font-style:italic;
+                        }
+
+                        .before_star{
+                            @include container;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+.star_sm{
+    float: none !important;
+}
+
+#stars_wrap{
+   @include container;
+}
+
+.stars_1_0, .stars_1_5 {
+    @include sprites(0px -722px);
+    width:180px;
+}
+.stars_2_0, .stars_2_5 {
+    @include sprites(0px -701px);
+    width:180px;
+}
+.stars_3_0, .stars_3_5 {
+    @include sprites(0px -679px);
+    width:180px;
+}
+
+.stars_4_0, .stars_4_5 {
+    @include sprites(0px -657px);
+    width:180px;
+}
+
+.stars_5_0{
+    @include sprites(0px -635px);
+     width:180px;
+
+}
+
+
+.stars_2{
+    @include sprites(0 -701px);
+     width:180px;
+}
+.stars_3{
+    @include sprites(0 -679px);
+     width:180px;
+}
+
+.stars_5{
+    @include sprites(0 -635px);
+     width:180px;
+}
+.stars_4{
+    @include sprites(0 -657px);
+     width:180px;
+}
+.stars_1{
+    @include sprites(0 -723px);
+     width:180px;
+}
+.stars_, .stars_0, {
+    @include sprites(0 -745px);
+     width:180px;
+}
+
+
+
+.star_gray{
+    /*@include sprites($stars_gray_position);*/
+    height:27px;
+    width:150px;
+    /*float: none;*/
+}
+
+.flag_icon{
+    @include sprites($flag_position, 27px, 32px);
+
+}
+.save_icon.saved_item{
+    @include sprites($save_position_saved, 27px, 32px);
+
+}
+.save_icon.not_saved_item{
+    @include sprites($save_position, 27px, 32px);
+    cursor: pointer;
+}
+
+.h{
+    display: none;
+}
+.himportant{
+    display: none !important;
+}
+
+
+
+.plus, .birdy{
+    @include inline-block;
+    @include sprites($plus_position, 14px, 9px);
+    float: none;
+}
+
+.birdy{
+    @include sprites($birdy_position, 14px, 9px);
+     float: none;
+
+}
+
+.i{
+    font-style: italic;
+}

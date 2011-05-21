@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "menu_label_associations/show.html.haml" do
+describe "menu_label_associations/_unused_show.html.haml" do
   before(:each) do
     @menu_label_association = assign(:menu_label_association, stub_model(MenuLabelAssociation,
       :menu_item_id => 1,

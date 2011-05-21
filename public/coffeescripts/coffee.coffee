@@ -4,7 +4,7 @@ window.gmap = (lat, long, zoom = 14) ->
     latlng = new google.maps.LatLng(lat, long);
     myOptions = zoom: zoom, center: latlng, mapTypeId: google.maps.MapTypeId.ROADMAP, overviewMapControl: false, overviewMapControlOptions: false, panControl: false, scaleControl: false, zoomControl: false, keyboardShortcuts: false, mapTypeControl: false, streetViewControl: false;
     map = new google.maps.Map(document.getElementById("map"),myOptions)
-    marker = new google.maps.Marker({	position: new google.maps.LatLng(55.729999, 52.433219),	map: map })
+    marker = new google.maps.Marker({	position: new google.maps.LatLng(lat, long),	map: map })
 
 before_send = (obj) ->
     obj.fadeTo("slow", .5)
@@ -19,12 +19,73 @@ window.update_reviews = (id_of_menu_item, limits = $("#show_more_button").data("
     beforeSend: () -> before_send(obj),
     success: (html) -> after_send(obj, html)})
 
+
+
+window.g_notice = (type, text) ->
+    $.gritter.add({title:type, text:text});
+
+
+window.save_helpfull = () ->
+
+window.save_menu_item = (mid) ->
+
+    path = $("#flag_icons div.save_icon[id=mid_"+mid+"]")
+
+    $(path).removeClass("not_saved_item").addClass("saved_item")
+    g_notice("Notification", "Item saved!")
+
 window.add_review = (id_of_menu_item, msg) ->
     update_reviews(id_of_menu_item)
-    $.gritter.add({title:"Notification", text:msg});
+#    $.gritter.add({title:"Notification", text:msg});
+
+    $("#comment_wrapper").slideUp("slow",() ->
+        $(this).empty()
+        $("<h1>#{msg}<h1>").appendTo("#comment_wrapper");
+
+        couner_reviews = $("#text_column #rating span").text()
+        $("#text_column #rating span").html(parseInt(couner_reviews)+1)
+        $("#comment_wrapper").slideDown("normal")
+    )
 
 
 $(document).ready ->
+
+    $(document).ajaxError () ->
+
+        $.gritter.add({title:"Error", text: "Ajax error!", image: "/images/error_icon.png", sticky: => true});
+
+#    gmap in dish reviews
+    lat =  $("#current_info_wrapper").data("latitude")
+    long =  $("#current_info_wrapper").data("longitude")
+
+#    TODO: uncomment me on production
+    gmap(lat, long)
+
+
+    $(".yes_answer").live "click", (event) ->
+        if $(this).find("a").length > 0
+            event.preventDefault()
+            link = $(this).find("a")
+            link_text = $(link).text()
+
+            $(this).find("span").html(link_text)
+
+            found_helpfull_number = $(this).next()
+            increment = parseInt(found_helpfull_number.text().replace(/[(|)]/ig,""),10)+1
+            $(found_helpfull_number).text("("+increment+")")
+            form = $(this).find("form")
+            form.submit()
+
+
+    $(".not_saved_item.save_icon").click () ->
+        $(this).find("form").submit()
+        $(this).unbind('click');
+
+
+
+
+
+
 
 
     $("#select_box_hint").click () ->

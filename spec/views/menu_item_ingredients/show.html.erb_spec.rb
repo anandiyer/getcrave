@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "menu_item_ingredients/show.html.haml" do
+describe "menu_item_ingredients/_unused_show.html.haml" do
   before(:each) do
     @menu_item_ingredient = assign(:menu_item_ingredient, stub_model(MenuItemIngredient,
       :menu_item_id => 1,

@@ -1,0 +1,12 @@
+#header
+  #logo
+    =link_to(image_tag("logo.png"),"/")
+  #navigation_wrap= render :partial => "/navigation"
+
+  #navigation_wrap_search
+    %form{:action =>"#"}
+      =text_field(:first, :second, :class =>"first_search_input")
+      =text_field(:first, :second, :class =>"second_search_input")
+      =image_tag "fileds_search_inputs.png", :class => "fields"
+      =image_submit_tag("search_button.png", :class => "search")
+      #in in

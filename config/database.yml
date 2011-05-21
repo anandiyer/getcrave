@@ -11,12 +11,12 @@
 development:
   adapter: postgresql
   encoding: utf-8
-  database: yourdatabase
+  database: getcrave_dev
   template: template_postgis
 #  template: template1
   pool: 5
-  username: almazom
-  #password: P@ssw0rd
+  username: postgres
+  password: P@ssw0rd
 
 #  adapter: mysql2
 #  encoding: utf8
