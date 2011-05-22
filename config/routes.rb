@@ -59,6 +59,8 @@ Crave::Application.routes.draw do
     resources :user_saved_menu_items
   end
   
+  resources :search
+  
   match '/auth/:provider/callback', :to => 'sessions#create'  
   match '/signout' => 'sessions#destroy', :as => :signout
 

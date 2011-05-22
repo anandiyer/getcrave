@@ -1,8 +1,8 @@
 production:
   solr:
-    hostname: http://ec2-west.websolr.com
+    hostname: http://ec2-east2.websolr.com
     port: 8983
-    path: /solr/4bb1daa014f
+    path: /solr/e1e3dc72352
     log_level: WARNING
 
 development:

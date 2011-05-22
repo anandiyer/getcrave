@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     if is_iphone_request?
       redirect_to "/mobile/uid?uid=" + current_user.id.to_s
     else
-     redirect_to session[:return_to]
+      redirect_to session[:return_to]
     end
   end
 

@@ -3,16 +3,17 @@
 #content_wrap
   #content
     #current_content_block
-      #bread_crumbs
-        =link_to("← "+"back to results", "#")
+      / 
+        #bread_crumbs
+          =link_to("← "+"back to results", "#")
       #current_info_wrapper.restaurant{:data => {:latitude=> @restaurant.latitude, :longitude => @restaurant.longitude}}
         #img_column.himportant
           =image_tag "temp_image.png"
           #icons_img_wrapper
             %span.photos_inline
-              =link_to "75 photos","@@"
+              /=link_to "75 photos","@@"
             %span.add_photos_inline
-              =link_to "add a photo","@@"
+              /=link_to "add a photo","@@"
             #photos_icon &nbsp;
         #text_column.restaurant
           %h1.current_title= @restaurant.name
@@ -22,16 +23,13 @@
               %p= @restaurant.street_address
               %p= @restaurant.neighborhood
               %p= "#{@restaurant.city}, #{@restaurant.state} #{@restaurant.zip}"
+              /
+                .phone_number
+                  .col1_pn
+                    %p (415) 927 1849
+                    %p= link_to "www.siet.com"
 
-
-
-              .phone_number
-                .col1_pn
-                  %p (415) 927 1849
-                  %p= link_to "www.siet.com"
-
-                .col2_pn= image_tag "social.png"
-
+                  .col2_pn= image_tag "social.png"
 
     #reviews_wrapper.restaurant
       %h3.review
@@ -53,7 +51,7 @@
           - group_star = @menu_items.first().menu_item_avg_rating_count.avg_rating
         - else
           - group_star = 0
-        .star_sm{:class => "star_sm stars_"+group_star.to_s.gsub(/[.]/, '_')}. &nbsp;
+        .star_sm{:class => "star_sm stars_"+group_star.to_s.gsub(/[.]/, '_')} &nbsp;
 
         - @menu_items.each do |@menu_item|
           - if !@menu_item.menu_item_avg_rating_count.nil?
@@ -62,18 +60,18 @@
             - stars = 0
           - if stars.to_f != group_star.to_f
             - group_star = stars
-            .star_sm{:class => "star_sm stars_"+stars.to_s.gsub(/[.]/, '_')}. &nbsp;
+            .star_sm{:class => "star_sm stars_"+stars.to_s.gsub(/[.]/, '_')} &nbsp;
 
           = render :partial => "menu_item"
   #sidebar
     #map{:style => "width:297px; height:297px; border: 1px solid #ccc"}
       =image_tag "map_temp.png"
     #foodies_wraper_wrapper
-      %h4 Foodies of the week
+      %h4 Foodies
       -for @user in User.all.first(5)
         =render :partial => "foodies"
 
 
 #footer
-  %p footer
+  %p 
 
