@@ -45,7 +45,7 @@
                    dishStore.proxy.url = '/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
                    restaurants.proxy.url = '/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
                }
-               
+               console.log(dishStore.proxy.url);
                dishStore.load();
                restaurants.load();
            });
@@ -79,8 +79,6 @@
                                        title: 'restaurant'
                                    }
                                );
-                               var initialLocation = new google.maps.LatLng(responseObject.restaurant.latitude,responseObject.restaurant.longitude);
-                               Ext.getCmp('googleMap').update(initialLocation)
                                // woah baby, this is a nasty hack but the map refuses to behave unless you trigger resize after a delay AFTER the initial ajax returns
                                Ext.Ajax.request({
                                    url: (urlPrefix+'/restaurants/'+record.data.id+'.json'),
@@ -89,6 +87,10 @@
                                    },
                                    success: function(response) {
                                        google.maps.event.trigger(Ext.getCmp('googleMap').map, 'resize');
+                                       var initialLocation = new google.maps.LatLng(responseObject.restaurant.latitude,responseObject.restaurant.longitude);
+                                       Ext.getCmp('googleMap').update(initialLocation);
+                                       console.log('just tried');
+                                       //needs work becoming resuable
                                    }
                                });
                            }
@@ -190,11 +192,6 @@
                clearSectionOnDeactivate:true
            });
 
-
-           var onScroll = new function(something) {
-               console.log('scrolling');
-           }
-
            var infoPnl = new Ext.Panel({
                html: '',
                id: 'infoPnl'
@@ -208,6 +205,8 @@
                    id: 'googleMap',
                    xtype: 'map',
                    useCurrentLocation: false,
+                   height:100,
+                   width:100,
                    mapOptions : {
                        center : new google.maps.LatLng(37.774518,-122.420101),  //SF
                        //not really centering here, just putting it in top right corner
@@ -218,14 +217,14 @@
                      }
                    }
                ],
-               height:'100px',
-               flex:1
+               height:100,
+               width:100
            });
            var restInfoPnl = new Ext.Panel({
                html: '',
                id: 'restInfoPnl',
-               flex:2,
-               height:'100%'
+               height:'100%',
+               width:'100%'
            });
            var restPnl = new Ext.Panel({
                id: 'restPnl',
@@ -241,6 +240,17 @@
                scroll: 'vertical',
                id: 'reviewPnl'
            });
+
+           var sessionHandler = function(b,e) {
+               if(b.getText() == "Login") {
+                   window.open('http://getcrave.com/auth/facebook','auth');
+               }
+               if(b.getText() == "Logout") {
+                   localStorage.setItem("uid","");
+                   Ext.getCmp("loginButton").setVisible(true);
+                   Ext.getCmp("logoutButton").setVisible(false);
+               }
+           }
 
            var tapHandler = function(b,e) {
                if(b.getText() == "Dishes") {
@@ -271,7 +281,8 @@
            ]
        });
 
-       var listPnl = new Ext.Panel({
+       //intentionally not using var to make this global
+       listPnl = new Ext.Panel({
            id: 'listPnl',
            items: [dishList,placesList,searchPnl],
            layout: {
@@ -293,8 +304,7 @@
                            {text:'Restaurants', handler:tapHandler}
                        ]}
                    ]
-               },searchForm
-               /*,
+               },searchForm,
                {
                    id:'bottomPanel',
                    xtype: 'toolbar',
@@ -303,11 +313,11 @@
                    items:[
                        {xtype:'segmentedbutton',
                        items:[
-                           {text:'Nearby',pressed:true}
+                           {text:'Login',id:'loginButton',handler:sessionHandler},
+                           {text:'Logout',id:'logoutButton',handler:sessionHandler,visible:false}
                        ]}
                     ]
                }
-                       */
            ]
        });
 
@@ -342,10 +352,33 @@
                direction:'horizontal'
            });
 
+           justLoggedIn();
    }
 
 });
-</script>
 
+function justLoggedIn() {
+    console.log('I just logged in');
+    myUID = localStorage.getItem("uid");
+    joe = localStorage.getItem("something");
+    if(myUID!="") {
+        Ext.getCmp("loginButton").setVisible(false);
+        Ext.getCmp("logoutButton").setVisible(true);
+    } else {
+        Ext.getCmp("loginButton").setVisible(true);
+        Ext.getCmp("logoutButton").setVisible(false);
+    }
+    console.log(myUID);
+    // ?get uid from local storage here?
+    //have to reach docked bottom bar, change to sign out, display form links
+}
+</script>
+<!--
+add bottom bar with login through fb link
+if they click open new window to /auth/facebook
+create /mobile/uid?uid= which saves uid in localstorage
+close new window
+how do i refresh underlying screen with login info? call a function in parent page before window closes?
+-->
 </body>
 </html>

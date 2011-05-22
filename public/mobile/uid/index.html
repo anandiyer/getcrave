@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js session creation</title>
+<script type="text/javascript">
+var uid = window.location.search.toString().replace("?uid=","");
+localStorage.setItem("uid",uid);
+window.opener.justLoggedIn();
+window.close();
+</script>
+</head>
+<body>
+
+</body>
+</html>
