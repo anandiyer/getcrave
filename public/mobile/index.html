@@ -54,47 +54,7 @@
            var placesList = new Ext.List({
                onItemDisclosure: {
                    handler: function(record, btn, index) {
-                       singleRestaurantStore.proxy.url = (urlPrefix+'/restaurants/'+record.data.id+'/menu_items.json');
-
-                       singleRestaurantStore.load(function(){
-                           Ext.getCmp('mainPnl').setActiveItem(2);
-                       });
-
-                       Ext.Ajax.request({
-                           url: (urlPrefix+'/restaurants/'+record.data.id+'.json'),
-                           reader: {
-                                type: 'json'
-                           },
-                           success: function(response) {
-                                //populate top panel with restaurant data, map
-                                var responseObject = eval('(' + response.responseText + ')');
-                               console.log(responseObject);
-                                htmlString = '<div class="restaurantInfo">'+responseObject.restaurant.name+'</div>';
-                                Ext.getCmp('restInfoPnl').update(htmlString);
-
-                               var placeholder = new google.maps.Marker(
-                                   {
-                                       position: new google.maps.LatLng(responseObject.restaurant.latitude,responseObject.restaurant.longitude),
-                                       map: Ext.getCmp('googleMap').map,
-                                       title: 'restaurant'
-                                   }
-                               );
-                               // woah baby, this is a nasty hack but the map refuses to behave unless you trigger resize after a delay AFTER the initial ajax returns
-                               Ext.Ajax.request({
-                                   url: (urlPrefix+'/restaurants/'+record.data.id+'.json'),
-                                   reader: {
-                                        type: 'json'
-                                   },
-                                   success: function(response) {
-                                       google.maps.event.trigger(Ext.getCmp('googleMap').map, 'resize');
-                                       var initialLocation = new google.maps.LatLng(responseObject.restaurant.latitude,responseObject.restaurant.longitude);
-                                       Ext.getCmp('googleMap').update(initialLocation);
-                                       console.log('just tried');
-                                       //needs work becoming resuable
-                                   }
-                               });
-                           }
-                       });
+                       restaurantDisplay(record, btn, index);
                    }
                },
                itemTpl: dishTemplate,
@@ -330,7 +290,6 @@
 function justLoggedIn() {
     console.log('I just logged in');
     myUID = localStorage.getItem("uid");
-    joe = localStorage.getItem("something");
     if(myUID!="") {
         Ext.getCmp("loginButton").setVisible(false);
         Ext.getCmp("logoutButton").setVisible(true);

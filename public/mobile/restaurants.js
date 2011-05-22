@@ -29,9 +29,111 @@ var singleRestaurantStore = new Ext.data.Store({
     }
 });
 
+function restaurantDisplay(record, btn, index) {
+    singleRestaurantStore.proxy.url = (urlPrefix+'/restaurants/'+record.data.id+'/menu_items.json');
+
+    singleRestaurantStore.load(function(){
+        Ext.getCmp('mainPnl').setActiveItem(2);
+    });
+
+    Ext.Ajax.request({
+        url: (urlPrefix+'/restaurants/'+record.data.id+'.json'),
+        reader: {
+             type: 'json'
+        },
+        success: function(response) {
+             //populate top panel with restaurant data, map
+             var responseObject = eval('(' + response.responseText + ')');
+            console.log(responseObject);
+             htmlString = '<div class="restaurantInfo">'+responseObject.restaurant.name+'</div>';
+             Ext.getCmp('restInfoPnl').update(htmlString);
+
+            var placeholder = new google.maps.Marker(
+                {
+                    position: new google.maps.LatLng(responseObject.restaurant.latitude,responseObject.restaurant.longitude),
+                    map: Ext.getCmp('googleMap').map,
+                    title: 'restaurant'
+                }
+            );
+            // woah baby, this is a nasty hack but the map refuses to behave unless you trigger resize after a delay AFTER the initial ajax returns
+            Ext.Ajax.request({
+                url: (urlPrefix+'/restaurants/'+record.data.id+'.json'),
+                reader: {
+                     type: 'json'
+                },
+                success: function(response) {
+                    google.maps.event.trigger(Ext.getCmp('googleMap').map, 'resize');
+                    var initialLocation = new google.maps.LatLng(responseObject.restaurant.latitude,responseObject.restaurant.longitude);
+                    Ext.getCmp('googleMap').update(initialLocation);
+                    console.log('just tried');
+                    //needs work becoming resuable
+                }
+            });
+        }
+    });
+}
+
 function starDisplay(rating) {
     return '<img src="../images/ratings/rating-dish-'+parseInt(rating)+'.png">';
 }
+
+var reviewForm = new Ext.form.FormPanel({
+    scroll: 'vertical',
+    items: [
+       {xtype: 'fieldset', title: 'Submit Review', items: [
+            {
+            xtype: 'selectfield',
+            name: 'menu_item_rating[rating]',
+            label:'Rating',
+            options: [
+                    {text: '5', value: 5},
+                    {text: '4', value: 4},
+                    {text: '3', value: 3},
+                    {text: '2', value: 2},
+                    {text: '1', value: 1}
+                ]
+            },
+            {
+                xtype: 'textfield',
+                label:'Review',
+                name: 'menu_item_rating[review]',
+                id: 'review'
+		    },
+           {
+               xtype: 'textfield',
+               name: 'menu_item_rating[menu_item_id]',
+               id: 'menuId',
+               hidden:true
+           },
+           {
+               xtype: 'textfield',
+               name: 'menu_item_rating[user_id]',
+               id: 'userId',
+               hidden:true
+           },
+           {
+               xtype:'button',
+               text: 'Submit',
+               handler: function() {
+                   reviewForm.submit({
+                       url: '/menu_item_ratings',
+                       method: 'post',
+                       submitDisabled: true,
+                       waitMsg: 'Saving Data...Please wait.',
+                       success: function (objForm,httpRequest) {
+                           var mbox = new Ext.MessageBox({});
+                           mbox.alert("Record Saved");
+                       },
+                       failure: function() {
+                           console.log('submissionFailed');
+                       }
+                   })
+               }
+           }
+        ]}
+    ]
+});
+
 function dishDisplay(response) {
     var responseObject = eval('(' + response.responseText + ')');
     htmlString = '<div class="dishinfo"><b>'+responseObject.menu_item.name+'</b><br/>';
@@ -67,6 +169,13 @@ function dishDisplay(response) {
     }
     //Ext.getCmp('detailPnl').add(carouselPnl);
     Ext.getCmp('infoPnl').update(htmlString);
+    myUID = localStorage.getItem("uid");
+    if(myUID!="") {
+        Ext.getCmp('userId').setValue(myUID);
+        Ext.getCmp('menuId').setValue(responseObject.menu_item.id);
+        Ext.getCmp('detailPnl').add(reviewForm);
+        Ext.getCmp('detailPnl').doLayout();
+    }
 }
 
 var aRestaurantList = new Ext.List({

@@ -11,41 +11,23 @@ var dishSearchStore = new Ext.data.Store({
 });
 
 var restaurantSearchStore = new Ext.data.Store({
-   model: 'Restaurants',
+    model: 'Restaurants',
     id: 'restaurants',
 
-   proxy: {
-       type:'ajax',
-       url:'',
-       reader: {
+    proxy: {
+        type:'ajax',
+        url:'',
+        reader: {
            type:'json',
            record:'restaurant'
-       }
-   }
+        }
+    }
 });
 
 var restaurantSearchList = new Ext.List({
     onItemDisclosure: {
-        //todo: abstrack drill down handlers so they are reusable
         handler: function(record, btn, index) {
-            singleRestaurantStore.proxy.url = (urlPrefix+'/restaurants/'+record.data.id+'/menu_items.json');
-
-            singleRestaurantStore.load(function(){
-                Ext.getCmp('mainPnl').setActiveItem(detailPnl);
-            });
-
-            Ext.Ajax.request({
-                url: (urlPrefix+'/restaurants/'+record.data.id+'.json'),
-                reader: {
-                     type: 'json'
-                },
-                success: function(response) {
-                     //populate top panel with restaurant data, map
-                     var responseObject = eval('(' + response.responseText + ')');
-                     htmlString = '<div class="restaurantInfo">'+responseObject.restaurant.name+'</div>';
-                     Ext.getCmp('restPnl').update(htmlString);
-                }
-            });
+            restaurantDisplay(record, btn, index);
         }
     },
     itemTpl: dishTemplate,
