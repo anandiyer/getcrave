@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Crave</title>
+  <title>crave</title>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag "jquery-1.6.min.js","rails" %>
   <%= csrf_meta_tag %>
 </head>
 
@@ -21,10 +21,6 @@
 <%= yield %>
 
 <br />
-
-<a href="/restaurants">Restaurants</a> |
-<a href="/menu_items">Menu</a> |
-<a href="/users">Users</a>
 
 </body>
 </html>

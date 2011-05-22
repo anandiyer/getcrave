@@ -1,4 +1,4 @@
-Crave::Application.routes.draw do  
+Crave::Application.routes.draw do 
   resources :user_saved_menu_items
 
   resources :menu_item_review_comments
@@ -31,6 +31,9 @@ Crave::Application.routes.draw do
         get 'avg_rating'
       end 
     end
+    member do
+      get 'show_reviews'
+    end
     collection do
       get 'search', 'location'
     end
@@ -55,6 +58,8 @@ Crave::Application.routes.draw do
     resources :menu_item_ratings
     resources :user_saved_menu_items
   end
+  
+  resources :search
   
   match '/auth/:provider/callback', :to => 'sessions#create'  
   match '/signout' => 'sessions#destroy', :as => :signout

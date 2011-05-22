@@ -12,7 +12,7 @@ describe MenuItemsController do
     end
 
     it "recognizes and generates #show" do
-      { :get => "/menu_items/1" }.should route_to(:controller => "menu_items", :action => "show", :id => "1")
+      { :get => "/menu_items/1" }.should route_to(:controller => "menu_items", :action => "index_new", :id => "1")
     end
 
     it "recognizes and generates #edit" do

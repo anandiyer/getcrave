@@ -5,7 +5,7 @@ class MenuItemIngredientsController < ApplicationController
     @menu_item_ingredients = MenuItemIngredient.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.xml  { render :xml => @menu_item_ingredients }
     end
   end
@@ -16,7 +16,7 @@ class MenuItemIngredientsController < ApplicationController
     @menu_item_ingredient = MenuItemIngredient.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # _unused_show.html.haml
       format.xml  { render :xml => @menu_item_ingredient }
     end
   end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "menu_labels/show.html.erb" do
+describe "menu_labels/_unused_show.html.haml" do
   before(:each) do
     @menu_label = assign(:menu_label, stub_model(MenuLabel,
       :menu_label => "Menu Label"

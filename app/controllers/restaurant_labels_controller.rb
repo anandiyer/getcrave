@@ -5,7 +5,7 @@ class RestaurantLabelsController < ApplicationController
     @restaurant_labels = RestaurantLabel.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.xml  { render :xml => @restaurant_labels }
     end
   end
@@ -16,7 +16,7 @@ class RestaurantLabelsController < ApplicationController
     @restaurant_label = RestaurantLabel.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # _unused_show.html.haml
       format.xml  { render :xml => @restaurant_label }
     end
   end

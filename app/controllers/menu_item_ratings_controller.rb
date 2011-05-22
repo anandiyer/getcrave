@@ -7,13 +7,14 @@ class MenuItemRatingsController < ApplicationController
     
     average = @menu_item.menu_item_ratings.average(:rating)
     count = @menu_item.menu_item_ratings.count
-    
     @response = { :average => average, :count => count}
         
     respond_to do |format|
       format.json { render :json => @response.to_json }
     end 
   end
+
+
   
   # GET /menu_item_ratings
   # GET /menu_item_ratings.xml
@@ -27,7 +28,7 @@ class MenuItemRatingsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.xml  { render :xml => @menu_item_ratings }
       format.json { render :json => @menu_item_ratings }
     end
@@ -41,7 +42,7 @@ class MenuItemRatingsController < ApplicationController
     @menu_item_rating = MenuItemRating.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # _unused_show.html.haml
       format.xml  { render :xml => @menu_item_rating }
       format.json { render :json => @menu_item_rating }
     end
@@ -52,7 +53,7 @@ class MenuItemRatingsController < ApplicationController
   def new
     @menu_item_rating = MenuItemRating.new
     @menu_item_rating.menu_item_id = params[:menu_item_id]
-    # @menu_item_rating.user_id = current_user.id if current_user
+    @menu_item_rating.user_id = current_user.id if current_user
 
     respond_to do |format|
       # FIXME
@@ -70,19 +71,38 @@ class MenuItemRatingsController < ApplicationController
   # POST /menu_item_ratings
   # POST /menu_item_ratings.xml
   def create
+
     @menu_item_rating = MenuItemRating.new(params[:menu_item_rating])
 
-    respond_to do |format|
+    if current_user
+      @menu_item_rating.user_id = current_user.id
+    else
+#      TODO: destroy this line after restore facebook auth
+      unknown_user = User.find_or_create_by_user_name("Unknown user")
+      @menu_item_rating.user_id = unknown_user.id
+    end
+
+    respond_to { |format|
       if @menu_item_rating.save
         format.html { redirect_to(@menu_item_rating, :notice => 'Menu item rating was successfully created.') }
-        format.xml  { render :xml => @menu_item_rating, :status => :created, :location => @menu_item_rating }
-        format.json  { render :json => @menu_item_rating, :status => :created, :location => @menu_item_rating }
+        format.xml { render :xml => @menu_item_rating, :status => :created, :location => @menu_item_rating }
+        format.json { render :json => @menu_item_rating, :status => :created, :location => @menu_item_rating }
+        format.js {
+#          TODO: change temp number to real
+#          if !params[:menu_item_rating][:rating].empty?
+#            message = "You rated this dish with <b>"+params[:menu_item_rating][:rating]+"</b> stars!"
+#          else
+#            message = "Your review was successfully added"
+#          end
+          message = "Thanks for your review, "+@current_user.user_name+"!"
+          render :js=> "window.add_review(#{params[:menu_item_rating][:menu_item_id]},'#{message}')"
+          @current_user
+        }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @menu_item_rating.errors, :status => :unprocessable_entity }
-        format.json  { render :json => @menu_item_rating.errors, :status => :unprocessable_entity }
-      end
-    end
+        format.xml { render :xml => @menu_item_rating.errors, :status => :unprocessable_entity }
+        format.json { render :json => @menu_item_rating.errors, :status => :unprocessable_entity }
+      end }
   end
 
   # PUT /menu_item_ratings/1

@@ -5,7 +5,7 @@ class MenuItemPricesController < ApplicationController
     @menu_item_prices = MenuItemPrice.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.xml  { render :xml => @menu_item_prices }
     end
   end
@@ -16,7 +16,7 @@ class MenuItemPricesController < ApplicationController
     @menu_item_price = MenuItemPrice.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # _unused_show.html.haml
       format.xml  { render :xml => @menu_item_price }
     end
   end

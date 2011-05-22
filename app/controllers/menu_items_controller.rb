@@ -1,5 +1,6 @@
 class MenuItemsController < ApplicationController
   before_filter :get_restaurant
+  layout "general"
 
   def location
     @lat = params[:lat].to_f
@@ -66,15 +67,25 @@ class MenuItemsController < ApplicationController
   # GET /menu_items/1
   # GET /menu_items/1.xml
   def show
+
+    @foodies_for_current_dish = User.find(:all, 
+      :order => 'user_ratings_count DESC', 
+      :limit => 5)
+    
     #FIXME - need to get all the menu item attributes like ratings, photos etc.
     @menu_item = MenuItem.find(params[:id],
       :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings])
     
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # _unused_show.html.haml
       format.xml  { render :xml => @menu_item.to_xml( :include => [ :restaurant, :menu_item_avg_rating_count, :menu_item_ratings ] ) }
       format.json { render :json => @menu_item.to_json( :include => [ :restaurant, :menu_item_avg_rating_count, :menu_item_ratings ] ) }
     end
+  end
+
+
+  def show_reviews
+    render :partial => "review"
   end
 
   # GET /menu_items/new
@@ -144,9 +155,10 @@ class MenuItemsController < ApplicationController
   
   # Search
   def search
-      @search  = MenuItem.search() do
-        fulltext(params[:q])
-      end
+
+        @search  = MenuItem.search() do
+          fulltext(params[:q])
+        end
       
       @menu_items = @search.results
       

@@ -1,0 +1,62 @@
+!!!
+%html
+  %head
+    %title crave
+    = javascript_include_tag "jquery-1.6.min.js", "rails"
+    = javascript_include_tag  "plugins/jquery.raty.min.js", "selectivizr-min.js", "http://maps.google.com/maps/api/js?sensor=false", "coffee"
+    = include_gritter
+    = gflash
+
+    = stylesheet_link_tag "screen", "style"
+    /[if IE]
+      = stylesheet_link_tag "ie", "ie_style"
+    = csrf_meta_tag
+  %body.two-col.bp
+    #page
+      #container
+
+
+        =yield
+        -#= add_gritter("This is a notification just for you!")
+        -#= js add_gritter("This is a notification just for you!")
+        :javascript
+
+          //#TODO place to refactor - move to external js file
+
+
+
+
+
+          starts_update();
+
+          function starts_update(){
+            $('.star_gray').each(function(){
+              var data_rating = $(this).data("rating");
+              $(this).raty({
+                start: data_rating,
+                path: "/images/icons",
+                width: "180px",
+                //#half: true,
+                click: function(score, evt) {
+                  var data_rating = $(this).data("rating");
+                  var data_model = $(this).data("model");
+                  var id =  this.attr('id');
+                  var score =  score;
+                  $("form.new_menu_item_rating input#menu_item_rating_rating").val(score);
+                  //#$(this).parents("form").submit()
+
+
+                  //$.gritter.add({title:'Notification',text:'Rating: ID='+id+"<br /> model = "+ data_model+ " <br/>score :"+ score});
+                }
+              })
+            })
+          }
+
+
+
+
+
+
+
+
+
