@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110518041832) do
+ActiveRecord::Schema.define(:version => 20110522004757) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(:version => 20110518041832) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "user_profile_pic_url"
+    t.integer  "user_ratings_count"
   end
 
 end

@@ -68,11 +68,11 @@ class MenuItemsController < ApplicationController
   # GET /menu_items/1.xml
   def show
 
+    @foodies_for_current_dish = User.find(:all, 
+      :order => 'user_ratings_count DESC', 
+      :limit => 5)
+    
     #FIXME - need to get all the menu item attributes like ratings, photos etc.
-#   TODO: for ANAND @foodies_for_current_dish
-
-    @foodies_for_current_dish = User.all.first(5)
-
     @menu_item = MenuItem.find(params[:id],
       :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings])
     

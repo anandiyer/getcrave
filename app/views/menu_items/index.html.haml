@@ -68,9 +68,8 @@
       =image_tag "map_temp.png"
     #foodies_wraper_wrapper
       %h4 Foodies
-      -for @user in User.all.first(5)
+      -for @user in User.find(:all, :order => 'user_ratings_count DESC', :limit => 5)
         =render :partial => "foodies"
-
 
 #footer
   %p 
