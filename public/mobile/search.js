@@ -28,7 +28,6 @@ var restaurantSearchList = new Ext.List({
     onItemDisclosure: {
         //todo: abstrack drill down handlers so they are reusable
         handler: function(record, btn, index) {
-            result = helloThere();
             singleRestaurantStore.proxy.url = (urlPrefix+'/restaurants/'+record.data.id+'/menu_items.json');
 
             singleRestaurantStore.load(function(){
@@ -65,16 +64,10 @@ var dishSearchList = new Ext.List({
                     type: 'json'
                },
                success: function(response) {
-                   var responseObject = eval('(' + response.responseText + ')');
-                   htmlString = '<div class="dishinfo"><b>'+responseObject.menu_item.name+'</b><br/>';
-                   htmlString += '$ '+responseObject.menu_item.price+'<br>';
-                   htmlString += '<br><br>'+responseObject.menu_item.description+'<br>';
-                   htmlString += "</div>";
-                   Ext.getCmp('detailPnl').add(infoPnl);
-                   Ext.getCmp('infoPnl').update(htmlString);
+                   dishDisplay(response);
                }
            });
-           Ext.getCmp('mainPnl').setActiveItem(detailPnl);
+           Ext.getCmp('mainPnl').setActiveItem(1);
        }
     },
     itemTpl: dishTemplate,
@@ -86,11 +79,11 @@ var dishSearchList = new Ext.List({
 });
 
 var searchPnl = new Ext.Panel({
-    items: [restaurantSearchList,dishSearchList],
+    items: [dishSearchList,restaurantSearchList],
+    layout:'card',
     id: 'searchPnl',
     width:'100%',
-    height:'100%'
-
+    height:'288px'
 });
 
 var searchForm = new Ext.form.FormPanel({
@@ -105,13 +98,22 @@ var searchForm = new Ext.form.FormPanel({
             placeHolder: 'Search for dish, cuisine or diet...',
             listeners: {
                 change: function() {
-                    //make 2 ajax requests
                     searchValue = Ext.getCmp("searchBox").getValue();
-                    restaurantSearchStore.proxy.url = urlPrefix+'/restaurants/search.json?q='+searchValue;
-                    restaurantSearchStore.load();
-                    dishSearchStore.proxy.url = urlPrefix+'/menu_items/search.json?q='+searchValue;
-                    dishSearchStore.load();
-                    Ext.getCmp('listPnl').setActiveItem(searchPnl);
+                    //get active button, do appropriate search, set card in searchPnl
+                    if(Ext.getCmp('restaurantsButton').pressed) {
+                        restaurantSearchStore.proxy.url = urlPrefix+'/restaurants/search.json?q='+searchValue;
+                        restaurantSearchStore.load();
+                        console.log(restaurantSearchStore.proxy.url);
+                        Ext.getCmp('listPnl').setActiveItem(searchPnl);
+                        Ext.getCmp('searchPnl').setActiveItem(restaurantSearchList);
+                    }
+                    if(Ext.getCmp('dishesButton').pressed) {
+                        dishSearchStore.proxy.url = urlPrefix+'/menu_items/search.json?q='+searchValue;
+                        dishSearchStore.load();
+                        console.log(dishSearchStore.proxy.url);
+                        Ext.getCmp('listPnl').setActiveItem(searchPnl);
+                        Ext.getCmp('searchPnl').setActiveItem(dishSearchList);                        
+                    }
                 }
             }
         }
