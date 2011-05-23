@@ -8,8 +8,8 @@
 }
 .dishinfo {padding:12px;}
 .picanddata .pic {float:left;padding:12px}
-.picanddata .data {float:left;}
-.reviewtext {clear:both;float:none;padding:12px}
+.picanddata .data {float:left;padding:12px}
+.reviewtext {clear:both;float:none;}
 .restaurantInfo {width: 100%;
 height: 100px;
 background-color: #f9ecc0;
