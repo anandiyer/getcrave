@@ -41,6 +41,14 @@ window.add_review = (id_of_menu_item, msg) ->
     $("#comment_wrapper").slideUp("slow",() ->
         $(this).empty()
         $("<h1>#{msg}<h1>").appendTo("#comment_wrapper");
+<<<<<<< HEAD
+=======
+
+        couner_reviews = $("#text_column #rating span").text()
+        $("#text_column #rating span").html(parseInt(couner_reviews)+1)
+        $("#comment_wrapper").slideDown("normal")
+    )
+>>>>>>> 4250b2f0c9aa187ae210893a947cd03fda7ab6d2
 
         couner_reviews = $("#text_column #rating span").text()
         $("#text_column #rating span").html(parseInt(couner_reviews)+1)
@@ -79,6 +87,16 @@ $(document).ready ->
     $(".not_saved_item.save_icon").click () ->
         $(this).find("form").submit()
         $(this).unbind('click');
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+>>>>>>> 4250b2f0c9aa187ae210893a947cd03fda7ab6d2
 
     $("#select_box_hint").click () ->
         $("#sort_by").find("ul").slideToggle("slow")

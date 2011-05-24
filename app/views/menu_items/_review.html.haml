@@ -59,6 +59,13 @@
                   = f.hidden_field :user_id, :value => current_user.id if current_user
             .found_helpfull
               =" (" + @mi_rating.menu_item_rating_helpfuls.count.to_s+")"
+<<<<<<< HEAD
 =link_to("#limit="+(@show_more_step*2).to_s) do
   #show_more_button{:data =>{:step => @show_more_step, :next => @show_more_step*2, :itemid => params[:id]}}
     Show more
+=======
+/
+  =link_to("#limit="+(@show_more_step*2).to_s) do
+    #show_more_button{:data =>{:step => @show_more_step, :next => @show_more_step*2, :itemid => params[:id]}}
+      Show more
+>>>>>>> 4250b2f0c9aa187ae210893a947cd03fda7ab6d2

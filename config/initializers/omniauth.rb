@@ -5,5 +5,6 @@ APP_SECRET = CONFIG['app_secret']
 # OmniAuth.config.full_host = "http://localhost"
 
 Rails.application.config.middleware.use OmniAuth::Builder do
-    provider :facebook, APP_ID, APP_SECRET
+  # This cert location is only for Heroku
+  provider :facebook, APP_ID, APP_SECRET, {:client_options => {:ssl => {:ca_file => "/usr/lib/ssl/certs/ca-certificates.crt"}}}
 end

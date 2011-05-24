@@ -7,6 +7,7 @@
 	    <th>Name</th>
 	    <th>Description</th>
 		<th>Restaurant</th>
+		<th>Distance</th>
 	    <th></th>
 		<th></th>
 	  </tr>
@@ -15,7 +16,8 @@
 	  <tr>
 	    <td><%= menu_item.name %></td>
 	    <td><%= menu_item.description %></td>
-		<td><%= menu_item.restaurant_id %></td>		
+		<td><%= menu_item.restaurant_id %></td>	
+		<td><%= menu_item.distance %></td>	
 	    <td><%= link_to 'Show', menu_item %></td>
 	    <td><%= link_to 'Rate', new_menu_item_menu_item_rating_path(menu_item) %></td>
 	  </tr>

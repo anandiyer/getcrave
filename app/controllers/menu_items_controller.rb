@@ -1,3 +1,15 @@
+# Monkey patching to include the 'distance' attribute in menu_items
+module Geokit
+  module Mappable
+    def to_lat_lng
+      return self if instance_of?(Geokit::LatLng) || instance_of?(Geokit::GeoLoc)
+      return LatLng.new(self.restaurant.send(self.restaurant.class.lat_column_name),
+        self.restaurant.send(self.restaurant.class.lng_column_name)) if self.class.respond_to?(:acts_as_mappable)
+      nil
+    end
+  end 
+end
+
 class MenuItemsController < ApplicationController
   before_filter :get_restaurant
   layout "general"
@@ -15,22 +27,23 @@ class MenuItemsController < ApplicationController
     # and order by rating
     
     #FIXME - assuming within 3 mile radius by default
-    #FIXME - also distance virtual column/field is currently being dropped because
-    # of a GeoKit problem
     #FIXME - order by rating based on QS
-    
+    @origin = [@lat, @long]
     @menu_items = MenuItem.find(:all, 
-         :origin => [@lat, @long], 
+         :origin => @origin,
          :conditions => "distance < 3",
          :joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id",
-         :order => "distance ASC, (menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
+         :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
          # :include => :menu_item_avg_rating_count, 
          :limit => @limit)
+
+    # We have to add this to get the 'distance' field
+    @menu_items.sort_by_distance_from(@origin)
     
       respond_to do |format|
         format.html # location.html.erb
-        format.xml  { render :xml => @menu_items.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count])}
-        format.json  { render :json => @menu_items.to_json(:include => [:restaurant, :menu_item_avg_rating_count]) }
+        format.xml  { render :xml => @menu_items.to_xml(:methods => :distance, :include => [:restaurant, :menu_item_avg_rating_count])}
+        format.json  { render :json => @menu_items.to_json(:methods => :distance, :include => [:restaurant, :menu_item_avg_rating_count]) }
       end
   end 
 
@@ -68,11 +81,11 @@ class MenuItemsController < ApplicationController
   # GET /menu_items/1.xml
   def show
 
+    @foodies_for_current_dish = User.find(:all, 
+      :order => 'user_ratings_count DESC', 
+      :limit => 5)
+    
     #FIXME - need to get all the menu item attributes like ratings, photos etc.
-#   TODO: for ANAND @foodies_for_current_dish
-
-    @foodies_for_current_dish = User.all.first(5)
-
     @menu_item = MenuItem.find(params[:id],
       :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings])
     
@@ -155,16 +168,28 @@ class MenuItemsController < ApplicationController
   
   # Search
   def search
-      @search  = MenuItem.search() do
+    if params[:lat] && !params[:lat].empty? && params[:long] && !params[:long].empty?
+      @lat = params[:lat].to_f
+      @long = params[:long].to_f
+
+      @search = MenuItem.search() do
+        fulltext(params[:q])
+        # 6 and lower is the only precision that seems to work
+        with(:coordinates).near(@lat, @long, :precision => 5)
+        # , :boost => 2, :precision => 6)
+      end
+    else
+      @search = MenuItem.search() do
         fulltext(params[:q])
       end
-      
+    end
+
       @menu_items = @search.results
       
       respond_to do |format|
         format.html # search.html.erb
-        format.xml  { render :xml => @menu_items }
-        format.json { render :json => @menu_items }
+        format.xml  { render :xml => @menu_items.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count])}
+        format.json  { render :json => @menu_items.to_json(:include => [:restaurant, :menu_item_avg_rating_count]) }
       end
   end
   

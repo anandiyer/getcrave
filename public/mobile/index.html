@@ -45,7 +45,7 @@
                    dishStore.proxy.url = '/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
                    restaurants.proxy.url = '/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
                }
-               
+               console.log(dishStore.proxy.url);
                dishStore.load();
                restaurants.load();
            });
@@ -54,45 +54,7 @@
            var placesList = new Ext.List({
                onItemDisclosure: {
                    handler: function(record, btn, index) {
-                       singleRestaurantStore.proxy.url = (urlPrefix+'/restaurants/'+record.data.id+'/menu_items.json');
-
-                       singleRestaurantStore.load(function(){
-                           Ext.getCmp('mainPnl').setActiveItem(2);
-                       });
-
-                       Ext.Ajax.request({
-                           url: (urlPrefix+'/restaurants/'+record.data.id+'.json'),
-                           reader: {
-                                type: 'json'
-                           },
-                           success: function(response) {
-                                //populate top panel with restaurant data, map
-                                var responseObject = eval('(' + response.responseText + ')');
-                               console.log(responseObject);
-                                htmlString = '<div class="restaurantInfo">'+responseObject.restaurant.name+'</div>';
-                                Ext.getCmp('restInfoPnl').update(htmlString);
-
-                               var placeholder = new google.maps.Marker(
-                                   {
-                                       position: new google.maps.LatLng(responseObject.restaurant.latitude,responseObject.restaurant.longitude),
-                                       map: Ext.getCmp('googleMap').map,
-                                       title: 'restaurant'
-                                   }
-                               );
-                               var initialLocation = new google.maps.LatLng(responseObject.restaurant.latitude,responseObject.restaurant.longitude);
-                               Ext.getCmp('googleMap').update(initialLocation)
-                               // woah baby, this is a nasty hack but the map refuses to behave unless you trigger resize after a delay AFTER the initial ajax returns
-                               Ext.Ajax.request({
-                                   url: (urlPrefix+'/restaurants/'+record.data.id+'.json'),
-                                   reader: {
-                                        type: 'json'
-                                   },
-                                   success: function(response) {
-                                       google.maps.event.trigger(Ext.getCmp('googleMap').map, 'resize');
-                                   }
-                               });
-                           }
-                       });
+                       restaurantDisplay(record, btn, index);
                    }
                },
                itemTpl: dishTemplate,
@@ -131,39 +93,7 @@
                                 type: 'json'
                            },
                            success: function(response) {
-                               var responseObject = eval('(' + response.responseText + ')');
-                               htmlString = '<div class="dishinfo"><b>'+responseObject.menu_item.name+'</b><br/>';
-                               htmlString += '$ '+responseObject.menu_item.price+'<br>';
-                               htmlString += '<br><br>'+responseObject.menu_item.description+'<br>';
-                               /*for(i=0;i<responseObject[0].ingredients.length;i++) {
-                                htmlString += responseObject[0].ingredients[i].item;
-                                   if(i<responseObject[0].ingredients.length - 1) {
-                                       htmlString += ", ";
-                                   }
-                               }*/
-                               htmlString += "</div>";
-                               /*
-                               for(i=0;i<responseObject[0].images.length;i++) {
-                                   object = new Object();
-                                   object.html = '<div class="foodImg"><img width="100" src="'+responseObject[0].images[i].file+'"></div>';
-                                   object.xtype = 'panel';
-                                   Ext.getCmp('carouselPnl').add(object);
-                               }
-                               reviewString = "<br><br><b>Reviews</b><br><br>";
-                               for(i=0;i<responseObject[0].reviews.length;i++) {
-                                   if(responseObject[0].reviews[i].pic==""){
-                                       pic = "nothing.jpg";
-                                   } else {
-                                       pic = responseObject[0].reviews[i].pic;
-                                   }
-                                   reviewString += '<div class="picanddata"><img class="pic" src="'+pic+'" width="70"><div class="data">'+responseObject[0].reviews[i].reviewer+'<br>'+responseObject[0].reviews[i].rating+' stars</div><br><div class="reviewtext">'+responseObject[0].reviews[i].text+'</div></div>';
-                               }
-                               */
-                               //Ext.getCmp('detailPnl').add(carouselPnl);
-                               Ext.getCmp('detailPnl').add(infoPnl);
-                               //Ext.getCmp('detailPnl').add(reviewPnl);
-                               Ext.getCmp('infoPnl').update(htmlString);
-                               //Ext.getCmp('reviewPnl').update(reviewString);
+                               dishDisplay(response);
                            }
                        });
                        Ext.getCmp('mainPnl').setActiveItem(1);
@@ -190,24 +120,19 @@
                clearSectionOnDeactivate:true
            });
 
-
-           var onScroll = new function(something) {
-               console.log('scrolling');
-           }
-
            var infoPnl = new Ext.Panel({
                html: '',
                id: 'infoPnl'
            });
 
-           //add pin to map at address
            var restMapPnl = new Ext.Panel ({
-               //need to pass in coords
                items: [
                    {
                    id: 'googleMap',
                    xtype: 'map',
                    useCurrentLocation: false,
+                   height:100,
+                   width:100,
                    mapOptions : {
                        center : new google.maps.LatLng(37.774518,-122.420101),  //SF
                        //not really centering here, just putting it in top right corner
@@ -218,14 +143,14 @@
                      }
                    }
                ],
-               height:'100px',
-               flex:1
+               height:100,
+               width:100
            });
            var restInfoPnl = new Ext.Panel({
                html: '',
                id: 'restInfoPnl',
-               flex:2,
-               height:'100%'
+               height:'100%',
+               width:'100%'
            });
            var restPnl = new Ext.Panel({
                id: 'restPnl',
@@ -242,12 +167,25 @@
                id: 'reviewPnl'
            });
 
+           var sessionHandler = function(b,e) {
+               if(b.getText() == "Login") {
+                   window.open('http://getcrave.com/auth/facebook','auth');
+               }
+               if(b.getText() == "Logout") {
+                   localStorage.setItem("uid","");
+                   Ext.getCmp("loginButton").setVisible(true);
+                   Ext.getCmp("logoutButton").setVisible(false);
+               }
+           }
+
            var tapHandler = function(b,e) {
                if(b.getText() == "Dishes") {
                    Ext.getCmp('listPnl').setActiveItem(dishList);
+                   Ext.getCmp("newRestButton").setVisible(false);
                }
                if(b.getText() == "Restaurants") {
                    Ext.getCmp('listPnl').setActiveItem(placesList);
+                   Ext.getCmp("newRestButton").setVisible(true);
                }
            }
 
@@ -271,7 +209,8 @@
            ]
        });
 
-       var listPnl = new Ext.Panel({
+       //intentionally not using var to make this global
+       listPnl = new Ext.Panel({
            id: 'listPnl',
            items: [dishList,placesList,searchPnl],
            layout: {
@@ -289,12 +228,11 @@
                    items:[
                        {xtype:'segmentedbutton',
                        items:[
-                           {text:'Dishes',pressed:true, handler:tapHandler},
-                           {text:'Restaurants', handler:tapHandler}
+                           {text:'Dishes',id:'dishesButton',pressed:true, handler:tapHandler},
+                           {text:'Restaurants',id:'restaurantsButton', pressed:false, handler:tapHandler}
                        ]}
                    ]
-               },searchForm
-               /*,
+               },searchForm,
                {
                    id:'bottomPanel',
                    xtype: 'toolbar',
@@ -302,12 +240,14 @@
                    ui:'dark',
                    items:[
                        {xtype:'segmentedbutton',
+                       layout:{pack:'center'},
                        items:[
-                           {text:'Nearby',pressed:true}
+                           {text:'Login',id:'loginButton',handler:sessionHandler},
+                           {text:'Logout',id:'logoutButton',handler:sessionHandler,hidden:true},
+                           {text:'New Restaurant',id:'newRestButton',handler:sessionHandler,hidden:true}
                        ]}
                     ]
                }
-                       */
            ]
        });
 
@@ -342,10 +282,32 @@
                direction:'horizontal'
            });
 
+           justLoggedIn();
    }
 
 });
-</script>
 
+function justLoggedIn() {
+    myUID = localStorage.getItem("uid");
+    if(myUID!="" && myUID!=null) {
+        console.log('found');
+        Ext.getCmp("loginButton").setVisible(false);
+        Ext.getCmp("logoutButton").setVisible(true);
+    } else {
+        console.log('not found');
+        Ext.getCmp("loginButton").setVisible(true);
+        Ext.getCmp("logoutButton").setVisible(false);
+    }
+    // ?get uid from local storage here?
+    //have to reach docked bottom bar, change to sign out, display form links
+}
+</script>
+<!--
+add bottom bar with login through fb link
+if they click open new window to /auth/facebook
+create /mobile/uid?uid= which saves uid in localstorage
+close new window
+how do i refresh underlying screen with login info? call a function in parent page before window closes?
+-->
 </body>
 </html>
