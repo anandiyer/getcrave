@@ -288,16 +288,16 @@
 });
 
 function justLoggedIn() {
-    console.log('I just logged in');
     myUID = localStorage.getItem("uid");
-    if(myUID!="") {
+    if(myUID!="" && myUID!=null) {
+        console.log('found');
         Ext.getCmp("loginButton").setVisible(false);
         Ext.getCmp("logoutButton").setVisible(true);
     } else {
+        console.log('not found');
         Ext.getCmp("loginButton").setVisible(true);
         Ext.getCmp("logoutButton").setVisible(false);
     }
-    console.log(myUID);
     // ?get uid from local storage here?
     //have to reach docked bottom bar, change to sign out, display form links
 }
