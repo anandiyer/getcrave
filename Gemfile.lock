@@ -224,6 +224,7 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.27)
+    uuidtools (2.1.2)
     webrat (0.7.3)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
@@ -239,6 +240,7 @@ DEPENDENCIES
   compass
   cucumber-rails
   erb2haml
+  faraday
   friendly_id (~> 3.2.1)
   geokit
   gritter
@@ -253,4 +255,5 @@ DEPENDENCIES
   rspec-rails
   spatial_adapter
   sunspot_rails (~> 1.2.1)
+  uuidtools
   webrat

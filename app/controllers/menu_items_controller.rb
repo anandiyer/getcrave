@@ -1,3 +1,5 @@
+require "uuidtools"
+
 # Monkey patching to include the 'distance' attribute in menu_items
 module Geokit
   module Mappable
@@ -95,6 +97,55 @@ class MenuItemsController < ApplicationController
       format.json { render :json => @menu_item.to_json( :include => [ :restaurant, :menu_item_avg_rating_count, :menu_item_ratings ] ) }
     end
   end
+
+
+#
+##  menu items photo upload
+#  def upload_photo
+#    if params[:file] && (params[:file].content_type.to_s.index("image") == 0 )
+#      temp_file = params[:file].tempfile
+#      name = UUIDTools::UUID.random_create.to_s+".jpg" #renerating uniq name
+#      directory = RAILS_ROOT+MENU_ITEMS_PHOTOS_PATH
+#      path = File.join(directory, name)
+#      File.open(path, "wb") { |f| f.write(temp_file.read)}
+#
+#      render :nothing => true, :status => 200
+#    else
+#      raise "wrong type of file"
+#    end
+#  end
+
+    def upload_photo
+    if signed_in?
+      if params[:file] && (params[:file].content_type.to_s.index("image") == 0 )
+        temp_file = params[:file].tempfile
+        name = UUIDTools::UUID.random_create.to_s+".jpg"
+        directory = RAILS_ROOT+"/public/images/menu_items_photos"
+        path = File.join(directory, name)
+        File.open(path, "wb") { |f| f.write(temp_file.read)}
+
+        menu_item_photo = MenuItemPhoto.new
+
+        p "*******************************"
+        p menu_item_photo.menu_item_id = params[:id]
+        p menu_item_photo.user_id = current_user.id
+        p menu_item_photo.photo = name
+        p "*******************************"
+
+        menu_item = MenuItem.find(params[:id])
+        menu_item.menu_item_photos << menu_item_photo
+
+
+
+        render :text => menu_item.menu_item_photos.count
+      else
+        raise "wrong type of file"
+      end
+    else
+      raise "you must be authed"
+    end
+  end
+
 
 
   def show_reviews

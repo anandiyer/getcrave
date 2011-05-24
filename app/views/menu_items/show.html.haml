@@ -3,7 +3,6 @@
     = link_to(image_tag("logo.png"),"/")
   #navigation_wrap= render :partial => "/navigation"
 
-
   #navigation_wrap_search
     %form{:action =>"#"}
       = text_field(:first, :second, :class =>"first_search_input")
@@ -17,14 +16,18 @@
       #bread_crumbs
 
         = link_to("← "+@menu_item.restaurant.name, @menu_item.restaurant)
-      #current_info_wrapper{:data => {:latitude=> @menu_item.restaurant.latitude, :longitude => @menu_item.restaurant.longitude}}
+      #current_info_wrapper{:data => {:latitude=> @menu_item.restaurant.latitude, :longitude => @menu_item.restaurant.longitude, :menu_item_id => params[:id]}}
         #img_column
           = image_tag "temp_image.png"
           #icons_img_wrapper
             %span.photos_inline
-              = link_to "75 photos","@@"
+
+              = link_to "#" do
+                %span#photos_counter= photos_count params[:id]
+                photos
+
             %span.add_photos_inline
-              =link_to "add a photo","@@"
+              =link_to "add photos","#", :id => "plupload"
             #photos_icon &nbsp;
         #text_column
           %h1.current_title= @menu_item.name

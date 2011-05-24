@@ -16,6 +16,7 @@ gem "haml"
 gem "haml-rails"
 gem 'json'
 gem "gritter"
+gem "uuidtools"
 
 group :development, :test do
   gem 'cucumber-rails'
@@ -24,13 +25,11 @@ group :development, :test do
   gem 'webrat'
   gem 'mongrel'
   gem "erb2haml"
-
   gem "compass", :require => false
-
-
   gem 'jquery-rails', '>= 0.2.6'
   gem "haml"
   gem "haml-rails"
+  gem "faraday"
 
 end
 

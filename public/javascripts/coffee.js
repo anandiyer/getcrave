@@ -34,6 +34,9 @@
     obj.fadeTo("slow", 1);
     return obj.html(html);
   };
+  window.menu_item_photos_uploaded = function() {
+    return alert(1);
+  };
   window.update_reviews = function(id_of_menu_item, limits) {
     var obj;
     if (limits == null) {

@@ -33,6 +33,7 @@ Crave::Application.routes.draw do
     end
     member do
       get 'show_reviews'
+      post 'upload_photo'
     end
     collection do
       get 'search', 'location'

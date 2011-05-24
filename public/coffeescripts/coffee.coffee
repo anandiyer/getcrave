@@ -13,6 +13,8 @@ after_send = (obj, html) ->
     obj.fadeTo("slow", 1)
     obj.html(html)
 
+window.menu_item_photos_uploaded = ()->
+    alert 1
 window.update_reviews = (id_of_menu_item, limits = $("#show_more_button").data("step")) ->
     obj = $("#reviews_wrapper #update_place")
     $.ajax({url: "/menu_items/"+id_of_menu_item+"/show_reviews?limit="+limits,
@@ -48,8 +50,22 @@ window.add_review = (id_of_menu_item, msg) ->
 
 $(document).ready ->
 
-    $(document).ajaxError () ->
 
+#    $.ajaxSetup({
+#        beforeSend: (xhr) ->
+#            console.log(xhr)
+#            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+#
+#    });
+#
+#    $(document).ajaxSend (e, xhr, options) ->
+#        token = $("meta[name='csrf-token']").attr('content');
+#        xhr.setRequestHeader('X-CSRF-Token', token);
+
+
+
+
+    $(document).ajaxError () ->
         $.gritter.add({title:"Error", text: "Ajax error!", image: "/images/error_icon.png", sticky: => true});
 
 #    gmap in dish reviews
