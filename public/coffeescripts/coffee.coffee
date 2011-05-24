@@ -47,7 +47,6 @@ window.add_review = (id_of_menu_item, msg) ->
         $("#comment_wrapper").slideDown("normal")
     )
 
-
 $(document).ready ->
 
     $(document).ajaxError () ->
@@ -81,13 +80,6 @@ $(document).ready ->
         $(this).find("form").submit()
         $(this).unbind('click');
 
-
-
-
-
-
-
-
     $("#select_box_hint").click () ->
         $("#sort_by").find("ul").slideToggle("slow")
 
@@ -95,16 +87,10 @@ $(document).ready ->
         $("#select_sorttype").val($(this).text());
         $("#sort_by ul").slideUp()
 
-
-
-
-
      $("#reviews_wrapper #show_more_button").live 'click', (e) ->
         obj = $("#reviews_wrapper #update_place")
         id_of_menu_item = $(this).data("itemid")
         new_limits = $(this).data("next")
-
-
 
         $.ajax({url: "/menu_items/"+id_of_menu_item+"/show_reviews?limit="+new_limits,
         before_send: () -> before_fade(obj),
@@ -113,8 +99,6 @@ $(document).ready ->
 
     $("input[type=text]").focus () ->
         $(this).select()
-
-
 
 #
 #    $('#click').raty (score, evt) ->

@@ -2,6 +2,8 @@ solr/data
 config/database.yml
 /.bundle/
 /.idea/
+.idea/
+.idea
 /*.rvmrc
 /log/
 log/development.log
