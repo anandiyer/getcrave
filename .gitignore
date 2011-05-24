@@ -1,11 +1,9 @@
 solr/data
-<<<<<<< HEAD
-=======
+
 log/development.log
 tmp/
 tmp/pids/sunspot-solr-development.pid
 log/sunspot-solr-development.log
->>>>>>> 4250b2f0c9aa187ae210893a947cd03fda7ab6d2
 config/database.yml
 /.bundle/
 /.idea/
@@ -13,9 +11,5 @@ config/database.yml
 .idea
 /*.rvmrc
 /log/
-<<<<<<< HEAD
 log/development.log
 tmp
-
-=======
->>>>>>> 4250b2f0c9aa187ae210893a947cd03fda7ab6d2

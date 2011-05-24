@@ -4,11 +4,7 @@
 - else
   - flag_class = "not_saved_item"
 
-<<<<<<< HEAD
-#flag_icons{:title => "Save me!"}
-=======
 #flag_icons{:title => "save this item"}
->>>>>>> 4250b2f0c9aa187ae210893a947cd03fda7ab6d2
   .save_icon{:class=> "save_icon "+flag_class, :id => "mid_"+@menu_item.id.to_s}
     - @user_saved_menu_item = UserSavedMenuItem.new
     = form_for(@user_saved_menu_item, :remote => true) do |f|

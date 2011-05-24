@@ -24,18 +24,13 @@ group :development, :test do
   gem 'webrat'
   gem 'mongrel'
   gem "erb2haml"
-<<<<<<< HEAD
 
   gem "compass", :require => false
-#  gem "compass-susy-plugin"
+
 
   gem 'jquery-rails', '>= 0.2.6'
   gem "haml"
   gem "haml-rails"
-=======
-  gem "compass", :require => false
-#  gem "compass-susy-plugin"
->>>>>>> 4250b2f0c9aa187ae210893a947cd03fda7ab6d2
 
 end
 

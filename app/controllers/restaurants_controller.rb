@@ -4,25 +4,12 @@ class RestaurantsController < ApplicationController
 
   layout "general"
 
-<<<<<<< HEAD
-
-
-
-
-=======
->>>>>>> 4250b2f0c9aa187ae210893a947cd03fda7ab6d2
   def index
     # @restaurants = Restaurant.find(:all, :origin => [37.77859, -122.39142], :within=>1)
     # @restaurants = Restaurant.find(:all, :origin => [37.77859, -122.39142], :order=>'distance asc', :limit => 25)
     # @restaurants = Restaurant.all
 
-<<<<<<< HEAD
-
     get_closest_restaurants params[:lat], params[:long]
-
-=======
-    get_closest_restaurants params[:lat], params[:long]
->>>>>>> 4250b2f0c9aa187ae210893a947cd03fda7ab6d2
 
     respond_to do |format|
       format.html # index.html.haml
@@ -36,12 +23,6 @@ class RestaurantsController < ApplicationController
   def show
     @restaurant = Restaurant.find(params[:id])
 
-#    get_closest_restaurants params[:lat], params[:long]
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 4250b2f0c9aa187ae210893a947cd03fda7ab6d2
     respond_to do |format|
       format.html # _unused_show.html.haml
       format.xml { render :xml => @restaurant }
@@ -125,19 +106,11 @@ class RestaurantsController < ApplicationController
         # 6 and lower is the only precision that seems to work
         with(:coordinates).near(@lat, @long, :precision => 5)
         # , :boost => 2, :precision => 6)
-<<<<<<< HEAD
       end
     else
       @search = Restaurant.search() do
         fulltext(params[:q])
       end
-=======
-      end
-    else
-      @search = Restaurant.search() do
-        fulltext(params[:q])
-      end
->>>>>>> 4250b2f0c9aa187ae210893a947cd03fda7ab6d2
     end
 
     @restaurants = @search.results
@@ -149,11 +122,6 @@ class RestaurantsController < ApplicationController
     end
   end
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 4250b2f0c9aa187ae210893a947cd03fda7ab6d2
   private
 
   def get_closest_restaurants lat, log, limit = 50
@@ -165,20 +133,10 @@ class RestaurantsController < ApplicationController
       @limit = params[:limit].to_i
     end
 
-<<<<<<< HEAD
-    @restaurants = Restaurant.find(:all,:origin => [@lat, @long], :order=>'distance asc', :limit => @limit)
-=======
+
     @restaurants = Restaurant.find(:all,
-      :origin => [@lat, @long], 
+      :origin => [@lat, @long],
       :order=>'distance asc', 
       :limit => @limit)
->>>>>>> 4250b2f0c9aa187ae210893a947cd03fda7ab6d2
   end
-
-
 end
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 4250b2f0c9aa187ae210893a947cd03fda7ab6d2

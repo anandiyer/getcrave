@@ -15,7 +15,7 @@
   #content
     #current_content_block
       #bread_crumbs
-<<<<<<< HEAD
+
         = link_to("← "+@menu_item.restaurant.name, @menu_item.restaurant)
       #current_info_wrapper{:data => {:latitude=> @menu_item.restaurant.latitude, :longitude => @menu_item.restaurant.longitude}}
         #img_column
@@ -26,19 +26,6 @@
             %span.add_photos_inline
               =link_to "add a photo","@@"
             #photos_icon &nbsp;
-=======
-        = link_to("← "+@menu_item.restaurant.name, restaurant_menu_items_path(@menu_item.restaurant))
-      #current_info_wrapper{:data => {:latitude=> @menu_item.restaurant.latitude, :longitude => @menu_item.restaurant.longitude}}
-        #img_column
-          = image_tag "temp_image.png"
-          /
-            #icons_img_wrapper
-              %span.photos_inline
-                = link_to "75 photos","@@"
-              %span.add_photos_inline
-                =link_to "add a photo","@@"
-              #photos_icon &nbsp;
->>>>>>> 4250b2f0c9aa187ae210893a947cd03fda7ab6d2
         #text_column
           %h1.current_title= @menu_item.name
           #stars_wrap
@@ -63,11 +50,7 @@
             #dishlabels
               %strong Dish labels:
             #labels
-<<<<<<< HEAD
-              -%W{Meal Bread Tasty}.each do |x|
-=======
               -%W{Gluten-Free Vegan Vegetarian}.each do |x|
->>>>>>> 4250b2f0c9aa187ae210893a947cd03fda7ab6d2
                 .birdy &nbsp;
                 =link_to(x+"(12)","#", :class => "label")
                 ,
@@ -75,12 +58,7 @@
               =link_to "#" do
                 Add a label
 
-<<<<<<< HEAD
           =image_tag "social.png"
-=======
-          /=image_tag "social.png"
->>>>>>> 4250b2f0c9aa187ae210893a947cd03fda7ab6d2
-        000
         = render :partial => "/save"
 
 
