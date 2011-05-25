@@ -61,7 +61,7 @@
         #input_comment
           =f.text_field :review
           =f.hidden_field :menu_item_id, :value =>params[:id]
-#reviews_wrapper
+#reviews_wrapper{:class => @controller.controller_name}
   %h3.review
     Reviews
 
@@ -79,7 +79,7 @@
 
 
 
-  = render :partial => "/sidebar"
+  -#= render :partial => "/sidebar"
 #footer
   %p 
 

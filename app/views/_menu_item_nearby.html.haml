@@ -1,0 +1,45 @@
+- restaurant = @menu_item.restaurant
+.restaurant_menu_item_wrapper.nearby
+  .numbers
+    = @counter.next
+  .img_column_mi_1_col
+    =image_tag "item_rest_temp_image.png"
+  .desc_block_2_col
+    .b
+      %h1= link_to @menu_item.name, @menu_item
+    -#.b.i= @menu_item.description
+    .b.i
+      = link_to "@ "+restaurant.name, restaurant
+    .b.i= restaurant.address_full
+    .b.i= restaurant.street_address
+
+
+    -#  t.string   "name"
+    -#t.string   "street_address"
+    -#t.string   "neighborhood"
+    -#t.string   "city"
+    -#t.string   "state"
+    -#t.string   "zip"
+    -#t.string   "country"
+    -#t.string   "cross_street"
+    -#t.datetime "created_at"
+    -#t.datetime "updated_at"
+    -#t.point    "latitude_longitude", :limit => nil
+    -#t.float    "latitude"
+    -#t.float    "longitude"
+    -#t.point    "geom",
+
+
+  .save_n_review_3_col
+    = render :partial => "/save"
+  .review_counter_for_item
+
+    -#TODO: bad way to get exception, please refactor me ((
+
+    - if !@menu_item.menu_item_avg_rating_count.nil?
+      - review = @menu_item.menu_item_avg_rating_count.count
+
+    - else
+      - review = 0
+    .number_rev= review
+    reviews

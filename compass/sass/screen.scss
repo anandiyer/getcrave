@@ -273,7 +273,6 @@ body.two-col.bp{
             padding:0 0 0 5px;
 
             #buttons_wrapper{
-                height: 40px;
                 padding:10px 0 0 0;
                 @include container;
 
@@ -454,10 +453,21 @@ body.two-col.bp{
                 }
             }
 
-            #reviews_wrapper.restaurant{
+            #reviews_wrapper.menu_items{
+                border-top: none;
+            }
+            #reviews_wrapper.nearby{
+                border-top: none;
+                padding:0px 0 0 8px;
+            }
+            #reviews_wrapper{
                 border-top: 3px solid $light_gray;
                 padding:17px 0 0 8px;
 
+                #update_place_restaurants.nearby{
+                    padding-top: 0;
+
+                }
                 #update_place_restaurants{
                     padding: 8px 0 0 0;
                     .star_sm{
@@ -466,6 +476,25 @@ body.two-col.bp{
                         margin: 0 0 10px 0;
                     }
 
+                    .restaurant_menu_item_wrapper.nearby{
+                        .numbers{
+                            font-weight: bold;
+                            font-size:15px;
+
+                            $content-columns: ceil(1);
+                            @include column($content-columns, true);
+                            margin-right: -5px;
+                        }
+
+                        .desc_block_2_col{
+                            $content-columns: ceil(10);
+                            @include column($content-columns, true);
+                        }
+
+                        .save_n_review_3_col{
+                            padding-left: 26px;
+                        }
+                    }
                     .restaurant_menu_item_wrapper{
                         @include container;
                         height: 95px;
@@ -519,6 +548,8 @@ body.two-col.bp{
                 }
 
             }
+
+
             #reviews_wrapper{
                 margin: 12px 0 0 0;
                 padding:8px;

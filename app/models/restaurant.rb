@@ -13,4 +13,8 @@ class Restaurant < ActiveRecord::Base
       end
   end
 
+  def address_full
+    "#{zip}, #{street_address}, #{city}, #{state}"
+  end
+
 end

@@ -40,26 +40,9 @@
         %ul
           -["Rating", "Other"].each do |x|
             %li= x
-    #update_place_restaurants
+    #reviews_wrapper
+      = render :partial => "/items_grouped_by_stars"
 
-
-      - if !@menu_items.first().menu_item_avg_rating_count.nil?
-        - group_star = @menu_items.first().menu_item_avg_rating_count.avg_rating
-      - else
-        - group_star = 0
-
-      .star_sm{:class => "star_sm stars_"+group_star.to_s.gsub(/[.]/, '_')} &nbsp;
-
-      - @menu_items.each do |@menu_item|
-        - if !@menu_item.menu_item_avg_rating_count.nil?
-          - stars = @menu_item.menu_item_avg_rating_count.avg_rating
-        - else
-          - stars = 0
-        - if stars.to_f != group_star.to_f
-          - group_star = stars
-          .star_sm{:class => "star_sm stars_"+stars.to_s.gsub(/[.]/, '_')} &nbsp;
-        = render :partial => "menu_item"
-  = render :partial => "/sidebar"
 
 
 #footer
