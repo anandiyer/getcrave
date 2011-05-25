@@ -271,6 +271,37 @@ body.two-col.bp{
 
         #content{
             padding:0 0 0 5px;
+
+            #buttons_wrapper{
+                height: 40px;
+                padding:10px 0 0 0;
+                @include container;
+
+
+                #dishes_icon{
+                    @include inline-block;
+                    padding: 0 0 0 0;
+                    margin: 0;
+                    width: 148px;
+                    height: 30px;
+                    cursor: pointer;
+                    background: url(/images/dishes_icon.png) no-repeat 0 0;
+
+                }
+
+                #restaurant_icon{
+                    @extend #dishes_icon;
+                    width: 151px;
+                    margin-left: -4px;
+                    background-image: url(/images/restaurant_icon.png);
+
+
+                }
+            }
+
+
+
+
             #current_content_block{
                 @include container;
 

@@ -69,11 +69,12 @@ $(document).ready ->
         $.gritter.add({title:"Error", text: "Ajax error!", image: "/images/error_icon.png", sticky: => true});
 
 #    gmap in dish reviews
-    lat =  $("#current_info_wrapper").data("latitude")
-    long =  $("#current_info_wrapper").data("longitude")
+
+#    lat =  $("#current_info_wrapper").data("latitude")
+#    long =  $("#current_info_wrapper").data("longitude")
 
 #    TODO: uncomment me on production
-    gmap(lat, long)
+#    gmap(lat, long)
 
 
     $(".yes_answer").live "click", (event) ->
