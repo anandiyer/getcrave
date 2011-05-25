@@ -27,7 +27,10 @@
               = image_tag "fileds_search_inputs.png", :class => "fields"
               = image_submit_tag("search_button.png", :class => "search")
               #in in
-        =yield
+        #content_wrap
+          #content
+            =yield
+          = render :partial => "/sidebar"
         :javascript
 
           //#TODO place to refactor - move to external js file
