@@ -1,4 +1,4 @@
-
+@import "compass/css3/border-radius";
 
 // This import applies a global reset to any page that imports this stylesheet.
 @import "blueprint/reset";
@@ -234,6 +234,9 @@ body.two-col.bp{
                     $content-columns: ceil(1);
                     @include column($content-columns, true);
                     padding-right: 28px;
+                    img{
+                            @include border-radius(3px)
+                    }
                 }
                 .text_foodie_2_col{
                     $content-columns: ceil(3);
