@@ -4,9 +4,6 @@
     %title
     = javascript_include_tag "jquery-1.6.min.js", "rails"
     = javascript_include_tag  "plugins/jquery.raty.min.js", "plugins/plupload/plupload.js", "plugins/plupload/plupload.flash.js", "plugins/plupload/plupload.html5.js", "plupload_initialize.js",  "selectivizr-min.js", "http://maps.google.com/maps/api/js?sensor=false"
-
-
-
     = javascript_include_tag  "coffee"
     = include_gritter
     = gflash
@@ -18,22 +15,22 @@
   %body.two-col.bp
     #page
       #container
-        = @current_user
+        #header
+          #logo
+            = link_to(image_tag("logo.png"),"/")
+          #navigation_wrap= render :partial => "/navigation"
 
-
-
+          #navigation_wrap_search
+            %form{:action =>"#"}
+              = text_field(:first, :second, :class =>"first_search_input")
+              = text_field(:first, :second, :class =>"second_search_input")
+              = image_tag "fileds_search_inputs.png", :class => "fields"
+              = image_submit_tag("search_button.png", :class => "search")
+              #in in
         =yield
-        -#= add_gritter("This is a notification just for you!")
-        -#= js add_gritter("This is a notification just for you!")
         :javascript
 
           //#TODO place to refactor - move to external js file
-
-
-
-
-
-
 
           starts_update();
 

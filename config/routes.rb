@@ -1,4 +1,6 @@
 Crave::Application.routes.draw do 
+  get "nearby/index"
+
   resources :user_saved_menu_items
 
   resources :menu_item_review_comments
@@ -64,5 +66,9 @@ Crave::Application.routes.draw do
   
   match '/auth/:provider/callback', :to => 'sessions#create'  
   match '/signout' => 'sessions#destroy', :as => :signout
+
+
+
+  root :to => 'nearby#index'
 
 end
