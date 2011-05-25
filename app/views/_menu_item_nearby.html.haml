@@ -1,6 +1,5 @@
 - restaurant = @menu_item.restaurant
-
-.restaurant_menu_item_wrapper.nearby{:data => {:latitude => restaurant.latitude, :longitude => restaurant.longitude+@counter}}
+.restaurant_menu_item_wrapper{:data => {:latitude => restaurant.latitude, :longitude => restaurant.longitude}, :class => @controller.controller_name+"_"+@controller.action_name}
   .numbers
     = @counter.next
   .img_column_mi_1_col
@@ -16,7 +15,7 @@
       - @menu_item.labels.each_with_index do |x,i|
         = link_to x, "#"
 
-        - if i.next <@menu_item.labels.length
+        - if i.next < @menu_item.labels.length
           ,
   .save_n_review_3_col
     = render :partial => "/save"

@@ -1,5 +1,22 @@
-#update_place_restaurants{:class => @controller.controller_name}
+-#TODO: copy paste from menu_items#location. please fefactor me
 
+- if params[:lat]
+  - @lat = params[:lat].to_f
+  - @long = params[:long].to_f
+- else
+  - @lat = 40.761447
+  - @long = -73.969456
+
+
+- if params[:limit] && !params[:limit].empty?
+  - @limit = params[:limit].to_i
+
+- @origin = [@lat, @long]
+- @menu_items = MenuItem.find(:all,:origin => @origin,:conditions => "distance < 3",:joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id", :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC", :limit => @limit)
+
+
+
+#reviews_wrapper_bloc_wrapper
   - if !@menu_items.first().menu_item_avg_rating_count.nil?
     - group_star = @menu_items.first().menu_item_avg_rating_count.avg_rating
   - else
@@ -15,7 +32,8 @@
     - if stars.to_f != group_star.to_f
       - group_star = stars
       .star_sm{:class => "star_sm stars_"+stars.to_s.gsub(/[.]/, '_')} &nbsp;
-    - if  @controller.controller_name == "nearby"
+    - if  @controller.action_name == "location" || @controller.action_name == "show_menu_items_nearby"
       = render :partial => "/menu_item_nearby"
     -else
       = render :partial => "/menu_item"
+= render :partial => "/show_more"

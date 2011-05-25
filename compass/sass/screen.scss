@@ -456,7 +456,7 @@ body.two-col.bp{
             #reviews_wrapper.menu_items{
                 border-top: none;
             }
-            #reviews_wrapper.nearby{
+            #reviews_wrapper.menu_items_location, #reviews_wrapper.menu_items_show_menu_items_nearby{
                 border-top: none;
                 padding:0px 0 0 8px;
             }
@@ -464,7 +464,7 @@ body.two-col.bp{
                 border-top: 3px solid $light_gray;
                 padding:17px 0 0 8px;
 
-                #update_place_restaurants.nearby{
+                #update_place_restaurants.menu_items_location, #update_place_restaurants.menu_items_show_menu_items_nearby{
                     padding-top: 0;
 
                 }
@@ -476,7 +476,7 @@ body.two-col.bp{
                         margin: 0 0 10px 0;
                     }
 
-                    .restaurant_menu_item_wrapper.nearby{
+                    .restaurant_menu_item_wrapper.menu_items_location, .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby{
                         .numbers{
                             font-weight: bold;
                             font-size:15px;

@@ -5,14 +5,12 @@ cl = (msg) ->
     console.log(msg)
 
 window.gmap = (lat, long, zoom = 10, coor_array = [[lat,long]]) ->
-#window.gmap = (lat, long, zoom = 7) ->
-
-
     latlng = new google.maps.LatLng(lat, long);
     myOptions = zoom: zoom, center: latlng, mapTypeId: google.maps.MapTypeId.ROADMAP, overviewMapControl: false, overviewMapControlOptions: false, panControl: false, scaleControl: false, zoomControl: false, keyboardShortcuts: false, mapTypeControl: false, streetViewControl: false;
     map = new google.maps.Map(document.getElementById("map"),myOptions)
 
     for ll in coor_array
+#        g_notice("Lang Lat", ll[0]+"<br />"+ll[1])
         new google.maps.Marker({position: new google.maps.LatLng(ll[0], ll[1]), map: map })
 
 
@@ -21,8 +19,9 @@ before_send = (obj) ->
     obj.fadeTo("slow", .5)
 
 after_send = (obj, html) ->
-    obj.fadeTo("slow", 1)
+    obj.fadeTo("fast", 1)
     obj.html(html)
+
 
 window.menu_item_photos_uploaded = ()->
     alert 1
@@ -61,9 +60,11 @@ window.add_review = (id_of_menu_item, msg) ->
 
 
 window.set_gmap = (zoom = 4) ->
+
     ar = []
-    if $(".restaurant_menu_item_wrapper.nearby").length > 0
-        $(".restaurant_menu_item_wrapper.nearby").each () ->
+    if $(".menu_items_location").length > 0
+        cl 66
+        $(".restaurant_menu_item_wrapper").each () ->
             lat =  $(@).data("latitude")
             long =  $(@).data("longitude")
 
@@ -81,10 +82,6 @@ $(document).ready ->
 
 #   google maps in homepage neary
     set_gmap(4)
-
-
-
-
 
 
 
@@ -127,19 +124,31 @@ $(document).ready ->
         $("#sort_by ul").slideUp()
 
      $("#reviews_wrapper #show_more_button").live 'click', (e) ->
-        obj = $("#reviews_wrapper #update_place")
+
         id_of_menu_item = $(this).data("itemid")
         new_limits = $(this).data("next")
 
-        $.ajax({url: "/menu_items/"+id_of_menu_item+"/show_reviews?limit="+new_limits,
+        if $(".menu_items_location").length > 0
+
+           obj = $("#update_place_restaurants.menu_items_location")
+           lat = $("body").data("latitude")
+           long = $("body").data("longitude")
+           path = "/menu_items/show_menu_items_nearby?lat="+lat+"&long="+long+"&limit="+new_limits
+        else
+            obj = $("#reviews_wrapper #update_place")
+            path = "/menu_items/"+id_of_menu_item+"/show_reviews?limit="+new_limits
+
+
+        $.ajax({url: path,
         before_send: () -> before_fade(obj),
-        success: (html) ->  after_send(obj, html); $("#show_more_button").attr("data-next",new_limits*2)});
+        success: (html) ->
+            after_send(obj, html)
+            $("#show_more_button").attr("data-next",new_limits*2)
+            set_gmap(2)
+#            $.get('/menu_items/update_map')
+
+        });
 
 
     $("input[type=text]").focus () ->
         $(this).select()
-
-#
-#    $('#click').raty (score, evt) ->
-#        path: "/images/"
-#        alert('ID: ' + this.attr('id') + '\nscore: ' + score + '\nevent: ' + evt);

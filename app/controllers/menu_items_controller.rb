@@ -17,9 +17,16 @@ class MenuItemsController < ApplicationController
   layout "general"
 
   def location
-    @lat = params[:lat].to_f
-    @long = params[:long].to_f
-    @limit = 25
+
+    if params[:lat]
+      @lat = params[:lat].to_f
+      @long = params[:long].to_f
+    else
+      @lat = 40.761447
+      @long = -73.969456
+    end
+
+    @limit = 5
     
     if params[:limit] && !params[:limit].empty?
       @limit = params[:limit].to_i
@@ -43,7 +50,7 @@ class MenuItemsController < ApplicationController
     @menu_items.sort_by_distance_from(@origin)
     
       respond_to do |format|
-        format.html # location.html.erb
+        format.html # location.html.haml
         format.xml  { render :xml => @menu_items.to_xml(:methods => :distance, :include => [:restaurant, :menu_item_avg_rating_count])}
         format.json  { render :json => @menu_items.to_json(:methods => :distance, :include => [:restaurant, :menu_item_avg_rating_count]) }
       end
@@ -67,7 +74,7 @@ class MenuItemsController < ApplicationController
     @restaurant.id])
     
     respond_to do |format|
-      format.html # location.html.erb
+      format.html # location.html.haml
       format.xml  { render :xml => @menu_items.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count])}
       format.json  { render :json => @menu_items.to_json(:include => [:restaurant, :menu_item_avg_rating_count]) }
     end
@@ -150,6 +157,11 @@ class MenuItemsController < ApplicationController
 
   def show_reviews
     render :partial => "review"
+  end
+
+
+  def show_menu_items_nearby
+    render :partial => "/items_grouped_by_stars"
   end
 
   # GET /menu_items/new

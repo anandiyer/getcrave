@@ -966,7 +966,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper.menu_items {
   border-top: none;
 }
 /* line 459, ../../compass/sass/screen.scss */
-body.two-col.bp #content_wrap #content #reviews_wrapper.nearby {
+body.two-col.bp #content_wrap #content #reviews_wrapper.menu_items_location, body.two-col.bp #content_wrap #content #reviews_wrapper.menu_items_show_menu_items_nearby {
   border-top: none;
   padding: 0px 0 0 8px;
 }
@@ -976,7 +976,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper {
   padding: 17px 0 0 8px;
 }
 /* line 467, ../../compass/sass/screen.scss */
-body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants.nearby {
+body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants.menu_items_location, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants.menu_items_show_menu_items_nearby {
   padding-top: 0;
 }
 /* line 471, ../../compass/sass/screen.scss */
@@ -993,7 +993,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurant
   margin: 0 0 10px 0;
 }
 /* line 480, ../../compass/sass/screen.scss */
-body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.nearby .numbers {
+body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_location .numbers, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby .numbers {
   font-weight: bold;
   font-size: 15px;
   display: inline;
@@ -1003,11 +1003,11 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurant
   margin-right: -5px;
 }
 /* line 147, ../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.nearby .numbers {
+* html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_location .numbers, * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby .numbers {
   overflow-x: hidden;
 }
 /* line 489, ../../compass/sass/screen.scss */
-body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.nearby .desc_block_2_col {
+body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_location .desc_block_2_col, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby .desc_block_2_col {
   display: inline;
   float: left;
   margin-right: 0;
@@ -1015,11 +1015,11 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurant
   padding-top: 3px;
 }
 /* line 147, ../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.nearby .desc_block_2_col {
+* html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_location .desc_block_2_col, * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby .desc_block_2_col {
   overflow-x: hidden;
 }
 /* line 495, ../../compass/sass/screen.scss */
-body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.nearby .save_n_review_3_col {
+body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_location .save_n_review_3_col, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby .save_n_review_3_col {
   padding-left: 26px;
 }
 /* line 499, ../../compass/sass/screen.scss */

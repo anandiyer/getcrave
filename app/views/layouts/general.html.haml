@@ -13,7 +13,10 @@
     /[if IE]
       = stylesheet_link_tag "ie", "ie_style"
     = csrf_meta_tag
-  %body.two-col.bp
+
+  - if params[:lat] then data = {:latitude => params[:lat], :longitude => params[:long]}  else data = "" end
+  %body.two-col.bp{:data => data}
+
     #page
       #container
         #header
@@ -32,12 +35,12 @@
           #content
             =yield
           = render :partial => "/sidebar"
+        #footer
+          footer
+
         :javascript
 
           //#TODO place to refactor - move to external js file
-
-
-
 
 
 
