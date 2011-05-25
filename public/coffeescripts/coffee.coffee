@@ -1,10 +1,21 @@
 disher_review_wrapper = $("#reviews_wrapper")
 
-window.gmap = (lat, long, zoom = 14) ->
+
+cl = (msg) ->
+    console.log(msg)
+
+window.gmap = (lat, long, zoom = 10, coor_array = [[lat,long]]) ->
+#window.gmap = (lat, long, zoom = 7) ->
+
+
     latlng = new google.maps.LatLng(lat, long);
     myOptions = zoom: zoom, center: latlng, mapTypeId: google.maps.MapTypeId.ROADMAP, overviewMapControl: false, overviewMapControlOptions: false, panControl: false, scaleControl: false, zoomControl: false, keyboardShortcuts: false, mapTypeControl: false, streetViewControl: false;
     map = new google.maps.Map(document.getElementById("map"),myOptions)
-    marker = new google.maps.Marker({	position: new google.maps.LatLng(lat, long),	map: map })
+
+    for ll in coor_array
+        new google.maps.Marker({position: new google.maps.LatLng(ll[0], ll[1]), map: map })
+
+
 
 before_send = (obj) ->
     obj.fadeTo("slow", .5)
@@ -48,33 +59,44 @@ window.add_review = (id_of_menu_item, msg) ->
         $("#comment_wrapper").slideDown("normal")
     )
 
+
+window.set_gmap = (zoom = 4) ->
+    ar = []
+    if $(".restaurant_menu_item_wrapper.nearby").length > 0
+        $(".restaurant_menu_item_wrapper.nearby").each () ->
+            lat =  $(@).data("latitude")
+            long =  $(@).data("longitude")
+
+            ar.push([lat, long])
+        lat =  ar[0][0]
+        long = ar[0][1]
+        gmap(lat, long, zoom, ar)
+
 $(document).ready ->
-
-
-#    $.ajaxSetup({
-#        beforeSend: (xhr) ->
-#            console.log(xhr)
-#            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-#
-#    });
-#
-#    $(document).ajaxSend (e, xhr, options) ->
-#        token = $("meta[name='csrf-token']").attr('content');
-#        xhr.setRequestHeader('X-CSRF-Token', token);
-
-
 
 
     $(document).ajaxError () ->
         $.gritter.add({title:"Error", text: "Ajax error!", image: "/images/error_icon.png", sticky: => true});
 
-#    gmap in dish reviews
 
-#    lat =  $("#current_info_wrapper").data("latitude")
-#    long =  $("#current_info_wrapper").data("longitude")
+#   google maps in homepage neary
+    set_gmap(4)
 
-#    TODO: uncomment me on production
-#    gmap(lat, long)
+
+
+
+
+
+
+
+
+
+#    lat = 40.761447
+#    long = -73.969456
+#    gmap(lat, long, 7, [[lat, long],[lat,long+1]])
+
+
+
 
 
     $(".yes_answer").live "click", (event) ->

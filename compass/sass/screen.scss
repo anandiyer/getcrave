@@ -489,6 +489,7 @@ body.two-col.bp{
                         .desc_block_2_col{
                             $content-columns: ceil(10);
                             @include column($content-columns, true);
+                            padding-top: 3px;
                         }
 
                         .save_n_review_3_col{

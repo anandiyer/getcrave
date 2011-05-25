@@ -1,11 +1,17 @@
 (function() {
-  var after_send, before_send, disher_review_wrapper;
+  var after_send, before_send, cl, disher_review_wrapper;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   disher_review_wrapper = $("#reviews_wrapper");
-  window.gmap = function(lat, long, zoom) {
-    var latlng, map, marker, myOptions;
+  cl = function(msg) {
+    return console.log(msg);
+  };
+  window.gmap = function(lat, long, zoom, coor_array) {
+    var latlng, ll, map, myOptions, _i, _len, _results;
     if (zoom == null) {
-      zoom = 14;
+      zoom = 10;
+    }
+    if (coor_array == null) {
+      coor_array = [[lat, long]];
     }
     latlng = new google.maps.LatLng(lat, long);
     myOptions = {
@@ -22,10 +28,15 @@
       streetViewControl: false
     };
     map = new google.maps.Map(document.getElementById("map"), myOptions);
-    return marker = new google.maps.Marker({
-      position: new google.maps.LatLng(lat, long),
-      map: map
-    });
+    _results = [];
+    for (_i = 0, _len = coor_array.length; _i < _len; _i++) {
+      ll = coor_array[_i];
+      _results.push(new google.maps.Marker({
+        position: new google.maps.LatLng(ll[0], ll[1]),
+        map: map
+      }));
+    }
+    return _results;
   };
   before_send = function(obj) {
     return obj.fadeTo("slow", .5);
@@ -77,8 +88,25 @@
       return $("#comment_wrapper").slideDown("normal");
     });
   };
+  window.set_gmap = function(zoom) {
+    var ar, lat, long;
+    if (zoom == null) {
+      zoom = 4;
+    }
+    ar = [];
+    if ($(".restaurant_menu_item_wrapper.nearby").length > 0) {
+      $(".restaurant_menu_item_wrapper.nearby").each(function() {
+        var lat, long;
+        lat = $(this).data("latitude");
+        long = $(this).data("longitude");
+        return ar.push([lat, long]);
+      });
+      lat = ar[0][0];
+      long = ar[0][1];
+      return gmap(lat, long, zoom, ar);
+    }
+  };
   $(document).ready(function() {
-    var lat, long;
     $(document).ajaxError(function() {
       return $.gritter.add({
         title: "Error",
@@ -89,9 +117,7 @@
         }, this)
       });
     });
-    lat = $("#current_info_wrapper").data("latitude");
-    long = $("#current_info_wrapper").data("longitude");
-    gmap(lat, long);
+    set_gmap(4);
     $(".yes_answer").live("click", function(event) {
       var form, found_helpfull_number, increment, link, link_text;
       if ($(this).find("a").length > 0) {

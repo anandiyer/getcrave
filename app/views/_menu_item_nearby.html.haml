@@ -1,5 +1,6 @@
 - restaurant = @menu_item.restaurant
-.restaurant_menu_item_wrapper.nearby
+
+.restaurant_menu_item_wrapper.nearby{:data => {:latitude => restaurant.latitude, :longitude => restaurant.longitude+@counter}}
   .numbers
     = @counter.next
   .img_column_mi_1_col
@@ -11,30 +12,15 @@
     .b.i
       = link_to "@ "+restaurant.name, restaurant
     .b.i= restaurant.address_full
-    .b.i= restaurant.street_address
+    .b.i
+      - @menu_item.labels.each_with_index do |x,i|
+        = link_to x, "#"
 
-
-    -#  t.string   "name"
-    -#t.string   "street_address"
-    -#t.string   "neighborhood"
-    -#t.string   "city"
-    -#t.string   "state"
-    -#t.string   "zip"
-    -#t.string   "country"
-    -#t.string   "cross_street"
-    -#t.datetime "created_at"
-    -#t.datetime "updated_at"
-    -#t.point    "latitude_longitude", :limit => nil
-    -#t.float    "latitude"
-    -#t.float    "longitude"
-    -#t.point    "geom",
-
-
+        - if i.next <@menu_item.labels.length
+          ,
   .save_n_review_3_col
     = render :partial => "/save"
   .review_counter_for_item
-
-    -#TODO: bad way to get exception, please refactor me ((
 
     - if !@menu_item.menu_item_avg_rating_count.nil?
       - review = @menu_item.menu_item_avg_rating_count.count

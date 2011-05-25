@@ -1,4 +1,5 @@
 #update_place_restaurants{:class => @controller.controller_name}
+
   - if !@menu_items.first().menu_item_avg_rating_count.nil?
     - group_star = @menu_items.first().menu_item_avg_rating_count.avg_rating
   - else

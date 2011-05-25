@@ -10,4 +10,9 @@ class MenuItem < ActiveRecord::Base
         text :name, :default_boost => 2
         text :description
     end
+
+
+  def labels
+    %W{Gluten_free Gluten_free}
+  end
 end
