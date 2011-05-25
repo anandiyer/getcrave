@@ -235,7 +235,7 @@ body.two-col.bp{
                     @include column($content-columns, true);
                     padding-right: 28px;
                     img{
-                            @include border-radius(3px)
+                        @include border-radius(3px)
                     }
                 }
                 .text_foodie_2_col{
@@ -672,6 +672,10 @@ body.two-col.bp{
                         $content-columns: ceil(1);
                         padding-right:28px;
                         @include column($content-columns, true);
+
+                        img{
+                            @include border-radius(3px);
+                        }
 
                     }
                     .review_desc_col_wrapper{
