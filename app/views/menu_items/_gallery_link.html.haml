@@ -1,0 +1,13 @@
+- if get_photos(params[:id]).length > 0
+  - get_photos(params[:id]).each_with_index do |url, i|
+
+    - if i == 0
+      =link_to url do
+        %span#photos_counter
+          = photos_count params[:id]
+        photos
+    - else
+      = link_to "1", url, :class => "h"
+- else
+  %span#photos_counter 0
+  photos

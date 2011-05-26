@@ -17,7 +17,8 @@ $(function() {
                 FileUploaded: function(up, file, info) {
                     //eval(info["response"]);
 
-                    $("span#photos_counter").text(info.response);
+                    $("#gallery").html(info.response);
+                    window.gallery_init();
                 }
             }
 

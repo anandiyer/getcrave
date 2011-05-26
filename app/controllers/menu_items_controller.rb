@@ -16,6 +16,7 @@ class MenuItemsController < ApplicationController
   before_filter :get_restaurant
   layout "general"
 
+#  TODO: change 2 your bucket name
   @@BUCKET = "my_image_bucket"
 
 
@@ -115,7 +116,7 @@ class MenuItemsController < ApplicationController
         menu_item.menu_item_photos << menu_item_photo
 
 
-        render :text => menu_item.menu_item_photos.count
+        render :partial => "gallery_link"
       else
 #        plupload can filter file types
         raise "wrong type of file"

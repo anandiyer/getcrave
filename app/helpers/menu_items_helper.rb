@@ -10,4 +10,9 @@ module MenuItemsHelper
   def photos_count menu_item_id
     MenuItem.find(menu_item_id).menu_item_photos.count.to_s
   end
+
+# menu_item_id - menu_item_id 2 get photos
+  def get_photos menu_item_id
+    MenuItem.find(menu_item_id).menu_item_photos.map{|x| x.photo}
+  end
 end

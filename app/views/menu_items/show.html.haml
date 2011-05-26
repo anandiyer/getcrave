@@ -1,3 +1,7 @@
+
+
+
+
 #current_content_block
   #bread_crumbs
     = link_to("← "+@menu_item.restaurant.name, @menu_item.restaurant)
@@ -6,10 +10,14 @@
       = image_tag "temp_image.png"
       #icons_img_wrapper
         %span.photos_inline
+          #gallery
+            = render :partial => "gallery_link"
 
-          = link_to "#" do
-            %span#photos_counter= photos_count params[:id]
-            photos
+
+
+
+
+
 
         %span.add_photos_inline
           =link_to "add photos","#", :id => "plupload"

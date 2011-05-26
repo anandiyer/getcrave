@@ -112,7 +112,23 @@
       return gmap(lat, long, zoom);
     }
   };
+  window.gallery_init = function() {
+    return $('#gallery a').lightBox({
+      overlayBgColor: '#FFF',
+      overlayOpacity: 0.6,
+      imageLoading: '/images/lightbox-ico-loading.gif',
+      imageBtnClose: '/images/lightbox-btn-close.gif',
+      imageBtnPrev: '/images/lightbox-btn-prev.gif',
+      imageBtnNext: '/images/lightbox-btn-next.gif',
+      containerResizeSpeed: 100,
+      txtImage: 'Imagem',
+      txtOf: 'of'
+    });
+  };
   $(document).ready(function() {
+    if ($("#gallery").length > 0) {
+      gallery_init;
+    }
     $(document).ajaxError(function() {
       return $.gritter.add({
         title: "Error",
@@ -123,7 +139,6 @@
         }, this)
       });
     });
-    set_gmap(4);
     $(".yes_answer").live("click", function(event) {
       var form, found_helpfull_number, increment, link, link_text;
       if ($(this).find("a").length > 0) {

@@ -81,8 +81,22 @@ window.set_gmap = (zoom = 4) ->
 
 
 
+window.gallery_init = () ->
+    $('#gallery a').lightBox
+        overlayBgColor: '#FFF'
+        overlayOpacity: 0.6
+        imageLoading: '/images/lightbox-ico-loading.gif'
+        imageBtnClose: '/images/lightbox-btn-close.gif'
+        imageBtnPrev: '/images/lightbox-btn-prev.gif'
+        imageBtnNext: '/images/lightbox-btn-next.gif'
+        containerResizeSpeed: 100
+        txtImage: 'Imagem'
+        txtOf: 'of'
+
 
 $(document).ready ->
+
+    gallery_init if $("#gallery").length > 0
 
 
     $(document).ajaxError () ->
@@ -90,7 +104,7 @@ $(document).ready ->
 
 
 #   google maps in homepage neary
-    set_gmap(4)
+#    set_gmap(4)
 
 
 
