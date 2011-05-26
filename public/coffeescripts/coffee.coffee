@@ -105,10 +105,10 @@ geo = (position) ->
 
 $(document).ready ->
 
-    if (navigator.geolocation)
-      navigator.geolocation.getCurrentPosition(geo, error)
-    else
-      cl error('not supported geo')
+#    if (navigator.geolocation)
+#      navigator.geolocation.getCurrentPosition(geo, error)
+#    else
+#      cl error('not supported geo')
 
 
     gallery_init if $("#gallery").length > 0

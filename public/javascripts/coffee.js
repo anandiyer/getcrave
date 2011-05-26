@@ -141,11 +141,6 @@
     return long = position.coords.longitude;
   };
   $(document).ready(function() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(geo, error);
-    } else {
-      cl(error('not supported geo'));
-    }
     if ($("#gallery").length > 0) {
       gallery_init;
     }

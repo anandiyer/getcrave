@@ -31,13 +31,20 @@ group :development, :test do
   gem 'mongrel'
   gem "erb2haml"
   gem "compass", :require => false
+<<<<<<< HEAD
   gem 'jquery-rails', '>= 0.2.6'
   gem "haml"
   gem "haml-rails"
   gem "faraday"
 
+=======
+#  gem "compass-susy-plugin"
+>>>>>>> 5d829f4d1e03592a3bf9745f94b8ca990f44e385
 end
 
+group :production do
+  gem 'rack-google_analytics', :require => "rack/google_analytics"
+end
 
 # http://postgis.refractions.net/download/
 # http://postgis.refractions.net/docs/ch02.html

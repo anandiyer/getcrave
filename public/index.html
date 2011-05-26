@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset=utf-8 />
+<title>GetCrave</title>
+</head>
+<body>
+    <article>
+      <p><span id="status">Getting your location...</span></p>
+    </article>
+    <script>
+        function success(position) {
+//            var s = document.querySelector('#status');
+//
+//            if (s.className == 'success') {
+//            // not sure why we're hitting this twice in FF, I think it's
+//            // to do with a cached result coming back
+//                return;
+//            }
+//
+//			url = "/restaurants?lat=" + position.coords.latitude + "&long=" + position.coords.longitude;
+//            s.innerHTML = "<a href=\"" + url + "\">Restaurants</a>";
+//            s.className = 'success';
+            path = "/menu_items/location?lat="+position.coords.latitude+"&long="+position.coords.latitude
+            window.location = path
+        }
+
+        function error(msg) {
+           alert("not supported geo")
+  
+            // console.log(arguments);
+        }
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(success, error);
+        } else {
+            error('not supported');
+        }
+    </script>
+</body>
+</html>
