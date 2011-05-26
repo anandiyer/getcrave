@@ -18,45 +18,20 @@ class MenuItemsController < ApplicationController
 
   @@BUCKET = "my_image_bucket"
 
+
+
+
+
   def location
 
-    if params[:lat]
-      @lat = params[:lat].to_f
-      @long = params[:long].to_f
-    else
-      @lat = 40.761447
-      @long = -73.969456
-    end
+    params_4_location_and_show_menu_item_nearby
 
-    @limit = 5
-    
-    if params[:limit] && !params[:limit].empty?
-      @limit = params[:limit].to_i
+    respond_to do |format|
+      format.html # location.html.haml
+      format.xml { render :xml => @menu_items.to_xml(:methods => :distance, :include => [:restaurant, :menu_item_avg_rating_count]) }
+      format.json { render :json => @menu_items.to_json(:methods => :distance, :include => [:restaurant, :menu_item_avg_rating_count]) }
     end
-    
-    # Lookup all the restaurants near the given lat/long and get 25 of the menu_items
-    # and order by rating
-    
-    #FIXME - assuming within 3 mile radius by default
-    #FIXME - order by rating based on QS
-    @origin = [@lat, @long]
-    @menu_items = MenuItem.find(:all, 
-         :origin => @origin,
-         :conditions => "distance < 3",
-         :joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id",
-         :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
-         # :include => :menu_item_avg_rating_count, 
-         :limit => @limit)
-
-    # We have to add this to get the 'distance' field
-    @menu_items.sort_by_distance_from(@origin)
-    
-      respond_to do |format|
-        format.html # location.html.haml
-        format.xml  { render :xml => @menu_items.to_xml(:methods => :distance, :include => [:restaurant, :menu_item_avg_rating_count])}
-        format.json  { render :json => @menu_items.to_json(:methods => :distance, :include => [:restaurant, :menu_item_avg_rating_count]) }
-      end
-  end 
+  end
 
   # GET /menu_items
   # GET /menu_items.xml
@@ -161,11 +136,13 @@ class MenuItemsController < ApplicationController
 
 
   def show_reviews
+    show
     render :partial => "review"
   end
 
 
   def show_menu_items_nearby
+    params_4_location_and_show_menu_item_nearby
     render :partial => "/items_grouped_by_stars"
   end
 
@@ -260,9 +237,43 @@ class MenuItemsController < ApplicationController
         format.json  { render :json => @menu_items.to_json(:include => [:restaurant, :menu_item_avg_rating_count]) }
       end
   end
-  
+
   private
-    def get_restaurant
-      @restaurant = Restaurant.find(params[:restaurant_id]) unless params[:restaurant_id].blank?
+  def get_restaurant
+    @restaurant = Restaurant.find(params[:restaurant_id]) unless params[:restaurant_id].blank?
+  end
+
+  def params_4_location_and_show_menu_item_nearby
+    if params[:lat]
+      @lat = params[:lat].to_f
+      @long = params[:long].to_f
+    else
+      @lat = 40.761447
+      @long = -73.969456
     end
+
+    @limit = 5
+
+    if params[:limit] && !params[:limit].empty?
+      @limit = params[:limit].to_i
+    end
+
+    # Lookup all the restaurants near the given lat/long and get 25 of the menu_items
+    # and order by rating
+
+    #FIXME - assuming within 3 mile radius by default
+    #FIXME - order by rating based on QS
+    @origin = [@lat, @long]
+    @menu_items = MenuItem.find(:all,
+                                :origin => @origin,
+                                :conditions => "distance < 3",
+                                :joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id",
+                                :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
+                                # :include => :menu_item_avg_rating_count,
+                                :limit => @limit)
+
+    # We have to add this to get the 'distance' field
+    @menu_items.sort_by_distance_from(@origin)
+
+  end
 end
