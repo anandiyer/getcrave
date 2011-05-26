@@ -109,7 +109,7 @@ class MenuItemsController < ApplicationController
 
         menu_item_photo.menu_item_id = params[:id]
         menu_item_photo.user_id = current_user.id
-        menu_item_photo.photo = filename
+        p menu_item_photo.photo = url
 
         menu_item = MenuItem.find(params[:id])
         menu_item.menu_item_photos << menu_item_photo
