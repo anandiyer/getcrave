@@ -60,10 +60,10 @@ window.add_review = (id_of_menu_item, msg) ->
 
 
 window.set_gmap = (zoom = 4) ->
+    cl "set_gmap"
 
     ar = []
     if $(".menu_items_location").length > 0
-        cl 66
         $(".restaurant_menu_item_wrapper").each () ->
             lat =  $(@).data("latitude")
             long =  $(@).data("longitude")
@@ -72,6 +72,15 @@ window.set_gmap = (zoom = 4) ->
         lat =  ar[0][0]
         long = ar[0][1]
         gmap(lat, long, zoom, ar)
+    else if $("#current_info_wrapper").length >0
+        obj = $("#current_info_wrapper")
+
+        lat =  obj.data("latitude")
+        long = obj.data("longitude")
+        gmap(lat, long, zoom)
+
+
+
 
 $(document).ready ->
 

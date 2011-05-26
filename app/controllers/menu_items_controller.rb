@@ -19,9 +19,6 @@ class MenuItemsController < ApplicationController
   @@BUCKET = "my_image_bucket"
 
 
-
-
-
   def location
 
     params_4_location_and_show_menu_item_nearby
@@ -101,8 +98,6 @@ class MenuItemsController < ApplicationController
 
     def upload_photo
     if signed_in?
-
-      p params[:file].content_type
       if params[:file] && (params[:file].content_type.to_s.index("image") == 0 )
         temp_file = params[:file].tempfile
         filename = UUIDTools::UUID.random_create.to_s+".jpg"

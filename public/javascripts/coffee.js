@@ -89,13 +89,13 @@
     });
   };
   window.set_gmap = function(zoom) {
-    var ar, lat, long;
+    var ar, lat, long, obj;
     if (zoom == null) {
       zoom = 4;
     }
+    cl("set_gmap");
     ar = [];
     if ($(".menu_items_location").length > 0) {
-      cl(66);
       $(".restaurant_menu_item_wrapper").each(function() {
         var lat, long;
         lat = $(this).data("latitude");
@@ -105,6 +105,11 @@
       lat = ar[0][0];
       long = ar[0][1];
       return gmap(lat, long, zoom, ar);
+    } else if ($("#current_info_wrapper").length > 0) {
+      obj = $("#current_info_wrapper");
+      lat = obj.data("latitude");
+      long = obj.data("longitude");
+      return gmap(lat, long, zoom);
     }
   };
   $(document).ready(function() {
