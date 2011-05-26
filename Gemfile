@@ -26,9 +26,11 @@ group :development, :test do
   gem "erb2haml"
   gem "compass", :require => false
 #  gem "compass-susy-plugin"
-
 end
 
+group :production do
+  gem 'rack-google_analytics', :require => "rack/google_analytics"
+end
 
 # http://postgis.refractions.net/download/
 # http://postgis.refractions.net/docs/ch02.html
