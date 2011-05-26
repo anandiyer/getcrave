@@ -456,10 +456,15 @@ body.two-col.bp{
                 }
             }
 
-            #reviews_wrapper.menu_items{
+            #reviews_wrapper.menu_items, #reviews_wrapper.restaurants_index{
                 border-top: none;
             }
-            #reviews_wrapper.menu_items_location, #reviews_wrapper.menu_items_show_menu_items_nearby{
+
+            #reviews_wrapper.restaurants_index .restaurant_menu_item_wrapper.restaurants_index:first-of-type{
+                border-top: none !important;
+
+            }
+            #reviews_wrapper.menu_items_location, #reviews_wrapper.menu_items_show_menu_items_nearby, .restaurant_menu_item_wrapper.restaurants_index{
                 border-top: none;
                 padding:0px 0 0 8px;
             }
@@ -467,7 +472,7 @@ body.two-col.bp{
                 border-top: 3px solid $light_gray;
                 padding:17px 0 0 8px;
 
-                #update_place_restaurants.menu_items_location, #update_place_restaurants.menu_items_show_menu_items_nearby{
+                #update_place_restaurants.menu_items_location, #update_place_restaurants.menu_items_show_menu_items_nearby, .restaurant_menu_item_wrapper.restaurants_index{
                     padding-top: 0;
                 }
                 #update_place_restaurants{
@@ -478,7 +483,7 @@ body.two-col.bp{
                         margin: 0 0 10px 0;
                     }
 
-                    .restaurant_menu_item_wrapper.menu_items_location, .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby{
+                    .restaurant_menu_item_wrapper.menu_items_location, .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby, .restaurant_menu_item_wrapper.restaurants_index{
                         .numbers{
                             font-weight: bold;
                             font-size:15px;
@@ -527,6 +532,9 @@ body.two-col.bp{
                             $content-columns: ceil(2);
                             @include column($content-columns, true);
                             padding:0 15px 0 0;
+                            img{
+                                @include border-radius(3px);
+                            }
                         }
                         .desc_block_2_col{
                             $content-columns: ceil(11);

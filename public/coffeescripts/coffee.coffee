@@ -59,11 +59,12 @@ window.add_review = (id_of_menu_item, msg) ->
     )
 
 
-window.set_gmap = (zoom = 4) ->
-    cl "set_gmap"
+window.set_gmap = (zoom = 10) ->
+#    cl "set_gmap"
 
     ar = []
-    if $(".menu_items_location").length > 0
+#    if restaurants || menu items page
+    if $(".menu_items_location").length > 0 || $(".restaurants_index") .length > 0
         $(".restaurant_menu_item_wrapper").each () ->
             lat =  $(@).data("latitude")
             long =  $(@).data("longitude")
@@ -119,16 +120,12 @@ $(document).ready ->
 
 
 #   google maps in homepage neary
-    set_gmap(4) if window.location.port != "3005"
-
+    set_gmap(2) if window.location.port != "4000"
 
 
 #    lat = 40.761447
 #    long = -73.969456
 #    gmap(lat, long, 7, [[lat, long],[lat,long+1]])
-
-
-
 
 
     $(".yes_answer").live "click", (event) ->
@@ -163,13 +160,20 @@ $(document).ready ->
         id_of_menu_item = $(this).data("itemid")
         new_limits = $(this).data("next")
 
-        if $(".menu_items_location").length > 0
-
-           obj = $("#update_place_restaurants.menu_items_location")
+        if $(".menu_items_location").length > 0 || $(".restaurants_index").length > 0
            lat = $("body").data("latitude")
            long = $("body").data("longitude")
-           path = "/menu_items/show_menu_items_nearby?lat="+lat+"&long="+long+"&limit="+new_limits
-        else
+
+           obj = $("#update_place_restaurants")
+
+
+           if $(".menu_items_location").length > 0
+            path = "/menu_items/show_menu_items_nearby?lat="+lat+"&long="+long+"&limit="+new_limits
+           else
+            path = "/restaurants/show_restaurants_nearby?lat="+lat+"&long="+long+"&limit="+new_limits
+
+
+        else if $(".menu_items_location").length > 0
             obj = $("#reviews_wrapper #update_place")
             path = "/menu_items/"+id_of_menu_item+"/show_reviews?limit="+new_limits
 
@@ -179,7 +183,7 @@ $(document).ready ->
         success: (html) ->
             after_send(obj, html)
             $("#show_more_button").attr("data-next",new_limits*2)
-            set_gmap(2)
+            set_gmap(8)
 #            $.get('/menu_items/update_map')
 
         });

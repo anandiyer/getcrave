@@ -91,11 +91,10 @@
   window.set_gmap = function(zoom) {
     var ar, lat, long, obj;
     if (zoom == null) {
-      zoom = 4;
+      zoom = 10;
     }
-    cl("set_gmap");
     ar = [];
-    if ($(".menu_items_location").length > 0) {
+    if ($(".menu_items_location").length > 0 || $(".restaurants_index").length > 0) {
       $(".restaurant_menu_item_wrapper").each(function() {
         var lat, long;
         lat = $(this).data("latitude");
@@ -154,8 +153,8 @@
         }, this)
       });
     });
-    if (window.location.port !== "3005") {
-      set_gmap(4);
+    if (window.location.port !== "4000") {
+      set_gmap(2);
     }
     $(".yes_answer").live("click", function(event) {
       var form, found_helpfull_number, increment, link, link_text;
@@ -186,12 +185,16 @@
       var id_of_menu_item, lat, long, new_limits, obj, path;
       id_of_menu_item = $(this).data("itemid");
       new_limits = $(this).data("next");
-      if ($(".menu_items_location").length > 0) {
-        obj = $("#update_place_restaurants.menu_items_location");
+      if ($(".menu_items_location").length > 0 || $(".restaurants_index").length > 0) {
         lat = $("body").data("latitude");
         long = $("body").data("longitude");
-        path = "/menu_items/show_menu_items_nearby?lat=" + lat + "&long=" + long + "&limit=" + new_limits;
-      } else {
+        obj = $("#update_place_restaurants");
+        if ($(".menu_items_location").length > 0) {
+          path = "/menu_items/show_menu_items_nearby?lat=" + lat + "&long=" + long + "&limit=" + new_limits;
+        } else {
+          path = "/restaurants/show_restaurants_nearby?lat=" + lat + "&long=" + long + "&limit=" + new_limits;
+        }
+      } else if ($(".menu_items_location").length > 0) {
         obj = $("#reviews_wrapper #update_place");
         path = "/menu_items/" + id_of_menu_item + "/show_reviews?limit=" + new_limits;
       }
@@ -203,7 +206,7 @@
         success: function(html) {
           after_send(obj, html);
           $("#show_more_button").attr("data-next", new_limits * 2);
-          return set_gmap(2);
+          return set_gmap(8);
         }
       });
     });

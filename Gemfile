@@ -17,11 +17,8 @@ gem "haml-rails"
 gem 'json'
 gem "gritter"
 
-#kill me
 gem "uuidtools"
-
 gem 'aws-s3', '0.6.2', :require => 'aws/s3'
-
 
 group :development, :test do
   gem 'cucumber-rails'
@@ -31,15 +28,11 @@ group :development, :test do
   gem 'mongrel'
   gem "erb2haml"
   gem "compass", :require => false
-<<<<<<< HEAD
   gem 'jquery-rails', '>= 0.2.6'
   gem "haml"
   gem "haml-rails"
   gem "faraday"
 
-=======
-#  gem "compass-susy-plugin"
->>>>>>> 5d829f4d1e03592a3bf9745f94b8ca990f44e385
 end
 
 group :production do

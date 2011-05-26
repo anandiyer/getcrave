@@ -54,7 +54,7 @@ Crave::Application.routes.draw do
   resources :restaurants do
     resources :menu_items
     collection do
-      get 'search'
+      get 'search', 'show_restaurants_nearby'
     end
   end
 

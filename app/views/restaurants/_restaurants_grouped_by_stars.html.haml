@@ -1,0 +1,13 @@
+
+#reviews_wrapper_bloc_wrapper
+  -#- if !@restaurants.first().menu_item_avg_rating_count.nil?
+  -#  - group_star = @restaurants.first().menu_item_avg_rating_count.avg_rating
+  -#- else
+  -#  - group_star = 0
+
+  -#.star_sm{:class => "star_sm stars_"+group_star.to_s.gsub(/[.]/, '_')} &nbsp;
+
+  - @restaurants.each_with_index do |@restaurant, @counter|
+    = render :partial => "restaurant_nearby"
+
+= render :partial => "/show_more"

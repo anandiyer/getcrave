@@ -1,0 +1,8 @@
+#buttons_wrapper
+  #dishes_icon &nbsp;
+  #restaurant_icon &nbsp;
+
+
+#reviews_wrapper{:class => @controller.controller_name+"_"+@controller.action_name}
+  #update_place_restaurants{:class => @controller.controller_name+"_"+@controller.action_name}
+    = render :partial => "restaurants_grouped_by_stars"
