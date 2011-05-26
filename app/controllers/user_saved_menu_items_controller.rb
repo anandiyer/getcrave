@@ -12,7 +12,7 @@ class UserSavedMenuItemsController < ApplicationController
      end
      
     respond_to do |format|
-      format.html # index.html.haml
+      format.html # index.html.erb
       format.xml  { render :xml => @user_saved_menu_items }
       format.json  { render :json => @user_saved_menu_items }
     end

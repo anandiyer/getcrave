@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "users/index.html.haml" do
+describe "users/index.html.erb" do
   before(:each) do
     assign(:users, [
       stub_model(User,

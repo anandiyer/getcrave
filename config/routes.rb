@@ -1,5 +1,7 @@
 Crave::Application.routes.draw do 
 
+  get "nearby/index"
+
   resources :user_saved_menu_items
 
   resources :menu_item_review_comments

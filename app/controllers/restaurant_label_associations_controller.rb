@@ -5,7 +5,7 @@ class RestaurantLabelAssociationsController < ApplicationController
     @restaurant_label_associations = RestaurantLabelAssociation.all
 
     respond_to do |format|
-      format.html # index.html.haml
+      format.html # index.html.erb
       format.xml  { render :xml => @restaurant_label_associations }
     end
   end

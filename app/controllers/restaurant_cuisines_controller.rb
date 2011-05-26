@@ -5,7 +5,7 @@ class RestaurantCuisinesController < ApplicationController
     @restaurant_cuisines = RestaurantCuisine.all
 
     respond_to do |format|
-      format.html # index.html.haml
+      format.html # index.html.erb
       format.xml  { render :xml => @restaurant_cuisines }
     end
   end

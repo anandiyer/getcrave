@@ -3,3 +3,20 @@
 <%= render 'form' %>
 
 <%= link_to 'Back', menu_item_photos_path %>
+
+
+
+<%= form_for @menu_item_photo, :html => {:multipart => true, :accept => "image/gif,image/png,image/jpg"} do |f| %>
+
+   <div>
+     <label>Image</label>
+   </div>
+   <div style="width: 400px;" >
+     <%= file_field 'upload', 'datafile'  %>
+   </div>
+
+ <div>
+   <%= f.submit "Upload image", :class => "button" %>
+ </div>
+
+<% end  %>

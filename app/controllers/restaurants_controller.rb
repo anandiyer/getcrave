@@ -12,7 +12,7 @@ class RestaurantsController < ApplicationController
     get_closest_restaurants params[:lat], params[:long]
 
     respond_to do |format|
-      format.html # index.html.haml
+      format.html # index.html.erb
       format.xml { render :xml => @restaurants }
       format.json { render :json => @restaurants }
     end
@@ -116,7 +116,7 @@ class RestaurantsController < ApplicationController
     @restaurants = @search.results
 
     respond_to do |format|
-      format.html # index.html.haml
+      format.html # index.html.erb
       format.xml { render :xml => @restaurants }
       format.json { render :json => @restaurants }
     end

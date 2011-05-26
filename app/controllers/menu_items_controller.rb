@@ -16,6 +16,8 @@ class MenuItemsController < ApplicationController
   before_filter :get_restaurant
   layout "general"
 
+  @@BUCKET = "my_image_bucket"
+
   def location
 
     if params[:lat]
@@ -124,32 +126,35 @@ class MenuItemsController < ApplicationController
 
     def upload_photo
     if signed_in?
+
+      p params[:file].content_type
       if params[:file] && (params[:file].content_type.to_s.index("image") == 0 )
         temp_file = params[:file].tempfile
-        name = UUIDTools::UUID.random_create.to_s+".jpg"
-        directory = RAILS_ROOT+"/public/images/menu_items_photos"
-        path = File.join(directory, name)
-        File.open(path, "wb") { |f| f.write(temp_file.read)}
+        filename = UUIDTools::UUID.random_create.to_s+".jpg"
+
+        AWS::S3::S3Object.store(filename, temp_file.read, @@BUCKET, :access => :public_read)
+        url = AWS::S3::S3Object.url_for(filename, @@BUCKET, :authenticated => false)
 
         menu_item_photo = MenuItemPhoto.new
 
-        p "*******************************"
-        p menu_item_photo.menu_item_id = params[:id]
-        p menu_item_photo.user_id = current_user.id
-        p menu_item_photo.photo = name
-        p "*******************************"
+        menu_item_photo.menu_item_id = params[:id]
+        menu_item_photo.user_id = current_user.id
+        menu_item_photo.photo = filename
 
         menu_item = MenuItem.find(params[:id])
         menu_item.menu_item_photos << menu_item_photo
 
 
-
         render :text => menu_item.menu_item_photos.count
       else
+#        plupload can filter file types
         raise "wrong type of file"
       end
+
+
+
     else
-      raise "you must be authed"
+      raise "not signed in"
     end
   end
 

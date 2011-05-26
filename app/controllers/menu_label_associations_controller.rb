@@ -5,7 +5,7 @@ class MenuLabelAssociationsController < ApplicationController
     @menu_label_associations = MenuLabelAssociation.all
 
     respond_to do |format|
-      format.html # index.html.haml
+      format.html # index.html.erb
       format.xml  { render :xml => @menu_label_associations }
     end
   end

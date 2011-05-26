@@ -5,7 +5,7 @@ class MenuItemReviewCommentsController < ApplicationController
     @menu_item_review_comments = MenuItemReviewComment.all
 
     respond_to do |format|
-      format.html # index.html.haml
+      format.html # index.html.erb
       format.xml  { render :xml => @menu_item_review_comments }
     end
   end

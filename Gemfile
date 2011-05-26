@@ -16,7 +16,12 @@ gem "haml"
 gem "haml-rails"
 gem 'json'
 gem "gritter"
+
+#kill me
 gem "uuidtools"
+
+gem 'aws-s3', '0.6.2', :require => 'aws/s3'
+
 
 group :development, :test do
   gem 'cucumber-rails'

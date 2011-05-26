@@ -11,7 +11,7 @@ class MenuItemRatingHelpfulsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html # index.html.haml
+      format.html # index.html.erb
       format.xml  { render :xml => @menu_item_rating_helpfuls }
       format.json  { render :json => @menu_item_rating_helpfuls }
     end

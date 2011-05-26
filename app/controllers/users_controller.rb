@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     end
     
     respond_to do |format|
-      format.html # index.html.haml
+      format.html # index.html.erb
       format.xml  { render :xml => @users }
       format.xml  { render :json => @users }
     end

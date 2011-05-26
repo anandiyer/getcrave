@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "menu_item_ingredients/index.html.haml" do
+describe "menu_item_ingredients/index.html.erb" do
   before(:each) do
     assign(:menu_item_ingredients, [
       stub_model(MenuItemIngredient,
