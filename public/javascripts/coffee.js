@@ -1,5 +1,5 @@
 (function() {
-  var after_send, before_send, cl, disher_review_wrapper;
+  var after_send, before_send, cl, disher_review_wrapper, error, geo;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   disher_review_wrapper = $("#reviews_wrapper");
   cl = function(msg) {
@@ -125,7 +125,27 @@
       txtOf: 'of'
     });
   };
+  error = function(msg) {
+    return $.gritter.add({
+      title: "GEO Error",
+      text: msg,
+      image: "/images/error_icon.png",
+      sticky: __bind(function() {
+        return true;
+      }, this)
+    });
+  };
+  geo = function(position) {
+    var lat, long;
+    lat = position.coords.latitude;
+    return long = position.coords.longitude;
+  };
   $(document).ready(function() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(geo, error);
+    } else {
+      cl(error('not supported geo'));
+    }
     if ($("#gallery").length > 0) {
       gallery_init;
     }
@@ -139,6 +159,9 @@
         }, this)
       });
     });
+    if (window.location.port !== "3005") {
+      set_gmap(4);
+    }
     $(".yes_answer").live("click", function(event) {
       var form, found_helpfull_number, increment, link, link_text;
       if ($(this).find("a").length > 0) {

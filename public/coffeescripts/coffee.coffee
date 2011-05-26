@@ -93,8 +93,23 @@ window.gallery_init = () ->
         txtImage: 'Imagem'
         txtOf: 'of'
 
+error = (msg) ->
+    $.gritter.add({title:"GEO Error", text: msg, image: "/images/error_icon.png", sticky: => true});
+
+
+geo = (position) ->
+    lat = position.coords.latitude
+    long = position.coords.longitude
+
+
 
 $(document).ready ->
+
+    if (navigator.geolocation)
+      navigator.geolocation.getCurrentPosition(geo, error)
+    else
+      cl error('not supported geo')
+
 
     gallery_init if $("#gallery").length > 0
 
@@ -104,10 +119,7 @@ $(document).ready ->
 
 
 #   google maps in homepage neary
-#    set_gmap(4)
-
-
-
+    set_gmap(4) if window.location.port != "3005"
 
 
 
