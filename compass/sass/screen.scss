@@ -40,8 +40,8 @@ $blue: #2e70a4;
 $stars_position: 0 -635px;
 $stars_gray_position: 0 -905px;
 $flag_position: 0 -371px;
-$save_position: 0 -299px;
-$save_position_saved: 0 -335px;
+$save_position: -32px -299px;
+$save_position_saved: -32px -349px;
 $photos_counter_position: 0 -596px;
 $add_photos_counter_position: 0 -614px;
 $yes_position: 0 -551px;
@@ -448,7 +448,7 @@ body.two-col.bp{
                     #flag_icons{
                         $content-columns: ceil(3);
                         @include column($content-columns, true);
-                        padding: 10px 0 0 37px;
+                        padding: 10px 0 0 18px;
                         div{
                             padding-right:30px;
                         }
@@ -834,11 +834,11 @@ body.two-col.bp{
 
 }
 .save_icon.saved_item{
-    @include sprites($save_position_saved, 27px, 32px);
+    @include sprites($save_position_saved, 27px, 47px);
 
 }
 .save_icon.not_saved_item{
-    @include sprites($save_position, 27px, 32px);
+    @include sprites($save_position, 27px, 47px);
     cursor: pointer;
 }
 
