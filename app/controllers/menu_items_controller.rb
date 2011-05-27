@@ -63,16 +63,12 @@ class MenuItemsController < ApplicationController
 
   # GET /menu_items/1
   # GET /menu_items/1.xml
+
+
   def show
 
-    @foodies_for_current_dish = User.find(:all, 
-      :order => 'user_ratings_count DESC', 
-      :limit => 5)
-    
-    #FIXME - need to get all the menu item attributes like ratings, photos etc.
-    @menu_item = MenuItem.find(params[:id],
-      :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings])
-    
+    params_4_show_n_show_reviews
+
     respond_to do |format|
       format.html # _unused_show.html.haml
       format.xml  { render :xml => @menu_item.to_xml( :include => [ :restaurant, :menu_item_avg_rating_count, :menu_item_ratings ] ) }
@@ -132,7 +128,7 @@ class MenuItemsController < ApplicationController
 
 
   def show_reviews
-    show
+    params_4_show_n_show_reviews
     render :partial => "review"
   end
 
@@ -238,6 +234,19 @@ class MenuItemsController < ApplicationController
   def get_restaurant
     @restaurant = Restaurant.find(params[:restaurant_id]) unless params[:restaurant_id].blank?
   end
+
+  def params_4_show_n_show_reviews
+    @foodies_for_current_dish = User.find(:all,
+      :order => 'user_ratings_count DESC',
+      :limit => 5)
+
+    #FIXME - need to get all the menu item attributes like ratings, photos etc.
+    @menu_item = MenuItem.find(params[:id],
+      :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings])
+
+  end
+
+
 
   def params_4_location_and_show_menu_item_nearby
     if params[:lat]
