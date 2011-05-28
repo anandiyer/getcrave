@@ -169,7 +169,7 @@
 
            var sessionHandler = function(b,e) {
                if(b.getText() == "Login") {
-                   window.open('http://getcrave.com/auth/facebook','auth');
+                   window.location = 'http://getcrave.com/auth/facebook';
                }
                if(b.getText() == "Logout") {
                    localStorage.setItem("uid","");
