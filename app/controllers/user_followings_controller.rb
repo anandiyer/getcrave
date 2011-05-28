@@ -1,9 +1,15 @@
 class UserFollowingsController < ApplicationController
+  before_filter :get_user
+  
   # GET /user_followings
   # GET /user_followings.xml
   def index
-    @user_followings = UserFollowing.all
-
+    if (@user)
+      @user_followings = @user.user_followings.find(:all)
+    else
+      @user_followings = UserFollowing.all
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @user_followings }
@@ -89,4 +95,9 @@ class UserFollowingsController < ApplicationController
       format.json  { head :ok }
     end
   end
+  
+  private
+    def get_user
+      @user = User.find(params[:user_id]) unless params[:user_id].blank?
+    end
 end
