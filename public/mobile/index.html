@@ -36,8 +36,6 @@
            }
 
            navigator.geolocation.getCurrentPosition(function(position) {
-               console.log('location got');
-               console.log('/restaurants.json?lat='+position.coords.latitude+'&long='+position.coords.longitude);
                if(urlPrefixSet) {
                    dishStore.proxy.url = urlPrefix+encodeURIComponent('/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                    restaurants.proxy.url = urlPrefix+encodeURIComponent('/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
@@ -105,7 +103,7 @@
                //itemSelector: 'div.adish',
                //this breaks my onItemDisclosure activity
                singleSelect: true,
-               grouped: false,
+               grouped: true,
                indexBar: false,
                store: dishStore,
                id:'dishesNearbyList',
