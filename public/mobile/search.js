@@ -1,5 +1,13 @@
+Ext.regModel('DishSearch',
+{
+    fields: ['name','id','price','description','restaurant_id']
+});
+
+dishSearchTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><b>{name}</b><br/>{description}</div></tpl>');
+
+
 var dishSearchStore = new Ext.data.Store({
-    model: 'Dish',
+    model: 'DishSearch',
     proxy: {
         type:'ajax',
         url:'',
@@ -52,7 +60,7 @@ var dishSearchList = new Ext.List({
            Ext.getCmp('mainPnl').setActiveItem(1);
        }
     },
-    itemTpl: dishTemplate,
+    itemTpl: dishSearchTemplate,
     singleSelect: true,
     grouped: false,
     indexBar: false,
