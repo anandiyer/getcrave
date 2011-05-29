@@ -32,6 +32,6 @@ class SessionsController < ApplicationController
   
   private 
     def is_iphone_request?
-      request.user_agent =~ /(Mobile\/.+Safari)/
+      request.user_agent =~ /(Mobile.+Safari)/
     end
 end
