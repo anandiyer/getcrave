@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_many :authorizations
   has_many :menu_item_ratings
   has_many :user_saved_menu_items
+  has_many :user_followings
   has_friendly_id :user_name, :use_slug => true
   attr_accessible :user_name, :user_profile_pic_url
   

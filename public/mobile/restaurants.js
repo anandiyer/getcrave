@@ -135,6 +135,7 @@ var reviewForm = new Ext.form.FormPanel({
 });
 
 function dishDisplay(response) {
+    console.log('displaying dish');
     var responseObject = eval('(' + response.responseText + ')');
     htmlString = '<div class="dishinfo"><b>'+responseObject.menu_item.name+'</b><br/>';
     htmlString += '@'+responseObject.menu_item.restaurant.name+'<br>';
@@ -170,12 +171,12 @@ function dishDisplay(response) {
     //Ext.getCmp('detailPnl').add(carouselPnl);
     Ext.getCmp('infoPnl').update(htmlString);
     myUID = localStorage.getItem("uid");
-    if(myUID!="") {
+    if(myUID!="" && myUID!=null) {
+        Ext.getCmp('detailPnl').add(reviewForm);
         Ext.getCmp('userId').setValue(myUID);
         Ext.getCmp('menuId').setValue(responseObject.menu_item.id);
-        Ext.getCmp('detailPnl').add(reviewForm);
-        Ext.getCmp('detailPnl').doLayout();
     }
+    Ext.getCmp('detailPnl').doLayout();
 }
 
 var aRestaurantList = new Ext.List({

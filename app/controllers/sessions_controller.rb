@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
     
     # If coming from an iPhone, redirect to another page with the user_id
     if is_iphone_request?
-      redirect_to "/mobile/uid?uid=" + current_user.id.to_s
+      redirect_to "/mobile/uid/?uid=" + current_user.id.to_s
     else
       redirect_to session[:return_to]
     end
@@ -32,6 +32,6 @@ class SessionsController < ApplicationController
   
   private 
     def is_iphone_request?
-      request.user_agent =~ /(Mobile\/.+Safari)/
+      request.user_agent =~ /(Mobile.+Safari)/
     end
 end
