@@ -1,0 +1,26 @@
+- if  @controller.controller_name == "menu_items"
+  - dish_button_status = "on"
+  - rest_button_status = "off"
+- else
+  - dish_button_status = "off"
+  - rest_button_status = "on"
+
+
+#buttons_wrapper
+
+  - if rest_button_status == "off"
+    #dishes_icon{:class => dish_button_status+" dishbutton"}
+      #left_side &nbsp;
+      = image_tag "dishes_button_text.png"
+    =link_to restaurants_path do
+      #restaurant_icon{:class => rest_button_status+" restbutton"}
+        #left_side &nbsp;
+        = image_tag "restaurants_button_text_on.png"
+  - else
+    =link_to location_menu_items_path do
+      #dishes_icon{:class => dish_button_status+" dishbutton"}
+        #left_side &nbsp;
+        = image_tag "dishes_button_text.png"
+    #restaurant_icon{:class => rest_button_status+" restbutton"}
+      #left_side &nbsp;
+      = image_tag "restaurants_button_text_on.png"

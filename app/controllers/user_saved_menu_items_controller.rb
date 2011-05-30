@@ -1,5 +1,7 @@
 class UserSavedMenuItemsController < ApplicationController
   before_filter :get_user
+
+  layout "general"
   
   # GET /user_saved_menu_items
   # GET /user_saved_menu_items.xml
@@ -95,7 +97,11 @@ class UserSavedMenuItemsController < ApplicationController
   
   private
     def get_user
-      @user = User.find(params[:user_id]) unless params[:user_id].blank?
+      if !params[:user_id]
+         @user = current_user
+      else
+        @user = User.find(params[:user_id]) unless params[:user_id].blank?
+      end
     end
   
 end

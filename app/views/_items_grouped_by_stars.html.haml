@@ -1,4 +1,8 @@
+- if !@menu_items
+  - @menu_items = @user_saved_menu_items
+
 #reviews_wrapper_bloc_wrapper
+
   - if !@menu_items.first().menu_item_avg_rating_count.nil?
 
     - group_star = @menu_items.first().menu_item_avg_rating_count.avg_rating

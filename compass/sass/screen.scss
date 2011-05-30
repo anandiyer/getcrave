@@ -280,6 +280,10 @@ body.two-col.bp{
                 @include container;
 
 
+                #restaurant_icon{
+                    @extend #dishes_icon;
+                    margin-left: -30px;
+                }
 
                 #dishes_icon{
                     @include inline-block;
@@ -287,24 +291,44 @@ body.two-col.bp{
                     margin: 0;
                     width: 148px;
                     height: 30px;
-                    cursor: pointer;
-                    background: url(/images/dishes_icon.png) no-repeat 0 0;
+                    /*background: url(/images/dishes_icon.png) no-repeat 0 0;*/
+                    position: relative;
+                    text-align: center;
+                    #left_side{
+                        position:absolute;
+                        left: 0;
+                        top: 0px;
+                        width: 10px;
+                        height: 30px;
+                    }
+                    img{
+                        padding-top:7px;
+                    }
 
+
+                }
+
+
+                #restaurant_icon.on{
+                   margin-left: -4px;
+                }
+
+                #restaurant_icon.off{
+                    margin-left: -4px;
+                    background: url("/images/sprites/button-sprite.png") no-repeat scroll -72px -5px transparent;
+                }
+                #dishes_icon.off{
+
+                    background: url("/images/sprites/button-sprite.png") no-repeat scroll -72px -5px transparent;
                 }
 
                 #dishes_icon.on{
-
+                    background: url("/images/sprites/button-sprite.png") no-repeat scroll -72px -40px transparent;
+                    #left_side{
+                        background: url("/images/sprites/button-sprite.png") no-repeat scroll 0px -40px transparent;
+                    }
                 }
 
-
-                #restaurant_icon{
-                    @extend #dishes_icon;
-                    width: 151px;
-                    margin-left: -4px;
-                    background-image: url(/images/restaurant_icon.png);
-
-
-                }
             }
 
 
