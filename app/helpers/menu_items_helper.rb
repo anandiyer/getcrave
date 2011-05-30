@@ -15,4 +15,6 @@ module MenuItemsHelper
   def get_photos menu_item_id
     MenuItem.find(menu_item_id).menu_item_photos.map{|x| x.photo}
   end
+
+
 end

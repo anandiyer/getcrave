@@ -146,6 +146,20 @@
     return long = position.coords.longitude;
   };
   $(document).ready(function() {
+    $(".label_div ul li").live("click", function(event) {
+      var id;
+      id = $(this).attr("id");
+      return $("#labels form").find("input#menu_label_association_menu_label_id").val(id).end().submit();
+    });
+    $("#desc_wrap #labels a").live("click", function(event) {
+      var offset;
+      offset = $(this).offset();
+      $(".label_div_wrapper").offset({
+        top: offset.top + 12,
+        left: offset.left - 84
+      }).slideDown();
+      return event.preventDefault();
+    });
     if ($("#gallery").length > 0) {
       gallery_init;
     }
@@ -159,7 +173,9 @@
         }, this)
       });
     });
-    set_gmap(2);
+    if (window.location.port !== "3005") {
+      set_gmap(2);
+    }
     $(".yes_answer").live("click", function(event) {
       var form, found_helpfull_number, increment, link, link_text;
       if ($(this).find("a").length > 0) {

@@ -118,6 +118,34 @@ $(document).ready ->
 #      cl error('not supported geo')
 
 
+
+#    ### labels
+
+    $(".label_div ul li").live "click", (event) ->
+        id = $(this).attr("id")
+        $("#labels form")
+            .find("input#menu_label_association_menu_label_id")
+            .val(id)
+            .end()
+            .submit()
+
+
+    $("#desc_wrap #labels a").live "click", (event) ->
+
+        offset = $(this).offset()
+#        $(".label_div_wrapper").offset("{ top: "+offset.top+", left: "+offset.left+"}")
+        $(".label_div_wrapper").offset({ top: offset.top+12, left: offset.left-84 }).slideDown()
+        event.preventDefault()
+#
+#        label_div = $(".label_div")
+#        if $(label_div).length == 0
+#         $("body").add("div").addClass("label_div")
+
+#    labels
+
+
+
+
     gallery_init if $("#gallery").length > 0
 
 
@@ -126,8 +154,9 @@ $(document).ready ->
 
 
 #   google maps in homepage neary
-    set_gmap(2)
-#    if window.location.port != "13005"
+
+    set_gmap(2) if window.location.port != "3005"
+
 
 
 #    lat = 40.761447

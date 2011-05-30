@@ -2,6 +2,16 @@
 
 
 
+- labels = MenuLabel.all
+
+= content_tag :div, :class => "label_div_wrapper" do
+  = content_tag :div, " ", :class => "label_div_tri"
+
+  = content_tag :div, :class => "label_div" do
+    = content_tag :ul do
+      - labels.each do |x|
+        = content_tag :li, x.menu_label, :id => x.id
+
 #current_content_block
   #bread_crumbs
     = link_to("← "+@menu_item.restaurant.name, @menu_item.restaurant)
@@ -41,18 +51,26 @@
         -if @menu_item.menu_item_avg_rating_count
           %span= @menu_item.menu_item_avg_rating_count.count
           Reviews
+
       #desc_wrap
+
         #description= @menu_item.description
         #dishlabels
           %strong Dish labels:
         #labels
+          - @menu_label_association = MenuLabelAssociation.new
+          = form_for(@menu_label_association, :remote => true) do |f|
+            = f.text_field :menu_item_id, :value => params[:id]
+            = f.text_field :menu_label_id
+            = f.text_field :user_id, :value => current_user.id
+
+
           -%W{Gluten-Free Vegan Vegetarian}.each do |x|
             .birdy &nbsp;
             =link_to(x+"(12)","#", :class => "label")
             ,
           .plus &nbsp;
-          =link_to "#" do
-            Add a label
+          =link_to( "Add a label", "#")
 
       -#=image_tag "social.png"
       #social

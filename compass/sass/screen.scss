@@ -76,6 +76,47 @@ $small_font_size: 12px;
 
 
 body.two-col.bp{
+
+    .label_div_tri{
+        width: 220px;
+        background: url("/images/icons/labels_triangle.gif") no-repeat center center;
+        height: 9px;
+
+    }
+
+    .label_div_wrapper{
+        display: none;
+        position: absolute;
+        top: 10px;
+        width: 220px;
+        .label_div{
+            background-color: white;
+            font-size: 15px;
+            border:5px solid #575757;
+
+            ul{
+                margin: 0px;
+                padding: 0px;
+
+                li{
+                    list-style: none;
+                    padding: 6px 0 0 11px;
+                    border-bottom: 1px solid $light_gray;
+
+                };
+                li:hover{
+                    background-color: $gray;
+                    color: white;
+                    cursor: pointer;
+                }
+            }
+
+        }
+    }
+
+
+
+
     h1, h2, h3, h4{
         color: #464646;
     }
@@ -900,3 +941,4 @@ body.two-col.bp{
 .i{
     font-style: italic;
 }
+
