@@ -120,7 +120,7 @@ $(document).ready ->
 
 
 #   google maps in homepage neary
-    set_gmap(2) if window.location.port != "4000"
+    set_gmap(2) if window.location.port != "3005"
 
 
 #    lat = 40.761447

@@ -24,9 +24,8 @@
           .before_start
             .data_review
               =@mi_rating.updated_at.strftime("%b %d, %Y")
-            %h3
-              -#TODO: refactor to somethings like @mi_rating.user.user_name
-              =user.user_name
+            -#%h3
+            -#  =user.user_name
             %em
               by
               =link_to user.user_name, user

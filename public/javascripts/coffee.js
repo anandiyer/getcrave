@@ -153,7 +153,7 @@
         }, this)
       });
     });
-    if (window.location.port !== "4000") {
+    if (window.location.port !== "3005") {
       set_gmap(2);
     }
     $(".yes_answer").live("click", function(event) {
