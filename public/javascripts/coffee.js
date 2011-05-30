@@ -5,6 +5,14 @@
   cl = function(msg) {
     return console.log(msg);
   };
+  window.added_label = function(menu_item_id) {
+    $.gritter.add({
+      title: 'Notification',
+      text: menu_item_id + ' Label was added!',
+      image: '/images/icons/add_label_icon.png'
+    });
+    return $(".label_div_wrapper").hide();
+  };
   window.gmap = function(lat, long, zoom, coor_array) {
     var latlng, ll, map, myOptions, _i, _len, _results;
     if (zoom == null) {

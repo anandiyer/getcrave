@@ -37,18 +37,18 @@ class MenuLabelAssociationsController < ApplicationController
     @menu_label_association = MenuLabelAssociation.find(params[:id])
   end
 
+
   # POST /menu_label_associations
   # POST /menu_label_associations.xml
   def create
     @menu_label_association = MenuLabelAssociation.new(params[:menu_label_association])
 
+
     respond_to do |format|
       if @menu_label_association.save
         format.html { redirect_to(@menu_label_association, :notice => 'Menu label association was successfully created.') }
         format.xml  { render :xml => @menu_label_association, :status => :created, :location => @menu_label_association }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @menu_label_association.errors, :status => :unprocessable_entity }
+        format.js  { render :js => "alert(1)"}
       end
     end
   end

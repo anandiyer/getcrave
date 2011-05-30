@@ -4,6 +4,11 @@ disher_review_wrapper = $("#reviews_wrapper")
 cl = (msg) ->
     console.log(msg)
 
+window.added_label = (menu_item_id) ->
+    $.gritter.add({title:'Notification', text: menu_item_id+' Label was added!', image: '/images/icons/add_label_icon.png'});
+    $(".label_div_wrapper").hide()
+
+
 window.gmap = (lat, long, zoom = 10, coor_array = [[lat,long]]) ->
     latlng = new google.maps.LatLng(lat, long);
     myOptions = zoom: zoom, center: latlng, mapTypeId: google.maps.MapTypeId.ROADMAP, overviewMapControl: false, overviewMapControlOptions: false, panControl: false, scaleControl: false, zoomControl: false, keyboardShortcuts: false, mapTypeControl: false, streetViewControl: false;
