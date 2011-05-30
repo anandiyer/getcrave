@@ -10,7 +10,7 @@ window.gmap = (lat, long, zoom = 10, coor_array = [[lat,long]]) ->
     map = new google.maps.Map(document.getElementById("map"),myOptions)
 
     for ll in coor_array
-#        g_notice("Lang Lat", ll[0]+"<br />"+ll[1])
+        g_notice("Lang Lat", ll[0]+"<br />"+ll[1])
         new google.maps.Marker({position: new google.maps.LatLng(ll[0], ll[1]), map: map })
 
 
@@ -60,11 +60,13 @@ window.add_review = (id_of_menu_item, msg) ->
 
 
 window.set_gmap = (zoom = 10) ->
-#    cl "set_gmap"
+    cl "set_gmap"
 
     ar = []
 #    if restaurants || menu items page
-    if $(".menu_items_location").length > 0 || $(".restaurants_index") .length > 0
+    if $(".menu_items_location").length > 0 || $(".restaurants_index").length > 0 || $(".user_saved_menu_items_index").length > 0
+        cl "if $(.menu_items_location).length > 0 || $(.restaurants_index) .length > 0"
+
         $(".restaurant_menu_item_wrapper").each () ->
             lat =  $(@).data("latitude")
             long =  $(@).data("longitude")
@@ -74,11 +76,15 @@ window.set_gmap = (zoom = 10) ->
         long = ar[0][1]
         gmap(lat, long, zoom, ar)
     else if $("#current_info_wrapper").length >0
+        cl "else if $(#current_info_wrapper).length >0"
         obj = $("#current_info_wrapper")
 
-        lat =  obj.data("latitude")
-        long = obj.data("longitude")
+        cl lat =  obj.data("latitude")
+        cl long = obj.data("longitude")
         gmap(lat, long, zoom)
+    else
+        cl "else"
+
 
 
 
@@ -120,7 +126,8 @@ $(document).ready ->
 
 
 #   google maps in homepage neary
-    set_gmap(2) if window.location.port != "3005"
+    set_gmap(2)
+#    if window.location.port != "13005"
 
 
 #    lat = 40.761447
@@ -176,6 +183,10 @@ $(document).ready ->
         else if $(".menu_items_location").length > 0
             obj = $("#reviews_wrapper #update_place")
             path = "/menu_items/"+id_of_menu_item+"/show_reviews?limit="+new_limits
+        else if $(".user_saved_menu_items_index").length > 0
+            obj = $("#update_place_restaurants")
+            path = "/user_saved_menu_items/show_menu_items_saved?limit="+new_limits
+
 
 
         $.ajax({url: path,

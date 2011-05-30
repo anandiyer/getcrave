@@ -2,17 +2,30 @@ class UserSavedMenuItemsController < ApplicationController
   before_filter :get_user
 
   layout "general"
-  
+
+
+
+  def show_menu_items_saved
+    params_for_index_and_show_menu_items_saved
+    render :partial => "/items_grouped_by_stars"
+  end
+
+
   # GET /user_saved_menu_items
   # GET /user_saved_menu_items.xml
-  
   def index
-    if (@user)
-       @user_saved_menu_items = @user.user_saved_menu_items.find(:all)
-     else 
-       @user_saved_menu_items = UserSavedMenuItem.all
-     end
+#    if (@user)
+#       @user_saved_menu_items = @user.user_saved_menu_items.find(:all)
+#     else
+#       @user_saved_menu_items = UserSavedMenuItem.all
+#     end
+
+#    @user_saved_menu_items = MenuItem
+
+
      
+    params_for_index_and_show_menu_items_saved
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @user_saved_menu_items }
@@ -94,14 +107,32 @@ class UserSavedMenuItemsController < ApplicationController
       format.json  { head :ok }
     end
   end
-  
+
   private
-    def get_user
-      if !params[:user_id]
-         @user = current_user
-      else
-        @user = User.find(params[:user_id]) unless params[:user_id].blank?
-      end
+  def get_user
+    if !params[:user_id]
+      @user = current_user
+    else
+      @user = User.find(params[:user_id]) unless params[:user_id].blank?
     end
+  end
+
+  def params_for_index_and_show_menu_items_saved
+
+    if !params[:limit].nil?
+      p @limit = params[:limit]
+    else
+      p @limit = 5
+    end
+
+#    TODO: its not real saved items
+
+    @menu_items = MenuItem.find(:all,
+                                :joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id",
+                                :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
+                                # :include => :menu_item_avg_rating_count,
+                                :limit => @limit)
+
+  end
   
 end

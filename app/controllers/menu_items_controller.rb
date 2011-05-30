@@ -257,7 +257,7 @@ class MenuItemsController < ApplicationController
       @long = -73.969456
     end
 
-    @limit = 1
+    @limit = 5
 
     if params[:limit] && !params[:limit].empty?
       @limit = params[:limit].to_i

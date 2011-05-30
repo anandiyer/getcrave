@@ -1003,7 +1003,7 @@ body.two-col.bp #content_wrap #content #current_content_block #current_info_wrap
   padding-right: 30px;
 }
 /* line 489, ../../compass/sass/screen.scss */
-body.two-col.bp #content_wrap #content #reviews_wrapper.menu_items, body.two-col.bp #content_wrap #content #reviews_wrapper.restaurants_index {
+body.two-col.bp #content_wrap #content #reviews_wrapper.menu_items, body.two-col.bp #content_wrap #content #reviews_wrapper.restaurants_index, body.two-col.bp #content_wrap #content #reviews_wrapper.user_saved_menu_items_index, body.two-col.bp #content_wrap #content .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved {
   border-top: none;
 }
 /* line 493, ../../compass/sass/screen.scss */
@@ -1011,7 +1011,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper.restaurants_index .resta
   border-top: none !important;
 }
 /* line 497, ../../compass/sass/screen.scss */
-body.two-col.bp #content_wrap #content #reviews_wrapper.menu_items_location, body.two-col.bp #content_wrap #content #reviews_wrapper.menu_items_show_menu_items_nearby, body.two-col.bp #content_wrap #content .restaurant_menu_item_wrapper.restaurants_index {
+body.two-col.bp #content_wrap #content #reviews_wrapper.menu_items_location, body.two-col.bp #content_wrap #content #reviews_wrapper.menu_items_show_menu_items_nearby, body.two-col.bp #content_wrap #content .restaurant_menu_item_wrapper.restaurants_index, body.two-col.bp #content_wrap #content .user_saved_menu_items_index, body.two-col.bp #content_wrap #content .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved {
   border-top: none;
   padding: 0px 0 0 8px;
 }
@@ -1021,7 +1021,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper {
   padding: 17px 0 0 8px;
 }
 /* line 505, ../../compass/sass/screen.scss */
-body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants.menu_items_location, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants.menu_items_show_menu_items_nearby, body.two-col.bp #content_wrap #content #reviews_wrapper .restaurant_menu_item_wrapper.restaurants_index {
+body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants.menu_items_location, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants.menu_items_show_menu_items_nearby, body.two-col.bp #content_wrap #content #reviews_wrapper .restaurant_menu_item_wrapper.restaurants_index, body.two-col.bp #content_wrap #content #reviews_wrapper .user_saved_menu_items_index, body.two-col.bp #content_wrap #content #reviews_wrapper .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved {
   padding-top: 0;
 }
 /* line 508, ../../compass/sass/screen.scss */
@@ -1037,8 +1037,8 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurant
   *zoom: 1;
   margin: 0 0 10px 0;
 }
-/* line 517, ../../compass/sass/screen.scss */
-body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_location .numbers, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby .numbers, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.restaurants_index .numbers {
+/* line 520, ../../compass/sass/screen.scss */
+body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_location .numbers, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby .numbers, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.restaurants_index .numbers, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.user_saved_menu_items_index .numbers, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved .numbers {
   font-weight: bold;
   font-size: 15px;
   display: inline;
@@ -1048,11 +1048,11 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurant
   margin-right: -5px;
 }
 /* line 147, ../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_location .numbers, * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby .numbers, * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.restaurants_index .numbers {
+* html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_location .numbers, * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby .numbers, * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.restaurants_index .numbers, * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.user_saved_menu_items_index .numbers, * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved .numbers {
   overflow-x: hidden;
 }
-/* line 526, ../../compass/sass/screen.scss */
-body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_location .desc_block_2_col, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby .desc_block_2_col, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.restaurants_index .desc_block_2_col {
+/* line 529, ../../compass/sass/screen.scss */
+body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_location .desc_block_2_col, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby .desc_block_2_col, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.restaurants_index .desc_block_2_col, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.user_saved_menu_items_index .desc_block_2_col, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved .desc_block_2_col {
   display: inline;
   float: left;
   margin-right: 0;
@@ -1060,14 +1060,14 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurant
   padding-top: 3px;
 }
 /* line 147, ../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_location .desc_block_2_col, * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby .desc_block_2_col, * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.restaurants_index .desc_block_2_col {
+* html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_location .desc_block_2_col, * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby .desc_block_2_col, * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.restaurants_index .desc_block_2_col, * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.user_saved_menu_items_index .desc_block_2_col, * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved .desc_block_2_col {
   overflow-x: hidden;
 }
-/* line 532, ../../compass/sass/screen.scss */
-body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_location .save_n_review_3_col, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby .save_n_review_3_col, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.restaurants_index .save_n_review_3_col {
+/* line 536, ../../compass/sass/screen.scss */
+body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_location .save_n_review_3_col, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby .save_n_review_3_col, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.restaurants_index .save_n_review_3_col, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.user_saved_menu_items_index .save_n_review_3_col, body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved .save_n_review_3_col {
   padding-left: 16px;
 }
-/* line 536, ../../compass/sass/screen.scss */
+/* line 540, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper {
   width: 973px;
   margin: 0 auto;
@@ -1086,7 +1086,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurant
 * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper {
   overflow-x: hidden;
 }
-/* line 545, ../../compass/sass/screen.scss */
+/* line 549, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .review_counter_for_item {
   position: absolute;
   text-align: center;
@@ -1098,12 +1098,12 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurant
   top: 71px;
   left: 560px;
 }
-/* line 555, ../../compass/sass/screen.scss */
+/* line 559, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .review_counter_for_item div {
   font-size: 15px;
   font-weight: bold;
 }
-/* line 561, ../../compass/sass/screen.scss */
+/* line 565, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .img_column_mi_1_col {
   display: inline;
   float: left;
@@ -1115,7 +1115,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurant
 * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .img_column_mi_1_col {
   overflow-x: hidden;
 }
-/* line 565, ../../compass/sass/screen.scss */
+/* line 569, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .img_column_mi_1_col img {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -1124,7 +1124,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurant
   -khtml-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 569, ../../compass/sass/screen.scss */
+/* line 573, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .desc_block_2_col {
   display: inline;
   float: left;
@@ -1136,18 +1136,18 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurant
 * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .desc_block_2_col {
   overflow-x: hidden;
 }
-/* line 573, ../../compass/sass/screen.scss */
+/* line 577, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .desc_block_2_col h1 {
   color: #2e70a4;
   padding: 0 0 3px 0;
   margin: 0;
   font-size: 18px;
 }
-/* line 579, ../../compass/sass/screen.scss */
+/* line 583, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .desc_block_2_col a {
   text-decoration: none;
 }
-/* line 583, ../../compass/sass/screen.scss */
+/* line 587, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .save_n_review_3_col {
   display: inline;
   float: left;
@@ -1159,7 +1159,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurant
 * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .save_n_review_3_col {
   overflow-x: hidden;
 }
-/* line 594, ../../compass/sass/screen.scss */
+/* line 598, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper {
   margin: 12px 0 0 0;
   padding: 8px;
@@ -1173,12 +1173,12 @@ body.two-col.bp #content_wrap #content #reviews_wrapper {
 * html body.two-col.bp #content_wrap #content #reviews_wrapper {
   overflow-x: hidden;
 }
-/* line 600, ../../compass/sass/screen.scss */
+/* line 604, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper h3.review {
   font-size: 23px;
   margin-bottom: 6px;
 }
-/* line 605, ../../compass/sass/screen.scss */
+/* line 609, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #select_box_hint {
   width: 140px;
   height: 30px;
@@ -1189,7 +1189,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #select_box_hint {
   left: 69px;
   background-color: transparent;
 }
-/* line 617, ../../compass/sass/screen.scss */
+/* line 621, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #show_more_button {
   height: 25px;
   border: 1px solid #ccc;
@@ -1199,11 +1199,11 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #show_more_button {
   margin-top: 10px;
   cursor: pointer;
 }
-/* line 627, ../../compass/sass/screen.scss */
+/* line 631, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #update_place {
   /*border: 1px solid red;*/
 }
-/* line 630, ../../compass/sass/screen.scss */
+/* line 634, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #sorting {
   margin-bottom: 8px;
   width: 200px;
@@ -1211,13 +1211,13 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #sorting {
   *zoom: 1;
   float: none;
 }
-/* line 636, ../../compass/sass/screen.scss */
+/* line 640, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #before_sort_by {
   width: 50px;
   float: left;
   padding-top: 7px;
 }
-/* line 644, ../../compass/sass/screen.scss */
+/* line 648, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by {
   cursor: pointer;
   float: right;
@@ -1228,7 +1228,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by {
   height: 30px;
   background-color: #fff;
 }
-/* line 653, ../../compass/sass/screen.scss */
+/* line 657, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by input {
   width: 100px;
   border: none;
@@ -1236,7 +1236,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by input 
   padding: 6px 0 0 9px;
   color: black;
 }
-/* line 660, ../../compass/sass/screen.scss */
+/* line 664, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by ul {
   -moz-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
@@ -1248,7 +1248,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by ul {
   padding: 0;
   width: 140px;
 }
-/* line 671, ../../compass/sass/screen.scss */
+/* line 675, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by ul li {
   color: black;
   list-style-type: none;
@@ -1258,21 +1258,21 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by ul li 
   border-bottom: 1px solid #ececec;
   background-color: #fff;
 }
-/* line 681, ../../compass/sass/screen.scss */
+/* line 685, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by ul li:hover {
   background-color: #ececec;
 }
-/* line 688, ../../compass/sass/screen.scss */
+/* line 692, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #reviews_wrapper_bloc_wrapper {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 691, ../../compass/sass/screen.scss */
+/* line 695, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block:first-of-type {
   border-top: 1px solid #ececec;
   /*margin-top: 15px;*/
 }
-/* line 695, ../../compass/sass/screen.scss */
+/* line 699, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block {
   width: 973px;
   margin: 0 auto;
@@ -1289,7 +1289,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block {
 * html body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block {
   overflow-x: hidden;
 }
-/* line 704, ../../compass/sass/screen.scss */
+/* line 708, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_image_col {
   padding-right: 28px;
   display: inline;
@@ -1301,7 +1301,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
 * html body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_image_col {
   overflow-x: hidden;
 }
-/* line 709, ../../compass/sass/screen.scss */
+/* line 713, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_image_col img {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -1310,7 +1310,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   -khtml-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 714, ../../compass/sass/screen.scss */
+/* line 718, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper {
   display: inline;
   float: left;
@@ -1322,36 +1322,36 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
 * html body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper {
   overflow-x: hidden;
 }
-/* line 718, ../../compass/sass/screen.scss */
+/* line 722, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .before_start {
   line-height: 24px;
 }
-/* line 723, ../../compass/sass/screen.scss */
+/* line 727, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper #review_body_head {
   float: none;
   clear: both;
 }
-/* line 728, ../../compass/sass/screen.scss */
+/* line 732, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper h3 {
   font-size: 18px;
   margin-bottom: 0px;
 }
-/* line 732, ../../compass/sass/screen.scss */
+/* line 736, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .star {
   margin: 4px 0 5px 0;
   float: none;
 }
-/* line 737, ../../compass/sass/screen.scss */
+/* line 741, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .helpful_block {
   margin-top: 11px;
 }
-/* line 740, ../../compass/sass/screen.scss */
+/* line 744, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .helpful_block .before_answer_block {
   float: left;
   font-size: 11px;
   padding-top: 3px;
 }
-/* line 745, ../../compass/sass/screen.scss */
+/* line 749, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .helpful_block span.yes_answer {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1375,12 +1375,12 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .helpful_block span.yes_answer {
   *display: inline;
 }
-/* line 757, ../../compass/sass/screen.scss */
+/* line 761, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .helpful_block .found_helpfull {
   color: #a0a0a0;
   padding-left: 3px;
 }
-/* line 761, ../../compass/sass/screen.scss */
+/* line 765, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .helpful_block span.no_answer {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1404,7 +1404,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .helpful_block span.no_answer {
   *display: inline;
 }
-/* line 773, ../../compass/sass/screen.scss */
+/* line 777, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .data_review {
   width: 90px;
   text-align: right;
@@ -1413,7 +1413,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   color: #a0a0a0;
   font-style: italic;
 }
-/* line 782, ../../compass/sass/screen.scss */
+/* line 786, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .before_star {
   width: 973px;
   margin: 0 auto;
@@ -1421,12 +1421,12 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   *zoom: 1;
 }
 
-/* line 794, ../../compass/sass/screen.scss */
+/* line 798, ../../compass/sass/screen.scss */
 .star_sm {
   float: none !important;
 }
 
-/* line 798, ../../compass/sass/screen.scss */
+/* line 802, ../../compass/sass/screen.scss */
 #stars_wrap {
   width: 973px;
   margin: 0 auto;
@@ -1434,7 +1434,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   *zoom: 1;
 }
 
-/* line 802, ../../compass/sass/screen.scss */
+/* line 806, ../../compass/sass/screen.scss */
 .stars_1_0, .stars_1_5 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1446,7 +1446,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 806, ../../compass/sass/screen.scss */
+/* line 810, ../../compass/sass/screen.scss */
 .stars_2_0, .stars_2_5 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1458,7 +1458,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 810, ../../compass/sass/screen.scss */
+/* line 814, ../../compass/sass/screen.scss */
 .stars_3_0, .stars_3_5 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1470,7 +1470,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 815, ../../compass/sass/screen.scss */
+/* line 819, ../../compass/sass/screen.scss */
 .stars_4_0, .stars_4_5 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1482,7 +1482,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 820, ../../compass/sass/screen.scss */
+/* line 824, ../../compass/sass/screen.scss */
 .stars_5_0 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1494,7 +1494,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 827, ../../compass/sass/screen.scss */
+/* line 831, ../../compass/sass/screen.scss */
 .stars_2 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1506,7 +1506,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 831, ../../compass/sass/screen.scss */
+/* line 835, ../../compass/sass/screen.scss */
 .stars_3 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1518,7 +1518,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 836, ../../compass/sass/screen.scss */
+/* line 840, ../../compass/sass/screen.scss */
 .stars_5 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1530,7 +1530,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 840, ../../compass/sass/screen.scss */
+/* line 844, ../../compass/sass/screen.scss */
 .stars_4 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1542,7 +1542,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 844, ../../compass/sass/screen.scss */
+/* line 848, ../../compass/sass/screen.scss */
 .stars_1 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1554,7 +1554,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 848, ../../compass/sass/screen.scss */
+/* line 852, ../../compass/sass/screen.scss */
 .stars_, .stars_0 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1566,7 +1566,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 855, ../../compass/sass/screen.scss */
+/* line 859, ../../compass/sass/screen.scss */
 .star_gray {
   /*@include sprites($stars_gray_position);*/
   height: 27px;
@@ -1574,7 +1574,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   /*float: none;*/
 }
 
-/* line 862, ../../compass/sass/screen.scss */
+/* line 866, ../../compass/sass/screen.scss */
 .flag_icon {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1585,7 +1585,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   /*border: 1px solid red;*/
 }
 
-/* line 866, ../../compass/sass/screen.scss */
+/* line 870, ../../compass/sass/screen.scss */
 .save_icon.saved_item {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1596,7 +1596,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   /*border: 1px solid red;*/
 }
 
-/* line 870, ../../compass/sass/screen.scss */
+/* line 874, ../../compass/sass/screen.scss */
 .save_icon.not_saved_item {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1608,17 +1608,17 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   cursor: pointer;
 }
 
-/* line 875, ../../compass/sass/screen.scss */
+/* line 879, ../../compass/sass/screen.scss */
 .h {
   display: none;
 }
 
-/* line 878, ../../compass/sass/screen.scss */
+/* line 882, ../../compass/sass/screen.scss */
 .himportant {
   display: none !important;
 }
 
-/* line 884, ../../compass/sass/screen.scss */
+/* line 888, ../../compass/sass/screen.scss */
 .plus, .birdy {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1639,7 +1639,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   *display: inline;
 }
 
-/* line 890, ../../compass/sass/screen.scss */
+/* line 894, ../../compass/sass/screen.scss */
 .birdy {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1651,7 +1651,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   float: none;
 }
 
-/* line 896, ../../compass/sass/screen.scss */
+/* line 900, ../../compass/sass/screen.scss */
 .i {
   font-style: italic;
 }

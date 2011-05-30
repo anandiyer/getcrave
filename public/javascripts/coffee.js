@@ -31,6 +31,7 @@
     _results = [];
     for (_i = 0, _len = coor_array.length; _i < _len; _i++) {
       ll = coor_array[_i];
+      g_notice("Lang Lat", ll[0] + "<br />" + ll[1]);
       _results.push(new google.maps.Marker({
         position: new google.maps.LatLng(ll[0], ll[1]),
         map: map
@@ -93,8 +94,10 @@
     if (zoom == null) {
       zoom = 10;
     }
+    cl("set_gmap");
     ar = [];
-    if ($(".menu_items_location").length > 0 || $(".restaurants_index").length > 0) {
+    if ($(".menu_items_location").length > 0 || $(".restaurants_index").length > 0 || $(".user_saved_menu_items_index").length > 0) {
+      cl("if $(.menu_items_location).length > 0 || $(.restaurants_index) .length > 0");
       $(".restaurant_menu_item_wrapper").each(function() {
         var lat, long;
         lat = $(this).data("latitude");
@@ -105,10 +108,13 @@
       long = ar[0][1];
       return gmap(lat, long, zoom, ar);
     } else if ($("#current_info_wrapper").length > 0) {
+      cl("else if $(#current_info_wrapper).length >0");
       obj = $("#current_info_wrapper");
-      lat = obj.data("latitude");
-      long = obj.data("longitude");
+      cl(lat = obj.data("latitude"));
+      cl(long = obj.data("longitude"));
       return gmap(lat, long, zoom);
+    } else {
+      return cl("else");
     }
   };
   window.gallery_init = function() {
@@ -153,9 +159,7 @@
         }, this)
       });
     });
-    if (window.location.port !== "3005") {
-      set_gmap(2);
-    }
+    set_gmap(2);
     $(".yes_answer").live("click", function(event) {
       var form, found_helpfull_number, increment, link, link_text;
       if ($(this).find("a").length > 0) {
@@ -197,6 +201,9 @@
       } else if ($(".menu_items_location").length > 0) {
         obj = $("#reviews_wrapper #update_place");
         path = "/menu_items/" + id_of_menu_item + "/show_reviews?limit=" + new_limits;
+      } else if ($(".user_saved_menu_items_index").length > 0) {
+        obj = $("#update_place_restaurants");
+        path = "/user_saved_menu_items/show_menu_items_saved?limit=" + new_limits;
       }
       return $.ajax({
         url: path,
