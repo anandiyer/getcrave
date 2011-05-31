@@ -1,3 +1,47 @@
+=link_to "add new item to current restaurant", "#", :class => 'activate_modal', :name => "modal_window"
+#mask.close_modal 1
+#modal_window.modal_window
+  #close_me.close_modal
+    = image_tag "icons/close.png"
+  .modal_title
+    %h1 Add a dish
+  .clone_me
+
+
+    -#= form_for("menu_items[]", :url =>"/menu_items/new", :remote => true) do |f|
+    - form_for MenuItem.new do |f|
+      = f.text_field :restaurant_id, :value => @restaurant.id
+      = f.text_field :name
+      = f.text_field :description
+      = f.text_field :user_id, :value => current_user.id
+      = f.submit "ok"
+
+    .inputs_column
+      .clone_line
+        %label
+          Dish name
+          %super *
+        .text_input
+          = text_field :dish, :name, :placeholder => "ex. Potaito"
+      .clone_line
+        %label
+          Dish name
+          %super *
+        .text_input
+          = text_field :dish, :name, :placeholder => "List the ingrediants"
+      .clone_line
+        %label
+          Dish name
+          %super *
+        .text_input
+          = text_field :dish, :name, :placeholder => "Add a label"
+    .img_column
+      =image_tag "dish-noimage-sm.jpg"
+      %span.add_photos_inline
+      %nobr
+        =link_to "add a photo","#", :id => "plupload"
+
+
 %p#notice= notice
 
 %p

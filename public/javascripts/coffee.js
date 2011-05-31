@@ -1,10 +1,48 @@
 (function() {
-  var after_send, before_send, cl, disher_review_wrapper, error, geo;
+  var after_send, before_send, cl, close_modal, disher_review_wrapper, error, geo, show_modal;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   disher_review_wrapper = $("#reviews_wrapper");
   cl = function(msg) {
     return console.log(msg);
   };
+  close_modal = function() {
+    $('#mask').hide();
+    return $('.modal_window').hide();
+  };
+  show_modal = function(modal_id) {
+    cl(modal_id);
+    $('#mask').css({
+      'display': 'block',
+      opacity: 0
+    });
+    $('#mask').fadeTo("fast", 0.6);
+    return $('#' + modal_id).fadeIn("fast");
+  };
+  window.modal_window = function() {
+    var window_height, window_width;
+    cl(1);
+    window_width = $(window).width();
+    window_height = $(window).height();
+    $('.modal_window').each(function() {
+      var left, modal_height, modal_width, top;
+      modal_height = $(this).outerHeight();
+      modal_width = $(this).outerWidth();
+      top = (window_height - modal_height) / 2;
+      left = (window_width - modal_width) / 2;
+      return $(this).css({
+        'top': top,
+        'left': left
+      });
+    });
+    return $('.activate_modal').click(function() {
+      var modal_id;
+      modal_id = $(this).attr('name');
+      return show_modal(modal_id);
+    });
+  };
+  $('.close_modal').live("click", function() {
+    return close_modal();
+  });
   window.added_label = function(menu_item_id) {
     $.gritter.add({
       title: 'Notification',
@@ -102,7 +140,6 @@
     if (zoom == null) {
       zoom = 10;
     }
-    cl("set_gmap");
     ar = [];
     if ($(".menu_items_location").length > 0 || $(".restaurants_index").length > 0 || $(".user_saved_menu_items_index").length > 0) {
       cl("if $(.menu_items_location).length > 0 || $(.restaurants_index) .length > 0");
@@ -118,11 +155,9 @@
     } else if ($("#current_info_wrapper").length > 0) {
       cl("else if $(#current_info_wrapper).length >0");
       obj = $("#current_info_wrapper");
-      cl(lat = obj.data("latitude"));
-      cl(long = obj.data("longitude"));
+      lat = obj.data("latitude");
+      long = obj.data("longitude");
       return gmap(lat, long, zoom);
-    } else {
-      return cl("else");
     }
   };
   window.gallery_init = function() {
@@ -154,18 +189,22 @@
     return long = position.coords.longitude;
   };
   $(document).ready(function() {
+    if ($(".modal_window").length > 0) {
+      modal_window();
+    }
     $(".label_div ul li").live("click", function(event) {
       var id;
       id = $(this).attr("id");
       return $("#labels form").find("input#menu_label_association_menu_label_id").val(id).end().submit();
     });
     $("#desc_wrap #labels a.mi_add_label").live("click", function(event) {
-      var offset;
-      offset = $(this).offset();
-      $(".label_div_wrapper").offset({
-        top: offset.top + 12,
-        left: offset.left - 84
-      }).slideDown();
+      var new_left, new_top, offset;
+      offset = $(this).position();
+      new_top = parseInt(offset.top) + 12;
+      new_left = parseInt(offset.left) - 84;
+      $(".label_div_wrapper").css({
+        "top": new_top
+      }).css("left", new_left).show();
       return event.preventDefault();
     });
     if ($("#gallery").length > 0) {

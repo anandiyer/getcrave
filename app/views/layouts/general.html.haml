@@ -49,6 +49,17 @@
         #footer
           footer
 
+
+        - labels = MenuLabel.all
+
+        = content_tag :div, :class => "label_div_wrapper" do
+          = content_tag :div, " ", :class => "label_div_tri"
+
+          = content_tag :div, :class => "label_div" do
+            = content_tag :ul do
+              - labels.each do |x|
+                = content_tag :li, x.menu_label, :id => x.id
+
         :javascript
 
           //#TODO place to refactor - move to external js file

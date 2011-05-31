@@ -1,4 +1,6 @@
+@import "compass/utilities/links/link-colors";
 @import "compass/css3/border-radius";
+@import "compass/css3/opacity";
 
 // This import applies a global reset to any page that imports this stylesheet.
 @import "blueprint/reset";
@@ -461,6 +463,9 @@ body.two-col.bp{
                         // true means it's the last column in the row
                         @include column($content-columns, true);
                         padding: 6px 44px 0 2px;
+
+
+
                         .photos_inline{
                             @include inline-block;
                             white-space: nowrap;
@@ -471,11 +476,12 @@ body.two-col.bp{
                                 text-decoration: none;
                             }
                         }
-                        .add_photos_inline{
-                            @extend .photos_inline;
-                            @include sprites($add_photos_counter_position);
+                        /*.add_photos_inline{*/
+                            /*@extend .photos_inline;*/
+                            /*@include sprites($add_photos_counter_position);*/
 
-                        }
+
+                        /*}*/
                     }
 
                     #text_column.restaurant{
@@ -947,3 +953,119 @@ body.two-col.bp{
     font-style: italic;
 }
 
+
+
+
+#mask{
+    position:absolute;
+    top:0px;
+    left:0px;
+    height:100%;
+    width:100%;
+    /*display:none;*/
+
+
+    background-color: black;
+    z-index: 1000;
+    @include opacity(.4);
+}
+
+.modal_window{
+    position:absolute;
+    /*display:none;*/
+
+
+    color:white;
+    z-index: 1001;
+
+
+
+}
+
+/* style a specific modal window  */
+#modal_window{
+    padding:20px;
+    border:1px solid gray;
+    background: white;
+    color:green;
+    width: 466px;
+    height: 350px;
+
+
+    @include border-radius(3px);
+    #close_me{
+        margin:-28px -28px 0 0;
+        right: 0px;
+        text-align: right;
+        cursor: pointer;
+    }
+
+    .clone_me{
+
+        .inputs_column{
+            $content-columns: ceil(9);
+            @include column($content-columns, true);
+            padding: 0 20px 0 0;
+        }
+
+        .img_column{
+            padding: 20px 0 0 0;
+            img{
+               @include border-radius(3px)
+            }
+             nobr{
+                a{
+                    font-size:12px;
+                }
+            }
+        }
+
+
+        .clone_line{
+            padding:0 0 10px 0;
+        }
+
+
+        label{
+            float: none;
+            font-weight: bold;
+            color: black;
+            color: #474747;
+            super{
+                color: red;
+            }
+        }
+        .text_input{
+            height: 30px;
+            background: url("/images/sprites/button-sprite.png") no-repeat 0px -419px;
+            border:1px solid #ddd;
+
+            input{
+                height: 21px;
+                width: 205px;
+                border: none;
+                margin: 4px 3px 0px 10px;
+            }
+        }
+    }
+
+    .modal_title{
+        color: #787878;
+        border-bottom: 1px solid $light_gray;
+        margin-bottom: 10px;
+        h1{
+            /*color: #787878 !important;*/
+            font-size: 24px;
+        }
+
+    }
+}
+
+
+.add_photos_inline{
+    @extend .photos_inline;
+    @include sprites($add_photos_counter_position);
+
+
+
+}

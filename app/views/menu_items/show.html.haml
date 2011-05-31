@@ -1,17 +1,3 @@
-
-
-
-
-- labels = MenuLabel.all
-
-= content_tag :div, :class => "label_div_wrapper" do
-  = content_tag :div, " ", :class => "label_div_tri"
-
-  = content_tag :div, :class => "label_div" do
-    = content_tag :ul do
-      - labels.each do |x|
-        = content_tag :li, x.menu_label, :id => x.id
-
 #current_content_block
   #bread_crumbs
     = link_to("← "+@menu_item.restaurant.name, @menu_item.restaurant)
@@ -22,13 +8,6 @@
         %span.photos_inline
           #gallery
             = render :partial => "gallery_link"
-
-
-
-
-
-
-
         %span.add_photos_inline
           =link_to "add photos","#", :id => "plupload"
         #photos_icon &nbsp;

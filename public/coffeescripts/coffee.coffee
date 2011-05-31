@@ -4,6 +4,47 @@ disher_review_wrapper = $("#reviews_wrapper")
 cl = (msg) ->
     console.log(msg)
 
+close_modal = () ->
+#    $('#mask').fadeOut("fast");
+#    $('.modal_window').fadeOut("fast");
+
+    $('#mask').hide()
+    $('.modal_window').hide()
+
+
+
+show_modal = (modal_id) ->
+    cl modal_id
+    $('#mask').css({ 'display' : 'block', opacity : 0});
+    $('#mask').fadeTo("fast",0.6);
+    $('#'+modal_id).fadeIn("fast");
+
+
+
+
+window.modal_window = () ->
+
+    cl(1)
+    window_width = $(window).width()
+    window_height = $(window).height()
+
+    $('.modal_window').each () ->
+        modal_height = $(@).outerHeight()
+        modal_width = $(@).outerWidth()
+
+        top = (window_height-modal_height)/2
+        left = (window_width-modal_width)/2
+        $(@).css({'top' : top , 'left' : left})
+
+    $('.activate_modal').click () ->
+        modal_id = $(@).attr('name')
+        show_modal(modal_id)
+
+
+	$('.close_modal').live "click", () -> close_modal()
+
+
+
 window.added_label = (menu_item_id) ->
     $.gritter.add({title:'Notification', text: menu_item_id+' Label was added!', image: '/images/icons/add_label_icon.png'});
     $(".label_div_wrapper").hide()
@@ -65,7 +106,6 @@ window.add_review = (id_of_menu_item, msg) ->
 
 
 window.set_gmap = (zoom = 10) ->
-    cl "set_gmap"
 
     ar = []
 #    if restaurants || menu items page
@@ -84,11 +124,11 @@ window.set_gmap = (zoom = 10) ->
         cl "else if $(#current_info_wrapper).length >0"
         obj = $("#current_info_wrapper")
 
-        cl lat =  obj.data("latitude")
-        cl long = obj.data("longitude")
+        lat =  obj.data("latitude")
+        long = obj.data("longitude")
         gmap(lat, long, zoom)
-    else
-        cl "else"
+
+
 
 
 
@@ -117,15 +157,10 @@ geo = (position) ->
 
 $(document).ready ->
 
-#    if (navigator.geolocation)
-#      navigator.geolocation.getCurrentPosition(geo, error)
-#    else
-#      cl error('not supported geo')
-
+    modal_window() if $(".modal_window").length > 0
 
 
 #    ### labels
-
     $(".label_div ul li").live "click", (event) ->
         id = $(this).attr("id")
         $("#labels form")
@@ -137,9 +172,13 @@ $(document).ready ->
 
     $("#desc_wrap #labels a.mi_add_label").live "click", (event) ->
 
-        offset = $(this).offset()
+        offset = $(@).position()
 #        $(".label_div_wrapper").offset("{ top: "+offset.top+", left: "+offset.left+"}")
-        $(".label_div_wrapper").offset({ top: offset.top+12, left: offset.left-84 }).slideDown()
+#        $(".label_div_wrapper").offset({ top: 0, left: 0 }).show()
+        new_top = parseInt(offset.top)+12
+        new_left = parseInt(offset.left)-84
+
+        $(".label_div_wrapper").css("top": new_top).css("left",new_left).show()
         event.preventDefault()
 #
 #        label_div = $(".label_div")
