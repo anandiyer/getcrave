@@ -1,5 +1,3 @@
--#- labels =
-
 
 -#TODO: please refactor me
 
@@ -9,7 +7,8 @@
   - id = params[:id]
 
 
-- labels_ids =  MenuLabelAssociation.where(:user_id => current_user.id, :menu_item_id => id).map{|x| x.menu_label_id}.uniq!
-- MenuLabel.find(labels_ids).map{|x| x.menu_label}.each do |x|
-  .birdy &nbsp;
-  =link_to(x,"#", :class => "label")
+- labels_ids =  MenuLabelAssociation.where(:user_id => current_user.id, :menu_item_id => id).map{|x| x.menu_label_id}.uniq
+- if labels_ids
+  - MenuLabel.find(labels_ids).map{|x| x.menu_label}.each do |x|
+    .birdy &nbsp;
+    =link_to(x,"#", :class => "label")

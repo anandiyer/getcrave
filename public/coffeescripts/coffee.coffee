@@ -154,8 +154,15 @@ $(document).ready ->
     gallery_init if $("#gallery").length > 0
 
 
-    $(document).ajaxError () ->
-        $.gritter.add({title:"Error", text: "Ajax error!", image: "/images/error_icon.png", sticky: => true});
+    $(document)
+    .ajaxComplete (event, xhr, settings) ->
+        if settings.url == "/menu_label_associations"
+            if xhr.responseText.indexOf('Warning') < 0
+                $(".birdy_update").html(xhr.responseText)
+            $(".label_div_wrapper").slideUp("fast")
+
+#    .ajaxError () ->
+#        $.gritter.add({title:"Error", text: "Ajax error!", image: "/images/error_icon.png", sticky: => true});
 
 
 #   google maps in homepage neary

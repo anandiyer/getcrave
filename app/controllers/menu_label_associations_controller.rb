@@ -41,14 +41,23 @@ class MenuLabelAssociationsController < ApplicationController
   # POST /menu_label_associations
   # POST /menu_label_associations.xml
   def create
-    @menu_label_association = MenuLabelAssociation.new(params[:menu_label_association])
 
+#    @menu_label_association2 = MenuLabelAssociation.where(:user_id => params[:menu_label_association][:user_id], :menu_item_id => params[:menu_label_association][:menu_item_id]).any?
+
+    any_exist = MenuLabelAssociation.where(params[:menu_label_association]).any?
 
     respond_to do |format|
-      if @menu_label_association.save
-        format.html { redirect_to(@menu_label_association, :notice => 'Menu label association was successfully created.') }
-        format.xml  { render :xml => @menu_label_association, :status => :created, :location => @menu_label_association }
-        format.js  { render :js => "alert(1)"}
+      if !any_exist
+        @menu_label_association = MenuLabelAssociation.new(params[:menu_label_association])
+
+
+        if @menu_label_association.save
+          format.html { redirect_to(@menu_label_association, :notice => 'Menu label association was successfully created.') }
+          format.xml { render :xml => @menu_label_association, :status => :created, :location => @menu_label_association }
+          format.js { render :partial => "menu_items/labels_list" }
+        end
+      else
+        format.js { render :js => "window.g_notice('Warning!','You added this label before!')" }
       end
     end
   end

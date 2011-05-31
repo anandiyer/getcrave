@@ -171,15 +171,13 @@
     if ($("#gallery").length > 0) {
       gallery_init;
     }
-    $(document).ajaxError(function() {
-      return $.gritter.add({
-        title: "Error",
-        text: "Ajax error!",
-        image: "/images/error_icon.png",
-        sticky: __bind(function() {
-          return true;
-        }, this)
-      });
+    $(document).ajaxComplete(function(event, xhr, settings) {
+      if (settings.url === "/menu_label_associations") {
+        if (xhr.responseText.indexOf('Warning') < 0) {
+          $(".birdy_update").html(xhr.responseText);
+        }
+        return $(".label_div_wrapper").slideUp("fast");
+      }
     });
     if (window.location.port !== "3005") {
       set_gmap(2);
