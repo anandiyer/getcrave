@@ -204,7 +204,7 @@ $(document).ready ->
 
 #   google maps in homepage neary
 
-    set_gmap(2) if window.location.port != "3005"
+    set_gmap(2) if window.location.port.indexOf("300") > 0
 
 
 

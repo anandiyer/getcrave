@@ -26,8 +26,7 @@
                 %p (415) 927 1849
                 %p= link_to "www.siet.com"
               .col2_pn
-                :erb
-                  <iframe src="http://www.facebook.com/plugins/like.php?app_id=177216185667399&amp;href=getcrave.com<%=request.request_uri%>&amp;send=false&amp;layout=button_count&amp;width=50&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;" allowTransparency="true"></iframe>
+                = render :partial => "/social"
                 -#= image_tag "social.png"
 
   #reviews_wrapper.restaurant
