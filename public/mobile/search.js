@@ -1,7 +1,3 @@
-Ext.regModel('DishSearch',
-{
-    fields: ['name','id','price','description','restaurant_id']
-});
 
 dishSearchTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><b>{name}</b><br/>{description}</div></tpl>');
 
