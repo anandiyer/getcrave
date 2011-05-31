@@ -276,7 +276,7 @@
            var mainPnl = new Ext.Panel({
                fullscreen: true,
                id: 'mainPnl',
-               items: [listPnl,detailPnl,restaurantPnl],
+               items: [listPnl,detailPnl,restaurantPnl,newDishForm],
                layout: {
                    type: 'card'
                },
@@ -287,6 +287,12 @@
            justLoggedIn();
    }
 
+});
+
+$(".newDish").live("click",function() {
+    //activate new dish form
+    Ext.getCmp('mainPnl').setActiveItem(3);
+    return false;
 });
 </script>
 <!--

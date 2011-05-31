@@ -49,8 +49,11 @@ function restaurantDisplay(record, btn, index) {
         success: function(response) {
              //populate top panel with restaurant data, map
              var responseObject = eval('(' + response.responseText + ')');
-            console.log(responseObject);
-             htmlString = '<div class="restaurantInfo">'+responseObject.restaurant.name+'</div>';
+             console.log(responseObject);
+            //set restaurant data locally now
+             localStorage.setItem('editRestaurantId',responseObject.restaurant.id);
+            console.log('set restaurant id '+responseObject.restaurant.id);
+             htmlString = '<div class="restaurantInfo">'+responseObject.restaurant.name+'<br><br><a class="newDish">add dish</a></div>';
              Ext.getCmp('restInfoPnl').update(htmlString);
 
             var placeholder = new google.maps.Marker(
@@ -160,7 +163,7 @@ var newRestaurant = new Ext.form.FormPanel({
                            coordsArray = stringLocation.split(",");
                            Ext.getCmp('latfield').setValue($.trim(coordsArray[0]));
                            Ext.getCmp('lngfield').setValue($.trim(coordsArray[1]));
-                           reviewForm.submit({
+                           newRestaurant.submit({
                                url: '/restaurants',
                                method: 'post',
                                submitDisabled: true,
