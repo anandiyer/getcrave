@@ -311,7 +311,6 @@ body.two-col.bp{
                     }
                 }
 
-
             }
         }
 
@@ -514,6 +513,7 @@ body.two-col.bp{
                         #social{
                             position: absolute;
                             z-index: 100px;
+                            padding-top: 15px;
                         }
                         #desc_wrap{
                            /*@include container;*/
@@ -974,7 +974,7 @@ body.two-col.bp{
     left:0px;
     height:100%;
     width:100%;
-    /*display:none;*/
+    display:none;
 
 
     background-color: black;
@@ -984,13 +984,11 @@ body.two-col.bp{
 
 .modal_window{
     position:absolute;
-    /*display:none;*/
+    display:none;
 
 
     color:white;
     z-index: 1001;
-
-
 
 }
 
@@ -999,9 +997,8 @@ body.two-col.bp{
     padding:20px;
     border:1px solid gray;
     background: white;
-    color:green;
+    color: #474747;
     width: 466px;
-    height: 350px;
 
 
     @include border-radius(3px);

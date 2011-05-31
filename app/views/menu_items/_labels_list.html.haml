@@ -7,7 +7,14 @@
   - id = params[:id]
 
 
-- labels_ids =  MenuLabelAssociation.where(:user_id => current_user.id, :menu_item_id => id).map{|x| x.menu_label_id}.uniq
+-#- if current_user
+  -#labels set current user
+  - labels_ids =  MenuLabelAssociation.where(:user_id => current_user.id, :menu_item_id => id).map{|x| x.menu_label_id}.uniq
+  - labels_ids =  MenuLabelAssociation.where(:user_id => current_user.id, :menu_item_id => id).map{|x| x.menu_label_id}.uniq
+-#- else
+- labels_ids =  MenuLabelAssociation.where(:menu_item_id => id).map{|x| x.menu_label_id}.uniq
+
+
 - if labels_ids
   - MenuLabel.find(labels_ids).map{|x| x.menu_label}.each do |x|
     .birdy &nbsp;

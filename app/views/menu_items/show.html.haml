@@ -1,3 +1,11 @@
+- labels = MenuLabel.all
+= content_tag :div, :class => "label_div_wrapper" do
+  = content_tag :div, " ", :class => "label_div_tri"
+
+  = content_tag :div, :class => "label_div" do
+    = content_tag :ul do
+      - labels.each do |x|
+        = content_tag :li, x.menu_label, :id => x.id
 #current_content_block
   #bread_crumbs
     = link_to("← "+@menu_item.restaurant.name, @menu_item.restaurant)
@@ -38,15 +46,22 @@
           %strong Dish labels:
         #labels
           - @menu_label_association = MenuLabelAssociation.new
+          - if current_user
+            - user_id = current_user.id
+          - else
+            - user_id = nil
+
           = form_for(@menu_label_association, :remote => true) do |f|
             = f.hidden_field :menu_item_id, :value => params[:id]
             = f.hidden_field :menu_label_id
-            = f.hidden_field :user_id, :value => current_user.id
+            = f.hidden_field :user_id, :value => user_id
 
           .birdy_update
             = render :partial => "labels_list"
-          .plus &nbsp;
-          =link_to( "Add a label", "#", :class => :mi_add_label)
+            .plus &nbsp;
+            =link_to("Add a label", "#", :class => :mi_add_label)
+
+
 
       -#=image_tag "social.png"
       #social

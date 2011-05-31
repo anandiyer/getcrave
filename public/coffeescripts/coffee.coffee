@@ -12,8 +12,15 @@ close_modal = () ->
     $('.modal_window').hide()
 
 
+window.show_dialog = (title, content) ->
+    modal_window()
+    show_modal("modal_window")
+    $(".modal_window .modal_title h1").empty().text(title)
+    $(".modal_window .clone_me").empty().html(content) if content
 
-show_modal = (modal_id) ->
+
+
+window.show_modal = (modal_id) ->
     cl modal_id
     $('#mask').css({ 'display' : 'block', opacity : 0});
     $('#mask').fadeTo("fast",0.6);
@@ -24,7 +31,7 @@ show_modal = (modal_id) ->
 
 window.modal_window = () ->
 
-    cl(1)
+    cl(111)
     window_width = $(window).width()
     window_height = $(window).height()
 
@@ -157,7 +164,10 @@ geo = (position) ->
 
 $(document).ready ->
 
-    modal_window() if $(".modal_window").length > 0
+#    show_dialog("title", "content")
+#    modal_window() if $(".modal_window").length > 0
+
+
 
 
 #    ### labels
@@ -195,7 +205,7 @@ $(document).ready ->
 
     $(document).ajaxComplete (event, xhr, settings) ->
         if settings.url == "/menu_label_associations"
-            if xhr.responseText.indexOf('Warning') < 0
+            if xhr.responseText.indexOf('Warning') < 0 && xhr.responseText.indexOf("sign in") < 0
                 $(".birdy_update").html(xhr.responseText)
             $(".label_div_wrapper").slideUp("fast")
 

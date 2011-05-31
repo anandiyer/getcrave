@@ -1,5 +1,5 @@
 (function() {
-  var after_send, before_send, cl, close_modal, disher_review_wrapper, error, geo, show_modal;
+  var after_send, before_send, cl, close_modal, disher_review_wrapper, error, geo;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   disher_review_wrapper = $("#reviews_wrapper");
   cl = function(msg) {
@@ -9,7 +9,15 @@
     $('#mask').hide();
     return $('.modal_window').hide();
   };
-  show_modal = function(modal_id) {
+  window.show_dialog = function(title, content) {
+    modal_window();
+    show_modal("modal_window");
+    $(".modal_window .modal_title h1").empty().text(title);
+    if (content) {
+      return $(".modal_window .clone_me").empty().html(content);
+    }
+  };
+  window.show_modal = function(modal_id) {
     cl(modal_id);
     $('#mask').css({
       'display': 'block',
@@ -20,7 +28,7 @@
   };
   window.modal_window = function() {
     var window_height, window_width;
-    cl(1);
+    cl(111);
     window_width = $(window).width();
     window_height = $(window).height();
     $('.modal_window').each(function() {
@@ -189,9 +197,6 @@
     return long = position.coords.longitude;
   };
   $(document).ready(function() {
-    if ($(".modal_window").length > 0) {
-      modal_window();
-    }
     $(".label_div ul li").live("click", function(event) {
       var id;
       id = $(this).attr("id");
@@ -212,7 +217,7 @@
     }
     $(document).ajaxComplete(function(event, xhr, settings) {
       if (settings.url === "/menu_label_associations") {
-        if (xhr.responseText.indexOf('Warning') < 0) {
+        if (xhr.responseText.indexOf('Warning') < 0 && xhr.responseText.indexOf("sign in") < 0) {
           $(".birdy_update").html(xhr.responseText);
         }
         return $(".label_div_wrapper").slideUp("fast");

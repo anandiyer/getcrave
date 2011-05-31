@@ -1,19 +1,20 @@
 =link_to "add new item to current restaurant", "#", :class => 'activate_modal', :name => "modal_window"
-#mask.close_modal 1
+#mask.close_modal
 #modal_window.modal_window
   #close_me.close_modal
     = image_tag "icons/close.png"
   .modal_title
     %h1 Add a dish
   .clone_me
-
-
     -#= form_for("menu_items[]", :url =>"/menu_items/new", :remote => true) do |f|
+
+    - current_user ? user = current_user.id : user = nil
+
     - form_for MenuItem.new do |f|
       = f.text_field :restaurant_id, :value => @restaurant.id
       = f.text_field :name
       = f.text_field :description
-      = f.text_field :user_id, :value => current_user.id
+      = f.text_field :user_id, :value => user
       = f.submit "ok"
 
     .inputs_column

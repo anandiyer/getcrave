@@ -1,6 +1,8 @@
 class MenuLabelAssociationsController < ApplicationController
   # GET /menu_label_associations
   # GET /menu_label_associations.xml
+  before_filter :check_auth_fb
+
   def index
     @menu_label_associations = MenuLabelAssociation.all
 
