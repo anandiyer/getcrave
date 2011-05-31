@@ -159,7 +159,7 @@
       id = $(this).attr("id");
       return $("#labels form").find("input#menu_label_association_menu_label_id").val(id).end().submit();
     });
-    $("#desc_wrap #labels a").live("click", function(event) {
+    $("#desc_wrap #labels a.mi_add_label").live("click", function(event) {
       var offset;
       offset = $(this).offset();
       $(".label_div_wrapper").offset({
