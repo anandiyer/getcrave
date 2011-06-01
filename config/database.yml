@@ -13,10 +13,8 @@ development:
   encoding: utf-8
   database: getcrave_dev
   template: template_postgis
-#  template: template1
   pool: 5
   username: postgres
-  password: P@ssw0rd
 
 #  adapter: mysql2
 #  encoding: utf8

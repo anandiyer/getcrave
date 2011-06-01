@@ -6,5 +6,7 @@ log/sunspot-solr-development.log
 config/database.yml
 /.bundle/
 ./idea
+./idea/inspectionProfiles
+./idea/inspectionProfiles/
 /*.rvmrc
 /log/
