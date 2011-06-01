@@ -999,6 +999,8 @@ body.two-col.bp{
     background: white;
     color: #474747;
     width: 466px;
+    position: fixed;
+    top: 30%;
 
 
     @include border-radius(3px);
@@ -1074,7 +1076,10 @@ body.two-col.bp{
 .add_photos_inline{
     @extend .photos_inline;
     @include sprites($add_photos_counter_position);
+}
 
 
+textarea{
+    border: 1px solid #9A9A9A;
 
 }

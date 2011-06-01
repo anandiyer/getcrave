@@ -1,7 +1,7 @@
 disher_review_wrapper = $("#reviews_wrapper")
 
 
-cl = (msg) ->
+window.cl = (msg) ->
     console.log(msg)
 
 close_modal = () ->
@@ -31,16 +31,17 @@ window.show_modal = (modal_id) ->
 
 window.modal_window = () ->
 
-    window_width = $(window).width()
+    window_width = $(document).width()
     window_height = $(document).height()
 
     $('.modal_window').each () ->
         modal_height = $(@).outerHeight()
         modal_width = $(@).outerWidth()
 
-        top = (window_height-modal_height)/2
+#        top = (window_height-modal_height)/2
+#        top = (window_height-modal_height)/2
         left = (window_width-modal_width)/2
-        $(@).css({'top' : top , 'left' : left})
+        $(@).css({'left' : left})
 
     $('.activate_modal').click () ->
         modal_id = $(@).attr('name')
@@ -166,6 +167,8 @@ $(document).ready ->
 #    show_dialog("title", "content")
     modal_window() if $(".modal_window").length > 0
 
+    gallery_init() if $("#gallery").length > 0
+
 
 
 
@@ -199,7 +202,7 @@ $(document).ready ->
 
 
 
-    gallery_init if $("#gallery").length > 0
+
 
 
     $(document).ajaxComplete (event, xhr, settings) ->

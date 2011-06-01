@@ -1,8 +1,8 @@
 (function() {
-  var after_send, before_send, cl, close_modal, disher_review_wrapper, error, geo;
+  var after_send, before_send, close_modal, disher_review_wrapper, error, geo;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   disher_review_wrapper = $("#reviews_wrapper");
-  cl = function(msg) {
+  window.cl = function(msg) {
     return console.log(msg);
   };
   close_modal = function() {
@@ -27,16 +27,14 @@
   };
   window.modal_window = function() {
     var window_height, window_width;
-    window_width = $(window).width();
+    window_width = $(document).width();
     window_height = $(document).height();
     $('.modal_window').each(function() {
-      var left, modal_height, modal_width, top;
+      var left, modal_height, modal_width;
       modal_height = $(this).outerHeight();
       modal_width = $(this).outerWidth();
-      top = (window_height - modal_height) / 2;
       left = (window_width - modal_width) / 2;
       return $(this).css({
-        'top': top,
         'left': left
       });
     });
@@ -198,6 +196,9 @@
     if ($(".modal_window").length > 0) {
       modal_window();
     }
+    if ($("#gallery").length > 0) {
+      gallery_init();
+    }
     $(".label_div ul li").live("click", function(event) {
       var id;
       id = $(this).attr("id");
@@ -213,9 +214,6 @@
       }).css("left", new_left).show();
       return event.preventDefault();
     });
-    if ($("#gallery").length > 0) {
-      gallery_init;
-    }
     $(document).ajaxComplete(function(event, xhr, settings) {
       if (settings.url === "/menu_label_associations") {
         if (xhr.responseText.indexOf('Warning') < 0 && xhr.responseText.indexOf("sign in") < 0) {

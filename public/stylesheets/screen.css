@@ -1734,6 +1734,8 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   background: white;
   color: #474747;
   width: 466px;
+  position: fixed;
+  top: 30%;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   -o-border-radius: 3px;
@@ -1741,14 +1743,14 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   -khtml-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 1005, ../../compass/sass/screen.scss */
+/* line 1007, ../../compass/sass/screen.scss */
 #modal_window #close_me {
   margin: -28px -28px 0 0;
   right: 0px;
   text-align: right;
   cursor: pointer;
 }
-/* line 1014, ../../compass/sass/screen.scss */
+/* line 1016, ../../compass/sass/screen.scss */
 #modal_window .clone_me .inputs_column {
   display: inline;
   float: left;
@@ -1760,11 +1762,11 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
 * html #modal_window .clone_me .inputs_column {
   overflow-x: hidden;
 }
-/* line 1020, ../../compass/sass/screen.scss */
+/* line 1022, ../../compass/sass/screen.scss */
 #modal_window .clone_me .img_column {
   padding: 20px 0 0 0;
 }
-/* line 1022, ../../compass/sass/screen.scss */
+/* line 1024, ../../compass/sass/screen.scss */
 #modal_window .clone_me .img_column img {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -1773,51 +1775,51 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   -khtml-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 1026, ../../compass/sass/screen.scss */
+/* line 1028, ../../compass/sass/screen.scss */
 #modal_window .clone_me .img_column nobr a {
   font-size: 12px;
 }
-/* line 1033, ../../compass/sass/screen.scss */
+/* line 1035, ../../compass/sass/screen.scss */
 #modal_window .clone_me .clone_line {
   padding: 0 0 10px 0;
 }
-/* line 1038, ../../compass/sass/screen.scss */
+/* line 1040, ../../compass/sass/screen.scss */
 #modal_window .clone_me label {
   float: none;
   font-weight: bold;
   color: black;
   color: #474747;
 }
-/* line 1043, ../../compass/sass/screen.scss */
+/* line 1045, ../../compass/sass/screen.scss */
 #modal_window .clone_me label super {
   color: red;
 }
-/* line 1047, ../../compass/sass/screen.scss */
+/* line 1049, ../../compass/sass/screen.scss */
 #modal_window .clone_me .text_input {
   height: 30px;
   background: url("/images/sprites/button-sprite.png") no-repeat 0px -419px;
   border: 1px solid #ddd;
 }
-/* line 1052, ../../compass/sass/screen.scss */
+/* line 1054, ../../compass/sass/screen.scss */
 #modal_window .clone_me .text_input input {
   height: 21px;
   width: 205px;
   border: none;
   margin: 4px 3px 0px 10px;
 }
-/* line 1061, ../../compass/sass/screen.scss */
+/* line 1063, ../../compass/sass/screen.scss */
 #modal_window .modal_title {
   color: #787878;
   border-bottom: 1px solid #ececec;
   margin-bottom: 10px;
 }
-/* line 1065, ../../compass/sass/screen.scss */
+/* line 1067, ../../compass/sass/screen.scss */
 #modal_window .modal_title h1 {
   /*color: #787878 !important;*/
   font-size: 24px;
 }
 
-/* line 1074, ../../compass/sass/screen.scss */
+/* line 1076, ../../compass/sass/screen.scss */
 .add_photos_inline {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1826,4 +1828,9 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   height: 17px;
   float: left;
   /*border: 1px solid red;*/
+}
+
+/* line 1082, ../../compass/sass/screen.scss */
+textarea {
+  border: 1px solid #9A9A9A;
 }
