@@ -5,6 +5,10 @@
   - dish_button_status = "off"
   - rest_button_status = "on"
 
+- if params[:lat]
+  - tail = "?lat="+params[:lat]+"&long="+params[:long]
+
+
 
 #buttons_wrapper
 
@@ -12,12 +16,15 @@
     #dishes_icon{:class => dish_button_status+" dishbutton"}
       #left_side &nbsp;
       = image_tag "dishes_button_text.png"
-    =link_to restaurants_path do
+
+
+
+    =link_to "/restaurants"+tail do
       #restaurant_icon{:class => rest_button_status+" restbutton"}
         #left_side &nbsp;
         = image_tag "restaurants_button_text_on.png"
   - else
-    =link_to location_menu_items_path do
+    =link_to "/menu_items/location"+tail do
       #dishes_icon{:class => dish_button_status+" dishbutton"}
         #left_side &nbsp;
         = image_tag "dishes_button_text.png"
