@@ -41,6 +41,7 @@ class MenuItemsController < ApplicationController
       @limit = params[:limit].to_i
     end
 
+
     # FIXME - handle restaurant = nil case 
     @menu_items = MenuItem.find_by_sql(["SELECT menu_items.* FROM menu_items
     LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id
