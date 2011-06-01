@@ -1,5 +1,5 @@
 class UserSavedMenuItemsController < ApplicationController
-  before_filter :get_user
+  before_filter :get_user, :check_auth_fb
 
   layout "general"
 
