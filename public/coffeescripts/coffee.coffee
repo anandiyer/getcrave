@@ -142,8 +142,8 @@ window.set_gmap = (zoom = 10) ->
 
 window.gallery_init = () ->
     $('#gallery a').lightBox
-        overlayBgColor: '#FFF'
-        overlayOpacity: 0.6
+        overlayBgColor: '#000'
+        overlayOpacity: 0.4
         imageLoading: '/images/lightbox-ico-loading.gif'
         imageBtnClose: '/images/lightbox-btn-close.gif'
         imageBtnPrev: '/images/lightbox-btn-prev.gif'
