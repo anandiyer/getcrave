@@ -18,19 +18,17 @@
     }
   };
   window.show_modal = function(modal_id) {
-    cl(modal_id);
     $('#mask').css({
       'display': 'block',
       opacity: 0
     });
-    $('#mask').fadeTo("fast", 0.6);
+    $('#mask').fadeTo("fast", 0.6).height($(document).height());
     return $('#' + modal_id).fadeIn("fast");
   };
   window.modal_window = function() {
     var window_height, window_width;
-    cl(111);
     window_width = $(window).width();
-    window_height = $(window).height();
+    window_height = $(document).height();
     $('.modal_window').each(function() {
       var left, modal_height, modal_width, top;
       modal_height = $(this).outerHeight();

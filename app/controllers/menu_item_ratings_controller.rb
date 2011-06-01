@@ -1,5 +1,5 @@
 class MenuItemRatingsController < ApplicationController
-  before_filter :get_menu_item
+  before_filter :get_menu_item, :check_auth_fb
   
   # GET /menu_items_ratings/avg_rating
   def avg_rating

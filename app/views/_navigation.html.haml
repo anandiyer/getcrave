@@ -9,7 +9,7 @@
       = link_to "Sign Out", signout_path
     - else
       -#= link_to "Sign in with Facebook", "/auth/facebook"
-      = link_to(image_tag("fb_login_icon.png"), "/auth/facebook")
+      = link_to(image_tag("fb_login_icon.png"), "/auth/facebook", :class => "not_signed")
 
 
 

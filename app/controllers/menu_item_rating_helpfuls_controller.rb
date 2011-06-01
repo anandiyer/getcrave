@@ -1,5 +1,5 @@
 class MenuItemRatingHelpfulsController < ApplicationController
-  before_filter :get_menu_item_rating
+  before_filter :get_menu_item_rating, :check_auth_fb
   
   # GET /menu_item_rating_helpfuls
   # GET /menu_item_rating_helpfuls.xml

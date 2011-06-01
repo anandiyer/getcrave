@@ -21,9 +21,9 @@ window.show_dialog = (title, content) ->
 
 
 window.show_modal = (modal_id) ->
-    cl modal_id
     $('#mask').css({ 'display' : 'block', opacity : 0});
-    $('#mask').fadeTo("fast",0.6);
+
+    $('#mask').fadeTo("fast",0.6).height($(document).height())
     $('#'+modal_id).fadeIn("fast");
 
 
@@ -31,9 +31,8 @@ window.show_modal = (modal_id) ->
 
 window.modal_window = () ->
 
-    cl(111)
     window_width = $(window).width()
-    window_height = $(window).height()
+    window_height = $(document).height()
 
     $('.modal_window').each () ->
         modal_height = $(@).outerHeight()
