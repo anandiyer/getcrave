@@ -3,6 +3,11 @@ Ext.regModel('Restaurants',
     fields: ['distance','name','id']
 });
 
+Ext.regModel('DishSearch',
+{
+    fields: ['name','id','price','description','restaurant_id']
+});
+
 var restaurants = new Ext.data.Store({
    model: 'Restaurants',
     id: 'restaurants',
@@ -18,7 +23,7 @@ var restaurants = new Ext.data.Store({
 });
 
 var singleRestaurantStore = new Ext.data.Store({
-    model: 'Dish',
+    model: 'DishSearch',
     proxy: {
         type:'ajax',
         url:'',
@@ -44,8 +49,11 @@ function restaurantDisplay(record, btn, index) {
         success: function(response) {
              //populate top panel with restaurant data, map
              var responseObject = eval('(' + response.responseText + ')');
-            console.log(responseObject);
-             htmlString = '<div class="restaurantInfo">'+responseObject.restaurant.name+'</div>';
+             console.log(responseObject);
+            //set restaurant data locally now
+             localStorage.setItem('editRestaurantId',responseObject.restaurant.id);
+            console.log('set restaurant id '+responseObject.restaurant.id);
+             htmlString = '<div class="restaurantInfo">'+responseObject.restaurant.name+'<br><br><a class="newDish">add dish</a></div>';
              Ext.getCmp('restInfoPnl').update(htmlString);
 
             var placeholder = new google.maps.Marker(
@@ -66,7 +74,7 @@ function restaurantDisplay(record, btn, index) {
                     var initialLocation = new google.maps.LatLng(responseObject.restaurant.latitude,responseObject.restaurant.longitude);
                     Ext.getCmp('googleMap').update(initialLocation);
                     console.log('just tried');
-                    //needs work becoming resuable
+                    //needs work becoming resuable, maybe have to destroy this on unload
                 }
             });
         }
@@ -76,6 +84,108 @@ function restaurantDisplay(record, btn, index) {
 function starDisplay(rating) {
     return '<img src="../images/ratings/rating-dish-'+parseInt(rating)+'.png">';
 }
+var newRestaurant = new Ext.form.FormPanel({
+    scroll: 'vertical',
+    dockedItems:[
+       {
+           dock:'top',
+           xtype:'toolbar',
+           ui:'light',
+           title:'Crave',
+           items:[{text:'Back',ui:'back', handler:backHandler}]
+       }
+    ],
+    items: [
+       {xtype: 'fieldset', title: 'New Restaurant', items: [
+            {
+                xtype: 'textfield',
+                label:'Name',
+                name: 'restaurant[name]',
+                id: 'restaurantName'
+		    },
+           {xtype: 'textfield', name: 'restaurant[latitude]', id: 'latfield', hidden: true},
+           {xtype: 'textfield', name: 'restaurant[longitude]', id: 'lngfield', hidden: true},
+           {
+               xtype: 'textfield',
+               label:'Address',
+               name: 'restaurant[street_address]',
+               id: 'restaurantAddress'
+           },
+           {
+               xtype: 'textfield',
+               label:'Neighborhood',
+               name: 'restaurant[neighborhood]',
+               id: 'restaurantNeighborhood'
+           },
+           {
+               xtype: 'textfield',
+               label:'City',
+               value: 'San Francisco',
+               name: 'restaurant[city]',
+               id: 'restaurantCity'
+           },
+           {
+               xtype: 'textfield',
+               value: 'CA',
+               label:'State',
+               name: 'restaurant[state]',
+               id: 'restaurantState'
+           },
+           {
+               xtype: 'textfield',
+               label:'Zip',
+               name: 'restaurant[zip]',
+               id: 'restaurantZip'
+           },
+           {
+               xtype: 'textfield',
+               label:'Country',
+               value: 'USA',
+               name: 'restaurant[country]',
+               id: 'restaurantCountry'
+           },
+           {
+               xtype: 'textfield',
+               label:'Cross Street',
+               name: 'restaurant[cross_street]',
+               id: 'restaurantCross'
+           },
+           {
+               xtype:'button',
+               text: 'Submit',
+               handler: function() {
+                   var s = Ext.getCmp('restaurantAddress').getValue()+" "+Ext.getCmp('restaurantCity').getValue()+" "+Ext.getCmp('restaurantState').getValue()+" "+Ext.getCmp('restaurantZip').getValue();
+
+                   var geocoder = new google.maps.Geocoder();
+                   geocoder.geocode( { 'address': s}, function(results, status) {
+                       if (status == google.maps.GeocoderStatus.OK) {
+                           stringLocation = results[0].geometry.location.toString().replace("(","").replace(")","");
+                           coordsArray = stringLocation.split(",");
+                           Ext.getCmp('latfield').setValue($.trim(coordsArray[0]));
+                           Ext.getCmp('lngfield').setValue($.trim(coordsArray[1]));
+                           newRestaurant.submit({
+                               url: '/restaurants',
+                               method: 'post',
+                               submitDisabled: true,
+                               waitMsg: 'Saving Data...Please wait.',
+                               success: function (objForm,httpRequest) {
+                                   var mbox = new Ext.MessageBox({});
+                                   mbox.alert("Record Saved");
+                                   //redirect back to restaurant list?
+                               },
+                               failure: function() {
+                                   console.log('submissionFailed');
+                               }
+                           })
+                       } else {
+                           alert("Cannot resolve that address for the following reason: " + status);
+                       }
+                   });
+               }
+           }
+        ]}
+    ]
+});
 
 var reviewForm = new Ext.form.FormPanel({
     scroll: 'vertical',

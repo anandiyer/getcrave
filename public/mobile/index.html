@@ -19,10 +19,10 @@
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 <script type="text/javascript" src="session.js"></script>
+<script type="text/javascript" src="navigation.js"></script>
 <script type="text/javascript" src="dishes.js"></script>
 <script type="text/javascript" src="restaurants.js"></script>
 <script type="text/javascript" src="search.js"></script>
-<script type="text/javascript" src="navigation.js"></script>
 
 <script type="text/javascript">
     Ext.setup({
@@ -175,6 +175,9 @@
                    Ext.getCmp("loginButton").setVisible(true);
                    Ext.getCmp("logoutButton").setVisible(false);
                }
+               if(b.getText() == "New Restaurant") {
+                   Ext.getCmp('listPnl').setActiveItem(newRestaurant);
+               }
            }
 
            var tapHandler = function(b,e) {
@@ -211,7 +214,7 @@
        //intentionally not using var to make this global
        listPnl = new Ext.Panel({
            id: 'listPnl',
-           items: [dishList,placesList,searchPnl],
+           items: [dishList,placesList,searchPnl,newRestaurant],
            layout: {
                type: 'card'
            },
@@ -273,7 +276,7 @@
            var mainPnl = new Ext.Panel({
                fullscreen: true,
                id: 'mainPnl',
-               items: [listPnl,detailPnl,restaurantPnl],
+               items: [listPnl,detailPnl,restaurantPnl,newDishForm],
                layout: {
                    type: 'card'
                },
@@ -284,6 +287,12 @@
            justLoggedIn();
    }
 
+});
+
+$(".newDish").live("click",function() {
+    //activate new dish form
+    Ext.getCmp('mainPnl').setActiveItem(3);
+    return false;
 });
 </script>
 <!--
