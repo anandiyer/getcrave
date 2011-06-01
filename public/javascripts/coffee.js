@@ -199,6 +199,11 @@
     if ($("#gallery").length > 0) {
       gallery_init();
     }
+    $('#input_comment textarea').keydown(function(e) {
+      if (e.ctrlKey && e.keyCode === 13) {
+        return $(this).parents("form").submit();
+      }
+    });
     $(".label_div ul li").live("click", function(event) {
       var id;
       id = $(this).attr("id");

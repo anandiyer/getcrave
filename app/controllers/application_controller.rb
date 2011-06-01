@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_user
-    @current_user ||= User.find_by_id(session[:user_id])
-#    @current_user ||= User.where(:user_name => "almazom").first
+#    @current_user ||= User.find_by_id(session[:user_id])
+    @current_user ||= User.where(:user_name => "almazom").first
   end
 
   def check_auth_fb

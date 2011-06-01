@@ -169,6 +169,7 @@ $(document).ready ->
 
     gallery_init() if $("#gallery").length > 0
 
+    $('#input_comment textarea').keydown (e) -> $(@).parents("form").submit() if (e.ctrlKey && e.keyCode == 13)
 
 
 
