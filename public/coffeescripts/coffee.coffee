@@ -165,7 +165,7 @@ geo = (position) ->
 $(document).ready ->
 
 #    show_dialog("title", "content")
-#    modal_window() if $(".modal_window").length > 0
+    modal_window() if $(".modal_window").length > 0
 
 
 

@@ -197,6 +197,9 @@
     return long = position.coords.longitude;
   };
   $(document).ready(function() {
+    if ($(".modal_window").length > 0) {
+      modal_window();
+    }
     $(".label_div ul li").live("click", function(event) {
       var id;
       id = $(this).attr("id");
