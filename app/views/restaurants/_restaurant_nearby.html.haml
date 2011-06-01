@@ -12,10 +12,13 @@
   .save_n_review_3_col= render :partial => "/save"
   .review_counter_for_item
 
-    -#- if !@menu_item.menu_item_avg_rating_count.nil?
-    -#  - review = @menu_item.menu_item_avg_rating_count.count
-    -#
-    -#- else
-    -#  - review = 0
-    -#.number_rev= review
-    -#reviews
+
+
+    -#TODO: we need denormalisation field restaurant.menu_items_reviews_count
+    - review = @restaurant.menu_items.map{|x| x.menu_item_ratings if !x.menu_item_ratings.blank?}.uniq.delete_if{|x| x == nil}.count
+
+    .number_rev= review
+    reviews
+
+    -#To get number of reviews for restaurant, we have to get menu_item_ratings for all restaurant.menu_items.
+    -#We dont have a controller for this yet.
