@@ -34,7 +34,7 @@ var singleRestaurantStore = new Ext.data.Store({
     }
 });
 
-function restaurantDisplay(record, btn, index) {
+function restaurantDisplay(record, index) {
     singleRestaurantStore.proxy.url = (urlPrefix+'/restaurants/'+record.data.id+'/menu_items.json');
 
     singleRestaurantStore.load(function(){
@@ -291,21 +291,6 @@ function dishDisplay(response) {
 
 var aRestaurantList = new Ext.List({
     id:'aRestaurantList',
-    onItemDisclosure: {
-       handler: function(record, btn, index) {
-           console.log(urlPrefix+'/menu_items/'+record.data.id+'.json');
-           Ext.Ajax.request({
-               url: (urlPrefix+'/menu_items/'+record.data.id+'.json'),
-               reader: {
-                    type: 'json'
-               },
-               success: function(response) {
-                   dishDisplay(response);
-               }
-           });
-           Ext.getCmp('mainPnl').setActiveItem(1);
-       }
-    },
     itemTpl: '<tpl for="."><div class="thisdish"><b>{name}</b></div></tpl>',
     singleSelect: true,
     grouped: false,
@@ -318,4 +303,19 @@ var aRestaurantList = new Ext.List({
     height:'334px',
     modal:true,
     hideOnMaskTap: false
+});
+
+aRestaurantList.on('itemtap', function(dataView, index, item, e) {
+    record = dataView.store.data.items[index];
+    console.log(urlPrefix+'/menu_items/'+record.data.id+'.json');
+    Ext.Ajax.request({
+        url: (urlPrefix+'/menu_items/'+record.data.id+'.json'),
+        reader: {
+             type: 'json'
+        },
+        success: function(response) {
+            dishDisplay(response);
+        }
+    });
+    Ext.getCmp('mainPnl').setActiveItem(1);
 });

@@ -1,3 +1,7 @@
+.chevrony {display:block;float:right;background-image: url('../../images/arrow-gray.png');
+width: 8px;
+height: 13px;
+margin: -6px 3px 0 0;}
 #googleMap {height:100px;width:100px;}
 .foodImg {
     display:block;
