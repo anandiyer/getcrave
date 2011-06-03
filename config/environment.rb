@@ -3,3 +3,5 @@ require File.expand_path('../application', __FILE__)
 
 # Initialize the rails application
 Crave::Application.initialize!
+
+puts Rails.env

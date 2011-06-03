@@ -92,12 +92,21 @@ window.g_notice = (type, text) ->
 
 window.save_helpfull = () ->
 
-window.save_menu_item = (mid) ->
-
+window.save_menu_item = (mid, saved_item_id) ->
     path = $("#flag_icons div.save_icon[id=mid_"+mid+"]")
+    $(path).find("form").attr("rel",saved_item_id)
+
 
     $(path).removeClass("not_saved_item").addClass("saved_item")
     g_notice("Notification", "Item saved!")
+
+
+# create_table "user_saved_menu_items", :force => true do |t|
+#    t.integer  "user_id"
+#    t.integer  "menu_item_id"
+#    t.datetime "created_at"
+#    t.datetime "updated_at"
+
 
 window.add_review = (id_of_menu_item, msg) ->
     update_reviews(id_of_menu_item)
@@ -136,10 +145,6 @@ window.set_gmap = (zoom = 10) ->
         gmap(lat, long, zoom)
 
 
-
-
-
-
 window.gallery_init = () ->
     $('#gallery a').lightBox
         overlayBgColor: '#000'
@@ -169,7 +174,22 @@ $(document).ready ->
 
     gallery_init() if $("#gallery").length > 0
 
+    $('#comment_wrapper .submit_wrapper').click (e) -> $(@).parents("form").submit()
     $('#input_comment textarea').keydown (e) -> $(@).parents("form").submit() if (e.ctrlKey && e.keyCode == 13)
+
+
+    $(document).ajaxSend (event, request, settings) ->
+        if settings.type == 'post'
+            settings.data = (settings.data ? settings.data + "&" : "") + "authenticity_token=" + encodeURIComponent( AUTH_TOKEN )
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    $.ajaxSetup({ beforeSend: (xhr) ->  xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))})
+
+
+
+#   $('textarea').autoResize({onResize : () -> $(this).css({opacity:0.8}), animateCallback : () -> $(@).css({opacity:1}), animateDuration : 300, extraSpace : 40});
+    $('textarea').autoResize()
+
 
 
 
@@ -241,9 +261,23 @@ $(document).ready ->
             form.submit()
 
 
+    $(".saved_item.save_icon").click () ->
+        cl "saved icon"
+        cl id = $(@).attr("rel")
+
+        path = ("/user_saved_menu_items/"+id)
+        $.ajax({url: path ,type: "delete"})
+
+#        f = $(@).find("form")
+#        f.attr("method", "delete")
+#        .attr("action", new_action)
+#        .submit()
+
     $(".not_saved_item.save_icon").click () ->
+        cl f = $(this).find("form")
+        cl new_action = "/user_saved_menu_items/"+$(f).attr("rel")
         $(this).find("form").submit()
-        $(this).unbind('click');
+        $(this).unbind('click')
 
 
     $("#select_box_hint").click () ->

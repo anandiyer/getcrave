@@ -81,8 +81,14 @@
         =f.hidden_field :menu_item_id, :value =>params[:id]
         .star_gray{:id => params[:id], :data =>{:model => "user_menu_item_ratings"}} &nbsp;
         #input_comment
-          =f.text_area :review
-          =f.hidden_field :menu_item_id, :value =>params[:id]
+          = f.text_area :review
+          = f.hidden_field :menu_item_id, :value =>params[:id]
+        #submit_block
+          .submit_wrapper
+            .text Submit
+            .left_rounder
+            .submit_button
+
 #reviews_wrapper{:class => @controller.controller_name}
   %h3.review
     Reviews

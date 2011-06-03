@@ -66,13 +66,16 @@ class UserSavedMenuItemsController < ApplicationController
   # POST /user_saved_menu_items.xml
   def create
     @user_saved_menu_item = UserSavedMenuItem.new(params[:user_saved_menu_item])
+    p @user_saved_menu_item.id
 
     respond_to do |format|
-      if @user_saved_menu_item.save
+      p @user_saved_menu_item.save
+
+      if t
         format.html { redirect_to(@user_saved_menu_item, :notice => 'User saved menu item was successfully created.') }
         format.xml  { render :xml => @user_saved_menu_item, :status => :created, :location => @user_saved_menu_item }
         format.json  { render :json => @user_saved_menu_item, :status => :created, :location => @user_saved_menu_item }
-        format.js  { render :js => "window.save_menu_item("+params[:user_saved_menu_item][:menu_item_id]+")" }
+        format.js  { render :js => "window.save_menu_item("+params[:user_saved_menu_item][:menu_item_id]+","+@user_saved_menu_item.id.to_s+")" }
       end
     end
   end
@@ -99,12 +102,13 @@ class UserSavedMenuItemsController < ApplicationController
   # DELETE /user_saved_menu_items/1.xml
   def destroy
     @user_saved_menu_item = UserSavedMenuItem.find(params[:id])
-    # @user_saved_menu_item.destroy
+    @user_saved_menu_item.destroy
 
     respond_to do |format|
       format.html { redirect_to(user_saved_menu_items_url) }
       format.xml  { head :ok }
       format.json  { head :ok }
+      format.js  { render :js =>"alert(1)"  }
     end
   end
 

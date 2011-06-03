@@ -122,9 +122,10 @@
     });
   };
   window.save_helpfull = function() {};
-  window.save_menu_item = function(mid) {
+  window.save_menu_item = function(mid, saved_item_id) {
     var path;
     path = $("#flag_icons div.save_icon[id=mid_" + mid + "]");
+    $(path).find("form").attr("rel", saved_item_id);
     $(path).removeClass("not_saved_item").addClass("saved_item");
     return g_notice("Notification", "Item saved!");
   };
@@ -199,11 +200,29 @@
     if ($("#gallery").length > 0) {
       gallery_init();
     }
+    $('#comment_wrapper .submit_wrapper').click(function(e) {
+      return $(this).parents("form").submit();
+    });
     $('#input_comment textarea').keydown(function(e) {
       if (e.ctrlKey && e.keyCode === 13) {
         return $(this).parents("form").submit();
       }
     });
+    $(document).ajaxSend(function(event, request, settings) {
+      var _ref;
+      if (settings.type === 'post') {
+        settings.data = ((_ref = settings.data) != null ? _ref : settings.data + {
+          "&": ""
+        }) + "authenticity_token=" + encodeURIComponent(AUTH_TOKEN);
+        return request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      }
+    });
+    $.ajaxSetup({
+      beforeSend: function(xhr) {
+        return xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+      }
+    });
+    $('textarea').autoResize();
     $(".label_div ul li").live("click", function(event) {
       var id;
       id = $(this).attr("id");
@@ -244,7 +263,20 @@
         return form.submit();
       }
     });
+    $(".saved_item.save_icon").click(function() {
+      var id, path;
+      cl("saved icon");
+      cl(id = $(this).attr("rel"));
+      path = "/user_saved_menu_items/" + id;
+      return $.ajax({
+        url: path,
+        type: "delete"
+      });
+    });
     $(".not_saved_item.save_icon").click(function() {
+      var f, new_action;
+      cl(f = $(this).find("form"));
+      cl(new_action = "/user_saved_menu_items/" + $(f).attr("rel"));
       $(this).find("form").submit();
       return $(this).unbind('click');
     });

@@ -406,6 +406,46 @@ body.two-col.bp{
                         $content-columns: ceil(15);
                         @include column($content-columns, true);
 
+                        #submit_block{
+                            /*input[type=submit]{*/
+                                /*text-align: right;*/
+                            /*}*/
+
+                            .submit_wrapper{
+                                width: 98px;
+                                height: 33px;
+                                position: relative;
+                                cursor: pointer;
+                                height: 40px;
+                                float: right;
+
+                                .text{
+                                    position: absolute;
+                                    top: 4px;
+                                    left: 25px;
+                                    text-shadow:1px 1px 1px #ffffff;
+                                    font-size: 15px;
+                                    cursor: pointer;
+
+                                }
+
+                                .left_rounder{
+                                    height: 33px;
+                                    width: 8px;
+                                    background: url("/images/sprites/button-sprite.png") no-repeat 0px -75px;
+                                    float: left;
+
+                                }
+
+                                .submit_button{
+                                    float: right;
+                                    width: 90px;
+                                    height: 33px;
+                                    background: url("/images/sprites/button-sprite.png") no-repeat -131px -75px;
+                                }
+                            }
+                        }
+
                         h1{
                             font-size:17px;
                         }
@@ -425,8 +465,16 @@ body.two-col.bp{
                             textarea{
                                 width: 100%;
                                 border: none;
-                                height: 30px;
+                                overflow: hidden;
+
+                                height: 20px;
+                                /*resize: none;*/
                             }
+
+                            textarea:focus{
+                                height: 45px;
+                            }
+
 
                         }
                     }
@@ -1079,8 +1127,3 @@ body.two-col.bp{
     @include sprites($add_photos_counter_position);
 }
 
-
-textarea{
-    border: 1px solid #9A9A9A;
-
-}
