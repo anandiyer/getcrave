@@ -21,10 +21,11 @@ window.show_dialog = (title, content) ->
 
 
 window.show_modal = (modal_id) ->
-    $('#mask').css({ 'display' : 'block', opacity : 0});
+    $('#mask').css({ 'display' : 'block', opacity : 0})
 
     $('#mask').fadeTo("fast",0.6).height($(document).height())
-    $('#'+modal_id).fadeIn("fast");
+    $('#'+modal_id).fadeIn("fast")
+    window.pl_all($("form.uuid").attr("rel"))
 
 
 
@@ -76,8 +77,8 @@ after_send = (obj, html) ->
     obj.html(html)
 
 
-window.menu_item_photos_uploaded = ()->
-    alert 1
+#window.menu_item_photos_uploaded = ()->
+#    alert 1
 window.update_reviews = (id_of_menu_item, limits = $("#show_more_button").data("step")) ->
     obj = $("#reviews_wrapper #update_place")
     $.ajax({url: "/menu_items/"+id_of_menu_item+"/show_reviews?limit="+limits,
@@ -99,13 +100,6 @@ window.save_menu_item = (mid, saved_item_id) ->
 
     $(path).removeClass("not_saved_item").addClass("saved_item")
     g_notice("Notification", "Item saved!")
-
-
-# create_table "user_saved_menu_items", :force => true do |t|
-#    t.integer  "user_id"
-#    t.integer  "menu_item_id"
-#    t.datetime "created_at"
-#    t.datetime "updated_at"
 
 
 window.add_review = (id_of_menu_item, msg) ->
@@ -167,10 +161,34 @@ geo = (position) ->
 
 
 
+
+
+
+
 $(document).ready ->
 
+
+    #graphic submit
+    $(".submit_wrapper.submit").click () ->
+
+        $(@).parents("form").submit()
+
+
+    window.pl_all() if $(".add_photos_inline a#plupload").length !=0
+
+#add menu item in modal
+    $(".text_input input#menu_item_name").keyup () ->
+        if $(@).val().length != 0
+            cl 1
+            $("#add_photo_here").show()
+        else
+            cl 0
+            $("#add_photo_here").hide()
+
+
 #    show_dialog("title", "content")
-    modal_window() if $(".modal_window").length > 0
+    modal_window()
+#    if $(".modal_window").length > 0
 
     gallery_init() if $("#gallery").length > 0
 
@@ -189,6 +207,9 @@ $(document).ready ->
 
 #   $('textarea').autoResize({onResize : () -> $(this).css({opacity:0.8}), animateCallback : () -> $(@).css({opacity:1}), animateDuration : 300, extraSpace : 40});
     $('textarea').autoResize()
+
+
+
 
 
 
@@ -213,12 +234,6 @@ $(document).ready ->
 
         $(".label_div_wrapper").css("top": new_top).css("left",new_left).show()
         event.preventDefault()
-#
-#        label_div = $(".label_div")
-#        if $(label_div).length == 0
-#         $("body").add("div").addClass("label_div")
-
-#    labels
 
 
 
@@ -247,8 +262,9 @@ $(document).ready ->
 
 
     $(".yes_answer").live "click", (event) ->
-        if $(this).find("a").length > 0
-            event.preventDefault()
+
+        event.preventDefault()
+        if $(this).find("a").length > 0 && $(".fb_login a.not_signed").length == 0
             link = $(this).find("a")
             link_text = $(link).text()
 
@@ -259,6 +275,9 @@ $(document).ready ->
             $(found_helpfull_number).text("("+increment+")")
             form = $(this).find("form")
             form.submit()
+        else
+            show_dialog("Please sign in!")
+
 
 
     $(".saved_item.save_icon").click () ->

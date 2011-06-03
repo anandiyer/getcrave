@@ -79,6 +79,12 @@ $small_font_size: 12px;
 
 body.two-col.bp{
 
+    ul{
+        padding: 0px;
+        list-style: none;
+    }
+
+
     .label_div_tri{
         width: 220px;
         background: url("/images/icons/labels_triangle.gif") no-repeat center center;
@@ -411,39 +417,7 @@ body.two-col.bp{
                                 /*text-align: right;*/
                             /*}*/
 
-                            .submit_wrapper{
-                                width: 98px;
-                                height: 33px;
-                                position: relative;
-                                cursor: pointer;
-                                height: 40px;
-                                float: right;
 
-                                .text{
-                                    position: absolute;
-                                    top: 4px;
-                                    left: 25px;
-                                    text-shadow:1px 1px 1px #ffffff;
-                                    font-size: 15px;
-                                    cursor: pointer;
-
-                                }
-
-                                .left_rounder{
-                                    height: 33px;
-                                    width: 8px;
-                                    background: url("/images/sprites/button-sprite.png") no-repeat 0px -75px;
-                                    float: left;
-
-                                }
-
-                                .submit_button{
-                                    float: right;
-                                    width: 90px;
-                                    height: 33px;
-                                    background: url("/images/sprites/button-sprite.png") no-repeat -131px -75px;
-                                }
-                            }
                         }
 
                         h1{
@@ -723,7 +697,7 @@ body.two-col.bp{
                     width: 140px;
                     height:30px;
                     position: absolute;
-                    z-index: 1000;
+                    z-index: 1001;
                     cursor: pointer;
                     top:43px;
                     left: 69px;
@@ -1028,7 +1002,7 @@ body.two-col.bp{
 
 
     background-color: black;
-    z-index: 1000;
+    z-index: 200;
     @include opacity(.4);
 }
 
@@ -1038,7 +1012,11 @@ body.two-col.bp{
 
 
     color:white;
-    z-index: 1001;
+    z-index: 201;
+
+    #labels_all{
+        display: none;
+    }
 
 }
 
@@ -1067,10 +1045,25 @@ body.two-col.bp{
             $content-columns: ceil(9);
             @include column($content-columns, true);
             padding: 0 20px 0 0;
+
+            .submit_wrapper{
+                float: left;
+                padding:0 15px 0 0;
+            }
+
+            .cancel_adding{
+                font-size: 16px;
+            }
         }
 
         .img_column{
+
             padding: 20px 0 0 0;
+
+            /*#add_photo_here{*/
+                /*display: none;*/
+            /*}*/
+
             img{
                @include border-radius(3px)
             }
@@ -1084,6 +1077,11 @@ body.two-col.bp{
 
         .clone_line{
             padding:0 0 10px 0;
+            /*textarea{*/
+                /*border: none;*/
+                /*height:20px;*/
+                /*width: 320px;*/
+            /*}*/
         }
 
 
@@ -1103,7 +1101,7 @@ body.two-col.bp{
 
             input{
                 height: 21px;
-                width: 205px;
+                width: 320px;
                 border: none;
                 margin: 4px 3px 0px 10px;
             }
@@ -1128,3 +1126,42 @@ body.two-col.bp{
     @include sprites($add_photos_counter_position);
 }
 
+
+.submit_wrapper{
+    width: 98px;
+    height: 33px;
+    position: relative;
+    cursor: pointer;
+    height: 40px;
+    /*float: right;*/
+
+    .text{
+        position: absolute;
+        top: 4px;
+        left: 25px;
+        text-shadow:1px 1px 1px #ffffff;
+        font-size: 15px;
+        cursor: pointer;
+
+    }
+
+    .left_rounder{
+        height: 33px;
+        width: 8px;
+        background: url("/images/sprites/button-sprite.png") no-repeat 0px -75px;
+        float: left;
+
+    }
+
+    .submit_button{
+        float: right;
+        width: 90px;
+        height: 33px;
+        background: url("/images/sprites/button-sprite.png") no-repeat -131px -75px;
+    }
+}
+
+.plupload{
+    background-color:red;
+    opacity:1;
+}

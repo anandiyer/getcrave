@@ -23,7 +23,8 @@
       opacity: 0
     });
     $('#mask').fadeTo("fast", 0.6).height($(document).height());
-    return $('#' + modal_id).fadeIn("fast");
+    $('#' + modal_id).fadeIn("fast");
+    return window.pl_all($("form.uuid").attr("rel"));
   };
   window.modal_window = function() {
     var window_height, window_width;
@@ -95,9 +96,6 @@
   after_send = function(obj, html) {
     obj.fadeTo("fast", 1);
     return obj.html(html);
-  };
-  window.menu_item_photos_uploaded = function() {
-    return alert(1);
   };
   window.update_reviews = function(id_of_menu_item, limits) {
     var obj;
@@ -194,9 +192,22 @@
     return long = position.coords.longitude;
   };
   $(document).ready(function() {
-    if ($(".modal_window").length > 0) {
-      modal_window();
+    $(".submit_wrapper.submit").click(function() {
+      return $(this).parents("form").submit();
+    });
+    if ($(".add_photos_inline a#plupload").length !== 0) {
+      window.pl_all();
     }
+    $(".text_input input#menu_item_name").keyup(function() {
+      if ($(this).val().length !== 0) {
+        cl(1);
+        return $("#add_photo_here").show();
+      } else {
+        cl(0);
+        return $("#add_photo_here").hide();
+      }
+    });
+    modal_window();
     if ($("#gallery").length > 0) {
       gallery_init();
     }
@@ -251,8 +262,8 @@
     }
     $(".yes_answer").live("click", function(event) {
       var form, found_helpfull_number, increment, link, link_text;
-      if ($(this).find("a").length > 0) {
-        event.preventDefault();
+      event.preventDefault();
+      if ($(this).find("a").length > 0 && $(".fb_login a.not_signed").length === 0) {
         link = $(this).find("a");
         link_text = $(link).text();
         $(this).find("span").html(link_text);
@@ -261,6 +272,8 @@
         $(found_helpfull_number).text("(" + increment + ")");
         form = $(this).find("form");
         return form.submit();
+      } else {
+        return show_dialog("Please sign in!");
       }
     });
     $(".saved_item.save_icon").click(function() {

@@ -1,3 +1,5 @@
+#require 'rmagick'
+#require 'open-uri'
 require "uuidtools"
 
 # Monkey patching to include the 'distance' attribute in menu_items
@@ -14,6 +16,8 @@ end
 
 class MenuItemsController < ApplicationController
   before_filter :get_restaurant
+  before_filter :check_auth_fb, :only => [:upload_photo]
+
   layout "general"
 
 #  TODO: change 2 your bucket name
@@ -94,36 +98,69 @@ class MenuItemsController < ApplicationController
 #    end
 #  end
 
-    def upload_photo
-    if signed_in?
+  def upload_photo
+#    if signed_in?
+
+    p "upload_photo"
+
+    p params[:id].blank?
+
+
+      p "id"
       if params[:file] && (params[:file].content_type.to_s.index("image") == 0 )
-        temp_file = params[:file].tempfile
+        p temp_file = params[:file].tempfile
         filename = UUIDTools::UUID.random_create.to_s+".jpg"
 
         AWS::S3::S3Object.store(filename, temp_file.read, @@BUCKET, :access => :public_read)
         url = AWS::S3::S3Object.url_for(filename, @@BUCKET, :authenticated => false)
 
-        menu_item_photo = MenuItemPhoto.new
-
-        menu_item_photo.menu_item_id = params[:id]
-        menu_item_photo.user_id = current_user.id
-        p menu_item_photo.photo = url
-
-        menu_item = MenuItem.find(params[:id])
-        menu_item.menu_item_photos << menu_item_photo
 
 
-        render :partial => "gallery_link"
+
+        if params[:uuid] == "undefined"
+
+          menu_item_photo = MenuItemPhoto.new
+
+          menu_item_photo.menu_item_id = params[:id]
+          menu_item_photo.user_id = current_user.id
+          p menu_item_photo.photo = url
+
+          menu_item = MenuItem.find(params[:id])
+          menu_item.menu_item_photos << menu_item_photo
+
+
+          render :partial => "gallery_link"
+        else
+#          temp = TempImage.new
+#          temp.hash = params[:uuid].to_s
+#          temp.image_name = filename.to_s
+#          temp.save did not work (())
+
+#          TODO: Anand? can you refactor me?
+          TempImage.find_by_sql("INSERT INTO temp_images(hash, image_name) VALUES ('"+params[:uuid]+"', '"+filename+"')")
+
+          render :nothing => true
+
+
+#          temp.save
+        end
+
       else
-#        plupload can filter file types
+  #        plupload can filter file types
         raise "wrong type of file"
       end
+#    else
+#      p "temp image save"
+#
+#
+#    end
 
 
 
-    else
-      raise "not signed in"
-    end
+
+#    else
+#      raise "not signed in"
+#    end
   end
 
 
@@ -159,17 +196,43 @@ class MenuItemsController < ApplicationController
   # POST /menu_items
   # POST /menu_items.xml
   def create
+
+    uuid = params[:menu_item][:uuid]
+    params[:menu_item].delete("uuid")
+
+
     @menu_item = MenuItem.new(params[:menu_item])
 
     respond_to do |format|
       if @menu_item.save
+        labels = params[:dish][:label].gsub(/ /,"").split(",").delete_if{|l| l.size <2}.uniq
+        labels_ids = MenuLabel.where(:menu_label => labels).select("id").map{|i| i.id}
+
+        labels_ids.each do |label_id|
+          ma = MenuLabelAssociation.new
+          ma.menu_item_id = @menu_item.id
+          ma.menu_label_id = label_id
+          ma.user_id = current_user.id
+          ma.save
+        end
+
+
+        photos = TempImage.where(:hash => uuid)
+
+        photos.map{|ph| ph.image_name}.each do |p|
+          mip = MenuItemPhoto.new
+          mip.menu_item_id = @menu_item.id
+          mip.photo = @menu_item.photo
+          mip.user_id = current_user.id
+          mip.save
+        end
+
+        photos.delete_all
+
         format.html { redirect_to(@menu_item, :notice => 'Menu item was successfully created.') }
         format.xml  { render :xml => @menu_item, :status => :created, :location => @menu_item }
         format.json  { render :json => @menu_item, :status => :created, :location => @menu_item }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @menu_item.errors, :status => :unprocessable_entity }
-        format.json  { render :json => @menu_item.errors, :status => :unprocessable_entity }
+        format.js  { render :js => params.to_xml }
       end
     end
   end

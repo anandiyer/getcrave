@@ -84,10 +84,7 @@
           = f.text_area :review
           = f.hidden_field :menu_item_id, :value =>params[:id]
         #submit_block
-          .submit_wrapper
-            .text Submit
-            .left_rounder
-            .submit_button
+          = render :partial => "/button"
 
 #reviews_wrapper{:class => @controller.controller_name}
   %h3.review

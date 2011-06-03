@@ -13,9 +13,15 @@
     = stylesheet_link_tag "jquery.lightbox-0.5.css"
 
 
+    -#autocomplete
+
+    = javascript_include_tag "plugins/ui/jquery.ui.core.js","plugins/ui/jquery.ui.widget.js","plugins/ui/jquery.ui.position.js","plugins/ui/jquery.ui.autocomplete.js"
+    = stylesheet_link_tag "ui/jquery.ui.all.css"
+
+
+
     -#if on page we have upload option
     = javascript_include_tag  "plugins/plupload/plupload.js", "plugins/plupload/plupload.flash.js", "plugins/plupload/plupload.html5.js", "plupload_initialize.js"
-
 
     = javascript_include_tag  "coffee"
 
