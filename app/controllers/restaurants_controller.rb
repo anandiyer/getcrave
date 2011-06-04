@@ -9,7 +9,7 @@ class RestaurantsController < ApplicationController
     # @restaurants = Restaurant.find(:all, :origin => [37.77859, -122.39142], :order=>'distance asc', :limit => 25)
     # @restaurants = Restaurant.all
 
-    get_closest_restaurants params[:lat], params[:long]
+    get_closest_restaurants params[:lat], params[:long], params[:within], params[:limit]
 
     respond_to do |format|
       format.html # index.html.haml
@@ -114,7 +114,6 @@ class RestaurantsController < ApplicationController
 
     @restaurants = @search.results
 
-
     respond_to do |format|
       format.html # index.html.haml
       format.xml { render :xml => @restaurants }
@@ -124,18 +123,26 @@ class RestaurantsController < ApplicationController
 
   private
 
-  def get_closest_restaurants lat, log, limit = 50
+  def get_closest_restaurants lat, long, within, limit
     @lat = lat.to_f
-    @long = log.to_f
-    @limit = limit
+    @long = long.to_f
+    @within = 1
+    @limit = 50
 
-    if params[:limit] && !params[:limit].empty?
-      @limit = params[:limit].to_i
+    if within && !within.empty?
+      @within = within.to_f
     end
+    
+    if limit && !limit.empty?
+      @limit = limit.to_i
+    end
+    
+    @conditions = "distance < #{@within}"
 
     @restaurants = Restaurant.find(:all,
-      :origin => [@lat, @long], 
-      :order=>'distance asc', 
+      :origin => [@lat, @long],
+      :conditions => @conditions,
+      :order => 'distance asc', 
       :limit => @limit)
   end
 

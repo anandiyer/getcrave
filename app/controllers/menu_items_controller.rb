@@ -17,23 +17,29 @@ class MenuItemsController < ApplicationController
   def location
     @lat = params[:lat].to_f
     @long = params[:long].to_f
+    @within = 1
     @limit = 25
     
     if params[:limit] && !params[:limit].empty?
       @limit = params[:limit].to_i
     end
     
+    if params[:within] && !params[:within].empty?
+      @within = params[:within].to_f
+    end
+    
+    @conditions = "distance < #{@within}"
+    
     # Lookup all the restaurants near the given lat/long and get 25 of the menu_items
     # and order by rating
     
-    #FIXME - assuming within 3 mile radius by default
     #FIXME - order by rating based on QS
     @origin = [@lat, @long]
     @menu_items = MenuItem.find(:all, 
          :origin => @origin,
-         :conditions => "distance < 3",
+         :conditions => @conditions,
          :joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id",
-         :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
+         :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, menu_item_avg_rating_count.count DESC",
          # :include => :menu_item_avg_rating_count, 
          :limit => @limit)
 

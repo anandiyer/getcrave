@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110527201330) do
+ActiveRecord::Schema.define(:version => 20110603234401) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -156,6 +156,13 @@ ActiveRecord::Schema.define(:version => 20110527201330) do
 
   add_index "slugs", ["name", "sluggable_type", "sequence", "scope"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
   add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
+
+  create_table "temp_images", :force => true do |t|
+    t.string   "hash"
+    t.string   "image_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "user_followings", :force => true do |t|
     t.integer  "user_id"
