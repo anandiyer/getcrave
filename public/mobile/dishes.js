@@ -27,20 +27,20 @@ var dishStore = new Ext.data.Store({
     model: 'Dish',
     sorters: [{property: 'arating', direction: 'DESC'}],
     getGroupString : function(record) {
-        rating = record.get('rating');
-        if(rating=='5.0') {
+        rating = parseInt(record.get('rating'));
+        if(rating==5) {
             return "<img src='../images/rating-stars/rating-dish-5.png'>";
         }
-        if(rating=='4.0') {
+        if(rating==4) {
             return "<img src='../images/rating-stars/rating-dish-4.png'>";
         }
-        if(rating=='3.0') {
+        if(rating==3) {
             return "<img src='../images/rating-stars/rating-dish-3.png'>";
         }
-        if(rating=='2.0') {
+        if(rating==2) {
             return "<img src='../images/rating-stars/rating-dish-2.png'>";
         }
-        if(rating=='1.0') {
+        if(rating==1) {
             return "<img src='../images/rating-stars/rating-dish-1.png'>";
         }
     },
