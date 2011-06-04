@@ -1,7 +1,40 @@
 .chevrony {display:block;float:right;background-image: url('../../images/arrow-gray.png');
-width: 8px;
-height: 13px;
-margin: -6px 3px 0 0;}
+    width: 8px;
+    height: 13px;
+    margin: 28px 3px 0 0;}
+.adish {overflow:hidden;}
+.dishListinfo {float:left;margin:2px 0 0 3px;font-size:14px;color:#282828;line-height: 20px;}
+.dishImg {display:block;float:left;width:60px;margin:3px;-webkit-border-radius:5px;}
+.dishname {font-weight:bold;}
+.restaurantName {display:block;}
+.distanceFigure {display:block;color:#5d5d5d;}
+.x-list .x-list-item {border-top:solid 1px #cccccc;
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.45, rgb(241,241,241)),
+        color-stop(0.73, rgb(241,241,241))
+    );
+}
+.x-list-header {
+    background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.45, rgb(65,66,68)),
+    color-stop(0.73, rgb(36,38,36))
+);
+}
+/*
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.45, rgb(36,38,36)),
+        color-stop(0.73, rgb(65,66,68))
+    );
+*/
 #googleMap {height:100px;width:100px;}
 .foodImg {
     display:block;
