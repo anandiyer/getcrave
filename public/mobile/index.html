@@ -38,7 +38,9 @@
 
            navigator.geolocation.getCurrentPosition(function(position) {
                if(urlPrefixSet) {
+                   console.log('setting proxy url');
                    dishStore.proxy.url = urlPrefix+encodeURIComponent('/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+                   //dishStore.proxy.url = urlPrefix+encodeURIComponent('/menu_items/location.json?lat=37.77867&limit=25&long=-122.39127');
                    restaurants.proxy.url = urlPrefix+encodeURIComponent('/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                } else {
                    dishStore.proxy.url = '/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
@@ -227,8 +229,8 @@
                    items:[
                        {xtype:'segmentedbutton',
                        items:[
-                           {text:'Dishes',id:'dishesButton',pressed:true, handler:tapHandler},
-                           {text:'Restaurants',id:'restaurantsButton', pressed:false, handler:tapHandler}
+                           {text:'Dishes',id:'dishesButton',pressed:true, handler:tapHandler,ui:'round',width:'110'}, //,icon:'../images/dish-icon-ON.png',iconAlign:'left'
+                           {text:'Restaurants',id:'restaurantsButton', pressed:false, handler:tapHandler,ui:'round',width:'110'} //,icon:'../images/restaurant-icon-OFF.png',iconAlign:'left'
                        ]}
                    ]
                },searchForm,
