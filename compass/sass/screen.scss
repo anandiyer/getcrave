@@ -417,6 +417,8 @@ body.two-col.bp{
                                 /*text-align: right;*/
                             /*}*/
 
+                            float: right;
+
 
                         }
 
@@ -550,9 +552,14 @@ body.two-col.bp{
                                 padding:0 0 5px 0;
                            }
                            #labels{
-                               .birdy_update{
-                                width: 300px;
-                                float: left;
+                               @include container;
+
+                               /*border:1px solid red;*/
+
+                               div.birdy_update{
+                                   width: 450px;
+                                   float: left;
+                                   padding: 0;
                                }
 
                                a{

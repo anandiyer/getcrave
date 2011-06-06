@@ -120,10 +120,17 @@
     });
   };
   window.save_helpfull = function() {};
+  window.unsave_menu_item = function() {
+    var path;
+    cl("unsave");
+    cl(path = $("#flag_icons div.save_icon"));
+    $(path).removeClass("saved_item").addClass("not_saved_item");
+    return g_notice("Notification", "Item unsaved!");
+  };
   window.save_menu_item = function(mid, saved_item_id) {
     var path;
     path = $("#flag_icons div.save_icon[id=mid_" + mid + "]");
-    $(path).find("form").attr("rel", saved_item_id);
+    $(path).attr("rel", saved_item_id).find("form").attr("rel", saved_item_id);
     $(path).removeClass("not_saved_item").addClass("saved_item");
     return g_notice("Notification", "Item saved!");
   };
@@ -234,19 +241,44 @@
       }
     });
     $('textarea').autoResize();
+    $("#labels a.label").live("click", function(event) {
+      var id;
+      id = $(this).attr("rel");
+      return $("#labels form").find("input#menu_label_association_menu_label_id").val(id).end().submit();
+    });
     $(".label_div ul li").live("click", function(event) {
       var id;
       id = $(this).attr("id");
       return $("#labels form").find("input#menu_label_association_menu_label_id").val(id).end().submit();
     });
-    $("#desc_wrap #labels a.mi_add_label").live("click", function(event) {
-      var new_left, new_top, offset;
+    $("#desc_wrap a.mi_add_label").live("click", function(event) {
+      var all_labels, new_left, new_top, offset;
       offset = $(this).position();
       new_top = parseInt(offset.top) + 12;
       new_left = parseInt(offset.left) - 84;
-      $(".label_div_wrapper").css({
-        "top": new_top
-      }).css("left", new_left).show();
+      all_labels = [];
+      $(".label_item").each(function() {
+        var exist;
+        exist = $(this).text();
+        all_labels.push(exist);
+        return $(".label_div ul li").each(function() {
+          if ($(this).text() === exist) {
+            return $(this).remove();
+          }
+        });
+      });
+      if ($(".label_div ul li").length === 0) {
+        $(".label_div_wrapper").hide();
+        $.gritter.add({
+          title: 'Notification',
+          text: "All labels was added!"
+        });
+      } else {
+        $(".label_div_wrapper").css({
+          "top": new_top
+        }).css("left", new_left).show();
+      }
+      cl(all_labels);
       return event.preventDefault();
     });
     $(document).ajaxComplete(function(event, xhr, settings) {
@@ -257,9 +289,6 @@
         return $(".label_div_wrapper").slideUp("fast");
       }
     });
-    if (window.location.port.indexOf("300") > 0) {
-      set_gmap(2);
-    }
     $(".yes_answer").live("click", function(event) {
       var form, found_helpfull_number, increment, link, link_text;
       event.preventDefault();
@@ -276,7 +305,7 @@
         return show_dialog("Please sign in!");
       }
     });
-    $(".saved_item.save_icon").click(function() {
+    $(".saved_item.save_icon").live("click", function() {
       var id, path;
       cl("saved icon");
       cl(id = $(this).attr("rel"));
@@ -286,7 +315,7 @@
         type: "delete"
       });
     });
-    $(".not_saved_item.save_icon").click(function() {
+    $(".not_saved_item.save_icon").live("click", function() {
       var f, new_action;
       cl(f = $(this).find("form"));
       cl(new_action = "/user_saved_menu_items/" + $(f).attr("rel"));

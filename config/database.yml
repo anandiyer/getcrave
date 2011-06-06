@@ -15,12 +15,8 @@ development:
   database: getcratve_dev2
   template: template_postgis
   pool: 5
-<<<<<<< HEAD
   username: almazom
 
-=======
-  username: postgres
->>>>>>> 2556a87d697662a9a98cfe9051a55c39e46e9651
 
 #  adapter: mysql2
 #  encoding: utf8

@@ -93,10 +93,25 @@ window.g_notice = (type, text) ->
 
 window.save_helpfull = () ->
 
+
+
+window.unsave_menu_item = () ->
+    cl "unsave"
+    cl path = $("#flag_icons div.save_icon")
+#    $(path).find("form").attr("rel",saved_item_id)
+
+    $(path).removeClass("saved_item").addClass("not_saved_item")
+    g_notice("Notification", "Item unsaved!")
+
+#    path = $("#flag_icons div.save_icon[id=mid_"+mid+"]")
+#    $(path).find("form").attr("rel",saved_item_id)
+
+#    $(path).removeClass("not_saved_item").addClass("saved_item")
+#    g_notice("Notification", "Item saved!")
+
 window.save_menu_item = (mid, saved_item_id) ->
     path = $("#flag_icons div.save_icon[id=mid_"+mid+"]")
-    $(path).find("form").attr("rel",saved_item_id)
-
+    $(path).attr("rel",saved_item_id).find("form").attr("rel",saved_item_id)
 
     $(path).removeClass("not_saved_item").addClass("saved_item")
     g_notice("Notification", "Item saved!")
@@ -160,11 +175,6 @@ geo = (position) ->
     long = position.coords.longitude
 
 
-
-
-
-
-
 $(document).ready ->
 
 
@@ -209,14 +219,10 @@ $(document).ready ->
     $('textarea').autoResize()
 
 
-
-
-
-
-
 #    ### labels
-    $(".label_div ul li").live "click", (event) ->
-        id = $(this).attr("id")
+    $("#labels a.label").live "click", (event) ->
+        id = $(@).attr("rel")
+
         $("#labels form")
             .find("input#menu_label_association_menu_label_id")
             .val(id)
@@ -224,22 +230,54 @@ $(document).ready ->
             .submit()
 
 
-    $("#desc_wrap #labels a.mi_add_label").live "click", (event) ->
 
+    $(".label_div ul li").live "click", (event) ->
+
+
+        id = $(@).attr("id")
+        $("#labels form")
+            .find("input#menu_label_association_menu_label_id")
+            .val(id)
+            .end()
+            .submit()
+
+    $("#desc_wrap a.mi_add_label").live "click", (event) ->
         offset = $(@).position()
-#        $(".label_div_wrapper").offset("{ top: "+offset.top+", left: "+offset.left+"}")
-#        $(".label_div_wrapper").offset({ top: 0, left: 0 }).show()
         new_top = parseInt(offset.top)+12
         new_left = parseInt(offset.left)-84
 
-        $(".label_div_wrapper").css("top": new_top).css("left",new_left).show()
+
+
+
+        all_labels = []
+
+
+        $(".label_item").each () ->
+            exist = $(@).text()
+            all_labels.push(exist)
+
+            $(".label_div ul li").each () ->
+                if $(@).text() == exist
+                    $(@).remove()
+
+
+        if $(".label_div ul li").length == 0
+            $(".label_div_wrapper").hide()
+            $.gritter.add({title:'Notification', text: "All labels was added!"})
+        else
+            $(".label_div_wrapper").css("top": new_top).css("left",new_left).show()
+
+
+
+
+
+
+
+
+
+
+        cl all_labels
         event.preventDefault()
-
-
-
-
-
-
 
     $(document).ajaxComplete (event, xhr, settings) ->
         if settings.url == "/menu_label_associations"
@@ -252,7 +290,7 @@ $(document).ready ->
 
 #   google maps in homepage neary
 
-    set_gmap(2)  if window.location.port.indexOf("300") > 0
+#    set_gmap(2)  if window.location.port.indexOf("300") > 0
 
 
 
@@ -278,9 +316,7 @@ $(document).ready ->
         else
             show_dialog("Please sign in!")
 
-
-
-    $(".saved_item.save_icon").click () ->
+    $(".saved_item.save_icon").live "click", () ->
         cl "saved icon"
         cl id = $(@).attr("rel")
 
@@ -292,7 +328,7 @@ $(document).ready ->
 #        .attr("action", new_action)
 #        .submit()
 
-    $(".not_saved_item.save_icon").click () ->
+    $(".not_saved_item.save_icon").live "click", () ->
         cl f = $(this).find("form")
         cl new_action = "/user_saved_menu_items/"+$(f).attr("rel")
         $(this).find("form").submit()
@@ -317,12 +353,10 @@ $(document).ready ->
 
            obj = $("#update_place_restaurants")
 
-
            if $(".menu_items_location").length > 0
             path = "/menu_items/show_menu_items_nearby?lat="+lat+"&long="+long+"&limit="+new_limits
            else
             path = "/restaurants/show_restaurants_nearby?lat="+lat+"&long="+long+"&limit="+new_limits
-
 
         else if $(".menu_items_location").length > 0
             obj = $("#reviews_wrapper #update_place")
