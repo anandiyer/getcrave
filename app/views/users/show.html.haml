@@ -1,0 +1,84 @@
+#current_content_block
+  #bread_crumbs_user
+  #current_info_wrapper
+    #img_column
+      - if !@user.user_profile_pic_url.nil?
+        = image_tag @user.user_profile_pic_url
+      - else
+        =image_tag "no_user_big.png"
+
+      #icons_img_wrapper
+
+        -#%span.add_photos_inline
+        -#  1
+        #photos_icon &nbsp;
+    #text_column
+      %h1.current_title= @user.user_name
+
+
+      #rating
+        =  @user.menu_item_ratings.count
+        reviews
+        |
+        = @user.menu_item_ratings.count
+        ratings
+      - @text = " Follow"
+      = render :partial => "/button"
+      .bio
+        %strong Bio:
+      lkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf
+
+
+
+      -##desc_wrap
+        -##description 2
+        -##dishlabels
+        -#  %strong Dish labels:
+
+#reviews_wrapper{:class => @controller.controller_name}
+
+  #buttons_wrapper.user_buttons_wrapper
+
+
+    #dishes_icon{:class =>"on dishbutton"}
+      #left_side &nbsp;
+      %span Reviews
+      (1)
+    #restaurant_icon{:class => "off dishbutton"}
+      #left_side &nbsp;
+      %span Saved
+      (1)
+    #restaurant_icon{:class => "off dishbutton"}
+      #left_side &nbsp;
+      %span Following
+      (1)
+    #restaurant_icon{:class => "off dishbutton"}
+      #left_side &nbsp;
+      %span Followers
+      (1)
+
+
+  #select_box_hint &nbsp;
+  #sorting
+    #before_sort_by
+      Sort by:
+    #sort_by
+      =text_field(:select, :sorttype, :value => "Newest", :disabled => true)
+      %ul
+        -["Rating", "Other"].each do |x|
+          %li= x
+
+  #reviews_wrapper
+    #update_place_restaurants{:class => @controller.controller_name+"_"+@controller.action_name}
+      - @menu_items.each do |@menu_item|
+
+        - @user.menu_item_ratings.each do |mi|
+          - @menu_item = mi.menu_item
+          = render :partial => "/user_items"
+      = render :partial => "/show_more"
+
+
+
+      -#a (<%= m.rating %>): <%= m.review %><br />
+
+  -##update_place= render :partial => "review"

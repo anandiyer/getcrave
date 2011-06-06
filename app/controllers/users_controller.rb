@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
+  layout "general"
   def index
     
     if params[:limit] && !params[:limit].empty?
@@ -20,8 +21,10 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
+
     @user = User.find(params[:id], :include => :menu_item_ratings)
-    
+    @menu_items = @user.menu_item_ratings
+
     respond_to do |format|
 
       format.html # _unused_show.html.haml

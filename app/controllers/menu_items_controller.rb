@@ -233,7 +233,7 @@ class MenuItemsController < ApplicationController
         format.xml  { render :xml => @menu_item, :status => :created, :location => @menu_item }
         format.json  { render :json => @menu_item, :status => :created, :location => @menu_item }
         format.js  { render :js => "window.close_modal()" }
-#      end
+      end
     end
   end
 

@@ -1,7 +1,9 @@
 - @foodies_for_current_dish ||= User.find(:all, :order => 'user_ratings_count DESC', :limit => 5)
+
 #sidebar
-  #map{:style => "width:297px; height:297px; border: 1px solid #ccc"}
-    =image_tag "map_temp.png"
+  - if @controller.controller_name != "users"
+    #map{:style => "width:297px; height:297px; border: 1px solid #ccc"}
+      =image_tag "map_temp.png"
   #foodies_wraper_wrapper
     %h4 Foodies
     -for @user in @foodies_for_current_dish

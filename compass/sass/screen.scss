@@ -323,6 +323,21 @@ body.two-col.bp{
         #content{
             padding:0 0 0 5px;
 
+            #buttons_wrapper.user_buttons_wrapper{
+                height: 40px;
+                #dishes_icon.off{
+                    color: $gray;
+                    border-right: 1px solid #dcdcdc;
+
+                }
+                #dishes_icon{
+
+                    padding: 4px 0 0 0;
+                    span{
+                        font-weight: bold;
+                    }
+                }
+            }
             #buttons_wrapper{
                 padding:10px 0 0 0;
                 @include container;
@@ -338,7 +353,7 @@ body.two-col.bp{
                     padding: 0 0 0 0;
                     margin: 0;
                     width: 148px;
-                    height: 30px;
+                    height: 26px;
                     /*background: url(/images/dishes_icon.png) no-repeat 0 0;*/
                     position: relative;
                     text-align: center;
@@ -385,6 +400,10 @@ body.two-col.bp{
             #current_content_block{
                 @include container;
 
+                #bread_crumbs_user{
+                    height: 10px;
+                    /*padding:13px 0 9px 2px;*/
+                }
                 #bread_crumbs{
                     height: 10px;
                     padding:13px 0 9px 2px;
@@ -797,6 +816,16 @@ body.two-col.bp{
                     border-bottom: 1px solid $light_gray;
                     padding: 10px 0 5px 0;
 
+                    h1{
+                        padding:0;
+                        margin:0;
+                        font-size: 20px;
+                        float: left;
+                        a{
+                            text-decoration: none;
+                        }
+                    }
+
 
 
                     .review_image_col{
@@ -964,6 +993,7 @@ body.two-col.bp{
 }
 .save_icon.saved_item{
     @include sprites($save_position_saved, 47px, 47px);
+    cursor: pointer;
 
 }
 .save_icon.not_saved_item{
@@ -1171,4 +1201,8 @@ body.two-col.bp{
 .plupload{
     background-color:red;
     opacity:1;
+}
+
+.gray{
+    color: $gray;
 }
