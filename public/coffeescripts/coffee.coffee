@@ -4,7 +4,7 @@ disher_review_wrapper = $("#reviews_wrapper")
 window.cl = (msg) ->
     console.log(msg)
 
-close_modal = () ->
+window.close_modal = () ->
 #    $('#mask').fadeOut("fast");
 #    $('.modal_window').fadeOut("fast");
 

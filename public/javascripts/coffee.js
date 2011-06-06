@@ -1,11 +1,11 @@
 (function() {
-  var after_send, before_send, close_modal, disher_review_wrapper, error, geo;
+  var after_send, before_send, disher_review_wrapper, error, geo;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   disher_review_wrapper = $("#reviews_wrapper");
   window.cl = function(msg) {
     return console.log(msg);
   };
-  close_modal = function() {
+  window.close_modal = function() {
     $('#mask').hide();
     return $('.modal_window').hide();
   };
