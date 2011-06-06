@@ -179,9 +179,9 @@ $(document).ready ->
 
 
     #graphic submit
-    $(".submit_wrapper.submit").click () ->
-
-        $(@).parents("form").submit()
+#    $(".submit_wrapper.submit").click () ->
+#
+#        $(@).parents("form").submit()
 
 
     window.pl_all() if $(".add_photos_inline a#plupload").length !=0
@@ -203,7 +203,7 @@ $(document).ready ->
     gallery_init() if $("#gallery").length > 0
 
     $('#comment_wrapper .submit_wrapper').click (e) -> $(@).parents("form").submit()
-    $('#input_comment textarea').keydown (e) -> $(@).parents("form").submit() if (e.ctrlKey && e.keyCode == 13)
+#    $('#input_comment textarea').keydown (e) -> $(@).parents("form").submit() if (e.ctrlKey && e.keyCode == 13)
 
 
     $(document).ajaxSend (event, request, settings) ->

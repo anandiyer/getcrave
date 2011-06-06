@@ -1,8 +1,12 @@
 #reviews_wrapper_bloc_wrapper
 
   -#- @menu_item ||= MenuItem.find(params[:id])
-  - @current_menu_item_reviews = @menu_item.menu_item_ratings.reverse
+  - @current_menu_item_reviews = @user.menu_item_ratings.reverse
+
   - @show_more_step = 5
+
+
+
 
 
   -if !params[:limit]
@@ -21,7 +25,8 @@
           #click &nbsp;
 
         .review_desc_col_wrapper
-          %h1= link_to @menu_item.name, @menu_item
+          %h1
+            -#= link_to @menu_item.name, @menu_item
           .before_start
             .data_review
               =@mi_rating.updated_at.strftime("%b %d, %Y")

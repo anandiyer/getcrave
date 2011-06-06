@@ -199,9 +199,6 @@
     return long = position.coords.longitude;
   };
   $(document).ready(function() {
-    $(".submit_wrapper.submit").click(function() {
-      return $(this).parents("form").submit();
-    });
     if ($(".add_photos_inline a#plupload").length !== 0) {
       window.pl_all();
     }
@@ -220,11 +217,6 @@
     }
     $('#comment_wrapper .submit_wrapper').click(function(e) {
       return $(this).parents("form").submit();
-    });
-    $('#input_comment textarea').keydown(function(e) {
-      if (e.ctrlKey && e.keyCode === 13) {
-        return $(this).parents("form").submit();
-      }
     });
     $(document).ajaxSend(function(event, request, settings) {
       var _ref;

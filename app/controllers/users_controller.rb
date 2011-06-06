@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   def show
 
     @user = User.find(params[:id], :include => :menu_item_ratings)
-    @menu_items = @user.menu_item_ratings
+
 
     respond_to do |format|
 

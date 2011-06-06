@@ -70,11 +70,11 @@
 
   #reviews_wrapper
     #update_place_restaurants{:class => @controller.controller_name+"_"+@controller.action_name}
-      - @menu_items.each do |@menu_item|
-
-        - @user.menu_item_ratings.each do |mi|
-          - @menu_item = mi.menu_item
-          = render :partial => "/user_items"
+      -#- @menu_items.each do |mi|
+      -#
+      -#  -#- @user.menu_item_ratings.each do |mi|
+      -#  - @menu_item = mi.menu_item
+      = render :partial => "/user_items"
       = render :partial => "/show_more"
 
 
