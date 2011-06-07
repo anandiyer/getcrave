@@ -1,4 +1,4 @@
-- user_to_follow = User.where(:user_name => params[:id]).first
+- user_to_follow = User.find(params[:id])
 
 
 #current_content_block
@@ -35,7 +35,7 @@
           = f.text_field :following_user_id, :value => current_user.id
           = f.submit 'Save'
 
-        - if current_user.is_following?(User.where(:user_name => params[:id])) then @text = "unfollow" else @text = "follow" end
+        - if current_user.is_following?(User.find(params[:id])) then @text = "unfollow" else @text = "follow" end
 
         = render :partial => "/button"
       .bio

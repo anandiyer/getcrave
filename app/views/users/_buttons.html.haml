@@ -1,4 +1,5 @@
-- selected_user = User.where(:user_name => params[:id]).first
+- selected_user = User.find(params[:id])
+
 #buttons_wrapper.user_buttons_wrapper
   - @controller.action_name == "show" ? class_name = "on" : class_name = "off"
   = link_to user_path selected_user.user_name do

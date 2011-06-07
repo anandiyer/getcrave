@@ -13,9 +13,10 @@
 
 
 
-  %ul
-    %li.nearby=link_to "Nearby","/"
-    %li.saved=link_to "Saved", "/user_saved_menu_items"
-    %li.following=link_to "Following","#"
-    - if signed_in?
-      %li.profile=link_to "Profile", user_path(current_user.user_name)
+  - if current_user
+    %ul
+      %li.nearby=link_to "Nearby","/"
+      %li.saved=link_to "Saved", "/user_saved_menu_items"
+      %li.following=link_to "Following","#"
+      - if signed_in?
+        %li.profile=link_to "Profile", user_path(current_user.user_name)
