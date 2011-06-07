@@ -1,4 +1,3 @@
-
 = image_tag "nav_left_corner.png", :class => "left_nav_corner"
 = image_tag "nav_right_corner.png", :class => "right_nav_corner"
 #navigation
@@ -18,4 +17,5 @@
     %li.nearby=link_to "Nearby","/"
     %li.saved=link_to "Saved", "/user_saved_menu_items"
     %li.following=link_to "Following","#"
-    %li.profile=link_to "Profile", user_path(current_user.user_name)
+    - if signed_in?
+      %li.profile=link_to "Profile", user_path(current_user.user_name)

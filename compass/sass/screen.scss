@@ -36,6 +36,7 @@
 $orange: #f2663a;
 $body_back_gray: #f4f4f4;
 $light_gray: #ececec;
+$dark_gray: #666;
 $gray: #a0a0a0;
 $blue: #2e70a4;
 
@@ -325,13 +326,19 @@ body.two-col.bp{
 
             #buttons_wrapper.user_buttons_wrapper{
                 height: 40px;
+
                 #dishes_icon.off{
                     color: $gray;
                     border-right: 1px solid #dcdcdc;
-
                 }
-                #dishes_icon{
 
+                a{
+                  #dishes_icon{
+                    color: $dark_gray;
+                  }
+                }
+
+                #dishes_icon{
                     padding: 4px 0 0 0;
                     span{
                         font-weight: bold;
@@ -369,6 +376,8 @@ body.two-col.bp{
                     }
 
 
+
+
                 }
 
 
@@ -390,6 +399,7 @@ body.two-col.bp{
                     #left_side{
                         background: url("/images/sprites/button-sprite.png") no-repeat scroll 0px -40px transparent;
                     }
+
                 }
 
             }

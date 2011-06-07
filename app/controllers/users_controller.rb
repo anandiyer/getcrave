@@ -18,16 +18,23 @@ class UsersController < ApplicationController
     end
   end
 
-#  to show current user save items
-  def saved
+
+  def following
 
   end
+
+#  to show current user save items
+  def saved
+    params_4_show_and_saved
+    @user_saved_menu_items = current_user.user_saved_menu_items.limit(5)
+  end
+
 
   # GET /users/1
   # GET /users/1.xml
   def show
 
-    @user = User.find(params[:id], :include => :menu_item_ratings)
+    params_4_show_and_saved
 
 
     respond_to do |format|
@@ -102,5 +109,12 @@ class UsersController < ApplicationController
       format.xml  { head :ok }
       format.json  { head :ok }
     end
+  end
+
+
+  private
+
+  def params_4_show_and_saved
+    @user = User.find(params[:id], :include => :menu_item_ratings)
   end
 end

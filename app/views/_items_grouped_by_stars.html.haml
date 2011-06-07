@@ -1,21 +1,27 @@
-- if !@menu_items
-  - @menu_items = @user_saved_menu_items
+- if !@menu_items && @user_saved_menu_items
+  -#- @menu_items = @user_saved_menu_items
+
+  -#TODO: needs to group_by_stars
+  - @menu_items = @user_saved_menu_items.map{|usmi| usmi.menu_item}
 
 #reviews_wrapper_bloc_wrapper
 
-  - if !@menu_items.first().menu_item_avg_rating_count.nil?
+  - if !@menu_items && !@menu_items.first().menu_item_avg_rating_count.nil?
 
     - group_star = @menu_items.first().menu_item_avg_rating_count.avg_rating
   - else
-    - group_star = 0
+  - group_star = 0
 
   .star_sm{:class => "star_sm stars_"+group_star.to_s.gsub(/[.]/, '_')} &nbsp;
 
   - @menu_items.each_with_index do |@menu_item, @counter|
-    - if !@menu_item.menu_item_avg_rating_count.nil?
-      - stars = @menu_item.menu_item_avg_rating_count.avg_rating
-    - else
-      - stars = 0
+    - stars = 0
+    - begin
+      - stars = @menu_item.menu_item_avg_rating_count.avg_rating if !@menu_item.menu_item_avg_rating_count.nil?
+    - rescue NoMethodError
+      - logger.error("@menu_item.menu_item_avg_rating_count")
+
+
     - if stars.to_f != group_star.to_f
       - group_star = stars
       .star_sm{:class => "star_sm stars_"+stars.to_s.gsub(/[.]/, '_')} &nbsp;

@@ -66,8 +66,8 @@ Crave::Application.routes.draw do
   end
 
   resources :users do
-    collection do
-      get "saved"
+    member do
+      get "saved", "following","followers"
     end
 
     resources :menu_item_ratings

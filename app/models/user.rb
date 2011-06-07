@@ -9,4 +9,9 @@ class User < ActiveRecord::Base
   def self.create_from_hash!(hash)
     create(:user_name => hash['user_info']['name'])
   end
+
+
+  def is_following? following_user_id
+    User.find(following_user_id).user_followings.where(:following_user_id => self.id).any?
+  end
 end

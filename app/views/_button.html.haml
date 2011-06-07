@@ -1,6 +1,6 @@
 - if !@text
-  - @text = "Submit"
-.submit_wrapper.submit
-  .text= @text
+  - @text = "submit"
+.submit_wrapper.submit{:class => @text}
+  .text= @text.capitalize
   .left_rounder
   .submit_button

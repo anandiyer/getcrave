@@ -56,6 +56,7 @@ class UserFollowingsController < ApplicationController
         format.html { redirect_to(@user_following, :notice => 'User following was successfully created.') }
         format.xml  { render :xml => @user_following, :status => :created, :location => @user_following }
         format.json  { render :json => @user_following, :status => :created, :location => @user_following }
+        format.js  { render :js => "alert(1)" }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @user_following.errors, :status => :unprocessable_entity }
