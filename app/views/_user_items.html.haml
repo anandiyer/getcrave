@@ -3,7 +3,7 @@
   -#- @menu_item ||= MenuItem.find(params[:id])
   - @current_menu_item_reviews = @user.menu_item_ratings.reverse
 
-  - @show_more_step = 5
+  - @show_more_step = 20
 
 
 
@@ -16,7 +16,7 @@
 
   - @current_menu_item_reviews_limits = @current_menu_item_reviews.first(review_limit)
   - @current_menu_item_reviews_limits.each do |@mi_rating|
-    - user = User.find(@mi_rating.user_id)
+    - user = @user
 
     - if @mi_rating.user_id?
       .reviews_wrapper_block
@@ -26,10 +26,12 @@
 
         .review_desc_col_wrapper
           %h1
-            -#= link_to @menu_item.name, @menu_item
+            = link_to @mi_rating.menu_item.name, @mi_rating.menu_item
+
           .before_start
             .data_review
               =@mi_rating.updated_at.strftime("%b %d, %Y")
+
 
           -rating = @mi_rating.rating ? @mi_rating.rating : 0
           .star_sm{:class => "star_sm stars_"+@mi_rating.rating.to_s.gsub(/[.]/, '_'), :id => @mi_rating.id, :data => {:rating => rating, :model => "menu_item_ratings"}} &nbsp;
