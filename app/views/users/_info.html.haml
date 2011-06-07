@@ -1,5 +1,5 @@
 
-- params[:id] ? user_to_follow = User.find(params[:id]) : user_to_follow = User.find(params[:params_id])
+- !params[:user_id] ? user_to_follow = User.find(params[:id]) : user_to_follow = User.find(params[:user_id])
 
 
 #current_content_block
@@ -35,7 +35,7 @@
           = f.hidden_field :user_id, :value => user_to_follow.id
           = f.hidden_field :following_user_id, :value => current_user.id
 
-          - if current_user.is_following?(User.find(params[:id])) then @text = "unfollow" else @text = "follow" end
+          - if current_user.is_following?(user_to_follow) then @text = "unfollow" else @text = "follow" end
           = render :partial => "/button"
 
 
