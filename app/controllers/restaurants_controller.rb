@@ -129,11 +129,9 @@ class RestaurantsController < ApplicationController
 
   private
 
-<<<<<<< HEAD
-  def get_closest_restaurants lat, log, limit = 5
-=======
+
+
   def get_closest_restaurants lat, long, within, limit
->>>>>>> c0cb7a1e99e70edba858fe247d97d534dabef48b
     @lat = lat.to_f
     @long = long.to_f
     @within = 1
@@ -152,12 +150,9 @@ class RestaurantsController < ApplicationController
 
     @restaurants = Restaurant.find(:all,
       :origin => [@lat, @long],
-<<<<<<< HEAD
-      :order=>'distance asc', 
-=======
+      :order=>'distance asc',
       :conditions => @conditions,
       :order => 'distance asc', 
->>>>>>> c0cb7a1e99e70edba858fe247d97d534dabef48b
       :limit => @limit)
   end
 end

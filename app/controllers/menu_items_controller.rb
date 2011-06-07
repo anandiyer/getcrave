@@ -25,8 +25,7 @@ class MenuItemsController < ApplicationController
 
 
   def location
-<<<<<<< HEAD
-=======
+
     @lat = params[:lat].to_f
     @long = params[:long].to_f
     @within = 1
@@ -54,7 +53,6 @@ class MenuItemsController < ApplicationController
          :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, menu_item_avg_rating_count.count DESC",
          # :include => :menu_item_avg_rating_count, 
          :limit => @limit)
->>>>>>> c0cb7a1e99e70edba858fe247d97d534dabef48b
 
     params_4_location_and_show_menu_item_nearby
 
