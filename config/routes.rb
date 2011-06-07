@@ -66,6 +66,10 @@ Crave::Application.routes.draw do
   end
 
   resources :users do
+    collection do
+      get "saved"
+    end
+
     resources :menu_item_ratings
     resources :user_saved_menu_items
     resources :user_followings

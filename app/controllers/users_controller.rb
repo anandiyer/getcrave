@@ -18,6 +18,10 @@ class UsersController < ApplicationController
     end
   end
 
+#  to show current user save items
+  def saved
+
+  end
 
   # GET /users/1
   # GET /users/1.xml
