@@ -165,3 +165,18 @@ padding: 12px;}
     background:#b1422e;
 }
 .x-toolbar-light .x-toolbar-title {color:#ffffff;}
+
+
+
+
+.x-toolbar-light {
+background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #F6745D), color-stop(1, #E64E33) );
+border-top: 1px solid #F8907D;
+-webkit-border-top-left-radius: 5px;
+-webkit-border-top-right-radius: 5px;
+border-top-left-radius: 5px 5px;
+border-top-right-radius: 5px 5px;
+}
+.x-toolbar.x-docked-top {
+border-bottom: .1em solid #73271A;
+}
