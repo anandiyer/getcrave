@@ -170,6 +170,10 @@
       return gmap(lat, long, zoom);
     }
   };
+  window.make_unfollow = function() {
+    $(".submit.submit_wrapper").removeClass("follow").addClass("unfollow").find(".text").text("Unfollow");
+    return g_notice("Notification", "Now you are following!");
+  };
   window.gallery_init = function() {
     return $('#gallery a').lightBox({
       overlayBgColor: '#000',

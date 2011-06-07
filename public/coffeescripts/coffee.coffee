@@ -154,6 +154,9 @@ window.set_gmap = (zoom = 10) ->
         gmap(lat, long, zoom)
 
 
+window.make_unfollow = () ->
+    $(".submit.submit_wrapper").removeClass("follow").addClass("unfollow").find(".text").text("Unfollow")
+    g_notice("Notification", "Now you are following!")
 window.gallery_init = () ->
     $('#gallery a').lightBox
         overlayBgColor: '#000'
