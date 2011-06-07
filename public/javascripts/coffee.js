@@ -206,14 +206,14 @@
     $("#navigation li.following a").click(function(e) {
       if ($(".fb_login a.not_signed").length !== 0) {
         show_dialog("Please sign in!");
+        return e.preventDefault();
       }
-      return e.preventDefault();
     });
     return $("#navigation li.saved a").click(function(e) {
       if ($(".fb_login a.not_signed").length !== 0) {
         show_dialog("Please sign in!");
+        return e.preventDefault();
       }
-      return e.preventDefault();
     });
   };
   $(document).ready(function() {

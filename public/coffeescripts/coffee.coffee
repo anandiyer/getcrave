@@ -183,12 +183,12 @@ top_nav_bind = () ->
     $("#navigation li.following a").click (e) ->
         if $(".fb_login a.not_signed").length != 0
             show_dialog("Please sign in!")
-        e.preventDefault()
+            e.preventDefault()
 
     $("#navigation li.saved a").click (e) ->
         if $(".fb_login a.not_signed").length != 0
             show_dialog("Please sign in!")
-        e.preventDefault()
+            e.preventDefault()
 
 
 $(document).ready ->
