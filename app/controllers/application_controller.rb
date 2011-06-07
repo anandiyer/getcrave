@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
       @current_user ||= User.find_by_id(session[:user_id])
     rescue e
       logger.info(e+" | Can not find current_user")
-#      render :js => "window.show_dialog(\"#{title}\")"
       @current_user = User.find(5)
     end
 #    @current_user ||= User.where(:user_name => "almazom").first
