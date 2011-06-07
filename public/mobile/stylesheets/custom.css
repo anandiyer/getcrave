@@ -8,6 +8,15 @@
 .dishname {font-weight:bold;}
 .restaurantName {display:block;}
 .distanceFigure {display:block;color:#5d5d5d;}
+.cravelogo {margin: 10px 0 0 0;}
+
+.x-button img {
+width: 1.0em;
+height: 1.0em;
+}
+.x-toolbar .x-button {
+padding: .3em .3em;
+}
 .x-list .x-list-item {border-top:solid 1px #cccccc;
     background-image: -webkit-gradient(
         linear,
@@ -76,6 +85,36 @@ padding: 12px;}
     );
 }
 
+#dishesButton.x-button span {
+    background: url('../../images/dish-icon-OFF.png') no-repeat;
+    font-size:12px;
+    font-weight:bold;
+    color:#f39a8a;
+    text-shadow: 1px 1px 1px #943325;
+}
+#dishesButton.x-button-pressed span {
+    background: url('../../images/dish-icon-ON.png') no-repeat;
+    color:#ffffff;
+    text-shadow: 1px 1px 1px #571e15;
+}
+#restaurantsButton span {
+    text-align: left;
+    text-indent: 24px;
+}
+
+#restaurantsButton.x-button span {
+    background: url('../../images/restaurant-icon-OFF.png') no-repeat;
+    font-size:12px;
+    font-weight:bold;
+    color:#f39a8a;
+    text-shadow: 1px 1px 1px #943325;
+}
+#restaurantsButton.x-button-pressed span {
+    background: url('../../images/restaurant-icon-ON.png') no-repeat;
+    color:#ffffff;
+    text-shadow: 1px 1px 1px #571e15;
+}
+
 .x-toolbar-light .x-button.x-button-pressed,
 .x-toolbar-light .x-button.x-button-pressed::after,
 .x-toolbar-light .x-button.x-button-active,
@@ -89,9 +128,8 @@ padding: 12px;}
         linear,
         left top,
         left bottom,
-        color-stop(0.25, rgb(221,79,60)),
-        color-stop(0.63, rgb(221,79,60)),
-        color-stop(0.82, rgb(212,61,38))
+        color-stop(0.25, #e75136),
+        color-stop(0.82, #e1371a)
     );
 }
 .x-toolbar-light .x-button.x-button-pressed, .x-toolbar-light .x-button.x-button-active, .x-toolbar .x-toolbar-light .x-button.x-button-pressed, .x-toolbar .x-toolbar-light .x-button.x-button-active, .x-toolbar-light .x-field-select .x-input-text.x-button-pressed, .x-toolbar-light .x-field-select .x-input-text.x-button-active, .x-toolbar .x-toolbar-light .x-field-select .x-input-text.x-button-pressed, .x-toolbar .x-toolbar-light .x-field-select .x-input-text.x-button-active, .x-toolbar-light .x-field-select::before.x-button-pressed, .x-toolbar-light .x-field-select::before.x-button-active, .x-toolbar .x-toolbar-light .x-field-select::before.x-button-pressed, .x-toolbar .x-toolbar-light .x-field-select::before.x-button-active
@@ -104,9 +142,8 @@ padding: 12px;}
     linear,
     left top,
     left bottom,
-    color-stop(0.25, rgb(234,112,94)),
-    color-stop(0.63, rgb(234,112,94)),
-    color-stop(0.82, rgb(214,62,39))
+    color-stop(0.25, #f9735b),
+    color-stop(0.82, #e4381a)
     );
 }
 .x-toolbar-light .x-button, .x-toolbar .x-toolbar-light .x-button, .x-toolbar-light .x-field-select .x-input-text, .x-toolbar .x-toolbar-light .x-field-select .x-input-text, .x-toolbar-light .x-field-select::before, .x-toolbar .x-toolbar-light .x-field-select::before
