@@ -20,13 +20,13 @@ class UsersController < ApplicationController
 
 
   def following
-
+       params_4_show_and_saved
   end
 
 #  to show current user save items
   def saved
     params_4_show_and_saved
-    @user_saved_menu_items = current_user.user_saved_menu_items.limit(5)
+    @user_saved_menu_items = current_user.user_saved_menu_items.limit(5) if current_user
   end
 
 
