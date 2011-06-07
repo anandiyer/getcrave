@@ -4,7 +4,7 @@
       =image_tag "reviews_avatar_temp.png"
     .text_foodie_2_col
       .foodie_name
-        =link_to @user.user_name, @user
+        =link_to(@user.user_name, user_path(@user.id))
       %em 123 followers
     .reviews_couner_3_col
       %h3= @user.menu_item_ratings.count
