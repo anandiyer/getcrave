@@ -184,6 +184,12 @@ $(document).ready ->
 #        $(@).parents("form").submit()
 
 
+
+
+#    follow button press
+    $(".follow.submit.submit_wrapper").live "click", () ->
+        $(@).parents("form").submit()
+
     window.pl_all() if $(".add_photos_inline a#plupload").length !=0
 
 #add menu item in modal

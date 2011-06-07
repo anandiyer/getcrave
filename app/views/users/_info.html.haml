@@ -31,13 +31,13 @@
 
 
         - form_for(UserFollowing.new, :remote => true) do |f|
-          = f.text_field :user_id, :value => user_to_follow.id
-          = f.text_field :following_user_id, :value => current_user.id
-          = f.submit 'Save'
+          = f.hidden_field :user_id, :value => user_to_follow.id
+          = f.hidden_field :following_user_id, :value => current_user.id
 
-        - if current_user.is_following?(User.find(params[:id])) then @text = "unfollow" else @text = "follow" end
+          - if current_user.is_following?(User.find(params[:id])) then @text = "unfollow" else @text = "follow" end
+          = render :partial => "/button"
 
-        = render :partial => "/button"
+
       .bio
         %strong Bio:
       lkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf

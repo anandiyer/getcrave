@@ -199,6 +199,9 @@
     return long = position.coords.longitude;
   };
   $(document).ready(function() {
+    $(".follow.submit.submit_wrapper").live("click", function() {
+      return $(this).parents("form").submit();
+    });
     if ($(".add_photos_inline a#plupload").length !== 0) {
       window.pl_all();
     }
