@@ -6,9 +6,14 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_user
-#    @current_user ||= User.find_by_id(session[:user_id])
+    begin
+      @current_user ||= User.find_by_id(session[:user_id])
+    rescue e
+      logger.info(e+" | Can not find current_user")
+      render :js => "window.show_dialog(\"#{title}\")"
+    end
 #    @current_user ||= User.where(:user_name => "almazom").first
-    @current_user ||= User.where(:user_name => "ai").first
+#    @current_user ||= User.where(:user_name => "ai").first
   end
 
   def check_auth_fb

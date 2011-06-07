@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
 
   def following
-
+       params_4_show_and_saved
   end
 
 #  to show current user save items

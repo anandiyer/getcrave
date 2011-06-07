@@ -281,6 +281,9 @@
         return $(".label_div_wrapper").slideUp("fast");
       }
     });
+    if (window.location.port.indexOf("300") > 0) {
+      set_gmap(2);
+    }
     $(".yes_answer").live("click", function(event) {
       var form, found_helpfull_number, increment, link, link_text;
       event.preventDefault();
