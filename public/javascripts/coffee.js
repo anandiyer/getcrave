@@ -1,5 +1,5 @@
 (function() {
-  var after_send, before_send, disher_review_wrapper, error, geo;
+  var after_send, before_send, disher_review_wrapper, error, geo, top_nav_bind;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   disher_review_wrapper = $("#reviews_wrapper");
   window.cl = function(msg) {
@@ -202,7 +202,22 @@
     lat = position.coords.latitude;
     return long = position.coords.longitude;
   };
+  top_nav_bind = function() {
+    $("#navigation li.following a").click(function(e) {
+      if ($(".fb_login a.not_signed").length !== 0) {
+        show_dialog("Please sign in!");
+      }
+      return e.preventDefault();
+    });
+    return $("#navigation li.saved a").click(function(e) {
+      if ($(".fb_login a.not_signed").length !== 0) {
+        show_dialog("Please sign in!");
+      }
+      return e.preventDefault();
+    });
+  };
   $(document).ready(function() {
+    top_nav_bind();
     $(".follow.submit.submit_wrapper").live("click", function() {
       return $(this).parents("form").submit();
     });

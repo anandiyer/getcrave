@@ -178,6 +178,19 @@ geo = (position) ->
     long = position.coords.longitude
 
 
+
+top_nav_bind = () ->
+    $("#navigation li.following a").click (e) ->
+        if $(".fb_login a.not_signed").length != 0
+            show_dialog("Please sign in!")
+        e.preventDefault()
+
+    $("#navigation li.saved a").click (e) ->
+        if $(".fb_login a.not_signed").length != 0
+            show_dialog("Please sign in!")
+        e.preventDefault()
+
+
 $(document).ready ->
 
 
@@ -186,6 +199,9 @@ $(document).ready ->
 #
 #        $(@).parents("form").submit()
 
+
+
+    top_nav_bind()
 
 
 

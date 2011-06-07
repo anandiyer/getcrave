@@ -1,5 +1,7 @@
 class UserFollowingsController < ApplicationController
+  layout "general"
   before_filter :get_user
+
   
   # GET /user_followings
   # GET /user_followings.xml

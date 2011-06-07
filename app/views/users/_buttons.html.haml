@@ -14,7 +14,7 @@
       %span Saved
       (1)
   - @controller.action_name == "following" ? class_name = "on" : class_name = "off"
-  = link_to saved_user_path selected_user.user_name do
+  = link_to user_user_followings_path selected_user.user_name do
     #restaurant_icon{:class => class_name+" dishbutton"}
       #left_side &nbsp;
       %span Following
