@@ -9,7 +9,7 @@ class RestaurantsController < ApplicationController
     # @restaurants = Restaurant.find(:all, :origin => [37.77859, -122.39142], :order=>'distance asc', :limit => 25)
     # @restaurants = Restaurant.all
 
-    get_closest_restaurants params[:lat], params[:long]
+    get_closest_restaurants params[:lat], params[:long], params[:within], params[:limit]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -112,7 +112,6 @@ class RestaurantsController < ApplicationController
 
     @restaurants = @search.results
 
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => @restaurants }
@@ -130,19 +129,35 @@ class RestaurantsController < ApplicationController
 
   private
 
+<<<<<<< HEAD
   def get_closest_restaurants lat, log, limit = 5
+=======
+  def get_closest_restaurants lat, long, within, limit
+>>>>>>> c0cb7a1e99e70edba858fe247d97d534dabef48b
     @lat = lat.to_f
-    @long = log.to_f
-    @limit = limit
+    @long = long.to_f
+    @within = 1
+    @limit = 50
 
-    if params[:limit] && !params[:limit].empty?
-      @limit = params[:limit].to_i
+    if within && !within.empty?
+      @within = within.to_f
     end
+    
+    if limit && !limit.empty?
+      @limit = limit.to_i
+    end
+    
+    @conditions = "distance < #{@within}"
 
 
     @restaurants = Restaurant.find(:all,
       :origin => [@lat, @long],
+<<<<<<< HEAD
       :order=>'distance asc', 
+=======
+      :conditions => @conditions,
+      :order => 'distance asc', 
+>>>>>>> c0cb7a1e99e70edba858fe247d97d534dabef48b
       :limit => @limit)
   end
 end

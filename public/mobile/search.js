@@ -29,11 +29,6 @@ var restaurantSearchStore = new Ext.data.Store({
 });
 
 var restaurantSearchList = new Ext.List({
-    onItemDisclosure: {
-        handler: function(record, btn, index) {
-            restaurantDisplay(record, btn, index);
-        }
-    },
     itemTpl: dishTemplate,
     singleSelect: true,
     grouped: false,
@@ -41,27 +36,32 @@ var restaurantSearchList = new Ext.List({
     store: restaurantSearchStore
 });
 
+restaurantSearchList.on('itemtap', function(dataView, index, item, e) {
+    record = dataView.store.data.items[index];
+    restaurantDisplay(record, index);
+});
+
 var dishSearchList = new Ext.List({
-    onItemDisclosure: {
-       handler: function(record, btn, index) {
-           Ext.Ajax.request({
-               url: (urlPrefix+'/menu_items/'+record.data.id+'.json'),
-               reader: {
-                    type: 'json'
-               },
-               success: function(response) {
-                   dishDisplay(response);
-               }
-           });
-           Ext.getCmp('mainPnl').setActiveItem(1);
-       }
-    },
     itemTpl: dishSearchTemplate,
     singleSelect: true,
     grouped: false,
     indexBar: false,
     store: dishSearchStore,
     scroll:'vertical'
+});
+
+dishSearchList.on('itemtap', function(dataView, index, item, e) {
+    record = dataView.store.data.items[index];
+    Ext.Ajax.request({
+        url: (urlPrefix+'/menu_items/'+record.data.id+'.json'),
+        reader: {
+             type: 'json'
+        },
+        success: function(response) {
+            dishDisplay(response);
+        }
+    });
+    Ext.getCmp('mainPnl').setActiveItem(1);
 });
 
 var searchPnl = new Ext.Panel({

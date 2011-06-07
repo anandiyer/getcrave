@@ -1,4 +1,4 @@
-dishTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><b>{name}</b><br/>{[this.distDisplay(values.distance)]}</div></tpl>',
+dishTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><img src="../images/no-image-default.png" class="dishImg"><div class="dishListinfo"><span class="dishname">{name}</span><span class="restaurantName">@{restaurant_name}</span><span class="distanceFigure">{[this.distDisplay(values.distance)]}</span></div><span class="chevrony"></span></span></div></tpl>',
     {distDisplay: function(miles) {
         feet = Math.round(miles * 5280);
         if(feet<1000) {
@@ -10,10 +10,16 @@ dishTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><b>{name}</b><
 
 Ext.regModel('Dish',
 {
-    fields: ['name','id','price','description','restaurant_id','distance','menu_item_avg_rating_count','avg_rating',{
+    fields: ['name','id','price','description','restaurant_id','restaurant','distance','menu_item_avg_rating_count','avg_rating',{
         name: 'rating',
         convert: function(value, record) {
+            console.log(record.get('menu_item_avg_rating_count').avg_rating);
             return record.get('menu_item_avg_rating_count').avg_rating.toString();
+        }
+    },{
+        name: 'restaurant_name',
+        convert: function(value, record) {
+            return record.get('restaurant').name.toString();
         }
     }]
 });
@@ -22,7 +28,22 @@ var dishStore = new Ext.data.Store({
     model: 'Dish',
     sorters: [{property: 'arating', direction: 'DESC'}],
     getGroupString : function(record) {
-        return record.get('rating');
+        rating = parseInt(record.get('rating'));
+        if(rating==5) {
+            return "<img src='../images/rating-stars/rating-dish-5.png'>";
+        }
+        if(rating==4) {
+            return "<img src='../images/rating-stars/rating-dish-4.png'>";
+        }
+        if(rating==3) {
+            return "<img src='../images/rating-stars/rating-dish-3.png'>";
+        }
+        if(rating==2) {
+            return "<img src='../images/rating-stars/rating-dish-2.png'>";
+        }
+        if(rating==1) {
+            return "<img src='../images/rating-stars/rating-dish-1.png'>";
+        }
     },
     proxy: {
         type:'ajax',

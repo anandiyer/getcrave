@@ -38,24 +38,23 @@
 
            navigator.geolocation.getCurrentPosition(function(position) {
                if(urlPrefixSet) {
+                   console.log('setting proxy url');
                    dishStore.proxy.url = urlPrefix+encodeURIComponent('/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+                   //dishStore.proxy.url = urlPrefix+encodeURIComponent('/menu_items/location.json?lat=37.77867&limit=25&long=-122.39127');
                    restaurants.proxy.url = urlPrefix+encodeURIComponent('/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                } else {
                    dishStore.proxy.url = '/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
                    restaurants.proxy.url = '/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
                }
                console.log(dishStore.proxy.url);
-               dishStore.load();
+               dishStore.load(function() {
+                   console.log('dish store loaded');
+               });
                restaurants.load();
            });
 
 
            var placesList = new Ext.List({
-               onItemDisclosure: {
-                   handler: function(record, btn, index) {
-                       restaurantDisplay(record, btn, index);
-                   }
-               },
                itemTpl: dishTemplate,
                singleSelect: true,
                grouped: false,
@@ -68,41 +67,14 @@
                hideOnMaskTap: false,
                clearSectionOnDeactivate:true
            });
+           placesList.on('itemtap', function(dataView, index, item, e) {
+               record = dataView.store.data.items[index];
+               restaurantDisplay(record, index);
+           });
 
            var dishList = new Ext.List({
-               onItemDisclosure: {
-                   handler: function(record, btn, index) {
-                       console.log(record.data.id);
-                       /*
-                        if(Ext.getCmp('carouselPnl')) {
-                            Ext.getCmp('carouselPnl').destroy();
-                        }
-                       var carouselPnl = new Ext.Carousel({
-                           id: 'carouselPnl',
-                           direction: 'horizontal',
-                           items: [
-                           ],
-                           width:'100%',
-                           height:'150px'
-                       });
-                       */
-                       Ext.Ajax.request({
-                           url: (urlPrefix+'/menu_items/'+record.data.id+'.json'),
-                           reader: {
-                                type: 'json'
-                           },
-                           success: function(response) {
-                               dishDisplay(response);
-                           }
-                       });
-                       Ext.getCmp('mainPnl').setActiveItem(1);
-                       //Ext.getCmp('detailPnl').setLoading(false);
-
-                   }
-               },
                itemTpl: dishTemplate,
-               //itemSelector: 'div.adish',
-               //this breaks my onItemDisclosure activity
+               itemSelector: '.adish',
                singleSelect: true,
                grouped: true,
                indexBar: false,
@@ -110,13 +82,39 @@
                id:'dishesNearbyList',
                scroll:'vertical',
 
-               floating:true,
                width:350,
                height:370,
-               centered:true,
-               modal:true,
                hideOnMaskTap: false,
                clearSectionOnDeactivate:true
+           });
+
+           dishList.on('itemtap', function(dataView, index, item, e) {
+               record = dataView.store.data.items[index];
+               /*
+                if(Ext.getCmp('carouselPnl')) {
+                    Ext.getCmp('carouselPnl').destroy();
+                }
+               var carouselPnl = new Ext.Carousel({
+                   id: 'carouselPnl',
+                   direction: 'horizontal',
+                   items: [
+                   ],
+                   width:'100%',
+                   height:'150px'
+               });
+               */
+               Ext.Ajax.request({
+                   url: (urlPrefix+'/menu_items/'+record.data.id+'.json'),
+                   reader: {
+                        type: 'json'
+                   },
+                   success: function(response) {
+                       dishDisplay(response);
+                   }
+               });
+               Ext.getCmp('mainPnl').setActiveItem(1);
+               //Ext.getCmp('detailPnl').setLoading(false);
+
            });
 
            var infoPnl = new Ext.Panel({
@@ -206,7 +204,7 @@
                    dock:'top',
                    xtype:'toolbar',
                    ui:'light',
-                   title:'Crave',
+                   title:'<img class="cravelogo" src="../images/crave-logo-horizontal-white.png">',
                    items:[{text:'Back',ui:'back', handler:backHandler}]
                }
            ]
@@ -231,8 +229,8 @@
                    items:[
                        {xtype:'segmentedbutton',
                        items:[
-                           {text:'Dishes',id:'dishesButton',pressed:true, handler:tapHandler},
-                           {text:'Restaurants',id:'restaurantsButton', pressed:false, handler:tapHandler}
+                           {text:'Dishes',id:'dishesButton',pressed:true, handler:tapHandler,ui:'round',width:'110'}, //,icon:'../images/dish-icon-ON.png',iconAlign:'left'
+                           {text:'Restaurants',id:'restaurantsButton', pressed:false, handler:tapHandler,ui:'round',width:'110'} //,icon:'../images/restaurant-icon-OFF.png',iconAlign:'left'
                        ]}
                    ]
                },searchForm,
@@ -268,7 +266,7 @@
                        dock:'top',
                        xtype:'toolbar',
                        ui:'light',
-                       title:'Crave',
+                       title:'<img class="cravelogo" src="../images/crave-logo-horizontal-white.png">',
                        items:[{text:'Back',ui:'back', handler:backHandler}]
                    }
                ]
