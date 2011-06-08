@@ -3,7 +3,7 @@
     =image_tag "item_rest_temp_image.png"
   .desc_block_2_col
     .b
-      %h1= link_to @menu_item.name, @menu_item
+      %h1= link_to @menu_item.name, restaurant_menu_item_path(@restaurant.friendly_id, @menu_item.friendly_id)
     .b.i= @menu_item.description
     / .b.i Steve M and 3 other friends have rated this
 
