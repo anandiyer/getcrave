@@ -18,4 +18,8 @@ class User < ActiveRecord::Base
   def small_thumbnail
     self.user_profile_pic_url ? self.user_profile_pic_url : "reviews_avatar_temp.png"
   end
+
+  def followers_counter
+    UserFollowing.where(:user_id => self.id).count
+  end
 end

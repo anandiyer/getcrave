@@ -18,7 +18,8 @@
             following
         %td
           .reviews_couner_3_col
-            %h3= UserFollowing.where(:user_id => @user_f).count
+            %h3= @user_f.user.followers_counter
+
             followers
         %td.button_following
           .f_button.follow
