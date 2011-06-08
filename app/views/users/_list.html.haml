@@ -1,7 +1,8 @@
+
 #reviews_wrapper{:class => @controller.controller_name}
   = render :partial => "users/buttons"
 
-  - if @controller.controller_name != "user_followings"
+  - if @controller.action_name != "following"
     #select_box_hint &nbsp;
     #sorting
       #before_sort_by
@@ -16,6 +17,6 @@
 
       = render :partial => "/user_items" if @controller.action_name == "show"
       = render :partial => "/items_grouped_by_stars" if @controller.action_name == "saved"
-      = render :partial => "user_followings/following_users" if @controller.controller_name == "user_followings"
+      = render :partial => "following_users" if @controller.action_name == "following"
 
       -#= render :partial => "/show_more"

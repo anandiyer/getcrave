@@ -19,8 +19,14 @@ class UsersController < ApplicationController
   end
 
 
+
   def following
        params_4_show_and_saved
+#    <UserFollowing id: 27, user_id: 5, following_user_id: 12, created_at: "2011-06-08 14:19:08", updated_at: "2011-06-08 14:19:08">
+
+       @following = User.find(params[:id]).user_followings
+
+#       .map{|x| x.user.user_name}
   end
 
 #  to show current user save items

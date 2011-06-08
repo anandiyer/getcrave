@@ -1,0 +1,32 @@
+-if @following
+  %table{:border =>1}
+    - @following.each do |@user_f|
+      - user = User.find(@user_f.following_user_id)
+      %tr
+
+        %td.thumbnail= image_tag "reviews_avatar_temp.png"
+        %td.name= link_to user.user_name, user
+        %td.reviews
+          .reviews_couner_3_col
+            %h3= user.menu_item_ratings.count
+            reviews
+        %td
+          .reviews_couner_3_col
+            %h3= user.user_ratings_count
+            ratings
+        %td
+          .reviews_couner_3_col
+            %h3= user.user_followings.find(:all).count
+            following
+        %td
+          .reviews_couner_3_col
+            %h3= user.followers_counter
+
+            followers
+        %td.button_following
+          - current_user.is_following?(user) ? class_name = "current_user_is_following unfollow" : class_name = "cu_not_following follow"
+          .f_button{:class => class_name}
+
+
+
+

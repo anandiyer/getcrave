@@ -33,7 +33,7 @@
           = f.hidden_field :user_id, :value => current_user.id
           = f.hidden_field :following_user_id, :value => user_to_follow.id
 
-          = current_user.is_following?(user_to_follow)
+          -#= current_user.is_following?(user_to_follow)
           - if current_user.is_following?(user_to_follow) then class_name = "unfollow" else class_name = "follow" end
           .follow_button{:class => class_name}
 
