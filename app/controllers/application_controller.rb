@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
       @current_user = User.find(5)
     end
 #    @current_user ||= User.where(:user_name => "almazom").first
-    @current_user ||= User.where(:user_name => "ai").first
+#    @current_user ||= User.where(:user_name => "ai").first
   end
 
   def check_auth_fb

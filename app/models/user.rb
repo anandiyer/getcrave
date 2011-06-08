@@ -19,7 +19,19 @@ class User < ActiveRecord::Base
     self.user_profile_pic_url ? self.user_profile_pic_url : "reviews_avatar_temp.png"
   end
 
-  def followers_counter
-    UserFollowing.where(:user_id => self.id).count
+  def following
+    UserFollowing.where(:user_id => self.id).all
+  end
+
+  def followers
+    UserFollowing.where(:following_user_id => self.id).all
+  end
+
+  def reviews
+    self.menu_item_ratings
+  end
+
+  def saved
+    self.user_saved_menu_items
   end
 end

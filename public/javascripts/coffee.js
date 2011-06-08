@@ -218,7 +218,8 @@
   };
   $(document).ready(function() {
     top_nav_bind();
-    $("form .follow_button.follow").live("click", function() {
+    $("form .follow").live("click", function() {
+      $(this).removeClass("follow").addClass("unfollow");
       return $(this).parents("form").submit();
     });
     if ($(".add_photos_inline a#plupload").length !== 0) {

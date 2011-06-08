@@ -1,7 +1,8 @@
--if @following
-  %table{:border =>1}
-    - @following.each do |@user_f|
-      - user = User.find(@user_f.following_user_id)
+- if @following || @followers
+  %table
+    - @followers ? items = @followers : items = @following
+    - items.each do |@user_f|
+      - user = User.find(@followers ? @user_f.user_id : @user_f.following_user_id)
       %tr
 
         %td.thumbnail= image_tag "reviews_avatar_temp.png"
@@ -20,12 +21,17 @@
             following
         %td
           .reviews_couner_3_col
-            %h3= user.followers_counter
+            %h3= user.followers.count
 
             followers
         %td.button_following
           - current_user.is_following?(user) ? class_name = "current_user_is_following unfollow" : class_name = "cu_not_following follow"
-          .f_button{:class => class_name}
+
+          - form_for(UserFollowing.new, :remote => true) do |f|
+            = f.hidden_field :user_id, :value => current_user.id
+            = f.hidden_field :following_user_id, :value => user.id
+
+            .f_button{:class => class_name}
 
 
 

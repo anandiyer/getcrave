@@ -1,8 +1,7 @@
-
 #reviews_wrapper{:class => @controller.controller_name}
   = render :partial => "users/buttons"
 
-  - if @controller.action_name != "following"
+  - if !@controller.action_name.include? "follow"
     #select_box_hint &nbsp;
     #sorting
       #before_sort_by
@@ -12,11 +11,11 @@
         %ul
           -["Rating", "Other"].each do |x|
             %li= x
-  #reviews_wrapper
-    #update_place_restaurants{:class => @controller.controller_name+"_"+@controller.action_name}
+  #reviews_wrapper{:class => class_name_from_path}
+    #update_place_restaurants{:class => class_name_from_path}
 
       = render :partial => "/user_items" if @controller.action_name == "show"
       = render :partial => "/items_grouped_by_stars" if @controller.action_name == "saved"
-      = render :partial => "following_users" if @controller.action_name == "following"
+      = render :partial => "following_users" if @controller.action_name.include? "follow"
 
       -#= render :partial => "/show_more"

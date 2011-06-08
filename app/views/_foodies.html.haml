@@ -5,9 +5,9 @@
     .text_foodie_2_col
       .foodie_name
         =link_to(@user.user_name, user_path(@user.id))
-      - if @user.followers_counter > 0
+      - if @user.followers.any?
         %em
-          =@user.followers_counter
+          =@user.followers.count
           followers
     .reviews_couner_3_col
       %h3= @user.menu_item_ratings.count

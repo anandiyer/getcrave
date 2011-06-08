@@ -2,6 +2,9 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   layout "general"
+
+  before_filter :get_selected_user, :only => [:saved, :show, :followers, :following]
+
   def index
     
     if params[:limit] && !params[:limit].empty?
@@ -19,29 +22,28 @@ class UsersController < ApplicationController
   end
 
 
+  def followers
+    params_4_show_and_saved
+    @followers = UserFollowing.where(:following_user_id => 12).all
+#    @followers = UserFollowing.where(:following_user_id => params[:user_id])
+  end
 
   def following
-       params_4_show_and_saved
-#    <UserFollowing id: 27, user_id: 5, following_user_id: 12, created_at: "2011-06-08 14:19:08", updated_at: "2011-06-08 14:19:08">
-
-       @following = User.find(params[:id]).user_followings
-
-#       .map{|x| x.user.user_name}
+    params_4_show_and_saved
+    @following = User.find(params[:id]).user_followings
   end
 
 #  to show current user save items
   def saved
     params_4_show_and_saved
-    @user_saved_menu_items = current_user.user_saved_menu_items.limit(5) if current_user
+    @user_saved_menu_items = User.find(params[:id]).saved if current_user
   end
 
 
   # GET /users/1
   # GET /users/1.xml
   def show
-
     params_4_show_and_saved
-
 
     respond_to do |format|
 
@@ -122,5 +124,10 @@ class UsersController < ApplicationController
 
   def params_4_show_and_saved
     @user = User.find(params[:id], :include => :menu_item_ratings)
+  end
+
+  protected
+  def get_selected_user
+    @selected_user = User.find(params[:user_id] ? params[:user_id] : params[:id])
   end
 end

@@ -4,6 +4,6 @@
 - else
   %h2 Saved Dishes
 
-#reviews_wrapper{:class => @controller.controller_name+"_"+@controller.action_name}
+#reviews_wrapper{:class => class_name_from_path}
   #update_place_restaurants{:class => @controller.controller_name+"_"+@controller.action_name}
     = render :partial => "/items_grouped_by_stars"

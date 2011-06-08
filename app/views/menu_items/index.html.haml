@@ -42,7 +42,7 @@
         %ul
           -["Rating", "Other"].each do |x|
             %li= x
-    #reviews_wrapper
+    #reviews_wrapper{:class => class_name_from_path}
       #update_place_restaurants{:class => @controller.controller_name+"_"+@controller.action_name}
         = render :partial => "/items_grouped_by_stars"
 
