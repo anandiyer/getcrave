@@ -80,6 +80,11 @@ $small_font_size: 12px;
 
 body.two-col.bp{
 
+    h3{
+       padding:0;
+       margin:0;
+    }
+
     ul{
         padding: 0px;
         list-style: none;
@@ -634,6 +639,65 @@ body.two-col.bp{
                         width: 150px;
                         @include container;
                         margin: 0 0 10px 0;
+                    }
+                    table{
+                        padding: 0px;
+                        margin: 0px;
+
+                        font-size: 15px;
+                        color: $gray;
+                        tr{
+
+                            /*background-color: green;*/
+                        }
+
+                        td{
+                            text-align: center;
+                            border-bottom: 1px solid $light_gray;
+                            vertical-align: top;
+
+                            h3{
+                                font-size:20px;
+                            }
+                            .reviews_couner_3_col{
+                                height: 50px;
+
+                            }
+                        }
+
+                        td.button_following{
+                            .f_button{
+                                height: 31px;
+                                width: 31px;
+                                cursor:pointer;
+
+                            }
+                            .follow{
+                                background: url(/images/sprites/button-sprite.png) no-repeat 0 -455px;
+                            }
+                            .follow:hover{
+                                background-position: 0 -489px;
+
+                            }
+                        }
+                        td.reviews{
+
+
+                        }
+
+                        td.name{
+                            vertical-align: top;
+                            text-align: left;
+                            width: 175px;
+                            a{
+                                font-weight: bold;
+                                text-decoration: none;
+                            }
+
+                        }
+                        td.thumbnail{
+                            width: 50px;
+                        }
                     }
 
 
@@ -1206,6 +1270,9 @@ body.two-col.bp{
         height: 33px;
         background: url("/images/sprites/button-sprite.png") no-repeat -131px -75px;
     }
+
+
+
 }
 
 .plupload{
@@ -1216,3 +1283,4 @@ body.two-col.bp{
 .gray{
     color: $gray;
 }
+

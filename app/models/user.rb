@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
   def is_following? following_user_id
     User.find(following_user_id).user_followings.where(:following_user_id => self.id).any?
   end
+
+  def small_thumbnail
+    self.user_profile_pic_url ? self.user_profile_pic_url : "reviews_avatar_temp.png"
+  end
 end

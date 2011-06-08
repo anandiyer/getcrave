@@ -1,4 +1,4 @@
-- selected_user = User.find(params[:id])
+- selected_user = User.find(params[:user_id] ? params[:user_id] : params[:id])
 
 #buttons_wrapper.user_buttons_wrapper
   - @controller.action_name == "show" ? class_name = "on" : class_name = "off"
@@ -13,7 +13,7 @@
       #left_side &nbsp;
       %span Saved
       (1)
-  - @controller.action_name == "following" ? class_name = "on" : class_name = "off"
+  - @controller.controller_name == "user_followings" ? class_name = "on" : class_name = "off"
   = link_to user_user_followings_path selected_user.id do
     #restaurant_icon{:class => class_name+" dishbutton"}
       #left_side &nbsp;

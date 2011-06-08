@@ -18,4 +18,4 @@
     %li.nearby=link_to "Nearby","/"
     %li.saved=link_to "Saved", "/user_saved_menu_items"
     %li.following=link_to "Following","#"
-    -#%li.profile=link_to_if(current_user, "Profile", user_path(current_user.user_name))
+    %li.profile=link_to_if(current_user, "Profile", user_path(current_user.user_name)) if current_user

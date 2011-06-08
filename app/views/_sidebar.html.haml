@@ -1,4 +1,4 @@
-- @foodies_for_current_dish ||= User.find(:all, :order => 'user_ratings_count DESC', :limit => 5)
+- @foodies_for_current_dish ||= User.find(:all, :order => 'user_ratings_count DESC', :limit => 20)
 
 #sidebar
   - if @controller.controller_name != "users"
