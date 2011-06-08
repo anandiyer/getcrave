@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_user
-#TODO: refactor me
+#TODO: fix me
     begin
       @current_user ||= User.find_by_id(session[:user_id])
     rescue e
@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
     end
 #    @current_user ||= User.where(:user_name => "almazom").first
 #    @current_user ||= User.where(:user_name => "ai").first
+#    @current_user ||= User.where(:user_name => "test3").first
   end
 
   def check_auth_fb

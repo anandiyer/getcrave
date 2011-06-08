@@ -1,6 +1,7 @@
 - if @following || @followers
   %table
     - @followers ? items = @followers : items = @following
+
     - items.each do |@user_f|
       - user = User.find(@followers ? @user_f.user_id : @user_f.following_user_id)
       %tr
@@ -32,7 +33,3 @@
             = f.hidden_field :following_user_id, :value => user.id
 
             .f_button{:class => class_name}
-
-
-
-
