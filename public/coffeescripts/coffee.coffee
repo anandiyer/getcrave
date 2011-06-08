@@ -206,7 +206,7 @@ $(document).ready ->
 
 
 #    follow button press
-    $(".follow.submit.submit_wrapper").live "click", () ->
+    $("form .follow_button.follow").live "click", () ->
         $(@).parents("form").submit()
 
     window.pl_all() if $(".add_photos_inline a#plupload").length !=0

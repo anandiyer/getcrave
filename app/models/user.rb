@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
 
   def is_following? following_user_id
-    User.find(following_user_id).user_followings.where(:following_user_id => self.id).any?
+    self.user_followings.where(:following_user_id => following_user_id).any?
   end
 
   def small_thumbnail

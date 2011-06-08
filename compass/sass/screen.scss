@@ -558,6 +558,30 @@ body.two-col.bp{
                         // true means it's the last column in the row
                         @include column($content-columns, true);
                         padding: 7px 0 0 0;
+
+
+                        .follow_button{
+                            width:76px;
+                            height:26px;
+                            cursor: pointer;
+                        }
+                        .follow_button.follow{
+                            background: url(/images/sprites/button-sprite.png) no-repeat 0 -491px;
+                        }
+
+
+                        .follow_button.unfollow:hover{
+                            background: url(/images/sprites/button-sprite.png) no-repeat -95px -523px;
+                        }
+                        .follow_button.unfollow{
+                            background: url(/images/sprites/button-sprite.png) no-repeat 0 -523px;
+                            width: 94px;
+                        }
+
+                        .follow_button.follow:hover{
+                            background: url(/images/sprites/button-sprite.png) no-repeat -76px -491px;
+                        }
+
                         #rating{
                             padding: 5px 0 0 0;
                         }
@@ -673,10 +697,10 @@ body.two-col.bp{
 
                             }
                             .follow{
-                                background: url(/images/sprites/button-sprite.png) no-repeat 0 -455px;
+                                background: url(/images/sprites/button-sprite.png) no-repeat 0 -454px;
                             }
                             .follow:hover{
-                                background-position: 0 -489px;
+                                background-position: -32px -454px;
 
                             }
                         }

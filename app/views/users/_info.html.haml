@@ -1,6 +1,4 @@
-
 - !params[:user_id] ? user_to_follow = User.find(params[:id]) : user_to_follow = User.find(params[:user_id])
-
 
 #current_content_block
   #bread_crumbs_user
@@ -32,11 +30,13 @@
 
 
         - form_for(UserFollowing.new, :remote => true) do |f|
-          = f.text_field :user_id, :value => current_user.id
-          = f.text_field :following_user_id, :value => user_to_follow.id
+          = f.hidden_field :user_id, :value => current_user.id
+          = f.hidden_field :following_user_id, :value => user_to_follow.id
 
-          - if current_user.is_following?(user_to_follow) then @text = "unfollow" else @text = "follow" end
-          = render :partial => "/button"
+          = current_user.is_following?(user_to_follow)
+          - if current_user.is_following?(user_to_follow) then class_name = "unfollow" else class_name = "follow" end
+          .follow_button{:class => class_name}
+
 
 
       .bio

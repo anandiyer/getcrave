@@ -218,7 +218,7 @@
   };
   $(document).ready(function() {
     top_nav_bind();
-    $(".follow.submit.submit_wrapper").live("click", function() {
+    $("form .follow_button.follow").live("click", function() {
       return $(this).parents("form").submit();
     });
     if ($(".add_photos_inline a#plupload").length !== 0) {
