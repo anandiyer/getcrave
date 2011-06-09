@@ -6,7 +6,10 @@
     =image_tag "item_rest_temp_image.png"
   .desc_block_2_col
     .b
-      %h1= link_to @menu_item.name, @menu_item
+
+      %h1
+        = @menu_item.id
+        = link_to @menu_item.name, @menu_item
     -#.b.i= @menu_item.description
     .b.i
       .star_sm{:class => "stars_"+stars_class_normalize(@stars)}

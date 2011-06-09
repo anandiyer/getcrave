@@ -120,19 +120,20 @@
     });
   };
   window.save_helpfull = function() {};
-  window.unsave_menu_item = function() {
+  window.unsave_menu_item = function(id) {
     var path;
-    cl("unsave");
-    cl(path = $("#flag_icons div.save_icon"));
-    $(path).removeClass("saved_item").addClass("not_saved_item");
-    return g_notice("Notification", "Item unsaved!");
+    if (id) {
+      path = $("#mid_" + id);
+    } else {
+      $(path).find("form").attr("rel", saved_item_id);
+    }
+    return $(path).removeClass("saved_item").addClass("not_saved_item");
   };
   window.save_menu_item = function(mid, saved_item_id) {
     var path;
     path = $("#flag_icons div.save_icon[id=mid_" + mid + "]");
     $(path).attr("rel", saved_item_id).find("form").attr("rel", saved_item_id);
-    $(path).removeClass("not_saved_item").addClass("saved_item");
-    return g_notice("Notification", "Item saved!");
+    return $(path).removeClass("not_saved_item").addClass("saved_item");
   };
   window.add_review = function(id_of_menu_item, msg) {
     update_reviews(id_of_menu_item);

@@ -95,13 +95,15 @@ window.save_helpfull = () ->
 
 
 
-window.unsave_menu_item = () ->
-    cl "unsave"
-    cl path = $("#flag_icons div.save_icon")
-#    $(path).find("form").attr("rel",saved_item_id)
+window.unsave_menu_item = (id) ->
+
+    if id
+        path = $("#mid_"+id)
+    else
+        $(path).find("form").attr("rel",saved_item_id)
 
     $(path).removeClass("saved_item").addClass("not_saved_item")
-    g_notice("Notification", "Item unsaved!")
+#    g_notice("Notification", "Item unsaved!")
 
 #    path = $("#flag_icons div.save_icon[id=mid_"+mid+"]")
 #    $(path).find("form").attr("rel",saved_item_id)
@@ -114,7 +116,7 @@ window.save_menu_item = (mid, saved_item_id) ->
     $(path).attr("rel",saved_item_id).find("form").attr("rel",saved_item_id)
 
     $(path).removeClass("not_saved_item").addClass("saved_item")
-    g_notice("Notification", "Item saved!")
+#    g_notice("Notification", "Item saved!")
 
 
 window.add_review = (id_of_menu_item, msg) ->

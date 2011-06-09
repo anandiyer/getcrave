@@ -107,7 +107,7 @@ class UserSavedMenuItemsController < ApplicationController
     respond_to do |format|
 #      format.all { render :js =>"alert(1)" }
 #      format.all { render :partial => "/save" }
-       format.js { render :js => "window.unsave_menu_item()" }
+       format.js { render :js => "window.unsave_menu_item(#{@user_saved_menu_item.menu_item.id})" }
 #      format.all { redirect_to(user_saved_menu_items_url) }
 #      format.xml  { head :ok }
 #      format.json  { head :ok }
