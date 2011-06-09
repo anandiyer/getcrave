@@ -365,10 +365,17 @@ $(document).ready ->
 
 
 
-    $(".follow_button.unfollow").live "click", () ->
-        f_id =  $("form#new_user_following input#user_following_following_user_id").val()
-        path = ("/user_followings/"+f_id)
+#    $(".current_user_is_following.f_button.unfollow").live "click", () ->
+#        alert 1
+
+
+    $(".unfollow").live "click", () ->
         this_obj = @
+        f_id = $(this_obj).parents("form").find("input#user_following_following_user_id").val()
+
+#        f_id =  $("form#new_user_following input#user_following_following_user_id").val()
+        path = ("/user_followings/"+f_id)
+#
 #        $.ajax({url: path ,type: "delete"})
 
         $.ajax({url: path, type: "delete", context: document.body,success: () => $(@).removeClass("unfollow").addClass("follow")});

@@ -333,11 +333,11 @@
         return show_dialog("Please sign in!");
       }
     });
-    $(".follow_button.unfollow").live("click", function() {
+    $(".unfollow").live("click", function() {
       var f_id, path, this_obj;
-      f_id = $("form#new_user_following input#user_following_following_user_id").val();
-      path = "/user_followings/" + f_id;
       this_obj = this;
+      f_id = $(this_obj).parents("form").find("input#user_following_following_user_id").val();
+      path = "/user_followings/" + f_id;
       return $.ajax({
         url: path,
         type: "delete",
