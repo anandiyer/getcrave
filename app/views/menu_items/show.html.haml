@@ -69,11 +69,11 @@
             Have you tried this?
           =form_for(MenuItemRating.new, :remote => true) do |f|
             =f.hidden_field :rating
-            =f.hidden_field :menu_item_id, :value =>params[:id]
-            .star_gray{:id => params[:id], :data =>{:model => "user_menu_item_ratings"}} &nbsp;
+            =f.hidden_field :menu_item_id, :value =>@menu_item.id
+            .star_gray{:id => @menu_item.id, :data =>{:model => "user_menu_item_ratings"}} &nbsp;
             #input_comment
               =f.text_field :review
-              =f.hidden_field :menu_item_id, :value =>params[:id]
+              =f.hidden_field :menu_item_id, :value =>@menu_item.id
     #reviews_wrapper
       %h3.review
         Reviews
