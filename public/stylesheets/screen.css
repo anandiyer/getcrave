@@ -458,7 +458,7 @@ body.two-col.bp .label_div_wrapper {
   position: absolute;
   top: 10px;
   width: 220px;
-  z-index: 1005;
+  z-index: 105;
 }
 /* line 107, ../../compass/sass/screen.scss */
 body.two-col.bp .label_div_wrapper .label_div {
@@ -1083,13 +1083,13 @@ body.two-col.bp #content_wrap #content #current_content_block #current_info_wrap
 body.two-col.bp #content_wrap #content #current_content_block #current_info_wrapper #text_column #social {
   position: absolute;
   z-index: 100px;
-  padding-top: 15px;
+  padding-top: 10px;
 }
 /* line 602, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #current_content_block #current_info_wrapper #text_column #desc_wrap {
   /*@include container;*/
   padding: 5px 0 5px 0;
-  margin-top: 7px;
+  margin-top: 42px;
   border-top: 1px solid #ececec;
   width: 457px;
   font-size: 12px;
