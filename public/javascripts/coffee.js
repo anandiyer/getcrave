@@ -93,7 +93,6 @@
     _results = [];
     for (_i = 0, _len = coor_array.length; _i < _len; _i++) {
       ll = coor_array[_i];
-      g_notice("Lang Lat", ll[0] + "<br />" + ll[1]);
       _results.push(new google.maps.Marker({
         position: new google.maps.LatLng(ll[0], ll[1]),
         map: map
@@ -165,7 +164,6 @@
     cl("set map");
     ar = [];
     if ($(".menu_items_location").length > 0 || $(".search_index").length > 0 || $(".restaurants_index").length > 0 || $(".user_saved_menu_items_index").length > 0) {
-      cl("if $(.menu_items_location).length > 0 || $(.restaurants_index) .length > 0");
       $(".restaurant_menu_item_wrapper").each(function() {
         var lat, long;
         lat = $(this).data("latitude");
@@ -176,7 +174,6 @@
       long = ar[0][1];
       return gmap(lat, long, zoom, ar);
     } else if ($("#current_info_wrapper").length > 0) {
-      cl("else if $(#current_info_wrapper).length >0");
       obj = $("#current_info_wrapper");
       lat = obj.data("latitude");
       long = obj.data("longitude");
@@ -301,6 +298,7 @@
           title: 'Notification',
           text: "All labels was added!"
         });
+        hide_mask();
       } else {
         $(".label_div_wrapper").css({
           "top": new_top

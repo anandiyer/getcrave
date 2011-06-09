@@ -76,7 +76,7 @@ window.gmap = (lat, long, zoom = 10, coor_array = [[lat,long]]) ->
     map = new google.maps.Map(document.getElementById("map"),myOptions)
 
     for ll in coor_array
-        g_notice("Lang Lat", ll[0]+"<br />"+ll[1])
+#        g_notice("Lang Lat", ll[0]+"<br />"+ll[1])
         new google.maps.Marker({position: new google.maps.LatLng(ll[0], ll[1]), map: map })
 
 
@@ -150,7 +150,7 @@ window.set_gmap = (zoom = 10) ->
     ar = []
 #    if restaurants || menu items page
     if $(".menu_items_location").length > 0 || $(".search_index").length > 0 || $(".restaurants_index").length > 0 || $(".user_saved_menu_items_index").length > 0
-        cl "if $(.menu_items_location).length > 0 || $(.restaurants_index) .length > 0"
+#        cl "if $(.menu_items_location).length > 0 || $(.restaurants_index) .length > 0"
 
         $(".restaurant_menu_item_wrapper").each () ->
             lat =  $(@).data("latitude")
@@ -161,7 +161,7 @@ window.set_gmap = (zoom = 10) ->
         long = ar[0][1]
         gmap(lat, long, zoom, ar)
     else if $("#current_info_wrapper").length >0
-        cl "else if $(#current_info_wrapper).length >0"
+#        cl "else if $(#current_info_wrapper).length >0"
         obj = $("#current_info_wrapper")
 
         lat =  obj.data("latitude")
@@ -307,7 +307,9 @@ $(document).ready ->
         if $(".label_div ul li").length == 0
             $(".label_div_wrapper").hide()
 
+
             $.gritter.add({title:'Notification', text: "All labels was added!"})
+            hide_mask()
         else
             $(".label_div_wrapper").css("top": new_top).css("left",new_left).show()
 
