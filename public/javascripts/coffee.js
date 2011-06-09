@@ -150,8 +150,9 @@
     if (zoom == null) {
       zoom = 10;
     }
+    cl("set map");
     ar = [];
-    if ($(".menu_items_location").length > 0 || $(".restaurants_index").length > 0 || $(".user_saved_menu_items_index").length > 0) {
+    if ($(".menu_items_location").length > 0 || $(".search_index").length > 0 || $(".restaurants_index").length > 0 || $(".user_saved_menu_items_index").length > 0) {
       cl("if $(.menu_items_location).length > 0 || $(.restaurants_index) .length > 0");
       $(".restaurant_menu_item_wrapper").each(function() {
         var lat, long;
@@ -304,9 +305,7 @@
         return $(".label_div_wrapper").slideUp("fast");
       }
     });
-    if (window.location.port.indexOf("3006") > 0) {
-      set_gmap(2);
-    }
+    set_gmap(10);
     $(".yes_answer").live("click", function(event) {
       var form, found_helpfull_number, increment, link, link_text;
       event.preventDefault();

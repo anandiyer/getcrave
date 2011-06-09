@@ -1,0 +1,34 @@
+- restaurant = @menu_item.restaurant
+.restaurant_menu_item_wrapper{:data => {:latitude => restaurant.latitude, :longitude => restaurant.longitude}, :class => @controller.controller_name+"_"+@controller.action_name}
+  .numbers
+    = @counter.next
+  .img_column_mi_1_col
+    =image_tag "item_rest_temp_image.png"
+  .desc_block_2_col
+    .b
+      %h1= link_to @menu_item.name, @menu_item
+    -#.b.i= @menu_item.description
+    .b.i
+      .star_sm{:class => "stars_"+stars_class_normalize(@stars)}
+
+    .b.i
+      = link_to "@ "+restaurant.name, restaurant
+    .b.i= restaurant.address_full
+    .b.i
+      - @menu_item.labels.each_with_index do |x,i|
+        = link_to x, "#"
+        - if i.next < @menu_item.labels.length
+          ,
+  .save_n_review_3_col
+
+
+    = render :partial => "/save"
+  .review_counter_for_item
+
+    - if !@menu_item.menu_item_avg_rating_count.nil?
+      - review = @menu_item.menu_item_avg_rating_count.count
+
+    - else
+      - review = 0
+    .number_rev= review
+    reviews

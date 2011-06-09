@@ -231,8 +231,8 @@ body.two-col.bp{
             margin: 0 0 0 8px;
             img.fields{
                 padding: 5px 4px 0 11px;
-
             }
+
             input:not([class="search"]){
                  position: absolute;
                  color: #999999;
@@ -240,7 +240,7 @@ body.two-col.bp{
                  top: 10px;
                  font-size: 16px;
             }
-            input.first_search_input{
+            input#q{
                 left: 19px;
                 width: 365px;
             }
@@ -638,7 +638,7 @@ body.two-col.bp{
                 }
             }
 
-            #reviews_wrapper.users_following,#reviews_wrapper.users_followers, #reviews_wrapper.users_show, #reviews_wrapper.users, #reviews_wrapper.menu_items, #reviews_wrapper.restaurants_index, #reviews_wrapper.user_saved_menu_items_index, .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved{
+            #reviews_wrapper.search_index, #reviews_wrapper.users_following,#reviews_wrapper.users_followers, #reviews_wrapper.users_show, #reviews_wrapper.users, #reviews_wrapper.menu_items, #reviews_wrapper.restaurants_index, #reviews_wrapper.user_saved_menu_items_index, .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved{
                 border-top: none;
 
             }
@@ -662,6 +662,15 @@ body.two-col.bp{
                 #update_place_restaurants.menu_items_location, #update_place_restaurants.menu_items_show_menu_items_nearby, .restaurant_menu_item_wrapper.restaurants_index, .user_saved_menu_items_index, .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved{
                     padding-top: 0;
                 }
+
+                #update_place_restaurants.search_index{
+                    #results{
+                        font-weight:bold;
+                        padding: 0 0 0 5px;
+
+                    }
+                }
+
                 #update_place_restaurants{
                     padding: 8px 0 0 0;
                     .star_sm{
@@ -741,7 +750,7 @@ body.two-col.bp{
 
 
 
-                    .restaurant_menu_item_wrapper.menu_items_location, .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby, .restaurant_menu_item_wrapper.restaurants_index, .restaurant_menu_item_wrapper.user_saved_menu_items_index, .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved{
+                    .restaurant_menu_item_wrapper.search_index, .restaurant_menu_item_wrapper.menu_items_location, .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby, .restaurant_menu_item_wrapper.restaurants_index, .restaurant_menu_item_wrapper.user_saved_menu_items_index, .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved{
                         .numbers{
                             font-weight: bold;
                             font-size:15px;

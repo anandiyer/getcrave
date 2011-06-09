@@ -1,6 +1,14 @@
 - if !@menu_items && @user_saved_menu_items
-
   - @menu_items = @user_saved_menu_items.map{|usmi| usmi.menu_item}
+- if @results
+  - @menu_items = @results
+
+  #results
+    #{@results.length} result for #{params[:q]} in #{params[:where][:nearby]}
+
+
+
+
 
 #reviews_wrapper_bloc_wrapper
 

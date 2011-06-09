@@ -1,12 +1,20 @@
 class SearchController < ApplicationController
+  layout "general"
   
   def index
     if (params[:q] && !params[:q].empty?)
-      @search = Sunspot.search(Restaurant, MenuItem) do
-        fulltext(params[:q])
-        paginate :page => 1, :per_page => 100
+      if !is_almazom?
+        @search = Sunspot.search(Restaurant, MenuItem) do
+          fulltext(params[:q])
+          paginate :page => 1, :per_page => 100
+        end
+        @results = @search.results
+      else
+
+#        TODO:Remove me on production
+        @results = MenuItem.where("id > 100 AND  id < 110")
       end
-      @results = @search.results
+
 
       respond_to do |format|
         format.html

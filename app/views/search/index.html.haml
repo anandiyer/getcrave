@@ -1,0 +1,37 @@
+= render :partial => "list"
+
+-#:erb
+-#  <% form_tag search_index_path, :method => 'get' do %>
+-#    <p>
+-#      <%= text_field_tag :q, params[:q] %>
+-#      <%= submit_tag "Crave", :name => nil %>
+-#    </p>
+-#    <%end%>
+
+
+
+-#<% form_tag search_index_path, :method => 'get' do %>
+-#  <p>
+-#    <%= text_field_tag :q, params[:q] %>
+-#    <%= submit_tag "Crave", :name => nil %>
+-#  </p>
+-#
+-#    <% unless @results.nil? %>
+-#      <table>
+-#        <% for result_item in @results %>
+-#          <tr>
+-#            <td>
+-#            <% if (result_item.type.to_s == "MenuItem") %>
+-#                <a href="/menu_items/<%= result_item.id %>"><%= result_item.name %></a> @
+-#                <a href="/restaurants/<%= result_item.restaurant.id %>/menu_items"><%= result_item.restaurant.name %></a>
+-#            <% else %>
+-#                <a href="/restaurants/<%= result_item.id %>/menu_items"><%= result_item.name %></a>
+-#            </td><% end %>
+-#    </td>
+-#          </tr>
+-#        <% end %>
+-#      </table>
+-#    <% else %>
+-#      <p>Your query returned no results.</p>
+-#    <% end %>
+-#<% end %>

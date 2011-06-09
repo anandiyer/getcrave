@@ -1,0 +1,9 @@
+- @results.each_with_index do |@menu_item, @counter|
+
+  - @stars = "0"
+  - begin
+    - @stars = @menu_item.menu_item_avg_rating_count.avg_rating if !@menu_item.menu_item_avg_rating_count.nil?
+  - rescue NoMethodError
+    - logger.error("@menu_item.menu_item_avg_rating_count")
+
+  = render :partial => "item"

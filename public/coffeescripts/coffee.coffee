@@ -131,10 +131,11 @@ window.add_review = (id_of_menu_item, msg) ->
 
 
 window.set_gmap = (zoom = 10) ->
+    cl "set map"
 
     ar = []
 #    if restaurants || menu items page
-    if $(".menu_items_location").length > 0 || $(".restaurants_index").length > 0 || $(".user_saved_menu_items_index").length > 0
+    if $(".menu_items_location").length > 0 || $(".search_index").length > 0 || $(".restaurants_index").length > 0 || $(".user_saved_menu_items_index").length > 0
         cl "if $(.menu_items_location).length > 0 || $(.restaurants_index) .length > 0"
 
         $(".restaurant_menu_item_wrapper").each () ->
@@ -316,7 +317,8 @@ $(document).ready ->
 
 #   google maps in homepage neary
 
-    set_gmap(2)  if window.location.port.indexOf("3006") > 0
+    set_gmap(10)
+#    if window.location.port.indexOf("3006") > 0
 
 
 
