@@ -458,7 +458,7 @@ body.two-col.bp .label_div_wrapper {
   position: absolute;
   top: 10px;
   width: 220px;
-  z-index: 105;
+  z-index: 1005;
 }
 /* line 107, ../../compass/sass/screen.scss */
 body.two-col.bp .label_div_wrapper .label_div {
