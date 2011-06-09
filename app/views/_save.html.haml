@@ -7,7 +7,7 @@
   #flag_icons{:title => "save this item"}
     .save_icon{:class=> "save_icon "+flag_class, :id => "mid_"+@restaurants.id.to_s}
 -else
-  - if class_name_from_path = "search_index"
+  - if class_name_from_path == "search_index"
     - params[:id] = @menu_item.id
 
   - if @menu_item && params[:id]
