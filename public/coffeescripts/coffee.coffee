@@ -340,7 +340,7 @@ $(document).ready ->
 
 #   google maps in homepage neary
 
-    set_gmap(10)
+#    set_gmap(10) if $("#map").length >0
 #    if window.location.port.indexOf("3006") > 0
 
 
@@ -366,6 +366,9 @@ $(document).ready ->
             form.submit()
         else
             show_dialog("Please sign in!")
+
+    $(".follow_button.unfollow")"click" () ->
+        alert 1
 
     $(".saved_item.save_icon").live "click", () ->
         cl "saved icon"

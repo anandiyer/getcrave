@@ -335,6 +335,9 @@
         return show_dialog("Please sign in!");
       }
     });
+    $(".follow_button.unfollow").live("click", function() {
+      return cl("un follow");
+    });
     $(".saved_item.save_icon").live("click", function() {
       var id, path;
       cl("saved icon");
