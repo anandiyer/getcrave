@@ -13,8 +13,11 @@ Ext.regModel('Dish',
     fields: ['name','id','price','description','restaurant_id','restaurant','distance','menu_item_avg_rating_count','avg_rating',{
         name: 'rating',
         convert: function(value, record) {
-            console.log(record.get('menu_item_avg_rating_count').avg_rating);
-            return record.get('menu_item_avg_rating_count').avg_rating.toString();
+            if(record.get('menu_item_avg_rating_count').avg_rating) {
+                return record.get('menu_item_avg_rating_count').avg_rating.toString();
+            } else {
+                return "unrated";
+            }
         }
     },{
         name: 'restaurant_name',
@@ -26,7 +29,7 @@ Ext.regModel('Dish',
 
 var dishStore = new Ext.data.Store({
     model: 'Dish',
-    sorters: [{property: 'arating', direction: 'DESC'}],
+    sorters: [{property: 'arating', direction: 'ASC'}],
     getGroupString : function(record) {
         rating = parseInt(record.get('rating'));
         if(rating==5) {
