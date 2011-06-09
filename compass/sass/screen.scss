@@ -223,6 +223,10 @@ body.two-col.bp{
 
         #logo{
             margin: 12px 0 2px 18px;
+            height: 66px;
+            width: 92px;
+            /*border:1px solid red;*/
+            background: url(/images/sprites/icon-sprite.png) no-repeat 0 -1204px;
         }
 
         #navigation_wrap_search{
@@ -447,13 +451,11 @@ body.two-col.bp{
                         $content-columns: ceil(15);
                         @include column($content-columns, true);
 
+                        #submit_block:hover{
+                            color: red;
+                        }
                         #submit_block{
-                            /*input[type=submit]{*/
-                                /*text-align: right;*/
-                            /*}*/
-
                             float: right;
-
 
                         }
 
@@ -478,7 +480,7 @@ body.two-col.bp{
                                 border: none;
                                 overflow: hidden;
 
-                                height: 20px;
+                                height: 30px;
                                 /*resize: none;*/
                             }
 

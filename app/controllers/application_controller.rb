@@ -13,15 +13,15 @@ class ApplicationController < ActionController::Base
 
   def current_user
 #TODO: fix me
-    begin
-      @current_user ||= User.find_by_id(session[:user_id])
-    rescue e
-      logger.info(e+" | Can not find current_user")
-      @current_user = User.find(5)
-    end
+#    begin
+#      @current_user ||= User.find_by_id(session[:user_id])
+#    rescue e
+#      logger.info(e+" | Can not find current_user")
+#      @current_user = User.find(5)
+#    end
 #    @current_user ||= User.where(:user_name => "almazom").first
 #    @current_user ||= User.where(:user_name => "ai").first
-#    @current_user ||= User.where(:user_name => "test3").first
+    @current_user ||= User.where(:user_name => "test3").first
   end
 
   def check_auth_fb
