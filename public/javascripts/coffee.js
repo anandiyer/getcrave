@@ -1,9 +1,19 @@
 (function() {
-  var after_send, before_send, disher_review_wrapper, error, geo, top_nav_bind;
+  var after_send, before_send, close_labels_selectbox, disher_review_wrapper, error, geo, top_nav_bind;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   disher_review_wrapper = $("#reviews_wrapper");
+  close_labels_selectbox = function() {
+    $(".label_div_wrapper").slideUp("fast");
+    return hide_mask();
+  };
   window.cl = function(msg) {
     return console.log(msg);
+  };
+  window.hide_mask = function() {
+    return $('#mask').fadeOut("fast");
+  };
+  window.show_mask = function() {
+    return $('#mask').fadeIn("fast");
   };
   window.close_modal = function() {
     $('#mask').hide();
@@ -46,7 +56,8 @@
     });
   };
   $('.close_modal').live("click", function() {
-    return close_modal();
+    close_modal();
+    return $(".label_div_wrapper").hide();
   });
   window.added_label = function(menu_item_id) {
     $.gritter.add({
@@ -270,6 +281,7 @@
     });
     $("#desc_wrap a.mi_add_label").live("click", function(event) {
       var all_labels, new_left, new_top, offset;
+      show_mask();
       offset = $(this).position();
       new_top = parseInt(offset.top) + 12;
       new_left = parseInt(offset.left) - 84;
@@ -303,7 +315,7 @@
         if (xhr.responseText.indexOf('Warning') < 0 && xhr.responseText.indexOf("sign in") < 0) {
           $(".birdy_update").html(xhr.responseText);
         }
-        return $(".label_div_wrapper").slideUp("fast");
+        return close_labels_selectbox();
       }
     });
     set_gmap(10);

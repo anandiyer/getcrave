@@ -1,9 +1,19 @@
 disher_review_wrapper = $("#reviews_wrapper")
 
 
+close_labels_selectbox = () ->
+    $(".label_div_wrapper").slideUp("fast")
+    hide_mask()
+
 window.cl = (msg) ->
     console.log(msg)
 
+window.hide_mask = () ->
+    $('#mask').fadeOut("fast");
+
+window.show_mask = () ->
+#    $('#mask').show()
+    $('#mask').fadeIn("fast");
 window.close_modal = () ->
 #    $('#mask').fadeOut("fast");
 #    $('.modal_window').fadeOut("fast");
@@ -49,7 +59,9 @@ window.modal_window = () ->
         show_modal(modal_id)
 
 
-	$('.close_modal').live "click", () -> close_modal()
+	$('.close_modal').live "click", () ->
+	    close_modal()
+	    $(".label_div_wrapper").hide()
 
 
 
@@ -262,7 +274,6 @@ $(document).ready ->
 
     $(".label_div ul li").live "click", (event) ->
 
-
         id = $(@).attr("id")
         $("#labels form")
             .find("input#menu_label_association_menu_label_id")
@@ -270,7 +281,10 @@ $(document).ready ->
             .end()
             .submit()
 
+
+
     $("#desc_wrap a.mi_add_label").live "click", (event) ->
+        show_mask()
         offset = $(@).position()
         new_top = parseInt(offset.top)+12
         new_left = parseInt(offset.left)-84
@@ -292,6 +306,7 @@ $(document).ready ->
 
         if $(".label_div ul li").length == 0
             $(".label_div_wrapper").hide()
+
             $.gritter.add({title:'Notification', text: "All labels was added!"})
         else
             $(".label_div_wrapper").css("top": new_top).css("left",new_left).show()
@@ -305,14 +320,20 @@ $(document).ready ->
 
 
 
+
+
         cl all_labels
         event.preventDefault()
+
+
+
 
     $(document).ajaxComplete (event, xhr, settings) ->
         if settings.url == "/menu_label_associations"
             if xhr.responseText.indexOf('Warning') < 0 && xhr.responseText.indexOf("sign in") < 0
                 $(".birdy_update").html(xhr.responseText)
-            $(".label_div_wrapper").slideUp("fast")
+            close_labels_selectbox()
+
 
 #    $(document).ajaxError () -> $.gritter.add({title:"Error", text: "Ajax error!", image: "/images/error_icon.png", sticky: => true});
 

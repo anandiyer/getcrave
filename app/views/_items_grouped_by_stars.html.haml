@@ -8,8 +8,6 @@
 
 
 
-
-
 #reviews_wrapper_bloc_wrapper
 
   - if !@menu_items && !@menu_items.first().menu_item_avg_rating_count.nil?
@@ -18,7 +16,9 @@
   - else
   - group_star = 0
 
-  .star_sm{:class => "star_sm stars_"+group_star.to_s.gsub(/[.]/, '_')} &nbsp;
+
+  -#.star_sm{:class => "star_sm stars_"+group_star.to_s.gsub(/[.]/, '_')} &nbsp;
+
 
   - @menu_items.each_with_index do |@menu_item, @counter|
     - stars = 0
