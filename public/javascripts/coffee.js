@@ -184,8 +184,7 @@
     }
   };
   window.make_unfollow = function() {
-    $(".submit.submit_wrapper").removeClass("follow").addClass("unfollow").find(".text").text("Unfollow");
-    return g_notice("Notification", "Now you are following!");
+    return $(".submit.submit_wrapper").removeClass("follow").addClass("unfollow").find(".text").text("Unfollow");
   };
   window.gallery_init = function() {
     return $('#gallery a').lightBox({
@@ -307,7 +306,6 @@
           "top": new_top
         }).css("left", new_left).show();
       }
-      cl(all_labels);
       return event.preventDefault();
     });
     $(document).ajaxComplete(function(event, xhr, settings) {
@@ -318,7 +316,9 @@
         return close_labels_selectbox();
       }
     });
-    set_gmap(10);
+    if ($("#map").length > 0) {
+      set_gmap(10);
+    }
     $(".yes_answer").live("click", function(event) {
       var form, found_helpfull_number, increment, link, link_text;
       event.preventDefault();
@@ -336,7 +336,18 @@
       }
     });
     $(".follow_button.unfollow").live("click", function() {
-      return cl("un follow");
+      var f_id, path, this_obj;
+      f_id = $("form#new_user_following input#user_following_following_user_id").val();
+      path = "/user_followings/" + f_id;
+      this_obj = this;
+      return $.ajax({
+        url: path,
+        type: "delete",
+        context: document.body,
+        success: __bind(function() {
+          return $(this).removeClass("unfollow").addClass("follow");
+        }, this)
+      });
     });
     $(".saved_item.save_icon").live("click", function() {
       var id, path;

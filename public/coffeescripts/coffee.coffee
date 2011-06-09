@@ -171,7 +171,7 @@ window.set_gmap = (zoom = 10) ->
 
 window.make_unfollow = () ->
     $(".submit.submit_wrapper").removeClass("follow").addClass("unfollow").find(".text").text("Unfollow")
-    g_notice("Notification", "Now you are following!")
+#    g_notice("Notification", "Now you are following!")
 window.gallery_init = () ->
     $('#gallery a').lightBox
         overlayBgColor: '#000'
@@ -312,23 +312,16 @@ $(document).ready ->
             $(".label_div_wrapper").css("top": new_top).css("left",new_left).show()
 
 
-
-
-
-
-
-
-
-
-
-
-        cl all_labels
+#        cl all_labels
         event.preventDefault()
 
 
 
 
     $(document).ajaxComplete (event, xhr, settings) ->
+
+
+
         if settings.url == "/menu_label_associations"
             if xhr.responseText.indexOf('Warning') < 0 && xhr.responseText.indexOf("sign in") < 0
                 $(".birdy_update").html(xhr.responseText)
@@ -340,7 +333,7 @@ $(document).ready ->
 
 #   google maps in homepage neary
 
-#    set_gmap(10) if $("#map").length >0
+    set_gmap(10) if $("#map").length >0
 #    if window.location.port.indexOf("3006") > 0
 
 
@@ -367,8 +360,19 @@ $(document).ready ->
         else
             show_dialog("Please sign in!")
 
-    $(".follow_button.unfollow")"click" () ->
-        alert 1
+
+
+
+    $(".follow_button.unfollow").live "click", () ->
+        f_id =  $("form#new_user_following input#user_following_following_user_id").val()
+        path = ("/user_followings/"+f_id)
+        this_obj = @
+#        $.ajax({url: path ,type: "delete"})
+
+        $.ajax({url: path, type: "delete", context: document.body,success: () => $(@).removeClass("unfollow").addClass("follow")});
+
+#
+
 
     $(".saved_item.save_icon").live "click", () ->
         cl "saved icon"
