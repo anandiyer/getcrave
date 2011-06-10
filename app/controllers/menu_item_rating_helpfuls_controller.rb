@@ -60,6 +60,10 @@ class MenuItemRatingHelpfulsController < ApplicationController
   def create
     @menu_item_rating_helpful = MenuItemRatingHelpful.new(params[:menu_item_rating_helpful])
 
+    Notifier.review_helpful(current_user,
+      @menu_item_rating_helpful.menu_item_rating.user, 
+      @menu_item_rating_helpful.menu_item_rating.menu_item)
+
     respond_to do |format|
       if @menu_item_rating_helpful.save
         format.html { redirect_to(@menu_item_rating_helpful, :notice => 'Menu item rating helpful was successfully created.') }

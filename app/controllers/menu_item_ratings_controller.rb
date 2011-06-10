@@ -13,8 +13,6 @@ class MenuItemRatingsController < ApplicationController
       format.json { render :json => @response.to_json }
     end 
   end
-
-
   
   # GET /menu_item_ratings
   # GET /menu_item_ratings.xml
