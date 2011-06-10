@@ -39,6 +39,9 @@ module Crave
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
     
+    config.autoload_paths += %W(#{config.root}/lib)
+    config.middleware.use 'StoreRedirectTo'
+    
     if Rails.env == "production"
       config.middleware.use("Rack::GoogleAnalytics", :web_property_id => "UA-23593309-1")
     end
