@@ -270,8 +270,12 @@ $(document).ready ->
 
     gallery_init() if $("#gallery").length > 0
 
-    $('#comment_wrapper .submit_wrapper').click (e) -> $(@).parents("form").submit()
-#    $('#input_comment textarea').keydown (e) -> $(@).parents("form").submit() if (e.ctrlKey && e.keyCode == 13)
+    $('#comment_wrapper .submit_wrapper').click (e) ->
+        if $(@).parents("form").find("textarea").val().length > 3
+            $(@).parents("form").submit()
+
+    $('#input_comment textarea').focus (e) ->
+        $(@).parents("form").find("#submit_block").show()
 
 
     $(document).ajaxSend (event, request, settings) ->

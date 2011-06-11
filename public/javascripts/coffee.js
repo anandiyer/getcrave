@@ -284,7 +284,12 @@
       gallery_init();
     }
     $('#comment_wrapper .submit_wrapper').click(function(e) {
-      return $(this).parents("form").submit();
+      if ($(this).parents("form").find("textarea").val().length > 3) {
+        return $(this).parents("form").submit();
+      }
+    });
+    $('#input_comment textarea').focus(function(e) {
+      return $(this).parents("form").find("#submit_block").show();
     });
     $(document).ajaxSend(function(event, request, settings) {
       var _ref;

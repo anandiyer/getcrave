@@ -498,6 +498,7 @@ body.two-col.bp{
                         }
                         #submit_block{
                             float: right;
+                            display: none;
                         }
 
                         h1{
@@ -513,15 +514,14 @@ body.two-col.bp{
                             border-top:1px solid #ccc;
                             border-left:1px solid #ccc;
                             margin:7px 0 8px 0;
-                            padding:5px 5px 5px 8px;
-
+                            /*padding:5px 5px 5px 8px;*/
 
                             textarea{
                                 width: 100%;
                                 border: none;
                                 overflow: hidden;
 
-                                height: 30px;
+                                height: 20px;
                                 /*resize: none;*/
                             }
 

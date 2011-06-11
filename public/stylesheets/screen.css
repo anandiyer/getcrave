@@ -963,30 +963,31 @@ body.two-col.bp #content_wrap #content #current_content_block #comment_wrapper_w
 /* line 499, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #current_content_block #comment_wrapper_wrapper #comment_wrapper #submit_block {
   float: right;
+  display: none;
 }
-/* line 503, ../../compass/sass/screen.scss */
+/* line 504, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #current_content_block #comment_wrapper_wrapper #comment_wrapper h1 {
   font-size: 17px;
 }
-/* line 507, ../../compass/sass/screen.scss */
+/* line 508, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #current_content_block #comment_wrapper_wrapper #comment_wrapper #content_title {
   color: #282828;
   padding: 0 0 4px 0;
 }
-/* line 511, ../../compass/sass/screen.scss */
+/* line 512, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #current_content_block #comment_wrapper_wrapper #comment_wrapper #input_comment {
   background-color: #fff;
   border-top: 1px solid #ccc;
   border-left: 1px solid #ccc;
   margin: 7px 0 8px 0;
-  padding: 5px 5px 5px 8px;
+  /*padding:5px 5px 5px 8px;*/
 }
 /* line 519, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #current_content_block #comment_wrapper_wrapper #comment_wrapper #input_comment textarea {
   width: 100%;
   border: none;
   overflow: hidden;
-  height: 30px;
+  height: 20px;
   /*resize: none;*/
 }
 /* line 528, ../../compass/sass/screen.scss */
