@@ -10,6 +10,7 @@
 
 #reviews_wrapper_bloc_wrapper
 
+
   - if !@menu_items && !@menu_items.first().menu_item_avg_rating_count.nil?
 
     - group_star = @menu_items.first().menu_item_avg_rating_count.avg_rating
@@ -35,4 +36,4 @@
       = render :partial => "/menu_item_nearby"
     -else
       = render :partial => "/menu_item"
-= render :partial => "/show_more"
+= render :partial => "/show_more" if @menu_items.length > ITEMS_ON_PAGE
