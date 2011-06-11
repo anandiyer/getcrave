@@ -90,9 +90,6 @@ body.two-col.bp{
             $content-columns: ceil(7);
             @include column($content-columns, true);
 
-
-
-
             .links_footer{
                 margin-left: -4px;
 
@@ -104,7 +101,6 @@ body.two-col.bp{
                    border: none;
                 }
             }
-
         }
     }
 
@@ -117,7 +113,6 @@ body.two-col.bp{
         padding: 0px;
         list-style: none;
     }
-
 
     .label_div_tri{
         width: 220px;
@@ -481,11 +476,28 @@ body.two-col.bp{
                         @include column($content-columns, true);
 
                         #submit_block:hover{
-                            color: red;
+                            font-weight: bold;
+                            .submit_wrapper {
+                                .left_rounder{
+                                    background-position: 0 -113px;
+                                }
+                                .submit_button{
+                                    background-position: -131px -113px;
+                                }
+                            }
+                        }
+                        #submit_block:active{
+                            .submit_wrapper {
+                                .left_rounder{
+                                    background-position: 0 -151px;
+                                }
+                                .submit_button{
+                                    background-position: -131px -151px;
+                                }
+                            }
                         }
                         #submit_block{
                             float: right;
-
                         }
 
                         h1{
