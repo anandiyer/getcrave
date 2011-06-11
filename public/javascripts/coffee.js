@@ -2,6 +2,13 @@
   var after_send, before_send, close_labels_selectbox, disher_review_wrapper, error, geo, search_bind, top_nav_bind;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   disher_review_wrapper = $("#reviews_wrapper");
+  window.is_logged_in = function() {
+    if ($(".fb_login a.not_signed").length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   close_labels_selectbox = function() {
     $(".label_div_wrapper").slideUp("fast");
     return hide_mask();
@@ -20,6 +27,9 @@
     return $('.modal_window').hide();
   };
   window.show_dialog = function(title, content) {
+    if (title == null) {
+      title = "Please, sign in!";
+    }
     modal_window();
     show_modal("modal_window");
     $(".modal_window .modal_title h1").empty().text(title);
@@ -51,8 +61,13 @@
     });
     return $('.activate_modal').click(function() {
       var modal_id;
-      modal_id = $(this).attr('name');
-      return show_modal(modal_id);
+      if (is_logged_in()) {
+        modal_id = $(this).attr('name');
+        return show_modal(modal_id);
+      } else {
+        show_modal();
+        return $("img[alt=Fb_sign_in]").parents(".modal_window").show().find(".modal_title").text("<h1>Please, sign in!</h1>");
+      }
     });
   };
   $('.close_modal').live("click", function() {
@@ -298,32 +313,36 @@
     });
     $("#desc_wrap a.mi_add_label").live("click", function(event) {
       var all_labels, new_left, new_top, offset;
-      show_mask();
-      offset = $(this).position();
-      new_top = parseInt(offset.top) + 12;
-      new_left = parseInt(offset.left) - 84;
-      all_labels = [];
-      $(".label_item").each(function() {
-        var exist;
-        exist = $(this).text();
-        all_labels.push(exist);
-        return $(".label_div ul li").each(function() {
-          if ($(this).text() === exist) {
-            return $(this).remove();
-          }
+      if (is_logged_in()) {
+        show_mask();
+        offset = $(this).position();
+        new_top = parseInt(offset.top) + 12;
+        new_left = parseInt(offset.left) - 84;
+        all_labels = [];
+        $(".label_item").each(function() {
+          var exist;
+          exist = $(this).text();
+          all_labels.push(exist);
+          return $(".label_div ul li").each(function() {
+            if ($(this).text() === exist) {
+              return $(this).remove();
+            }
+          });
         });
-      });
-      if ($(".label_div ul li").length === 0) {
-        $(".label_div_wrapper").hide();
-        $.gritter.add({
-          title: 'Notification',
-          text: "All labels was added!"
-        });
-        hide_mask();
+        if ($(".label_div ul li").length === 0) {
+          $(".label_div_wrapper").hide();
+          $.gritter.add({
+            title: 'Notification',
+            text: "All labels was added!"
+          });
+          hide_mask();
+        } else {
+          $(".label_div_wrapper").css({
+            "top": new_top
+          }).css("left", new_left).show();
+        }
       } else {
-        $(".label_div_wrapper").css({
-          "top": new_top
-        }).css("left", new_left).show();
+        show_dialog();
       }
       return event.preventDefault();
     });

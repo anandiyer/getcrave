@@ -1857,7 +1857,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
 .save_icon.not_saved_item {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
-  background-position: -32px -299px;
+  background-position: 0px -299px;
   width: 47px;
   height: 47px;
   float: left;

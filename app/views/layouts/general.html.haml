@@ -82,33 +82,28 @@
           starts_update();
 
           function starts_update(){
+
             $('.star_gray').each(function(){
               var data_rating = $(this).data("rating");
               $(this).raty({
                 start: data_rating,
                 path: "/images/icons",
                 width: "180px",
-                //#half: true,
                 click: function(score, evt) {
+
+
+                  if($(".fb_login a.not_signed").length == 1){
+                    window.show_dialog("Please sign in?");
+                  }
+
                   var data_rating = $(this).data("rating");
                   var data_model = $(this).data("model");
                   var id =  this.attr('id');
                   var score =  score;
                   $("form.new_menu_item_rating input#menu_item_rating_rating").val(score);
                   //#$(this).parents("form").submit()
-
-
                   //$.gritter.add({title:'Notification',text:'Rating: ID='+id+"<br /> model = "+ data_model+ " <br/>score :"+ score});
                 }
               })
             })
           }
-
-
-
-
-
-
-
-
-
