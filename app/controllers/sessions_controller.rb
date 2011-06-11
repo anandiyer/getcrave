@@ -4,6 +4,21 @@ class SessionsController < ApplicationController
     unless @auth = Authorization.find_from_hash(auth)
       # Create a new user or add an auth to existing user, depending on
       # whether there is already a user signed in.
+
+      # TODO: Beta If this user is not in the APPROVED LIST, we can't let'em in
+      ids = [
+        743181527, #shreya
+        500034335, #anand
+        80900323, #rich
+        80900324 #sara
+      ]
+      
+      if (!ids.include?(auth['uid']))
+        # TODO: redirect to sorry page
+        redirect_to '/'
+        return
+      end
+      
       @auth = Authorization.create_from_hash(auth, current_user)
       Notifier.signup_email(@auth.user).deliver
     end
