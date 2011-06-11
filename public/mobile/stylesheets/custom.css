@@ -1,3 +1,6 @@
+.restName {font-weight:bold;}
+.restAddress {font-weight:lighter;display:block;}
+
 .chevrony {display:block;float:right;background-image: url('../../images/arrow-gray.png');
     width: 8px;
     height: 13px;
@@ -56,10 +59,14 @@ padding: .3em .3em;
 .picanddata .pic {float:left;padding:12px}
 .picanddata .data {float:left;padding:12px}
 .reviewtext {clear:both;float:none;}
-.restaurantInfo {width: 100%;
-height: 100px;
-background-color: #f9ecc0;
-padding: 12px;}
+.restaurantInfo {
+    width: 100%;
+    height: 100px;
+    background-color: #f9ecc0;
+    padding: 12px;
+    font-size:14px;
+    color:#282828;
+}
 .dashedBorder {border:dashed 1px;}
 /*sencha overrides */
 .x-toolbar-light {
@@ -165,3 +172,11 @@ padding: 12px;}
     background:#b1422e;
 }
 .x-toolbar-light .x-toolbar-title {color:#ffffff;}
+
+.x-toolbar-light {
+background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #F6745D), color-stop(1, #E64E33) );
+border-top: 1px solid #F8907D;
+}
+.x-toolbar.x-docked-top {
+border-bottom: .1em solid #73271A;
+}

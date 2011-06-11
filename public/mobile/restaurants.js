@@ -23,7 +23,28 @@ var restaurants = new Ext.data.Store({
 });
 
 var singleRestaurantStore = new Ext.data.Store({
-    model: 'DishSearch',
+    model: 'Dish',
+    sorters: [{property: 'arating', direction: 'ASC'}],
+    getGroupString : function(record) {
+        rating = parseInt(record.get('rating'));
+        if(rating==5) {
+            return "<img src='../images/rating-stars/rating-dish-5.png'>";
+        }
+        if(rating==4) {
+            return "<img src='../images/rating-stars/rating-dish-4.png'>";
+        }
+        if(rating==3) {
+            return "<img src='../images/rating-stars/rating-dish-3.png'>";
+        }
+        if(rating==2) {
+            return "<img src='../images/rating-stars/rating-dish-2.png'>";
+        }
+        if(rating==1) {
+            return "<img src='../images/rating-stars/rating-dish-1.png'>";
+        } else {
+            return "unrated";
+        }
+    },
     proxy: {
         type:'ajax',
         url:'',
@@ -36,9 +57,15 @@ var singleRestaurantStore = new Ext.data.Store({
 
 function restaurantDisplay(record, index) {
     singleRestaurantStore.proxy.url = (urlPrefix+'/restaurants/'+record.data.id+'/menu_items.json');
+    var myVar = "hello";
 
     singleRestaurantStore.load(function(){
         Ext.getCmp('mainPnl').setActiveItem(2);
+        /* singleRestaurantStore.each(function() {
+           console.log(this);
+        });
+        */
+        //loop to count the total reviews here? and add them to htmlString by id?
     });
 
     Ext.Ajax.request({
@@ -47,13 +74,12 @@ function restaurantDisplay(record, index) {
              type: 'json'
         },
         success: function(response) {
+             //try looping through single restaurant store here
              //populate top panel with restaurant data, map
              var responseObject = eval('(' + response.responseText + ')');
-             console.log(responseObject);
             //set restaurant data locally now
              localStorage.setItem('editRestaurantId',responseObject.restaurant.id);
-            console.log('set restaurant id '+responseObject.restaurant.id);
-             htmlString = '<div class="restaurantInfo">'+responseObject.restaurant.name+'<br><br><a class="newDish">add dish</a></div>';
+             htmlString = '<div class="restaurantInfo"><span class="restName">'+responseObject.restaurant.name+'</span><span class="restAddress">'+responseObject.restaurant.street_address+', '+responseObject.restaurant.city+'</span><!--<a class="newDish">add dish</a>--></div>';
              Ext.getCmp('restInfoPnl').update(htmlString);
 
             var placeholder = new google.maps.Marker(
@@ -73,7 +99,6 @@ function restaurantDisplay(record, index) {
                     google.maps.event.trigger(Ext.getCmp('googleMap').map, 'resize');
                     var initialLocation = new google.maps.LatLng(responseObject.restaurant.latitude,responseObject.restaurant.longitude);
                     Ext.getCmp('googleMap').update(initialLocation);
-                    console.log('just tried');
                     //needs work becoming resuable, maybe have to destroy this on unload
                 }
             });
@@ -291,9 +316,9 @@ function dishDisplay(response) {
 
 var aRestaurantList = new Ext.List({
     id:'aRestaurantList',
-    itemTpl: '<tpl for="."><div class="thisdish"><b>{name}</b></div></tpl>',
+    itemTpl: dishTemplate,
     singleSelect: true,
-    grouped: false,
+    grouped: true,
     indexBar: false,
     layout:{type:'vbox'},
     fullscreen:false,
