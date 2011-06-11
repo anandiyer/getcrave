@@ -1,10 +1,6 @@
-- if @controller.controller_name != "user_saved_menu_items"
 
-  = render :partial => "/nearby_buttons"
-- else
-  %h2 Saved Dishes
+= render :partial => "/nearby_buttons"
 
 #reviews_wrapper{:class => class_name_from_path}
   #update_place_restaurants{:class => @controller.controller_name+"_"+@controller.action_name}
-
-    = render :partial => "result"
+    = render :partial => params[:search_restaurants] ? "result_restaurants" : "result_menu_items"

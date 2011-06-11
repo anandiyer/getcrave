@@ -58,4 +58,5 @@
             .found_helpfull
               =" (" + @mi_rating.menu_item_rating_helpfuls.count.to_s+")"
 
-= render :partial => "/show_more"
+
+= render :partial => "/show_more" if @current_menu_item_reviews_limits.length > ITEMS_ON_PAGE

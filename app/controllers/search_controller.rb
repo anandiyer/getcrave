@@ -2,12 +2,22 @@ class SearchController < ApplicationController
   layout "general"
   
   def index
+
+
     if (params[:q] && !params[:q].empty?)
-        @search = Sunspot.search(MenuItem) do
-          fulltext(params[:q])
-          paginate :page => 1, :per_page => 50
-        end
-        @results = @search.results
+      if !params[:search_restaurants]
+
+#        @search = Sunspot.search(MenuItem) do
+#          fulltext(params[:q])
+#          paginate :page => 1, :per_page => ITEMS_ON_PAGE*2
+#        end
+#        @results = @search.results
+        @results = MenuItem.find(100,1001,1002)
+
+      else
+        @results = Restaurant.find(100,1001,1002)
+      end
+
 
       respond_to do |format|
         format.html

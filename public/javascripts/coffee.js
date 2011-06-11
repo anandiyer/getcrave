@@ -1,5 +1,5 @@
 (function() {
-  var after_send, before_send, close_labels_selectbox, disher_review_wrapper, error, geo, top_nav_bind;
+  var after_send, before_send, close_labels_selectbox, disher_review_wrapper, error, geo, search_bind, top_nav_bind;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   disher_review_wrapper = $("#reviews_wrapper");
   close_labels_selectbox = function() {
@@ -225,7 +225,28 @@
       }
     });
   };
+  search_bind = function() {
+    var loc, restaurant_search;
+    if ($("a #restaurant_icon.off.restbutton.search_index").length > 0 || $("a #dishes_icon.off.dishbutton.search_index").length > 0) {
+      loc = window.location.search;
+      if (loc.indexOf("search_restaurants=true") < 0) {
+        restaurant_search = loc + "&search_restaurants=true";
+      } else {
+        restaurant_search = loc;
+      }
+      $("a #restaurant_icon.off.restbutton.search_index").click(function(e) {
+        cl(2222);
+        e.preventDefault();
+        return window.location = restaurant_search;
+      });
+      return $("a #dishes_icon.off.dishbutton.search_index").click(function(e) {
+        $("#navigation_wrap_search form").submit();
+        return e.preventDefault();
+      });
+    }
+  };
   $(document).ready(function() {
+    search_bind();
     top_nav_bind();
     $("form .follow").live("click", function() {
       $(this).removeClass("follow").addClass("unfollow");

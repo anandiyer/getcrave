@@ -206,19 +206,32 @@ top_nav_bind = () ->
             e.preventDefault()
 
 
+search_bind = () ->
+    if $("a #restaurant_icon.off.restbutton.search_index").length > 0 || $("a #dishes_icon.off.dishbutton.search_index").length > 0
+        loc = window.location.search
+
+        if loc.indexOf("search_restaurants=true") < 0
+            restaurant_search = loc+"&search_restaurants=true"
+        else
+            restaurant_search = loc
+        $("a #restaurant_icon.off.restbutton.search_index").click (e) ->
+            cl 2222
+            e.preventDefault()
+            window.location = restaurant_search
+
+
+
+        $("a #dishes_icon.off.dishbutton.search_index").click (e) ->
+            $("#navigation_wrap_search form").submit()
+            e.preventDefault()
+
+
+
+
 $(document).ready ->
 
-
-    #graphic submit
-#    $(".submit_wrapper.submit").click () ->
-#
-#        $(@).parents("form").submit()
-
-
-
+    search_bind()
     top_nav_bind()
-
-
 
 #    follow button press
     $("form .follow").live "click", () ->

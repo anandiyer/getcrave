@@ -1,0 +1,11 @@
+-#@restaurants
+-#- @results.each_with_index do |@restaurant, @counter|
+
+  -#- @stars = "0"
+  -#- begin
+  -#  - @stars = @menu_item.menu_item_avg_rating_count.avg_rating if !@menu_item.menu_item_avg_rating_count.nil?
+  -#- rescue NoMethodError
+  -#  - logger.error("@menu_item.menu_item_avg_rating_count")
+
+- @restaurants = @results
+= render :partial => "restaurants/restaurants_grouped_by_stars"
