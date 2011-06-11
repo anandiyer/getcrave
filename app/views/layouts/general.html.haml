@@ -66,8 +66,8 @@
           #content
             =yield
           = render :partial => "/sidebar"
-        #footer
-          footer
+        #footer= render :partial => "/footer"
+
         = render :partial => "/modal_window"
 
         :javascript

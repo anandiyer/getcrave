@@ -1,0 +1,9 @@
+.left_footer_column
+  @ 2011 Crave Inc.
+  .links_footer
+    - ["About", "Contact", "Privacy Policy", "Terms of Use"].each do |x|
+      =link_to x, "#"
+.right_footer
+  :erb
+    <div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId=177216185667399&amp;xfbml=1"></script><fb:like href="getcrave.com" send="false" width="300" show_faces="false" font="arial"></fb:like>
+

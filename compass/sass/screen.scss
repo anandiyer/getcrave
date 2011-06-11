@@ -58,15 +58,6 @@ $birdy_position: 0 -552px;
 
 $small_font_size: 12px;
 
-
-  /*color: #464646;*/
-  /*color: #666766;*/
-  /*color: #2e70a7;*/
-  /*color: #464646;*/
-  /*color: #464646;*/
-  /*color: #2e70a7;*/
-
-
 @mixin sprites($position, $weight:17px, $height:17px) {
     background-image: url("/images/sprites/icon-sprite.png");
     background-repeat: no-repeat;
@@ -79,6 +70,43 @@ $small_font_size: 12px;
 
 
 body.two-col.bp{
+
+    #footer{
+
+        background: url(/images/footer_line.png) no-repeat 5px top;
+        height: 50px;
+        @include container;
+        padding:15px 0 0 15px;
+        font-size: 11px;
+
+        /*position: relative;*/
+        .right_footer{
+            float: right;
+            width: 250px;
+            /*text-align:right;*/
+        }
+
+        .left_footer_column{
+            $content-columns: ceil(7);
+            @include column($content-columns, true);
+
+
+
+
+            .links_footer{
+                margin-left: -4px;
+
+                a{
+                    padding:0 5px 0 3px;
+                    border-right: 1px solid $gray;
+                }
+                a:last-of-type{
+                   border: none;
+                }
+            }
+
+        }
+    }
 
     h3{
        padding:0;
@@ -386,10 +414,6 @@ body.two-col.bp{
                     img{
                         padding-top:7px;
                     }
-
-
-
-
                 }
 
 
@@ -1326,8 +1350,6 @@ body.two-col.bp{
         background: url("/images/sprites/button-sprite.png") no-repeat -131px -75px;
     }
 
-
-
 }
 
 .plupload{
@@ -1338,4 +1360,3 @@ body.two-col.bp{
 .gray{
     color: $gray;
 }
-
