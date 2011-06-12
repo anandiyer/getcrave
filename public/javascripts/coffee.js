@@ -396,7 +396,7 @@
       var id, path;
       cl("saved icon");
       cl(id = $(this).attr("rel"));
-      path = "/user_saved_menu_items/" + id;
+      path = "/saved/" + id;
       return $.ajax({
         url: path,
         type: "delete"
@@ -405,7 +405,7 @@
     $(".not_saved_item.save_icon").live("click", function() {
       var f, new_action;
       cl(f = $(this).find("form"));
-      cl(new_action = "/user_saved_menu_items/" + $(f).attr("rel"));
+      cl(new_action = "/saved/" + $(f).attr("rel"));
       $(this).find("form").submit();
       return $(this).unbind('click');
     });
@@ -434,7 +434,7 @@
         path = "/menu_items/" + id_of_menu_item + "/show_reviews?limit=" + new_limits;
       } else if ($(".user_saved_menu_items_index").length > 0) {
         obj = $("#update_place_restaurants");
-        path = "/user_saved_menu_items/show_menu_items_saved?limit=" + new_limits;
+        path = "/saved/show_menu_items_saved?limit=" + new_limits;
       }
       return $.ajax({
         url: path,

@@ -9,7 +9,7 @@
 #current_content_block
   #bread_crumbs
     = link_to("← "+@menu_item.restaurant.name, @menu_item.restaurant)
-  #current_info_wrapper{:data => {:latitude=> @menu_item.restaurant.latitude, :longitude => @menu_item.restaurant.longitude, :menu_item_id => params[:id]}}
+  #current_info_wrapper{:data => {:latitude=> @menu_item.restaurant.latitude, :longitude => @menu_item.restaurant.longitude, :menu_item_id => @menu_item.id}}
     #img_column
       = image_tag "temp_image.png"
       #icons_img_wrapper
@@ -53,7 +53,7 @@
             - user_id = nil
 
           = form_for(@menu_label_association, :remote => true) do |f|
-            = f.hidden_field :menu_item_id, :value => params[:id]
+            = f.hidden_field :menu_item_id, :value => @menu_item.id
             = f.hidden_field :menu_label_id
             = f.hidden_field :user_id, :value => user_id
 
@@ -78,11 +78,11 @@
         Have you tried this?
       =form_for(MenuItemRating.new, :remote => true) do |f|
         =f.hidden_field :rating
-        =f.hidden_field :menu_item_id, :value =>params[:id]
-        .star_gray{:id => params[:id], :data =>{:model => "user_menu_item_ratings"}} &nbsp;
+        =f.hidden_field :menu_item_id, :value =>@menu_item.id
+        .star_gray{:id => @menu_item.id, :data =>{:model => "user_menu_item_ratings"}} &nbsp;
         #input_comment
           = f.text_area :review
-          = f.hidden_field :menu_item_id, :value =>params[:id]
+          = f.hidden_field :menu_item_id, :value =>@menu_item.id
         #submit_block
           = render :partial => "/button"
 

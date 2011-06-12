@@ -412,7 +412,7 @@ $(document).ready ->
         cl "saved icon"
         cl id = $(@).attr("rel")
 
-        path = ("/user_saved_menu_items/"+id)
+        path = ("/saved/"+id)
         $.ajax({url: path ,type: "delete"})
 
 #        f = $(@).find("form")
@@ -422,7 +422,7 @@ $(document).ready ->
 
     $(".not_saved_item.save_icon").live "click", () ->
         cl f = $(this).find("form")
-        cl new_action = "/user_saved_menu_items/"+$(f).attr("rel")
+        cl new_action = "/saved/"+$(f).attr("rel")
         $(this).find("form").submit()
         $(this).unbind('click')
 
@@ -455,7 +455,7 @@ $(document).ready ->
             path = "/menu_items/"+id_of_menu_item+"/show_reviews?limit="+new_limits
         else if $(".user_saved_menu_items_index").length > 0
             obj = $("#update_place_restaurants")
-            path = "/user_saved_menu_items/show_menu_items_saved?limit="+new_limits
+            path = "/saved/show_menu_items_saved?limit="+new_limits
 
 
 
