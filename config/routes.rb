@@ -64,6 +64,12 @@ Crave::Application.routes.draw do
     resources :ratings, :as => "menu_item_ratings", :controller => "menu_item_ratings"
   end
   
+  resources :saved, :as => "user_saved_menu_items", :controller => "user_saved_menu_items" do 	
+    collection do
+      get "show_menu_items_saved"
+    end
+  end
+  
   resources :search
   
   match '/auth/:provider/callback', :to => 'sessions#create'  
