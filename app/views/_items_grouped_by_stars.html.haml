@@ -36,4 +36,4 @@
       = render :partial => "/menu_item_nearby"
     -else
       = render :partial => "/menu_item"
-= render :partial => "/show_more" if @menu_items.length > ITEMS_ON_PAGE
+= render :partial => "/show_more" if @menu_items.length > ITEMS_PER_PAGE

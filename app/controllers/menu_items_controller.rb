@@ -21,15 +21,14 @@ class MenuItemsController < ApplicationController
   layout "general"
 
 #  TODO: change 2 your bucket name
-  @@BUCKET = "my_image_bucket"
-
-
+  @@BUCKET = "getcrave"
+  
   def location
 
     @lat = params[:lat].to_f
     @long = params[:long].to_f
     @within = 1
-    @limit = 25
+    @limit = ITEMS_PER_PAGE
     
     if params[:limit] && !params[:limit].empty?
       @limit = params[:limit].to_i
@@ -328,7 +327,7 @@ class MenuItemsController < ApplicationController
   def params_4_show_n_show_reviews
     @foodies_for_current_dish = User.find(:all,
       :order => 'user_ratings_count DESC',
-      :limit => 5)
+      :limit => ITEMS_PER_PAGE)
 
     #FIXME - need to get all the menu item attributes like ratings, photos etc.
     @menu_item = MenuItem.find(params[:id],
@@ -347,7 +346,7 @@ class MenuItemsController < ApplicationController
       @long = -73.969456
     end
 
-    @limit = 5
+    @limit = ITEMS_PER_PAGE
 
     if params[:limit] && !params[:limit].empty?
       @limit = params[:limit].to_i

@@ -15,12 +15,12 @@
       #left_side &nbsp;
       = image_tag "dishes_button_text.png"
 
-    =link_to "/restaurants"+tail do
+    =link_to "/places"+tail do
       #restaurant_icon{:class => rest_button_status+" restbutton "+class_name_from_path}
         #left_side &nbsp;
         = image_tag "restaurants_button_text_on.png"
   - else
-    =link_to "/menu_items/location"+tail do
+    =link_to "/items/location"+tail do
       #dishes_icon{:class => dish_button_status+" dishbutton "+class_name_from_path}
         #left_side &nbsp;
         = image_tag "dishes_button_text.png"

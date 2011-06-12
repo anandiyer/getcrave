@@ -52,6 +52,8 @@ class UserFollowingsController < ApplicationController
   # POST /user_followings.xml
   def create
     @user_following = UserFollowing.new(params[:user_following])
+    
+    Notifier.follow_user_email(current_user, User.find(params[:user_following][:following_user_id]))
 
     respond_to do |format|
       if @user_following.save

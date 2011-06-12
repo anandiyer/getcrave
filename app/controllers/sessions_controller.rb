@@ -10,12 +10,13 @@ class SessionsController < ApplicationController
         743181527, #shreya
         500034335, #anand
         80900323, #rich
-        80900324 #sara
+        80900324, #sara
+        662773250 #artignor
       ]
       
-      if (!ids.include?(auth['uid']))
+      if (!ids.include?(auth['uid'].to_i))
         # TODO: redirect to sorry page
-        redirect_to '/'
+        redirect_to '/request.html'
         return
       end
       

@@ -382,7 +382,7 @@
       var f_id, path, this_obj;
       this_obj = this;
       f_id = $(this_obj).parents("form").find("input#user_following_following_user_id").val();
-      path = "/user_followings/" + f_id;
+      path = "/following/" + f_id;
       return $.ajax({
         url: path,
         type: "delete",
@@ -444,7 +444,7 @@
         success: function(html) {
           after_send(obj, html);
           $("#show_more_button").attr("data-next", new_limits * 2);
-          return set_gmap(8);
+          return set_gmap(10);
         }
       });
     });

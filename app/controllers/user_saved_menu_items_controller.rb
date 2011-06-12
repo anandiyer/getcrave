@@ -105,9 +105,9 @@ class UserSavedMenuItemsController < ApplicationController
     @user_saved_menu_item.destroy
 
     respond_to do |format|
+       format.js { render :js => "window.unsave_menu_item(#{@user_saved_menu_item.menu_item.id})" }
 #      format.all { render :js =>"alert(1)" }
 #      format.all { render :partial => "/save" }
-       format.js { render :js => "window.unsave_menu_item(#{@user_saved_menu_item.menu_item.id})" }
 #      format.all { redirect_to(user_saved_menu_items_url) }
 #      format.xml  { head :ok }
 #      format.json  { head :ok }
@@ -127,18 +127,18 @@ class UserSavedMenuItemsController < ApplicationController
   def params_for_index_and_show_menu_items_saved
 
     if !params[:limit].nil?
-      p @limit = params[:limit]
+      @limit = params[:limit]
     else
-      p @limit = 5
+      @limit = ITEMS_PER_PAGE
     end
 
 #    TODO: its not real saved items
 
     @menu_items = MenuItem.find(:all,
-                                :joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id",
-                                :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
-                                # :include => :menu_item_avg_rating_count,
-                                :limit => @limit)
+          :joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id",
+          :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
+          # :include => :menu_item_avg_rating_count,
+          :limit => @limit)
 
   end
   

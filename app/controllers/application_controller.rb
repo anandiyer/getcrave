@@ -28,7 +28,6 @@ class ApplicationController < ActionController::Base
 
     title = "Please sign in!"
     if !signed_in?
-#      p "not signed"
       render :js => "window.show_dialog(\"#{title}\")"
     end
   end

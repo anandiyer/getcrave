@@ -399,7 +399,7 @@ $(document).ready ->
         f_id = $(this_obj).parents("form").find("input#user_following_following_user_id").val()
 
 #        f_id =  $("form#new_user_following input#user_following_following_user_id").val()
-        path = ("/user_followings/"+f_id)
+        path = ("/following/"+f_id)
 #
 #        $.ajax({url: path ,type: "delete"})
 
@@ -464,7 +464,7 @@ $(document).ready ->
         success: (html) ->
             after_send(obj, html)
             $("#show_more_button").attr("data-next",new_limits*2)
-            set_gmap(8)
+            set_gmap(10)
 #            $.get('/menu_items/update_map')
 
         });

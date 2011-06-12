@@ -15,4 +15,4 @@ ActionMailer::Base.smtp_settings = {
     :enable_starttls_auto => true
 }
 
-ITEMS_ON_PAGE = 25
+ITEMS_PER_PAGE = 25

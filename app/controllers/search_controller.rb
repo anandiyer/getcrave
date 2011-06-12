@@ -9,11 +9,10 @@ class SearchController < ApplicationController
 
       @search = Sunspot.search(current_model) do
           fulltext(params[:q])
-          paginate :page => 1, :per_page => ITEMS_ON_PAGE
+          paginate :page => 1, :per_page => ITEMS_PER_PAGE
       end
       @results = @search.results
 #      @results = current_model.find(100,1001,1002)
-
 
       respond_to do |format|
         format.html

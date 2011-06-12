@@ -22,9 +22,9 @@
             %p= @restaurant.neighborhood
             %p= "#{@restaurant.city}, #{@restaurant.state} #{@restaurant.zip}"
             .phone_number
-              .col1_pn
-                %p (415) 927 1849
-                %p= link_to "www.siet.com"
+              / .col1_pn
+              / %p (415) 927 1849
+              /  %p= link_to "www.siet.com"
               .col2_pn
                 = render :partial => "/social"
                 -#= image_tag "social.png"

@@ -15,12 +15,12 @@
 
   -#- if current_user
   %ul
-    %li.nearby=link_to "Nearby","/"
-    %li.saved=link_to "Saved", "/user_saved_menu_items"
-    %li.following=link_to "Following","#"
+    %li.nearby=link_to "Nearby","/alpha.html"
+    %li.saved=link_to "Saved", "/saved"
+    %li.following=link_to "Foodies","#"
     %li.profile
       - if current_user
-        =link_to "Profile", user_path(current_user.user_name)
+        =link_to "Profile", user_path(current_user.friendly_id)
       -else
         - title = "Please sign in!"
         =link_to_function("Profile", "window.show_dialog(\"#{title}\")")

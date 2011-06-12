@@ -1,25 +1,24 @@
 Crave::Application.routes.draw do 
 
-  resources :user_saved_menu_items do
+  resources :saved, :as => "user_saved_menu_items", :controller => "user_saved_menu_items" do
     collection do
       get "show_menu_items_saved"
     end
   end
 
-  resources :user_followings
-
+  resources :following, :as => "user_followings", :controller => "user_followings"
 
   resources :menu_item_review_comments
   
-  resources :menu_item_ratings do
-    resources :menu_item_rating_helpfuls do
+  resources :ratings, :as => "menu_item_ratings", :controller => "menu_item_ratings" do
+    resources :helpful, :as => "menu_item_rating_helpfuls", :controller => "menu_item_rating_helpfuls" do
       collection do
         get 'count'
       end
     end
   end
 
-  resources :menu_item_rating_helpfuls
+  resources :helpful, :as => "menu_item_rating_helpfuls", :controller => "menu_item_rating_helpfuls"
   
   resources :menu_label_associations
 
@@ -33,8 +32,8 @@ Crave::Application.routes.draw do
 
   resources :menu_item_prices
 
-  resources :menu_items do
-    resources :menu_item_ratings do
+  resources :items, :as => "menu_items", :controller => "menu_items" do
+    resources :ratings, :as => "menu_item_ratings", :controller => "menu_item_ratings" do
       collection do
         get 'avg_rating'
       end 
@@ -56,10 +55,8 @@ Crave::Application.routes.draw do
 
   resources :restaurant_cuisines
 
-
-  resources :restaurants do
-
-    resources :menu_items
+  resources :places, :as => "restaurants", :controller => "restaurants" do
+    resources :items, :as => "menu_items", :controller => "menu_items"
     collection do
       get 'search', 'show_restaurants_nearby'
     end
@@ -70,9 +67,9 @@ Crave::Application.routes.draw do
       get "saved", "following","followers"
     end
 
-    resources :menu_item_ratings
-    resources :user_saved_menu_items
-    resources :user_followings
+    resources :ratings, :as => "menu_item_ratings", :controller => "menu_item_ratings"
+    resources :saved, :as => "user_saved_menu_items", :controller => "user_saved_menu_items"
+    resources :following, :as => "user_followings", :controller => "user_followings"
   end
   
   resources :search

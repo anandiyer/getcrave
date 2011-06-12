@@ -3,7 +3,7 @@
   -#- @menu_item ||= MenuItem.find(params[:id])
   - @current_menu_item_reviews = @user.menu_item_ratings.reverse
 
-  - @show_more_step = 20
+  - @show_more_step = ITEMS_PER_PAGE
 
 
 
@@ -44,6 +44,6 @@
           .helpful_block
             .before_answer_block.gray
               = @mi_rating.menu_item_rating_helpfuls.count.to_s
-              users pleople found this helpfull!
+              users people found this helpful
 
 

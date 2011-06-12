@@ -445,8 +445,8 @@ body.two-col.bp #footer {
 /* line 83, ../../compass/sass/screen.scss */
 body.two-col.bp #footer .right_footer {
   float: right;
-  width: 250px;
-  /*text-align:right;*/
+  width: 280px;
+  text-align:right;
 }
 /* line 89, ../../compass/sass/screen.scss */
 body.two-col.bp #footer .left_footer_column {

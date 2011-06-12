@@ -5,10 +5,10 @@
   #current_info_wrapper
     #img_column
 
-      - if !@user.user_profile_pic_url.nil? && (@user.user_profile_pic_url.include?(".jpg"))
-        = image_tag @user.user_profile_pic_url
+      - if !@user.user_profile_pic_url.nil?
+        = image_tag @user.user_profile_pic_url+"?type=large", :width=>140, :height=>140
       - else
-        =image_tag "no_user_big.png"
+        =image_tag "person-noimage.png"
 
       #icons_img_wrapper
 
@@ -22,9 +22,6 @@
       #rating
         =  @user.menu_item_ratings.count
         reviews
-        |
-        = @user.menu_item_ratings.count
-        ratings
       -#i can not follow myself
 
       - if current_user && user_to_follow != current_user
@@ -40,6 +37,6 @@
 
 
 
-      .bio
-        %strong Bio:
-      lkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf
+      / .bio
+      /  %strong Bio:
+      / lkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf lsdjfl s;djkllkdjf

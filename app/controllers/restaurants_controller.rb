@@ -21,13 +21,7 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1
   # GET /restaurants/1.xml
   def show
-    @restaurant = Restaurant.find(params[:id])
-
-    respond_to do |format|
-      format.html # _unused_show.html.haml
-      format.xml { render :xml => @restaurant }
-      format.json { render :json => @restaurant }
-    end
+    redirect_to restaurant_menu_items_path(params[:id])
   end
 
   # GET /restaurants/new
@@ -135,7 +129,7 @@ class RestaurantsController < ApplicationController
     @lat = lat.to_f
     @long = long.to_f
     @within = 1
-    @limit = 50
+    @limit = ITEMS_PER_PAGE
 
     if within && !within.empty?
       @within = within.to_f

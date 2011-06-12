@@ -17,7 +17,7 @@
     - if is_item_saved? @menu_item.id
       - flag_class = "saved_item"
       #flag_icons{:title => "save this item"}
-        - user_saved_menu_item_id = UserSavedMenuItem.where(:user_id => current_user.id, :menu_item_id => params[:id]).first.id
+        - user_saved_menu_item_id = UserSavedMenuItem.where(:user_id => current_user.id, :menu_item_id => params[:id]).id
         .save_icon{:class=> "save_icon "+flag_class, :id => "mid_"+@menu_item.id.to_s, :rel => user_saved_menu_item_id}
     - else
       - flag_class = "not_saved_item"
