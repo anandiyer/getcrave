@@ -24,8 +24,8 @@ class UsersController < ApplicationController
 
   def followers
     params_4_show_and_saved
-    @followers = UserFollowing.where(:following_user_id => 12).all
-#    @followers = UserFollowing.where(:following_user_id => params[:user_id])
+#    @followers = UserFollowing.where(:following_user_id => 12).all
+    @followers = UserFollowing.where(:following_user_id => params[:id])
   end
 
   def following

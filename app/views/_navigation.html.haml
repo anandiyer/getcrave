@@ -16,7 +16,7 @@
   -#- if current_user
   %ul
     %li.nearby=link_to "Nearby","/alpha.html"
-    %li.saved=link_to "Saved", "/saved"
+    %li.saved=link_to "Saved", saved_user_path(current_user.id)
     %li.following=link_to "Foodies","#"
     %li.profile
       - if current_user

@@ -1,11 +1,5 @@
 Crave::Application.routes.draw do 
 
-  resources :saved, :as => "user_saved_menu_items", :controller => "user_saved_menu_items" do
-    collection do
-      get "show_menu_items_saved"
-    end
-  end
-
   resources :following, :as => "user_followings", :controller => "user_followings"
 
   resources :menu_item_review_comments
@@ -64,12 +58,10 @@ Crave::Application.routes.draw do
 
   resources :users do
     member do
-      get "saved", "following","followers"
+      get "saved", "following", "followers"
     end
 
     resources :ratings, :as => "menu_item_ratings", :controller => "menu_item_ratings"
-    resources :saved, :as => "user_saved_menu_items", :controller => "user_saved_menu_items"
-    resources :following, :as => "user_followings", :controller => "user_followings"
   end
   
   resources :search
