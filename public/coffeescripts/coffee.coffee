@@ -248,9 +248,13 @@ $(document).ready ->
     top_nav_bind()
 
 #    follow button press
-    $("form .follow").live "click", () ->
-        $(@).removeClass("follow").addClass("unfollow")
-        $(@).parents("form").submit()
+    $(".follow").live "click", () ->
+        if is_logged_in()
+            $(@).removeClass("follow").addClass("unfollow")
+            $(@).parents("form").submit()
+        else
+            show_dialog("Please sign in to follow!")
+
 
     window.pl_all() if $(".add_photos_inline a#plupload").length !=0
 

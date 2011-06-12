@@ -263,9 +263,13 @@
   $(document).ready(function() {
     search_bind();
     top_nav_bind();
-    $("form .follow").live("click", function() {
-      $(this).removeClass("follow").addClass("unfollow");
-      return $(this).parents("form").submit();
+    $(".follow").live("click", function() {
+      if (is_logged_in()) {
+        $(this).removeClass("follow").addClass("unfollow");
+        return $(this).parents("form").submit();
+      } else {
+        return show_dialog("Please sign in to follow!");
+      }
     });
     if ($(".add_photos_inline a#plupload").length !== 0) {
       window.pl_all();
