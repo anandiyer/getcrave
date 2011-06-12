@@ -221,6 +221,12 @@ top_nav_bind = () ->
 
 
 search_bind = () ->
+    $(".first_search_input").keyup (e) ->
+        if e.keyCode == 13
+            $(@).parents("form").submit()
+
+    $("#navigation_wrap_search #submit_block").click () ->  $(@).parents("form").submit()
+
     if $("a #restaurant_icon.off.restbutton.search_index").length > 0 || $("a #dishes_icon.off.dishbutton.search_index").length > 0
         loc = window.location.search
 

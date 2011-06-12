@@ -72,6 +72,46 @@ $small_font_size: 12px;
 
 body.two-col.bp{
 
+    #submit_block:hover{
+        font-weight: bold;
+        .submit_wrapper {
+            .left_rounder{
+                background-position: 0 -113px;
+            }
+            .submit_button{
+                background-position: -131px -113px;
+            }
+        }
+    }
+    #submit_block:active{
+        .submit_wrapper {
+            .left_rounder{
+                background-position: 0 -151px;
+            }
+            .submit_button{
+                background-position: -131px -151px;
+            }
+        }
+    }
+
+
+    #navigation_wrap_search{
+        #submit_block{
+            display: block;
+            font-weight: bold;
+            position: absolute;
+            top:4px;
+            left: 642px;
+        }
+
+    }
+    #submit_block{
+        float: right;
+        display: none;
+    }
+
+
+
 
     a{
         @include link-colors(#2E70A7, #1a507d, #2E70A7, #2E70A7, #2E70A7);
@@ -481,31 +521,7 @@ body.two-col.bp{
                         $content-columns: ceil(15);
                         @include column($content-columns, true);
 
-                        #submit_block:hover{
-                            font-weight: bold;
-                            .submit_wrapper {
-                                .left_rounder{
-                                    background-position: 0 -113px;
-                                }
-                                .submit_button{
-                                    background-position: -131px -113px;
-                                }
-                            }
-                        }
-                        #submit_block:active{
-                            .submit_wrapper {
-                                .left_rounder{
-                                    background-position: 0 -151px;
-                                }
-                                .submit_button{
-                                    background-position: -131px -151px;
-                                }
-                            }
-                        }
-                        #submit_block{
-                            float: right;
-                            display: none;
-                        }
+
 
                         h1{
                             font-size:17px;

@@ -55,12 +55,12 @@
 
           #navigation_wrap_search
             %form{:action => search_index_path, :method => :get}
-
               = text_field_tag :q, params[:q], :class =>"first_search_input", :value => params[:q] ? params[:q] : ""
-
               = text_field(:where, :nearby, :value => "San Francisco, CA", :class =>"second_search_input")
               = image_tag "fileds_search_inputs.png", :class => "fields"
-              = image_submit_tag("search_button.png", :class => "search")
+              - @text = "Search"
+              #submit_block= render :partial => "/button"
+
               #in in
         #content_wrap
           #content

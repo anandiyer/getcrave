@@ -242,6 +242,14 @@
   };
   search_bind = function() {
     var loc, restaurant_search;
+    $(".first_search_input").keyup(function(e) {
+      if (e.keyCode === 13) {
+        return $(this).parents("form").submit();
+      }
+    });
+    $("#navigation_wrap_search #submit_block").click(function() {
+      return $(this).parents("form").submit();
+    });
     if ($("a #restaurant_icon.off.restbutton.search_index").length > 0 || $("a #dishes_icon.off.dishbutton.search_index").length > 0) {
       loc = window.location.search;
       if (loc.indexOf("search_restaurants=true") < 0) {
