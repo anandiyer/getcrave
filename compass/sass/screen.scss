@@ -1,6 +1,7 @@
 @import "compass/utilities/links/link-colors";
 @import "compass/css3/border-radius";
 @import "compass/css3/opacity";
+@import "compass/utilities/links/link-colors";
 
 // This import applies a global reset to any page that imports this stylesheet.
 @import "blueprint/reset";
@@ -70,6 +71,12 @@ $small_font_size: 12px;
 
 
 body.two-col.bp{
+
+
+    a{
+        @include link-colors(#2E70A7, #1a507d, #2E70A7, #2E70A7, #2E70A7);
+        text-decoration: none;
+    }
 
     #footer{
 
