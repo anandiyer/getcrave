@@ -7,16 +7,56 @@
 	<link rel="stylesheet" href="/stylesheets/main.css" type="text/css" />
 </head>
 <body id="body">
-	<div id="content">
-		<div class="logo"><center><img src="images/crave-logo.png"></center></div>
-		<center>
-			<div class="slogan">Have you ever been to a restaurant and asked, <br/> &ldquo;So, what&rsquo;s good here?&rdquo; </div>
-			<div class="description">We help people find the food they like.</div>><br />
-		</center>
-	</div>
-	<center>
-		<div id="fb-root"></div>
-		<a href="/auth/facebook?redirect_to=/alpha.html"><img src="images/fb_login_icon.png" /></a>
-	</center>
+	<div id="background">
+		<div id="content">
+		<div class="logo"><img src="/images/crave-logo.png"></div>                                                        
+        <div class="explanation">
+			<div class="slogan">&ldquo;So, what&rsquo;s good here?&rdquo;</div>                                                           
+			<div class="description">We help you find the best food.                                                                                              		
+		</div>
+		<br />
+		<label class="request" for="mce-EMAIL">Request an invite!</label><br/>
+		<div class="ss-form-container">                                                        
+ 			<div class="ss-form">
+				<form action="https://spreadsheets.google.com/spreadsheet/formResponse?formkey=dFp2OUpmeVpobk9TQUFCNFdrU2dEamc6MQ&amp;ifq" method="POST" id="ss-form"> 
+					<br /> 
+					<div class="errorbox-good"> 
+						<div class="ss-item ss-item-required ss-text"><div class="ss-form-entry">                                                          
+							<input type="text" name="entry.9.single" placeholder="you@example.com"value="" id="required-email"></div></div></div>                           
+							<br /> 
+							<input type="hidden" name="pageNumber" value="0"> 
+							<input type="hidden" name="backupCache" value=""> 
+							<div class="ss-item ss-navigate"><div class="ss-form-entry"> 
+								<input type="submit" name="submit" value="Submit" class="btn"> </div></div></form>                                  
+								<script type="text/javascript"> 
+	      							(function() {
+										var divs = document.getElementById('ss-form').
+										getElementsByTagName('div');
+										var numDivs = divs.length;
+										for (var j = 0; j < numDivs; j++) {
+											if (divs[j].className == 'errorbox-bad') {
+												divs[j].lastChild.firstChild.lastChild.focus();
+												return;
+											}
+										}
+										for (var i = 0; i < numDivs; i++) {
+											var div = divs[i];
+											if (div.className == 'ss-form-entry' &&
+												div.firstChild &&
+												div.firstChild.className == 'ss-q-title') {
+													div.lastChild.focus();
+													return;
+												}
+											}
+										})();
+	      						</script></div> 
+								<div class="ss-footer"><div class="ss-attribution"></div> 	
+							</div>
+       					</div>
+					<div id="fb-root"></div>
+	        		<a href="/auth/facebook?redirect_to=/alpha.html"><img src="images/fb_login_icon.png" style="float:left; margin:30px 0 0 20px;"></img></a>              
+				</div>
+			</div>
+ 		</div>
 </body>
 </html>
