@@ -44,7 +44,7 @@
                    restaurants.proxy.url = urlPrefix+encodeURIComponent('/places.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                } else {
                    dishStore.proxy.url = '/items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
-                   restaurants.proxy.url = '/places.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
+                   places.proxy.url = '/places.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
                }
                console.log(dishStore.proxy.url);
                dishStore.load(function() {
@@ -59,7 +59,7 @@
                singleSelect: true,
                grouped: false,
                indexBar: false,
-               store: restaurants,
+               store: places,
 
                floating:true,
                centered:true,
