@@ -113,18 +113,12 @@ class RestaurantsController < ApplicationController
     end
   end
 
-
   def show_restaurants_nearby
     get_closest_restaurants params[:lat], params[:long]
     render :partial => "restaurants_grouped_by_stars"
   end
 
-
-
   private
-
-
-
   def get_closest_restaurants lat, long, within, limit
     @lat = lat.to_f
     @long = long.to_f
@@ -140,7 +134,6 @@ class RestaurantsController < ApplicationController
     end
     
     @conditions = "distance < #{@within}"
-
 
     @restaurants = Restaurant.find(:all,
       :origin => [@lat, @long],

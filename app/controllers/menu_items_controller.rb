@@ -25,34 +25,6 @@ class MenuItemsController < ApplicationController
   
   def location
 
-    @lat = params[:lat].to_f
-    @long = params[:long].to_f
-    @within = 1
-    @limit = ITEMS_PER_PAGE
-    
-    if params[:limit] && !params[:limit].empty?
-      @limit = params[:limit].to_i
-    end
-    
-    if params[:within] && !params[:within].empty?
-      @within = params[:within].to_f
-    end
-    
-    @conditions = "distance < #{@within}"
-    
-    # Lookup all the restaurants near the given lat/long and get 25 of the menu_items
-    # and order by rating
-    
-    #FIXME - order by rating based on QS
-    @origin = [@lat, @long]
-    @menu_items = MenuItem.find(:all, 
-         :origin => @origin,
-         :conditions => @conditions,
-         :joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id",
-         :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, menu_item_avg_rating_count.count DESC",
-         # :include => :menu_item_avg_rating_count, 
-         :limit => @limit)
-
     params_4_location_and_show_menu_item_nearby
 
     respond_to do |format|
@@ -72,13 +44,12 @@ class MenuItemsController < ApplicationController
       @limit = params[:limit].to_i
     end
 
-
     # FIXME - handle restaurant = nil case 
     @menu_items = MenuItem.find_by_sql(["SELECT menu_items.* FROM menu_items
-    LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id
-    WHERE menu_items.restaurant_id = ? 
-    ORDER BY (menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
-    @restaurant.id])
+      LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id
+      WHERE menu_items.restaurant_id = ? 
+      ORDER BY (menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
+      @restaurant.id])
     
     respond_to do |format|
       format.html # location.html.haml
@@ -90,15 +61,12 @@ class MenuItemsController < ApplicationController
     #@menu_items = MenuItem.find(:all, 
       #:joins => " INNER JOIN restaurants ON restaurants.id = menu_items.restaurant_id")
       #:conditions => { :restaurants => { :origin => [@lat, @long], :order => 'distance asc', :limit => 5 } })
-
   end
 
   # GET /menu_items/1
   # GET /menu_items/1.xml
 
-
   def show
-
     params_4_show_n_show_reviews
 
     respond_to do |format|
@@ -107,7 +75,6 @@ class MenuItemsController < ApplicationController
       format.json { render :json => @menu_item.to_json( :include => [ :restaurant, :menu_item_avg_rating_count, :menu_item_ratings ] ) }
     end
   end
-
 
 #
 ##  menu items photo upload
@@ -127,34 +94,26 @@ class MenuItemsController < ApplicationController
 
   def upload_photo
 #    if signed_in?
-
     p "upload_photo"
-
     p params[:id].blank?
-
-
-      p "id"
+    p "id"
+    
       if params[:file] && (params[:file].content_type.to_s.index("image") == 0 )
         p temp_file = params[:file].tempfile
         filename = UUIDTools::UUID.random_create.to_s+".jpg"
 
         AWS::S3::S3Object.store(filename, temp_file.read, @@BUCKET, :access => :public_read)
         url = AWS::S3::S3Object.url_for(filename, @@BUCKET, :authenticated => false)
-
-
-
-
+        
         if params[:uuid] == "undefined"
-
           menu_item_photo = MenuItemPhoto.new
-
           menu_item_photo.menu_item_id = params[:id]
           menu_item_photo.user_id = current_user.id
+
           p menu_item_photo.photo = url
 
           menu_item = MenuItem.find(params[:id])
           menu_item.menu_item_photos << menu_item_photo
-
 
           render :partial => "gallery_link"
         else
@@ -162,34 +121,23 @@ class MenuItemsController < ApplicationController
 #          temp.hash = params[:uuid].to_s
 #          temp.image_name = filename.to_s
 #          temp.save did not work (())
-
 #          TODO: Anand? can you refactor me?
           TempImage.find_by_sql("INSERT INTO temp_images(hash, image_name) VALUES ('"+params[:uuid]+"', '"+filename+"')")
 
           render :nothing => true
-
-
 #          temp.save
         end
-
       else
-  #        plupload can filter file types
+#        plupload can filter file types
         raise "wrong type of file"
       end
 #    else
 #      p "temp image save"
-#
-#
 #    end
-
-
-
-
 #    else
 #      raise "not signed in"
 #    end
   end
-
 
 
   def show_reviews
@@ -310,13 +258,13 @@ class MenuItemsController < ApplicationController
       end
     end
 
-      @menu_items = @search.results
+    @menu_items = @search.results
       
-      respond_to do |format|
+    respond_to do |format|
         format.html # search.html.erb
         format.xml  { render :xml => @menu_items.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count])}
         format.json  { render :json => @menu_items.to_json(:include => [:restaurant, :menu_item_avg_rating_count]) }
-      end
+    end
   end
 
   private
@@ -335,39 +283,37 @@ class MenuItemsController < ApplicationController
 
   end
 
-
-
   def params_4_location_and_show_menu_item_nearby
-    if params[:lat]
-      @lat = params[:lat].to_f
-      @long = params[:long].to_f
-    else
-      @lat = 40.761447
-      @long = -73.969456
-    end
-
+    @lat = params[:lat].to_f
+    @long = params[:long].to_f
+    @within = 1
     @limit = ITEMS_PER_PAGE
-
+    
     if params[:limit] && !params[:limit].empty?
       @limit = params[:limit].to_i
     end
-
+    
+    if params[:within] && !params[:within].empty?
+      @within = params[:within].to_f
+    end
+    
+    @conditions = "distance < #{@within}"
+    
     # Lookup all the restaurants near the given lat/long and get 25 of the menu_items
     # and order by rating
-
-    #FIXME - assuming within 3 mile radius by default
+    
     #FIXME - order by rating based on QS
     @origin = [@lat, @long]
-    @menu_items = MenuItem.find(:all,
-                                :origin => @origin,
-                                :conditions => "distance < 3",
-                                :joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id",
-                                :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
-                                # :include => :menu_item_avg_rating_count,
-                                :limit => @limit)
+    @menu_items = MenuItem.find(:all, 
+         :origin => @origin,
+         :conditions => @conditions,
+         :joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id",
+         :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, menu_item_avg_rating_count.count DESC",
+         # :include => :menu_item_avg_rating_count, 
+         :limit => @limit)
 
     # We have to add this to get the 'distance' field
-    @menu_items.sort_by_distance_from(@origin)
+    # @menu_items.sort_by_distance_from(@origin)
 
   end
 end
