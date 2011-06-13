@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 #  to show current user save items
   def saved
     params_4_show_and_saved
-    @user_saved_menu_items = User.find(params[:id]).saved if current_user
+    @user_saved_menu_items = User.find(params[:id]).saved
   end
 
 
