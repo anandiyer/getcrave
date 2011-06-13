@@ -41,7 +41,7 @@
                    console.log('setting proxy url');
                    dishStore.proxy.url = urlPrefix+encodeURIComponent('/items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                    //dishStore.proxy.url = urlPrefix+encodeURIComponent('/items/location.json?lat=37.77867&limit=25&long=-122.39127');
-                   restaurants.proxy.url = urlPrefix+encodeURIComponent('/places.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+                   places.proxy.url = urlPrefix+encodeURIComponent('/places.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                } else {
                    dishStore.proxy.url = '/items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
                    places.proxy.url = '/places.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
@@ -50,7 +50,7 @@
                dishStore.load(function() {
                    console.log('dish store loaded');
                });
-               restaurants.load();
+               places.load();
            });
 
 
@@ -69,7 +69,7 @@
            });
            placesList.on('itemtap', function(dataView, index, item, e) {
                record = dataView.store.data.items[index];
-               restaurantDisplay(record, index);
+               placeDisplay(record, index);
            });
 
            var dishList = new Ext.List({
@@ -229,8 +229,8 @@
                    items:[
                        {xtype:'segmentedbutton',
                        items:[
-                           {text:'Dishes',id:'dishesButton',pressed:true, handler:tapHandler,ui:'round',width:'110'}, //,icon:'../images/dish-icon-ON.png',iconAlign:'left'
-                           {text:'Restaurants',id:'restaurantsButton', pressed:false, handler:tapHandler,ui:'round',width:'110'} //,icon:'../images/restaurant-icon-OFF.png',iconAlign:'left'
+                           {text:'Items',id:'dishesButton',pressed:true, handler:tapHandler,ui:'round',width:'110'}, //,icon:'../images/dish-icon-ON.png',iconAlign:'left'
+                           {text:'Places',id:'placesButton', pressed:false, handler:tapHandler,ui:'round',width:'110'} //,icon:'../images/restaurant-icon-OFF.png',iconAlign:'left'
                        ]}
                    ]
                },searchForm,
@@ -252,8 +252,8 @@
            ]
        });
 
-           var restaurantPnl = new Ext.Panel({
-               id: 'restaurantPnl',
+           var placePnl = new Ext.Panel({
+               id: 'placePnl',
                items: [restPnl,aRestaurantList],
                fullscreen:true,
                layout: {
@@ -275,7 +275,7 @@
            var mainPnl = new Ext.Panel({
                fullscreen: true,
                id: 'mainPnl',
-               items: [listPnl,detailPnl,restaurantPnl,newDishForm],
+               items: [listPnl,detailPnl,placePnl,newDishForm],
                layout: {
                    type: 'card'
                },
