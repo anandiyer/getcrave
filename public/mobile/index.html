@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Crave</title>
+    <title>crave</title>
     <link rel="stylesheet"
      href="stylesheets/apple.css"
      type="text/css" />
@@ -39,11 +39,11 @@
            navigator.geolocation.getCurrentPosition(function(position) {
                if(urlPrefixSet) {
                    console.log('setting proxy url');
-                   dishStore.proxy.url = urlPrefix+encodeURIComponent('/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
-                   //dishStore.proxy.url = urlPrefix+encodeURIComponent('/menu_items/location.json?lat=37.77867&limit=25&long=-122.39127');
+                   dishStore.proxy.url = urlPrefix+encodeURIComponent('/items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+                   //dishStore.proxy.url = urlPrefix+encodeURIComponent('/items/location.json?lat=37.77867&limit=25&long=-122.39127');
                    restaurants.proxy.url = urlPrefix+encodeURIComponent('/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                } else {
-                   dishStore.proxy.url = '/menu_items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
+                   dishStore.proxy.url = '/items/location.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
                    restaurants.proxy.url = '/restaurants.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
                }
                console.log(dishStore.proxy.url);
@@ -104,7 +104,7 @@
                });
                */
                Ext.Ajax.request({
-                   url: (urlPrefix+'/menu_items/'+record.data.id+'.json'),
+                   url: (urlPrefix+'/items/'+record.data.id+'.json'),
                    reader: {
                         type: 'json'
                    },

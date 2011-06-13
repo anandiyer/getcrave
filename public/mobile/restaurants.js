@@ -8,9 +8,9 @@ Ext.regModel('DishSearch',
     fields: ['name','id','price','description','restaurant_id']
 });
 
-var restaurants = new Ext.data.Store({
+var places = new Ext.data.Store({
    model: 'Restaurants',
-    id: 'restaurants',
+    id: 'places',
 
    proxy: {
        type:'ajax',
@@ -56,7 +56,7 @@ var singleRestaurantStore = new Ext.data.Store({
 });
 
 function restaurantDisplay(record, index) {
-    singleRestaurantStore.proxy.url = (urlPrefix+'/restaurants/'+record.data.id+'/menu_items.json');
+    singleRestaurantStore.proxy.url = (urlPrefix+'/places/'+record.data.id+'/menu_items.json');
     var myVar = "hello";
 
     singleRestaurantStore.load(function(){
@@ -69,7 +69,7 @@ function restaurantDisplay(record, index) {
     });
 
     Ext.Ajax.request({
-        url: (urlPrefix+'/restaurants/'+record.data.id+'.json'),
+        url: (urlPrefix+'/places/'+record.data.id+'.json'),
         reader: {
              type: 'json'
         },
@@ -91,7 +91,7 @@ function restaurantDisplay(record, index) {
             );
             // woah baby, this is a nasty hack but the map refuses to behave unless you trigger resize after a delay AFTER the initial ajax returns
             Ext.Ajax.request({
-                url: (urlPrefix+'/restaurants/'+record.data.id+'.json'),
+                url: (urlPrefix+'/places/'+record.data.id+'.json'),
                 reader: {
                      type: 'json'
                 },
@@ -189,7 +189,7 @@ var newRestaurant = new Ext.form.FormPanel({
                            Ext.getCmp('latfield').setValue($.trim(coordsArray[0]));
                            Ext.getCmp('lngfield').setValue($.trim(coordsArray[1]));
                            newRestaurant.submit({
-                               url: '/restaurants',
+                               url: '/places',
                                method: 'post',
                                submitDisabled: true,
                                waitMsg: 'Saving Data...Please wait.',
