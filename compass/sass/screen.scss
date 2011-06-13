@@ -102,6 +102,7 @@ body.two-col.bp{
             position: absolute;
             top:4px;
             left: 642px;
+
         }
 
     }
@@ -209,13 +210,12 @@ body.two-col.bp{
     color: #464646;
     text-align: left;
 
-    h1.current_title{
-       font-size: 24px;
-       font-weight: 200;
-    }
+
     h1.current_title {
-          margin: 0;
-          padding-bottom:7px;
+        font-size: 24px;
+        font-weight: 200;
+        margin: 0;
+        padding-bottom:7px;
     }
 
     #header{
@@ -269,22 +269,89 @@ body.two-col.bp{
                     }
 
                 }
-                li.nearby{
-                    @include sprites($nav_nearby_position);
-                     width: 65px;
+
+
+                li.selected{
+                    background:url(/images/sprites/button-sprite.png) no-repeat 100% -556px;
+                    .left_corner{
+                        background:url(/images/sprites/button-sprite.png) no-repeat 0 -555px;
+                    }
+                }
+                li{
+                    padding-right:13px;
+                    padding-top:1px;
+
+
+                    .left_corner{
+                        float: left;
+                        height: 27px;
+                        width: 28px;
+                        margin-left: -25px;
+                        margin-top: -1px;
+
+                        .icon_corner{
+                            width:17px;
+                            height: 20px;
+                            margin-left:11px;
+                        }
+                    }
+                    a{
+                        padding-top:2px;
+                    }
+
+                }
+
+                li.nearby.selected{
+                    .icon_corner{
+                        background:url(/images/sprites/icon-sprite.png) no-repeat 0 -4px;
+                    }
+
+                }li.nearby{
+                    .icon_corner{
+                        background:url(/images/sprites/icon-sprite.png) no-repeat 0 -16px;
+                    }
+                }
+
+
+
+
+                li.saved.selected .icon_corner{
+                    background:url(/images/sprites/icon-sprite.png) no-repeat 0 -36px;
                 }
                 li.saved{
-                    @include sprites($nav_saved_position);
-                     width: 57px;
+                     .icon_corner{
+                         background:url(/images/sprites/icon-sprite.png) no-repeat 0 -57px;
+                         /*background:url(/images/sprites/icon-sprite.png) no-repeat 0 -16px;*/
+                     }
                 }
-                li.following{
-                    @include sprites($nav_following_position);
-                     width:79px;
-                     padding-left:27px;
-                }li.profile{
-                    @include sprites($nav_profile_position);
-                    padding-left:25px;
-                    width: 52px;
+
+                li.foodies.selected .icon_corner{
+                    background:url(/images/sprites/icon-sprite.png) no-repeat 0 -77px;
+
+                }
+                li.foodies{
+                 .left_corner{
+                    width:38px;
+                     .icon_corner{
+                         width:24px;
+                         height: 22px;
+                         background:url(/images/sprites/icon-sprite.png) no-repeat 0 -100px;
+                     }
+                 }
+
+                }
+
+                li.profile.selected .icon_corner{
+                    background:url(/images/sprites/icon-sprite.png) no-repeat 0 -120px
+                }
+
+                li.profile{
+                    .left_corner{
+                        width:34px;
+                        .icon_corner{
+                            background:url(/images/sprites/icon-sprite.png) no-repeat 0 -141px;
+                        }
+                    }
                 }
             }
 
