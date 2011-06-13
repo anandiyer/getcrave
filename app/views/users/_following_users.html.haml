@@ -26,10 +26,13 @@
 
             followers
         %td.button_following
-          - current_user.is_following?(user) ? class_name = "current_user_is_following unfollow" : class_name = "cu_not_following follow"
+          - if current_user
+            - current_user && current_user.is_following?(user) ? class_name = "current_user_is_following unfollow" : class_name = "cu_not_following follow"
 
-          - form_for(UserFollowing.new, :remote => true) do |f|
-            = f.hidden_field :user_id, :value => current_user.id
-            = f.hidden_field :following_user_id, :value => user.id
+            - form_for(UserFollowing.new, :remote => true) do |f|
+              = f.hidden_field :user_id, :value => current_user.id
+              = f.hidden_field :following_user_id, :value => user.id
+              .f_button{:class => class_name}
+          - else
+            .f_button{:class => "follow"}
 
-            .f_button{:class => class_name}
