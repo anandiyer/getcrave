@@ -129,7 +129,7 @@
     }
     obj = $("#reviews_wrapper #update_place");
     return $.ajax({
-      url: "/menu_items/" + id_of_menu_item + "/show_reviews?limit=" + limits,
+      url: "/items/" + id_of_menu_item + "/show_reviews?limit=" + limits,
       beforeSend: function() {
         return before_send(obj);
       },

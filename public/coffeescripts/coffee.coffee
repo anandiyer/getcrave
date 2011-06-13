@@ -107,7 +107,7 @@ after_send = (obj, html) ->
 #    alert 1
 window.update_reviews = (id_of_menu_item, limits = $("#show_more_button").data("step")) ->
     obj = $("#reviews_wrapper #update_place")
-    $.ajax({url: "/menu_items/"+id_of_menu_item+"/show_reviews?limit="+limits,
+    $.ajax({url: "/items/"+id_of_menu_item+"/show_reviews?limit="+limits,
     beforeSend: () -> before_send(obj),
     success: (html) -> after_send(obj, html)})
 

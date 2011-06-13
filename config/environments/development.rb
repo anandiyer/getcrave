@@ -24,12 +24,6 @@ Crave::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
 
 
-#  TODO: change 2 your key and dublicate to production.rb
-
-  AWS::S3::Base.establish_connection!(
-    :access_key_id     => 'AKIAIZHVKH4OQCX62L5Q',
-    :secret_access_key => '9zoZ3g+OWQxfiqS3ojGT4NuAMwvL0rHKdFoxKiS4'
-  )
 
 
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE

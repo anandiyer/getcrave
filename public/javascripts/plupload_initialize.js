@@ -1,19 +1,11 @@
 
 window.pl_all = (function(uuid) {
     PATH = "";
-//    if ($("a#plupload").length > 0 && $("#current_info_wrapper").data("menu_item_id")) {
-
-
     if ($("a#plupload").length > 0) {
 
         id = $("#current_info_wrapper").data("menu_item_id");
-
         console.log(uuid)
-
-
-
-        path = "/menu_items/" + id + "/upload_photo?uuid="+uuid;
-
+        path = "/items/" + id + "/upload_photo?uuid="+uuid;
 
         window.uploader = new plupload.Uploader({
             runtimes : 'html5,flash',
@@ -47,6 +39,7 @@ window.pl_all = (function(uuid) {
 
         window.uploader.bind('UploadComplete', function(up, file) {
             $.gritter.add({title:"Notice", text: " Files was uploaded!"});
+            
         });
 
         window.uploader.bind('BeforeUpload', function(up, file) {
@@ -77,6 +70,8 @@ window.pl_all = (function(uuid) {
         window.uploader.init();
 
         uploader.bind('FilesAdded', function(up, files) {
+			$(".photos_inline").removeClass("himportant")
+			
 //            $.each(files, function(i, file) {
 //                $('#filelist').append(
 //                        '<div id="' + file.id + '">' +

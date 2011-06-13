@@ -65,8 +65,8 @@ class MenuItemPhotosController < ApplicationController
 #    filename = sanitize_filename(orig_filename)
     filename = orig_filename
 
-    AWS::S3::S3Object.store(filename, fileUp['datafile'].read, @@BUCKET, :access => :public_read)
-    url = AWS::S3::S3Object.url_for(filename, @@BUCKET, :authenticated => false)
+    AWS::S3::S3Object.store(filename, fileUp['datafile'].read, BUCKET, :access => :public_read)
+    url = AWS::S3::S3Object.url_for(filename, BUCKET, :authenticated => false)
 
     p "******************************************************"
     p url

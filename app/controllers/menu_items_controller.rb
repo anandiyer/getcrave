@@ -16,12 +16,11 @@ end
 
 class MenuItemsController < ApplicationController
   before_filter :get_restaurant
-  before_filter :check_auth_fb, :only => [:upload_photo]
+  before_filter :signed_in?, :only => [:upload_photo]
 
   layout "general"
 
-#  TODO: change 2 your bucket name
-  @@BUCKET = "getcrave"
+
   
   def location
 
@@ -102,13 +101,13 @@ class MenuItemsController < ApplicationController
         p temp_file = params[:file].tempfile
         filename = UUIDTools::UUID.random_create.to_s+".jpg"
 
-        AWS::S3::S3Object.store(filename, temp_file.read, @@BUCKET, :access => :public_read)
-        url = AWS::S3::S3Object.url_for(filename, @@BUCKET, :authenticated => false)
+        AWS::S3::S3Object.store(filename, temp_file.read, BUCKET, :access => :public_read)
+        url = AWS::S3::S3Object.url_for(filename, BUCKET, :authenticated => false)
         
         if params[:uuid] == "undefined"
           menu_item_photo = MenuItemPhoto.new
           menu_item_photo.menu_item_id = params[:id]
-          menu_item_photo.user_id = current_user.id
+          menu_item_photo.user_id = current_user.id if current_user
 
           p menu_item_photo.photo = url
 
