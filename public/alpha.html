@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"> 
 <head>
-	<title>crave - coming soon</title> 
+	<title>crave - alpha</title> 
 	<meta name="description" content="Have you ever been to a restaurant and asked, &ldquo;So, what&rsquo;s good here?&rdquo; We help people find the food they like.">
-	<link rel="shortcut icon" href="images/favicon.ico" > 
-	<link rel="stylesheet" href="stylesheets/main.css" type="text/css" />
+	<link rel="shortcut icon" href="/images/favicon.ico" > 
+	<link rel="stylesheet" href="/stylesheets/main.css" type="text/css" />
 </head>
 <body id="body">
-    <script>
+	<script>
         function success(position) {
             var s = document.querySelector('#status');
   
@@ -38,14 +38,16 @@
         }
     </script>
 
-	<div id="content">
-		<div class="logo"><center><img src="images/crave-logo.png" /></center></div>
-		<center>
-			<div class="slogan">Welcome to the crave alpha.<br />
-				<span id="status">Please wait while we try to locate you...</span><br />
-				<img src="/images/activity_indicator.gif" />
-			</div>
-		</center>
+	<div id="background">
+		<div id="content">
+		<div class="logo"><img src="/images/crave-logo.png"></div>                                                        
+        <div class="explanation">
+			<div class="whoa">Welcome to the alpha</div>   
+			<div class="description">Hang tight for a sec while we try to locate you...<br />
+				<span id="status"></span>
+				<img src="/images/activity_indicator.gif" />       
+			</div><br />                                                                                      		
+		</div>
 	</div>
 </body>
 </html>

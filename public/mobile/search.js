@@ -38,7 +38,7 @@ var restaurantSearchList = new Ext.List({
 
 restaurantSearchList.on('itemtap', function(dataView, index, item, e) {
     record = dataView.store.data.items[index];
-    restaurantDisplay(record, index);
+    dishDisplay(record, index);
 });
 
 var dishSearchList = new Ext.List({
@@ -86,15 +86,15 @@ var searchForm = new Ext.form.FormPanel({
                 change: function() {
                     searchValue = Ext.getCmp("searchBox").getValue();
                     //get active button, do appropriate search, set card in searchPnl
-                    if(Ext.getCmp('restaurantsButton').pressed) {
-                        restaurantSearchStore.proxy.url = urlPrefix+'/restaurants/search.json?q='+searchValue;
+                    if(Ext.getCmp('placesButton').pressed) {
+                        restaurantSearchStore.proxy.url = urlPrefix+'/places/search.json?q='+searchValue;
                         restaurantSearchStore.load();
                         console.log(restaurantSearchStore.proxy.url);
                         Ext.getCmp('listPnl').setActiveItem(searchPnl);
                         Ext.getCmp('searchPnl').setActiveItem(restaurantSearchList);
                     }
                     if(Ext.getCmp('dishesButton').pressed) {
-                        dishSearchStore.proxy.url = urlPrefix+'/menu_items/search.json?q='+searchValue;
+                        dishSearchStore.proxy.url = urlPrefix+'/items/search.json?q='+searchValue;
                         dishSearchStore.load();
                         console.log(dishSearchStore.proxy.url);
                         Ext.getCmp('listPnl').setActiveItem(searchPnl);

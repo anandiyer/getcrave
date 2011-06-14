@@ -20,6 +20,7 @@ module ApplicationHelper
   end
 
   def stars_class_normalize decimal_data
-    decimal_data.to_s.gsub(/[.]/, '_')
+    dd = (decimal_data * 10).round.to_f / 10
+    dd.to_s.gsub(/[.]/, '_')
   end
 end

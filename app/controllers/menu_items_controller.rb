@@ -19,8 +19,6 @@ class MenuItemsController < ApplicationController
   before_filter :signed_in?, :only => [:upload_photo]
 
   layout "general"
-
-
   
   def location
 
@@ -306,8 +304,11 @@ class MenuItemsController < ApplicationController
          # :include => :menu_item_avg_rating_count, 
          :limit => @limit)
 
-    # We have to add this to get the 'distance' field
-    # @menu_items.sort_by_distance_from(@origin)
+    if (params[:sort].eql?("distance"))
+      # We have to add this to get the 'distance' and this also
+      # sorts by distance as opposed to by rating
+      @menu_items.sort_by_distance_from(@origin)
+    end
 
   end
 end
