@@ -253,6 +253,9 @@ $(document).ready ->
     search_bind()
     top_nav_bind()
 
+
+    $("#navigation .left_corner").live "click", () ->
+         window.location = $(@).next().attr("href")
 #    add menu item submit
     $(".inputs_column #submit_block a").live "click", () ->
         window.close_modal()

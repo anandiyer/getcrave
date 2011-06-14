@@ -271,6 +271,9 @@
   $(document).ready(function() {
     search_bind();
     top_nav_bind();
+    $("#navigation .left_corner").live("click", function() {
+      return window.location = $(this).next().attr("href");
+    });
     $(".inputs_column #submit_block a").live("click", function() {
       return window.close_modal();
     });

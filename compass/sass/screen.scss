@@ -287,6 +287,7 @@ body.two-col.bp{
 
 
                     .left_corner{
+                        cursor: pointer;
                         float: left;
                         height: 27px;
                         width: 28px;
@@ -307,10 +308,10 @@ body.two-col.bp{
 
                 li.nearby.selected{
                     .icon_corner{
-                        background:url(/images/sprites/icon-sprite.png) no-repeat 0 -4px;
+                        background:url(/images/sprites/icon-sprite.png) no-repeat 0 4px;
                     }
 
-                }li.nearby{
+                }li.neleftrby{
                     .icon_corner{
                         background:url(/images/sprites/icon-sprite.png) no-repeat 0 -16px;
                     }
