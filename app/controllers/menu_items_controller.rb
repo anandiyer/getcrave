@@ -50,7 +50,7 @@ class MenuItemsController < ApplicationController
       ORDER BY (menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
       @restaurant.id])
     
-    respond_to do |format|                                    6
+    respond_to do |format|
       format.html # location.html.haml
       format.xml  { render :xml => @menu_items.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count])}
       format.json  { render :json => @menu_items.to_json(:include => [:restaurant, :menu_item_avg_rating_count]) }
@@ -116,7 +116,6 @@ class MenuItemsController < ApplicationController
 
          AWS::S3::S3Object.store(filename, temp_file.read, BUCKET, :access => :public_read)
          p url = AWS::S3::S3Object.url_for(filename, BUCKET, :authenticated => false)
-
 
 
         if params[:uuid] == "undefined"
