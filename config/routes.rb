@@ -1,5 +1,4 @@
 Crave::Application.routes.draw do 
-
   resources :following, :as => "user_followings", :controller => "user_followings"
 
   resources :menu_item_review_comments

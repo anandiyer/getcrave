@@ -1,6 +1,8 @@
 #require 'rmagick'
 #require 'open-uri'
 require "uuidtools"
+require 'RMagick'
+require 'fileutils'
 
 # Monkey patching to include the 'distance' attribute in menu_items
 module Geokit
@@ -48,7 +50,7 @@ class MenuItemsController < ApplicationController
       ORDER BY (menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
       @restaurant.id])
     
-    respond_to do |format|
+    respond_to do |format|                                    6
       format.html # location.html.haml
       format.xml  { render :xml => @menu_items.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count])}
       format.json  { render :json => @menu_items.to_json(:include => [:restaurant, :menu_item_avg_rating_count]) }
@@ -91,25 +93,40 @@ class MenuItemsController < ApplicationController
 
   def upload_photo
 
+
+
     if params[:file] && (params[:file].content_type.to_s.index("image") == 0 )
-        p temp_file = params[:file].tempfile
-        p filename = UUIDTools::UUID.random_create.to_s+".jpg"
+        temp_file = params[:file].tempfile
 
-        AWS::S3::S3Object.store(filename, temp_file.read, BUCKET, :access => :public_read)
-        p url = AWS::S3::S3Object.url_for(filename, BUCKET, :authenticated => false)
+        filename = UUIDTools::UUID.random_create.to_s+".jpg"
+
+#        thumb_name = "menu_items_"+params[:id]
+
+#        croped_image
+#        img = Magick::Image.read(params[:file].tempfile.path).first
+#        thumbnail = img.thumbnail(141,141)
+#        thumbnail.write "public/"+thumb_name+".png"
+
+#        if !session[thumb_name]
+#          session[:thumb_name] = "have thumbnail"
+#
+#          AWS::S3::S3Object.store(thumb_name, thumbnail, BUCKET, :access => :public_read)
+#          p thumb_url = AWS::S3::S3Object.url_for(thumb_name, BUCKET, :authenticated => false)
+#        end
+
+         AWS::S3::S3Object.store(filename, temp_file.read, BUCKET, :access => :public_read)
+         p url = AWS::S3::S3Object.url_for(filename, BUCKET, :authenticated => false)
 
 
-        p "params[:uuid]="
-        p params[:uuid]
 
         if params[:uuid] == "undefined"
-          p menu_item_photo = MenuItemPhoto.new
-          p menu_item_photo.menu_item_id = params[:id]
-          p current_user.id
-          p menu_item_photo.user_id = current_user.id if current_user
-          p menu_item_photo.photo = url
-          p menu_item = MenuItem.find(params[:id])
-          p menu_item.menu_item_photos << menu_item_photo
+          menu_item_photo = MenuItemPhoto.new
+          menu_item_photo.menu_item_id = params[:id]
+          current_user.id
+          menu_item_photo.user_id = current_user.id if current_user
+          menu_item_photo.photo = url
+          menu_item = MenuItem.find(params[:id])
+          menu_item.menu_item_photos << menu_item_photo
 
           render :partial => "gallery_link"
         else
@@ -120,7 +137,7 @@ class MenuItemsController < ApplicationController
 #          TODO: Anand? can you refactor me?
 
          p "insert into temp_image"
-          TempImage.find_by_sql("INSERT INTO temp_images(hash, image_name) VALUES ('"+params[:uuid]+"', '"+filename+"')")
+          TempImage.find_by_sql("INSERT INTO temp_images(hash, image_name) VALUES ('"+params[:uuid]+"', '"+url+"')")
 
           render :nothing => true
 #          temp.save
@@ -179,13 +196,12 @@ class MenuItemsController < ApplicationController
           ma = MenuLabelAssociation.new
           ma.menu_item_id = @menu_item.id
           ma.menu_label_id = label_id
-          ma.user_id = current_user.id.to_s
+          ma.user_id = current_user.id
           ma.save
         end
 
 
         photos = TempImage.where(:hash => uuid)
-        puts current_user.id.to_s
         photos.map{|ph| ph.image_name}.each do |p|
           mip = MenuItemPhoto.new
           mip.menu_item_id = @menu_item.id

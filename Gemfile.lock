@@ -185,6 +185,7 @@ GEM
     rake (0.8.7)
     rest-client (1.6.1)
       mime-types (>= 1.16)
+    rmagick (2.13.1)
     rsolr (0.12.1)
       builder (>= 2.1.2)
     rspec (2.6.0)
@@ -260,6 +261,7 @@ DEPENDENCIES
   pg
   rack-google_analytics
   rails (= 3.0.7)
+  rmagick (= 2.13.1)
   rspec-rails
   spatial_adapter
   sunspot_rails (~> 1.2.1)
