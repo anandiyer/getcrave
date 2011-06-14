@@ -98,7 +98,6 @@ class MenuItemsController < ApplicationController
         AWS::S3::S3Object.store(filename, temp_file.read, BUCKET, :access => :public_read)
         p url = AWS::S3::S3Object.url_for(filename, BUCKET, :authenticated => false)
 
-
         p "params[:uuid]="
         p params[:uuid]
 
@@ -108,7 +107,7 @@ class MenuItemsController < ApplicationController
           p current_user.id
           p menu_item_photo.user_id = current_user.id if current_user
           p menu_item_photo.photo = url
-          p menu_item = MenuItem.find(params[:id])
+          p menu_item = MenuItem.find_by_id(params[:id])
           p menu_item.menu_item_photos << menu_item_photo
 
           render :partial => "gallery_link"
@@ -179,7 +178,7 @@ class MenuItemsController < ApplicationController
           ma = MenuLabelAssociation.new
           ma.menu_item_id = @menu_item.id
           ma.menu_label_id = label_id
-          ma.user_id = current_user.id.to_s
+          ma.user_id = current_user.id
           ma.save
         end
 

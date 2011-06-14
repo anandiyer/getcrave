@@ -15,12 +15,12 @@ module ApplicationHelper
 #    act_name == "nearby" && class_name_from_path == "restaurants_index" ? "selected" : "notselected"
 
     class_name.to_s
-
-
   end
 
   def stars_class_normalize decimal_data
-    dd = (decimal_data * 10).round.to_f / 10
-    dd.to_s.gsub(/[.]/, '_')
+    if (decimal_data.to_i != 0)
+      decimal_data = (decimal_data * 10).round.to_f / 10
+    end
+    decimal_data.to_s.gsub(/[.]/, '_')
   end
 end
