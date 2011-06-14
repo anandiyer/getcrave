@@ -55,8 +55,9 @@ var singleRestaurantStore = new Ext.data.Store({
     }
 });
 
-function restaurantDisplay(record, index) {
-    singleRestaurantStore.proxy.url = (urlPrefix+'/places/'+record.data.id+'/menu_items.json');
+function placeDisplay(record, index) {
+    console.log(urlPrefix+'/places/'+record.data.id+'/items.json');
+    singleRestaurantStore.proxy.url = (urlPrefix+'/places/'+record.data.id+'/items.json');
     var myVar = "hello";
 
     singleRestaurantStore.load(function(){
