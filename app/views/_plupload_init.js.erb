@@ -1,0 +1,112 @@
+<% session_key_name = Rails.application.config.session_options[:key] %>
+
+window.pl_all = (function (uuid) {
+    PATH = "";
+    if ($("a#plupload").length > 0) {
+        id = $("#current_info_wrapper").data("menu_item_id");
+        path = "/items/" + id + "/upload_photo?uuid=" + uuid + "&current_user_id=" + $(".current_user").attr("rel");
+
+        window.uploader = new plupload.Uploader({
+            runtimes: 'html5',
+            browse_button: 'plupload',
+            max_file_size: '10mb',
+            url: path,
+             multipart_params: {
+              '_http_accept': 'application/javascript',
+              'authenticity_token' : '<%= form_authenticity_token %>',
+              '<%= session_key_name %>' : encodeURIComponent('<%= u cookies[session_key_name] %>')
+            },
+            filters: [{
+                title: "Image files",
+                extensions: "jpg,gif,png"
+            }],
+            init: {
+                FileUploaded: function (up, file, info) {
+                    console.log(up);
+                    console.log(file);
+                    console.log(info);
+
+                    $("#gallery").html(info.response);
+                    window.gallery_init();
+                }
+            }
+        });
+
+        window.uploader.bind('Init', function (up, params) {
+            console.log("init");
+        });
+
+
+        window.uploader.bind('UploadComplete', function (up, file) {
+            $.gritter.add({
+                title: "Notice",
+                text: " Files was uploaded!"
+            });
+        });
+
+        window.uploader.bind('BeforeUpload', function (up, file) {
+
+            var signed = !$(".fb_login").find("a").hasClass("not_signed");
+
+            if (!signed) {
+                uploader.stop();
+                window.show_dialog("Please, sign in to add photos!")
+            }
+
+        });
+
+        window.uploader.bind('UploadProgress', function (up, file) {
+            $('#' + file.id + " b").html(file.percent + "%");
+
+        });
+
+        window.uploader.init();
+
+        uploader.bind('FilesAdded', function (up, files) {
+            $(".photos_inline").removeClass("himportant")
+            uploader.start();
+        });
+    }
+
+
+    var availableTags = ($("#labels_all").text().split(","));
+
+    function split(val) {
+        return val.split(/,\s*/);
+    }
+
+    function extractLast(term) {
+        return split(term).pop();
+    }
+
+
+    $("#dish_label")
+    // don't navigate away from the field on tab when selecting an item
+    .bind("keydown", function (event) {
+        if (event.keyCode === $.ui.keyCode.TAB && $(this).data("autocomplete").menu.active) {
+            event.preventDefault();
+        }
+    }).autocomplete({
+        minLength: 0,
+        source: function (request, response) {
+            // delegate back to autocomplete, but extract the last term
+            response($.ui.autocomplete.filter(
+            availableTags, extractLast(request.term)));
+        },
+        focus: function () {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function (event, ui) {
+            var terms = split(this.value);
+            // remove the current input
+            terms.pop();
+            // add the selected item
+            terms.push(ui.item.value);
+            // add placeholder to get the comma-and-space at the end
+            terms.push("");
+            this.value = terms.join(", ");
+            return false;
+        }
+    });
+});

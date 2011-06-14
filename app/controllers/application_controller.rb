@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
 #TODO: fix me
     begin
       @current_user ||= User.find_by_id(session[:user_id])
-    rescue e
-      logger.info(e+" | Can not find current_user")
+    rescue
+#      logger.info(e+" | Can not find current_user")
       @current_user = User.find(5)
     end
 #    @current_user ||= User.where(:user_name => "almazom").first

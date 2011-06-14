@@ -1,7 +1,7 @@
 #reviews_wrapper{:class => @controller.controller_name}
   = render :partial => "users/buttons"
 
-  - if !@controller.action_name.include? "follow"
+  - if !controller.action_name.include? "follow"
     #select_box_hint &nbsp;
     #sorting
       #before_sort_by

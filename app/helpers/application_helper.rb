@@ -2,7 +2,7 @@ module ApplicationHelper
 
 
   def class_name_from_path
-    @controller.controller_name+"_"+@controller.action_name
+    controller.controller_name+"_"+controller.action_name
   end
 
   def navigation_selected act_name

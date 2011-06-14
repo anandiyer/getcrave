@@ -8,6 +8,7 @@ class MenuItem < ActiveRecord::Base
     has_friendly_id :name, :use_slug => true, :approximate_ascii => true
     acts_as_mappable :through => :restaurant
     
+
     searchable do
         text :name, :default_boost => 2
         text :description
@@ -15,6 +16,7 @@ class MenuItem < ActiveRecord::Base
           Sunspot::Util::Coordinates.new(restaurant.latitude, restaurant.longitude)
         end
     end
+
 
 # vars - menu_label_id, menu_item_id
   def labels_counter menu_label_id, menu_item_id

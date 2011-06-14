@@ -271,6 +271,12 @@
   $(document).ready(function() {
     search_bind();
     top_nav_bind();
+    $(".inputs_column #submit_block a").live("click", function() {
+      return window.close_modal();
+    });
+    $(".inputs_column #submit_block .submit_wrapper").live("click", function() {
+      return $(this).parents("form").submit();
+    });
     $(".follow").live("click", function() {
       if (is_logged_in()) {
         $(this).removeClass("follow").addClass("unfollow");
@@ -302,20 +308,6 @@
     });
     $('#input_comment textarea').focus(function(e) {
       return $(this).parents("form").find("#submit_block").show();
-    });
-    $(document).ajaxSend(function(event, request, settings) {
-      var _ref;
-      if (settings.type === 'post') {
-        settings.data = ((_ref = settings.data) != null ? _ref : settings.data + {
-          "&": ""
-        }) + "authenticity_token=" + encodeURIComponent(AUTH_TOKEN);
-        return request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      }
-    });
-    $.ajaxSetup({
-      beforeSend: function(xhr) {
-        return xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-      }
     });
     $('textarea').autoResize();
     $("#labels a.label").live("click", function(event) {

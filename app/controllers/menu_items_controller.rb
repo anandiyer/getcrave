@@ -92,27 +92,26 @@ class MenuItemsController < ApplicationController
 #  end
 
   def upload_photo
-#    if signed_in?
-    p "upload_photo"
-    p params[:id].blank?
-    p "id"
-    
-      if params[:file] && (params[:file].content_type.to_s.index("image") == 0 )
+
+    if params[:file] && (params[:file].content_type.to_s.index("image") == 0 )
         p temp_file = params[:file].tempfile
-        filename = UUIDTools::UUID.random_create.to_s+".jpg"
+        p filename = UUIDTools::UUID.random_create.to_s+".jpg"
 
         AWS::S3::S3Object.store(filename, temp_file.read, BUCKET, :access => :public_read)
-        url = AWS::S3::S3Object.url_for(filename, BUCKET, :authenticated => false)
-        
+        p url = AWS::S3::S3Object.url_for(filename, BUCKET, :authenticated => false)
+
+
+        p "params[:uuid]="
+        p params[:uuid]
+
         if params[:uuid] == "undefined"
-          menu_item_photo = MenuItemPhoto.new
-          menu_item_photo.menu_item_id = params[:id]
-          menu_item_photo.user_id = current_user.id if current_user
-
+          p menu_item_photo = MenuItemPhoto.new
+          p menu_item_photo.menu_item_id = params[:id]
+          p current_user.id
+          p menu_item_photo.user_id = current_user.id if current_user
           p menu_item_photo.photo = url
-
-          menu_item = MenuItem.find(params[:id])
-          menu_item.menu_item_photos << menu_item_photo
+          p menu_item = MenuItem.find(params[:id])
+          p menu_item.menu_item_photos << menu_item_photo
 
           render :partial => "gallery_link"
         else
@@ -121,6 +120,8 @@ class MenuItemsController < ApplicationController
 #          temp.image_name = filename.to_s
 #          temp.save did not work (())
 #          TODO: Anand? can you refactor me?
+
+         p "insert into temp_image"
           TempImage.find_by_sql("INSERT INTO temp_images(hash, image_name) VALUES ('"+params[:uuid]+"', '"+filename+"')")
 
           render :nothing => true
@@ -130,12 +131,7 @@ class MenuItemsController < ApplicationController
 #        plupload can filter file types
         raise "wrong type of file"
       end
-#    else
-#      p "temp image save"
-#    end
-#    else
-#      raise "not signed in"
-#    end
+
   end
 
 
@@ -174,7 +170,6 @@ class MenuItemsController < ApplicationController
     uuid = params[:menu_item][:uuid]
     params[:menu_item].delete("uuid")
 
-
     @menu_item = MenuItem.new(params[:menu_item])
 
     respond_to do |format|
@@ -186,27 +181,27 @@ class MenuItemsController < ApplicationController
           ma = MenuLabelAssociation.new
           ma.menu_item_id = @menu_item.id
           ma.menu_label_id = label_id
-          ma.user_id = current_user.id
+          ma.user_id = current_user.id.to_s
           ma.save
         end
 
 
         photos = TempImage.where(:hash => uuid)
-
+        puts current_user.id.to_s
         photos.map{|ph| ph.image_name}.each do |p|
           mip = MenuItemPhoto.new
           mip.menu_item_id = @menu_item.id
-          mip.photo = @menu_item.photo
+          mip.photo = p
           mip.user_id = current_user.id
           mip.save
         end
-
         photos.delete_all
 
-        format.html { redirect_to(@menu_item, :notice => 'Menu item was successfully created.') }
-        format.xml  { render :xml => @menu_item, :status => :created, :location => @menu_item }
-        format.json  { render :json => @menu_item, :status => :created, :location => @menu_item }
-        format.js  { render :js => "window.close_modal()" }
+#        format.html { redirect_to(@menu_item, :notice => 'Menu item was successfully created.') }
+#        format.xml  { render :xml => @menu_item, :status => :created, :location => @menu_item }
+#        format.json  { render :json => @menu_item, :status => :created, :location => @menu_item }
+        format.js  { render :js => "window.close_modal(); window.cl(#{@menu_item.id.to_s})" }
+
       end
     end
   end

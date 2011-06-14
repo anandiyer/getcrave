@@ -253,6 +253,12 @@ $(document).ready ->
     search_bind()
     top_nav_bind()
 
+#    add menu item submit
+    $(".inputs_column #submit_block a").live "click", () ->
+        window.close_modal()
+    $(".inputs_column #submit_block .submit_wrapper").live "click", () ->
+        $(@).parents("form").submit()
+
 #    follow button press
     $(".follow").live "click", () ->
         if is_logged_in()
@@ -288,12 +294,12 @@ $(document).ready ->
         $(@).parents("form").find("#submit_block").show()
 
 
-    $(document).ajaxSend (event, request, settings) ->
-        if settings.type == 'post'
-            settings.data = (settings.data ? settings.data + "&" : "") + "authenticity_token=" + encodeURIComponent( AUTH_TOKEN )
-            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    $.ajaxSetup({ beforeSend: (xhr) ->  xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))})
+#    $(document).ajaxSend (event, request, settings) ->
+#        if settings.type == 'post'
+#            settings.data = (settings.data ? settings.data + "&" : "") + "authenticity_token=" + encodeURIComponent( AUTH_TOKEN )
+#            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+#
+#    $.ajaxSetup({ beforeSend: (xhr) ->  xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))})
 
 
 

@@ -103,17 +103,20 @@ body.two-col.bp{
             position: absolute;
             top:4px;
             left: 642px;
-
         }
+    }
 
+    .inputs_column #submit_block{
+        float:left;
+        a{
+            font-weight: normal;
+        }
     }
     #submit_block{
+        font-weight: bold;
         float: right;
         display: none;
     }
-
-
-
 
     a{
         @include link-colors(#2E70A7, #1a507d, #2E70A7, #2E70A7, #2E70A7);

@@ -1,0 +1,56 @@
+- if current_user
+  = link_to "add new item to current restaurant", "#", :class => 'activate_modal', :name => "modal_window"
+
+
+  - @restaurant = Restaurant.find(params[:restaurant_id])
+
+  #mask.close_modal
+  #modal_window.modal_window
+    #labels_all= MenuLabel.all.map{|l| l.menu_label}.join(",")
+    #close_me.close_modal
+      = image_tag "icons/close.png"
+    .modal_title
+      %h1 Add a dish
+    .clone_me
+      -#= form_for("menu_items[]", :url =>"/menu_items/new", :remote => true) do |f|
+
+      - current_user ? user = current_user.id : user = nil
+
+      - uuid = UUIDTools::UUID.random_create.to_s
+      - form_for( MenuItem.new, :remote =>true, :html =>{:class => "uuid", :rel => uuid}) do |f|
+        = f.hidden_field :restaurant_id, :value => @restaurant.id
+        = f.hidden_field :user_id, :value => user
+        = f.hidden_field :uuid, :value => uuid
+
+
+        .inputs_column
+          .clone_line
+            %label
+              Dish name
+              %super *
+            .text_input
+              = f.text_field :name, :placeholder => "ex. Potaito"
+          .clone_line
+            %label
+              Description
+            .text_input
+              = text_field :dish, :description, :placeholder => "List the ingrediants"
+          .clone_line
+            %label
+              Add a label
+              %super *
+            .text_input
+              = text_field :dish, :label, :placeholder => "Add a label"
+
+          #submit_block{:style => "display:block"}
+            = render :partial => "/button"
+            =link_to "Cancel", "#", :class => "cancel_adding"
+      .img_column
+        =image_tag "dish-noimage-sm.jpg"
+        #add_photo_here
+          %span.add_photos_inline
+          %nobr
+            =link_to "add a photo","#", :id => "plupload"
+- else
+  - title = "Please, sign in!"
+  = link_to_function("add new item to current restaurant", "window.show_dialog(\"#{title}\")")
