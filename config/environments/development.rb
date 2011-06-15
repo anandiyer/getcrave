@@ -23,7 +23,15 @@ Crave::Application.configure do
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 
-
+    ActionMailer::Base.smtp_settings = {
+        :user_name => "app518646@heroku.com",
+        :password => "5b29d416c8d90bec0a",
+        :domain => "getcrave.com",
+        :address => "smtp.sendgrid.net",
+        :port => 25,
+        :authentication => :plain,
+        :enable_starttls_auto => true
+    }
 
 
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
