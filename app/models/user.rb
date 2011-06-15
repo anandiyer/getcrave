@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   end
 
   def small_thumbnail
-    self.user_profile_pic_url ? self.user_profile_pic_url : "reviews_avatar_temp.png"
+    (self.user_profile_pic_url && !self.user_profile_pic_url.empty?) ? self.user_profile_pic_url : "reviews_avatar_temp.png"
   end
 
   def following

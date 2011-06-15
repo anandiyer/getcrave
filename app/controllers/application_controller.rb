@@ -13,15 +13,11 @@ class ApplicationController < ActionController::Base
 
   def current_user
 #TODO: fix me
-    begin
+    if is_almazom?
+      @current_user ||= User.where(:user_name => "almazom").first
+    else
       @current_user ||= User.find_by_id(session[:user_id])
-    rescue
-#      logger.info(e+" | Can not find current_user")
-      @current_user = User.find(5)
     end
-#    @current_user ||= User.where(:user_name => "almazom").first
-#    @current_user ||= User.where(:user_name => "ai").first
-#    @current_user ||= User.where(:user_name => "test3").first
   end
 
   def check_auth_fb

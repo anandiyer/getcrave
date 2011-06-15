@@ -1,8 +1,8 @@
 #require 'rmagick'
 #require 'open-uri'
 require "uuidtools"
-require 'RMagick'
-require 'fileutils'
+#require 'RMagick'
+#require 'fileutils'
 
 # Monkey patching to include the 'distance' attribute in menu_items
 module Geokit
@@ -198,7 +198,6 @@ class MenuItemsController < ApplicationController
   # POST /menu_items
   # POST /menu_items.xml
   def create
-
     uuid = params[:menu_item][:uuid]
     params[:menu_item].delete("uuid")
 
@@ -342,6 +341,5 @@ class MenuItemsController < ApplicationController
       # sorts by distance as opposed to by rating
       @menu_items.sort_by_distance_from(@origin)
     end
-
   end
 end

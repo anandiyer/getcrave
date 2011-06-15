@@ -246,7 +246,6 @@ body.two-col.bp{
           img.right_nav_corner{
             float:right;
           }
-
         }
 
         #navigation{
@@ -256,12 +255,28 @@ body.two-col.bp{
             height:20px;
 
             .fb_login{
-                width: 200px;
+                width: 350px;
                 float: right;
                 color: white;
                 text-align: right;
-            }
+                font-size:12px !important;
+                white-space: nowrap;
+                #user_small_thumb_logo{
 
+                    @include inline-block;
+                    width:30px;
+                    height:30px;
+                    padding-right:3px;
+                    margin-top: -5px;
+                    img{
+                        @include border-radius(3px);
+                    }
+                }
+
+                a{
+                    color:#fff;
+                }
+            }
 
             ul{
                 margin:0px;
@@ -279,9 +294,7 @@ body.two-col.bp{
                         color: white;
                         text-decoration: none;
                     }
-
                 }
-
 
                 li.selected{
                     background:url(/images/sprites/button-sprite.png) no-repeat 100% -556px;
@@ -293,7 +306,6 @@ body.two-col.bp{
                     padding-right:13px;
                     padding-top:1px;
 
-
                     .left_corner{
                         cursor: pointer;
                         float: left;
@@ -301,7 +313,6 @@ body.two-col.bp{
                         width: 28px;
                         margin-left: -25px;
                         margin-top: -1px;
-
                         .icon_corner{
                             width:17px;
                             height: 20px;
@@ -311,14 +322,12 @@ body.two-col.bp{
                     a{
                         padding-top:2px;
                     }
-
                 }
 
                 li.nearby.selected{
                     .icon_corner{
                         background:url(/images/sprites/icon-sprite.png) no-repeat 0 4px;
                     }
-
                 }
 
                 li.nearby{
