@@ -26,17 +26,19 @@ Crave::Application.routes.draw do
   resources :menu_item_prices
 
   resources :items, :as => "menu_items", :controller => "menu_items" do
+
     resources :ratings, :as => "menu_item_ratings", :controller => "menu_item_ratings" do
       collection do
         get 'avg_rating'
       end 
     end
+
     member do
       get 'show_reviews'
       post 'upload_photo'
     end
     collection do
-      get 'search', 'location', 'show_menu_items_nearby'
+      get 'search', 'location', 'show_menu_items_nearby' , 'nearby_loading'
     end
   end
 
@@ -73,5 +75,6 @@ Crave::Application.routes.draw do
   
   match '/auth/:provider/callback', :to => 'sessions#create'  
   match '/signout' => 'sessions#destroy', :as => :signout
+  match '/nearby' => 'menu_items#nearby_loading', :as => :nearby
 
 end

@@ -17,11 +17,15 @@ module Geokit
 end
 
 class MenuItemsController < ApplicationController
-  before_filter :get_restaurant
+  before_filter :get_restaurant, :except => :nearby_loading
   before_filter :signed_in?, :only => [:upload_photo]
 
   layout "general"
   
+  def nearby_loading
+
+  end
+
   def location
 
     params_4_location_and_show_menu_item_nearby

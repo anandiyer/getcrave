@@ -73,6 +73,14 @@ $small_font_size: 12px;
 body.two-col.bp{
 
 
+
+
+
+
+
+
+
+
     #submit_block:hover{
         font-weight: bold;
         .submit_wrapper {
@@ -412,6 +420,29 @@ body.two-col.bp{
         padding: 0 0 0 8px;
         margin-left: 5px;
 
+
+
+        #get_nearby_loading{
+            @include border-radius(3px);
+            position: absolute;
+            height: 51px;
+            width:100px;
+            height:80px;
+            background-color:red;
+            top:450px;
+            margin-left:296px;
+            background: #333;
+            text-align: center;
+            padding-top:20px;
+            #locating{
+                font-weight:bold;
+                color:white;
+            }
+
+        }
+
+
+
         #sidebar{
 
 
@@ -584,6 +615,9 @@ body.two-col.bp{
                     padding-bottom: 9px;
                     padding-right: 16px;
                     border-bottom: 3px solid $light_gray;
+
+
+
 
                     #comment_wrapper{
                         @include container;
