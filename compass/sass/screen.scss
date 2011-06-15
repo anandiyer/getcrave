@@ -305,7 +305,6 @@ body.two-col.bp{
                 li{
                     padding-right:13px;
                     padding-top:1px;
-
                     .left_corner{
                         cursor: pointer;
                         float: left;
@@ -336,9 +335,6 @@ body.two-col.bp{
                     }
                 }
 
-
-
-
                 li.saved.selected .icon_corner{
                     background:url(/images/sprites/icon-sprite.png) no-repeat 0 -36px;
                 }
@@ -366,7 +362,7 @@ body.two-col.bp{
                 }
 
                 li.profile.selected .icon_corner{
-                    background:url(/images/sprites/icon-sprite.png) no-repeat 0 -120px
+                    background:url(/images/sprites/icon-sprite.png) no-repeat 0 -120px !important;
                 }
 
                 li.profile{
@@ -378,7 +374,6 @@ body.two-col.bp{
                     }
                 }
             }
-
         }
 
         #logo{
