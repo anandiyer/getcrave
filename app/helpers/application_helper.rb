@@ -8,7 +8,7 @@ module ApplicationHelper
   def navigation_selected act_name
 
     class_name = "not"
-    class_name = "selected" if act_name == "nearby" && class_name_from_path == "restaurants_index"
+    class_name = "selected" if act_name == "nearby" && class_name_from_path == "menu_items_location"
     class_name = "selected" if act_name == "saved" && class_name_from_path == "users_saved"
     class_name = "selected" if act_name == "profile" && class_name_from_path == "users_show"
 

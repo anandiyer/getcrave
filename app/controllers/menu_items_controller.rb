@@ -27,8 +27,23 @@ class MenuItemsController < ApplicationController
   end
 
   def location
-
     params_4_location_and_show_menu_item_nearby
+
+
+    if !cookies[:lat] && !cookies[:long]
+      how_much = 3
+      cookies[:lat] = {
+        :value => params[:lat],
+        :expires => how_much.minutes.from_now.utc
+      }
+
+      cookies[:long] = {
+        :value => params[:long],
+        :expires => how_much.minutes.from_now.utc
+      }
+    end
+
+
 
     respond_to do |format|
       format.html # location.html.haml
