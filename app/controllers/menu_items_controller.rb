@@ -31,7 +31,7 @@ class MenuItemsController < ApplicationController
 
 
     if !cookies[:lat] && !cookies[:long]
-      how_much = 3
+      how_much = 15
       cookies[:lat] = {
         :value => params[:lat],
         :expires => how_much.minutes.from_now.utc
