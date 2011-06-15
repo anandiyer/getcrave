@@ -9,13 +9,13 @@ class MenuItem < ActiveRecord::Base
     acts_as_mappable :through => :restaurant
     
 
-#    searchable do
-#        text :name, :default_boost => 2
-#        text :description
-#        location :coordinates do
-#          Sunspot::Util::Coordinates.new(restaurant.latitude, restaurant.longitude)
-#        end
-#    end
+    searchable do
+        text :name, :default_boost => 2
+        text :description
+        location :coordinates do
+          Sunspot::Util::Coordinates.new(restaurant.latitude, restaurant.longitude)
+        end
+    end
 
 
 # vars - menu_label_id, menu_item_id
