@@ -105,7 +105,7 @@ after_send = (obj, html) ->
 
 #window.menu_item_photos_uploaded = ()->
 #    alert 1
-window.update_reviews = (id_of_menu_item, limits = $("#show_more_button").data("step")) ->
+window.update_reviews = (id_of_menu_item, limits = $(".two-col").attr("rel")) ->
     obj = $("#reviews_wrapper #update_place")
     $.ajax({url: "/items/"+id_of_menu_item+"/show_reviews?limit="+limits,
     beforeSend: () -> before_send(obj),
@@ -482,7 +482,7 @@ $(document).ready ->
      $("#reviews_wrapper #show_more_button").live 'click', (e) ->
 
         id_of_menu_item = $(this).data("itemid")
-        new_limits = $(this).data("next")
+        cl new_limits = $(this).data("next")
 
         if $(".menu_items_location").length > 0 || $(".restaurants_index").length > 0
            lat = $("body").data("latitude")

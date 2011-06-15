@@ -125,7 +125,7 @@
   window.update_reviews = function(id_of_menu_item, limits) {
     var obj;
     if (limits == null) {
-      limits = $("#show_more_button").data("step");
+      limits = $(".two-col").attr("rel");
     }
     obj = $("#reviews_wrapper #update_place");
     return $.ajax({
@@ -449,7 +449,7 @@
     $("#reviews_wrapper #show_more_button").live('click', function(e) {
       var id_of_menu_item, lat, long, new_limits, obj, path;
       id_of_menu_item = $(this).data("itemid");
-      new_limits = $(this).data("next");
+      cl(new_limits = $(this).data("next"));
       if ($(".menu_items_location").length > 0 || $(".restaurants_index").length > 0) {
         lat = $("body").data("latitude");
         long = $("body").data("longitude");
