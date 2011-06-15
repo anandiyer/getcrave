@@ -121,10 +121,9 @@ class MenuItemsController < ApplicationController
         if params[:uuid] == "undefined"
           menu_item_photo = MenuItemPhoto.new
           menu_item_photo.menu_item_id = params[:id]
-          current_user.id
           menu_item_photo.user_id = current_user.id if current_user
           menu_item_photo.photo = url
-          menu_item = MenuItem.find(params[:id])
+          menu_item = MenuItem.find_by_id(params[:id])
           menu_item.menu_item_photos << menu_item_photo
 
           render :partial => "gallery_link"
