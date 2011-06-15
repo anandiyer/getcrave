@@ -669,6 +669,20 @@ body.two-col.bp{
                         @include column($content-columns, true);
                         padding: 6px 44px 0 2px;
 
+                        #image_thumbnail_middle_size{
+                            width:141px;
+                            height:141px;
+                            overflow:hidden;
+                            @include border-radius(3px);
+                            /*border:1px solid $light_gray;*/
+
+
+                            img{
+                                /*@include opacity(.2);*/
+
+                            }
+                        }
+
 
 
                         .photos_inline{

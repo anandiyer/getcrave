@@ -246,12 +246,38 @@ search_bind = () ->
             e.preventDefault()
 
 
+window.thumbnail_resizing = () ->
+    if $("#image_thumbnail_middle_size").length > 0
+
+        if parseInt($("#gallery #photos_counter").text()) > 0
+           cl source =  $("#gallery a").first().attr("href")
+           img = $("#image_thumbnail_middle_size img")
+           $(img).attr("src", source)
+
+           $("#image_thumbnail_middle_size img").load () ->
+            img = $("#image_thumbnail_middle_size img")
+
+            width =  $(img).width()
+            height = $(img).height()
+
+            if width > height
+                attr = "height"
+            else
+                attr = "width"
+
+            $(img).attr("height", "140px").css("opacity", 1)
+
+
+
+
+
 
 
 $(document).ready ->
 
     search_bind()
     top_nav_bind()
+    thumbnail_resizing()
 
 
     $("#navigation .left_corner").live "click", () ->
@@ -379,8 +405,8 @@ $(document).ready ->
 
 #   google maps in homepage neary
 
-    set_gmap(10) if $("#map").length >0
-#    if window.location.port.indexOf("3006") > 0
+    set_gmap(10) if $("#map").length >0 && window.location.port.indexOf("3006") > 0
+
 
 
 

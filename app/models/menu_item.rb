@@ -9,22 +9,19 @@ class MenuItem < ActiveRecord::Base
     acts_as_mappable :through => :restaurant
     
 
-    if !is_almazom?
-      searchable do
-          text :name, :default_boost => 2
-          text :description
-          location :coordinates do
-            Sunspot::Util::Coordinates.new(restaurant.latitude, restaurant.longitude)
-          end
-      end
-    end
+#    searchable do
+#        text :name, :default_boost => 2
+#        text :description
+#        location :coordinates do
+#          Sunspot::Util::Coordinates.new(restaurant.latitude, restaurant.longitude)
+#        end
+#    end
 
 
 # vars - menu_label_id, menu_item_id
   def labels_counter menu_label_id, menu_item_id
     MenuLabelAssociation.where(:menu_label_id => menu_label_id, :menu_item_id => menu_item_id).count
   end
-
 
   def labels
     MenuLabel.find(self.menu_label_associations.map{|l| l.menu_label_id}).map{|ln| ln.menu_label}

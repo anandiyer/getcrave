@@ -11,7 +11,10 @@
     = link_to("← "+@menu_item.restaurant.name, @menu_item.restaurant)
   #current_info_wrapper{:data => {:latitude=> @menu_item.restaurant.latitude, :longitude => @menu_item.restaurant.longitude, :menu_item_id => @menu_item.id}}
     #img_column
-      = image_tag "temp_image.png"
+      #image_thumbnail_middle_size
+        -#= image_tag(get_photo_url_4_thumbnail(params[:id]))
+        = image_tag "temp_image.png"
+
       - visibility_class =  get_photos(params[:id]).count == 0 ? "himportant" : " "
       #icons_img_wrapper
         %span.photos_inline{:class => visibility_class}
@@ -40,7 +43,8 @@
           %span= @menu_item.menu_item_avg_rating_count.count
           Reviews
 
-      #social= render :partial => "/social"
+      #social
+        = render :partial => "/social" if !is_almazom?
       #desc_wrap
 
         #description= @menu_item.description

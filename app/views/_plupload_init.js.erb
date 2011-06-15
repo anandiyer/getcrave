@@ -38,6 +38,8 @@ window.pl_all = (function (uuid) {
 
 
         window.uploader.bind('UploadComplete', function (up, file) {
+            window.window.thumbnail_resizing()
+
             $.gritter.add({
                 title: "Notice",
                 text: " Files was uploaded!"

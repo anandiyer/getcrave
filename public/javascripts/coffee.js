@@ -268,9 +268,32 @@
       });
     }
   };
+  window.thumbnail_resizing = function() {
+    var img, source;
+    if ($("#image_thumbnail_middle_size").length > 0) {
+      if (parseInt($("#gallery #photos_counter").text()) > 0) {
+        cl(source = $("#gallery a").first().attr("href"));
+        img = $("#image_thumbnail_middle_size img");
+        $(img).attr("src", source);
+        return $("#image_thumbnail_middle_size img").load(function() {
+          var attr, height, width;
+          img = $("#image_thumbnail_middle_size img");
+          width = $(img).width();
+          height = $(img).height();
+          if (width > height) {
+            attr = "height";
+          } else {
+            attr = "width";
+          }
+          return $(img).attr("height", "140px").css("opacity", 1);
+        });
+      }
+    }
+  };
   $(document).ready(function() {
     search_bind();
     top_nav_bind();
+    thumbnail_resizing();
     $("#navigation .left_corner").live("click", function() {
       return window.location = $(this).next().attr("href");
     });
@@ -366,7 +389,7 @@
         return close_labels_selectbox();
       }
     });
-    if ($("#map").length > 0) {
+    if ($("#map").length > 0 && window.location.port.indexOf("3006") > 0) {
       set_gmap(10);
     }
     $(".yes_answer").live("click", function(event) {
