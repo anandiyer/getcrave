@@ -48,11 +48,6 @@
 
   - if params[:lat] then data = {:latitude => params[:lat], :longitude => params[:long]}  else data = "" end
   %body.two-col.bp{:data => data, :rel => ITEMS_PER_PAGE}
-    = cookies[:lat]
-    = cookies[:long]
-
-
-
     #page
       #container
         #header

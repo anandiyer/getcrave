@@ -19,9 +19,10 @@
     %li.nearby{:class => navigation_selected("nearby").to_s}
       .left_corner
         .icon_corner
-      =link_to "Nearby", nearby_path
-
-
+      - if cookies[:lat]
+        = link_to "Nearby", "/items/location?lat=#{cookies[:lat]}&long="+cookies[:long]
+      - else
+        =link_to "Nearby", nearby_path
 
     %li.saved{:class => navigation_selected("saved").to_s}
       .left_corner
