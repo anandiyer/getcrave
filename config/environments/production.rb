@@ -47,6 +47,14 @@ Crave::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-
+  ActionMailer::Base.smtp_settings = {
+      :user_name => "app518646@heroku.com",
+      :password => "5b29d416c8d90bec0a",
+      :domain => "getcrave.com",
+      :address => "smtp.sendgrid.net",
+      :port => 25,
+      :authentication => :plain,
+      :enable_starttls_auto => true
+  }
 
 end
