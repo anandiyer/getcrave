@@ -9,12 +9,14 @@ class MenuItem < ActiveRecord::Base
     acts_as_mappable :through => :restaurant
     
 
-    searchable do
-        text :name, :default_boost => 2
-        text :description
-        location :coordinates do
-          Sunspot::Util::Coordinates.new(restaurant.latitude, restaurant.longitude)
-        end
+    if !is_almazom?
+      searchable do
+          text :name, :default_boost => 2
+          text :description
+          location :coordinates do
+            Sunspot::Util::Coordinates.new(restaurant.latitude, restaurant.longitude)
+          end
+      end
     end
 
 
