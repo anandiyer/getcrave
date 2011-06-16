@@ -8,18 +8,6 @@ puts Rails.env
 
 ITEMS_PER_PAGE = 25
 
-ActionMailer::Base.delivery_method = :smtp
-ActionMailer::Base.smtp_settings = {
-    :user_name => "app518646@heroku.com",
-    :password => "5b29d416c8d90bec0a",
-    :domain => "getcrave.com",
-    :address => "smtp.sendgrid.net",
-    :port => 25,
-    :authentication => :plain,
-    :enable_starttls_auto => true
-}
-
-
 #  TODO: change 2 your key and dublicate to production.rb
 #  TODO: its my amazon keys
 
