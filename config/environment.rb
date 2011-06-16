@@ -18,7 +18,7 @@ ActionMailer::Base.smtp_settings = {
     :authentication => :plain,
     :enable_starttls_auto => true
 }
-config.action_mailer.raise_delivery_errors = true
+
 
 #  TODO: change 2 your key and dublicate to production.rb
 #  TODO: its my amazon keys
