@@ -62,7 +62,7 @@ class MenuItemRatingHelpfulsController < ApplicationController
 
     Notifier.review_helpful(current_user,
       @menu_item_rating_helpful.menu_item_rating.user, 
-      @menu_item_rating_helpful.menu_item_rating.menu_item)
+      @menu_item_rating_helpful.menu_item_rating.menu_item).deliver
 
     respond_to do |format|
       if @menu_item_rating_helpful.save
