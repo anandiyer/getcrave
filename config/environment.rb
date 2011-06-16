@@ -8,6 +8,16 @@ puts Rails.env
 
 ITEMS_PER_PAGE = 25
 
+ActionMailer::Base.smtp_settings = {
+  :user_name      => ENV['SENDGRID_USERNAME'],
+  :password       => ENV['SENDGRID_PASSWORD'],
+  :domain         => ENV['SENDGRID_DOMAIN'],
+  :address        => "smtp.sendgrid.net",
+  :port           => "25",
+  :authentication => :plain,
+  :enable_starttls_auto => true
+}
+
 #  TODO: change 2 your key and dublicate to production.rb
 #  TODO: its my amazon keys
 

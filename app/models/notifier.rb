@@ -11,9 +11,8 @@ class Notifier < ActionMailer::Base
   def review_helpful(current_user, to_user, menu_item)
     if (to_user.email && !to_user.email.empty?)
       @body = "Hey there, " + current_user.user_name + " (http://getcrave.com/users/" + current_user.user_name +
-        " ) found your review of " + menu_item.name + " helpful. Check it out. http://getcrave.com/items/" 
-        + menu_item.friendly_id.to_s
-      
+        " ) found your review of " + menu_item.name + " helpful. Check it out. http://getcrave.com/items/" + menu_item.friendly_id.to_s
+
       mail( :to => to_user.email, :subject => "Someone liked your crave!", :body => @body)
     end
   end
