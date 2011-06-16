@@ -24,7 +24,7 @@ class Notifier < ActionMailer::Base
       " seems to be digging your reviews and " +
       " has just started following you on crave. crave on!"
       
-      mail( :to => to_user.email, :subject => current_user.user_name + " is following you on crave", :body => @body)
+      mail( :to => to_user.email, :subject => " is following you on crave", :body => " body")
     end
   end
   
