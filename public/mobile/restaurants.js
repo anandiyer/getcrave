@@ -106,11 +106,17 @@ function placeDisplay(record, index) {
 
     singleRestaurantStore.load(function(){
         Ext.getCmp('mainPnl').setActiveItem(2);
+        totalRatings = 0;
         singleRestaurantStore.each(function() {
-           console.log(this);
+           console.log(this.data.rating_count);
+           ratings = this.data.rating_count;
+           if(ratings!="") {
+               additionValue = parseInt(this.data.rating_count.toString().replace(" reviews",""));
+               console.log(additionValue);
+               totalRatings = totalRatings + additionValue;
+           }
         });
-        
-        //loop to count the total reviews here? and add them to htmlString by id?
+        $("#restaurantTotalRatings").html(totalRatings);
     });
 
     Ext.Ajax.request({
@@ -124,7 +130,7 @@ function placeDisplay(record, index) {
              var responseObject = eval('(' + response.responseText + ')');
             //set restaurant data locally now
              localStorage.setItem('editRestaurantId',responseObject.restaurant.id);
-             htmlString = '<div class="restaurantInfo"><span class="restName">'+responseObject.restaurant.name+'</span><span class="restAddress">'+responseObject.restaurant.street_address+', '+responseObject.restaurant.city+'</span><!--<a class="newDish">add dish</a>--></div>';
+             htmlString = '<div class="restaurantInfo"><span class="restName">'+responseObject.restaurant.name+'</span><span class="restAddress">'+responseObject.restaurant.street_address+', '+responseObject.restaurant.city+'<br><span id="restaurantTotalRatings"></span> ratings</span><!--<a class="newDish">add dish</a>--></div>';
              Ext.getCmp('restInfoPnl').update(htmlString);
 
             var placeholder = new google.maps.Marker(
