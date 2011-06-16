@@ -5,6 +5,10 @@ require File.expand_path('../application', __FILE__)
 Crave::Application.initialize!
 
 puts Rails.env
+
+ITEMS_PER_PAGE = 25
+
+ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
     :user_name => "app518646@heroku.com",
     :password => "5b29d416c8d90bec0a",
@@ -14,8 +18,6 @@ ActionMailer::Base.smtp_settings = {
     :authentication => :plain,
     :enable_starttls_auto => true
 }
-
-ITEMS_PER_PAGE = 25
 
 
 #  TODO: change 2 your key and dublicate to production.rb

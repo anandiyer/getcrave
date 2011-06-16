@@ -6,6 +6,7 @@ gem 'rails', '3.0.7'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
+gem "rmagick", "2.13.1", :require => "RMagick"
 gem 'spatial_adapter' # To handle PostGIS datatypes
 gem 'geokit'
 gem 'friendly_id', "~> 3.2.1"

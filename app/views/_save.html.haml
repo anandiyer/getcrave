@@ -1,4 +1,4 @@
-- if @controller.controller_name === "restaurants"
+- if controller.controller_name === "restaurants"
   -#  - if is_restaurant_saved? @restaurants.id
   -#    - flag_class = "saved_item"
   -#  - else
@@ -12,6 +12,8 @@
   - if class_name_from_path == "search_index" || class_name_from_path == "user_saved_menu_items_index"
     - params[:id] = @menu_item.id
 
+
+  - @menu_item = MenuItem.find(params[:id]) if !@menu_item
 
   - if @menu_item && params[:id]
     - if is_item_saved? @menu_item.id
@@ -27,4 +29,3 @@
           = form_for(@user_saved_menu_item, :remote => true) do |f|
             = f.hidden_field :user_id, :value => current_user.id if current_user
             = f.hidden_field :menu_item_id, :value => @menu_item.id
-

@@ -16,7 +16,7 @@ development:
   database: getcrave_dev
   template: template_postgis
   pool: 5
-  username: almazom
+  username: postgres
 
 #  adapter: mysql2
 #  encoding: utf8

@@ -21,8 +21,6 @@ class UserSavedMenuItemsController < ApplicationController
 #     end
 
 #    @user_saved_menu_items = MenuItem
-
-
      
     params_for_index_and_show_menu_items_saved
 
@@ -125,7 +123,6 @@ class UserSavedMenuItemsController < ApplicationController
   end
 
   def params_for_index_and_show_menu_items_saved
-
     if !params[:limit].nil?
       @limit = params[:limit]
     else
@@ -136,7 +133,7 @@ class UserSavedMenuItemsController < ApplicationController
 
     @menu_items = MenuItem.find(:all,
           :joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id",
-          :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
+          :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, menu_item_avg_rating_count.count DESC",
           # :include => :menu_item_avg_rating_count,
           :limit => @limit)
 

@@ -29,7 +29,11 @@
 
     -#if on page we have upload option
     = javascript_include_tag  "plugins/plupload/plupload.js", "plugins/plupload/plupload.flash.js", "plugins/plupload/plupload.html5.js"
-    = javascript_include_tag   "plupload_initialize.js"
+
+    = javascript_tag do
+      = render :partial => "/plupload_init.js"
+
+    -#= javascript_include_tag   "plupload_initialize.js"
 
     = javascript_include_tag  "coffee"
 
@@ -43,9 +47,7 @@
     = csrf_meta_tag
 
   - if params[:lat] then data = {:latitude => params[:lat], :longitude => params[:long]}  else data = "" end
-  %body.two-col.bp{:data => data}
-
-
+  %body.two-col.bp{:data => data, :rel => ITEMS_PER_PAGE}
     #page
       #container
         #header
@@ -64,6 +66,12 @@
 
               #in in
         #content_wrap
+          - if controller.action_name == "nearby_loading"
+            #get_nearby_loading
+              = image_tag "activity_indicator.gif"
+              #locating
+                Locating...
+
           #content
             =yield
           = render :partial => "/sidebar"

@@ -1,11 +1,11 @@
 #buttons_wrapper.user_buttons_wrapper
-  - @controller.action_name == "show" ? class_name = "on" : class_name = "off"
+  - controller.action_name == "show" ? class_name = "on" : class_name = "off"
   = link_to user_path @selected_user.id do
     #dishes_icon{:class => class_name+" dishbutton"}
       #left_side &nbsp;
       %span Reviews
       (#{@selected_user.reviews.count})
-  - @controller.action_name == "saved" ? class_name = "on" : class_name = "off"
+  - controller.action_name == "saved" ? class_name = "on" : class_name = "off"
   = link_to saved_user_path @selected_user.id do
     #restaurant_icon{:class => class_name+" dishbutton"}
       #left_side &nbsp;
@@ -13,7 +13,7 @@
       (#{@selected_user.saved.count})
 
 
-  - @controller.action_name == "following" ? class_name = "on" : class_name = "off"
+  - controller.action_name == "following" ? class_name = "on" : class_name = "off"
   = link_to following_user_path @selected_user.id do
     #restaurant_icon{:class => class_name+" dishbutton"}
       #left_side &nbsp;
@@ -21,7 +21,7 @@
       (#{@selected_user.following.count})
 
 
-  - @controller.action_name == "followers" ? class_name = "on" : class_name = "off"
+  - controller.action_name == "followers" ? class_name = "on" : class_name = "off"
   = link_to followers_user_path @selected_user.id do
     #restaurant_icon{:class => class_name+" dishbutton"}
       #left_side &nbsp;

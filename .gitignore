@@ -10,7 +10,6 @@ config/database.yml
 .idea/inspectionProfiles
 .idea/inspectionProfiles/
 .idea/workspace.xml
-*.rvmrc
 /log/
-log/development.log
 tmp
+/.bundle/

@@ -1,6 +1,8 @@
 #require 'rmagick'
 #require 'open-uri'
 require "uuidtools"
+#require 'RMagick'
+#require 'fileutils'
 
 # Monkey patching to include the 'distance' attribute in menu_items
 module Geokit
@@ -15,14 +17,33 @@ module Geokit
 end
 
 class MenuItemsController < ApplicationController
-  before_filter :get_restaurant
+  before_filter :get_restaurant, :except => :nearby_loading
   before_filter :signed_in?, :only => [:upload_photo]
 
   layout "general"
   
-  def location
+  def nearby_loading
 
+  end
+
+  def location
     params_4_location_and_show_menu_item_nearby
+
+
+    if !cookies[:lat] && !cookies[:long]
+      how_much = 15
+      cookies[:lat] = {
+        :value => params[:lat],
+        :expires => how_much.minutes.from_now.utc
+      }
+
+      cookies[:long] = {
+        :value => params[:long],
+        :expires => how_much.minutes.from_now.utc
+      }
+    end
+
+
 
     respond_to do |format|
       format.html # location.html.haml
@@ -90,26 +111,38 @@ class MenuItemsController < ApplicationController
 #  end
 
   def upload_photo
-#    if signed_in?
-    p "upload_photo"
-    p params[:id].blank?
-    p "id"
-    
-      if params[:file] && (params[:file].content_type.to_s.index("image") == 0 )
-        p temp_file = params[:file].tempfile
+
+
+
+    if params[:file] && (params[:file].content_type.to_s.index("image") == 0 )
+        temp_file = params[:file].tempfile
+
         filename = UUIDTools::UUID.random_create.to_s+".jpg"
 
-        AWS::S3::S3Object.store(filename, temp_file.read, BUCKET, :access => :public_read)
-        url = AWS::S3::S3Object.url_for(filename, BUCKET, :authenticated => false)
-        
+#        thumb_name = "menu_items_"+params[:id]
+
+#        croped_image
+#        img = Magick::Image.read(params[:file].tempfile.path).first
+#        thumbnail = img.thumbnail(141,141)
+#        thumbnail.write "public/"+thumb_name+".png"
+
+#        if !session[thumb_name]
+#          session[:thumb_name] = "have thumbnail"
+#
+#          AWS::S3::S3Object.store(thumb_name, thumbnail, BUCKET, :access => :public_read)
+#          p thumb_url = AWS::S3::S3Object.url_for(thumb_name, BUCKET, :authenticated => false)
+#        end
+
+         AWS::S3::S3Object.store(filename, temp_file.read, BUCKET, :access => :public_read)
+         p url = AWS::S3::S3Object.url_for(filename, BUCKET, :authenticated => false)
+
+
         if params[:uuid] == "undefined"
           menu_item_photo = MenuItemPhoto.new
           menu_item_photo.menu_item_id = params[:id]
           menu_item_photo.user_id = current_user.id if current_user
-
-          p menu_item_photo.photo = url
-
-          menu_item = MenuItem.find(params[:id])
+          menu_item_photo.photo = url
+          menu_item = MenuItem.find_by_id(params[:id])
           menu_item.menu_item_photos << menu_item_photo
 
           render :partial => "gallery_link"
@@ -119,7 +152,9 @@ class MenuItemsController < ApplicationController
 #          temp.image_name = filename.to_s
 #          temp.save did not work (())
 #          TODO: Anand? can you refactor me?
-          TempImage.find_by_sql("INSERT INTO temp_images(hash, image_name) VALUES ('"+params[:uuid]+"', '"+filename+"')")
+
+         p "insert into temp_image"
+          TempImage.find_by_sql("INSERT INTO temp_images(hash, image_name) VALUES ('"+params[:uuid]+"', '"+url+"')")
 
           render :nothing => true
 #          temp.save
@@ -128,12 +163,7 @@ class MenuItemsController < ApplicationController
 #        plupload can filter file types
         raise "wrong type of file"
       end
-#    else
-#      p "temp image save"
-#    end
-#    else
-#      raise "not signed in"
-#    end
+
   end
 
 
@@ -168,10 +198,8 @@ class MenuItemsController < ApplicationController
   # POST /menu_items
   # POST /menu_items.xml
   def create
-
     uuid = params[:menu_item][:uuid]
     params[:menu_item].delete("uuid")
-
 
     @menu_item = MenuItem.new(params[:menu_item])
 
@@ -190,21 +218,20 @@ class MenuItemsController < ApplicationController
 
 
         photos = TempImage.where(:hash => uuid)
-
         photos.map{|ph| ph.image_name}.each do |p|
           mip = MenuItemPhoto.new
           mip.menu_item_id = @menu_item.id
-          mip.photo = @menu_item.photo
+          mip.photo = p
           mip.user_id = current_user.id
           mip.save
         end
-
         photos.delete_all
 
-        format.html { redirect_to(@menu_item, :notice => 'Menu item was successfully created.') }
-        format.xml  { render :xml => @menu_item, :status => :created, :location => @menu_item }
-        format.json  { render :json => @menu_item, :status => :created, :location => @menu_item }
-        format.js  { render :js => "window.close_modal()" }
+#        format.html { redirect_to(@menu_item, :notice => 'Menu item was successfully created.') }
+#        format.xml  { render :xml => @menu_item, :status => :created, :location => @menu_item }
+#        format.json  { render :json => @menu_item, :status => :created, :location => @menu_item }
+        format.js  { render :js => "window.close_modal(); window.cl(#{@menu_item.id.to_s})" }
+
       end
     end
   end
@@ -314,6 +341,5 @@ class MenuItemsController < ApplicationController
       # sorts by distance as opposed to by rating
       @menu_items.sort_by_distance_from(@origin)
     end
-
   end
 end

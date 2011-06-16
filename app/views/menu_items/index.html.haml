@@ -1,3 +1,4 @@
+= render :partial => "restaurants/modal_add_item"
 #content
   #current_content_block
     #bread_crumbs
@@ -43,7 +44,7 @@
           -["Rating", "Other"].each do |x|
             %li= x
     #reviews_wrapper{:class => class_name_from_path}
-      #update_place_restaurants{:class => @controller.controller_name+"_"+@controller.action_name}
+      #update_place_restaurants{:class => class_name_from_path}
         = render :partial => "/items_grouped_by_stars"
 
 

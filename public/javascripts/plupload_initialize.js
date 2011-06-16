@@ -4,15 +4,15 @@ window.pl_all = (function(uuid) {
     if ($("a#plupload").length > 0) {
 
         id = $("#current_info_wrapper").data("menu_item_id");
-        console.log(uuid)
-        path = "/items/" + id + "/upload_photo?uuid="+uuid;
+        console.log(uuid);
+        path = "/items/" + id + "/upload_photo?uuid="+uuid+"?current_user_id="+$(".current_user").attr("rel");
 
         window.uploader = new plupload.Uploader({
-            runtimes : 'html5,flash',
+            runtimes : 'html5',
             browse_button : 'plupload',
             max_file_size : '10mb',
             url : path,
-            flash_swf_url : '/plupload/js/plupload.flash.swf',
+//            flash_swf_url : '/plupload/js/plupload.flash.swf',
             filters : [
                 {title : "Image files", extensions : "jpg,gif,png"},
 

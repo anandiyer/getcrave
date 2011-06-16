@@ -2,5 +2,5 @@
 = render :partial => "/nearby_buttons"
 
 #reviews_wrapper{:class => class_name_from_path}
-  #update_place_restaurants{:class => @controller.controller_name+"_"+@controller.action_name}
+  #update_place_restaurants{:class => class_name_from_path}
     = render :partial => params[:search_restaurants] ? "result_restaurants" : "result_menu_items"

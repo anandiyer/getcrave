@@ -36,7 +36,13 @@ class UsersController < ApplicationController
 #  to show current user save items
   def saved
     params_4_show_and_saved
-    @user_saved_menu_items = User.find(params[:id]).saved
+    @user_id = params[:id]
+    @conditions = "user_id = #{@user_id}"
+    
+    @user_saved_menu_items = UserSavedMenuItem.find(:all,
+      :conditions => @conditions,
+      :joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = user_saved_menu_items.menu_item_id",
+      :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, menu_item_avg_rating_count.count DESC")
   end
 
 
