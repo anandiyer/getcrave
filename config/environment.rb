@@ -14,7 +14,7 @@ ActionMailer::Base.smtp_settings = {
     :password => "5b29d416c8d90bec0a",
     :domain => "getcrave.com",
     :address => "smtp.sendgrid.net",
-    :port => 587,
+    :port => 25,
     :authentication => :plain,
     :enable_starttls_auto => true
 }
