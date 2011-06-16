@@ -27,7 +27,7 @@
       - if current_user
         = link_to "Saved", saved_user_path(current_user.id)
       - else
-        - title = "Please sign in to see your saved items!"
+        - title = "Please sign in to see your saved items"
         = link_to_function("Saved", "window.show_dialog(\"#{title}\")")
 
 
@@ -38,7 +38,7 @@
       - if current_user
         = link_to "Foodies", "#"
       - else
-        - title = "Please sign in to see foodies!"
+        - title = "Please sign in to check out our Foodies"
         = link_to_function("Foodies", "window.show_dialog(\"#{title}\")")
 
 
@@ -48,5 +48,5 @@
       - if current_user
         = link_to "Profile", user_path(current_user.friendly_id)
       - else
-        - title = "Please sign in to see Profile!"
+        - title = "Please sign in to see your profile"
         = link_to_function("Profile", "window.show_dialog(\"#{title}\")")

@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   before_filter :get_selected_user, :only => [:saved, :show, :followers, :following]
 
   def index
-    
     if params[:limit] && !params[:limit].empty?
       @limit = params[:limit].to_i
       @users = User.find(:all, :limit => @limit)
@@ -43,6 +42,12 @@ class UsersController < ApplicationController
       :conditions => @conditions,
       :joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = user_saved_menu_items.menu_item_id",
       :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, menu_item_avg_rating_count.count DESC")
+      
+      respond_to do |format|
+        format.html
+        format.xml  { render :xml => @user_saved_menu_items.to_xml }
+        format.json  { render :xml => @user_saved_menu_items.to_json }
+      end
   end
 
 

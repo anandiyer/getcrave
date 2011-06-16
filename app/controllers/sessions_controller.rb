@@ -11,7 +11,9 @@ class SessionsController < ApplicationController
         500034335, #anand
         80900323, #rich
         80900324, #sara
-        662773250 #artignor
+        662773250, #artignor
+        6200447, #cyrus
+        6239115 #greg
       ]
       
       if (!ids.include?(auth['uid'].to_i))
