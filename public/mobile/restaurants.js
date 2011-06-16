@@ -1,3 +1,47 @@
+restaurantTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><img src="../images/no-image-default.png" class="dishImg"><div class="dishListinfo"><span class="dishname">{name}</span><span class="distanceFigure">{[this.distDisplay(values.distance)]}</span></div><span class="chevrony"></span></span></div></tpl>',
+    {distDisplay: function(miles) {
+        feet = Math.round(miles * 5280);
+        if(feet<1000) {
+            return feet+" feet";
+        } else {
+            return parseFloat(miles).toFixed(1)+' miles';
+        }
+    }});
+
+restaurantDishTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><img src="../images/no-image-default.png" class="dishImg"><div class="dishListinfo"><span class="dishname">{name}</span><span class="restaurantName">{rating_count}</span></div><span class="chevrony"></span></span></div></tpl>');
+
+Ext.regModel('RestaurantDish',
+{
+    fields: ['name','id','price','description','restaurant_id','restaurant','distance','menu_item_avg_rating_count','avg_rating','count',{
+        name: 'rating',
+        convert: function(value, record) {
+            if(record.get('menu_item_avg_rating_count').avg_rating) {
+                return record.get('menu_item_avg_rating_count').avg_rating.toString();
+            } else {
+                return "unrated";
+            }
+        }
+    },{
+        name: 'rating_count',
+        convert: function(value, record) {
+            if(record.get('menu_item_avg_rating_count').count) {
+                if(record.get('menu_item_avg_rating_count').count.toString()=="1") {
+                    return record.get('menu_item_avg_rating_count').count.toString()+" review";
+                } else {
+                    return record.get('menu_item_avg_rating_count').count.toString()+" reviews";
+                }
+            } else {
+                return "";
+            }
+        }
+    },{
+        name: 'restaurant_name',
+        convert: function(value, record) {
+            return record.get('restaurant').name.toString();
+        }
+    }]
+});
+
 Ext.regModel('Restaurants',
 {
     fields: ['distance','name','id']
@@ -23,7 +67,7 @@ var places = new Ext.data.Store({
 });
 
 var singleRestaurantStore = new Ext.data.Store({
-    model: 'Dish',
+    model: 'RestaurantDish',
     sorters: [{property: 'arating', direction: 'ASC'}],
     getGroupString : function(record) {
         rating = parseInt(record.get('rating'));
@@ -62,15 +106,15 @@ function placeDisplay(record, index) {
 
     singleRestaurantStore.load(function(){
         Ext.getCmp('mainPnl').setActiveItem(2);
-        /* singleRestaurantStore.each(function() {
+        singleRestaurantStore.each(function() {
            console.log(this);
         });
-        */
+        
         //loop to count the total reviews here? and add them to htmlString by id?
     });
 
     Ext.Ajax.request({
-        url: (urlPrefix+'/places/'+record.data.id+'.json'),
+        url: (urlPrefix+'/places/'+record.data.id+'/details.json'),
         reader: {
              type: 'json'
         },
@@ -272,7 +316,9 @@ var reviewForm = new Ext.form.FormPanel({
 
 function dishDisplay(response) {
     console.log('displaying dish');
+    console.log(response);
     var responseObject = eval('(' + response.responseText + ')');
+    console.log(response);
     htmlString = '<div class="dishinfo"><b>'+responseObject.menu_item.name+'</b><br/>';
     htmlString += '@'+responseObject.menu_item.restaurant.name+'<br>';
     htmlString += '$ '+responseObject.menu_item.price+'<br>';
@@ -317,7 +363,7 @@ function dishDisplay(response) {
 
 var aRestaurantList = new Ext.List({
     id:'aRestaurantList',
-    itemTpl: dishTemplate,
+    itemTpl: restaurantDishTemplate,
     singleSelect: true,
     grouped: true,
     indexBar: false,
@@ -333,9 +379,9 @@ var aRestaurantList = new Ext.List({
 
 aRestaurantList.on('itemtap', function(dataView, index, item, e) {
     record = dataView.store.data.items[index];
-    console.log(urlPrefix+'/menu_items/'+record.data.id+'.json');
+    console.log(urlPrefix+'/items/'+record.data.id+'.json');
     Ext.Ajax.request({
-        url: (urlPrefix+'/menu_items/'+record.data.id+'.json'),
+        url: (urlPrefix+'/items/'+record.data.id+'.json'),
         reader: {
              type: 'json'
         },

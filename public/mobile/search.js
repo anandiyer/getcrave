@@ -29,7 +29,7 @@ var restaurantSearchStore = new Ext.data.Store({
 });
 
 var restaurantSearchList = new Ext.List({
-    itemTpl: dishTemplate,
+    itemTpl: restaurantTemplate,
     singleSelect: true,
     grouped: false,
     indexBar: false,
@@ -38,7 +38,7 @@ var restaurantSearchList = new Ext.List({
 
 restaurantSearchList.on('itemtap', function(dataView, index, item, e) {
     record = dataView.store.data.items[index];
-    dishDisplay(record, index);
+    placeDisplay(record, index);
 });
 
 var dishSearchList = new Ext.List({
@@ -53,7 +53,7 @@ var dishSearchList = new Ext.List({
 dishSearchList.on('itemtap', function(dataView, index, item, e) {
     record = dataView.store.data.items[index];
     Ext.Ajax.request({
-        url: (urlPrefix+'/menu_items/'+record.data.id+'.json'),
+        url: (urlPrefix+'/items/'+record.data.id+'.json'),
         reader: {
              type: 'json'
         },
