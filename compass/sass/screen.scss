@@ -218,9 +218,10 @@ body.two-col.bp{
         color: #464646;
     }
     background-color: $body_back_gray;
-    font-size: 14px;
+    font-size: 13px;
     color: #464646;
     text-align: left;
+	line-height:21px;
 
 
     h1.current_title {
@@ -287,7 +288,7 @@ body.two-col.bp{
                     margin: 0;
                     @include inline-block;
                     white-space: nowrap;
-
+					font-size:14px;
                     padding:0 0 0 16px;
                     color: white;
                     a{
@@ -480,7 +481,7 @@ body.two-col.bp{
                     $content-columns: ceil(3);
                     @include column($content-columns, true);
                     white-space: nowrap;
-
+					font-size:14px;
                     padding: 2px 40px 0 0;
                     a{
                         font-weight:bold;
@@ -550,7 +551,7 @@ body.two-col.bp{
                     padding: 0 0 0 0;
                     margin: 0;
                     width: 148px;
-                    height: 26px;
+                    height: 30px;
                     /*background: url(/images/dishes_icon.png) no-repeat 0 0;*/
                     position: relative;
                     text-align: center;
@@ -871,7 +872,7 @@ body.two-col.bp{
                     .star_sm{
                         width: 150px;
                         @include container;
-                        margin: 0 0 10px 0;
+                        margin: 0 0 5px 0;
                     }
                     table{
                         padding: 0px;
@@ -946,7 +947,7 @@ body.two-col.bp{
                     .restaurant_menu_item_wrapper.search_index, .restaurant_menu_item_wrapper.menu_items_location, .restaurant_menu_item_wrapper.menu_items_show_menu_items_nearby, .restaurant_menu_item_wrapper.restaurants_index, .restaurant_menu_item_wrapper.user_saved_menu_items_index, .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved{
                         .numbers{
                             font-weight: bold;
-                            font-size:15px;
+                            font-size:14px;
 
                             $content-columns: ceil(1);
                             @include column($content-columns, true);
@@ -981,8 +982,9 @@ body.two-col.bp{
                             font-size: 12px;
                             font-weight: normal;
                             line-height: 16px;
-                            top: 71px;
+                            top: 67px;
                             left: 560px;
+							color:#666666;
                             div{
                                 font-size: 15px;
                                 font-weight: bold;
@@ -1005,10 +1007,12 @@ body.two-col.bp{
                                 color: $blue;
                                 padding:0 0 3px 0;
                                 margin:0;
-                                font-size: 18px;
+                                font-size: 14px;
+								font-weight: bold;
                             }
                             a{
                                 text-decoration: none;
+								line-height:21px;
                             }
                         }
                         .save_n_review_3_col{
@@ -1133,8 +1137,9 @@ body.two-col.bp{
                     h1{
                         padding:0;
                         margin:0;
-                        font-size: 20px;
+                        font-size: 14px;
                         float: left;
+						font-weight:bold;
                         a{
                             text-decoration: none;
                         }
