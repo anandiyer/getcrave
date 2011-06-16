@@ -55,6 +55,9 @@ Crave::Application.routes.draw do
     collection do
       get 'search', 'show_restaurants_nearby'
     end
+    member do
+      get 'details'
+    end
   end
 
   resources :users do

@@ -1,6 +1,5 @@
 class RestaurantsController < ApplicationController
-  # GET /restaurants
-  # GET /restaurants.xml
+
 
   layout "general"
 
@@ -17,9 +16,16 @@ class RestaurantsController < ApplicationController
       format.json { render :json => @restaurants }
     end
   end
+  
+  def details
+    @restaurant = Restaurant.find_by_id(params[:id])
 
-  # GET /restaurants/1
-  # GET /restaurants/1.xml
+    respond_to do |format|
+      format.json { render :json => @restaurant}
+      format.xml  { render :xml => @restaurant }
+    end
+  end
+
   def show
     redirect_to restaurant_menu_items_path(params[:id])
   end
