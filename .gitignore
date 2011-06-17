@@ -13,3 +13,4 @@ config/database.yml
 /log/
 tmp
 /.bundle/
+public/coffeescripts/coffee.js

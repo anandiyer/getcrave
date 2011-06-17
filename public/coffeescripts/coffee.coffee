@@ -405,7 +405,7 @@ $(document).ready ->
 
 #   google maps in homepage neary
 
-    set_gmap(10) if $("#map").length >0 && window.location.port.indexOf("3006") > 0
+    set_gmap(13) if $("#map").length >0
 
 
 
@@ -509,7 +509,7 @@ $(document).ready ->
         success: (html) ->
             after_send(obj, html)
             $("#show_more_button").attr("data-next",new_limits*2)
-            set_gmap(10)
+            set_gmap(13)
 #            $.get('/menu_items/update_map')
 
         });

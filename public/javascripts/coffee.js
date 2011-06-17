@@ -389,8 +389,8 @@
         return close_labels_selectbox();
       }
     });
-    if ($("#map").length > 0 && window.location.port.indexOf("3006") > 0) {
-      set_gmap(10);
+    if ($("#map").length > 0) {
+      set_gmap(13);
     }
     $(".yes_answer").live("click", function(event) {
       var form, found_helpfull_number, increment, link, link_text;
@@ -474,7 +474,7 @@
         success: function(html) {
           after_send(obj, html);
           $("#show_more_button").attr("data-next", new_limits * 2);
-          return set_gmap(10);
+          return set_gmap(13);
         }
       });
     });
