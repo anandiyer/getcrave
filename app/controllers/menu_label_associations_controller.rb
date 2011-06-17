@@ -59,7 +59,7 @@ class MenuLabelAssociationsController < ApplicationController
           format.js { render :partial => "menu_items/labels_list" }
         end
       else
-        format.js { render :js => "window.g_notice('Warning!','You added this label before!')" }
+        format.js { render :js => "window.g_notice('Sorry','You have already up-voted this label')" }
       end
     end
   end
