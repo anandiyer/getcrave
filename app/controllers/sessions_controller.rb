@@ -45,15 +45,16 @@ class SessionsController < ApplicationController
     self.current_user = @auth.user
 
     # If coming from an iPhone, redirect to another page with the user_id
-    if is_iphone_request?
-      redirect_to "/mobile/uid/?uid=" + current_user.id.to_s
-    else
+    # TODO: turning off autoredirects while in alpha
+    #if is_iphone_request?
+    #  redirect_to "/mobile/uid/?uid=" + current_user.id.to_s
+    #else
       if (session[:redirect_to] && !session[:redirect_to].empty?)
         redirect_to session[:redirect_to]
       else
         redirect_to request.env['omniauth.origin'] || search_index_path
       end
-    end
+    # end
   end
   
   def destroy
