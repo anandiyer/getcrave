@@ -38,7 +38,7 @@ $orange: #f2663a;
 $body_back_gray: #f4f4f4;
 $light_gray: #ececec;
 $dark_gray: #666;
-$gray: #a0a0a0;
+$gray: #999;
 $blue: #2e70a4;
 
 $stars_position: 0 -635px;
@@ -109,7 +109,7 @@ body.two-col.bp{
             display: block;
             font-weight: bold;
             position: absolute;
-            top:4px;
+            top:8px;
             left: 642px;
         }
     }
@@ -143,6 +143,7 @@ body.two-col.bp{
             float: right;
             width: 350px;
             text-align:right;
+			padding-right:15px;
         }
 
         .left_footer_column{
@@ -387,33 +388,34 @@ body.two-col.bp{
 
         #navigation_wrap_search{
             background:url(/images/gray_back.png) no-repeat -3px 0;
-            height: 48px;
+            height: 50px;
             position: relative;
             margin: 0 0 0 8px;
             img.fields{
-                padding: 5px 4px 0 11px;
+                padding: 8px 4px 0 11px;
             }
 
             input:not([class="search"]){
                  position: absolute;
                  color: #999999;
                  border: none;
-                 top: 10px;
+                 top: 13px;
                  font-size: 16px;
             }
             input#q{
-                left: 19px;
+                left: 18px;
                 width: 365px;
+				font-family: helvetica neue,helvetica,arial,sans-serif;
             }
             input.second_search_input{
                 left: 438px;
                 width: 166px;
-
+				font-family: helvetica neue,helvetica,arial,sans-serif;
             }
 
             div#in{
                 position: absolute;
-                top:12px;
+                top:14px;
                 left:403px;
             }
         }
@@ -519,12 +521,18 @@ body.two-col.bp{
                 #dishes_icon.off{
                     color: $gray;
                     border-right: 1px solid #dcdcdc;
-
+					font-size:14px;
+					text-shadow:0px 1px #f9f9f9;
+					height:26px;
+					cursor:pointer;
                 }
 
                 a{
                   #dishes_icon{
-                    color: $dark_gray;
+                    color: #464641;
+					font-size:14px;
+					text-shadow:0px 1px #f9f9f9;
+					height:26px;
                   }
                 }
 
@@ -779,7 +787,9 @@ body.two-col.bp{
                         }
 
                         #rating{
-                            padding: 5px 0 0 0;
+                            padding:0;
+							font-size: 14px;
+							line-height: 21px;
                         }
                         #desc_wrap_rest{
                             #description{
@@ -836,6 +846,9 @@ body.two-col.bp{
 
             #reviews_wrapper.users_saved, #reviews_wrapper.search_index, #reviews_wrapper.users_following,#reviews_wrapper.users_followers, #reviews_wrapper.users_show, #reviews_wrapper.users, #reviews_wrapper.menu_items, #reviews_wrapper.restaurants_index, #reviews_wrapper.user_saved_menu_items_index, .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved{
                 border-top: none;
+				margin-top:0px;
+				padding-top:0px;
+				padding-left:0px;
 
             }
 
@@ -969,7 +982,7 @@ body.two-col.bp{
                         @include container;
                         height: 95px;
                         border-top: 1px solid $light_gray;
-                        padding:10px 0 0 0;
+                        padding:10px 10px 0 10px;
                         $content-columns: ceil(15);
                         @include column($content-columns, true);
                         position: relative;
@@ -1089,8 +1102,10 @@ body.two-col.bp{
                             width: 100px;
                             border:none;
                             background: transparent;
-                            padding: 6px 0 0 9px;
-                            color: black;
+                            padding: 10px 0 0 9px;
+                            color: #464646;
+							font-size: 14px;
+							font-family: helvetica neue,helvetica,arial,sans-serif;
                         }
                         ul{
                             -moz-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
@@ -1132,7 +1147,7 @@ body.two-col.bp{
                     $content-columns: ceil(15);
                     @include column($content-columns, true);
                     border-bottom: 1px solid $light_gray;
-                    padding: 10px 0 5px 0;
+                    padding: 10px 10px 6px 10px;
 
                     h1{
                         padding:0;
@@ -1182,12 +1197,12 @@ body.two-col.bp{
                         }
 
                         .helpful_block{
-                            margin-top: 11px;
+                            margin-top: 0px;
 
                             .before_answer_block{
                                 float: left;
-                                font-size: 12px;
-                                padding-top: 3px;
+                                font-size: 13px;
+                                line-height: 21px;
                             }
                             span.yes_answer{
                                 @include inline-block;
@@ -1224,6 +1239,7 @@ body.two-col.bp{
                             white-space: nowrap;
                             color: $gray;
                             font-style:italic;
+							padding-right: 10px;
                         }
 
                         .before_star{
@@ -1341,7 +1357,7 @@ body.two-col.bp{
 }
 
 .i{
-    font-style: italic;
+    font-style: normal;
 }
 
 
@@ -1356,7 +1372,7 @@ body.two-col.bp{
     display:none;
 
 
-    background-color: black;
+    background-color: none;
     z-index: 200;
     @include opacity(.4);
 }
@@ -1492,10 +1508,10 @@ body.two-col.bp{
 
     .text{
         position: absolute;
-        top: 4px;
+        top: 5px;
         left: 25px;
         text-shadow:1px 1px 1px #ffffff;
-        font-size: 15px;
+        font-size: 14px;
         cursor: pointer;
 
     }
