@@ -205,17 +205,18 @@ class MenuItemsController < ApplicationController
 
     respond_to do |format|
       if @menu_item.save
-        labels = params[:dish][:label].gsub(/ /,"").split(",").delete_if{|l| l.size <2}.uniq
-        labels_ids = MenuLabel.where(:menu_label => labels).select("id").map{|i| i.id}
+        if (params[:dish] && params[:dish][:label] && !params[:dish][:label].empty?)
+          labels = params[:dish][:label].gsub(/ /,"").split(",").delete_if{|l| l.size <2}.uniq
+          labels_ids = MenuLabel.where(:menu_label => labels).select("id").map{|i| i.id}
 
-        labels_ids.each do |label_id|
-          ma = MenuLabelAssociation.new
-          ma.menu_item_id = @menu_item.id
-          ma.menu_label_id = label_id
-          ma.user_id = current_user.id
-          ma.save
-        end
-
+          labels_ids.each do |label_id|
+            ma = MenuLabelAssociation.new
+            ma.menu_item_id = @menu_item.id
+            ma.menu_label_id = label_id
+            ma.user_id = current_user.id
+            ma.save
+          end
+        end 
 
         photos = TempImage.where(:hash => uuid)
         photos.map{|ph| ph.image_name}.each do |p|
@@ -228,8 +229,8 @@ class MenuItemsController < ApplicationController
         photos.delete_all
 
 #        format.html { redirect_to(@menu_item, :notice => 'Menu item was successfully created.') }
-#        format.xml  { render :xml => @menu_item, :status => :created, :location => @menu_item }
-#        format.json  { render :json => @menu_item, :status => :created, :location => @menu_item }
+        format.xml  { render :xml => @menu_item, :status => :created, :location => @menu_item }
+        format.json { render :json => @menu_item, :status => :created, :location => @menu_item }
         format.js  { render :js => "window.close_modal(); window.cl(#{@menu_item.id.to_s})" }
 
       end
