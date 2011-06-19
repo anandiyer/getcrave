@@ -5,6 +5,26 @@ class UsersController < ApplicationController
 
   before_filter :get_selected_user, :only => [:saved, :show, :followers, :following]
 
+  def following_reviews
+    # 1. find all the people this user is following
+    # 2. find all those users reviews ordered reverse chronologically
+    
+    @user_id = params[:id] ? params[:id] : current_user.id;
+    
+    if (@user_id)
+      @conditions = "user_followings.user_id = #{@user_id}"
+
+      @menu_item_ratings = MenuItemRating.find(:all,
+      :joins => 'INNER JOIN user_followings ON user_followings.following_user_id = menu_item_ratings.user_id',
+      :conditions => @conditions,
+      :order => 'updated_at DESC')
+      
+        respond_to do |format|
+          format.html
+        end
+    end
+  end
+
   def index
     if params[:limit] && !params[:limit].empty?
       @limit = params[:limit].to_i

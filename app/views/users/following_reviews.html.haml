@@ -1,0 +1,33 @@
+#reviews_wrapper{:class => class_name_from_path}
+  #update_place_restaurants{:class => class_name_from_path}
+    #reviews_wrapper_bloc_wrapper
+
+      - @menu_item_ratings.each do |@mi_rating|
+
+        - if @mi_rating.user_id?
+          .reviews_wrapper_block
+            .review_image_col
+              =image_tag "reviews_avatar_temp.png"
+              #click &nbsp;
+
+            .review_desc_col_wrapper
+              %h1
+                = link_to @mi_rating.menu_item.name, @mi_rating.menu_item
+
+              .before_start
+                .data_review
+                  =@mi_rating.updated_at.strftime("%b %d, %Y")
+
+              -rating = @mi_rating.rating ? @mi_rating.rating : 0
+              .star_sm{:class => "star_sm stars_"+stars_class_normalize(@mi_rating.rating), :id => @mi_rating.id, :data => {:rating => rating, :model => "menu_item_ratings"}} &nbsp;
+              %em
+                by 
+                =link_to @mi_rating.user.user_name, user_path(@mi_rating.user_id)
+              .review_body_head
+                =@mi_rating.review
+
+              .helpful_block
+                .before_answer_block.gray
+                  = @mi_rating.menu_item_rating_helpfuls.count.to_s
+                  foodies found this helpful
+

@@ -30,14 +30,13 @@
         -#TODO: almazom. bad catching exception (((
         - begin
           - if @menu_item.menu_item_avg_rating_count
-            - avg = @menu_item.menu_item_avg_rating_count.avg_rating.round
+            - avg = @menu_item.menu_item_avg_rating_count.avg_rating
           - else
             - avg = 0
         - rescue
           - avg = 0
 
-        -class_name ="stars_"+avg.to_s
-        #star_average{:class => class_name.gsub(/[.]/, '_'), :data =>{:rating => avg}} &nbsp;
+        #star_average{:class => "star_sm stars_"+stars_class_normalize(avg), :data =>{:rating => avg}} &nbsp;
       #rating
         -if @menu_item.menu_item_avg_rating_count
           %span= @menu_item.menu_item_avg_rating_count.count

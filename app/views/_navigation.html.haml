@@ -36,7 +36,7 @@
       .left_corner
         .icon_corner
       - if current_user
-        = link_to "Foodies", "#"
+        = link_to "Foodies", "/foodies"
       - else
         - title = "Please sign in to check out our Foodies"
         = link_to_function("Foodies", "window.show_dialog(\"#{title}\")")

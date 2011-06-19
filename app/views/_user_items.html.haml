@@ -28,7 +28,6 @@
             .data_review
               =@mi_rating.updated_at.strftime("%b %d, %Y")
 
-
           -rating = @mi_rating.rating ? @mi_rating.rating : 0
           .star_sm{:class => "star_sm stars_"+@mi_rating.rating.to_s.gsub(/[.]/, '_'), :id => @mi_rating.id, :data => {:rating => rating, :model => "menu_item_ratings"}} &nbsp;
           %em
