@@ -1262,25 +1262,47 @@ body.two-col.bp{
    @include container;
 }
 
-.stars_1_0, .stars_1_1, .stars_1_2, .stars_1_3, .stars_1_4, .stars_1_5 {
+.stars_1_0, .stars_1_1, .stars_1_2, {
     @include sprites(0px -722px);
     width:180px;
 }
-.stars_1_6, .stars_1_7, .stars_1_8, .stars_1_9, .stars_2_0, .stars_2_1, .stars_2_2, .stars_2_3, .stars_2_4, .stars_2_5 {
+
+.stars_1_3, .stars_1_4, .stars_1_5, .stars_1_6, .stars_1_7 {
+	@include sprites(0px -1001px);
+    width:180px;
+}
+
+.stars_1_8, .stars_1_9, .stars_2_0, .stars_2_1, .stars_2_2 {
     @include sprites(0px -701px);
     width:180px;
 }
-.stars_2_6, .stars_2_7, .stars_2_8, .stars_2_9, .stars_3_0, .stars_3_1, .stars_3_2, .stars_3_3, .stars_3_4, .stars_3_5 {
+
+.stars_2_3, .stars_2_4, .stars_2_5, .stars_2_6, .stars_2_7, {
+	@include sprites(0px -979px);
+    width:180px;
+}
+
+.stars_2_8, .stars_2_9, .stars_3_0, .stars_3_1, .stars_3_2, {
     @include sprites(0px -679px);
     width:180px;
 }
 
-.stars_3_6, .stars_3_7, .stars_3_8, .stars_3_9, .stars_4_0, .stars_4_1, .stars_4_2, .stars_4_3, .stars_4_4, .stars_4_5 {
-    @include sprites(0px -657px);
+.stars_3_3, .stars_3_4, .stars_3_5, .stars_3_6, .stars_3_7  {
+    @include sprites(0px -957px);
     width:180px;
 }
 
-.stars_4_6, .stars_4_7, .stars_4_8, .stars_4_9, .stars_5_0 {
+.stars_3_8, .stars_3_9, .stars_4_0, .stars_4_1, .stars_4_2, {
+    @include sprites(0 -657px);
+     width:180px;
+}
+
+.stars_4_3, .stars_4_4, .stars_4_5, .stars_4_6, .stars_4_7,  {
+    @include sprites(0px -935px);
+     width:180px;
+}
+
+.stars_4_8, .stars_4_9, .stars_5_0 {
     @include sprites(0px -635px);
      width:180px;
 }

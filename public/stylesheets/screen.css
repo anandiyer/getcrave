@@ -1879,7 +1879,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
 }
 
 /* line 1265, ../../compass/sass/screen.scss */
-.stars_1_0, .stars_1_1, .stars_1_2, .stars_1_3, .stars_1_4, .stars_1_5 {
+.stars_1_0, .stars_1_1, .stars_1_2 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
   background-position: 0px -722px;
@@ -1890,8 +1890,20 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1269, ../../compass/sass/screen.scss */
-.stars_1_6, .stars_1_7, .stars_1_8, .stars_1_9, .stars_2_0, .stars_2_1, .stars_2_2, .stars_2_3, .stars_2_4, .stars_2_5 {
+/* line 1270, ../../compass/sass/screen.scss */
+.stars_1_3, .stars_1_4, .stars_1_5, .stars_1_6, .stars_1_7 {
+  background-image: url("/images/sprites/icon-sprite.png");
+  background-repeat: no-repeat;
+  background-position: 0px -1001px;
+  width: 17px;
+  height: 17px;
+  float: left;
+  /*border: 1px solid red;*/
+  width: 180px;
+}
+
+/* line 1275, ../../compass/sass/screen.scss */
+.stars_1_8, .stars_1_9, .stars_2_0, .stars_2_1, .stars_2_2 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
   background-position: 0px -701px;
@@ -1902,8 +1914,20 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1273, ../../compass/sass/screen.scss */
-.stars_2_6, .stars_2_7, .stars_2_8, .stars_2_9, .stars_3_0, .stars_3_1, .stars_3_2, .stars_3_3, .stars_3_4, .stars_3_5 {
+/* line 1280, ../../compass/sass/screen.scss */
+.stars_2_3, .stars_2_4, .stars_2_5, .stars_2_6, .stars_2_7 {
+  background-image: url("/images/sprites/icon-sprite.png");
+  background-repeat: no-repeat;
+  background-position: 0px -979px;
+  width: 17px;
+  height: 17px;
+  float: left;
+  /*border: 1px solid red;*/
+  width: 180px;
+}
+
+/* line 1285, ../../compass/sass/screen.scss */
+.stars_2_8, .stars_2_9, .stars_3_0, .stars_3_1, .stars_3_2 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
   background-position: 0px -679px;
@@ -1914,11 +1938,11 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1278, ../../compass/sass/screen.scss */
-.stars_3_6, .stars_3_7, .stars_3_8, .stars_3_9, .stars_4_0, .stars_4_1, .stars_4_2, .stars_4_3, .stars_4_4, .stars_4_5 {
+/* line 1290, ../../compass/sass/screen.scss */
+.stars_3_3, .stars_3_4, .stars_3_5, .stars_3_6, .stars_3_7 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
-  background-position: 0px -657px;
+  background-position: 0px -957px;
   width: 17px;
   height: 17px;
   float: left;
@@ -1926,8 +1950,32 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1283, ../../compass/sass/screen.scss */
-.stars_4_6, .stars_4_7, .stars_4_8, .stars_4_9, .stars_5_0 {
+/* line 1295, ../../compass/sass/screen.scss */
+.stars_3_8, .stars_3_9, .stars_4_0, .stars_4_1, .stars_4_2 {
+  background-image: url("/images/sprites/icon-sprite.png");
+  background-repeat: no-repeat;
+  background-position: 0 -657px;
+  width: 17px;
+  height: 17px;
+  float: left;
+  /*border: 1px solid red;*/
+  width: 180px;
+}
+
+/* line 1300, ../../compass/sass/screen.scss */
+.stars_4_3, .stars_4_4, .stars_4_5, .stars_4_6, .stars_4_7 {
+  background-image: url("/images/sprites/icon-sprite.png");
+  background-repeat: no-repeat;
+  background-position: 0px -935px;
+  width: 17px;
+  height: 17px;
+  float: left;
+  /*border: 1px solid red;*/
+  width: 180px;
+}
+
+/* line 1305, ../../compass/sass/screen.scss */
+.stars_4_8, .stars_4_9, .stars_5_0 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
   background-position: 0px -635px;
@@ -1938,7 +1986,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1289, ../../compass/sass/screen.scss */
+/* line 1311, ../../compass/sass/screen.scss */
 .stars_2 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1950,7 +1998,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1293, ../../compass/sass/screen.scss */
+/* line 1315, ../../compass/sass/screen.scss */
 .stars_3 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1962,7 +2010,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1298, ../../compass/sass/screen.scss */
+/* line 1320, ../../compass/sass/screen.scss */
 .stars_5 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1974,7 +2022,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1302, ../../compass/sass/screen.scss */
+/* line 1324, ../../compass/sass/screen.scss */
 .stars_4 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1986,7 +2034,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1306, ../../compass/sass/screen.scss */
+/* line 1328, ../../compass/sass/screen.scss */
 .stars_1 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1998,7 +2046,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1310, ../../compass/sass/screen.scss */
+/* line 1332, ../../compass/sass/screen.scss */
 .stars_, .stars_0, .stars_0_0 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2010,7 +2058,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1317, ../../compass/sass/screen.scss */
+/* line 1339, ../../compass/sass/screen.scss */
 .star_gray {
   /*@include sprites($stars_gray_position);*/
   height: 27px;
@@ -2018,7 +2066,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   /*float: none;*/
 }
 
-/* line 1324, ../../compass/sass/screen.scss */
+/* line 1346, ../../compass/sass/screen.scss */
 .flag_icon {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2029,7 +2077,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   /*border: 1px solid red;*/
 }
 
-/* line 1328, ../../compass/sass/screen.scss */
+/* line 1350, ../../compass/sass/screen.scss */
 .save_icon.saved_item {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2041,7 +2089,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   cursor: pointer;
 }
 
-/* line 1333, ../../compass/sass/screen.scss */
+/* line 1355, ../../compass/sass/screen.scss */
 .save_icon.not_saved_item {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2053,17 +2101,17 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   cursor: pointer;
 }
 
-/* line 1338, ../../compass/sass/screen.scss */
+/* line 1360, ../../compass/sass/screen.scss */
 .h {
   display: none;
 }
 
-/* line 1341, ../../compass/sass/screen.scss */
+/* line 1363, ../../compass/sass/screen.scss */
 .himportant {
   display: none !important;
 }
 
-/* line 1347, ../../compass/sass/screen.scss */
+/* line 1369, ../../compass/sass/screen.scss */
 .plus, .birdy {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -2084,7 +2132,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   *display: inline;
 }
 
-/* line 1353, ../../compass/sass/screen.scss */
+/* line 1375, ../../compass/sass/screen.scss */
 .birdy {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2096,12 +2144,12 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   float: none;
 }
 
-/* line 1359, ../../compass/sass/screen.scss */
+/* line 1381, ../../compass/sass/screen.scss */
 .i {
   font-style: normal;
 }
 
-/* line 1366, ../../compass/sass/screen.scss */
+/* line 1388, ../../compass/sass/screen.scss */
 #mask {
   position: absolute;
   top: 0px;
@@ -2116,20 +2164,20 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   opacity: 0.4;
 }
 
-/* line 1380, ../../compass/sass/screen.scss */
+/* line 1402, ../../compass/sass/screen.scss */
 .modal_window {
   position: absolute;
   display: none;
   color: white;
   z-index: 201;
 }
-/* line 1388, ../../compass/sass/screen.scss */
+/* line 1410, ../../compass/sass/screen.scss */
 .modal_window #labels_all {
   display: none;
 }
 
 /* style a specific modal window  */
-/* line 1395, ../../compass/sass/screen.scss */
+/* line 1417, ../../compass/sass/screen.scss */
 #modal_window {
   padding: 20px;
   border: 1px solid gray;
@@ -2145,14 +2193,14 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   -khtml-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 1406, ../../compass/sass/screen.scss */
+/* line 1428, ../../compass/sass/screen.scss */
 #modal_window #close_me {
   margin: -28px -28px 0 0;
   right: 0px;
   text-align: right;
   cursor: pointer;
 }
-/* line 1415, ../../compass/sass/screen.scss */
+/* line 1437, ../../compass/sass/screen.scss */
 #modal_window .clone_me .inputs_column {
   display: inline;
   float: left;
@@ -2164,23 +2212,23 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
 * html #modal_window .clone_me .inputs_column {
   overflow-x: hidden;
 }
-/* line 1420, ../../compass/sass/screen.scss */
+/* line 1442, ../../compass/sass/screen.scss */
 #modal_window .clone_me .inputs_column .submit_wrapper {
   float: left;
   padding: 0 15px 0 0;
 }
-/* line 1425, ../../compass/sass/screen.scss */
+/* line 1447, ../../compass/sass/screen.scss */
 #modal_window .clone_me .inputs_column .cancel_adding {
   font-size: 16px;
 }
-/* line 1430, ../../compass/sass/screen.scss */
+/* line 1452, ../../compass/sass/screen.scss */
 #modal_window .clone_me .img_column {
   padding: 20px 0 0 0;
   /*#add_photo_here{*/
   /*display: none;*/
   /*}*/
 }
-/* line 1438, ../../compass/sass/screen.scss */
+/* line 1460, ../../compass/sass/screen.scss */
 #modal_window .clone_me .img_column img {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -2189,11 +2237,11 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   -khtml-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 1442, ../../compass/sass/screen.scss */
+/* line 1464, ../../compass/sass/screen.scss */
 #modal_window .clone_me .img_column nobr a {
   font-size: 12px;
 }
-/* line 1449, ../../compass/sass/screen.scss */
+/* line 1471, ../../compass/sass/screen.scss */
 #modal_window .clone_me .clone_line {
   padding: 0 0 10px 0;
   /*textarea{*/
@@ -2202,43 +2250,43 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   /*width: 320px;*/
   /*}*/
 }
-/* line 1459, ../../compass/sass/screen.scss */
+/* line 1481, ../../compass/sass/screen.scss */
 #modal_window .clone_me label {
   float: none;
   font-weight: bold;
   color: black;
   color: #474747;
 }
-/* line 1464, ../../compass/sass/screen.scss */
+/* line 1486, ../../compass/sass/screen.scss */
 #modal_window .clone_me label super {
   color: red;
 }
-/* line 1468, ../../compass/sass/screen.scss */
+/* line 1490, ../../compass/sass/screen.scss */
 #modal_window .clone_me .text_input {
   height: 30px;
   background: url("/images/sprites/button-sprite.png") no-repeat 0px -419px;
   border: 1px solid #ddd;
 }
-/* line 1473, ../../compass/sass/screen.scss */
+/* line 1495, ../../compass/sass/screen.scss */
 #modal_window .clone_me .text_input input {
   height: 21px;
   width: 320px;
   border: none;
   margin: 4px 3px 0px 10px;
 }
-/* line 1482, ../../compass/sass/screen.scss */
+/* line 1504, ../../compass/sass/screen.scss */
 #modal_window .modal_title {
   color: #787878;
   border-bottom: 1px solid #ececec;
   margin-bottom: 10px;
 }
-/* line 1486, ../../compass/sass/screen.scss */
+/* line 1508, ../../compass/sass/screen.scss */
 #modal_window .modal_title h1 {
   /*color: #787878 !important;*/
   font-size: 24px;
 }
 
-/* line 1495, ../../compass/sass/screen.scss */
+/* line 1517, ../../compass/sass/screen.scss */
 .add_photos_inline {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2249,7 +2297,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   /*border: 1px solid red;*/
 }
 
-/* line 1501, ../../compass/sass/screen.scss */
+/* line 1523, ../../compass/sass/screen.scss */
 .submit_wrapper {
   width: 98px;
   height: 33px;
@@ -2258,7 +2306,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   height: 40px;
   /*float: right;*/
 }
-/* line 1509, ../../compass/sass/screen.scss */
+/* line 1531, ../../compass/sass/screen.scss */
 .submit_wrapper .text {
   position: absolute;
   top: 5px;
@@ -2267,14 +2315,14 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   font-size: 14px;
   cursor: pointer;
 }
-/* line 1519, ../../compass/sass/screen.scss */
+/* line 1541, ../../compass/sass/screen.scss */
 .submit_wrapper .left_rounder {
   height: 33px;
   width: 8px;
   background: url("/images/sprites/button-sprite.png") no-repeat 0px -75px;
   float: left;
 }
-/* line 1527, ../../compass/sass/screen.scss */
+/* line 1549, ../../compass/sass/screen.scss */
 .submit_wrapper .submit_button {
   float: right;
   width: 90px;
@@ -2282,13 +2330,13 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   background: url("/images/sprites/button-sprite.png") no-repeat -131px -75px;
 }
 
-/* line 1536, ../../compass/sass/screen.scss */
+/* line 1558, ../../compass/sass/screen.scss */
 .plupload {
   background-color: red;
   opacity: 1;
 }
 
-/* line 1541, ../../compass/sass/screen.scss */
+/* line 1563, ../../compass/sass/screen.scss */
 .gray {
   color: #999999;
 }
