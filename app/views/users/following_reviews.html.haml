@@ -12,7 +12,7 @@
 
             .review_desc_col_wrapper
               %h1
-                = link_to @mi_rating.menu_item.name, @mi_rating.menu_item
+                = link_to @mi_rating.menu_item.name ? @mi_rating.menu_item.name : "nada", @mi_rating.menu_item
 
               .before_start
                 .data_review
