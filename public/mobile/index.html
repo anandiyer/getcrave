@@ -38,16 +38,24 @@
            console.log(dishStore.proxy.url);
            console.log(dishStore.proxy);
            console.log(dishStore);
+           dishStore.proxy.url = 'http://blooming-water-228.heroku.com/items/location.json?lat=37.77867&sort=distance&limit=2&long=-122.40127';
+           dishStore.proxy.url = 'http://localhost/wg/proxy.php?url=http://blooming-water-228.heroku.com'+encodeURIComponent('/items/location.json?lat=37.77867&sort=distance&limit=3&long=-122.40127');
+           console.log(dishStore.proxy.url);
+           dishStore.load(function() {
+               console.log('dish store loaded');
+               console.log(dishStore);
+           });
 
            navigator.geolocation.getCurrentPosition(function(position) {
+               /*
                if(urlPrefixSet) {
                    console.log('setting proxy url');
                    dishStore.proxy.url = urlPrefix+encodeURIComponent('/items/location.json?sort=distance&lat='+position.coords.latitude+'&limit=1&long='+position.coords.longitude);
                    places.proxy.url = urlPrefix+encodeURIComponent('/places.json?sort=distance&lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                } else {
                    console.log('in production');
-                   dishStore.proxy.url = '/items/location.json?lat='+position.coords.latitude+'&sort%3Ddistance&limit%3D1&long='+position.coords.longitude;
-                   places.proxy.url = '/places.json?sort=distance&lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
+                   dishStore.proxy.url = 'http://getcrave.com/items/location.json?lat=37.77867&sort=distance&limit=1&long=-122.40127';
+                   places.proxy.url = 'http://getcrave.com/places.json?sort=distance&lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
                }
                console.log(dishStore.proxy.url);
                dishStore.load(function() {
@@ -55,6 +63,7 @@
                    console.log(dishStore);
                });
                places.load();
+               */
            });
 
 
