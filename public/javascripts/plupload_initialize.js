@@ -14,7 +14,7 @@ window.pl_all = (function(uuid) {
             url : path,
 //            flash_swf_url : '/plupload/js/plupload.flash.swf',
             filters : [
-                {title : "Image files", extensions : "jpg,gif,png"},
+                {title : "Image files", extensions : "jpg,gif,png,jpeg"},
 
             ],
             init: {
