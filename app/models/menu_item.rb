@@ -10,6 +10,9 @@ class MenuItem < ActiveRecord::Base
     
 
     searchable do
+        text :fullname, :default_boost => 4 do
+          name + " " + restaurant.name
+        end
         text :name, :default_boost => 2
         text :description
         location :coordinates do
