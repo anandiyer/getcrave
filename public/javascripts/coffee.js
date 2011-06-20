@@ -28,7 +28,7 @@
   };
   window.show_dialog = function(title, content) {
     if (title == null) {
-      title = "Please, sign in!";
+      title = "Please sign in";
     }
     modal_window();
     show_modal("modal_window");
@@ -66,7 +66,7 @@
         return show_modal(modal_id);
       } else {
         show_modal();
-        return $("img[alt=Fb_sign_in]").parents(".modal_window").show().find(".modal_title").text("<h1>Please, sign in!</h1>");
+        return $("img[alt=Fb_sign_in]").parents(".modal_window").show().find(".modal_title").text("<h1>Please sign in</h1>");
       }
     });
   };

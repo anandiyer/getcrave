@@ -56,7 +56,7 @@ window.pl_all = (function(uuid) {
 
             if (!signed){
                 uploader.stop();
-                window.show_dialog("Please, sign in to add photos!")
+                window.show_dialog("Please sign in to add photos")
             }
 
         });

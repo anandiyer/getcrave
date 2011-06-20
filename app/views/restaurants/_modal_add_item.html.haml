@@ -1,5 +1,5 @@
 - if current_user
-  = link_to "add new item to current restaurant", "#", :class => 'activate_modal', :name => "modal_window"
+  = link_to "Don't see what you're looking for? Add it.", "#", :class => 'activate_modal', :name => "modal_window"
 
 
   - @restaurant = Restaurant.find(params[:restaurant_id])
@@ -52,5 +52,5 @@
           %nobr
             =link_to "add a photo","#", :id => "plupload"
 - else
-  - title = "Please, sign in!"
-  = link_to_function("add new item to current restaurant", "window.show_dialog(\"#{title}\")")
+  - title = "Please sign in"
+  = link_to_function("Don't see what you're looking for? Add it.", "window.show_dialog(\"#{title}\")")

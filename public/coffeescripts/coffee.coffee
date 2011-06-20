@@ -32,7 +32,7 @@ window.close_modal = () ->
     $('.modal_window').hide()
 
 
-window.show_dialog = (title = "Please, sign in!", content) ->
+window.show_dialog = (title = "Please sign in", content) ->
     modal_window()
     show_modal("modal_window")
     $(".modal_window .modal_title h1").empty().text(title)
@@ -70,7 +70,7 @@ window.modal_window = () ->
             show_modal(modal_id)
         else
             show_modal()
-            $("img[alt=Fb_sign_in]").parents(".modal_window").show().find(".modal_title").text("<h1>Please, sign in!</h1>")
+            $("img[alt=Fb_sign_in]").parents(".modal_window").show().find(".modal_title").text("<h1>Please sign in</h1>")
 
 
 	$('.close_modal').live "click", () ->
