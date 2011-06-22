@@ -420,10 +420,10 @@ body.two-col.bp{
 
             input:not([class="search"]){
                  position: absolute;
-                 color: #999999;
+                 color: #333333;
                  border: none;
-                 top: 13px;
-                 font-size: 16px;
+                 top: 14px;
+                 font-size: 14px;
             }
             input#q{
                 left: 18px;
@@ -519,6 +519,7 @@ body.two-col.bp{
                     em{
                         font-style:normal;
                         color: $gray;
+						font-size: 12px;
                     }
 
                 }
@@ -745,7 +746,7 @@ body.two-col.bp{
 						height:140px;
 						overflow: hidden;
                         img{
-                            @include border-radius(3px);
+                            @include border-radius(5px);
                         }
 
                         #image_thumbnail_middle_size{
@@ -889,7 +890,7 @@ body.two-col.bp{
             }
             #reviews_wrapper.menu_items_location, #reviews_wrapper.menu_items_show_menu_items_nearby, .restaurant_menu_item_wrapper.restaurants_index, .user_saved_menu_items_index, .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved{
                 border-top: none;
-                padding:0px 0 0 8px;
+                padding:0px 0 0 0px;
             }
             #reviews_wrapper{
                 border-top: 3px solid $light_gray;
@@ -1166,6 +1167,7 @@ body.two-col.bp{
 
                 #reviews_wrapper_bloc_wrapper{
                     @include clearfix;
+					overflow: visible;
                 }
                 .reviews_wrapper_block:first-of-type{
                     border-top: 1px solid $light_gray;
@@ -1184,6 +1186,8 @@ body.two-col.bp{
                         font-size: 14px;
                         float: left;
 						font-weight:bold;
+						width:455px;
+						line-height: 21px;
                         a{
                             text-decoration: none;
                         }
@@ -1203,7 +1207,7 @@ body.two-col.bp{
                     }
                     .review_desc_col_wrapper{
                         @include column($content-columns, true);
-                        width: 539px;
+                        width: 545px;
 
                         .before_start{
                             line-height:24px;
@@ -1268,7 +1272,6 @@ body.two-col.bp{
                             white-space: nowrap;
                             color: $gray;
                             font-style:italic;
-							padding-right: 10px;
                         }
 
                         .before_star{
