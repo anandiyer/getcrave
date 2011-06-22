@@ -7,7 +7,7 @@
       #user_small_thumb_logo
         =image_tag(current_user.small_thumbnail, :width => "30", :height => "30")
 
-      Hey, #{current_user.user_name} | #{link_to( "Sign Out", signout_path, :rel => current_user.id, :class => "current_user")}
+      #{link_to( "Hey, #{current_user.user_name}", user_path(current_user.friendly_id) )} | #{link_to( "Sign Out", signout_path, :rel => current_user.id, :class => "current_user")}
     - else
       = link_to(image_tag("fb_login_icon.png"), "/auth/facebook", :class => "not_signed")
 
