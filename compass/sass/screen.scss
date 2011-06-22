@@ -715,6 +715,8 @@ body.two-col.bp{
                         // true means it's the last column in the row
                         @include column($content-columns, true);
                         padding: 6px 44px 0 2px;
+						height:140px;
+						overflow: hidden;
                         img{
                             @include border-radius(3px);
                         }

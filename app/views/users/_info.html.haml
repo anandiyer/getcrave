@@ -4,7 +4,7 @@
   #current_info_wrapper
     #img_column
       - if !@user.user_profile_pic_url.nil?
-        = image_tag @user.user_profile_pic_url+"?type=large", :width=>140, :height=>140
+        = image_tag @user.user_profile_pic_url+"?type=large", :width=>140
       - else
         =image_tag "person-noimage.png"
 
