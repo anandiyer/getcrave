@@ -33,6 +33,7 @@
     - if stars.to_f != group_star.to_f
       - group_star = stars
       .star_sm{:class => "star_sm stars_"+stars_class_normalize(stars)} &nbsp;
+
     - if  controller.action_name == "location" || controller.action_name == "show_menu_items_nearby" || controller.controller_name == "user_saved_menu_items"
       = render :partial => "/menu_item_nearby"
     -else

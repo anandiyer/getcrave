@@ -9,8 +9,6 @@ window.is_logged_in = () ->
         false
 
 
-
-
 close_labels_selectbox = () ->
     $(".label_div_wrapper").slideUp("fast")
     hide_mask()
@@ -25,11 +23,11 @@ window.show_mask = () ->
 #    $('#mask').show()
     $('#mask').fadeIn("fast");
 window.close_modal = () ->
-#    $('#mask').fadeOut("fast");
-#    $('.modal_window').fadeOut("fast");
+    $('#mask').fadeOut("fast");
+    $('.modal_window').fadeOut("fast");
 
-    $('#mask').hide()
-    $('.modal_window').hide()
+#    $('#mask').hide()
+#    $('.modal_window').hide()
 
 
 window.show_dialog = (title = "Please sign in", content) ->
@@ -271,6 +269,10 @@ window.thumbnail_resizing = () ->
 
 
 
+window.update_after_adding_item = (place_name) ->
+    window.close_modal()
+    url = "/items/show_menu_items_of_place?place_name="+place_name
+    $.ajax({url: url, context: document.body, success: (msg) => $("#update_place_restaurants").fadeTo("fast",.6).delay(500).html(msg).delay(500).fadeTo("fast",1)});
 
 
 $(document).ready ->
@@ -302,7 +304,6 @@ $(document).ready ->
 #add menu item in modal
     $(".text_input input#menu_item_name").keyup () ->
         if $(@).val().length != 0
-            cl 1
             $("#add_photo_here").show()
         else
             cl 0
@@ -391,9 +392,6 @@ $(document).ready ->
 
 
     $(document).ajaxComplete (event, xhr, settings) ->
-
-
-
         if settings.url == "/menu_label_associations"
             if xhr.responseText.indexOf('Warning') < 0 && xhr.responseText.indexOf("sign in") < 0
                 $(".birdy_update").html(xhr.responseText)

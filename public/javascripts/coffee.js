@@ -23,8 +23,8 @@
     return $('#mask').fadeIn("fast");
   };
   window.close_modal = function() {
-    $('#mask').hide();
-    return $('.modal_window').hide();
+    $('#mask').fadeOut("fast");
+    return $('.modal_window').fadeOut("fast");
   };
   window.show_dialog = function(title, content) {
     if (title == null) {
@@ -290,6 +290,18 @@
       }
     }
   };
+  window.update_after_adding_item = function(place_name) {
+    var url;
+    window.close_modal();
+    url = "/items/show_menu_items_of_place?place_name=" + place_name;
+    return $.ajax({
+      url: url,
+      context: document.body,
+      success: __bind(function(msg) {
+        return $("#update_place_restaurants").fadeTo("fast", .6).delay(500).html(msg).delay(500).fadeTo("fast", 1);
+      }, this)
+    });
+  };
   $(document).ready(function() {
     search_bind();
     top_nav_bind();
@@ -316,7 +328,6 @@
     }
     $(".text_input input#menu_item_name").keyup(function() {
       if ($(this).val().length !== 0) {
-        cl(1);
         return $("#add_photo_here").show();
       } else {
         cl(0);
