@@ -20,6 +20,8 @@ class MenuItemsController < ApplicationController
   before_filter :get_restaurant, :except => :nearby_loading
   before_filter :signed_in?, :only => [:upload_photo]
 
+  respond_to :js, :only => [:show_menu_items_of_place, :show_menu_items_nearby]
+
   layout "general"
   
   def nearby_loading
@@ -52,22 +54,31 @@ class MenuItemsController < ApplicationController
     end
   end
 
+  def params_4_index_and_show_menu_items_of_place
+     # FIXME - handle restaurant = nil case
+
+    @restaurant = @restaurant ? @restaurant : Restaurant.find(params[:place_name])
+    @menu_items = MenuItem.find_by_sql(["SELECT menu_items.* FROM menu_items
+      LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id
+      WHERE menu_items.restaurant_id = ?
+      ORDER BY (menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
+      @restaurant.id])
+
+  end
+
   # GET /menu_items
   # GET /menu_items.xml
   def index
     # Assuming that no menu has more than 500 items - this is the MAX
     @limit = 500
-    
+
     if params[:limit] && !params[:limit].empty?
       @limit = params[:limit].to_i
     end
 
-    # FIXME - handle restaurant = nil case 
-    @menu_items = MenuItem.find_by_sql(["SELECT menu_items.* FROM menu_items
-      LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id
-      WHERE menu_items.restaurant_id = ? 
-      ORDER BY (menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
-      @restaurant.id])
+    params_4_index_and_show_menu_items_of_place
+
+
     
     respond_to do |format|
       format.html # location.html.haml
@@ -111,9 +122,6 @@ class MenuItemsController < ApplicationController
 #  end
 
   def upload_photo
-
-
-
     if params[:file] && (params[:file].content_type.to_s.index("image") == 0 )
         temp_file = params[:file].tempfile
 
@@ -173,6 +181,11 @@ class MenuItemsController < ApplicationController
   end
 
 
+  def show_menu_items_of_place
+    params_4_index_and_show_menu_items_of_place
+    render :partial => "/items_grouped_by_stars"
+  end
+
   def show_menu_items_nearby
     params_4_location_and_show_menu_item_nearby
     render :partial => "/items_grouped_by_stars"
@@ -200,6 +213,8 @@ class MenuItemsController < ApplicationController
   def create
     uuid = params[:menu_item][:uuid]
     params[:menu_item].delete("uuid")
+
+
 
     @menu_item = MenuItem.new(params[:menu_item])
 
@@ -231,7 +246,7 @@ class MenuItemsController < ApplicationController
 #        format.html { redirect_to(@menu_item, :notice => 'Menu item was successfully created.') }
         format.xml  { render :xml => @menu_item, :status => :created, :location => @menu_item }
         format.json { render :json => @menu_item, :status => :created, :location => @menu_item }
-        format.js  { render :js => "window.close_modal(); window.cl(#{@menu_item.id.to_s})" }
+        format.js  { render :js => "window.update_after_adding_item("+params[:menu_item][:restaurant_id].to_s+")"}
 
       end
     end

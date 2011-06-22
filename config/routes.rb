@@ -24,7 +24,7 @@ Crave::Application.routes.draw do
       post 'upload_photo'
     end
     collection do
-      get 'search', 'location', 'show_menu_items_nearby' , 'nearby_loading'
+      get 'search', 'location', 'show_menu_items_nearby' ,'show_menu_items_of_place' , 'nearby_loading'
     end
   end
 
