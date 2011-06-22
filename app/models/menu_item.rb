@@ -11,18 +11,16 @@ class MenuItem < ActiveRecord::Base
 
 #    TODO: not for production. for almazom
 
-#      searchable do
-#          text :fullname, :default_boost => 4 do
-#            name + " " + restaurant.name
-#          end
-#          text :name, :default_boost => 2
-#          text :description
-#          location :coordinates do
-#            Sunspot::Util::Coordinates.new(restaurant.latitude, restaurant.longitude)
-#          end
-#      end
-#
-
+     searchable do
+          text :fullname, :default_boost => 4 do
+           name + " " + restaurant.name
+          end
+          text :name, :default_boost => 2
+          text :description
+          location :coordinates do
+            Sunspot::Util::Coordinates.new(restaurant.latitude, restaurant.longitude)
+          end
+      end
 
 # vars - menu_label_id, menu_item_id
   def labels_counter menu_label_id, menu_item_id
