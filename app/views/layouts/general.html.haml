@@ -3,6 +3,10 @@
   %head
     %title crave - so what's good here?
     %link{:rel => "shortcut icon", :href => "/favicon.ico"}
+    %meta{:content => "207859815920359", :property => "fb:app_id"}
+    %meta{:content => "500034335", :property => "fb:admins"}
+    = yield :opengraph_meta_tags
+
     = javascript_include_tag "jquery-1.6.min.js", "rails"
 
 

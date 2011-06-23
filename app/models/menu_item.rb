@@ -7,6 +7,17 @@ class MenuItem < ActiveRecord::Base
     has_many    :menu_label_associations
     has_friendly_id :name, :use_slug => true, :approximate_ascii => true
     acts_as_mappable :through => :restaurant
+    acts_as_opengraph :values => { :site_name => "crave", :type => "food" },
+      :columns => {
+        :title => :restaurant_and_menu_item_name,
+        :image => :image,
+        :latitude => :latitude, 
+        :longitude => :longitude,
+        :street_address => :street_address,
+        :locality => :locality,
+        :postal_code => :postal_code,
+        :country_name => :country_name
+      }
     
     searchable do
           text :menu_restaurant_name, :default_boost => 8 do
@@ -32,4 +43,45 @@ class MenuItem < ActiveRecord::Base
   def labels
     MenuLabel.find(self.menu_label_associations.map{|l| l.menu_label_id}).map{|ln| ln.menu_label}
   end
+  
+  def opengraph_url
+    "http://getcrave.com/items/#{self.friendly_id}"
+  end
+  
+  def latitude
+    self.restaurant.latitude
+  end
+  
+  def longitude
+    self.restaurant.longitude
+  end
+  
+  def street_address
+    self.restaurant.street_address
+  end
+  
+  def restaurant_and_menu_item_name
+    self.name + " @ " + self.restaurant.name
+  end
+  
+  def image
+    if (self.menu_item_photos.first)
+      self.menu_item_photos.first.photo 
+    else
+      "http://getcrave.com/images/crave-text_50x50.png"
+    end
+  end
+  
+  def postal_code
+    self.restaurant.zip
+  end
+  
+  def country_name
+    self.restaurant.country
+  end
+  
+  def locality
+    self.restaurant.city
+  end
+  
 end
