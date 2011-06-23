@@ -757,7 +757,7 @@ body.two-col.bp{
                         @include column($content-columns, true);
                         padding: 6px 44px 0 2px;
 						height:140px;
-						overflow: hidden;
+						/*overflow: hidden;*/
                         img{
                             @include border-radius(5px);
                         }
@@ -1051,9 +1051,10 @@ body.two-col.bp{
                             $content-columns: ceil(2);
                             @include column($content-columns, true);
                             padding:0 15px 0 0;
-                            img{
-                                @include border-radius(3px);
-                            }
+                            overflow: hidden;
+                            width:69px;
+                            height:84px;
+                            @include border-radius(3px);
                         }
                         .desc_block_2_col{
                             $content-columns: ceil(11);
