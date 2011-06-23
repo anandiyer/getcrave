@@ -17,7 +17,7 @@
     - if @mi_rating.user_id?
       .reviews_wrapper_block
         .review_image_col
-          =image_tag @user.small_thumbnail
+          = link_to(image_tag(@user.small_thumbnail), @user)
           #click &nbsp;
 
         .review_desc_col_wrapper
