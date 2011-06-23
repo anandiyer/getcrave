@@ -679,6 +679,24 @@ body.two-col.bp{
                         padding: 8px 16px 0 10px;
                         $content-columns: ceil(15);
                         @include column($content-columns, true);
+                        position: relative;
+
+                        #fb_twitter_checkboxes{
+                            position: absolute;
+                            width: 100px;
+                            height: 30px;
+                            right:30px;
+                            top:10px;
+                            #inline_fb{
+                                @include inline-block;
+                                width: 40px;
+                                height: 21px;
+                                background: url("/images/sprites/icon-sprite.png") no-repeat 20px -1079px;
+
+
+                                /*padding: 0 10px 3px 16px;*/
+                            }
+                        }
 
 
 

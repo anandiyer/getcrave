@@ -40,12 +40,6 @@ class ApplicationController < ActionController::Base
 
   def current_user=(user)
     @current_user = user
-#    TODO: not for production only for almazom
-    begin
-      session[:user_id] = user.id
-    rescue
-      session[:user_id] = User.where(:user_name => "almazom").first.id
-    end
-
+    session[:user_id] = user.id if user
   end
 end

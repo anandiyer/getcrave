@@ -21,12 +21,15 @@ gem "gritter"
 gem "uuidtools"
 gem 'aws-s3', '0.6.2', :require => 'aws/s3'
 
+gem "fb_graph" #for fb share
+
 group :development, :test do
+  gem 'thin'
   gem 'cucumber-rails'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'webrat'
-  gem 'mongrel'
+#  gem 'mongrel'
   gem "erb2haml"
   gem "compass", :require => false
   gem 'jquery-rails', '>= 0.2.6'

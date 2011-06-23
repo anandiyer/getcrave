@@ -12,8 +12,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 
   provider :facebook,
     APP_ID,
-    APP_SECRET,
-    { :display => 'page',
-      :client_options => {:ssl => {:ca_file => "/usr/lib/ssl/certs/ca-certificates.crt"}}}
+    APP_SECRET,{ :display => 'page',:scope => 'publish_stream, offline_access, email, user_photos', :client_options => {:ssl => {:ca_file => "/usr/lib/ssl/certs/ca-certificates.crt"}}}
 end
 

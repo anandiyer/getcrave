@@ -70,9 +70,15 @@
 
   #comment_wrapper_wrapper
     #comment_wrapper
+
+
       #content_title
         Have you tried this?
       =form_for(MenuItemRating.new, :remote => true) do |f|
+        #fb_twitter_checkboxes
+          Share to:
+          #inline_fb
+            = check_box("facebook","boolean")
         =f.hidden_field :rating
         =f.hidden_field :menu_item_id, :value =>@menu_item.id
         .star_gray{:id => @menu_item.id, :data =>{:model => "user_menu_item_ratings"}} &nbsp;

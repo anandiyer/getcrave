@@ -1,6 +1,13 @@
 class SessionsController < ApplicationController
   def create
     auth = request.env["omniauth.auth"]
+    token =  auth['credentials']['token']
+
+    if !token
+      render :status => 404 and return #for bots
+    end
+
+
     unless @auth = Authorization.find_from_hash(auth)
       # Create a new user or add an auth to existing user, depending on
       # whether there is already a user signed in.
@@ -14,6 +21,7 @@ class SessionsController < ApplicationController
         662773250, #artignor
         6200447, #cyrus
         6239115, #greg
+        1412419249, #almazom
         629551728,
         586229596,
         207611,
@@ -31,14 +39,14 @@ class SessionsController < ApplicationController
         3304156,
         633516742
       ]
-      
+
       if (!ids.include?(auth['uid'].to_i))
         # TODO: redirect to sorry page
         redirect_to '/request.html'
         return
       end
-      
-      @auth = Authorization.create_from_hash(auth, current_user)
+
+      @auth = Authorization.create_from_hash(auth, token, current_user)
       Notifier.signup_email(@auth.user).deliver
     end
     # Log the authorizing user in.
