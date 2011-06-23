@@ -8,21 +8,21 @@ class MenuItem < ActiveRecord::Base
     has_friendly_id :name, :use_slug => true, :approximate_ascii => true
     acts_as_mappable :through => :restaurant
     
-
-#    TODO: not for production. for almazom
-
-#      searchable do
-#          text :fullname, :default_boost => 4 do
-#            name + " " + restaurant.name
-#          end
-#          text :name, :default_boost => 2
-#          text :description
-#          location :coordinates do
-#            Sunspot::Util::Coordinates.new(restaurant.latitude, restaurant.longitude)
-#          end
-#      end
-#
-
+    searchable do
+          text :menu_restaurant_name, :default_boost => 8 do
+           name + " " + restaurant.name
+          end
+          text :menu_labels, :default_boost => 6 do
+            menulabels = ""
+            self.labels.each { |l| menulabels << l + " "}
+            name + " " + menulabels
+          end
+          text :name, :default_boost => 4
+          text :description
+          location :coordinates do
+            Sunspot::Util::Coordinates.new(restaurant.latitude, restaurant.longitude)
+          end
+    end
 
 # vars - menu_label_id, menu_item_id
   def labels_counter menu_label_id, menu_item_id

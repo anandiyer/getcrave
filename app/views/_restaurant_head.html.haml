@@ -6,7 +6,7 @@
   #navigation_wrap_search
     %form{:action =>"#"}
       =text_field(:first, :second, :class =>"first_search_input")
-      =text_field(:first, :second, :class =>"second_search_input", :value => "San Francisco, CA")
+      =text_field(:first, :second, :class =>"second_search_input", :value => "San Francisco, CA", :disabled => true)
       =image_tag "fileds_search_inputs.png", :class => "fields"
       =image_submit_tag("search_button.png", :class => "search")
       #in in
