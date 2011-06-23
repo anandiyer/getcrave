@@ -1248,7 +1248,7 @@ body.two-col.bp #content_wrap #content #current_content_block #current_info_wrap
   width: 112.875px;
   padding: 6px 44px 0 2px;
   height: 140px;
-  overflow: hidden;
+  /*overflow: hidden;*/
   /*.add_photos_inline{*/
   /*@extend .photos_inline;*/
   /*@include sprites($add_photos_counter_position);*/
@@ -1594,21 +1594,24 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurant
   margin-right: 0;
   width: 71.917px;
   padding: 0 15px 0 0;
-}
-/* line 147, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .img_column_mi_1_col {
-  overflow-x: hidden;
-}
-/* line 1054, ../../compass/sass/screen.scss */
-body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .img_column_mi_1_col img {
+  overflow: hidden;
+  width: 69px;
+  height: 84px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   -o-border-radius: 3px;
   -ms-border-radius: 3px;
   -khtml-border-radius: 3px;
   border-radius: 3px;
+  /*img{*/
+  /**/
+  /*}*/
 }
-/* line 1058, ../../compass/sass/screen.scss */
+/* line 147, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .img_column_mi_1_col {
+  overflow-x: hidden;
+}
+/* line 1062, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .desc_block_2_col {
   display: inline;
   float: left;
@@ -1620,7 +1623,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurant
 * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .desc_block_2_col {
   overflow-x: hidden;
 }
-/* line 1062, ../../compass/sass/screen.scss */
+/* line 1066, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .desc_block_2_col h1 {
   color: #2e70a4;
   padding: 0 0 3px 0;
@@ -1628,12 +1631,12 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurant
   font-size: 14px;
   font-weight: bold;
 }
-/* line 1069, ../../compass/sass/screen.scss */
+/* line 1073, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .desc_block_2_col a {
   text-decoration: none;
   line-height: 21px;
 }
-/* line 1074, ../../compass/sass/screen.scss */
+/* line 1078, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .save_n_review_3_col {
   display: inline;
   float: left;
@@ -1645,7 +1648,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurant
 * html body.two-col.bp #content_wrap #content #reviews_wrapper #update_place_restaurants .restaurant_menu_item_wrapper .save_n_review_3_col {
   overflow-x: hidden;
 }
-/* line 1085, ../../compass/sass/screen.scss */
+/* line 1089, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper {
   margin: 12px 0 0 0;
   padding: 8px;
@@ -1659,12 +1662,12 @@ body.two-col.bp #content_wrap #content #reviews_wrapper {
 * html body.two-col.bp #content_wrap #content #reviews_wrapper {
   overflow-x: hidden;
 }
-/* line 1091, ../../compass/sass/screen.scss */
+/* line 1095, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper h3.review {
   font-size: 23px;
   margin-bottom: 6px;
 }
-/* line 1096, ../../compass/sass/screen.scss */
+/* line 1100, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #select_box_hint {
   width: 140px;
   height: 30px;
@@ -1675,7 +1678,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #select_box_hint {
   left: 69px;
   background-color: transparent;
 }
-/* line 1108, ../../compass/sass/screen.scss */
+/* line 1112, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #show_more_button {
   height: 25px;
   border: 1px solid #ccc;
@@ -1685,11 +1688,11 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #show_more_button {
   margin-top: 10px;
   cursor: pointer;
 }
-/* line 1118, ../../compass/sass/screen.scss */
+/* line 1122, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #update_place {
   /*border: 1px solid red;*/
 }
-/* line 1121, ../../compass/sass/screen.scss */
+/* line 1125, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #sorting {
   margin-bottom: 8px;
   width: 200px;
@@ -1697,13 +1700,13 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #sorting {
   *zoom: 1;
   float: none;
 }
-/* line 1127, ../../compass/sass/screen.scss */
+/* line 1131, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #before_sort_by {
   width: 50px;
   float: left;
   padding-top: 7px;
 }
-/* line 1135, ../../compass/sass/screen.scss */
+/* line 1139, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by {
   cursor: pointer;
   float: right;
@@ -1714,7 +1717,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by {
   height: 30px;
   background-color: #fff;
 }
-/* line 1144, ../../compass/sass/screen.scss */
+/* line 1148, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by input {
   width: 100px;
   border: none;
@@ -1724,7 +1727,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by input 
   font-size: 14px;
   font-family: helvetica neue,helvetica,arial,sans-serif;
 }
-/* line 1153, ../../compass/sass/screen.scss */
+/* line 1157, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by ul {
   -moz-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
@@ -1736,7 +1739,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by ul {
   padding: 0;
   width: 140px;
 }
-/* line 1164, ../../compass/sass/screen.scss */
+/* line 1168, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by ul li {
   color: black;
   list-style-type: none;
@@ -1746,22 +1749,22 @@ body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by ul li 
   border-bottom: 1px solid #ececec;
   background-color: #fff;
 }
-/* line 1174, ../../compass/sass/screen.scss */
+/* line 1178, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #sorting #sort_by ul li:hover {
   background-color: #ececec;
 }
-/* line 1181, ../../compass/sass/screen.scss */
+/* line 1185, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper #reviews_wrapper_bloc_wrapper {
   overflow: hidden;
   *zoom: 1;
   overflow: visible;
 }
-/* line 1185, ../../compass/sass/screen.scss */
+/* line 1189, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block:first-of-type {
   border-top: 1px solid #ececec;
   /*margin-top: 15px;*/
 }
-/* line 1189, ../../compass/sass/screen.scss */
+/* line 1193, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block {
   width: 973px;
   margin: 0 auto;
@@ -1778,7 +1781,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block {
 * html body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block {
   overflow-x: hidden;
 }
-/* line 1196, ../../compass/sass/screen.scss */
+/* line 1200, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block h1 {
   padding: 0;
   margin: 0;
@@ -1788,11 +1791,11 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block h
   width: 455px;
   line-height: 21px;
 }
-/* line 1204, ../../compass/sass/screen.scss */
+/* line 1208, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block h1 a {
   text-decoration: none;
 }
-/* line 1211, ../../compass/sass/screen.scss */
+/* line 1215, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_image_col {
   padding-right: 28px;
   display: inline;
@@ -1804,7 +1807,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
 * html body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_image_col {
   overflow-x: hidden;
 }
-/* line 1216, ../../compass/sass/screen.scss */
+/* line 1220, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_image_col img {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -1813,7 +1816,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   -khtml-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 1221, ../../compass/sass/screen.scss */
+/* line 1225, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper {
   display: inline;
   float: left;
@@ -1825,35 +1828,35 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
 * html body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper {
   overflow-x: hidden;
 }
-/* line 1225, ../../compass/sass/screen.scss */
+/* line 1229, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .before_start {
   line-height: 24px;
 }
-/* line 1230, ../../compass/sass/screen.scss */
+/* line 1234, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper #review_body_head {
   float: none;
   clear: both;
 }
-/* line 1236, ../../compass/sass/screen.scss */
+/* line 1240, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .star_sm {
   margin-bottom: 5px;
 }
-/* line 1239, ../../compass/sass/screen.scss */
+/* line 1243, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .star {
   margin: 4px 0 5px 0;
   float: none;
 }
-/* line 1245, ../../compass/sass/screen.scss */
+/* line 1249, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .helpful_block {
   margin-top: 0px;
 }
-/* line 1248, ../../compass/sass/screen.scss */
+/* line 1252, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .helpful_block .before_answer_block {
   float: left;
   font-size: 13px;
   line-height: 21px;
 }
-/* line 1253, ../../compass/sass/screen.scss */
+/* line 1257, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .helpful_block span.yes_answer {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1877,12 +1880,12 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .helpful_block span.yes_answer {
   *display: inline;
 }
-/* line 1265, ../../compass/sass/screen.scss */
+/* line 1269, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .helpful_block .found_helpfull {
   color: #999999;
   padding-left: 3px;
 }
-/* line 1269, ../../compass/sass/screen.scss */
+/* line 1273, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .helpful_block span.no_answer {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -1906,7 +1909,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .helpful_block span.no_answer {
   *display: inline;
 }
-/* line 1281, ../../compass/sass/screen.scss */
+/* line 1285, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .data_review {
   width: 90px;
   text-align: right;
@@ -1915,7 +1918,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   color: #999999;
   font-style: italic;
 }
-/* line 1290, ../../compass/sass/screen.scss */
+/* line 1294, ../../compass/sass/screen.scss */
 body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .review_desc_col_wrapper .before_star {
   width: 973px;
   margin: 0 auto;
@@ -1923,12 +1926,12 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   *zoom: 1;
 }
 
-/* line 1302, ../../compass/sass/screen.scss */
+/* line 1306, ../../compass/sass/screen.scss */
 .star_sm {
   float: none !important;
 }
 
-/* line 1306, ../../compass/sass/screen.scss */
+/* line 1310, ../../compass/sass/screen.scss */
 #stars_wrap {
   width: 973px;
   margin: 0 auto;
@@ -1936,7 +1939,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   *zoom: 1;
 }
 
-/* line 1310, ../../compass/sass/screen.scss */
+/* line 1314, ../../compass/sass/screen.scss */
 .stars_1_0, .stars_1_1, .stars_1_2 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1948,7 +1951,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1315, ../../compass/sass/screen.scss */
+/* line 1319, ../../compass/sass/screen.scss */
 .stars_1_3, .stars_1_4, .stars_1_5, .stars_1_6, .stars_1_7 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1960,7 +1963,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1320, ../../compass/sass/screen.scss */
+/* line 1324, ../../compass/sass/screen.scss */
 .stars_1_8, .stars_1_9, .stars_2_0, .stars_2_1, .stars_2_2 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1972,7 +1975,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1325, ../../compass/sass/screen.scss */
+/* line 1329, ../../compass/sass/screen.scss */
 .stars_2_3, .stars_2_4, .stars_2_5, .stars_2_6, .stars_2_7 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1984,7 +1987,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1330, ../../compass/sass/screen.scss */
+/* line 1334, ../../compass/sass/screen.scss */
 .stars_2_8, .stars_2_9, .stars_3_0, .stars_3_1, .stars_3_2 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -1996,7 +1999,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1335, ../../compass/sass/screen.scss */
+/* line 1339, ../../compass/sass/screen.scss */
 .stars_3_3, .stars_3_4, .stars_3_5, .stars_3_6, .stars_3_7 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2008,7 +2011,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1340, ../../compass/sass/screen.scss */
+/* line 1344, ../../compass/sass/screen.scss */
 .stars_3_8, .stars_3_9, .stars_4_0, .stars_4_1, .stars_4_2 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2020,7 +2023,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1345, ../../compass/sass/screen.scss */
+/* line 1349, ../../compass/sass/screen.scss */
 .stars_4_3, .stars_4_4, .stars_4_5, .stars_4_6, .stars_4_7 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2032,7 +2035,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1350, ../../compass/sass/screen.scss */
+/* line 1354, ../../compass/sass/screen.scss */
 .stars_4_8, .stars_4_9, .stars_5_0 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2044,7 +2047,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1356, ../../compass/sass/screen.scss */
+/* line 1360, ../../compass/sass/screen.scss */
 .stars_2 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2056,7 +2059,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1360, ../../compass/sass/screen.scss */
+/* line 1364, ../../compass/sass/screen.scss */
 .stars_3 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2068,7 +2071,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1365, ../../compass/sass/screen.scss */
+/* line 1369, ../../compass/sass/screen.scss */
 .stars_5 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2080,7 +2083,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1369, ../../compass/sass/screen.scss */
+/* line 1373, ../../compass/sass/screen.scss */
 .stars_4 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2092,7 +2095,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1373, ../../compass/sass/screen.scss */
+/* line 1377, ../../compass/sass/screen.scss */
 .stars_1 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2104,7 +2107,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1377, ../../compass/sass/screen.scss */
+/* line 1381, ../../compass/sass/screen.scss */
 .stars_, .stars_0, .stars_0_0 {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2116,7 +2119,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   width: 180px;
 }
 
-/* line 1384, ../../compass/sass/screen.scss */
+/* line 1388, ../../compass/sass/screen.scss */
 .star_gray {
   /*@include sprites($stars_gray_position);*/
   height: 27px;
@@ -2124,7 +2127,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   /*float: none;*/
 }
 
-/* line 1391, ../../compass/sass/screen.scss */
+/* line 1395, ../../compass/sass/screen.scss */
 .flag_icon {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2135,7 +2138,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   /*border: 1px solid red;*/
 }
 
-/* line 1395, ../../compass/sass/screen.scss */
+/* line 1399, ../../compass/sass/screen.scss */
 .save_icon.saved_item {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2147,7 +2150,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   cursor: pointer;
 }
 
-/* line 1400, ../../compass/sass/screen.scss */
+/* line 1404, ../../compass/sass/screen.scss */
 .save_icon.not_saved_item {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2159,17 +2162,17 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   cursor: pointer;
 }
 
-/* line 1405, ../../compass/sass/screen.scss */
+/* line 1409, ../../compass/sass/screen.scss */
 .h {
   display: none;
 }
 
-/* line 1408, ../../compass/sass/screen.scss */
+/* line 1412, ../../compass/sass/screen.scss */
 .himportant {
   display: none !important;
 }
 
-/* line 1414, ../../compass/sass/screen.scss */
+/* line 1418, ../../compass/sass/screen.scss */
 .plus, .birdy {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
@@ -2190,7 +2193,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   *display: inline;
 }
 
-/* line 1420, ../../compass/sass/screen.scss */
+/* line 1424, ../../compass/sass/screen.scss */
 .birdy {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2202,12 +2205,12 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   float: none;
 }
 
-/* line 1426, ../../compass/sass/screen.scss */
+/* line 1430, ../../compass/sass/screen.scss */
 .i {
   font-style: normal;
 }
 
-/* line 1433, ../../compass/sass/screen.scss */
+/* line 1437, ../../compass/sass/screen.scss */
 #mask {
   position: absolute;
   top: 0px;
@@ -2222,20 +2225,20 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   opacity: 0.4;
 }
 
-/* line 1447, ../../compass/sass/screen.scss */
+/* line 1451, ../../compass/sass/screen.scss */
 .modal_window {
   position: absolute;
   display: none;
   color: white;
   z-index: 201;
 }
-/* line 1455, ../../compass/sass/screen.scss */
+/* line 1459, ../../compass/sass/screen.scss */
 .modal_window #labels_all {
   display: none;
 }
 
 /* style a specific modal window  */
-/* line 1462, ../../compass/sass/screen.scss */
+/* line 1466, ../../compass/sass/screen.scss */
 #modal_window {
   padding: 20px;
   border: 1px solid gray;
@@ -2251,14 +2254,14 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   -khtml-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 1473, ../../compass/sass/screen.scss */
+/* line 1477, ../../compass/sass/screen.scss */
 #modal_window #close_me {
   margin: -28px -28px 0 0;
   right: 0px;
   text-align: right;
   cursor: pointer;
 }
-/* line 1482, ../../compass/sass/screen.scss */
+/* line 1486, ../../compass/sass/screen.scss */
 #modal_window .clone_me .inputs_column {
   display: inline;
   float: left;
@@ -2270,23 +2273,23 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
 * html #modal_window .clone_me .inputs_column {
   overflow-x: hidden;
 }
-/* line 1487, ../../compass/sass/screen.scss */
+/* line 1491, ../../compass/sass/screen.scss */
 #modal_window .clone_me .inputs_column .submit_wrapper {
   float: left;
   padding: 0 15px 0 0;
 }
-/* line 1492, ../../compass/sass/screen.scss */
+/* line 1496, ../../compass/sass/screen.scss */
 #modal_window .clone_me .inputs_column .cancel_adding {
   font-size: 16px;
 }
-/* line 1497, ../../compass/sass/screen.scss */
+/* line 1501, ../../compass/sass/screen.scss */
 #modal_window .clone_me .img_column {
   padding: 20px 0 0 0;
   /*#add_photo_here{*/
   /*display: none;*/
   /*}*/
 }
-/* line 1505, ../../compass/sass/screen.scss */
+/* line 1509, ../../compass/sass/screen.scss */
 #modal_window .clone_me .img_column img {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -2295,11 +2298,11 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   -khtml-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 1509, ../../compass/sass/screen.scss */
+/* line 1513, ../../compass/sass/screen.scss */
 #modal_window .clone_me .img_column nobr a {
   font-size: 12px;
 }
-/* line 1516, ../../compass/sass/screen.scss */
+/* line 1520, ../../compass/sass/screen.scss */
 #modal_window .clone_me .clone_line {
   padding: 0 0 10px 0;
   /*textarea{*/
@@ -2308,43 +2311,43 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   /*width: 320px;*/
   /*}*/
 }
-/* line 1526, ../../compass/sass/screen.scss */
+/* line 1530, ../../compass/sass/screen.scss */
 #modal_window .clone_me label {
   float: none;
   font-weight: bold;
   color: black;
   color: #474747;
 }
-/* line 1531, ../../compass/sass/screen.scss */
+/* line 1535, ../../compass/sass/screen.scss */
 #modal_window .clone_me label super {
   color: red;
 }
-/* line 1535, ../../compass/sass/screen.scss */
+/* line 1539, ../../compass/sass/screen.scss */
 #modal_window .clone_me .text_input {
   height: 30px;
   background: url("/images/sprites/button-sprite.png") no-repeat 0px -419px;
   border: 1px solid #ddd;
 }
-/* line 1540, ../../compass/sass/screen.scss */
+/* line 1544, ../../compass/sass/screen.scss */
 #modal_window .clone_me .text_input input {
   height: 21px;
   width: 320px;
   border: none;
   margin: 4px 3px 0px 10px;
 }
-/* line 1549, ../../compass/sass/screen.scss */
+/* line 1553, ../../compass/sass/screen.scss */
 #modal_window .modal_title {
   color: #787878;
   border-bottom: 1px solid #ececec;
   margin-bottom: 10px;
 }
-/* line 1553, ../../compass/sass/screen.scss */
+/* line 1557, ../../compass/sass/screen.scss */
 #modal_window .modal_title h1 {
   /*color: #787878 !important;*/
   font-size: 24px;
 }
 
-/* line 1562, ../../compass/sass/screen.scss */
+/* line 1566, ../../compass/sass/screen.scss */
 .add_photos_inline {
   background-image: url("/images/sprites/icon-sprite.png");
   background-repeat: no-repeat;
@@ -2355,13 +2358,13 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   /*border: 1px solid red;*/
 }
 
-/* line 1569, ../../compass/sass/screen.scss */
+/* line 1573, ../../compass/sass/screen.scss */
 #comment_wrapper.sending .submit_wrapper .text {
   left: 15px;
   color: #999999;
 }
 
-/* line 1576, ../../compass/sass/screen.scss */
+/* line 1580, ../../compass/sass/screen.scss */
 .submit_wrapper {
   width: 98px;
   height: 33px;
@@ -2370,7 +2373,7 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   height: 40px;
   /*float: right;*/
 }
-/* line 1584, ../../compass/sass/screen.scss */
+/* line 1588, ../../compass/sass/screen.scss */
 .submit_wrapper .text {
   position: absolute;
   top: 5px;
@@ -2379,14 +2382,14 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   font-size: 14px;
   cursor: pointer;
 }
-/* line 1595, ../../compass/sass/screen.scss */
+/* line 1599, ../../compass/sass/screen.scss */
 .submit_wrapper .left_rounder {
   height: 33px;
   width: 8px;
   background: url("/images/sprites/button-sprite.png") no-repeat 0px -75px;
   float: left;
 }
-/* line 1603, ../../compass/sass/screen.scss */
+/* line 1607, ../../compass/sass/screen.scss */
 .submit_wrapper .submit_button {
   float: right;
   width: 90px;
@@ -2394,13 +2397,13 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   background: url("/images/sprites/button-sprite.png") no-repeat -131px -75px;
 }
 
-/* line 1612, ../../compass/sass/screen.scss */
+/* line 1616, ../../compass/sass/screen.scss */
 .plupload {
   background-color: red;
   opacity: 1;
 }
 
-/* line 1617, ../../compass/sass/screen.scss */
+/* line 1621, ../../compass/sass/screen.scss */
 .gray {
   color: #999999;
 }

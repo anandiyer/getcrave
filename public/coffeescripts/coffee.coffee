@@ -1,13 +1,10 @@
 disher_review_wrapper = $("#reviews_wrapper")
 
-
-
 window.is_logged_in = () ->
     if $(".fb_login a.not_signed").length == 0
         true
     else
         false
-
 
 close_labels_selectbox = () ->
     $(".label_div_wrapper").slideUp("fast")
