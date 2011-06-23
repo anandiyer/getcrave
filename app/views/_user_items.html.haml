@@ -17,7 +17,7 @@
     - if @mi_rating.user_id?
       .reviews_wrapper_block
         .review_image_col
-          =image_tag "reviews_avatar_temp.png"
+          =image_tag @user.small_thumbnail
           #click &nbsp;
 
         .review_desc_col_wrapper
@@ -31,8 +31,8 @@
           -rating = @mi_rating.rating ? @mi_rating.rating : 0
           .star_sm{:class => "star_sm stars_"+@mi_rating.rating.to_s.gsub(/[.]/, '_'), :id => @mi_rating.id, :data => {:rating => rating, :model => "menu_item_ratings"}} &nbsp;
           %em
-            by
-            =link_to user.user_name, user
+            -# by
+            -# =link_to user.user_name, user
           .review_body_head
             =@mi_rating.review
 
