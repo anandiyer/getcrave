@@ -162,7 +162,8 @@
   };
   window.add_review = function(id_of_menu_item, msg) {
     update_reviews(id_of_menu_item);
-    return $("#comment_wrapper").slideUp("slow", function() {
+    $("#comment_wrapper #submit_block .text").text("Submitting");
+    $("#comment_wrapper").slideUp("slow", function() {
       var couner_reviews;
       $(this).empty();
       $("<h1>" + msg + "<h1>").appendTo("#comment_wrapper");
@@ -170,6 +171,7 @@
       $("#text_column #rating span").html(parseInt(couner_reviews) + 1);
       return $("#comment_wrapper").slideDown("normal");
     });
+    return $("#comment_wrapper").removeClass("sending");
   };
   window.set_gmap = function(zoom) {
     var ar, lat, long, obj;
@@ -391,6 +393,10 @@
         show_dialog();
       }
       return event.preventDefault();
+    });
+    $("#comment_wrapper").ajaxStart(function() {
+      $("#comment_wrapper").addClass("sending");
+      return $("#comment_wrapper #submit_block .text").text("Submitting");
     });
     $(document).ajaxComplete(function(event, xhr, settings) {
       if (settings.url === "/menu_label_associations") {

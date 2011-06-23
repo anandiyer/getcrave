@@ -247,7 +247,6 @@ class MenuItemsController < ApplicationController
         format.xml  { render :xml => @menu_item, :status => :created, :location => @menu_item }
         format.json { render :json => @menu_item, :status => :created, :location => @menu_item }
         format.js  { render :js => "window.update_after_adding_item("+params[:menu_item][:restaurant_id].to_s+")"}
-
       end
     end
   end

@@ -145,7 +145,7 @@ window.save_menu_item = (mid, saved_item_id) ->
 
 window.add_review = (id_of_menu_item, msg) ->
     update_reviews(id_of_menu_item)
-#    $.gritter.add({title:"Notification", text:msg});
+    $("#comment_wrapper #submit_block .text").text("Submitting")
 
     $("#comment_wrapper").slideUp("slow",() ->
         $(this).empty()
@@ -154,6 +154,8 @@ window.add_review = (id_of_menu_item, msg) ->
         $("#text_column #rating span").html(parseInt(couner_reviews)+1)
         $("#comment_wrapper").slideDown("normal")
     )
+
+    $("#comment_wrapper").removeClass("sending")
 
 
 window.set_gmap = (zoom = 10) ->
@@ -329,7 +331,7 @@ $(document).ready ->
 #            settings.data = (settings.data ? settings.data + "&" : "") + "authenticity_token=" + encodeURIComponent( AUTH_TOKEN )
 #            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 #
-#    $.ajaxSetup({ beforeSend: (xhr) ->  xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))})
+
 
 
 
@@ -389,6 +391,12 @@ $(document).ready ->
         event.preventDefault()
 
 
+
+
+    $("#comment_wrapper").ajaxStart () ->
+#        cl "ajax start"
+        $("#comment_wrapper").addClass("sending")
+        $("#comment_wrapper #submit_block .text").text("Submitting")
 
 
     $(document).ajaxComplete (event, xhr, settings) ->

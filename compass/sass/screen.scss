@@ -660,6 +660,16 @@ body.two-col.bp{
 
 
 
+                    #comment_wrapper.sending{
+                        #input_comment{
+                            background-color: #ecebe9;
+                            textarea{
+                                background-color: #ecebe9;
+                                color: #999999;
+                            }
+                        }
+
+                    }
                     #comment_wrapper{
                         @include container;
                         float: none;
@@ -686,15 +696,15 @@ body.two-col.bp{
                             border-left:1px solid #ccc;
                             margin:7px 0 8px 0;
                             /*padding:5px 5px 5px 8px;*/
-                            background-color: #ecebe9;
+                            //background-color: #ecebe9;
 
                             textarea{
                                 width: 596px;
                                 border: none;
                                 overflow: hidden;
                                 height: 20px;
-                                background-color: #ecebe9;
-                                color: #999999;
+                                //background-color: #ecebe9;
+                                //color: #999999;
                                 /*resize: none;*/
                             }
 
@@ -1554,6 +1564,14 @@ body.two-col.bp{
     @include sprites($add_photos_counter_position);
 }
 
+#comment_wrapper.sending{
+    .submit_wrapper{
+        .text{
+            left: 15px;
+            color:#999999;
+        }
+    }
+}
 
 .submit_wrapper{
     width: 98px;
@@ -1566,11 +1584,11 @@ body.two-col.bp{
     .text{
         position: absolute;
         top: 5px;
-        left: 15px;
+        left: 25px;
         text-shadow:1px 1px 1px #ffffff;
         font-size: 14px;
         cursor: pointer;
-        color:#999999;
+
 
     }
 
