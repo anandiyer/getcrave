@@ -66,7 +66,7 @@ class UsersController < ApplicationController
       respond_to do |format|
         format.html
         format.xml  { render :xml => @user_saved_menu_items.to_xml }
-        format.json  { render :xml => @user_saved_menu_items.to_json }
+        format.json  { render :json => @user_saved_menu_items.to_json( :include => { :menu_item => {:include => [:menu_item_avg_rating_count, :restaurant, :menu_item_photos]} } )}
       end
   end
 
