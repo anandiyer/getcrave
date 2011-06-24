@@ -238,3 +238,4 @@ border: 0;
     border-right: 1px solid #CCC;
     border-left: 1px solid #CCC;
 }
+.x-field-clear {position:absolute;top:3px;right:12px;}
