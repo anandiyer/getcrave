@@ -66,11 +66,36 @@ class MenuItemRatingsController < ApplicationController
     @menu_item_rating = MenuItemRating.find(params[:id])
   end
 
+
+  def send_to_fb_wall
+    menu_item_id = params[:menu_item_rating][:menu_item_id]
+    menu_item = MenuItem.find(menu_item_id)
+    name = menu_item.name
+    link = "http://getcrave.com/items/"+params[:menu_item_rating][:menu_item_id]
+    message = "I just craved the #{name} - "+link
+    picture = menu_item.thumbnail
+
+    token = current_user.authorizations.first.token
+    me = FbGraph::User.me(token)
+    me.feed!(
+        :message => message,
+        :picture => picture,
+        :link => link,
+        :name => name
+#        :description => 'A Ruby wrapper for Facebook Graph API'
+    )
+
+  end
+
+
+
   # POST /menu_item_ratings
   # POST /menu_item_ratings.xml
   def create
 
-    p params[:facebook][:boolean]
+    if params[:facebook][:boolean] == "1"
+      send_to_fb_wall
+    end
 
     @menu_item_rating = MenuItemRating.new(params[:menu_item_rating])
 

@@ -13,11 +13,10 @@
   - @current_menu_item_reviews_limits = @current_menu_item_reviews.first(review_limit)
   - @current_menu_item_reviews_limits.each do |@mi_rating|
     - user = User.find(@mi_rating.user_id)
-
     - if @mi_rating.user_id?
       .reviews_wrapper_block
         .review_image_col
-          = link_to(image_tag(@user.small_thumbnail), @user)
+          = link_to(image_tag(user.small_thumbnail), user)
           #click &nbsp;
 
         .review_desc_col_wrapper

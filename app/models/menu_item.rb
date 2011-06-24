@@ -32,4 +32,12 @@ class MenuItem < ActiveRecord::Base
   def labels
     MenuLabel.find(self.menu_label_associations.map{|l| l.menu_label_id}).map{|ln| ln.menu_label}
   end
+
+  def thumbnail
+    if self.menu_item_photos.any?
+      self.menu_item_photos.first.photo
+    else
+      "item_rest_temp_image.png"
+    end
+  end
 end
