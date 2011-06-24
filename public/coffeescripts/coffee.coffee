@@ -142,7 +142,7 @@ window.save_menu_item = (mid, saved_item_id) ->
 
 window.add_review = (id_of_menu_item, msg) ->
     update_reviews(id_of_menu_item)
-    $("#comment_wrapper #submit_block .text").text("Submitting")
+#    $("#comment_wrapper #submit_block .text").text("Submit")
 
     $("#comment_wrapper").slideUp("slow",() ->
         $(this).empty()
@@ -150,9 +150,11 @@ window.add_review = (id_of_menu_item, msg) ->
         couner_reviews = $("#text_column #rating span").text()
         $("#text_column #rating span").html(parseInt(couner_reviews)+1)
         $("#comment_wrapper").slideDown("normal")
+        $("#comment_wrapper").removeClass("sending")
     )
 
-    $("#comment_wrapper").removeClass("sending")
+
+
 
 
 window.set_gmap = (zoom = 10) ->
@@ -391,7 +393,7 @@ $(document).ready ->
 
 
     $("#comment_wrapper").ajaxStart () ->
-#        cl "ajax start"
+        cl "ajax start"
         $("#comment_wrapper").addClass("sending")
         $("#comment_wrapper #submit_block .text").text("Submitting")
 

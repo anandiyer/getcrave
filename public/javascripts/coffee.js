@@ -162,16 +162,15 @@
   };
   window.add_review = function(id_of_menu_item, msg) {
     update_reviews(id_of_menu_item);
-    $("#comment_wrapper #submit_block .text").text("Submitting");
-    $("#comment_wrapper").slideUp("slow", function() {
+    return $("#comment_wrapper").slideUp("slow", function() {
       var couner_reviews;
       $(this).empty();
       $("<h1>" + msg + "<h1>").appendTo("#comment_wrapper");
       couner_reviews = $("#text_column #rating span").text();
       $("#text_column #rating span").html(parseInt(couner_reviews) + 1);
-      return $("#comment_wrapper").slideDown("normal");
+      $("#comment_wrapper").slideDown("normal");
+      return $("#comment_wrapper").removeClass("sending");
     });
-    return $("#comment_wrapper").removeClass("sending");
   };
   window.set_gmap = function(zoom) {
     var ar, lat, long, obj;
@@ -395,6 +394,7 @@
       return event.preventDefault();
     });
     $("#comment_wrapper").ajaxStart(function() {
+      cl("ajax start");
       $("#comment_wrapper").addClass("sending");
       return $("#comment_wrapper #submit_block .text").text("Submitting");
     });

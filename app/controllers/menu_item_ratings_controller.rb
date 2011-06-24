@@ -84,7 +84,6 @@ class MenuItemRatingsController < ApplicationController
         :name => name
 #        :description => 'A Ruby wrapper for Facebook Graph API'
     )
-
   end
 
 
