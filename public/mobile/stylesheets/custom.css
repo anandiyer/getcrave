@@ -227,3 +227,14 @@ padding: .4em;
 border: 0;
 }
 
+.x-toolbar .x-field {width:100%;}
+#searchForm {
+    background: #F8F7F5;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #F8F7F5), color-stop(100%, #ECEBE7));
+    background: -webkit-linear-gradient(top, #F8F7F5 0%, #ECEBE7 100%);
+    background: -o-linear-gradient(top, #F8F7F5 0%, #ECEBE7 100%);
+    background: linear-gradient(top, #F8F7F5 0%, #ECEBE7 100%);
+    border-bottom: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    border-left: 1px solid #CCC;
+}
