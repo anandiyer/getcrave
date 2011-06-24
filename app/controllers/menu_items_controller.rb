@@ -61,7 +61,7 @@ class MenuItemsController < ApplicationController
     @menu_items = MenuItem.find_by_sql(["SELECT menu_items.* FROM menu_items
       LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id
       WHERE menu_items.restaurant_id = ?
-      ORDER BY (menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
+      ORDER BY (menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, LOWER(menu_items.name) ASC", 
       @restaurant.id])
 
   end
