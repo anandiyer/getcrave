@@ -20,19 +20,21 @@ class MenuItem < ActiveRecord::Base
       }
     
     searchable do
-          text :menu_restaurant_name, :default_boost => 8 do
-           name + " " + restaurant.name
-          end
-          text :menu_labels, :default_boost => 6 do
-            menulabels = ""
-            self.labels.each { |l| menulabels << l + " "}
-            name + " " + menulabels
-          end
-          text :name, :default_boost => 4
-          text :description
-          location :coordinates do
-            Sunspot::Util::Coordinates.new(restaurant.latitude, restaurant.longitude)
-          end
+      text :menu_restaurant_name, :default_boost => 8 do
+        name + " " + restaurant.name
+      end
+      text :menu_labels, :default_boost => 6 do
+        menulabels = ""
+        self.labels.each { |l| menulabels << l + " "}
+        name + " " + menulabels
+      end
+      text :name, :default_boost => 4
+      text :description
+      float :avg_rating
+      float :num_ratings
+      location :coordinates do
+        Sunspot::Util::Coordinates.new(restaurant.latitude, restaurant.longitude)
+      end
     end
 
 # vars - menu_label_id, menu_item_id
@@ -82,6 +84,14 @@ class MenuItem < ActiveRecord::Base
   
   def locality
     self.restaurant.city
+  end
+  
+  def avg_rating
+    self.menu_item_ratings.average(:rating)
+  end
+  
+  def num_ratings
+    self.menu_item_ratings.count
   end
   
 end

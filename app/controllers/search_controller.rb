@@ -7,12 +7,21 @@ class SearchController < ApplicationController
     if (params[:q] && !params[:q].empty?)
       current_model = params[:search_restaurants] ? Restaurant : MenuItem
 
-      @search = Sunspot.search(current_model) do
+      if (current_model == MenuItem)
+        @search = Sunspot.search(current_model) do
           fulltext(params[:q])
           paginate :page => 1, :per_page => ITEMS_PER_PAGE
+          order_by :avg_rating, :desc
+          order_by :num_ratings, :desc
+        end
+      else
+        @search = Sunspot.search(current_model) do
+          fulltext(params[:q])
+          paginate :page => 1, :per_page => ITEMS_PER_PAGE
+        end
       end
+      
       @results = @search.results
-#      @results = current_model.find(100,1001,1002)
 
       respond_to do |format|
         format.html
