@@ -20,23 +20,46 @@ height: 1.0em;
 .x-toolbar .x-button {
 padding: .3em .3em;
 }
-.x-list .x-list-item {border-top:solid 1px #cccccc;
-    background-image: -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0.45, rgb(241,241,241)),
-        color-stop(0.73, rgb(241,241,241))
+.x-list .x-list-item {
+	border-top: solid 1px #CCC;
+	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, white), color-stop(100%, #F1F1F1));
     );
 }
+
+.dishListinfo {
+float: left;
+margin: 2px 0 0 7px;
+font-size: 14px;
+color: #282828;
+line-height: 21px;
+}
+
+.restaurantName {
+display: block;
+font-weight: lighter;
+}
+
+.restName {
+font-weight: bold;
+text-shadow: 1px 1px white;
+}
+
+.restAddress {
+font-weight: lighter;
+display: block;
+text-shadow: 1px 1px white;
+line-height: 21px;
+}
+
+.distanceFigure {
+display: block;
+color: #5D5D5D;
+font-weight: lighter;
+}
+
 .x-list-header {
-    background-image: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(0.45, rgb(65,66,68)),
-    color-stop(0.73, rgb(36,38,36))
-);
+	background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, #414244), color-stop(1, #242624) );
+	height: 22px;
 }
 /*
     background-image: -webkit-gradient(
@@ -60,12 +83,12 @@ padding: .3em .3em;
 .picanddata .data {float:left;padding:12px}
 .reviewtext {clear:both;float:none;}
 .restaurantInfo {
-    width: 100%;
-    height: 100px;
-    background-color: #f9ecc0;
-    padding: 12px;
-    font-size:14px;
-    color:#282828;
+	width: 100%;
+	height: 100px;
+	background-color: #F8ECC0;
+	padding: 12px;
+	font-size: 14px;
+	color: #282828;
 }
 .dashedBorder {border:dashed 1px;}
 /*sencha overrides */
@@ -188,3 +211,19 @@ border-bottom: .1em solid #73271A;
 input[type="search"]::-webkit-search-cancel-button {
 margin-right:4px;
 }
+
+.x-form .x-panel-body {
+padding: 1em;
+background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #F8F7F5), color-stop(1, #ECEBE7) );
+border-bottom: 1px solid #BAB9B7;
+border-top: 1px solid white;
+height: 45px;
+}
+
+.x-field input, .x-field textarea, .x-field select, .x-field .x-field-slider {
+-webkit-border-radius: 0;
+border-radius: 20px;
+padding: .4em;
+border: 0;
+}
+
