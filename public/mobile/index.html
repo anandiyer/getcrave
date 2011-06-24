@@ -226,6 +226,25 @@
            ]
        });
 
+
+        bottomPanel = new Ext.TabPanel({
+            tabBar: {
+                dock: 'bottom',
+                ui: 'dark',
+                layout: {
+                    pack: 'center'
+                },
+                items:[
+                    {text:'nearby',id:'nearButton',handler:sessionHandler,iconCls: 'nearBy'},
+                    {text:'me',id:'meButton',handler:sessionHandler,iconCls: 'me'},
+                    {text:'Login',id:'loginButton',handler:sessionHandler,iconCls:'user'},
+                    {text:'Logout',id:'logoutButton',handler:sessionHandler,hidden:true},
+                    {text:'New Restaurant',id:'newRestButton',handler:sessionHandler,hidden:true}
+                ]
+            }
+        });
+           
+
        //intentionally not using var to make this global
        listPnl = new Ext.Panel({
            id: 'listPnl',
@@ -250,20 +269,12 @@
                        ]}
                    ]
                },searchForm,
-               {
-                   id:'bottomPanel',
-                   xtype: 'toolbar',
-                   dock:'bottom',
-                   ui:'dark',
+
+                {
+                   dock: 'bottom',
                    items:[
-                       {xtype:'segmentedbutton',
-                       layout:{pack:'center'},
-                       items:[
-                           {text:'Login',id:'loginButton',handler:sessionHandler},
-                           {text:'Logout',id:'logoutButton',handler:sessionHandler,hidden:true},
-                           {text:'New Restaurant',id:'newRestButton',handler:sessionHandler,hidden:true}
-                       ]}
-                    ]
+                           bottomPanel
+                   ]
                }
            ]
        });
