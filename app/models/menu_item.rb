@@ -20,16 +20,17 @@ class MenuItem < ActiveRecord::Base
       }
     
     searchable do
-      text :menu_restaurant_name, :default_boost => 8 do
+      text :name, :default_boost => 8
+      text :description, :default_boost => 6
+      text :menu_restaurant_name, :default_boost => 4 do
         name + " " + restaurant.name
       end
-      text :menu_labels, :default_boost => 6 do
+      text :menu_labels, :default_boost => 2 do
         menulabels = ""
         self.labels.each { |l| menulabels << l + " "}
         name + " " + menulabels
       end
-      text :name, :default_boost => 4
-      text :description
+
       float :avg_rating
       float :num_ratings
       location :coordinates do
