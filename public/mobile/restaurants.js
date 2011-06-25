@@ -8,7 +8,7 @@ restaurantTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><img src
         }
     }});
 
-restaurantDishTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><img src="../images/no-image-default.png" class="dishImg"><div class="dishListinfo"><span class="dishname">{name}</span><span class="restaurantName">{rating_count}</span></div><span class="chevrony"></span></span></div></tpl>');
+restaurantDishTemplate = new Ext.XTemplate.from('restDishTemplate');
 
 Ext.regModel('RestaurantDish',
 {
