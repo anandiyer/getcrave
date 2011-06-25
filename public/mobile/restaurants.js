@@ -329,7 +329,9 @@ function dishDisplay(response) {
         htmlString += starDisplay(responseObject.menu_item.menu_item_avg_rating_count.avg_rating);
         htmlString += ' '+responseObject.menu_item.menu_item_avg_rating_count.count+' ratings';
     }
-    htmlString += '<div class="dataSection"><div class="sectionHead">Description</div><div class="sectionBody">'+responseObject.menu_item.description+'</div></div>';
+    if(responseObject.menu_item.description!="") {
+        htmlString += '<div class="dataSection"><div class="sectionHead">Description</div><div class="sectionBody">'+responseObject.menu_item.description+'</div></div>';
+    }
     /*for(i=0;i<responseObject[0].ingredients.length;i++) {
      htmlString += responseObject[0].ingredients[i].item;
         if(i<responseObject[0].ingredients.length - 1) {
