@@ -256,3 +256,16 @@ border: 0;
 .dataSection {border:solid 1px;border-radius:10px;}
 .sectionHead {background-color:#ccc;border-top-left-radius:10px;border-top-right-radius:10px;padding:12px;}
 .sectionBody {padding:10px;}
+
+.loginButton {
+    background: url("../../images/facebook-button.png") no-repeat;
+    width: 302px;
+    height: 36px;
+    border: none;
+    margin: 12px;
+    display:block;
+}
+.explanation {
+    font-weight:bold;
+    margin:12px;
+}
