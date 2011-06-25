@@ -8,7 +8,7 @@ restaurantTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><img src
         }
     }});
 
-restaurantDishTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><img src="../images/no-image-default.png" class="dishImg"><div class="dishListinfo"><span class="dishname">{name}</span><span class="restaurantName">{rating_count}</span></div><span class="chevrony"></span></span></div></tpl>');
+restaurantDishTemplate = new Ext.XTemplate.from('restDishTemplate');
 
 Ext.regModel('RestaurantDish',
 {
@@ -102,7 +102,6 @@ var singleRestaurantStore = new Ext.data.Store({
 function placeDisplay(record, index) {
     console.log(urlPrefix+'/places/'+record.data.id+'/items.json');
     singleRestaurantStore.proxy.url = (urlPrefix+'/places/'+record.data.id+'/items.json');
-    var myVar = "hello";
 
     singleRestaurantStore.load(function(){
         Ext.getCmp('mainPnl').setActiveItem(2);
@@ -321,18 +320,16 @@ var reviewForm = new Ext.form.FormPanel({
 });
 
 function dishDisplay(response) {
-    console.log('displaying dish');
-    console.log(response);
     var responseObject = eval('(' + response.responseText + ')');
-    console.log(response);
+    //instead of making this into a string I should create javascript object, apply template
     htmlString = '<div class="dishinfo"><b>'+responseObject.menu_item.name+'</b><br/>';
     htmlString += '@'+responseObject.menu_item.restaurant.name+'<br>';
-    htmlString += '$ '+responseObject.menu_item.price+'<br>';
+    //htmlString += '$ '+responseObject.menu_item.price+'<br>';
     if(responseObject.menu_item.menu_item_avg_rating_count) {
         htmlString += starDisplay(responseObject.menu_item.menu_item_avg_rating_count.avg_rating);
         htmlString += ' '+responseObject.menu_item.menu_item_avg_rating_count.count+' ratings';
     }
-    htmlString += '<br><br>'+responseObject.menu_item.description+'<br>';
+    htmlString += '<div class="dataSection"><div class="sectionHead">Description</div><div class="sectionBody">'+responseObject.menu_item.description+'</div></div>';
     /*for(i=0;i<responseObject[0].ingredients.length;i++) {
      htmlString += responseObject[0].ingredients[i].item;
         if(i<responseObject[0].ingredients.length - 1) {
@@ -349,10 +346,11 @@ function dishDisplay(response) {
     }
     */
     if(responseObject.menu_item.menu_item_ratings) {
-        reviewString = "<br><br><b>Reviews</b><br><br>";
+        reviewString = '<div class="dataSection"><div class="sectionHead">Reviews</div><div class="sectionBody">';
         for(i=0;i<responseObject.menu_item.menu_item_ratings.length;i++) {
             reviewString += '<div class="picanddata"><div class="data">'+starDisplay(responseObject.menu_item.menu_item_ratings[i].rating)+'</div> <div class="reviewtext">'+responseObject.menu_item.menu_item_ratings[i].review+'</div></div>';
         }
+        reviewString += '</div></div>';
         Ext.getCmp('detailPnl').add(reviewPnl);
         Ext.getCmp('reviewPnl').update(reviewString);
     }

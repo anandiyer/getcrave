@@ -252,3 +252,7 @@ border: 0;
 .x-tab img.me, .x-button img.x-icon-mask.me {
 	-webkit-mask-image:url('../../images/tab-Me-ON.png');
 }
+
+.dataSection {border:solid 1px;border-radius:10px;margin:12px 0;}
+.sectionHead {background-color:#ccc;border-top-left-radius:10px;border-top-right-radius:10px;padding:12px;}
+.sectionBody {padding:10px;}
