@@ -20,8 +20,10 @@
     = stylesheet_link_tag "jquery.lightbox-0.5.css"
 
 
-    -#autocomplete
+    -#columnizing
+    = javascript_include_tag  "plugins/autocolumn.min.js" if controller.controller_name == "search"
 
+    -#autocomplete
     = javascript_include_tag "plugins/ui/jquery.ui.core.js","plugins/ui/jquery.ui.widget.js","plugins/ui/jquery.ui.position.js","plugins/ui/jquery.ui.autocomplete.js"
     = stylesheet_link_tag "ui/jquery.ui.all.css"
 
@@ -40,22 +42,21 @@
     = include_gritter
     = gflash
 
-    = stylesheet_link_tag "screen", "style"
+    = stylesheet_link_tag 'screen.css', :media => 'screen, projection'
+    = stylesheet_link_tag "style"
 
     /[if IE]
       = stylesheet_link_tag "ie", "ie_style"
     = csrf_meta_tag
 
-  - if params[:lat] then data = {:latitude => params[:lat], :longitude => params[:long]}  else data = "" end
+  - if cookies[:lat] then data = {:latitude => cookies[:lat], :longitude => cookies[:long]}  else data = "" end
   %body.two-col.bp{:data => data, :rel => ITEMS_PER_PAGE}
     #page
       #container
         #header
           = link_to nearby_path do
             #logo
-
           #navigation_wrap= render :partial => "/navigation"
-
           #navigation_wrap_search
             %form{:action => search_index_path, :method => :get}
               = text_field_tag :q, params[:q], :class =>"first_search_input", :placeholder =>"Search for a dish or restaurant", :value => params[:q] ? params[:q] : ""
@@ -66,11 +67,12 @@
 
               #in in
         #content_wrap
-          - if controller.action_name == "nearby_loading"
-            #get_nearby_loading
+          - if controller.action_name == "nearby_loading" || controller.controller_name == "search"
+            - controller.controller_name == "search" ? text = "Loading" : text = "Locating"
+
+            #get_nearby_loading{:class => controller.controller_name == "search" ? "h" : ""}
               = image_tag "activity_indicator.gif"
-              #locating
-                Locating...
+              #locating= text+"..."
 
           #content
             =yield
@@ -80,14 +82,7 @@
         = render :partial => "/modal_window"
 
         :javascript
-
           //#TODO place to refactor - move to external js file
-
-
-
-
-
-
           starts_update();
 
           function starts_update(){
@@ -99,7 +94,6 @@
                 path: "/images/icons",
                 width: "180px",
                 click: function(score, evt) {
-
 
                   if($(".fb_login a.not_signed").length == 1){
                     window.show_dialog("Please sign in?");

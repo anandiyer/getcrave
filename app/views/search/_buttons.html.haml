@@ -1,0 +1,48 @@
+- if  controller.controller_name == "menu_items" || (@controller.controller_name == "search" && !params[:search_restaurants] && !params[:search_dishes])
+  - all_results_status = "on"
+  - dish_button_status = "off"
+  - rest_button_status = "off"
+
+- else
+  - if  controller.controller_name == "menu_items" || (@controller.controller_name == "search" && params[:search_restaurants] && !params[:search_dishes])
+    - rest_button_status = "on"
+    - all_results_status = "off"
+    - dish_button_status = "off"
+  - else
+    - dish_button_status = "on"
+    - rest_button_status = "off"
+    - all_results_status = "off"
+
+#buttons_wrapper
+  - if all_results_status == "on"
+    #all_results_icon{:class => all_results_status+" restbutton "+class_name_from_path}
+      #left_side &nbsp;
+      = image_tag "all_results_button_text_on.png"
+  - else
+    =link_to "/search?q="+params[:q] do
+      #all_results_icon{:class => all_results_status+" restbutton "+class_name_from_path}
+        #left_side &nbsp;
+        = image_tag "all_results_button_text_off.png"
+
+
+  - if rest_button_status == "on"
+    #restaurant_icon{:class => rest_button_status+" restbutton "+class_name_from_path}
+      #left_side &nbsp;
+      = image_tag "restaurants_button_text_on.png"
+  - else
+    = link_to "/search?q="+params[:q]+"&search_restaurants=true" do
+      #restaurant_icon{:class => rest_button_status+" restbutton "+class_name_from_path}
+        #left_side &nbsp;
+        = image_tag "restaurants_button_text_on.png"
+
+
+  - if dish_button_status == "on"
+    #dishes_icon{:class => dish_button_status+" dishbutton "+class_name_from_path}
+      #left_side &nbsp;
+      = image_tag "dishes_button_text.png"
+  - else
+    = link_to "/search?q="+params[:q]+"&search_dishes=true" do
+      #dishes_icon{:class => dish_button_status+" dishbutton "+class_name_from_path}
+        #left_side &nbsp;
+        = image_tag "dishes_button_text.png"
+

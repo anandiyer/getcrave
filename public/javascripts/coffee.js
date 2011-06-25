@@ -1,5 +1,5 @@
 (function() {
-  var after_send, before_send, close_labels_selectbox, disher_review_wrapper, error, geo, search_bind, top_nav_bind;
+  var after_send, before_send, close_labels_selectbox, columnizing, disher_review_wrapper, error, filter_bind, geo, search_bind, select_all_checked_labels, top_nav_bind;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   disher_review_wrapper = $("#reviews_wrapper");
   window.is_logged_in = function() {
@@ -242,32 +242,14 @@
     });
   };
   search_bind = function() {
-    var loc, restaurant_search;
     $(".first_search_input").keyup(function(e) {
       if (e.keyCode === 13) {
         return $(this).parents("form").submit();
       }
     });
-    $("#navigation_wrap_search #submit_block").click(function() {
+    return $("#navigation_wrap_search #submit_block").click(function() {
       return $(this).parents("form").submit();
     });
-    if ($("a #restaurant_icon.off.restbutton.search_index").length > 0 || $("a #dishes_icon.off.dishbutton.search_index").length > 0) {
-      loc = window.location.search;
-      if (loc.indexOf("search_restaurants=true") < 0) {
-        restaurant_search = loc + "&search_restaurants=true";
-      } else {
-        restaurant_search = loc;
-      }
-      $("a #restaurant_icon.off.restbutton.search_index").click(function(e) {
-        cl(2222);
-        e.preventDefault();
-        return window.location = restaurant_search;
-      });
-      return $("a #dishes_icon.off.dishbutton.search_index").click(function(e) {
-        $("#navigation_wrap_search form").submit();
-        return e.preventDefault();
-      });
-    }
   };
   window.thumbnail_resizing = function() {
     var img, source;
@@ -303,10 +285,73 @@
       }, this)
     });
   };
+  select_all_checked_labels = function() {
+    var category, labels_array, path, path_total, queary, within;
+    labels_array = [];
+    within = $("#distance_inputs input:checked").val();
+    $(".labels_inputs input:checked").each(function() {
+      return labels_array.push($(this).next("label").text());
+    });
+    path = [];
+    if (labels_array.length > 0) {
+      path.push("labels=" + labels_array.join("+"));
+    }
+    if (within && within.length > 0) {
+      path.push("within=" + within);
+    }
+    category = $("#buttons_wrapper .on").attr("id").replace("_icon", "");
+    path.push("category=" + category);
+    queary = window.location.search.split("&")[0].split("=")[1];
+    path.push("q=" + queary);
+    path.push("lat=" + $("body").attr("data-latitude"));
+    path.push("long=" + $("body").attr("data-longitude"));
+    cl(path_total = "/search?" + path.join("&"));
+    return $.ajax({
+      url: path_total,
+      type: "get",
+      context: document.body
+    });
+  };
+  filter_bind = function() {
+    $("#filters a").click(function(e) {
+      var obj;
+      obj = $("#toggled_filters");
+      $(obj).slideToggle("fast", function() {
+        $("#triangle").toggleClass("on");
+        if ($(this).is(":visible")) {
+          if ($(".labels_inputs .column").length === 0) {
+            return $('.labels_inputs').columnize({
+              columns: 3,
+              cache: false
+            });
+          }
+        }
+      });
+      return e.preventDefault();
+    });
+    $("#distance_inputs input").live("click", function() {
+      return select_all_checked_labels();
+    });
+    return $(".labels_inputs input").live("click", function() {
+      return select_all_checked_labels();
+    });
+  };
+  columnizing = function() {
+    if ($(".labels_inputs .column").length === 0) {
+      $('.labels_inputs').columnize({
+        columns: 4,
+        cache: false
+      });
+    }
+    return filter_bind();
+  };
   $(document).ready(function() {
     search_bind();
     top_nav_bind();
     thumbnail_resizing();
+    if (window.location.href.indexOf("search") > 0) {
+      columnizing();
+    }
     $("#navigation .left_corner").live("click", function() {
       return window.location = $(this).next().attr("href");
     });
@@ -346,6 +391,11 @@
     });
     $('#input_comment textarea').focus(function(e) {
       return $(this).parents("form").find("#submit_block").show();
+    });
+    $.ajaxSetup({
+      'beforeSend': function(xhr) {
+        return xhr.setRequestHeader("Accept", "text/javascript");
+      }
     });
     $('textarea').autoResize();
     $("#labels a.label").live("click", function(event) {
@@ -393,12 +443,22 @@
       }
       return event.preventDefault();
     });
+    $("#toggled_filters").ajaxStart(function() {
+      $("#get_nearby_loading").show();
+      $("#update_place_restaurants").fadeTo("slow", .5);
+      return $("#toggled_filters input").attr('disabled', "true");
+    });
     $("#comment_wrapper").ajaxStart(function() {
       cl("ajax start");
       $("#comment_wrapper").addClass("sending");
       return $("#comment_wrapper #submit_block .text").text("Submitting");
     });
     $(document).ajaxComplete(function(event, xhr, settings) {
+      if (settings.url.indexOf("search") > 0) {
+        $("#get_nearby_loading").hide();
+        $("#toggled_filters input").removeAttr('disabled');
+        $("#update_place_restaurants").fadeTo("slow", 1).html(xhr.responseText);
+      }
       if (settings.url === "/menu_label_associations") {
         if (xhr.responseText.indexOf('Warning') < 0 && xhr.responseText.indexOf("sign in") < 0) {
           $(".birdy_update").html(xhr.responseText);
@@ -406,9 +466,6 @@
         return close_labels_selectbox();
       }
     });
-    if ($("#map").length > 0) {
-      set_gmap(13);
-    }
     $(".yes_answer").live("click", function(event) {
       var form, found_helpfull_number, increment, link, link_text;
       event.preventDefault();

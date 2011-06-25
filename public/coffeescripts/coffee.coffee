@@ -226,23 +226,23 @@ search_bind = () ->
 
     $("#navigation_wrap_search #submit_block").click () ->  $(@).parents("form").submit()
 
-    if $("a #restaurant_icon.off.restbutton.search_index").length > 0 || $("a #dishes_icon.off.dishbutton.search_index").length > 0
-        loc = window.location.search
+#    if $("a #restaurant_icon.off.restbutton.search_index").length > 0 || $("a #dishes_icon.off.dishbutton.search_index").length > 0
+#        loc = window.location.search
+#
+#        if loc.indexOf("search_restaurants=true") < 0
+#            restaurant_search = loc+"&search_restaurants=true"
+#        else
+#            restaurant_search = loc
+#        $("a #restaurant_icon.off.restbutton.search_index").click (e) ->
+#            cl 2222
+#            e.preventDefault()
+#            window.location = restaurant_search
 
-        if loc.indexOf("search_restaurants=true") < 0
-            restaurant_search = loc+"&search_restaurants=true"
-        else
-            restaurant_search = loc
-        $("a #restaurant_icon.off.restbutton.search_index").click (e) ->
-            cl 2222
-            e.preventDefault()
-            window.location = restaurant_search
 
 
-
-        $("a #dishes_icon.off.dishbutton.search_index").click (e) ->
-            $("#navigation_wrap_search form").submit()
-            e.preventDefault()
+#        $("a #dishes_icon.off.dishbutton.search_index").click (e) ->
+#            $("#navigation_wrap_search form").submit()
+#            e.preventDefault()
 
 
 window.thumbnail_resizing = () ->
@@ -276,11 +276,61 @@ window.update_after_adding_item = (place_name) ->
     $.ajax({url: url, context: document.body, success: (msg) => $("#update_place_restaurants").fadeTo("fast",.6).delay(500).html(msg).delay(500).fadeTo("fast",1)});
 
 
+
+
+select_all_checked_labels = () ->
+    labels_array = []
+
+    within = $("#distance_inputs input:checked").val()
+
+    $(".labels_inputs input:checked").each () ->
+        labels_array.push($(this).next("label").text())
+
+    path = []
+
+    if labels_array.length > 0
+        path.push("labels="+labels_array.join("+"))
+
+
+    if within && within.length > 0
+        path.push("within="+within)
+
+    category = $("#buttons_wrapper .on").attr("id").replace("_icon","")
+    path.push("category="+category)
+    queary = window.location.search.split("&")[0].split("=")[1]
+    path.push("q="+queary)
+    path.push("lat="+$("body").attr("data-latitude"))
+    path.push("long="+$("body").attr("data-longitude"))
+
+    cl path_total = "/search?"+path.join("&")
+    $.ajax({url: path_total, type: "get", context: document.body});
+
+filter_bind = () ->
+    $("#filters a").click (e) ->
+        obj = $("#toggled_filters")
+        $(obj).slideToggle "fast", () ->
+            $("#triangle").toggleClass("on")
+            if $(this).is(":visible")
+                $('.labels_inputs').columnize({columns: 3, cache: false}} if $(".labels_inputs .column").length == 0
+        e.preventDefault()
+
+    $("#distance_inputs input").live "click", () -> select_all_checked_labels()
+    $(".labels_inputs input").live "click", () -> select_all_checked_labels()
+
+
+
+columnizing = () ->
+    $('.labels_inputs').columnize({columns: 4, cache: false}} if $(".labels_inputs .column").length == 0
+    filter_bind()
+
+
 $(document).ready ->
 
     search_bind()
     top_nav_bind()
     thumbnail_resizing()
+
+    columnizing() if window.location.href.indexOf("search") > 0
 
 
     $("#navigation .left_corner").live "click", () ->
@@ -325,13 +375,8 @@ $(document).ready ->
         $(@).parents("form").find("#submit_block").show()
 
 
-#    $(document).ajaxSend (event, request, settings) ->
-#        if settings.type == 'post'
-#            settings.data = (settings.data ? settings.data + "&" : "") + "authenticity_token=" + encodeURIComponent( AUTH_TOKEN )
-#            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-#
-
-
+    #for respond_to :js
+    $.ajaxSetup 'beforeSend': (xhr) -> xhr.setRequestHeader("Accept", "text/javascript")
 
 
 #   $('textarea').autoResize({onResize : () -> $(this).css({opacity:0.8}), animateCallback : () -> $(@).css({opacity:1}), animateDuration : 300, extraSpace : 40});
@@ -349,10 +394,7 @@ $(document).ready ->
             .submit()
 
 
-
     $(".label_div ul li").live "click", (event) ->
-
-
         id = $(@).attr("id")
         $("#labels form")
             .find("input#menu_label_association_menu_label_id")
@@ -392,6 +434,14 @@ $(document).ready ->
 
 
 
+    $("#toggled_filters")
+        .ajaxStart () ->
+            $("#get_nearby_loading").show()
+            $("#update_place_restaurants").fadeTo("slow",.5)
+            $("#toggled_filters input").attr('disabled', "true");
+
+
+
     $("#comment_wrapper").ajaxStart () ->
         cl "ajax start"
         $("#comment_wrapper").addClass("sending")
@@ -399,6 +449,15 @@ $(document).ready ->
 
 
     $(document).ajaxComplete (event, xhr, settings) ->
+        if settings.url.indexOf("search") > 0
+            $("#get_nearby_loading").hide()
+
+            $("#toggled_filters input").removeAttr('disabled');
+            $("#update_place_restaurants")
+                .fadeTo("slow",1)
+                .html(xhr.responseText)
+
+
         if settings.url == "/menu_label_associations"
             if xhr.responseText.indexOf('Warning') < 0 && xhr.responseText.indexOf("sign in") < 0
                 $(".birdy_update").html(xhr.responseText)
@@ -410,7 +469,7 @@ $(document).ready ->
 
 #   google maps in homepage neary
 
-    set_gmap(13) if $("#map").length >0
+#    set_gmap(13) if $("#map").length >0
 
 
 

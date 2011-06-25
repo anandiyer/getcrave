@@ -59,6 +59,11 @@ $birdy_position: 0 -552px;
 
 $small_font_size: 12px;
 
+@mixin nospace() {
+    padding:0px;
+    margin:0px;
+}
+
 @mixin sprites($position, $weight:17px, $height:17px) {
     background-image: url("/images/sprites/icon-sprite.png");
     background-repeat: no-repeat;
@@ -71,6 +76,7 @@ $small_font_size: 12px;
 
 
 body.two-col.bp{
+    background-color:red;
 
 
 
@@ -468,6 +474,7 @@ body.two-col.bp{
             background: #333;
             text-align: center;
             padding-top:20px;
+            z-index:1000;
             #locating{
                 font-weight:bold;
                 color:white;
@@ -536,31 +543,84 @@ body.two-col.bp{
                         padding:0;
                     }
                 }
-
             }
         }
 
         #content{
-            padding:0 20px 0 0px;
+            #result_report_info{
+                padding:10px 0 0 10px;
+                font-weight: bold;
+                font-size: 14px;
+            }
 
+
+            #toggled_filters{
+                padding:10px 0 0 0;
+                max-height:200px;
+
+            }
+
+            #filters{
+
+                #triangle.on{
+                    background: url("/images/sprites/icon-sprite.png") no-repeat -24px -1280px;
+                }
+                #triangle{
+                    @include inline-block;
+                    width:18px;
+                    height:18px;
+                    background: url("/images/sprites/icon-sprite.png") no-repeat 0px -1280px;
+                }
+
+                a{
+                    font-size:15px;
+                }
+
+                border-bottom:1px dotted $gray;
+                padding:10px 0px 10px 10px;
+                width: 587px;
+
+                .distance_title{
+                    font-weight: bold;
+                }
+
+
+                #labels{
+                    .labels_inputs{
+                        @extends #distance_inputs;
+                    }
+                }
+
+                #distance_inputs, .labels_inputs{
+                    position: relative;
+                    left: -3px;
+                    input{
+                        position:relative;
+                        top:2px;
+                        @inclide nospace;
+                    }
+                }
+
+
+
+            }
             #buttons_wrapper.user_buttons_wrapper{
                 height: 40px;
 
-                #dishes_icon.off{
-                    color: $gray;
-                    border-right: 1px solid #dcdcdc;
-					font-size:14px;
-					text-shadow:0px 1px #f9f9f9;
-					height:26px;
-					cursor:pointer;
-                }
+                /*#dishes_icon.off{*/
+                    /*color: $gray;*/
+                    /*border-right: 1px solid #dcdcdc;*/
+					/*font-size:14px;*/
+					/*text-shadow:0px 1px #f9f9f9;*/
+					/*height:26px;*/
+					/*cursor:pointer;*/
+                /*}*/
 
                 a{
                   #dishes_icon{
                     color: #464641;
 					font-size:14px;
 					text-shadow:0px 1px #f9f9f9;
-					height:26px;
                   }
                 }
 
@@ -576,10 +636,13 @@ body.two-col.bp{
                 @include container;
 
 
+                #all_results_icon{
+                    @extend #dishes_icon;
+                }
+
                 #restaurant_icon{
                     @extend #dishes_icon;
                     margin-left: -30px;
-
                 }
 
                 #dishes_icon{
@@ -608,11 +671,21 @@ body.two-col.bp{
                    margin-left: -4px;
                 }
 
-                #restaurant_icon.off{
+                #restaurant_icon.off, #all_results_icon{
                     margin-left: -4px;
                     background: url("/images/sprites/button-sprite.png") no-repeat scroll -72px -5px transparent;
                 }
+
+
+
+
                 #dishes_icon.off{
+                    margin-left: -4px;
+                    color: $gray;
+                    border-right: 1px solid #dcdcdc;
+					font-size:14px;
+					text-shadow:0px 1px #f9f9f9;
+					cursor:pointer;
 
                     background: url("/images/sprites/button-sprite.png") no-repeat scroll -72px -5px transparent;
                     img{
@@ -621,6 +694,7 @@ body.two-col.bp{
                 }
 
                 #dishes_icon.on{
+                    margin-left: -4px;
                     background: url("/images/sprites/button-sprite.png") no-repeat scroll -72px -40px transparent;
                     #left_side{
                         background: url("/images/sprites/button-sprite.png") no-repeat scroll 0px -40px transparent;

@@ -1,0 +1,21 @@
+- if @results.count == 0
+  No matching results :( Were you looking for restaurants instead?
+
+- @results.each_with_index do |item, @counter|
+
+  - if item.class.to_s == "MenuItem"
+    - @menu_item = item
+    - @stars = "0"
+    - begin
+      - @stars = @menu_item.menu_item_avg_rating_count.avg_rating if !@menu_item.menu_item_avg_rating_count.nil?
+    - rescue NoMethodError
+      - logger.error("@menu_item.menu_item_avg_rating_count")
+
+    = render :partial => "item"
+
+  - else
+    - @restaurant = item
+    = render :partial => "restaurants/restaurant_nearby"
+
+
+
