@@ -348,7 +348,13 @@ function dishDisplay(response) {
     if(responseObject.menu_item.menu_item_ratings) {
         reviewString = '<div class="dataSection"><div class="sectionHead">Reviews</div><div class="sectionBody">';
         for(i=0;i<responseObject.menu_item.menu_item_ratings.length;i++) {
-            reviewString += '<div class="picanddata"><div class="data">'+starDisplay(responseObject.menu_item.menu_item_ratings[i].rating)+'</div> <div class="reviewtext">'+responseObject.menu_item.menu_item_ratings[i].review+'</div></div>';
+
+
+            reviewString += '<div class="picanddata">';
+            reviewString += '<div class="pic"><img src="'+responseObject.menu_item.menu_item_ratings[i].user.user_profile_pic_url+'"></div>';
+            reviewString += '<div class="data"><div class="username">'+responseObject.menu_item.menu_item_ratings[i].user.user_name+'</div>'+starDisplay(responseObject.menu_item.menu_item_ratings[i].rating)+'</div>';
+            reviewString += '<div class="reviewtext">'+responseObject.menu_item.menu_item_ratings[i].review+'</div>';
+            reviewString += '</div>';
         }
         reviewString += '</div></div>';
         Ext.getCmp('detailPnl').add(reviewPnl);

@@ -78,7 +78,7 @@ font-weight: lighter;
     padding:5px;
     margin:12px auto;
 }
-.dishinfo {padding:12px;}
+.dishinfo, #reviewPnl {padding:12px;}
 .picanddata .pic {float:left;padding:12px}
 .picanddata .data {float:left;padding:12px}
 .reviewtext {clear:both;float:none;}
@@ -253,6 +253,6 @@ border: 0;
 	-webkit-mask-image:url('../../images/tab-Me-ON.png');
 }
 
-.dataSection {border:solid 1px;border-radius:10px;margin:12px 0;}
+.dataSection {border:solid 1px;border-radius:10px;}
 .sectionHead {background-color:#ccc;border-top-left-radius:10px;border-top-right-radius:10px;padding:12px;}
 .sectionBody {padding:10px;}
