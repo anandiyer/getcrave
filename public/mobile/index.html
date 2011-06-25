@@ -181,7 +181,8 @@
            });
 
            var sessionHandler = function(b,e) {
-               if(b.getText() == "Login") {
+               var target = $(e).attr("class");
+               /*if(b.getText() == "Login") {
                    window.location = 'http://getcrave.com/auth/facebook';
                }
                if(b.getText() == "Logout") {
@@ -191,6 +192,13 @@
                }
                if(b.getText() == "New Restaurant") {
                    Ext.getCmp('listPnl').setActiveItem(newRestaurant);
+               }
+               */
+               if(target == "nearBy") {
+                   Ext.getCmp('listPnl').setActiveItem(dishList);
+               }
+               if(target == "me") {
+                   Ext.getCmp('listPnl').setActiveItem(profilePnl);
                }
            }
 
@@ -226,6 +234,22 @@
            ]
        });
 
+           var profilePnl = new Ext.Panel({
+               fullScreen: true,
+               html:'<div class="fancyImage"><img src="../images/profile-cold-food.png"></div><div class="loginControl"></div>',
+               id: 'profilePnl',
+               scroll:'vertical',
+               dockedItems:[
+                   {
+                       dock:'top',
+                       xtype:'toolbar',
+                       ui:'light',
+                       title:'<img class="cravelogo" src="../images/crave-logo-horizontal-white.png">',
+                       items:[{text:'Back',ui:'back', handler:backHandler}]
+                   }
+               ]
+           });
+
 
         bottomPanel = new Ext.TabPanel({
             tabBar: {
@@ -234,12 +258,16 @@
                 layout: {
                     pack: 'center'
                 },
+                listeners: {
+                    click: sessionHandler,
+                    element: 'body'
+                },
                 items:[
                     {text:'nearby',id:'nearButton',handler:sessionHandler,iconCls: 'nearBy'},
-                    {text:'me',id:'meButton',handler:sessionHandler,iconCls: 'me'},
+                    {text:'me',id:'meButton',handler:sessionHandler,iconCls: 'me'}/*,
                     {text:'Login',id:'loginButton',handler:sessionHandler,iconCls:'user'},
                     {text:'Logout',id:'logoutButton',handler:sessionHandler,hidden:true},
-                    {text:'New Restaurant',id:'newRestButton',handler:sessionHandler,hidden:true}
+                    {text:'New Restaurant',id:'newRestButton',handler:sessionHandler,hidden:true} */
                 ]
             }
         });
@@ -248,7 +276,7 @@
        //intentionally not using var to make this global
        listPnl = new Ext.Panel({
            id: 'listPnl',
-           items: [dishList,placesList,searchPnl,newRestaurant],
+           items: [dishList,placesList,searchPnl,newRestaurant,profilePnl],
            layout: {
                type: 'card'
            },
