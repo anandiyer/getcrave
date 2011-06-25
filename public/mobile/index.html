@@ -267,7 +267,7 @@
 
            var profilePnl = new Ext.Panel({
                fullScreen: true,
-               html:'<div class="fancyImage"><img src="../images/profile-cold-food.png"></div><div class="explanation">Rate & Save Dishes, Follow Foodies</div><a href="/auth/facebook" class="loginButton"></a>',
+               html:'<div class="fancyImage"><img class="logoutButton" src="../images/profile-cold-food.png"></div><div class="explanation">Rate & Save Dishes, Follow Foodies</div><a href="/auth/facebook" class="loginButton"></a>',
                id: 'profilePnl',
                scroll:'vertical',
                dockedItems:[
@@ -379,6 +379,10 @@ $(".newDish").live("click",function() {
     Ext.getCmp('mainPnl').setActiveItem(3);
     return false;
 });
+$(".logoutButton").live("click", function() {
+    localStorage.setItem("uid","");
+});
+
 </script>
 
 </body>
