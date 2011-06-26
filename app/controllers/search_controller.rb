@@ -36,7 +36,7 @@ class SearchController < ApplicationController
         partial_2_show = "result_menu_items" 
 
         @search = Sunspot.search(MenuItem) do
-          fulltext(params[:q])
+          fulltext(q)
           paginate :page => 1, :per_page => ITEMS_PER_PAGE
           order_by :avg_rating, :desc
           order_by :num_ratings, :desc
