@@ -226,10 +226,10 @@
                }
                */
                if(target == "nearBy") {
-                   Ext.getCmp('listPnl').setActiveItem(dishList);
+                   Ext.getCmp('mainPnl').setActiveItem(listPnl);
                }
                if(target == "me") {
-                   Ext.getCmp('listPnl').setActiveItem(profilePnl);
+                   Ext.getCmp('mainPnl').setActiveItem(profilePnl);
                }
            }
 
@@ -307,7 +307,7 @@
        //intentionally not using var to make this global
        listPnl = new Ext.Panel({
            id: 'listPnl',
-           items: [dishList,placesList,searchPnl,newRestaurant,profilePnl],
+           items: [dishList,placesList,searchPnl,newRestaurant],
            layout: {
                type: 'card'
            },
@@ -327,14 +327,7 @@
                            {text:'Places',id:'placesButton', pressed:false, handler:tapHandler,ui:'round',width:'110'} //,icon:'../images/restaurant-icon-OFF.png',iconAlign:'left'
                        ]}
                    ]
-               },searchForm,
-
-                {
-                   dock: 'bottom',
-                   items:[
-                           bottomPanel
-                   ]
-               }
+               },searchForm
            ]
        });
 
@@ -361,10 +354,16 @@
            var mainPnl = new Ext.Panel({
                fullscreen: true,
                id: 'mainPnl',
-               items: [listPnl,detailPnl,placePnl,newDishForm],
+               items: [listPnl,detailPnl,placePnl,newDishForm,profilePnl],
                layout: {
                    type: 'card'
                },
+               dockedItems: [{
+                   dock: 'bottom',
+                   items:[
+                           bottomPanel
+                   ]
+               }],
                cardSwitchAnimation: 'slide',
                direction:'horizontal'
            });
