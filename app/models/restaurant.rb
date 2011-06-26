@@ -6,6 +6,18 @@ class Restaurant < ActiveRecord::Base
                    :default_formula => :sphere, 
                    :lat_column_name => :latitude,
                    :lng_column_name => :longitude
+  acts_as_opengraph :values => { :site_name => "crave", :type => "restaurant" },
+    :columns => {
+      :title => :name,
+      :image => :image,
+      :latitude => :latitude, 
+      :longitude => :longitude,
+      :street_address => :street_address,
+      :locality => :city,
+      :postal_code => :zip,
+      :country_name => :country
+  }
+                   
   searchable do
       text :name
       location :coordinates do
@@ -17,4 +29,7 @@ class Restaurant < ActiveRecord::Base
     "#{street_address}, #{city}, #{state}, #{zip}"
   end
 
+  def image
+    "http://getcrave.com/images/crave-text_50x50.png"
+  end
 end

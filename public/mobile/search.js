@@ -72,16 +72,28 @@ var searchPnl = new Ext.Panel({
     height:'288px'
 });
 
-var searchForm = new Ext.form.FormPanel({
+/*
+var nearBySearchToolbar = new Ext.Toolbar({
+	dock : 'top',
+	items: [{
+		xtype: 'searchfield',
+        name: 'searchBox',
+		width : '100%'
+	}]
+});
+*/
+
+var searchForm = new Ext.Toolbar({
     id: 'searchForm',
     items: [
         {
-            xtype: 'textfield',
+            xtype: 'searchfield',
             name: 'searchString',
             inputType: 'search',
+            useClearIcon:true,
             id: 'searchBox',
             ui: 'search',
-            placeHolder: 'Search for dish, cuisine or diet...',
+            placeHolder: 'Search for dish, restaurant or diet...',
             listeners: {
                 change: function() {
                     searchValue = Ext.getCmp("searchBox").getValue();

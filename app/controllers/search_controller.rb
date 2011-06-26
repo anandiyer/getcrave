@@ -12,34 +12,41 @@ class SearchController < ApplicationController
     if (params[:q] && !params[:q].empty?)
       
       q = params[:q]
-
-      # default is all results
-      partial_2_show = "result_all"
-      
-      if (params[:search_restaurants] || params[:category] == "restaurant")
-        current_model = Restaurant
-        partial_2_show = "result_restaurants" 
-      elsif (params[:search_dishes] || params[:category] == "dishes")
-        current_model = MenuItem
-        partial_2_show = "result_menu_items" 
         
-        #TODO: we're only appending labels to dishes right now
-        #eventually we want to be able to do this for restaurants as well
-        #so that we can find Vegan food at 21st Amendment for example
-        if (params[:labels])
-          # Append the labels to the end of the query
-          q = q + " " + params[:labels]
-        end
-        
+      #TODO: we're only appending labels to dishes right now
+      #eventually we want to be able to do this for restaurants as well
+      #so that we can find Vegan food at 21st Amendment for example
+      if (params[:labels])
+        # Append the labels to the end of the query
+        q = q + " " + params[:labels]
       end
 
-      if (current_model == Restaurant) || (current_model == MenuItem) 
-        @search = Sunspot.search(current_model) do
-            fulltext(q)
+      if (params[:search_restaurants] || params[:category] == "restaurant")
+        
+        partial_2_show = "result_restaurants" 
+        
+        @search = Sunspot.search(Restaurant) do
+            # Ignoring labels for restaurants
+            fulltext(params[:q])
             paginate :page => 1, :per_page => ITEMS_PER_PAGE
         end
+        
+      elsif (params[:search_dishes] || params[:category] == "dishes")
+        
+        partial_2_show = "result_menu_items" 
+
+        @search = Sunspot.search(MenuItem) do
+          fulltext(params[:q])
+          paginate :page => 1, :per_page => ITEMS_PER_PAGE
+          order_by :avg_rating, :desc
+          order_by :num_ratings, :desc
+        end
+        
       else
         # default search mode, search both Restaurants and Menu Items
+        
+        partial_2_show = "result_all"
+        
         @search = Sunspot.search(Restaurant, MenuItem) do
           fulltext(q)
           paginate :page => 1, :per_page => ITEMS_PER_PAGE

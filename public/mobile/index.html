@@ -8,12 +8,53 @@
     <link rel="stylesheet"
      href="stylesheets/custom.css"
      type="text/css" />
+    <link rel="Fav Icon" href="../favicon.ico" type="image/vnd.microsoft.icon">
 
+	<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+	try{ 
+	var pageTracker = _gat._getTracker("UA-23593309-1");
+	pageTracker._trackPageview();
+	} catch(err) {} 
+	</script>
 </head>
 
 <body>
 
 <img src="../images/loading-screen.png" border="0" class="startuppic"/>
+
+<textarea id="dishesTemplate" class="x-hidden-display">
+    <tpl for=".">
+        <div class="adish">
+            <img src="../images/no-image-default.png" class="dishImg">
+            <div class="dishListinfo">
+                <span class="dishname">{name}</span>
+                <span class="restaurantName">@{restaurant_name}</span>
+                <span class="distanceFigure">{[this.distDisplay(values.distance)]}</span>
+            </div>
+            <span class="chevrony"></span>
+            </span>
+        </div>
+    </tpl>
+</textarea>
+
+<textarea id="restDishTemplate" class="x-hidden-display">
+    <tpl for=".">
+        <div class="adish">
+            <img src="../images/no-image-default.png" class="dishImg">
+            <div class="dishListinfo">
+                <span class="dishname">{name}</span>
+                <span class="restaurantName">{rating_count}</span>
+            </div>
+            <span class="chevrony"></span>
+            </span>
+        </div>
+    </tpl>
+</textarea>
+
 
 <script type="text/javascript" src="sencha-touch.js"></script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -29,6 +70,8 @@
        glossOnIcon: false,
        onReady: function() {
 
+           $(".startuppic").remove();
+
            urlPrefix = "";
            urlPrefixSet=false;
            if(window.location.toString().indexOf("http://localhost")>-1) {
@@ -42,12 +85,12 @@
            navigator.geolocation.getCurrentPosition(function(position) {
                if(urlPrefixSet) {
                    console.log('setting proxy url');
-                   dishStore.proxy.url = urlPrefix+encodeURIComponent('/items/location.json?sort=distance&lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
-                   places.proxy.url = urlPrefix+encodeURIComponent('/places.json?sort=distance&lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+                   dishStore.proxy.url = urlPrefix+encodeURIComponent('/items/location.json?distance=yes&lat=37.77867&limit=25&long=-122.39127');
+                   places.proxy.url = urlPrefix+encodeURIComponent('/places.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
                } else {
                    console.log('in production');
-                   dishStore.proxy.url = 'http://getcrave.com/items/location.json?lat='+position.coords.latitude+'&sort=distance&limit=25&long='+position.coords.longitude;
-                   places.proxy.url = 'http://getcrave.com/places.json?sort=distance&lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
+                   dishStore.proxy.url = 'http://getcrave.com/items/location.json?lat='+position.coords.latitude+'&distance=yes&limit=25&long='+position.coords.longitude;
+                   places.proxy.url = 'http://getcrave.com/places.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
                }
                console.log(dishStore.proxy.url);
                dishStore.load(function() {
@@ -169,7 +212,8 @@
            });
 
            var sessionHandler = function(b,e) {
-               if(b.getText() == "Login") {
+               var target = $(e).attr("class");
+               /*if(b.getText() == "Login") {
                    window.location = 'http://getcrave.com/auth/facebook';
                }
                if(b.getText() == "Logout") {
@@ -179,6 +223,13 @@
                }
                if(b.getText() == "New Restaurant") {
                    Ext.getCmp('listPnl').setActiveItem(newRestaurant);
+               }
+               */
+               if(target == "nearBy") {
+                   Ext.getCmp('mainPnl').setActiveItem(listPnl);
+               }
+               if(target == "me") {
+                   Ext.getCmp('mainPnl').setActiveItem(profilePnl);
                }
            }
 
@@ -214,6 +265,45 @@
            ]
        });
 
+           var profilePnl = new Ext.Panel({
+               fullScreen: true,
+               html:'<div class="fancyImage"><img class="logoutButton" src="../images/profile-cold-food.png"></div><div class="explanation">Rate & Save Dishes, Follow Foodies</div><a href="/auth/facebook" class="loginButton"></a>',
+               id: 'profilePnl',
+               scroll:'vertical',
+               dockedItems:[
+                   {
+                       dock:'top',
+                       xtype:'toolbar',
+                       ui:'light',
+                       title:'<img class="cravelogo" src="../images/crave-logo-horizontal-white.png">',
+                       items:[{text:'Back',ui:'back', handler:backHandler}]
+                   }
+               ]
+           });
+
+
+        bottomPanel = new Ext.TabPanel({
+            tabBar: {
+                dock: 'bottom',
+                ui: 'dark',
+                layout: {
+                    pack: 'center'
+                },
+                listeners: {
+                    click: sessionHandler,
+                    element: 'body'
+                },
+                items:[
+                    {text:'nearby',id:'nearButton',handler:sessionHandler,iconCls: 'nearBy'},
+                    {text:'me',id:'meButton',handler:sessionHandler,iconCls: 'me'}/*,
+                    {text:'Login',id:'loginButton',handler:sessionHandler,iconCls:'user'},
+                    {text:'Logout',id:'logoutButton',handler:sessionHandler,hidden:true},
+                    {text:'New Restaurant',id:'newRestButton',handler:sessionHandler,hidden:true} */
+                ]
+            }
+        });
+           
+
        //intentionally not using var to make this global
        listPnl = new Ext.Panel({
            id: 'listPnl',
@@ -237,22 +327,7 @@
                            {text:'Places',id:'placesButton', pressed:false, handler:tapHandler,ui:'round',width:'110'} //,icon:'../images/restaurant-icon-OFF.png',iconAlign:'left'
                        ]}
                    ]
-               },searchForm,
-               {
-                   id:'bottomPanel',
-                   xtype: 'toolbar',
-                   dock:'bottom',
-                   ui:'dark',
-                   items:[
-                       {xtype:'segmentedbutton',
-                       layout:{pack:'center'},
-                       items:[
-                           {text:'Login',id:'loginButton',handler:sessionHandler},
-                           {text:'Logout',id:'logoutButton',handler:sessionHandler,hidden:true},
-                           {text:'New Restaurant',id:'newRestButton',handler:sessionHandler,hidden:true}
-                       ]}
-                    ]
-               }
+               },searchForm
            ]
        });
 
@@ -279,10 +354,16 @@
            var mainPnl = new Ext.Panel({
                fullscreen: true,
                id: 'mainPnl',
-               items: [listPnl,detailPnl,placePnl,newDishForm],
+               items: [listPnl,detailPnl,placePnl,newDishForm,profilePnl],
                layout: {
                    type: 'card'
                },
+               dockedItems: [{
+                   dock: 'bottom',
+                   items:[
+                           bottomPanel
+                   ]
+               }],
                cardSwitchAnimation: 'slide',
                direction:'horizontal'
            });
@@ -297,6 +378,11 @@ $(".newDish").live("click",function() {
     Ext.getCmp('mainPnl').setActiveItem(3);
     return false;
 });
+$(".logoutButton").live("click", function() {
+    localStorage.setItem("uid","");
+});
+
 </script>
+
 </body>
 </html>

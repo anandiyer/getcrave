@@ -29,6 +29,7 @@ GEM
       activemodel (= 3.0.7)
       activesupport (= 3.0.7)
     activesupport (3.0.7)
+    acts_as_opengraph (0.0.4)
     addressable (2.2.4)
     arel (2.0.9)
     aws-s3 (0.6.2)
@@ -243,6 +244,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_opengraph
   aws-s3 (= 0.6.2)
   capybara
   compass
