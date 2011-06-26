@@ -6,20 +6,47 @@ class SearchController < ApplicationController
 #    cookies[:lat]
 #    cookies[:long]
 
+# Right now, we cannot really fine-tune by distance, so we're ignoring 
+# the 'within' query string parameter
+
     if (params[:q] && !params[:q].empty?)
-      current_model = params[:search_restaurants] ? Restaurant : MenuItem
+      
+      q = params[:q]
 
-#      @search = Sunspot.search(current_model) do
-#          fulltext(params[:q])
-#          paginate :page => 1, :per_page => ITEMS_PER_PAGE
-#      end
-#      @results = @search.results
-      @results = current_model.find(100,1001,1002)
-
+      # default is all results
       partial_2_show = "result_all"
-      partial_2_show = "result_restaurants" if params[:search_restaurants]
-      partial_2_show = "result_menu_items" if params[:search_dishes]
+      
+      if (params[:search_restaurants] || params[:category] == "restaurant")
+        current_model = Restaurant
+        partial_2_show = "result_restaurants" 
+      elsif (params[:search_dishes] || params[:category] == "dishes")
+        current_model = MenuItem
+        partial_2_show = "result_menu_items" 
+        
+        #TODO: we're only appending labels to dishes right now
+        #eventually we want to be able to do this for restaurants as well
+        #so that we can find Vegan food at 21st Amendment for example
+        if (params[:labels])
+          # Append the labels to the end of the query
+          q = q + " " + params[:labels]
+        end
+        
+      end
 
+      if (current_model == Restaurant) || (current_model == MenuItem) 
+        @search = Sunspot.search(current_model) do
+            fulltext(q)
+            paginate :page => 1, :per_page => ITEMS_PER_PAGE
+        end
+      else
+        # default search mode, search both Restaurants and Menu Items
+        @search = Sunspot.search(Restaurant, MenuItem) do
+          fulltext(q)
+          paginate :page => 1, :per_page => ITEMS_PER_PAGE
+        end
+      end
+
+      @results = @search.results
 
       respond_to do |format|
         format.html
