@@ -100,8 +100,14 @@ class MenuItemsController < ApplicationController
 
     respond_to do |format|
       format.html # _unused_show.html.haml
-      format.xml  { render :xml => @menu_item.to_xml( :include => {:restaurant => {}, :menu_item_avg_rating_count => {}, :menu_item_ratings => {:include => :user} } ) }
-      format.json { render :json => @menu_item.to_json( :include => {:restaurant => {}, :menu_item_avg_rating_count => {}, :menu_item_ratings => {:include => :user} } ) }
+      format.xml  { render :xml => @menu_item.to_xml( :include => {:restaurant => {}, 
+        :menu_item_avg_rating_count => {}, 
+        :menu_label_associations => {},
+        :menu_item_ratings => {:include => :user} } ) }
+      format.json { render :json => @menu_item.to_json( :include => {:restaurant => {}, 
+        :menu_item_avg_rating_count => {}, 
+        :menu_label_associations => {},
+        :menu_item_ratings => {:include => :user} } ) }
       
     end
   end
