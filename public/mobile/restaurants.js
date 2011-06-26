@@ -366,7 +366,7 @@ function dishDisplay(response) {
     Ext.getCmp('infoPnl').update(htmlString);
     myUID = localStorage.getItem("uid");
     if(myUID!="" && myUID!=null) {
-        Ext.getCmp('detailPnl').add(reviewForm);
+        //Ext.getCmp('detailPnl').add(reviewForm);
         Ext.getCmp('userId').setValue(myUID);
         Ext.getCmp('menuId').setValue(responseObject.menu_item.id);
     }
