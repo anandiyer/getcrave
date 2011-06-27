@@ -68,65 +68,74 @@ class MenuItemRatingsController < ApplicationController
 
 
   def send_to_fb_wall
-    menu_item_id = params[:menu_item_rating][:menu_item_id]
-    menu_item = MenuItem.find(menu_item_id)
-    name = menu_item.name
-    link = "http://getcrave.com/items/"+params[:menu_item_rating][:menu_item_id]
-    message = "I just craved the #{name} - "+link
-    picture = menu_item.thumbnail
+      menu_item_id = params[:menu_item_rating][:menu_item_id]
+      menu_item = MenuItem.find(menu_item_id)
+      name = menu_item.name
+      link = "http://getcrave.com/items/"+params[:menu_item_rating][:menu_item_id]
+      message = "I just craved the #{name} - "+link
+      picture = menu_item.thumbnail
+      desc = menu_item.description ? menu_item.description : "Have you ever been to a restaurant and asked, “So, what’s good here?” We help people find the food they like."
 
-    token = current_user.authorizations.first.token
-    me = FbGraph::User.me(token)
-    me.feed!(
-        :message => message,
-        :picture => picture,
-        :link => link,
-        :name => name
-#        :description => 'A Ruby wrapper for Facebook Graph API'
-    )
+      p token = current_user.authorizations.first.token
+
+      me = FbGraph::User.me(token)
+      me.feed!(
+          :message => message,
+#          :picture => picture,
+          :link => link,
+          :name => name,
+          :description => desc
+      )
+
   end
-
-
 
   # POST /menu_item_ratings
   # POST /menu_item_ratings.xml
   def create
+      if params[:facebook][:boolean] == "1"
 
-    if params[:facebook][:boolean] == "1"
-      send_to_fb_wall
-    end
+        if current_user.authorizations.first.token.blank?
+          session[:user_id] = nil
+          session[:redirect_to] = nil
+          render :text => "no_token"
+          return
+        else
+          send_to_fb_wall
+        end
+      end
 
-    @menu_item_rating = MenuItemRating.new(params[:menu_item_rating])
+      @menu_item_rating = MenuItemRating.new(params[:menu_item_rating])
 
-    if current_user
-      @menu_item_rating.user_id = current_user.id
-    else
+      if current_user
+        @menu_item_rating.user_id = current_user.id
+      else
 #      TODO: destroy this line after restore facebook auth
-      unknown_user = User.find_or_create_by_user_name("Unknown user")
-      @menu_item_rating.user_id = unknown_user.id
-    end
+        unknown_user = User.find_or_create_by_user_name("Unknown user")
+        @menu_item_rating.user_id = unknown_user.id
+      end
 
-    respond_to { |format|
-      if @menu_item_rating.save
-        format.html { redirect_to(@menu_item_rating, :notice => 'Menu item rating was successfully created.') }
-        format.xml { render :xml => @menu_item_rating, :status => :created, :location => @menu_item_rating }
-        format.json { render :json => @menu_item_rating, :status => :created, :location => @menu_item_rating }
-        format.js {
+      respond_to { |format|
+        if @menu_item_rating.save
+          format.html { redirect_to(@menu_item_rating, :notice => 'Menu item rating was successfully created.') }
+          format.xml { render :xml => @menu_item_rating, :status => :created, :location => @menu_item_rating }
+          format.json { render :json => @menu_item_rating, :status => :created, :location => @menu_item_rating }
+          format.js {
 #          TODO: change temp number to real
 #          if !params[:menu_item_rating][:rating].empty?
 #            message = "You rated this dish with <b>"+params[:menu_item_rating][:rating]+"</b> stars!"
 #          else
 #            message = "Your review was successfully added"
 #          end
-          message = "Thanks for your review, "+@current_user.user_name+"!"
-          render :js=> "window.add_review(#{params[:menu_item_rating][:menu_item_id]},'#{message}')"
-          @current_user
-        }
-      else
-        format.html { render :action => "new" }
-        format.xml { render :xml => @menu_item_rating.errors, :status => :unprocessable_entity }
-        format.json { render :json => @menu_item_rating.errors, :status => :unprocessable_entity }
-      end }
+            message = "Thanks for your review, "+@current_user.user_name+"!"
+            render :js => "window.add_review(#{params[:menu_item_rating][:menu_item_id]},'#{message}')"
+            @current_user
+          }
+        else
+          format.html { render :action => "new" }
+          format.xml { render :xml => @menu_item_rating.errors, :status => :unprocessable_entity }
+          format.json { render :json => @menu_item_rating.errors, :status => :unprocessable_entity }
+        end }
+
   end
 
   # PUT /menu_item_ratings/1

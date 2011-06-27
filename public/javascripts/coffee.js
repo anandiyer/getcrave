@@ -454,6 +454,12 @@
       return $("#comment_wrapper #submit_block .text").text("Submitting");
     });
     $(document).ajaxComplete(function(event, xhr, settings) {
+      if (settings.url.indexOf("ratings") > 0) {
+        if (xhr.responseText === "no_token") {
+          cl("no token");
+          window.location = "/auth/facebook";
+        }
+      }
       if (settings.url.indexOf("search") > 0) {
         $("#get_nearby_loading").hide();
         $("#toggled_filters input").removeAttr('disabled');

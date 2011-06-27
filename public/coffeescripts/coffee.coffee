@@ -33,17 +33,12 @@ window.show_dialog = (title = "Please sign in", content) ->
     $(".modal_window .modal_title h1").empty().text(title)
     $(".modal_window .clone_me").empty().html(content) if content
 
-
-
 window.show_modal = (modal_id) ->
     $('#mask').css({ 'display' : 'block', opacity : 0})
 
     $('#mask').fadeTo("fast",0.6).height($(document).height())
     $('#'+modal_id).fadeIn("fast")
     window.pl_all($("form.uuid").attr("rel"))
-
-
-
 
 window.modal_window = () ->
 
@@ -88,8 +83,6 @@ window.gmap = (lat, long, zoom = 10, coor_array = [[lat,long]]) ->
 #        g_notice("Lang Lat", ll[0]+"<br />"+ll[1])
         new google.maps.Marker({position: new google.maps.LatLng(ll[0], ll[1]), map: map })
 
-
-
 before_send = (obj) ->
     obj.fadeTo("slow", .5)
 
@@ -113,8 +106,6 @@ window.g_notice = (type, text) ->
 
 
 window.save_helpfull = () ->
-
-
 
 window.unsave_menu_item = (id) ->
 
@@ -449,6 +440,15 @@ $(document).ready ->
 
 
     $(document).ajaxComplete (event, xhr, settings) ->
+        if settings.url.indexOf("ratings") > 0
+            if xhr.responseText == "no_token"
+                cl "no token"
+                window.location = "/auth/facebook"
+
+
+
+#            window.location = "/auth/facebook"
+
         if settings.url.indexOf("search") > 0
             $("#get_nearby_loading").hide()
 

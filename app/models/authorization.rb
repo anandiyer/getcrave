@@ -3,13 +3,29 @@ class Authorization < ActiveRecord::Base
   validates_presence_of :user_id, :uid, :provider
   validates_uniqueness_of :uid, :scope => :provider
   
+
   def self.find_from_hash(hash)
+    p hash['provider']
+    p hash['uid']
     find_by_provider_and_uid(hash['provider'], hash['uid'])
   end
 
-  def self.create_from_hash(hash, token, user = nil)
-    user ||= User.create_from_hash!(hash)
-    Authorization.create(:user => user, :uid => hash['uid'], :provider => hash['provider'], :token => token)
+  def self.create_from_hash(hash, user = nil)
+    "create Authorization---------------------------"
+
+    p token = hash['credentials']['token']
+    p user ||= User.create_from_hash!(hash)
+
+    auth = Authorization.create(:user => user, :uid => hash['uid'], :provider => hash['provider'], :token => token)
+    p auth.errors
+    p auth.valid?
+
+    if !auth.valid?
+      p "25"
+      a_find = Authorization.find_from_hash(hash)
+      a_find.token = token
+      a_find.save
+    end
   end
   
 end
