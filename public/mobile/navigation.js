@@ -5,7 +5,7 @@ var backHandler = function(b,e) {
 }
 var rateHandler = function(b,e) {
     if(b.getText() == "Rate") {
-        Ext.getCmp('mainPnl').setActiveItem(reviewForm);
+        Ext.getCmp('mainPnl').setActiveItem(reviewFormPnl);
     }
 
     if(b.getText() == "Submit") {
