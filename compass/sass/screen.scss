@@ -641,32 +641,72 @@ body.two-col.bp{
                 @include container;
 
 
+                .restbutton{
+                    font-size: 15px;
+                    font-weight: bold;
+                }
+
+                #all_results_icon.off{
+                    #all_results_icon_image{
+                        background: url(/images/sprites/icon-sprite.png) no-repeat 0 -1118px;
+                    }
+                }
+
+                #restaurant_icon.on{
+                    #restaurant_icon_image{
+                        background: url(/images/sprites/icon-sprite.png) no-repeat 0 -204px;
+                        width: 20px;
+                    }
+                }
+
+                #restaurant_icon.off{
+                    #restaurant_icon_image{
+                        background: url(/images/sprites/icon-sprite.png) no-repeat 0 -223px;
+                        width: 20px;
+                    }
+                }
+
+
+
+
+
+
+                #all_results_icon_image, #restaurant_icon_image, #food_icon_image{
+                    @include inline-block;
+                    height:15px;
+                    width: 15px;
+                    background: url(/images/sprites/icon-sprite.png) no-repeat 0 -1100px;
+                }
+
                 #all_results_icon{
                     @extend #dishes_icon;
+
+
                 }
 
                 #restaurant_icon{
                     @extend #dishes_icon;
                     margin-left: -30px;
-                .places_iconOff{
-					background: url(/images/sprites/icon-sprite.png);
-					background-position: 29px -219px;
-					height: 20px;
-					padding: 0px 0px 0px 20px;
-					margin: 4px 0px 0 14px;
-					font-size: 14px;
-					font-weight: bold;
-					color: #888;
-					text-shadow: 0px 1px white;
+                    .places_iconOff{
+                        background: url(/images/sprites/icon-sprite.png);
+                        background-position: 29px -219px;
+                        height: 20px;
+                        padding: 0px 0px 0px 20px;
+                        margin: 4px 0px 0 14px;
+                        font-size: 14px;
+                        font-weight: bold;
+                        color: #888;
+                        text-shadow: 0px 1px white;
+                    }
 				}
-				}
+
 
                 #dishes_icon{
                     @include inline-block;
-                    padding: 0 0 0 0;
+                    padding: 4px 0 0 0;
                     margin: 0;
                     width: 148px;
-                    height: 30px;
+                    height: 24px;
                     /*background: url(/images/dishes_icon.png) no-repeat 0 0;*/
                     position: relative;
                     text-align: center;
@@ -677,39 +717,39 @@ body.two-col.bp{
                         width: 10px;
                         height: 30px;
                     }
-					.dishes_iconON{
-						background: url(/images/sprites/icon-sprite.png);
-						background-position: 29px -162px;
-						height: 20px;
-						padding: 0px 0px 0px 19px;
-						margin: 4px 0px 0 15px;
-						font-size: 14px;
-						font-weight: bold;
-						color: #464646;
-						text-shadow: 0px 1px white;
-					}
-					.places_iconOn{
-						background: url(/images/sprites/icon-sprite.png);
-						background-position: 29px -200px;
-						height: 20px;
-						padding: 0px 0px 0px 20px;
-						margin: 4px 0px 0 14px;
-						font-size: 14px;
-						font-weight: bold;
-						color: #464646;
-						text-shadow: 0px 1px white;
-					}
-					.dishes_iconOff{
-						background: url(/images/sprites/icon-sprite.png);
-						background-position: 29px -181px;
-						height: 20px;
-						padding: 0px 0px 0px 19px;
-						margin: 4px 0px 0 15px;
-						font-size: 14px;
-						font-weight: bold;
-						color: #888;
-						text-shadow: 0px 1px white;
-					}
+					/*.dishes_iconON{*/
+						/*background: url(/images/sprites/icon-sprite.png);*/
+						/*background-position: 29px -162px;*/
+						/*height: 20px;*/
+						/*padding: 0px 0px 0px 19px;*/
+						/*margin: 4px 0px 0 15px;*/
+						/*font-size: 14px;*/
+						/*font-weight: bold;*/
+						/*color: #464646;*/
+						/*text-shadow: 0px 1px white;*/
+					/*}*/
+					/*.places_iconOn{*/
+						/*background: url(/images/sprites/icon-sprite.png);*/
+						/*background-position: 29px -200px;*/
+						/*height: 20px;*/
+						/*padding: 0px 0px 0px 20px;*/
+						/*margin: 4px 0px 0 14px;*/
+						/*font-size: 14px;*/
+						/*font-weight: bold;*/
+						/*color: #464646;*/
+						/*text-shadow: 0px 1px white;*/
+					/*}*/
+					/*.dishes_iconOff{*/
+						/*background: url(/images/sprites/icon-sprite.png);*/
+						/*background-position: 29px -181px;*/
+						/*height: 20px;*/
+						/*padding: 0px 0px 0px 19px;*/
+						/*margin: 4px 0px 0 15px;*/
+						/*font-size: 14px;*/
+						/*font-weight: bold;*/
+						/*color: #888;*/
+						/*text-shadow: 0px 1px white;*/
+					/*}*/
                     img{
                         padding-top:7px;
                     }
@@ -718,15 +758,25 @@ body.two-col.bp{
 
                 #restaurant_icon.on{
                    margin-left: -4px;
+
                 }
 
                 #restaurant_icon.off, #all_results_icon{
                     margin-left: -4px;
+
                     background: url("/images/sprites/button-sprite.png") no-repeat scroll -72px -5px transparent;
                 }
 
+                                                                             0
 
 
+                #dishes_icon.on{
+                    #food_icon_image{
+                        background: url(/images/sprites/icon-sprite.png) no-repeat 0 -166px;
+                        width: 23px;
+                    }
+
+                }
 
                 #dishes_icon.off{
                     margin-left: -4px;
@@ -736,10 +786,17 @@ body.two-col.bp{
 					text-shadow:0px 1px #f9f9f9;
 					cursor:pointer;
 
-                    background: url("/images/sprites/button-sprite.png") no-repeat scroll -72px -5px transparent;
-                    img{
-                       @include opacity(.6)
+                    #food_icon_image{
+                        background: url(/images/sprites/icon-sprite.png) no-repeat 0 -184px;
+                        width: 23px;
                     }
+
+                    background: url("/images/sprites/button-sprite.png") no-repeat scroll -72px -5px transparent;
+
+
+                    /*img{*/
+                       /*@include opacity(.6)*/
+                    /*}*/
                 }
 
                 #dishes_icon.on{
