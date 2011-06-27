@@ -264,31 +264,11 @@ var newRestaurant = new Ext.form.FormPanel({
 
 var reviewForm = new Ext.form.FormPanel({
     fullScreen:true,
-    dockedItems:[
-        {
-            dock:'top',
-            xtype:'toolbar',
-            ui:'light',
-            title:'<img class="cravelogo" src="../images/crave-logo-horizontal-white.png">',
-             layout: {
-                 type: 'hbox',
-                 pack:'justify'
-             },
-            items:[{text:'Back',ui:'back', handler:backHandler},{text:'Submit',ui:'normal', handler:rateHandler}]
-        }
-    ],
            items: [
             {
-            xtype: 'selectfield',
+            xtype: 'textfield',
             name: 'menu_item_rating[rating]',
-            label:'Rating',
-            options: [
-                    {text: '5', value: 5},
-                    {text: '4', value: 4},
-                    {text: '3', value: 3},
-                    {text: '2', value: 2},
-                    {text: '1', value: 1}
-                ],
+                id:'menuRating',
                 hidden:true
             },
             {
@@ -314,6 +294,32 @@ var reviewForm = new Ext.form.FormPanel({
            }
        ]
 });
+
+var reviewFormPnl = new Ext.Panel({
+    id: 'reviewFormPnl',
+    dockedItems:[
+        {
+            dock:'top',
+            xtype:'toolbar',
+            ui:'light',
+            title:'<img class="cravelogo" src="../images/crave-logo-horizontal-white.png">',
+             layout: {
+                 type: 'hbox',
+                 pack:'justify'
+             },
+            items:[{text:'Back',ui:'back', handler:backHandler},{text:'Submit',ui:'normal', handler:rateHandler}]
+        }
+    ],
+    items: [
+        {
+            html: '<div class="starContainer"><div class="starLabel">Have you tried this</div><div class="starRating ratingOf0"><button class="starcover" id="id-star1"></button><button class="starcover" id="id-star2"></button><button class="starcover" id="id-star3"></button><button class="starcover" id="id-star4"></button><button class="starcover" id="id-star5"></button></div></div>',
+            height:'80',
+            width:'100%'
+        },
+            reviewForm
+    ]
+});
+
 
 function dishDisplay(response) {
     var responseObject = eval('(' + response.responseText + ')');
