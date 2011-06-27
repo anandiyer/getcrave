@@ -69,12 +69,11 @@ class SessionsController < ApplicationController
 
 
 
-#    begin
+    begin
       self.current_user = @auth.user
-#    rescue NoMethodError
-#      redirect_to root_path
-#
-#    end
+    rescue NoMethodError
+      redirect_to root_path
+    end
 
 
 
