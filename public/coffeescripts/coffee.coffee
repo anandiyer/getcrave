@@ -94,6 +94,7 @@ after_send = (obj, html) ->
 #window.menu_item_photos_uploaded = ()->
 #    alert 1
 window.update_reviews = (id_of_menu_item, limits = $(".two-col").attr("rel")) ->
+    cl "update_reviews"
     obj = $("#reviews_wrapper #update_place")
     $.ajax({url: "/items/"+id_of_menu_item+"/show_reviews?limit="+limits,
     beforeSend: () -> before_send(obj),
@@ -132,6 +133,7 @@ window.save_menu_item = (mid, saved_item_id) ->
 
 
 window.add_review = (id_of_menu_item, msg) ->
+
     update_reviews(id_of_menu_item)
 #    $("#comment_wrapper #submit_block .text").text("Submit")
 

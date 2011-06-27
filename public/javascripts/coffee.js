@@ -127,6 +127,7 @@
     if (limits == null) {
       limits = $(".two-col").attr("rel");
     }
+    cl("update_reviews");
     obj = $("#reviews_wrapper #update_place");
     return $.ajax({
       url: "/items/" + id_of_menu_item + "/show_reviews?limit=" + limits,

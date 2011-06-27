@@ -19,24 +19,24 @@ class MenuItem < ActiveRecord::Base
         :country_name => :country_name
       }
     
-    searchable do
-      text :name, :default_boost => 8
-      text :description, :default_boost => 6
-      text :menu_restaurant_name, :default_boost => 4 do
-        name + " " + restaurant.name
-      end
-      text :menu_labels, :default_boost => 2 do
-        menulabels = ""
-        self.labels.each { |l| menulabels << l + " "}
-        name + " " + menulabels
-      end
-
-      float :avg_rating
-      float :num_ratings
-      location :coordinates do
-        Sunspot::Util::Coordinates.new(restaurant.latitude, restaurant.longitude)
-      end
-    end
+#    searchable do
+#      text :name, :default_boost => 8
+#      text :description, :default_boost => 6
+#      text :menu_restaurant_name, :default_boost => 4 do
+#        name + " " + restaurant.name
+#      end
+#      text :menu_labels, :default_boost => 2 do
+#        menulabels = ""
+#        self.labels.each { |l| menulabels << l + " "}
+#        name + " " + menulabels
+#      end
+#
+#      float :avg_rating
+#      float :num_ratings
+#      location :coordinates do
+#        Sunspot::Util::Coordinates.new(restaurant.latitude, restaurant.longitude)
+#      end
+#    end
 
 # vars - menu_label_id, menu_item_id
   def labels_counter menu_label_id, menu_item_id

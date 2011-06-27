@@ -76,10 +76,6 @@ class SessionsController < ApplicationController
     end
 
 
-
-
-
-
     p "-------------------------------------------"
 #    TODO: change to blank if will be work
     if @auth.token.blank?

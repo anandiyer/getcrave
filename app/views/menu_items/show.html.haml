@@ -105,6 +105,11 @@
           -["Rating", "Other"].each do |x|
             %li= x
     #update_place= render :partial => "review"
+- else
+  #reviews_wrapper{:class => controller.controller_name}
+    #update_place
+
+
 
 
 
