@@ -643,7 +643,7 @@ body.two-col.bp{
                 #restaurant_icon{
                     @extend #dishes_icon;
                     margin-left: -30px;
-                a.places_iconOff{
+                .places_iconOff{
 					background: url(/images/sprites/icon-sprite.png);
 					background-position: 29px -219px;
 					height: 20px;

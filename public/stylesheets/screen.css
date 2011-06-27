@@ -1083,7 +1083,7 @@ body.two-col.bp #content_wrap #content #buttons_wrapper #restaurant_icon {
   margin-left: -30px;
 }
 /* line 646, ../../compass/sass/screen.scss */
-body.two-col.bp #content_wrap #content #buttons_wrapper #restaurant_icon a.places_iconOff {
+body.two-col.bp #content_wrap #content #buttons_wrapper #restaurant_icon .places_iconOff {
   background: url(/images/sprites/icon-sprite.png);
   background-position: 29px -219px;
   height: 20px;
