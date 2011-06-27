@@ -263,9 +263,21 @@ var newRestaurant = new Ext.form.FormPanel({
 });
 
 var reviewForm = new Ext.form.FormPanel({
-    scroll: 'vertical',
-    items: [
-       {xtype: 'fieldset', title: 'Submit Review', items: [
+    fullScreen:true,
+    dockedItems:[
+        {
+            dock:'top',
+            xtype:'toolbar',
+            ui:'light',
+            title:'<img class="cravelogo" src="../images/crave-logo-horizontal-white.png">',
+             layout: {
+                 type: 'hbox',
+                 pack:'justify'
+             },
+            items:[{text:'Back',ui:'back', handler:backHandler},{text:'Submit',ui:'normal', handler:rateHandler}]
+        }
+    ],
+           items: [
             {
             xtype: 'selectfield',
             name: 'menu_item_rating[rating]',
@@ -276,12 +288,16 @@ var reviewForm = new Ext.form.FormPanel({
                     {text: '3', value: 3},
                     {text: '2', value: 2},
                     {text: '1', value: 1}
-                ]
+                ],
+                hidden:true
             },
             {
                 xtype: 'textfield',
-                label:'Review',
                 name: 'menu_item_rating[review]',
+                width:'100%',
+                height:'200',
+                placeHolder: 'Write a review',
+                cls:'reviewField',
                 id: 'review'
 		    },
            {
@@ -295,28 +311,8 @@ var reviewForm = new Ext.form.FormPanel({
                name: 'menu_item_rating[user_id]',
                id: 'userId',
                hidden:true
-           },
-           {
-               xtype:'button',
-               text: 'Submit',
-               handler: function() {
-                   reviewForm.submit({
-                       url: '/menu_item_ratings',
-                       method: 'post',
-                       submitDisabled: true,
-                       waitMsg: 'Saving Data...Please wait.',
-                       success: function (objForm,httpRequest) {
-                           var mbox = new Ext.MessageBox({});
-                           mbox.alert("Record Saved");
-                       },
-                       failure: function() {
-                           console.log('submissionFailed');
-                       }
-                   })
-               }
            }
-        ]}
-    ]
+       ]
 });
 
 function dishDisplay(response) {
