@@ -27,6 +27,25 @@ Ext.regModel('Dish',
     }]
 });
 
+Ext.regModel('savedDish',
+{
+    fields: ['menu_item','menu_item_avg_rating_count','avg_rating',{
+        name: 'rating',
+        convert: function(value, record) {
+            if(record.get('menu_item').menu_item_avg_rating_count.avg_rating) {
+                return record.get('menu_item').menu_item_avg_rating_count.avg_rating.toString();
+            } else {
+                return "unrated";
+            }
+        }
+    },{
+        name: 'name',
+        convert: function(value, record) {
+            return record.get('menu_item').name.toString();
+        }
+    }]
+});
+
 var dishStore = new Ext.data.Store({
     model: 'Dish',
     sorters: [{property: 'arating', direction: 'ASC'}],
@@ -54,6 +73,37 @@ var dishStore = new Ext.data.Store({
        reader: {
            type:'json',
            record:'menu_item'
+       }
+    }
+});
+
+var savedDishStore = new Ext.data.Store({
+    model: 'savedDish',
+    sorters: [{property: 'arating', direction: 'ASC'}],
+    getGroupString : function(record) {
+        rating = parseInt(record.get('rating'));
+        if(rating==5) {
+            return "<img src='../images/rating-stars/rating-dish-5.png'>";
+        }
+        if(rating==4) {
+            return "<img src='../images/rating-stars/rating-dish-4.png'>";
+        }
+        if(rating==3) {
+            return "<img src='../images/rating-stars/rating-dish-3.png'>";
+        }
+        if(rating==2) {
+            return "<img src='../images/rating-stars/rating-dish-2.png'>";
+        }
+        if(rating==1) {
+            return "<img src='../images/rating-stars/rating-dish-1.png'>";
+        }
+    },
+    proxy: {
+        type:'ajax',
+        url:'',
+       reader: {
+           type:'json',
+           record:'user_saved_menu_item'
        }
     }
 });

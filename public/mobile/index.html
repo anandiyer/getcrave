@@ -207,6 +207,19 @@
 
            });
 
+           var savedList = new Ext.List({
+               itemTpl: dishTemplate,
+               itemSelector: '.adish',
+               singleSelect: true,
+               grouped: true,
+               indexBar: false,
+               store: savedDishStore,
+               id:'savedList',
+               scroll:'vertical',
+               hideOnMaskTap: false,
+               clearSectionOnDeactivate:true
+           });
+
            var infoPnl = new Ext.Panel({
                html: '',
                id: 'infoPnl'
@@ -274,6 +287,18 @@
                if(target == "me") {
                    Ext.getCmp('mainPnl').setActiveItem(profilePnl);
                }
+               if(target == "saved") {
+                   Ext.getCmp('mainPnl').setActiveItem(savedPnl);
+                   if(urlPrefixSet) {
+                       savedDishStore.proxy.url = urlPrefix+encodeURIComponent('/users/'+localStorage.getItem("uid")+'/saved.json');
+                   } else {
+                       savedDishStore.proxy.url = 'http://getcrave.com/users/'+localStorage.getItem("uid")+'/saved.json';
+                   }
+                   console.log(savedDishStore.proxy.url);
+                   savedDishStore.load(function() {
+                   console.log(savedDishStore);
+               });
+               }
            }
 
            var tapHandler = function(b,e) {
@@ -328,6 +353,20 @@
                ]
            });
 
+           var savedPnl = new Ext.Panel({
+               fullScreen: true,
+               id: 'savedPnl',
+               items: [savedList],
+               scroll:'vertical',
+               dockedItems:[
+                   {
+                       dock:'top',
+                       xtype:'toolbar',
+                       ui:'light',
+                       title:'Saved Items'
+                   }
+               ]
+           });
 
         bottomPanel = new Ext.TabPanel({
             tabBar: {
@@ -342,6 +381,7 @@
                 },
                 items:[
                     {text:'nearby',id:'nearButton',handler:sessionHandler,iconCls: 'nearBy'},
+                    {text:'saved',id:'savedButton',handler:sessionHandler,iconCls: 'saved'},
                     {text:'me',id:'meButton',handler:sessionHandler,iconCls: 'me'}/*,
                     {text:'Login',id:'loginButton',handler:sessionHandler,iconCls:'user'},
                     {text:'Logout',id:'logoutButton',handler:sessionHandler,hidden:true},
@@ -401,7 +441,7 @@
            var mainPnl = new Ext.Panel({
                fullscreen: true,
                id: 'mainPnl',
-               items: [listPnl,detailPnl,placePnl,newDishForm,profilePnl,reviewFormPnl],
+               items: [listPnl,detailPnl,placePnl,newDishForm,profilePnl,reviewFormPnl,savedPnl],
                layout: {
                    type: 'card'
                },
@@ -416,8 +456,6 @@
            });
 
            justLoggedIn();
-
-
 
            $(".starcover").live("click",function(event) {
                rating = event.currentTarget.id.toString().replace("id-star","");
