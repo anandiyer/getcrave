@@ -450,6 +450,7 @@ body.two-col.bp{
         }
     }
 
+
     #content_wrap{
         background:#FFFFFF;
         @include container;
@@ -547,6 +548,10 @@ body.two-col.bp{
         }
 
         #content{
+            /*background-color: red;*/
+            margin-right: 15px !important;
+
+
             #result_report_info{
                 padding:10px 0 0 10px;
                 font-weight: bold;
