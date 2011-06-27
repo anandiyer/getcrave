@@ -1,3 +1,4 @@
+- content_for :opengraph_meta_tags, opengraph_meta_tags_for(@menu_item)
 - labels = MenuLabel.all
 = content_tag :div, :class => "label_div_wrapper" do
   = content_tag :div, " ", :class => "label_div_tri"
@@ -40,10 +41,11 @@
       #rating
         -if @menu_item.menu_item_avg_rating_count
           %span= @menu_item.menu_item_avg_rating_count.count
-          Reviews
-
-      #social
-        = render :partial => "/social" if !is_almazom?
+          Reviews 
+      
+      :erb
+        <%= like_button_for @menu_item, :send => true, :layout => :button_count, :width => 250, :show_faces => false %>
+        
       #desc_wrap
 
         #description= @menu_item.description

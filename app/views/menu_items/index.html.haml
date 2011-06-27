@@ -1,3 +1,4 @@
+- content_for :opengraph_meta_tags, opengraph_meta_tags_for(@restaurant)
 #content
   #current_content_block
     #bread_crumbs
@@ -26,8 +27,8 @@
               / %p (415) 927 1849
               /  %p= link_to "www.siet.com"
               .col2_pn
-                = render :partial => "/social"
-                -#= image_tag "social.png"
+                :erb
+                  <%= like_button_for @restaurant, :layout => :button_count, :width => 150, :show_faces => false %>                
 
   #reviews_wrapper.restaurant
     %h3.review

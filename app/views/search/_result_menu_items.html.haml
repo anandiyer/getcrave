@@ -1,4 +1,4 @@
-- if @results.count == 0
+- if !@results || @results.count == 0
   No matching results :( Were you looking for restaurants instead?
 
 - @results.each_with_index do |@menu_item, @counter|

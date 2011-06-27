@@ -61,7 +61,7 @@ class MenuItemsController < ApplicationController
     @menu_items = MenuItem.find_by_sql(["SELECT menu_items.* FROM menu_items
       LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id
       WHERE menu_items.restaurant_id = ?
-      ORDER BY (menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC",
+      ORDER BY (menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, LOWER(menu_items.name) ASC", 
       @restaurant.id])
 
   end
@@ -100,8 +100,16 @@ class MenuItemsController < ApplicationController
 
     respond_to do |format|
       format.html # _unused_show.html.haml
-      format.xml  { render :xml => @menu_item.to_xml( :include => [ :restaurant, :menu_item_avg_rating_count, :menu_item_ratings ] ) }
-      format.json { render :json => @menu_item.to_json( :include => [ :restaurant, :menu_item_avg_rating_count, :menu_item_ratings ] ) }
+      format.xml  { render :xml => @menu_item.to_xml( :include => {:restaurant => {}, 
+        :menu_item_avg_rating_count => {}, 
+        :menu_item_ratings => {:include => :user},
+        :menu_item_photos => {},
+        :menu_label_associations => {}, } ) }
+      format.json { render :json => @menu_item.to_json( :include => {:restaurant => {}, 
+        :menu_item_avg_rating_count => {}, 
+        :menu_item_ratings => {:include => :user},
+        :menu_item_photos => {},
+        :menu_label_associations => {}, } ) }
     end
   end
 
@@ -325,7 +333,7 @@ class MenuItemsController < ApplicationController
   def params_4_location_and_show_menu_item_nearby
     @lat = params[:lat].to_f
     @long = params[:long].to_f
-    @within = 1
+    @within = 0.5
     @limit = ITEMS_PER_PAGE
     
     if params[:limit] && !params[:limit].empty?
@@ -351,7 +359,7 @@ class MenuItemsController < ApplicationController
          # :include => :menu_item_avg_rating_count, 
          :limit => @limit)
 
-    if (params[:sort].eql?("distance"))
+    if (params[:distance].eql?("yes"))
       # We have to add this to get the 'distance' and this also
       # sorts by distance as opposed to by rating
       @menu_items.sort_by_distance_from(@origin)

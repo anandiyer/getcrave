@@ -1,4 +1,4 @@
-dishTemplate = new Ext.XTemplate('<tpl for="."><div class="adish"><img src="../images/no-image-default.png" class="dishImg"><div class="dishListinfo"><span class="dishname">{name}</span><span class="restaurantName">@{restaurant_name}</span><span class="distanceFigure">{[this.distDisplay(values.distance)]}</span></div><span class="chevrony"></span></span></div></tpl>',
+dishTemplate = new Ext.XTemplate.from('dishesTemplate',
     {distDisplay: function(miles) {
         feet = Math.round(miles * 5280);
         if(feet<1000) {
