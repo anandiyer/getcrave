@@ -45,8 +45,6 @@ class MenuItemsController < ApplicationController
       }
     end
 
-
-
     respond_to do |format|
       format.html # location.html.haml
       format.xml { render :xml => @menu_items.to_xml(:methods => :distance, :include => [:restaurant, :menu_item_avg_rating_count]) }
@@ -78,8 +76,6 @@ class MenuItemsController < ApplicationController
 
     params_4_index_and_show_menu_items_of_place
 
-
-    
     respond_to do |format|
       format.html # location.html.haml
       format.xml  { render :xml => @menu_items.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count])}

@@ -100,11 +100,8 @@ window.update_reviews = (id_of_menu_item, limits = $(".two-col").attr("rel")) ->
     beforeSend: () -> before_send(obj),
     success: (html) -> after_send(obj, html)})
 
-
-
 window.g_notice = (type, text) ->
     $.gritter.add({title:type, text:text});
-
 
 window.save_helpfull = () ->
 

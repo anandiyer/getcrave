@@ -73,15 +73,15 @@ class MenuItemRatingsController < ApplicationController
       name = menu_item.name
       link = "http://getcrave.com/items/"+params[:menu_item_rating][:menu_item_id]
       message = "I just craved the #{name} - "+link
-      picture = menu_item.thumbnail
+      picture = menu_item.thumbnail.index("amazonaws").nil? ? "http://getcrave.com/images/"+menu_item.thumbnail : menu_item.thumbnail
       desc = menu_item.description ? menu_item.description : "Have you ever been to a restaurant and asked, “So, what’s good here?” We help people find the food they like."
 
-      p token = current_user.authorizations.first.token
+      token = current_user.authorizations.first.token
 
       me = FbGraph::User.me(token)
       me.feed!(
           :message => message,
-#          :picture => picture,
+          :picture => picture,
           :link => link,
           :name => name,
           :description => desc
