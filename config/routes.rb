@@ -1,4 +1,6 @@
 Crave::Application.routes.draw do 
+  resources :alpha_testers
+
   resources :following, :as => "user_followings", :controller => "user_followings"
   
   resources :ratings, :as => "menu_item_ratings", :controller => "menu_item_ratings" do

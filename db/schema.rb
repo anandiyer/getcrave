@@ -10,7 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110608225146) do
+ActiveRecord::Schema.define(:version => 20110626210852) do
+
+  create_table "alpha_testers", :force => true do |t|
+    t.integer  "facebook_id"
+    t.boolean  "authorized"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -18,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20110608225146) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "token"
   end
 
   create_table "ingredients", :force => true do |t|
