@@ -236,34 +236,38 @@
            var tapHandler = function(b,e) {
                if(b.getText() == "Items") {
                    Ext.getCmp('listPnl').setActiveItem(dishList);
-                   Ext.getCmp("newRestButton").setVisible(false);
+                   //Ext.getCmp("newRestButton").setVisible(false);
                }
                if(b.getText() == "Places") {
                    Ext.getCmp('listPnl').setActiveItem(placesList);
-                   Ext.getCmp("newRestButton").setVisible(true);
+                   //Ext.getCmp("newRestButton").setVisible(true);
                }
            }
 
-       var detailPnl = new Ext.Panel({
-           fullScreen: true,
-           items: [infoPnl,reviewPnl],
-           id: 'detailPnl',
-           layout: {
-               type: 'vbox',
-               align: 'start',
-               direction: 'normal'
-           },
-           scroll:'vertical',
-           dockedItems:[
-               {
-                   dock:'top',
-                   xtype:'toolbar',
-                   ui:'light',
-                   title:'<img class="cravelogo" src="../images/crave-logo-horizontal-white.png">',
-                   items:[{text:'Back',ui:'back', handler:backHandler}]
-               }
-           ]
-       });
+           var detailPnl = new Ext.Panel({
+               fullScreen: true,
+               items: [infoPnl,reviewPnl],
+               id: 'detailPnl',
+               layout: {
+                   type: 'vbox',
+                   align: 'start',
+                   direction: 'normal'
+               },
+               scroll:'vertical',
+               dockedItems:[
+                   {
+                       dock:'top',
+                       xtype:'toolbar',
+                       ui:'light',
+                       title:'<img class="cravelogo" src="../images/crave-logo-horizontal-white.png">',
+                        layout: {
+                            type: 'hbox',
+                            pack:'justify'
+                        },
+                       items:[{text:'Back',ui:'back', handler:backHandler},{text:'Rate',ui:'normal', handler:rateHandler}]
+                   }
+               ]
+           });
 
            var profilePnl = new Ext.Panel({
                fullScreen: true,

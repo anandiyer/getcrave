@@ -643,7 +643,18 @@ body.two-col.bp{
                 #restaurant_icon{
                     @extend #dishes_icon;
                     margin-left: -30px;
-                }
+                .places_iconOff{
+					background: url(/images/sprites/icon-sprite.png);
+					background-position: 29px -219px;
+					height: 20px;
+					padding: 0px 0px 0px 20px;
+					margin: 4px 0px 0 14px;
+					font-size: 14px;
+					font-weight: bold;
+					color: #888;
+					text-shadow: 0px 1px white;
+				}
+				}
 
                 #dishes_icon{
                     @include inline-block;
@@ -661,6 +672,39 @@ body.two-col.bp{
                         width: 10px;
                         height: 30px;
                     }
+					.dishes_iconON{
+						background: url(/images/sprites/icon-sprite.png);
+						background-position: 29px -162px;
+						height: 20px;
+						padding: 0px 0px 0px 19px;
+						margin: 4px 0px 0 15px;
+						font-size: 14px;
+						font-weight: bold;
+						color: #464646;
+						text-shadow: 0px 1px white;
+					}
+					.places_iconOn{
+						background: url(/images/sprites/icon-sprite.png);
+						background-position: 29px -200px;
+						height: 20px;
+						padding: 0px 0px 0px 20px;
+						margin: 4px 0px 0 14px;
+						font-size: 14px;
+						font-weight: bold;
+						color: #464646;
+						text-shadow: 0px 1px white;
+					}
+					.dishes_iconOff{
+						background: url(/images/sprites/icon-sprite.png);
+						background-position: 29px -181px;
+						height: 20px;
+						padding: 0px 0px 0px 19px;
+						margin: 4px 0px 0 15px;
+						font-size: 14px;
+						font-weight: bold;
+						color: #888;
+						text-shadow: 0px 1px white;
+					}
                     img{
                         padding-top:7px;
                     }
