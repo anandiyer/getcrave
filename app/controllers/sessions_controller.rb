@@ -5,33 +5,6 @@ class SessionsController < ApplicationController
       # Create a new user or add an auth to existing user, depending on
       # whether there is already a user signed in.
 
-      # TODO: Beta If this user is not in the APPROVED LIST, we can't let'em in
-      ids = [
-        743181527, #shreya
-        500034335, #anand
-        80900323, #rich
-        80900324, #sara
-        662773250, #artignor
-        6200447, #cyrus
-        6239115, #greg
-        629551728,
-        586229596,
-        207611,
-        303895,
-        686839298,
-        521340130,
-        80900009,
-        515064005,
-        80901397,
-        100001103782215,
-        12429364,
-        535354602,
-        15001447,
-        604290,
-        3304156,
-        633516742
-      ]
-      
       @authuid = auth['uid'].to_i
       @conditions = " facebook_id = #{@authuid}"
       @tester = AlphaTester.find(:first, :conditions => @conditions)
