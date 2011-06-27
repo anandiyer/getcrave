@@ -1,0 +1,21 @@
+%h1 Listing alpha_testers
+
+%table
+  %tr
+    %th Facebook
+    %th Authorized
+    %th
+    %th
+    %th
+
+  - @alpha_testers.each do |alpha_tester|
+    %tr
+      %td= alpha_tester.facebook_id
+      %td= alpha_tester.authorized
+      %td= link_to 'Show', alpha_tester
+      %td= link_to 'Edit', edit_alpha_tester_path(alpha_tester)
+      %td= link_to 'Destroy', alpha_tester, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Alpha tester', new_alpha_tester_path

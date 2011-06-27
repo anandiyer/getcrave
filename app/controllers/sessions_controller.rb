@@ -32,8 +32,11 @@ class SessionsController < ApplicationController
         633516742
       ]
       
-      if (!ids.include?(auth['uid'].to_i))
-        # TODO: redirect to sorry page
+      @authuid = auth['uid'].to_i
+      @conditions = " facebook_id = #{@authuid}"
+      @tester = AlphaTester.find(:first, :conditions => @conditions)
+
+      if (!@tester || !@tester.authorized)
         redirect_to '/request.html'
         return
       end
@@ -61,6 +64,7 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     session[:redirect_to] = nil
+    reset_session
     
     # render :text => "Signed out!"
     # TODO: we should be redirecting "back" but for beta, we're going to take them to index.html

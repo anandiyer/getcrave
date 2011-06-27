@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Facebook:
+  = @alpha_tester.facebook_id
+%p
+  %b Authorized:
+  = @alpha_tester.authorized
+
+= link_to 'Edit', edit_alpha_tester_path(@alpha_tester)
+\|
+= link_to 'Back', alpha_testers_path
