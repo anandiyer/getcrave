@@ -109,7 +109,7 @@ class MenuItemsController < ApplicationController
         :menu_item_avg_rating_count => {}, 
         :menu_item_ratings => {:include => :user},
         :menu_item_photos => {},
-        :menu_label_associations => {}, } ) }
+        :menu_label_associations => {:include => :menu_label}, } ) }
     end
   end
 
