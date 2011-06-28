@@ -50,6 +50,7 @@
             border: none;
             background: transparent;
         }
+        .x-tab-pressed {border: solid 1px white;}
     </style>
     <link rel="Fav Icon" href="../favicon.ico" type="image/vnd.microsoft.icon">
 
@@ -171,9 +172,6 @@
                store: dishStore,
                id:'dishesNearbyList',
                scroll:'vertical',
-
-               width:350,
-               height:370,
                hideOnMaskTap: false,
                clearSectionOnDeactivate:true
            });
@@ -282,21 +280,30 @@
                }
                */
                if(target == "nearBy") {
+                   Ext.getCmp("meButton").active = false;
+                   Ext.getCmp("savedButton").active = false;
+                   Ext.getCmp("nearButton").active = true;
                    Ext.getCmp('mainPnl').setActiveItem(listPnl);
                }
                if(target == "me") {
                    Ext.getCmp('mainPnl').setActiveItem(profilePnl);
+                   Ext.getCmp("nearButton").active = false;
+                   Ext.getCmp("savedButton").active = false;
+                   Ext.getCmp("meButton").active = true;
+                   console.log(Ext.getCmp("bottomTabBar").add());
                }
                if(target == "saved") {
                    Ext.getCmp('mainPnl').setActiveItem(savedPnl);
+                   Ext.getCmp("meButton").active = false;
+                   Ext.getCmp("nearButton").active = false;
+                   Ext.getCmp("savedButton").active = true;
+                   Ext.getCmp("bottomTabs").doLayout();
                    if(urlPrefixSet) {
                        savedDishStore.proxy.url = urlPrefix+encodeURIComponent('/users/'+localStorage.getItem("uid")+'/saved.json');
                    } else {
                        savedDishStore.proxy.url = 'http://getcrave.com/users/'+localStorage.getItem("uid")+'/saved.json';
                    }
-                   console.log(savedDishStore.proxy.url);
                    savedDishStore.load(function() {
-                   console.log(savedDishStore);
                });
                }
            }
@@ -313,7 +320,6 @@
            }
 
            var detailPnl = new Ext.Panel({
-               fullScreen: true,
                items: [infoPnl,reviewPnl],
                id: 'detailPnl',
                layout: {
@@ -338,7 +344,6 @@
            });
 
            var profilePnl = new Ext.Panel({
-               fullScreen: true,
                html:'<div class="fancyImage"><img class="logoutButton" src="../images/profile-cold-food.png"></div><div class="explanation">Rate & Save Dishes, Follow Foodies</div><a href="/auth/facebook" class="loginButton"></a>',
                id: 'profilePnl',
                scroll:'vertical',
@@ -354,7 +359,6 @@
            });
 
            var savedPnl = new Ext.Panel({
-               fullScreen: true,
                id: 'savedPnl',
                items: [savedList],
                scroll:'vertical',
@@ -369,9 +373,12 @@
            });
 
         bottomPanel = new Ext.TabPanel({
+            id: 'bottomTabs',
             tabBar: {
                 dock: 'bottom',
                 ui: 'dark',
+                id: 'bottomTabBar',
+                activeItem:0,
                 layout: {
                     pack: 'center'
                 },
@@ -380,16 +387,16 @@
                     element: 'body'
                 },
                 items:[
-                    {text:'nearby',id:'nearButton',handler:sessionHandler,iconCls: 'nearBy'},
-                    {text:'saved',id:'savedButton',handler:sessionHandler,iconCls: 'saved'},
-                    {text:'me',id:'meButton',handler:sessionHandler,iconCls: 'me'}/*,
+                    {text:'nearby',id:'nearButton',active:true,handler:sessionHandler,iconCls: 'nearBy'},
+                    {text:'saved',id:'savedButton',active:false,handler:sessionHandler,iconCls: 'saved'},
+                    {text:'me',id:'meButton',active:false,handler:sessionHandler,iconCls: 'me'}/*,
                     {text:'Login',id:'loginButton',handler:sessionHandler,iconCls:'user'},
                     {text:'Logout',id:'logoutButton',handler:sessionHandler,hidden:true},
                     {text:'New Restaurant',id:'newRestButton',handler:sessionHandler,hidden:true} */
                 ]
             }
         });
-           
+
 
        //intentionally not using var to make this global
        listPnl = new Ext.Panel({
@@ -398,6 +405,8 @@
            layout: {
                type: 'card'
            },
+           width:'100%',
+           height:'100%',
            cardSwitchAnimation: 'slide',
            direction:'horizontal',
            dockedItems: [
@@ -421,7 +430,6 @@
            var placePnl = new Ext.Panel({
                id: 'placePnl',
                items: [restPnl,aRestaurantList],
-               fullscreen:true,
                layout: {
                    type: 'vbox',
                    align: 'start',
@@ -437,21 +445,54 @@
                    }
                ]
            });
+/*
+           mainPnl = new Ext.TabPanel({
+               id: 'mainPnl',
+               fullscreen:true,
+               cardSwitchAnimation: {
+                   type: 'slide',
+                   cover: true,
+                   direction:'horizontal'
+               },
+               defaults: {
+                   scroll: 'vertical'
+               },
+               items: [
+                   {title:'nearby',id:'nearButton',active:true,handler:sessionHandler,iconCls:'nearBy',
+                   items: [
+                       listPnl
+                   ]},
+                   {title:'saved',id:'savedButton',handler:sessionHandler,active:false,iconCls:'saved',items:[savedPnl]},
+                   {title:'me',id:'meButton',active:false,handler:sessionHandler,iconCls:'me',items:[profilePnl]},
+                       detailPnl,placePnl,newDishForm,reviewFormPnl
+               ]
+           });
+*/
 
-           var mainPnl = new Ext.Panel({
+           var mainPnl = new Ext.TabPanel({
                fullscreen: true,
                id: 'mainPnl',
-               items: [listPnl,detailPnl,placePnl,newDishForm,profilePnl,reviewFormPnl,savedPnl],
-               layout: {
-                   type: 'card'
+               layout:'card',
+               items: [
+                   {
+                       title:'nearby',
+                       iconCls:'nearBy',
+                       items:[listPnl]
+                   },detailPnl,placePnl,{hidden:true,items:[newDishForm]},{title:'me',iconCls:'me',items:[profilePnl]},reviewFormPnl,{title:'saved',handler:sessionHandler,iconCls:'saved',items:[savedPnl]}],
+               tabBar: {
+                   dock: 'bottom',
+                   ui: 'dark',
+                   layout: {
+                       pack: 'center'
+                   }
                },
-               dockedItems: [{
+/*               dockedItems: [{
                    dock: 'bottom',
                    items:[
                            bottomPanel
                    ]
                }],
-               cardSwitchAnimation: 'slide',
+*/               cardSwitchAnimation: 'slide',
                direction:'horizontal'
            });
 
