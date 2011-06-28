@@ -309,7 +309,7 @@
            }
 
            var tapHandler = function(b,e) {
-               if(b.getText() == "Items") {
+               if(b.getText() == "Food") {
                    Ext.getCmp('listPnl').setActiveItem(dishList);
                    //Ext.getCmp("newRestButton").setVisible(false);
                }
@@ -419,7 +419,7 @@
                    items:[
                        {xtype:'segmentedbutton',
                        items:[
-                           {text:'Items',id:'dishesButton',pressed:true, handler:tapHandler,ui:'round',width:'110'}, //,icon:'../images/dish-icon-ON.png',iconAlign:'left'
+                           {text:'Food',id:'dishesButton',pressed:true, handler:tapHandler,ui:'round',width:'110'}, //,icon:'../images/dish-icon-ON.png',iconAlign:'left'
                            {text:'Places',id:'placesButton', pressed:false, handler:tapHandler,ui:'round',width:'110'} //,icon:'../images/restaurant-icon-OFF.png',iconAlign:'left'
                        ]}
                    ]

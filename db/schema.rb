@@ -10,10 +10,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110626210852) do
+ActiveRecord::Schema.define(:version => 20110627181907) do
 
   create_table "alpha_testers", :force => true do |t|
-    t.integer  "facebook_id"
+    t.integer  "facebook_id", :limit => 8
     t.boolean  "authorized"
     t.datetime "created_at"
     t.datetime "updated_at"
