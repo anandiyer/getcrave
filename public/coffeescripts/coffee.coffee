@@ -100,6 +100,18 @@ window.update_reviews = (id_of_menu_item, limits = $(".two-col").attr("rel")) ->
     beforeSend: () -> before_send(obj),
     success: (html) -> after_send(obj, html)})
 
+
+
+
+
+window.spinner_hide = (obj) ->
+    $("#spinner").hide()
+
+window.spinner_show = (obj) ->
+    offset = $(obj).offset()
+    $("#spinner").show().css("left",offset.left).css("top",offset.top+2)
+
+
 window.g_notice = (type, text) ->
     $.gritter.add({title:type, text:text});
 
@@ -439,6 +451,8 @@ $(document).ready ->
 
 
     $(document).ajaxComplete (event, xhr, settings) ->
+
+
         if settings.url.indexOf("ratings") > 0
             if xhr.responseText == "no_token"
                 cl "no token"

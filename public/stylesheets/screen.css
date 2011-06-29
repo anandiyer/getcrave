@@ -2559,14 +2559,14 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   font-size: 14px;
   cursor: pointer;
 }
-/* line 1794, ../../compass/sass/screen.scss */
+/* line 1792, ../../compass/sass/screen.scss */
 .submit_wrapper .left_rounder {
   height: 33px;
   width: 8px;
   background: url("/images/sprites/button-sprite.png") no-repeat 0px -75px;
   float: left;
 }
-/* line 1802, ../../compass/sass/screen.scss */
+/* line 1799, ../../compass/sass/screen.scss */
 .submit_wrapper .submit_button {
   float: right;
   width: 90px;
@@ -2574,13 +2574,19 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   background: url("/images/sprites/button-sprite.png") no-repeat -131px -75px;
 }
 
-/* line 1811, ../../compass/sass/screen.scss */
+/* line 1808, ../../compass/sass/screen.scss */
 .plupload {
   background-color: red;
   opacity: 1;
 }
 
-/* line 1816, ../../compass/sass/screen.scss */
+/* line 1813, ../../compass/sass/screen.scss */
 .gray {
   color: #999999;
+}
+
+/* line 1817, ../../compass/sass/screen.scss */
+#spinner {
+  position: absolute;
+  z-index: 100;
 }

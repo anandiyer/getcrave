@@ -139,6 +139,14 @@
       }
     });
   };
+  window.spinner_hide = function(obj) {
+    return $("#spinner").hide();
+  };
+  window.spinner_show = function(obj) {
+    var offset;
+    offset = $(obj).offset();
+    return $("#spinner").show().css("left", offset.left).css("top", offset.top + 2);
+  };
   window.g_notice = function(type, text) {
     return $.gritter.add({
       title: type,

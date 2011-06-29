@@ -26,6 +26,7 @@ window.pl_all = (function (uuid) {
                     console.log(file);
                     console.log(info);
 
+
                     $("#gallery").html(info.response);
                     window.gallery_init();
                 }
@@ -40,6 +41,7 @@ window.pl_all = (function (uuid) {
         window.uploader.bind('UploadComplete', function (up, file) {
             window.window.thumbnail_resizing()
 
+            window.spinner_hide();
             $.gritter.add({
                 title: "Notice",
                 text: " Files was uploaded!"
@@ -47,12 +49,16 @@ window.pl_all = (function (uuid) {
         });
 
         window.uploader.bind('BeforeUpload', function (up, file) {
+            obj = $("span.add_photos_inline");
+            window.spinner_show(obj);
 
             var signed = !$(".fb_login").find("a").hasClass("not_signed");
 
             if (!signed) {
                 uploader.stop();
                 window.show_dialog("Please sign in to add photos")
+            }else{
+
             }
 
         });
@@ -67,6 +73,7 @@ window.pl_all = (function (uuid) {
         uploader.bind('FilesAdded', function (up, files) {
             $(".photos_inline").removeClass("himportant")
             uploader.start();
+
         });
     }
 

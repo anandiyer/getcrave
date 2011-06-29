@@ -1787,8 +1787,6 @@ body.two-col.bp{
         text-shadow:1px 1px 1px #ffffff;
         font-size: 14px;
         cursor: pointer;
-
-
     }
 
     .left_rounder{
@@ -1796,7 +1794,6 @@ body.two-col.bp{
         width: 8px;
         background: url("/images/sprites/button-sprite.png") no-repeat 0px -75px;
         float: left;
-
     }
 
     .submit_button{
@@ -1815,4 +1812,9 @@ body.two-col.bp{
 
 .gray{
     color: $gray;
+}
+
+#spinner{
+    position:absolute;
+    z-index:100;
 }
