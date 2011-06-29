@@ -267,6 +267,7 @@ word-wrap:break-word;
 .x-tab img.me, .x-button img.x-icon-mask.me {
 	-webkit-mask-image:url('../../images/tab-Me-ON.png');
 }
+.hideMe {display:none;}
 
 .dataSection {border:1px solid #b2b2b2;border-radius:10px;width:100%;margin-top: 10px;}
 .sectionHead {

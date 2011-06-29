@@ -478,7 +478,7 @@
                        title:'nearby',
                        iconCls:'nearBy',
                        items:[listPnl]
-                   },detailPnl,placePnl,{hidden:true,items:[newDishForm]},{title:'me',iconCls:'me',items:[profilePnl]},reviewFormPnl,{title:'saved',handler:sessionHandler,iconCls:'saved',items:[savedPnl]}],
+                   },{items:[detailPnl]},{width:0,items:[placePnl]},{width:0,items:[newDishForm]},reviewFormPnl,{title:'saved',handler:sessionHandler,iconCls:'saved',items:[savedPnl]},{title:'me',iconCls:'me',items:[profilePnl]}],
                tabBar: {
                    dock: 'bottom',
                    ui: 'dark',
@@ -486,13 +486,7 @@
                        pack: 'center'
                    }
                },
-/*               dockedItems: [{
-                   dock: 'bottom',
-                   items:[
-                           bottomPanel
-                   ]
-               }],
-*/               cardSwitchAnimation: 'slide',
+               cardSwitchAnimation: 'slide',
                direction:'horizontal'
            });
 
