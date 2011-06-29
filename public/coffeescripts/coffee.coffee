@@ -309,8 +309,13 @@ select_all_checked_labels = () ->
     path.push("lat="+$("body").attr("data-latitude"))
     path.push("long="+$("body").attr("data-longitude"))
 
-    cl path_total = "/search?"+path.join("&")
-    $.ajax({url: path_total, type: "get", context: document.body});
+    path_total = "/search?"+path.join("&")
+    $.ajax({url: path_total, type: "get", context: document.body})
+
+
+    $("#result_for_text").text(path)
+
+
 
 filter_bind = () ->
     $("#filters a").click (e) ->
@@ -351,7 +356,8 @@ $(document).ready ->
     thumbnail_resizing()
 #    avatar_click_to_plupload()
 
-    columnizing() if window.location.href.indexOf("search") > 0
+    columnizing()
+#    if window.location.href.indexOf("search") > 0 || window.location.href.indexOf("/items/location") > 0
 
 
     $("#navigation .left_corner").live "click", () ->

@@ -1,27 +1,8 @@
 = render :partial => "buttons"
-
-#filters
-  =link_to "Filter Results", "#"
-  #triangle.on
-  #toggled_filters
-    #distance
-      .distance_title Distance
-      #distance_inputs
-        - %w{0.5 1 2 5}.sort.each do |distance|
-          = radio_button ("a", "b", distance)
-          = pluralize(distance, 'mile')
-    #labels
-      .distance_title Dietary Preference
-      .labels_inputs
-        - MenuLabel.all.map{|l| l.menu_label}.sort.each do |label|
-          .item_here
-            = check_box("c", "d", :value => label)
-            %label= label
-    -##labels
-
-
-#result_report_info
-  Results for
+= render :partial => "filters"
 #reviews_wrapper{:class => class_name_from_path}
   #update_place_restaurants{:class => class_name_from_path}
     = render :partial => params[:search_restaurants] ? "result_restaurants" : "result_menu_items"
+
+
+
