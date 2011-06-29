@@ -317,12 +317,13 @@
     path.push("q=" + queary);
     path.push("lat=" + $("body").attr("data-latitude"));
     path.push("long=" + $("body").attr("data-longitude"));
-    cl(path_total = "/search?" + path.join("&"));
-    return $.ajax({
+    path_total = "/search?" + path.join("&");
+    $.ajax({
       url: path_total,
       type: "get",
       context: document.body
     });
+    return $("#result_for_text").text(path);
   };
   filter_bind = function() {
     $("#filters a").click(function(e) {
@@ -368,9 +369,7 @@
     search_bind();
     top_nav_bind();
     thumbnail_resizing();
-    if (window.location.href.indexOf("search") > 0) {
-      columnizing();
-    }
+    columnizing();
     $("#navigation .left_corner").live("click", function() {
       return window.location = $(this).next().attr("href");
     });

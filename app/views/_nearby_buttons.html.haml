@@ -1,29 +1,18 @@
 - if  controller.controller_name == "menu_items" || (@controller.controller_name == "search" && !params[:search_restaurants])
-  - dish_button_status = "on"
-  - rest_button_status = "off"
+  - @dish_button_status = "on"
+  - @rest_button_status = "off"
 - else
-  - dish_button_status = "off"
-  - rest_button_status = "on"
+  - @dish_button_status = "off"
+  - @rest_button_status = "on"
 
 - tail = params[:lat] ? "?lat="+params[:lat]+"&long="+params[:long] : " "
 
-
 #buttons_wrapper
-
-  - if rest_button_status == "off"
-    #dishes_icon{:class => dish_button_status+" dishbutton "+class_name_from_path}
-      #left_side &nbsp;
-      .dishes_iconON Food
-
+  - if @rest_button_status == "off"
+    = render :partial => "/food_button"
     =link_to "/places"+tail do
-      #restaurant_icon{:class => rest_button_status+" restbutton "+class_name_from_path}
-        #left_side &nbsp;
-        .places_iconOff Places
+      = render :partial => "/place_button"
   - else
     =link_to "/items/location"+tail do
-      #dishes_icon{:class => dish_button_status+" dishbutton "+class_name_from_path}
-        #left_side &nbsp;
-        .dishes_iconOff Food
-    #restaurant_icon{:class => rest_button_status+" restbutton "+class_name_from_path}
-      #left_side &nbsp;
-      .places_iconOn Places
+      = render :partial => "/food_button"
+    = render :partial => "/place_button"

@@ -1,7 +1,9 @@
 !!!
 %html
   %head
-    %title= title(class_name_from_path)
+    %title
+      = class_name_from_path
+      -#= title(class_name_from_path)
     %link{:rel => "shortcut icon", :href => "/favicon.ico"}
     %meta{:content => "207859815920359", :property => "fb:app_id"}
     %meta{:content => "500034335", :property => "fb:admins"}
@@ -11,13 +13,11 @@
 
     = javascript_include_tag "jquery-1.6.min.js", "rails"
 
-
+    -#google maps
     = javascript_include_tag  "http://maps.google.com/maps/api/js?sensor=false"
-    -#if !is_almazom?
+
     = javascript_include_tag  "plugins/jquery.raty.min.js", "selectivizr-min.js"
     = javascript_include_tag "http://connect.facebook.net/en_US/all.js"
-    -#if !is_almazom?
-
 
     = javascript_include_tag  "plugins/autoresize.jquery.min.js"
 
@@ -25,9 +25,8 @@
     = javascript_include_tag  "plugins/jquery.lightbox-0.5.pack.js"
     = stylesheet_link_tag "jquery.lightbox-0.5.css"
 
-
     -#columnizing
-    = javascript_include_tag  "plugins/autocolumn.min.js" if controller.controller_name == "search"
+    = javascript_include_tag  "plugins/autocolumn.min.js" if %w{menu_items_location restaurants_index search_index}.include?(class_name_from_path)
 
     -#autocomplete
     = javascript_include_tag "plugins/ui/jquery.ui.core.js","plugins/ui/jquery.ui.widget.js","plugins/ui/jquery.ui.position.js","plugins/ui/jquery.ui.autocomplete.js"
@@ -73,12 +72,10 @@
 
               #in in
         #content_wrap
-          - if controller.action_name == "nearby_loading" || controller.controller_name == "search"
-            - controller.controller_name == "search" ? text = "Loading" : text = "Locating"
-
-            #get_nearby_loading{:class => controller.controller_name == "search" ? "h" : ""}
-              = image_tag "activity_indicator.gif"
-              #locating= text+"..."
+          - controller.controller_name == "search" ? text = "Loading" : text = "Locating"
+          #get_nearby_loading.h
+            = image_tag "activity_indicator.gif"
+            #locating= text+"..."
 
           #content
             =yield
