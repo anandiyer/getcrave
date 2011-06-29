@@ -67,242 +67,242 @@ body.bp {
   /*@include blueprint-interaction;*/
   /*@include blueprint-scaffolding;*/
 }
-/* line 51, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 51, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp h1, body.bp h2, body.bp h3, body.bp h4, body.bp h5, body.bp h6 {
   font-weight: normal;
   color: #222222;
 }
-/* line 52, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 52, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp h1 img, body.bp h2 img, body.bp h3 img, body.bp h4 img, body.bp h5 img, body.bp h6 img {
   margin: 0;
 }
-/* line 53, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 53, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp h1 {
   font-size: 3em;
   line-height: 1;
   margin-bottom: 0.50em;
 }
-/* line 54, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 54, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp h2 {
   font-size: 2em;
   margin-bottom: 0.75em;
 }
-/* line 55, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 55, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp h3 {
   font-size: 1.5em;
   line-height: 1;
   margin-bottom: 1.00em;
 }
-/* line 56, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 56, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp h4 {
   font-size: 1.2em;
   line-height: 1.25;
   margin-bottom: 1.25em;
 }
-/* line 57, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 57, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp h5 {
   font-size: 1em;
   font-weight: bold;
   margin-bottom: 1.50em;
 }
-/* line 58, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 58, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp h6 {
   font-size: 1em;
   font-weight: bold;
 }
-/* line 59, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 59, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp p {
   margin: 0 0 1.5em;
 }
-/* line 60, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 60, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp p .left {
   display: inline;
   float: left;
   margin: 1.5em 1.5em 1.5em 0;
   padding: 0;
 }
-/* line 61, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 61, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp p .right {
   display: inline;
   float: right;
   margin: 1.5em 0 1.5em 1.5em;
   padding: 0;
 }
-/* line 62, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 62, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp a {
   text-decoration: underline;
   color: #0066cc;
 }
-/* line 18, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 18, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
 body.bp a:visited {
   color: #004c99;
 }
-/* line 21, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 21, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
 body.bp a:focus {
   color: #0099ff;
 }
-/* line 24, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 24, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
 body.bp a:hover {
   color: #0099ff;
 }
-/* line 27, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 27, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
 body.bp a:active {
   color: #bf00ff;
 }
-/* line 63, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 63, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp blockquote {
   margin: 1.5em;
   color: #666666;
   font-style: italic;
 }
-/* line 64, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 64, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp strong, body.bp dfn {
   font-weight: bold;
 }
-/* line 65, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 65, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp em, body.bp dfn {
   font-style: italic;
 }
-/* line 66, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 66, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp sup, body.bp sub {
   line-height: 0;
 }
-/* line 67, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 67, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp abbr, body.bp acronym {
   border-bottom: 1px dotted #666666;
 }
-/* line 68, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 68, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp address {
   margin: 0 0 1.5em;
   font-style: italic;
 }
-/* line 69, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 69, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp del {
   color: #666666;
 }
-/* line 70, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 70, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp pre {
   margin: 1.5em 0;
   white-space: pre;
 }
-/* line 71, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 71, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp pre, body.bp code, body.bp tt {
   font: 1em "andale mono", "lucida console", monospace;
   line-height: 1.5;
 }
-/* line 72, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 72, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp li ul, body.bp li ol {
   margin: 0;
 }
-/* line 73, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 73, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp ul, body.bp ol {
   margin: 0 1.5em 1.5em 0;
   padding-left: 1.5em;
 }
-/* line 74, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 74, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp ul {
   list-style-type: disc;
 }
-/* line 75, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 75, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp ol {
   list-style-type: decimal;
 }
-/* line 76, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 76, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp dl {
   margin: 0 0 1.5em 0;
 }
-/* line 77, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 77, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp dl dt {
   font-weight: bold;
 }
-/* line 78, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 78, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp dd {
   margin-left: 1.5em;
 }
-/* line 79, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 79, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp table {
   margin-bottom: 1.4em;
   width: 100%;
 }
-/* line 80, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 80, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp th {
   font-weight: bold;
 }
-/* line 81, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 81, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp thead th {
   background: #c3d9ff;
 }
-/* line 82, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 82, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp th, body.bp td, body.bp caption {
   padding: 4px 10px 4px 5px;
 }
-/* line 85, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 85, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp table.striped tr:nth-child(even) td,
 body.bp table tr.even td {
   background: #e5ecf9;
 }
-/* line 86, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 86, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp tfoot {
   font-style: italic;
 }
-/* line 87, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 87, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp caption {
   background: #eeeeee;
 }
-/* line 88, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 88, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp .quiet {
   color: #666666;
 }
-/* line 89, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
+/* line 89, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_typography.scss */
 body.bp .loud {
   color: #111111;
 }
-/* line 9, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+/* line 9, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
 body.bp .clear {
   clear: both;
 }
-/* line 12, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+/* line 12, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
 body.bp .nowrap {
   white-space: nowrap;
 }
-/* line 16, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+/* line 16, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
 body.bp .clearfix {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 18, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+/* line 18, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
 body.bp .small {
   font-size: 0.8em;
   margin-bottom: 1.875em;
   line-height: 1.875em;
 }
-/* line 22, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+/* line 22, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
 body.bp .large {
   font-size: 1.2em;
   line-height: 2.5em;
   margin-bottom: 1.25em;
 }
-/* line 26, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+/* line 26, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
 body.bp .first {
   margin-left: 0;
   padding-left: 0;
 }
-/* line 29, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+/* line 29, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
 body.bp .last {
   margin-right: 0;
   padding-right: 0;
 }
-/* line 32, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+/* line 32, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
 body.bp .top {
   margin-top: 0;
   padding-top: 0;
 }
-/* line 35, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
+/* line 35, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
 body.bp .bottom {
   margin-bottom: 0;
   padding-bottom: 0;
 }
-/* line 25, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_debug.scss */
+/* line 25, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_debug.scss */
 body.bp .showgrid {
   background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(5%, rgba(0, 0, 0, 0.5)), color-stop(5%, rgba(0, 0, 0, 0))), -webkit-gradient(linear, 0% 50%, 983.0 50%, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(0%, rgba(100, 100, 225, 0.25)), color-stop(3.149%, rgba(100, 100, 225, 0.25)), color-stop(3.149%, rgba(0, 0, 0, 0)), color-stop(4.167%, rgba(0, 0, 0, 0)), color-stop(4.167%, rgba(100, 100, 225, 0.25)), color-stop(7.316%, rgba(100, 100, 225, 0.25)), color-stop(7.316%, rgba(0, 0, 0, 0)), color-stop(8.333%, rgba(0, 0, 0, 0)), color-stop(8.333%, rgba(100, 100, 225, 0.25)), color-stop(11.483%, rgba(100, 100, 225, 0.25)), color-stop(11.483%, rgba(0, 0, 0, 0)), color-stop(12.5%, rgba(0, 0, 0, 0)), color-stop(12.5%, rgba(100, 100, 225, 0.25)), color-stop(15.649%, rgba(100, 100, 225, 0.25)), color-stop(15.649%, rgba(0, 0, 0, 0)), color-stop(16.667%, rgba(0, 0, 0, 0)), color-stop(16.667%, rgba(100, 100, 225, 0.25)), color-stop(19.816%, rgba(100, 100, 225, 0.25)), color-stop(19.816%, rgba(0, 0, 0, 0)), color-stop(20.833%, rgba(0, 0, 0, 0)), color-stop(20.833%, rgba(100, 100, 225, 0.25)), color-stop(23.983%, rgba(100, 100, 225, 0.25)), color-stop(23.983%, rgba(0, 0, 0, 0)), color-stop(25%, rgba(0, 0, 0, 0)), color-stop(25.0%, rgba(100, 100, 225, 0.25)), color-stop(28.149%, rgba(100, 100, 225, 0.25)), color-stop(28.149%, rgba(0, 0, 0, 0)), color-stop(29.167%, rgba(0, 0, 0, 0)), color-stop(29.167%, rgba(100, 100, 225, 0.25)), color-stop(32.316%, rgba(100, 100, 225, 0.25)), color-stop(32.316%, rgba(0, 0, 0, 0)), color-stop(33.333%, rgba(0, 0, 0, 0)), color-stop(33.333%, rgba(100, 100, 225, 0.25)), color-stop(36.483%, rgba(100, 100, 225, 0.25)), color-stop(36.483%, rgba(0, 0, 0, 0)), color-stop(37.5%, rgba(0, 0, 0, 0)), color-stop(37.5%, rgba(100, 100, 225, 0.25)), color-stop(40.649%, rgba(100, 100, 225, 0.25)), color-stop(40.649%, rgba(0, 0, 0, 0)), color-stop(41.667%, rgba(0, 0, 0, 0)), color-stop(41.667%, rgba(100, 100, 225, 0.25)), color-stop(44.816%, rgba(100, 100, 225, 0.25)), color-stop(44.816%, rgba(0, 0, 0, 0)), color-stop(45.833%, rgba(0, 0, 0, 0)), color-stop(45.833%, rgba(100, 100, 225, 0.25)), color-stop(48.983%, rgba(100, 100, 225, 0.25)), color-stop(48.983%, rgba(0, 0, 0, 0)), color-stop(50.0%, rgba(0, 0, 0, 0)), color-stop(50.0%, rgba(100, 100, 225, 0.25)), color-stop(53.149%, rgba(100, 100, 225, 0.25)), color-stop(53.149%, rgba(0, 0, 0, 0)), color-stop(54.167%, rgba(0, 0, 0, 0)), color-stop(54.167%, rgba(100, 100, 225, 0.25)), color-stop(57.316%, rgba(100, 100, 225, 0.25)), color-stop(57.316%, rgba(0, 0, 0, 0)), color-stop(58.333%, rgba(0, 0, 0, 0)), color-stop(58.333%, rgba(100, 100, 225, 0.25)), color-stop(61.483%, rgba(100, 100, 225, 0.25)), color-stop(61.483%, rgba(0, 0, 0, 0)), color-stop(62.5%, rgba(0, 0, 0, 0)), color-stop(62.5%, rgba(100, 100, 225, 0.25)), color-stop(65.649%, rgba(100, 100, 225, 0.25)), color-stop(65.649%, rgba(0, 0, 0, 0)), color-stop(66.667%, rgba(0, 0, 0, 0)), color-stop(66.667%, rgba(100, 100, 225, 0.25)), color-stop(69.816%, rgba(100, 100, 225, 0.25)), color-stop(69.816%, rgba(0, 0, 0, 0)), color-stop(70.833%, rgba(0, 0, 0, 0)), color-stop(70.833%, rgba(100, 100, 225, 0.25)), color-stop(73.983%, rgba(100, 100, 225, 0.25)), color-stop(73.983%, rgba(0, 0, 0, 0)), color-stop(75%, rgba(0, 0, 0, 0)), color-stop(75.0%, rgba(100, 100, 225, 0.25)), color-stop(78.149%, rgba(100, 100, 225, 0.25)), color-stop(78.149%, rgba(0, 0, 0, 0)), color-stop(79.167%, rgba(0, 0, 0, 0)), color-stop(79.167%, rgba(100, 100, 225, 0.25)), color-stop(82.316%, rgba(100, 100, 225, 0.25)), color-stop(82.316%, rgba(0, 0, 0, 0)), color-stop(83.333%, rgba(0, 0, 0, 0)), color-stop(83.333%, rgba(100, 100, 225, 0.25)), color-stop(86.483%, rgba(100, 100, 225, 0.25)), color-stop(86.483%, rgba(0, 0, 0, 0)), color-stop(87.5%, rgba(0, 0, 0, 0)), color-stop(87.5%, rgba(100, 100, 225, 0.25)), color-stop(90.649%, rgba(100, 100, 225, 0.25)), color-stop(90.649%, rgba(0, 0, 0, 0)), color-stop(91.667%, rgba(0, 0, 0, 0)), color-stop(91.667%, rgba(100, 100, 225, 0.25)), color-stop(94.816%, rgba(100, 100, 225, 0.25)), color-stop(94.816%, rgba(0, 0, 0, 0)), color-stop(95.833%, rgba(0, 0, 0, 0)), color-stop(95.833%, rgba(100, 100, 225, 0.25)), color-stop(98.983%, rgba(100, 100, 225, 0.25)), color-stop(98.983%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0)));
   background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.5) 5%, rgba(0, 0, 0, 0) 5%), -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0px, rgba(100, 100, 225, 0.25) 0px, rgba(100, 100, 225, 0.25) 30.958px, rgba(0, 0, 0, 0) 30.958px, rgba(0, 0, 0, 0) 40.958px, rgba(100, 100, 225, 0.25) 40.958px, rgba(100, 100, 225, 0.25) 71.917px, rgba(0, 0, 0, 0) 71.917px, rgba(0, 0, 0, 0) 81.917px, rgba(100, 100, 225, 0.25) 81.917px, rgba(100, 100, 225, 0.25) 112.875px, rgba(0, 0, 0, 0) 112.875px, rgba(0, 0, 0, 0) 122.875px, rgba(100, 100, 225, 0.25) 122.875px, rgba(100, 100, 225, 0.25) 153.833px, rgba(0, 0, 0, 0) 153.833px, rgba(0, 0, 0, 0) 163.833px, rgba(100, 100, 225, 0.25) 163.833px, rgba(100, 100, 225, 0.25) 194.792px, rgba(0, 0, 0, 0) 194.792px, rgba(0, 0, 0, 0) 204.792px, rgba(100, 100, 225, 0.25) 204.792px, rgba(100, 100, 225, 0.25) 235.75px, rgba(0, 0, 0, 0) 235.75px, rgba(0, 0, 0, 0) 245.75px, rgba(100, 100, 225, 0.25) 245.75px, rgba(100, 100, 225, 0.25) 276.708px, rgba(0, 0, 0, 0) 276.708px, rgba(0, 0, 0, 0) 286.708px, rgba(100, 100, 225, 0.25) 286.708px, rgba(100, 100, 225, 0.25) 317.667px, rgba(0, 0, 0, 0) 317.667px, rgba(0, 0, 0, 0) 327.667px, rgba(100, 100, 225, 0.25) 327.667px, rgba(100, 100, 225, 0.25) 358.625px, rgba(0, 0, 0, 0) 358.625px, rgba(0, 0, 0, 0) 368.625px, rgba(100, 100, 225, 0.25) 368.625px, rgba(100, 100, 225, 0.25) 399.583px, rgba(0, 0, 0, 0) 399.583px, rgba(0, 0, 0, 0) 409.583px, rgba(100, 100, 225, 0.25) 409.583px, rgba(100, 100, 225, 0.25) 440.542px, rgba(0, 0, 0, 0) 440.542px, rgba(0, 0, 0, 0) 450.542px, rgba(100, 100, 225, 0.25) 450.542px, rgba(100, 100, 225, 0.25) 481.5px, rgba(0, 0, 0, 0) 481.5px, rgba(0, 0, 0, 0) 491.5px, rgba(100, 100, 225, 0.25) 491.5px, rgba(100, 100, 225, 0.25) 522.458px, rgba(0, 0, 0, 0) 522.458px, rgba(0, 0, 0, 0) 532.458px, rgba(100, 100, 225, 0.25) 532.458px, rgba(100, 100, 225, 0.25) 563.417px, rgba(0, 0, 0, 0) 563.417px, rgba(0, 0, 0, 0) 573.417px, rgba(100, 100, 225, 0.25) 573.417px, rgba(100, 100, 225, 0.25) 604.375px, rgba(0, 0, 0, 0) 604.375px, rgba(0, 0, 0, 0) 614.375px, rgba(100, 100, 225, 0.25) 614.375px, rgba(100, 100, 225, 0.25) 645.333px, rgba(0, 0, 0, 0) 645.333px, rgba(0, 0, 0, 0) 655.333px, rgba(100, 100, 225, 0.25) 655.333px, rgba(100, 100, 225, 0.25) 686.292px, rgba(0, 0, 0, 0) 686.292px, rgba(0, 0, 0, 0) 696.292px, rgba(100, 100, 225, 0.25) 696.292px, rgba(100, 100, 225, 0.25) 727.25px, rgba(0, 0, 0, 0) 727.25px, rgba(0, 0, 0, 0) 737.25px, rgba(100, 100, 225, 0.25) 737.25px, rgba(100, 100, 225, 0.25) 768.208px, rgba(0, 0, 0, 0) 768.208px, rgba(0, 0, 0, 0) 778.208px, rgba(100, 100, 225, 0.25) 778.208px, rgba(100, 100, 225, 0.25) 809.167px, rgba(0, 0, 0, 0) 809.167px, rgba(0, 0, 0, 0) 819.167px, rgba(100, 100, 225, 0.25) 819.167px, rgba(100, 100, 225, 0.25) 850.125px, rgba(0, 0, 0, 0) 850.125px, rgba(0, 0, 0, 0) 860.125px, rgba(100, 100, 225, 0.25) 860.125px, rgba(100, 100, 225, 0.25) 891.083px, rgba(0, 0, 0, 0) 891.083px, rgba(0, 0, 0, 0) 901.083px, rgba(100, 100, 225, 0.25) 901.083px, rgba(100, 100, 225, 0.25) 932.042px, rgba(0, 0, 0, 0) 932.042px, rgba(0, 0, 0, 0) 942.042px, rgba(100, 100, 225, 0.25) 942.042px, rgba(100, 100, 225, 0.25) 973.0px, rgba(0, 0, 0, 0) 973.0px, rgba(0, 0, 0, 0) 983.0px);
@@ -482,19 +482,19 @@ body.two-col.bp a {
   color: #2e70a7;
   text-decoration: none;
 }
-/* line 18, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 18, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
 body.two-col.bp a:visited {
   color: #2e70a7;
 }
-/* line 21, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 21, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
 body.two-col.bp a:focus {
   color: #2e70a7;
 }
-/* line 24, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 24, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
 body.two-col.bp a:hover {
   color: #1a507d;
 }
-/* line 27, /home/almazom/.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 27, ../../../../../../.rvm/gems/ree-1.8.7-2011.03@crave_project/gems/compass-0.11.3/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
 body.two-col.bp a:active {
   color: #2e70a7;
 }
@@ -2559,14 +2559,14 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   font-size: 14px;
   cursor: pointer;
 }
-/* line 1794, ../../compass/sass/screen.scss */
+/* line 1792, ../../compass/sass/screen.scss */
 .submit_wrapper .left_rounder {
   height: 33px;
   width: 8px;
   background: url("/images/sprites/button-sprite.png") no-repeat 0px -75px;
   float: left;
 }
-/* line 1802, ../../compass/sass/screen.scss */
+/* line 1799, ../../compass/sass/screen.scss */
 .submit_wrapper .submit_button {
   float: right;
   width: 90px;
@@ -2574,13 +2574,20 @@ body.two-col.bp #content_wrap #content #reviews_wrapper .reviews_wrapper_block .
   background: url("/images/sprites/button-sprite.png") no-repeat -131px -75px;
 }
 
-/* line 1811, ../../compass/sass/screen.scss */
+/* line 1808, ../../compass/sass/screen.scss */
 .plupload {
   background-color: red;
   opacity: 1;
 }
 
-/* line 1816, ../../compass/sass/screen.scss */
+/* line 1813, ../../compass/sass/screen.scss */
 .gray {
   color: #999999;
+}
+
+/* line 1817, ../../compass/sass/screen.scss */
+#spinner {
+  dispay: none !important;
+  position: absolute;
+  z-index: 100;
 }

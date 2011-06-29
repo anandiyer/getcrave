@@ -33,8 +33,6 @@
     = javascript_include_tag "plugins/ui/jquery.ui.core.js","plugins/ui/jquery.ui.widget.js","plugins/ui/jquery.ui.position.js","plugins/ui/jquery.ui.autocomplete.js"
     = stylesheet_link_tag "ui/jquery.ui.all.css"
 
-
-
     -#if on page we have upload option
     = javascript_include_tag  "plugins/plupload/plupload.js", "plugins/plupload/plupload.flash.js", "plugins/plupload/plupload.html5.js"
 
@@ -57,6 +55,8 @@
 
   - if cookies[:lat] then data = {:latitude => cookies[:lat], :longitude => cookies[:long]}  else data = "" end
   %body.two-col.bp{:data => data, :rel => ITEMS_PER_PAGE}
+    #spinner{:style => "display:none"}
+      = image_tag "ajax_loader_small.gif"
     #page
       #container
         #header
