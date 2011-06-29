@@ -356,8 +356,7 @@ $(document).ready ->
     thumbnail_resizing()
 #    avatar_click_to_plupload()
 
-    columnizing()
-#    if window.location.href.indexOf("search") > 0 || window.location.href.indexOf("/items/location") > 0
+    columnizing() if window.location.href.indexOf("search") > 0 || window.location.href.indexOf("/items/location") > 0
 
 
     $("#navigation .left_corner").live "click", () ->
@@ -476,16 +475,19 @@ $(document).ready ->
 
 
     $(document).ajaxComplete (event, xhr, settings) ->
+        $("#get_nearby_loading").hide()
+        $("#update_place_restaurants").fadeTo("fast",1)
+#        if $("#get_nearby_loading").hasClass("h")
+#            $("#get_nearby_loading").removeClass("h")
+#        else
+#            $("#get_nearby_loading").addClass("h")
+
 
 
         if settings.url.indexOf("ratings") > 0
             if xhr.responseText == "no_token"
                 cl "no token"
                 window.location = "/auth/facebook"
-
-
-
-#            window.location = "/auth/facebook"
 
         if settings.url.indexOf("search") > 0
             $("#get_nearby_loading").hide()

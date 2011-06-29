@@ -369,7 +369,9 @@
     search_bind();
     top_nav_bind();
     thumbnail_resizing();
-    columnizing();
+    if (window.location.href.indexOf("search") > 0 || window.location.href.indexOf("/items/location") > 0) {
+      columnizing();
+    }
     $("#navigation .left_corner").live("click", function() {
       return window.location = $(this).next().attr("href");
     });
@@ -472,6 +474,8 @@
       return $("#comment_wrapper #submit_block .text").text("Submitting");
     });
     $(document).ajaxComplete(function(event, xhr, settings) {
+      $("#get_nearby_loading").hide();
+      $("#update_place_restaurants").fadeTo("fast", 1);
       if (settings.url.indexOf("ratings") > 0) {
         if (xhr.responseText === "no_token") {
           cl("no token");
