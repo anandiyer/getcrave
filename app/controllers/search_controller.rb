@@ -3,6 +3,7 @@ class SearchController < ApplicationController
   
   def index
 
+    @page = (params[:page] || 1).to_i
 
     if (params[:q] && !params[:q].empty?)
       current_model = params[:search_restaurants] ? Restaurant : MenuItem
@@ -10,14 +11,14 @@ class SearchController < ApplicationController
       if (current_model == MenuItem)
         @search = Sunspot.search(current_model) do
           fulltext(params[:q])
-          paginate :page => 1, :per_page => ITEMS_PER_PAGE
+          paginate :page => @page, :per_page => ITEMS_PER_PAGE
           order_by :avg_rating, :desc
           order_by :num_ratings, :desc
         end
       else
         @search = Sunspot.search(current_model) do
           fulltext(params[:q])
-          paginate :page => 1, :per_page => ITEMS_PER_PAGE
+          paginate :page => @page, :per_page => ITEMS_PER_PAGE
         end
       end
       

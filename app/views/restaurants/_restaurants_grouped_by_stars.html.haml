@@ -9,4 +9,5 @@
   - @restaurants.each_with_index do |@restaurant, @counter|
     = render :partial => "restaurants/restaurant_nearby"
 
-= render :partial => "/show_more" if @restaurants.length > ITEMS_PER_PAGE
+  = will_paginate @restaurants
+-#= render :partial => "/show_more" if @restaurants.length > ITEMS_PER_PAGE

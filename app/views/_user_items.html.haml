@@ -1,7 +1,7 @@
 #reviews_wrapper_bloc_wrapper
 
   -#- @menu_item ||= MenuItem.find(params[:id])
-  - @current_menu_item_reviews = @user.menu_item_ratings.reverse
+  - @current_menu_item_reviews = @user.menu_item_ratings.reverse.paginate(:page => params[:page],:per_page => ITEMS_PER_PAGE)
 
   - @show_more_step = ITEMS_PER_PAGE
 
@@ -40,5 +40,5 @@
             .before_answer_block.gray
               = @mi_rating.menu_item_rating_helpfuls.count.to_s
               foodies found this helpful
-
+  =will_paginate(@current_menu_item_reviews)
 

@@ -14,14 +14,16 @@ class UsersController < ApplicationController
     if (@user_id)
       @conditions = "user_followings.user_id = #{@user_id}"
 
-      @menu_item_ratings = MenuItemRating.find(:all,
+      @menu_item_ratings = MenuItemRating.paginate(:all,
+      :page => params[:page],
+      :per_page => ITEMS_PER_PAGE,
       :joins => 'INNER JOIN user_followings ON user_followings.following_user_id = menu_item_ratings.user_id',
       :conditions => @conditions,
       :order => 'updated_at DESC')
       
-        respond_to do |format|
-          format.html
-        end
+      respond_to do |format|
+        format.html
+      end
     end
   end
 
@@ -58,7 +60,9 @@ class UsersController < ApplicationController
     @user_id = params[:id]
     @conditions = "user_id = #{@user_id}"
     
-    @user_saved_menu_items = UserSavedMenuItem.find(:all,
+    @user_saved_menu_items = UserSavedMenuItem.paginate(:all,
+      :page => params[:page],
+      :per_page => ITEMS_PER_PAGE,
       :conditions => @conditions,
       :joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = user_saved_menu_items.menu_item_id",
       :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, menu_item_avg_rating_count.count DESC")
