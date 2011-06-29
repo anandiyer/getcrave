@@ -474,11 +474,12 @@
                id: 'mainPnl',
                layout:'card',
                items: [
+                   {items:[detailPnl]},
                    {
                        title:'nearby',
                        iconCls:'nearBy',
                        items:[listPnl]
-                   },{title:'saved',handler:sessionHandler,iconCls:'saved',items:[savedPnl]},{title:'me',iconCls:'me',items:[profilePnl]},{items:[detailPnl]},{width:0,items:[placePnl]},{width:0,items:[newDishForm]},reviewFormPnl],
+                   },{title:'saved',handler:sessionHandler,iconCls:'saved',items:[savedPnl]},{title:'me',iconCls:'me',items:[profilePnl]},{width:0,items:[placePnl]},{width:0,items:[newDishForm]},reviewFormPnl],
                tabBar: {
                    dock: 'bottom',
                    ui: 'dark',
