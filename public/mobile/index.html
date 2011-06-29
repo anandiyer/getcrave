@@ -280,30 +280,21 @@
                }
                */
                if(target == "nearBy") {
-                   Ext.getCmp("meButton").active = false;
-                   Ext.getCmp("savedButton").active = false;
-                   Ext.getCmp("nearButton").active = true;
-                   Ext.getCmp('mainPnl').setActiveItem(listPnl);
                }
                if(target == "me") {
-                   Ext.getCmp('mainPnl').setActiveItem(profilePnl);
-                   Ext.getCmp("nearButton").active = false;
-                   Ext.getCmp("savedButton").active = false;
-                   Ext.getCmp("meButton").active = true;
-                   console.log(Ext.getCmp("bottomTabBar").add());
                }
+               console.log(b);
+               console.log(e);
                if(target == "saved") {
-                   Ext.getCmp('mainPnl').setActiveItem(savedPnl);
-                   Ext.getCmp("meButton").active = false;
-                   Ext.getCmp("nearButton").active = false;
-                   Ext.getCmp("savedButton").active = true;
-                   Ext.getCmp("bottomTabs").doLayout();
+//                   Ext.getCmp('mainPnl').setActiveItem(savedPnl);
                    if(urlPrefixSet) {
                        savedDishStore.proxy.url = urlPrefix+encodeURIComponent('/users/'+localStorage.getItem("uid")+'/saved.json');
                    } else {
                        savedDishStore.proxy.url = 'http://getcrave.com/users/'+localStorage.getItem("uid")+'/saved.json';
                    }
+                   console.log(savedDishStore.proxy.url);
                    savedDishStore.load(function() {
+                       console.log('dish store loaded');
                });
                }
            }
@@ -371,31 +362,6 @@
                    }
                ]
            });
-
-        bottomPanel = new Ext.TabPanel({
-            id: 'bottomTabs',
-            tabBar: {
-                dock: 'bottom',
-                ui: 'dark',
-                id: 'bottomTabBar',
-                activeItem:0,
-                layout: {
-                    pack: 'center'
-                },
-                listeners: {
-                    click: sessionHandler,
-                    element: 'body'
-                },
-                items:[
-                    {text:'nearby',id:'nearButton',active:true,handler:sessionHandler,iconCls: 'nearBy'},
-                    {text:'saved',id:'savedButton',active:false,handler:sessionHandler,iconCls: 'saved'},
-                    {text:'me',id:'meButton',active:false,handler:sessionHandler,iconCls: 'me'}/*,
-                    {text:'Login',id:'loginButton',handler:sessionHandler,iconCls:'user'},
-                    {text:'Logout',id:'logoutButton',handler:sessionHandler,hidden:true},
-                    {text:'New Restaurant',id:'newRestButton',handler:sessionHandler,hidden:true} */
-                ]
-            }
-        });
 
 
        //intentionally not using var to make this global
@@ -480,10 +446,14 @@
                        title:'nearby',
                        iconCls:'nearBy',
                        items:[listPnl]
-                   },{title:'saved',handler:sessionHandler,iconCls:'saved',items:[savedPnl]},{title:'me',iconCls:'me',items:[profilePnl]},{width:0,items:[placePnl]},{width:0,items:[newDishForm]},reviewFormPnl],
+                   },{title:'saved',iconCls:'saved',items:[savedPnl]},{title:'me',iconCls:'me',items:[profilePnl]},{width:0,items:[placePnl]},{width:0,items:[newDishForm]},reviewFormPnl],
                tabBar: {
                    dock: 'bottom',
                    ui: 'dark',
+                   listeners: {
+                       click: sessionHandler,
+                       element: 'body'
+                   },
                    layout: {
                        pack: 'center'
                    }
