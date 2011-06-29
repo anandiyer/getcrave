@@ -961,18 +961,11 @@ body.two-col.bp{
                         }
 
                         #image_thumbnail_middle_size{
-                            width:141px;
-                            height:141px;
-                            overflow:hidden;
+                            width: 141px;
+                            height: 141px;
+                            overflow: hidden;
                             @include border-radius(3px);
-                            /*border:1px solid $light_gray;*/
-
-
-                            img{
-                                /*@include opacity(.2);*/
-
-
-                            }
+                            cursor: pointer;
                         }
 
 

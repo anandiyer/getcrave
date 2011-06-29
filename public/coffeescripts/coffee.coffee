@@ -251,7 +251,7 @@ window.thumbnail_resizing = () ->
     if $("#image_thumbnail_middle_size").length > 0
 
         if parseInt($("#gallery #photos_counter").text()) > 0
-           cl source =  $("#gallery a").first().attr("href")
+           source =  $("#gallery a").first().attr("href")
            img = $("#image_thumbnail_middle_size img")
            $(img).attr("src", source)
 
@@ -267,6 +267,9 @@ window.thumbnail_resizing = () ->
                 attr = "width"
 
             $(img).attr("height", "140px").css("opacity", 1)
+            make_clickable_menu_item_image()
+
+
 
 
 
@@ -326,11 +329,26 @@ columnizing = () ->
     filter_bind()
 
 
-$(document).ready ->
+#avatar_click_to_plupload = () ->
+#    if $("#gallery").is(":hidden")
+##        cl "face to upload"
+#        $("#image_thumbnail_middle_size").click () ->
+#            $("#plupload").click()
 
+make_clickable_menu_item_image = () ->
+    cl "face to gallery"
+    $("#image_thumbnail_middle_size").click () ->
+        $("#gallery").find("a").first().click()
+
+$(document).ready ->
     search_bind()
     top_nav_bind()
     thumbnail_resizing()
+#    avatar_click_to_plupload()
+
+
+    window.pl_all($("form.uuid").attr("rel"), "image_thumbnail_middle_size")
+
 
     columnizing() if window.location.href.indexOf("search") > 0
 

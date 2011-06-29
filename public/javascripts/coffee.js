@@ -1,5 +1,5 @@
 (function() {
-  var after_send, before_send, close_labels_selectbox, columnizing, disher_review_wrapper, error, filter_bind, geo, search_bind, select_all_checked_labels, top_nav_bind;
+  var after_send, before_send, close_labels_selectbox, columnizing, disher_review_wrapper, error, filter_bind, geo, make_clickable_menu_item_image, search_bind, select_all_checked_labels, top_nav_bind;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   disher_review_wrapper = $("#reviews_wrapper");
   window.is_logged_in = function() {
@@ -264,7 +264,7 @@
     var img, source;
     if ($("#image_thumbnail_middle_size").length > 0) {
       if (parseInt($("#gallery #photos_counter").text()) > 0) {
-        cl(source = $("#gallery a").first().attr("href"));
+        source = $("#gallery a").first().attr("href");
         img = $("#image_thumbnail_middle_size img");
         $(img).attr("src", source);
         return $("#image_thumbnail_middle_size img").load(function() {
@@ -277,7 +277,8 @@
           } else {
             attr = "width";
           }
-          return $(img).attr("height", "140px").css("opacity", 1);
+          $(img).attr("height", "140px").css("opacity", 1);
+          return make_clickable_menu_item_image();
         });
       }
     }
@@ -354,10 +355,17 @@
     }
     return filter_bind();
   };
+  make_clickable_menu_item_image = function() {
+    cl("face to gallery");
+    return $("#image_thumbnail_middle_size").click(function() {
+      return $("#gallery").find("a").first().click();
+    });
+  };
   $(document).ready(function() {
     search_bind();
     top_nav_bind();
     thumbnail_resizing();
+    window.pl_all($("form.uuid").attr("rel"), "image_thumbnail_middle_size");
     if (window.location.href.indexOf("search") > 0) {
       columnizing();
     }

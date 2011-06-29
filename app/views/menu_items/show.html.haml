@@ -14,7 +14,7 @@
     #img_column
       #image_thumbnail_middle_size
         -#= image_tag(get_photo_url_4_thumbnail(params[:id]))
-        = image_tag "temp_image.png"
+        = image_tag "temp_image.png", :id =>"plupload_thumbnail"
 
       - visibility_class =  get_photos(params[:id]).count == 0 ? "himportant" : " "
       #icons_img_wrapper
