@@ -8,6 +8,50 @@
     <link rel="stylesheet"
      href="stylesheets/custom.css"
      type="text/css" />
+    <style type="text/css">
+        .reviewField {border:none;}
+        .starContainer {background-color:#ccc;  }
+        .starLabel {float:left;
+            height: 80px;
+            padding: 3px;
+            width: 100px;
+        }
+        .starRating {width: 200px;
+            float: left;
+            height: 80px;
+        }
+        .ratingOf0 {
+            background:url("../images/rating-my-0.png") no-repeat;
+        }
+        .ratingOf1 {
+            background:url("../images/rating-my-1.png") no-repeat;
+        }
+        .ratingOf2 {
+            background:url("../images/rating-my-2.png") no-repeat;
+        }
+        .ratingOf3 {
+            background:url("../images/rating-my-3.png") no-repeat;
+        }
+        .ratingOf4 {
+            background:url("../images/rating-my-4.png") no-repeat;
+        }
+        .ratingOf5 {
+            background:url("../images/rating-my-5.png") no-repeat;
+        }
+        .x-form .x-panel-body {
+            border:none;
+        }
+        .starcover {
+            height: 33px;
+            width: 37px;
+            float: left;
+            margin: 0 1px 0 0;
+            display:block;
+            border: none;
+            background: transparent;
+        }
+        .x-tab-pressed {border: solid 1px white;}
+    </style>
     <link rel="Fav Icon" href="../favicon.ico" type="image/vnd.microsoft.icon">
 
 	<script type="text/javascript">
@@ -128,9 +172,6 @@
                store: dishStore,
                id:'dishesNearbyList',
                scroll:'vertical',
-
-               width:350,
-               height:370,
                hideOnMaskTap: false,
                clearSectionOnDeactivate:true
            });
@@ -159,9 +200,22 @@
                        dishDisplay(response);
                    }
                });
-               Ext.getCmp('mainPnl').setActiveItem(1);
+               Ext.getCmp('mainPnl').setActiveItem(0);
                //Ext.getCmp('detailPnl').setLoading(false);
 
+           });
+
+           var savedList = new Ext.List({
+               itemTpl: dishTemplate,
+               itemSelector: '.adish',
+               singleSelect: true,
+               grouped: true,
+               indexBar: false,
+               store: savedDishStore,
+               id:'savedList',
+               scroll:'vertical',
+               hideOnMaskTap: false,
+               clearSectionOnDeactivate:true
            });
 
            var infoPnl = new Ext.Panel({
@@ -226,15 +280,27 @@
                }
                */
                if(target == "nearBy") {
-                   Ext.getCmp('mainPnl').setActiveItem(listPnl);
                }
                if(target == "me") {
-                   Ext.getCmp('mainPnl').setActiveItem(profilePnl);
+               }
+               console.log(b);
+               console.log(e);
+               if(target == "saved") {
+//                   Ext.getCmp('mainPnl').setActiveItem(savedPnl);
+                   if(urlPrefixSet) {
+                       savedDishStore.proxy.url = urlPrefix+encodeURIComponent('/users/'+localStorage.getItem("uid")+'/saved.json');
+                   } else {
+                       savedDishStore.proxy.url = 'http://getcrave.com/users/'+localStorage.getItem("uid")+'/saved.json';
+                   }
+                   console.log(savedDishStore.proxy.url);
+                   savedDishStore.load(function() {
+                       console.log('dish store loaded');
+               });
                }
            }
 
            var tapHandler = function(b,e) {
-               if(b.getText() == "Items") {
+               if(b.getText() == "Food") {
                    Ext.getCmp('listPnl').setActiveItem(dishList);
                    //Ext.getCmp("newRestButton").setVisible(false);
                }
@@ -245,7 +311,6 @@
            }
 
            var detailPnl = new Ext.Panel({
-               fullScreen: true,
                items: [infoPnl,reviewPnl],
                id: 'detailPnl',
                layout: {
@@ -270,7 +335,6 @@
            });
 
            var profilePnl = new Ext.Panel({
-               fullScreen: true,
                html:'<div class="fancyImage"><img class="logoutButton" src="../images/profile-cold-food.png"></div><div class="explanation">Rate & Save Dishes, Follow Foodies</div><a href="/auth/facebook" class="loginButton"></a>',
                id: 'profilePnl',
                scroll:'vertical',
@@ -285,28 +349,20 @@
                ]
            });
 
+           var savedPnl = new Ext.Panel({
+               id: 'savedPnl',
+               items: [savedList],
+               scroll:'vertical',
+               dockedItems:[
+                   {
+                       dock:'top',
+                       xtype:'toolbar',
+                       ui:'light',
+                       title:'Saved Items'
+                   }
+               ]
+           });
 
-        bottomPanel = new Ext.TabPanel({
-            tabBar: {
-                dock: 'bottom',
-                ui: 'dark',
-                layout: {
-                    pack: 'center'
-                },
-                listeners: {
-                    click: sessionHandler,
-                    element: 'body'
-                },
-                items:[
-                    {text:'nearby',id:'nearButton',handler:sessionHandler,iconCls: 'nearBy'},
-                    {text:'me',id:'meButton',handler:sessionHandler,iconCls: 'me'}/*,
-                    {text:'Login',id:'loginButton',handler:sessionHandler,iconCls:'user'},
-                    {text:'Logout',id:'logoutButton',handler:sessionHandler,hidden:true},
-                    {text:'New Restaurant',id:'newRestButton',handler:sessionHandler,hidden:true} */
-                ]
-            }
-        });
-           
 
        //intentionally not using var to make this global
        listPnl = new Ext.Panel({
@@ -315,6 +371,8 @@
            layout: {
                type: 'card'
            },
+           width:'100%',
+           height:'100%',
            cardSwitchAnimation: 'slide',
            direction:'horizontal',
            dockedItems: [
@@ -327,7 +385,7 @@
                    items:[
                        {xtype:'segmentedbutton',
                        items:[
-                           {text:'Items',id:'dishesButton',pressed:true, handler:tapHandler,ui:'round',width:'110'}, //,icon:'../images/dish-icon-ON.png',iconAlign:'left'
+                           {text:'Food',id:'dishesButton',pressed:true, handler:tapHandler,ui:'round',width:'110'}, //,icon:'../images/dish-icon-ON.png',iconAlign:'left'
                            {text:'Places',id:'placesButton', pressed:false, handler:tapHandler,ui:'round',width:'110'} //,icon:'../images/restaurant-icon-OFF.png',iconAlign:'left'
                        ]}
                    ]
@@ -338,7 +396,6 @@
            var placePnl = new Ext.Panel({
                id: 'placePnl',
                items: [restPnl,aRestaurantList],
-               fullscreen:true,
                layout: {
                    type: 'vbox',
                    align: 'start',
@@ -354,25 +411,85 @@
                    }
                ]
            });
+/*
+           mainPnl = new Ext.TabPanel({
+               id: 'mainPnl',
+               fullscreen:true,
+               cardSwitchAnimation: {
+                   type: 'slide',
+                   cover: true,
+                   direction:'horizontal'
+               },
+               defaults: {
+                   scroll: 'vertical'
+               },
+               items: [
+                   {title:'nearby',id:'nearButton',active:true,handler:sessionHandler,iconCls:'nearBy',
+                   items: [
+                       listPnl
+                   ]},
+                   {title:'saved',id:'savedButton',handler:sessionHandler,active:false,iconCls:'saved',items:[savedPnl]},
+                   {title:'me',id:'meButton',active:false,handler:sessionHandler,iconCls:'me',items:[profilePnl]},
+                       detailPnl,placePnl,newDishForm,reviewFormPnl
+               ]
+           });
+*/
 
-           var mainPnl = new Ext.Panel({
+           var mainPnl = new Ext.TabPanel({
                fullscreen: true,
                id: 'mainPnl',
-               items: [listPnl,detailPnl,placePnl,newDishForm,profilePnl],
-               layout: {
-                   type: 'card'
-               },
-               dockedItems: [{
+               layout:'card',
+               activeItem:1,
+               items: [
+                   {items:[detailPnl]},
+                   {
+                       title:'nearby',
+                       iconCls:'nearBy',
+                       items:[listPnl]
+                   },{title:'saved',iconCls:'saved',items:[savedPnl]},{title:'me',iconCls:'me',items:[profilePnl]},{width:0,items:[placePnl]},{width:0,items:[newDishForm]},reviewFormPnl],
+               tabBar: {
                    dock: 'bottom',
-                   items:[
-                           bottomPanel
-                   ]
-               }],
+                   ui: 'dark',
+                   listeners: {
+                       click: sessionHandler,
+                       element: 'body'
+                   },
+                   layout: {
+                       pack: 'center'
+                   }
+               },
                cardSwitchAnimation: 'slide',
                direction:'horizontal'
            });
 
            justLoggedIn();
+
+           $(".starcover").live("click",function(event) {
+               rating = event.currentTarget.id.toString().replace("id-star","");
+               var ratingClasses = new Array("ratingOf0","ratingOf1", "ratingOf2","ratingOf3","ratingOf4","ratingOf5");
+               for(i=0;i<ratingClasses.length;i++) {
+                   $(".starRating").removeClass(ratingClasses[i].toString());
+               }
+               if(rating==1) {
+                   $(".starRating").addClass("ratingOf1");
+               }
+               if(rating==2) {
+                   $(".starRating").addClass("ratingOf2");
+               }
+               if(rating==3) {
+                   $(".starRating").addClass("ratingOf3");
+               }
+               if(rating==4) {
+                   $(".starRating").addClass("ratingOf4");
+               }
+               if(rating==5) {
+                   $(".starRating").addClass("ratingOf5");
+               }
+               Ext.getCmp("menuRating").setValue(rating);
+               console.log(Ext.getCmp("menuRating").getValue());
+           });
+
+
    }
 
 });
@@ -385,6 +502,7 @@ $(".newDish").live("click",function() {
 $(".logoutButton").live("click", function() {
     localStorage.setItem("uid","");
 });
+
 
 </script>
 

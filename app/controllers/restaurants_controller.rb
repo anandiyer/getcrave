@@ -129,7 +129,7 @@ class RestaurantsController < ApplicationController
     @lat = lat.to_f
     @long = long.to_f
     @within = 1
-    @limit = ITEMS_PER_PAGE
+    @limit = 100
 
     if within && !within.empty?
       @within = within.to_f
@@ -141,9 +141,10 @@ class RestaurantsController < ApplicationController
     
     @conditions = "distance < #{@within}"
 
-    @restaurants = Restaurant.find(:all,
+    @restaurants = Restaurant.paginate(:all,
+      :page => params[:page],
+      :per_page => ITEMS_PER_PAGE,
       :origin => [@lat, @long],
-      :order=>'distance asc',
       :conditions => @conditions,
       :order => 'distance asc', 
       :limit => @limit)

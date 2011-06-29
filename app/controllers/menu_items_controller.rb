@@ -105,7 +105,7 @@ class MenuItemsController < ApplicationController
         :menu_item_avg_rating_count => {}, 
         :menu_item_ratings => {:include => :user},
         :menu_item_photos => {},
-        :menu_label_associations => {}, } ) }
+        :menu_label_associations => {:include => :menu_label}, } ) }
     end
   end
 
@@ -330,7 +330,7 @@ class MenuItemsController < ApplicationController
     @lat = params[:lat].to_f
     @long = params[:long].to_f
     @within = 0.5
-    @limit = ITEMS_PER_PAGE
+    @limit = 100
     
     if params[:limit] && !params[:limit].empty?
       @limit = params[:limit].to_i
@@ -347,7 +347,9 @@ class MenuItemsController < ApplicationController
     
     #FIXME - order by rating based on QS
     @origin = [@lat, @long]
-    @menu_items = MenuItem.find(:all, 
+    @menu_items = MenuItem.paginate(:all,
+         :page => params[:page],
+         :per_page => ITEMS_PER_PAGE,
          :origin => @origin,
          :conditions => @conditions,
          :joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id",

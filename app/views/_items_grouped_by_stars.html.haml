@@ -27,3 +27,7 @@
       = render :partial => "/menu_item_nearby"
     -else
       = render :partial => "/menu_item"
+  - if controller.action_name == "saved"
+    =will_paginate(@user_saved_menu_items)
+  - elsif controller.action_name != "index"
+    =will_paginate(@menu_items)

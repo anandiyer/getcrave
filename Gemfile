@@ -21,6 +21,7 @@ gem "acts_as_opengraph"
 
 gem "uuidtools"
 gem 'aws-s3', '0.6.2', :require => 'aws/s3'
+gem 'will_paginate'
 
 gem "fb_graph" #for fb share
 
