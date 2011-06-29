@@ -188,6 +188,8 @@ window.make_unfollow = () ->
     $(".submit.submit_wrapper").removeClass("follow").addClass("unfollow").find(".text").text("Unfollow")
 #    g_notice("Notification", "Now you are following!")
 window.gallery_init = () ->
+    cl "newq init"
+    $("#image_thumbnail_middle_size").unbind("click")
     $('#gallery a').lightBox
         overlayBgColor: '#000'
         overlayOpacity: 0.4
@@ -337,6 +339,9 @@ columnizing = () ->
 
 make_clickable_menu_item_image = () ->
     cl "face to gallery"
+
+    $("#image_thumbnail_middle_size").unbind("click")
+
     $("#image_thumbnail_middle_size").click () ->
         $("#gallery").find("a").first().click()
 
@@ -345,10 +350,6 @@ $(document).ready ->
     top_nav_bind()
     thumbnail_resizing()
 #    avatar_click_to_plupload()
-
-
-    window.pl_all($("form.uuid").attr("rel"), "image_thumbnail_middle_size")
-
 
     columnizing() if window.location.href.indexOf("search") > 0
 
