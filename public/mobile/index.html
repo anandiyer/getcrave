@@ -50,6 +50,7 @@
             border: none;
             background: transparent;
         }
+        .x-tab-pressed {border: solid 1px white;}
     </style>
     <link rel="Fav Icon" href="../favicon.ico" type="image/vnd.microsoft.icon">
 
@@ -171,9 +172,6 @@
                store: dishStore,
                id:'dishesNearbyList',
                scroll:'vertical',
-
-               width:350,
-               height:370,
                hideOnMaskTap: false,
                clearSectionOnDeactivate:true
            });
@@ -202,7 +200,7 @@
                        dishDisplay(response);
                    }
                });
-               Ext.getCmp('mainPnl').setActiveItem(1);
+               Ext.getCmp('mainPnl').setActiveItem(0);
                //Ext.getCmp('detailPnl').setLoading(false);
 
            });
@@ -282,13 +280,13 @@
                }
                */
                if(target == "nearBy") {
-                   Ext.getCmp('mainPnl').setActiveItem(listPnl);
                }
                if(target == "me") {
-                   Ext.getCmp('mainPnl').setActiveItem(profilePnl);
                }
+               console.log(b);
+               console.log(e);
                if(target == "saved") {
-                   Ext.getCmp('mainPnl').setActiveItem(savedPnl);
+//                   Ext.getCmp('mainPnl').setActiveItem(savedPnl);
                    if(urlPrefixSet) {
                        savedDishStore.proxy.url = urlPrefix+encodeURIComponent('/users/'+localStorage.getItem("uid")+'/saved.json');
                    } else {
@@ -296,7 +294,7 @@
                    }
                    console.log(savedDishStore.proxy.url);
                    savedDishStore.load(function() {
-                   console.log(savedDishStore);
+                       console.log('dish store loaded');
                });
                }
            }
@@ -313,7 +311,6 @@
            }
 
            var detailPnl = new Ext.Panel({
-               fullScreen: true,
                items: [infoPnl,reviewPnl],
                id: 'detailPnl',
                layout: {
@@ -338,7 +335,6 @@
            });
 
            var profilePnl = new Ext.Panel({
-               fullScreen: true,
                html:'<div class="fancyImage"><img class="logoutButton" src="../images/profile-cold-food.png"></div><div class="explanation">Rate & Save Dishes, Follow Foodies</div><a href="/auth/facebook" class="loginButton"></a>',
                id: 'profilePnl',
                scroll:'vertical',
@@ -354,7 +350,6 @@
            });
 
            var savedPnl = new Ext.Panel({
-               fullScreen: true,
                id: 'savedPnl',
                items: [savedList],
                scroll:'vertical',
@@ -368,28 +363,6 @@
                ]
            });
 
-        bottomPanel = new Ext.TabPanel({
-            tabBar: {
-                dock: 'bottom',
-                ui: 'dark',
-                layout: {
-                    pack: 'center'
-                },
-                listeners: {
-                    click: sessionHandler,
-                    element: 'body'
-                },
-                items:[
-                    {text:'nearby',id:'nearButton',handler:sessionHandler,iconCls: 'nearBy'},
-                    {text:'saved',id:'savedButton',handler:sessionHandler,iconCls: 'saved'},
-                    {text:'me',id:'meButton',handler:sessionHandler,iconCls: 'me'}/*,
-                    {text:'Login',id:'loginButton',handler:sessionHandler,iconCls:'user'},
-                    {text:'Logout',id:'logoutButton',handler:sessionHandler,hidden:true},
-                    {text:'New Restaurant',id:'newRestButton',handler:sessionHandler,hidden:true} */
-                ]
-            }
-        });
-           
 
        //intentionally not using var to make this global
        listPnl = new Ext.Panel({
@@ -398,6 +371,8 @@
            layout: {
                type: 'card'
            },
+           width:'100%',
+           height:'100%',
            cardSwitchAnimation: 'slide',
            direction:'horizontal',
            dockedItems: [
@@ -421,7 +396,6 @@
            var placePnl = new Ext.Panel({
                id: 'placePnl',
                items: [restPnl,aRestaurantList],
-               fullscreen:true,
                layout: {
                    type: 'vbox',
                    align: 'start',
@@ -437,20 +411,53 @@
                    }
                ]
            });
+/*
+           mainPnl = new Ext.TabPanel({
+               id: 'mainPnl',
+               fullscreen:true,
+               cardSwitchAnimation: {
+                   type: 'slide',
+                   cover: true,
+                   direction:'horizontal'
+               },
+               defaults: {
+                   scroll: 'vertical'
+               },
+               items: [
+                   {title:'nearby',id:'nearButton',active:true,handler:sessionHandler,iconCls:'nearBy',
+                   items: [
+                       listPnl
+                   ]},
+                   {title:'saved',id:'savedButton',handler:sessionHandler,active:false,iconCls:'saved',items:[savedPnl]},
+                   {title:'me',id:'meButton',active:false,handler:sessionHandler,iconCls:'me',items:[profilePnl]},
+                       detailPnl,placePnl,newDishForm,reviewFormPnl
+               ]
+           });
+*/
 
-           var mainPnl = new Ext.Panel({
+           var mainPnl = new Ext.TabPanel({
                fullscreen: true,
                id: 'mainPnl',
-               items: [listPnl,detailPnl,placePnl,newDishForm,profilePnl,reviewFormPnl,savedPnl],
-               layout: {
-                   type: 'card'
-               },
-               dockedItems: [{
+               layout:'card',
+               activeItem:1,
+               items: [
+                   {items:[detailPnl]},
+                   {
+                       title:'nearby',
+                       iconCls:'nearBy',
+                       items:[listPnl]
+                   },{title:'saved',iconCls:'saved',items:[savedPnl]},{title:'me',iconCls:'me',items:[profilePnl]},{width:0,items:[placePnl]},{width:0,items:[newDishForm]},reviewFormPnl],
+               tabBar: {
                    dock: 'bottom',
-                   items:[
-                           bottomPanel
-                   ]
-               }],
+                   ui: 'dark',
+                   listeners: {
+                       click: sessionHandler,
+                       element: 'body'
+                   },
+                   layout: {
+                       pack: 'center'
+                   }
+               },
                cardSwitchAnimation: 'slide',
                direction:'horizontal'
            });
