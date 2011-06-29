@@ -200,7 +200,7 @@
                        dishDisplay(response);
                    }
                });
-               Ext.getCmp('mainPnl').setActiveItem(1);
+               Ext.getCmp('mainPnl').setActiveItem(0);
                //Ext.getCmp('detailPnl').setLoading(false);
 
            });
@@ -378,7 +378,7 @@
                 dock: 'bottom',
                 ui: 'dark',
                 id: 'bottomTabBar',
-                activeItem:1,
+                activeItem:0,
                 layout: {
                     pack: 'center'
                 },
@@ -473,6 +473,7 @@
                fullscreen: true,
                id: 'mainPnl',
                layout:'card',
+               activeItem:1,
                items: [
                    {items:[detailPnl]},
                    {
