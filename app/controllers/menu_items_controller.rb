@@ -65,6 +65,31 @@ class MenuItemsController < ApplicationController
       @restaurant.id])
 
   end
+  
+  def food_by_foursquare_venue
+
+    @foursquare_venue_id = params[:foursquare_venue_id]
+    
+    @conditions = "restaurants.foursquare_venue_id = \'#{@foursquare_venue_id}\'"
+    
+    @menu_item = MenuItem.find(:first, 
+      :conditions => @conditions, 
+      :joins => " INNER JOIN restaurants ON restaurants.id = menu_items.restaurant_ID LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id",
+      :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, menu_item_avg_rating_count.count DESC")
+
+    if (@menu_item)
+      respond_to do |format|
+        format.xml  { render :xml => @menu_item.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count])}
+        format.json  { render :json => @menu_item.to_json(:include => [:restaurant, :menu_item_avg_rating_count]) }
+      end
+    else
+      respond_to do |format|
+        format.xml  { head :ok }
+        format.json  { head :ok }
+      end
+    end
+    
+  end
 
   # GET /menu_items
   # GET /menu_items.xml
