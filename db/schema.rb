@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110630044000) do
+ActiveRecord::Schema.define(:version => 20110630222642) do
 
   create_table "alpha_testers", :force => true do |t|
     t.integer  "facebook_id", :limit => 8
@@ -198,6 +198,7 @@ ActiveRecord::Schema.define(:version => 20110630044000) do
     t.string   "user_profile_pic_url"
     t.integer  "user_ratings_count"
     t.string   "email"
+    t.string   "telephone"
   end
 
 end
