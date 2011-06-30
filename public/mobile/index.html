@@ -177,7 +177,14 @@
            });
 
            dishList.on('itemtap', function(dataView, index, item, e) {
-               record = dataView.store.data.items[index];
+//               console.log(item);
+//               console.log(e); //.children[1].childres[0].firstChild.data
+//               console.log($(".dishname", item).text());
+//               console.log(dishList.getRecord(dishList.getNode(item)));
+               thisId = dishStore.findRecord("name",$(".dishname", item).text()).data.id;
+
+               //this is returning the view index, not unsorted store indes...
+//               record = dataView.store.data.items[index];
                /*
                 if(Ext.getCmp('carouselPnl')) {
                     Ext.getCmp('carouselPnl').destroy();
@@ -192,7 +199,7 @@
                });
                */
                Ext.Ajax.request({
-                   url: (urlPrefix+'/items/'+record.data.id+'.json'),
+                   url: (urlPrefix+'/items/'+thisId+'.json'),
                    reader: {
                         type: 'json'
                    },
