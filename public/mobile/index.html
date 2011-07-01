@@ -11,12 +11,14 @@
     <style type="text/css">
         .reviewField {border:none;}
         .starContainer {background-color:#ccc;  }
-        .starLabel {float:left;
+        .starLabel {
+            float:left;
             height: 80px;
             padding: 3px;
             width: 100px;
         }
-        .starRating {width: 200px;
+        .starRating {
+            width: 200px;
             float: left;
             height: 80px;
         }
@@ -316,6 +318,10 @@
                    //Ext.getCmp("newRestButton").setVisible(true);
                }
            }
+           var filtersHandler = function(b,e) {
+               Ext.getCmp('mainPnl').setActiveItem(filterListPnl);
+               labelString = "";
+           }
 
            var detailPnl = new Ext.Panel({
                items: [infoPnl,reviewPnl],
@@ -394,7 +400,12 @@
                        items:[
                            {text:'Food',id:'dishesButton',pressed:true, handler:tapHandler,ui:'round',width:'110'}, //,icon:'../images/dish-icon-ON.png',iconAlign:'left'
                            {text:'Places',id:'placesButton', pressed:false, handler:tapHandler,ui:'round',width:'110'} //,icon:'../images/restaurant-icon-OFF.png',iconAlign:'left'
-                       ]}
+                       ]},
+                       {
+                           xtype:'button',
+                           iconCls:'filtersButton',
+                           handler:filtersHandler
+                       }
                    ]
                },searchForm
            ]
@@ -452,8 +463,9 @@
                    {
                        title:'nearby',
                        iconCls:'nearBy',
+                       id:'listPnlTab',
                        items:[listPnl]
-                   },{title:'saved',iconCls:'saved',items:[savedPnl]},{title:'me',iconCls:'me',items:[profilePnl]},{width:0,items:[placePnl]},{width:0,items:[newDishForm]},reviewFormPnl],
+                   },{title:'saved',iconCls:'saved',items:[savedPnl]},{title:'me',iconCls:'me',items:[profilePnl]},{width:0,items:[placePnl]},{width:0,items:[newDishForm]},{width:0,items:[reviewFormPnl   ]},{width:0,items:[filterListPnl]}],
                tabBar: {
                    dock: 'bottom',
                    ui: 'dark',

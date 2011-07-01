@@ -1,3 +1,82 @@
+Ext.regModel('Filters', {
+    fields: ['label']
+});
+var filterStore = new Ext.data.JsonStore({
+    model  : 'Filters',
+    sorters: 'label',
+
+    getGroupString : function(record) {
+        return record.get('label')[0];
+    },
+
+    data: [
+        {label: 'Gluten Free'},
+        {label: 'Vegetarian'},
+        {label: 'Vegan'},
+        {label: 'High Protein'},
+        {label: 'Paleo friendly'},
+        {label: 'Sugar Free'},
+        {label: 'Low Fat'},
+        {label: 'Low Carb'},
+        {label: 'Organic'},
+        {label: 'Meat Lovers'},
+        {label: 'Bang for your Buck'},
+        {label: 'Spicy'},
+        {label: 'Pescatarian Friendly'},
+        {label: 'Late Night Eats'},
+        {label: 'Dairy Free'},
+        {label: 'Atkins Friendly'},
+        {label: 'Four Hour Body (4HB)'}
+    ]
+});
+var filterList = new Ext.List({
+    width:'100%',
+    height:'100%',
+    itemTpl : '<span class="labelname">{label}</span>',
+    grouped : false,
+    indexBar: false,
+
+    store: filterStore
+});
+labelString = "";
+filterList.on('itemtap', function(dataView, index, item, e) {
+    thisLabel = $(".labelname", item).text();
+    labelString += " "+thisLabel;
+    //alert(labelString);
+});
+//when youpress search, make json call to search results, repopulate listPnl store
+//add distance control button
+//add listener to button, add distance parameter to search string
+
+var searchHandler = function(b,e) {
+    Ext.getCmp('mainPnl').setActiveItem(1);
+    dishSearchStore.proxy.url = urlPrefix+'/items/search.json?q='+labelString;
+    dishSearchStore.load();
+    console.log(dishSearchStore.proxy.url);
+    Ext.getCmp('listPnl').setActiveItem(searchPnl);
+    Ext.getCmp('searchPnl').setActiveItem(dishSearchList);
+}
+var filterListPnl = new Ext.Panel({
+    items: [filterList],
+//    html: 'hello there',
+    id: 'filterListPnl',
+    scroll:'vertical',
+    dockedItems:[
+        {
+            dock:'top',
+            xtype:'toolbar',
+            ui:'light',
+            title:'Filters',
+             layout: {
+                 type: 'hbox',
+                 pack:'justify'
+             },
+            items:[{text:'Cancel',ui:'normal', handler:backHandler},{text:'Search',ui:'normal', handler:searchHandler}]
+        }
+    ]
+});
+
+
 dishTemplate = new Ext.XTemplate.from('dishesTemplate',
     {distDisplay: function(miles) {
         feet = Math.round(miles * 5280);
