@@ -5,6 +5,18 @@ class UsersController < ApplicationController
 
   before_filter :get_selected_user, :only => [:saved, :show, :followers, :following]
 
+  # given a provider (facebook/twitter/foursquare) uid, get that user's crave uid
+  def get_uid
+    @conditions = "provider = \'#{params[:provider]}\' AND uid = \'#{params[:uid]}\'"
+    @auth = Authorization.find(:first, :conditions => @conditions)
+    
+    respond_to do |format|
+      format.xml  { render :xml => @auth.to_xml( :include => :user ) }
+      format.json  { render :json => @auth.to_json( :include => :user ) }
+    end
+  end
+
+
   def following_reviews
     # 1. find all the people this user is following
     # 2. find all those users reviews ordered reverse chronologically

@@ -45,6 +45,9 @@ Crave::Application.routes.draw do
       get "saved", "following", "followers", "following_reviews"
     end
 
+    collection do
+      get "get_uid"
+    end
     resources :ratings, :as => "menu_item_ratings", :controller => "menu_item_ratings"
   end
   

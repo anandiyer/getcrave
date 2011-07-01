@@ -1,6 +1,9 @@
-CONFIG = YAML.load_file("#{RAILS_ROOT}/config/facebook.yml")[RAILS_ENV]
-APP_ID = CONFIG['app_id']
-APP_SECRET = CONFIG['app_secret']
+FB_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/facebook.yml")[RAILS_ENV]
+FS_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/foursquare.yml")[RAILS_ENV]
+FB_APP_ID = FB_CONFIG['app_id']
+FB_APP_SECRET = FB_CONFIG['app_secret']
+FS_APP_ID = FS_CONFIG['app_id']
+FS_APP_SECRET = FS_CONFIG['app_secret']
 
 # OmniAuth.config.full_host = "http://localhost"
 
@@ -10,10 +13,9 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   #  provider :facebook, APP_ID, APP_SECRET, {:client_options => {:ssl => {:ca_file => "/etc/ssl/certs"}}}
   #end
 
-  provider :facebook,
-    APP_ID,
-    APP_SECRET,
-    { :display => 'page',
-      :client_options => {:ssl => {:ca_file => "/usr/lib/ssl/certs/ca-certificates.crt"}}}
+  provider :facebook, FB_APP_ID, FB_APP_SECRET,
+    { :display => 'page', :client_options => {:ssl => {:ca_file => "/usr/lib/ssl/certs/ca-certificates.crt"}}}
+      
+  provider :foursquare, FS_APP_ID, FS_APP_SECRET
 end
 

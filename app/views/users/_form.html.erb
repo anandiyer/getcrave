@@ -19,7 +19,16 @@
     <%= f.label :telephone %>
     <%= f.text_field :telephone %> <br />
   </div>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>
+
+  <br />
+  <p>
+	<% if !Authorization.where(:user_id => @user.id, :provider => 'foursquare').exists? %>
+		<a href="/auth/foursquare"><img src="/images/signinwith-foursquare.png" /></a>
+	<% end %>
+  </p>
 <% end %>
