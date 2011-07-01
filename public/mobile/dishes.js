@@ -34,6 +34,8 @@ var filterList = new Ext.List({
     height:'100%',
     itemTpl : '<span class="labelname">{label}</span>',
     grouped : false,
+    multiSelect: true,
+    simpleSelect:true,
     indexBar: false,
 
     store: filterStore
@@ -60,6 +62,11 @@ var filterListPnl = new Ext.Panel({
     items: [filterList],
 //    html: 'hello there',
     id: 'filterListPnl',
+    layout: {
+        type: 'card'
+    },
+    width:'100%',
+    height:'100%',
     scroll:'vertical',
     dockedItems:[
         {
