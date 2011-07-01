@@ -362,3 +362,5 @@ line-height: 12px;
 text-rendering: optimizeLegibility;
 -webkit-font-smoothing: antialiased;
 }
+
+.filtersButton {background-image:url('../../images/filter-icon.png');}
