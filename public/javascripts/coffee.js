@@ -475,16 +475,17 @@
     });
     $(document).ajaxComplete(function(event, xhr, settings) {
       var new_limits;
-      cl("ajax complete");
+      cl("ajax complete 111");
+      cl(settings.url);
       $("#get_nearby_loading").hide();
       $("#update_place_restaurants").fadeTo("fast", 1);
       $("#comment_wrapper").removeClass("sending");
       $("#comment_wrapper #submit_block .text").text("Submit");
-      if (settings.url.indexOf("show_reviews") > 0) {
-        cl("show_reviews");
+      if (settings.url.indexOf("show_reviews") > 0 || settings.url.indexOf("&restaurant_id") > 0) {
+        cl("show_reviews or menu items index");
         new_limits = $("#show_more_button").data("next");
         $("#show_more_button").attr("data-next", new_limits * 2);
-        $("#update_place").html(xhr.responseText);
+        $('div[id^="update_place"]').html(xhr.responseText);
       }
       if (settings.url.indexOf("ratings") > 0) {
         if (xhr.responseText === "no_token") {
@@ -588,8 +589,11 @@
         cl(619);
         obj = $("#update_place");
         path = "/items/" + id_of_menu_item + "/show_reviews?limit=" + new_limits;
+      } else if ($(".menu_items_index").length > 0) {
+        cl(644);
+        obj = $("#update_place");
+        path = "/items" + "?limit=" + new_limits + "&&restaurant_id=" + $("#current_info_wrapper").attr("data-restaudat_id");
       }
-      cl(path);
       $.ajax({
         url: path
       });

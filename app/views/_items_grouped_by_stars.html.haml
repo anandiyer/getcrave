@@ -4,6 +4,7 @@
   - @menu_items = @results
   #results
     #{@results.length} result for #{params[:q]} in #{params[:where][:nearby]}
+
 #reviews_wrapper_bloc_wrapper
   - if !@menu_items && !@menu_items.first().menu_item_avg_rating_count.nil?
     - group_star = @menu_items.first().menu_item_avg_rating_count.avg_rating
@@ -27,7 +28,8 @@
       = render :partial => "/menu_item_nearby"
     -else
       = render :partial => "/menu_item"
-  - if controller.action_name == "saved"
-    =will_paginate(@user_saved_menu_items)
-  - elsif controller.action_name != "index"
-    =will_paginate(@menu_items)
+
+- begin
+  = render :partial => "/show_more" if @menu_items_request_all_items.count > @menu_items.count
+- rescue
+

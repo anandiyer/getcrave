@@ -53,14 +53,29 @@ class MenuItemsController < ApplicationController
   end
 
   def params_4_index_and_show_menu_items_of_place
-     # FIXME - handle restaurant = nil case
+    # FIXME - handle restaurant = nil case
 
-    @restaurant = @restaurant ? @restaurant : Restaurant.find(params[:place_name])
-    @menu_items = MenuItem.find_by_sql(["SELECT menu_items.* FROM menu_items
-      LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id
-      WHERE menu_items.restaurant_id = ?
-      ORDER BY (menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, LOWER(menu_items.name) ASC", 
-      @restaurant.id])
+#    @restaurant = @restaurant ? @restaurant : Restaurant.find(params[:place_name])
+    if !@restaurant  && params[:place_name]
+      @restaurant = Restaurant.find(params[:place_name])
+    elsif params[:restaurant_id]
+      @restaurant = Restaurant.find(params[:restaurant_id])
+    end
+
+
+#      @restaurant = @restaurant ? @restaurant : Restaurant.find(params[:place_name])
+
+
+
+    #TODO:better will be change to amth like this MenuItem.all.joins().order to get Arel object
+#    @menu_items = MenuItem.find_by_sql(["SELECT menu_items.* FROM menu_items
+#      LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id
+#      WHERE menu_items.restaurant_id = ?
+#      ORDER BY (menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, LOWER(menu_items.name) ASC LIMIT ?",
+#      @restaurant.id, params[:limit] ? params[:limit] : ITEMS_PER_PAGE])
+
+    @menu_items_request_all_items = MenuItem.where(:restaurant_id => @restaurant.id).joins("LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id").order("(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, LOWER(menu_items.name) ASC")
+    @menu_items = @menu_items_request_all_items.page(params[:page] ? params[:page] : 1).per(params[:limit] ? params[:limit] : ITEMS_PER_PAGE)
 
   end
 
@@ -68,7 +83,7 @@ class MenuItemsController < ApplicationController
   # GET /menu_items.xml
   def index
     # Assuming that no menu has more than 500 items - this is the MAX
-    @limit = 500
+    @limit = ITEMS_PER_PAGE
 
     if params[:limit] && !params[:limit].empty?
       @limit = params[:limit].to_i
@@ -80,6 +95,7 @@ class MenuItemsController < ApplicationController
       format.html # location.html.haml
       format.xml  { render :xml => @menu_items.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count])}
       format.json  { render :json => @menu_items.to_json(:include => [:restaurant, :menu_item_avg_rating_count]) }
+      format.js  { render :partial => "/items_grouped_by_stars" }
     end
     
     # Now find the menu items for each of those restaurants
