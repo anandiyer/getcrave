@@ -95,7 +95,7 @@ class MenuItemsController < ApplicationController
     params_4_show_n_show_reviews
 
     respond_to do |format|
-      format.html # _unused_show.html.haml
+      format.html # show.html.haml
       format.xml  { render :xml => @menu_item.to_xml( :include => {:restaurant => {}, 
         :menu_item_avg_rating_count => {}, 
         :menu_item_ratings => {:include => :user},
@@ -321,8 +321,7 @@ class MenuItemsController < ApplicationController
       :limit => ITEMS_PER_PAGE)
 
     #FIXME - need to get all the menu item attributes like ratings, photos etc.
-    @menu_item = MenuItem.find(params[:id],
-      :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings])
+    @menu_item = MenuItem.find(params[:id], :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings])
 
   end
 

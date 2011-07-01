@@ -468,14 +468,24 @@
       $("#update_place_restaurants").fadeTo("slow", .5);
       return $("#toggled_filters input").attr('disabled', "true");
     });
-    $("#comment_wrapper").ajaxStart(function() {
-      cl("ajax start");
+    $("form#new_menu_item_rating").ajaxStart(function() {
+      cl("ajax start comment_wrapper");
       $("#comment_wrapper").addClass("sending");
       return $("#comment_wrapper #submit_block .text").text("Submitting");
     });
     $(document).ajaxComplete(function(event, xhr, settings) {
+      var new_limits;
+      cl("ajax complete");
       $("#get_nearby_loading").hide();
       $("#update_place_restaurants").fadeTo("fast", 1);
+      $("#comment_wrapper").removeClass("sending");
+      $("#comment_wrapper #submit_block .text").text("Submit");
+      if (settings.url.indexOf("show_reviews") > 0) {
+        cl("show_reviews");
+        new_limits = $("#show_more_button").data("next");
+        $("#show_more_button").attr("data-next", new_limits * 2);
+        $("#update_place").html(xhr.responseText);
+      }
       if (settings.url.indexOf("ratings") > 0) {
         if (xhr.responseText === "no_token") {
           cl("no token");
@@ -550,35 +560,40 @@
     });
     $("#reviews_wrapper #show_more_button").live('click', function(e) {
       var id_of_menu_item, lat, long, new_limits, obj, path;
-      id_of_menu_item = $(this).data("itemid");
+      cl("11111111111");
+      cl(id_of_menu_item = $(this).data("itemid"));
       cl(new_limits = $(this).data("next"));
+      cl("11111111111");
       if ($(".menu_items_location").length > 0 || $(".restaurants_index").length > 0) {
+        cl(594);
         lat = $("body").data("latitude");
         long = $("body").data("longitude");
         obj = $("#update_place_restaurants");
         if ($(".menu_items_location").length > 0) {
+          cl(601);
           path = "/menu_items/show_menu_items_nearby?lat=" + lat + "&long=" + long + "&limit=" + new_limits;
         } else {
+          cl(604);
           path = "/restaurants/show_restaurants_nearby?lat=" + lat + "&long=" + long + "&limit=" + new_limits;
         }
       } else if ($(".menu_items_location").length > 0) {
         obj = $("#reviews_wrapper #update_place");
         path = "/menu_items/" + id_of_menu_item + "/show_reviews?limit=" + new_limits;
+        cl(612);
       } else if ($(".user_saved_menu_items_index").length > 0) {
         obj = $("#update_place_restaurants");
         path = "/saved/show_menu_items_saved?limit=" + new_limits;
+        cl(617);
+      } else if ($(".menu_items").length > 0) {
+        cl(619);
+        obj = $("#update_place");
+        path = "/items/" + id_of_menu_item + "/show_reviews?limit=" + new_limits;
       }
-      return $.ajax({
-        url: path,
-        before_send: function() {
-          return before_fade(obj);
-        },
-        success: function(html) {
-          after_send(obj, html);
-          $("#show_more_button").attr("data-next", new_limits * 2);
-          return set_gmap(13);
-        }
+      cl(path);
+      $.ajax({
+        url: path
       });
+      return e.preventDefault();
     });
     return $("input[type=text]").focus(function() {
       return $(this).select();
