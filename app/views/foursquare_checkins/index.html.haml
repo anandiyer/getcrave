@@ -1,0 +1,23 @@
+%h1 Listing foursquare_checkins
+
+%table
+  %tr
+    %th Venue
+    %th User
+    %th Checkin
+    %th
+    %th
+    %th
+
+  - @foursquare_checkins.each do |foursquare_checkin|
+    %tr
+      %td= foursquare_checkin.venue_id
+      %td= foursquare_checkin.user_id
+      %td= foursquare_checkin.checkin_id
+      %td= link_to 'Show', foursquare_checkin
+      %td= link_to 'Edit', edit_foursquare_checkin_path(foursquare_checkin)
+      %td= link_to 'Destroy', foursquare_checkin, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Foursquare checkin', new_foursquare_checkin_path
