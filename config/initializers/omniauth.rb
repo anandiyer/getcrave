@@ -16,6 +16,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :facebook, FB_APP_ID, FB_APP_SECRET,
     { :display => 'page', :client_options => {:ssl => {:ca_file => "/usr/lib/ssl/certs/ca-certificates.crt"}}}
       
-  provider :foursquare, FS_APP_ID, FS_APP_SECRET
+  provider :foursquare, FS_APP_ID, FS_APP_SECRET,
+    { :display => 'page', :client_options => {:ssl => {:ca_file => "/usr/lib/ssl/certs/ca-certificates.crt"}}}
 end
 

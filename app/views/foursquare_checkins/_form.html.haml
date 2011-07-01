@@ -1,0 +1,19 @@
+= form_for @foursquare_checkin do |f|
+  -if @foursquare_checkin.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@foursquare_checkin.errors.count, "error")} prohibited this foursquare_checkin from being saved:"
+      %ul
+        - @foursquare_checkin.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :venue_id
+    = f.text_field :venue_id
+  .field
+    = f.label :user_id
+    = f.text_field :user_id
+  .field
+    = f.label :checkin_id
+    = f.text_field :checkin_id
+  .actions
+    = f.submit 'Save'

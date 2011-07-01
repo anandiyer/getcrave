@@ -1,4 +1,6 @@
 Crave::Application.routes.draw do 
+  resources :foursquare_checkins
+
   resources :alpha_testers
 
   resources :following, :as => "user_followings", :controller => "user_followings"

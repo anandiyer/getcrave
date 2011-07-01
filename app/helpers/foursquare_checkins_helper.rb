@@ -1,0 +1,2 @@
+module FoursquareCheckinsHelper
+end

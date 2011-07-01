@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Venue:
+  = @foursquare_checkin.venue_id
+%p
+  %b User:
+  = @foursquare_checkin.user_id
+%p
+  %b Checkin:
+  = @foursquare_checkin.checkin_id
+
+= link_to 'Edit', edit_foursquare_checkin_path(@foursquare_checkin)
+\|
+= link_to 'Back', foursquare_checkins_path
