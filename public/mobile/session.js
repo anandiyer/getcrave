@@ -1,7 +1,6 @@
 
 function justLoggedIn() {
     myUID = localStorage.getItem("uid");
-    alert(myUID);
     if(myUID!="" && myUID!=null) {
         console.log('found');
         $(".loginButton").css("display","none");
