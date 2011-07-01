@@ -1008,7 +1008,6 @@ body.two-col.bp{
                             background: url(/images/sprites/button-sprite.png) no-repeat 0 -491px;
                         }
 
-
                         .follow_button.unfollow:hover{
                             background: url(/images/sprites/button-sprite.png) no-repeat -95px -523px;
                         }
@@ -1091,8 +1090,6 @@ body.two-col.bp{
                 border-top: none;
             }
 
-
-
             #reviews_wrapper.restaurants_index .restaurant_menu_item_wrapper.restaurants_index:first-of-type{
                 border-top: none !important;
 
@@ -1104,6 +1101,8 @@ body.two-col.bp{
             #reviews_wrapper{
                 border-top: 3px solid $light_gray;
                 padding:17px 0 0 8px;
+
+
 
 
 
@@ -1376,8 +1375,7 @@ body.two-col.bp{
                 }
 
                 #reviews_wrapper_bloc_wrapper{
-                    @include clearfix;
-					overflow: visible;
+                    @include container;
                 }
                 .reviews_wrapper_block:first-of-type{
                     border-top: 1px solid $light_gray;
