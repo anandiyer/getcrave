@@ -2,20 +2,31 @@ class SessionsController < ApplicationController
   def create
     auth = request.env["omniauth.auth"]
     unless @auth = Authorization.find_from_hash(auth)
+      
       # Create a new user or add an auth to existing user, depending on
       # whether there is already a user signed in.
+      if (auth['provider'] == 'facebook')
+        @authuid = auth['uid'].to_i
+        @conditions = " facebook_id = #{@authuid}"
+        @tester = AlphaTester.find(:first, :conditions => @conditions)
 
-      @authuid = auth['uid'].to_i
-      @conditions = " facebook_id = #{@authuid}"
-      @tester = AlphaTester.find(:first, :conditions => @conditions)
-
-      if (!@tester || !@tester.authorized)
-        redirect_to '/request.html'
-        return
+        if (!@tester || !@tester.authorized)
+          redirect_to '/request.html'
+          return
+        end
+        
+        # TODO: we shouldn't do this till after the auth has been created
+        # oh well...
+        Notifier.signup_email(@auth.user).deliver
+        
+      elsif (auth['provider'] == 'foursquare')
+        # Let's save this user's phone number if available
+        current_user.telephone = auth['user_info']['phone'] 
+        current_user.save
       end
       
       @auth = Authorization.create_from_hash(auth, current_user)
-      Notifier.signup_email(@auth.user).deliver
+
     end
     # Log the authorizing user in.
     self.current_user = @auth.user
