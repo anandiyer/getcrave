@@ -1,5 +1,5 @@
 class MenuItemRatingsController < ApplicationController
-  before_filter :get_menu_item, :check_auth_fb
+  before_filter :get_menu_item, :check_auth_fb, :get_user
   
   # GET /menu_items_ratings/avg_rating
   def avg_rating
@@ -21,7 +21,9 @@ class MenuItemRatingsController < ApplicationController
    
     if (@menu_item)
       @menu_item_ratings = @menu_item.menu_item_ratings.find(:all)
-    else 
+    elsif (@user)
+      @menu_item_ratings = @user.menu_item_ratings.paginate(:all,:page => params[:page],:per_page => ITEMS_PER_PAGE)
+    else
       @menu_item_ratings = MenuItemRating.all
     end
 
@@ -137,6 +139,10 @@ class MenuItemRatingsController < ApplicationController
   private
     def get_menu_item
       @menu_item = MenuItem.find(params[:menu_item_id]) unless params[:menu_item_id].blank?
+    end
+  
+    def get_user
+      @user = User.find(params[:user_id]) unless params[:user_id].blank?
     end
   
 end
