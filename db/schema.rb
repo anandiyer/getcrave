@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110701205240) do
+ActiveRecord::Schema.define(:version => 20110703184647) do
 
   create_table "alpha_testers", :force => true do |t|
     t.integer  "facebook_id", :limit => 8
@@ -204,7 +204,7 @@ ActiveRecord::Schema.define(:version => 20110701205240) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "user_profile_pic_url"
-    t.integer  "user_ratings_count"
+    t.integer  "user_ratings_count",   :default => 0
     t.string   "email"
     t.string   "telephone"
   end

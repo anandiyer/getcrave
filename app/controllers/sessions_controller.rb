@@ -21,11 +21,7 @@ class SessionsController < ApplicationController
           redirect_to '/request.html'
           return
         end
-        
-        # TODO: we shouldn't do this till after the auth has been created
-        # oh well...
-        Notifier.signup_email(@auth.user).deliver
-        
+
       elsif (auth['provider'] == 'foursquare')
         # Let's save this user's phone number if available
         current_user.telephone = auth['user_info']['phone'] 
@@ -33,7 +29,11 @@ class SessionsController < ApplicationController
       end
 
       @auth = Authorization.create_from_hash(auth, current_user)
-
+  
+      # TODO: we shouldn't have to do this if the user is simply
+      # assocating their account with another provider. Do this
+      # only for first time account creators
+      Notifier.signup_email(@auth.user).deliver
     end
 
     # Log the authorizing user in.
@@ -61,8 +61,6 @@ class SessionsController < ApplicationController
         redirect_to request.env['omniauth.origin'] || search_index_path
       end
     end
-
-
   end
   
   def destroy
