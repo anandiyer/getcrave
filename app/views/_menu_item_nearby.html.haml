@@ -10,11 +10,6 @@
     .b.i
       = link_to "@ "+restaurant.name, restaurant
     .b.i= restaurant.address_full
-    /.b.i
-      /- @menu_item.labels.each_with_index do |x,i|
-        /= link_to x, "#"
-        /- if i.next < @menu_item.labels.length
-          /,
   .save_n_review_3_col
     = render :partial => "/save"
   .review_counter_for_item
