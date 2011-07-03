@@ -72,7 +72,7 @@ class UsersController < ApplicationController
     @user_id = params[:id]
     @conditions = "user_id = #{@user_id}"
     
-    @user_saved_menu_items = UserSavedMenuItem.paginate(:all,
+    @user_saved_menu_items = UserSavedMenuItem.paginate(
       :page => params[:page],
       :per_page => ITEMS_PER_PAGE,
       :conditions => @conditions,

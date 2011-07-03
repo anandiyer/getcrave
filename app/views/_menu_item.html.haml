@@ -1,6 +1,5 @@
 .restaurant_menu_item_wrapper
-  .img_column_mi_1_col
-    =image_tag "item_rest_temp_image.png"
+  = render :partial => "/menu_items/small_thumbnail"
   .desc_block_2_col
     .b
       - if @menu_item

@@ -19,7 +19,7 @@ class Restaurant < ActiveRecord::Base
   }
                    
   searchable do
-      text :name
+      text :name, :default_boost => 6
       location :coordinates do
         Sunspot::Util::Coordinates.new(latitude, longitude)
       end

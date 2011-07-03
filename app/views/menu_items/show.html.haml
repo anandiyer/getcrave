@@ -14,7 +14,7 @@
     #img_column
       #image_thumbnail_middle_size
         -#= image_tag(get_photo_url_4_thumbnail(params[:id]))
-        = image_tag "temp_image.png"
+        = image_tag "temp_image.png", :id =>"plupload_thumbnail"
 
       - visibility_class =  get_photos(params[:id]).count == 0 ? "himportant" : " "
       #icons_img_wrapper
@@ -44,6 +44,7 @@
           Reviews 
       
       :erb
+        <br>
         <%= like_button_for @menu_item, :send => true, :layout => :button_count, :width => 250, :show_faces => false %>
         
       #desc_wrap
@@ -67,22 +68,20 @@
             = render :partial => "labels_list"
         .plus &nbsp;
         =link_to("Add a label", "#", :class => :mi_add_label)
-
-
-
-      -#=image_tag "social.png"
-
-
-
-
     = render :partial => "/save"
 
 
   #comment_wrapper_wrapper
     #comment_wrapper
+
+
       #content_title
         Have you tried this?
       =form_for(MenuItemRating.new, :remote => true) do |f|
+        #fb_twitter_checkboxes
+          Share to:
+          #inline_fb
+            = check_box("facebook","boolean")
         =f.hidden_field :rating
         =f.hidden_field :menu_item_id, :value =>@menu_item.id
         .star_gray{:id => @menu_item.id, :data =>{:model => "user_menu_item_ratings"}} &nbsp;
@@ -107,6 +106,11 @@
           -["Rating", "Other"].each do |x|
             %li= x
     #update_place= render :partial => "review"
+- else
+  #reviews_wrapper{:class => controller.controller_name}
+    #update_place
+
+
 
 
 

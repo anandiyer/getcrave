@@ -1,30 +1,21 @@
 #reviews_wrapper_bloc_wrapper
 
   - @menu_item ||= MenuItem.find(params[:id])
-  - @current_menu_item_reviews = @menu_item.menu_item_ratings.reverse
-  - @show_more_step = 10
+  - all_current_reviews = @menu_item.menu_item_ratings
+  - @current_menu_item_reviews = @menu_item.menu_item_ratings.order("created_at DESC").page(params[:page] ? params[:page] : 1).per(params[:limit] ? params[:limit] : ITEMS_PER_PAGE)
 
-
-  -if !params[:limit]
-    - review_limit = @show_more_step
-  - else
-    - review_limit = params[:limit].to_i
-
-  - @current_menu_item_reviews_limits = @current_menu_item_reviews.first(review_limit)
-  - @current_menu_item_reviews_limits.each do |@mi_rating|
+  - @current_menu_item_reviews.each do |@mi_rating|
     - user = User.find(@mi_rating.user_id)
-
     - if @mi_rating.user_id?
       .reviews_wrapper_block
         .review_image_col
-          =image_tag user.small_thumbnail
+          = link_to(image_tag(user.small_thumbnail), user)
           #click &nbsp;
 
         .review_desc_col_wrapper
           .before_start
             .data_review
               =@mi_rating.updated_at.strftime("%b %d, %Y")
-
           -rating = @mi_rating.rating ? @mi_rating.rating : 0
           .star_sm{:class => "star_sm stars_"+@mi_rating.rating.to_s.gsub(/[.]/, '_'), :id => @mi_rating.id, :data => {:rating => rating, :model => "menu_item_ratings"}} &nbsp;
           %em
@@ -36,20 +27,7 @@
           .helpful_block
             .before_answer_block
               Was this review helpful?
-
-              -#- begin
-              -#  - u = current_user
-              -#  - u.user_saved_menu_items
-              -#  - u.menu_item_ratings.count
-              -#  = u.menu_item_ratings.find(258).exists?
-              -#  -#=  u.menu_item_ratings.find(@mi_rating.id).menu_item_rating_helpfuls.count
-              -#- rescue ActiveRecord::RecordNotFound
-              -#  error
-
-              -#= u.menu_item_ratings.find(258).menu_item_rating_helpfuls.count
             %span.yes_answer
-              -#=User.first().menu_item_ratings.find(257)
-              -#u.menu_item_ratings.find(258).menu_item_rating_helpfuls.exists?
               #link_here_helpfull
                 %span= link_to "Yes","#"
                 = form_for(MenuItemRatingHelpful.new(@mi_rating.id), :remote => true) do |f|
@@ -58,5 +36,5 @@
             .found_helpfull
               =" (" + @mi_rating.menu_item_rating_helpfuls.count.to_s+")"
 
-
-= render :partial => "/show_more" if @current_menu_item_reviews_limits.length > ITEMS_PER_PAGE
+- if all_current_reviews.length > @current_menu_item_reviews.count
+  = render :partial => "/show_more"

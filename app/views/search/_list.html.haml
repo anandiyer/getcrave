@@ -1,6 +1,13 @@
-
-= render :partial => "/nearby_buttons"
-
+= render :partial => "buttons"
+= render :partial => "filters"
 #reviews_wrapper{:class => class_name_from_path}
   #update_place_restaurants{:class => class_name_from_path}
-    = render :partial => params[:search_restaurants] ? "result_restaurants" : "result_menu_items"
+    - if params[:search_restaurants]
+      = render :partial => "result_restaurants"
+    - elsif params[:search_dishes]
+      = render :partial => "result_menu_items"
+    - else
+      = render :partial => "result_all"
+
+
+

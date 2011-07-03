@@ -18,24 +18,25 @@ gem "haml-rails"
 gem 'json'
 gem "gritter"
 gem "acts_as_opengraph"
-
 gem "uuidtools"
 gem 'aws-s3', '0.6.2', :require => 'aws/s3'
-gem 'will_paginate'
+gem 'will_paginate', "~> 3.0.pre2"
+gem 'kaminari'
+
+gem "fb_graph" #for fb share
 
 group :development, :test do
+  gem 'thin'
   gem 'cucumber-rails'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'webrat'
-  gem 'mongrel'
   gem "erb2haml"
   gem "compass", :require => false
   gem 'jquery-rails', '>= 0.2.6'
   gem "haml"
   gem "haml-rails"
   gem "faraday"
-
 end
 
 group :production do

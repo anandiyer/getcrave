@@ -2,25 +2,16 @@
   - @menu_items = @user_saved_menu_items.map{|usmi| usmi.menu_item}
 - if @results
   - @menu_items = @results
-
   #results
     #{@results.length} result for #{params[:q]} in #{params[:where][:nearby]}
 
-
-
-
 #reviews_wrapper_bloc_wrapper
-
-
   - if !@menu_items && !@menu_items.first().menu_item_avg_rating_count.nil?
-
     - group_star = @menu_items.first().menu_item_avg_rating_count.avg_rating
   - else
   - group_star = 0
 
-
   -#.star_sm{:class => "star_sm stars_"+group_star.to_s.gsub(/[.]/, '_')} &nbsp;
-
 
   - @menu_items.each_with_index do |@menu_item, @counter|
     - stars = 0
@@ -28,7 +19,6 @@
       - stars = @menu_item.menu_item_avg_rating_count.avg_rating if !@menu_item.menu_item_avg_rating_count.nil?
     - rescue NoMethodError
       - logger.error("@menu_item.menu_item_avg_rating_count")
-
 
     - if stars.to_f != group_star.to_f
       - group_star = stars
@@ -38,7 +28,12 @@
       = render :partial => "/menu_item_nearby"
     -else
       = render :partial => "/menu_item"
-  - if controller.action_name == "saved"
-    =will_paginate(@user_saved_menu_items)
-  - elsif controller.action_name != "index"
-    =will_paginate(@menu_items)
+- if controller.action_name == "saved"
+  =will_paginate(@user_saved_menu_items)
+- elsif controller.action_name != "index"
+  =will_paginate(@menu_items)
+
+-# begin
+  /= render :partial => "/show_more" if @menu_items_request_all_items.count > @menu_items.count
+-# rescue
+

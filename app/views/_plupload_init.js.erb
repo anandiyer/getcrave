@@ -1,6 +1,12 @@
 <% session_key_name = Rails.application.config.session_options[:key] %>
 
-window.pl_all = (function (uuid) {
+window.pl_all = (function (uuid, plupload_id) {
+    if(!plupload_id){
+        plupload_id = "plupload"
+    }
+
+    console.log(plupload_id)
+
     PATH = "";
     if ($("a#plupload").length > 0) {
         id = $("#current_info_wrapper").data("menu_item_id");
@@ -8,8 +14,8 @@ window.pl_all = (function (uuid) {
 
         window.uploader = new plupload.Uploader({
             runtimes: 'html5',
-            browse_button: 'plupload',
-            max_file_size: '10mb',
+            browse_button: plupload_id,
+            max_file_size: '1mb',
             url: path,
              multipart_params: {
               '_http_accept': 'application/javascript',
@@ -26,47 +32,54 @@ window.pl_all = (function (uuid) {
                     console.log(file);
                     console.log(info);
 
+
                     $("#gallery").html(info.response);
                     window.gallery_init();
                 }
             }
         });
 
-        window.uploader.bind('Init', function (up, params) {
+        uploader.bind('Init', function (up, params) {
             console.log("init");
         });
 
 
-        window.uploader.bind('UploadComplete', function (up, file) {
+        uploader.bind('UploadComplete', function (up, file) {
             window.window.thumbnail_resizing()
 
+            window.spinner_hide();
             $.gritter.add({
                 title: "Notice",
                 text: " Files was uploaded!"
             });
         });
 
-        window.uploader.bind('BeforeUpload', function (up, file) {
+        uploader.bind('BeforeUpload', function (up, file) {
+            obj = $("span.add_photos_inline");
+            window.spinner_show(obj);
 
             var signed = !$(".fb_login").find("a").hasClass("not_signed");
 
             if (!signed) {
                 uploader.stop();
                 window.show_dialog("Please sign in to add photos")
+            }else{
+
             }
 
         });
 
-        window.uploader.bind('UploadProgress', function (up, file) {
+        uploader.bind('UploadProgress', function (up, file) {
             $('#' + file.id + " b").html(file.percent + "%");
 
         });
 
-        window.uploader.init();
+        uploader.init();
 
         uploader.bind('FilesAdded', function (up, files) {
             $(".photos_inline").removeClass("himportant")
             uploader.start();
+
         });
     }
 

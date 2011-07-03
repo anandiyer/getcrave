@@ -59,6 +59,11 @@ $birdy_position: 0 -552px;
 
 $small_font_size: 12px;
 
+@mixin nospace() {
+    padding:0px;
+    margin:0px;
+}
+
 @mixin sprites($position, $weight:17px, $height:17px) {
     background-image: url("/images/sprites/icon-sprite.png");
     background-repeat: no-repeat;
@@ -71,6 +76,7 @@ $small_font_size: 12px;
 
 
 body.two-col.bp{
+    background-color:red;
 
 
 
@@ -444,6 +450,7 @@ body.two-col.bp{
         }
     }
 
+
     #content_wrap{
         background:#FFFFFF;
         @include container;
@@ -468,6 +475,8 @@ body.two-col.bp{
             background: #333;
             text-align: center;
             padding-top:20px;
+            z-index:1000;
+
             #locating{
                 font-weight:bold;
                 color:white;
@@ -536,31 +545,88 @@ body.two-col.bp{
                         padding:0;
                     }
                 }
-
             }
         }
 
         #content{
-            padding:0 20px 0 0px;
+            /*background-color: red;*/
+            margin-right: 15px !important;
 
+
+            #result_report_info{
+                padding:10px 0 0 10px;
+                font-weight: bold;
+                font-size: 14px;
+            }
+
+
+            #toggled_filters{
+                padding:10px 0 0 0;
+                max-height:200px;
+
+            }
+
+            #filters{
+
+                #triangle.on{
+                    background: url("/images/sprites/icon-sprite.png") no-repeat -24px -1280px;
+                }
+                #triangle{
+                    @include inline-block;
+                    width:18px;
+                    height:18px;
+                    background: url("/images/sprites/icon-sprite.png") no-repeat 0px -1280px;
+                }
+
+                a{
+                    font-size:15px;
+                }
+
+                border-bottom:1px dotted $gray;
+                padding:10px 0px 10px 10px;
+                width: 587px;
+
+                .distance_title{
+                    font-weight: bold;
+                }
+
+
+                #labels{
+                    .labels_inputs{
+                        @extends #distance_inputs;
+                    }
+                }
+
+                #distance_inputs, .labels_inputs{
+                    position: relative;
+                    left: -3px;
+                    input{
+                        position:relative;
+                        top:2px;
+                        @inclide nospace;
+                    }
+                }
+
+
+
+            }
             #buttons_wrapper.user_buttons_wrapper{
                 height: 40px;
 
-                #dishes_icon.off{
-                    color: $gray;
-                    border-right: 1px solid #dcdcdc;
-					font-size:14px;
-					text-shadow:0px 1px #f9f9f9;
-					height:26px;
-					cursor:pointer;
-                }
+                /*#dishes_icon.off{*/
+                    /*color: $gray;*/
+                    /*border-right: 1px solid #dcdcdc;*/
+					/*font-size:14px;*/
+					/*text-shadow:0px 1px #f9f9f9;*/
+					/*height:26px;*/
+					/*cursor:pointer;*/
+                /*}*/
 
                 a{
                   #dishes_icon{
                     color: #464641;
 					font-size:14px;
 					text-shadow:0px 1px #f9f9f9;
-					height:26px;
                   }
                 }
 
@@ -576,18 +642,72 @@ body.two-col.bp{
                 @include container;
 
 
-                #restaurant_icon{
+                .restbutton{
+                    font-size: 15px;
+                    font-weight: bold;
+                }
+
+                #all_results_icon.off{
+                    #all_results_icon_image{
+                        background: url(/images/sprites/icon-sprite.png) no-repeat 0 -1118px;
+                    }
+                }
+
+                #restaurant_icon.on{
+                    #restaurant_icon_image{
+                        background: url(/images/sprites/icon-sprite.png) no-repeat 0 -204px;
+                        width: 20px;
+                    }
+                }
+
+                #restaurant_icon.off{
+                    #restaurant_icon_image{
+                        background: url(/images/sprites/icon-sprite.png) no-repeat 0 -223px;
+                        width: 20px;
+                    }
+                }
+
+
+
+
+
+
+                #all_results_icon_image, #restaurant_icon_image, #food_icon_image{
+                    @include inline-block;
+                    height:15px;
+                    width: 15px;
+                    background: url(/images/sprites/icon-sprite.png) no-repeat 0 -1100px;
+                }
+
+                #all_results_icon{
                     @extend #dishes_icon;
-                    margin-left: -30px;
+
 
                 }
 
+                #restaurant_icon{
+                    @extend #dishes_icon;
+                    margin-left: -30px;
+                    .places_iconOff{
+                        background: url(/images/sprites/icon-sprite.png);
+                        background-position: 29px -219px;
+                        height: 20px;
+                        padding: 0px 0px 0px 20px;
+                        margin: 4px 0px 0 14px;
+                        font-size: 14px;
+                        font-weight: bold;
+                        color: #888;
+                        text-shadow: 0px 1px white;
+                    }
+				}
+
+
                 #dishes_icon{
                     @include inline-block;
-                    padding: 0 0 0 0;
+                    padding: 4px 0 0 0;
                     margin: 0;
                     width: 148px;
-                    height: 30px;
+                    height: 24px;
                     /*background: url(/images/dishes_icon.png) no-repeat 0 0;*/
                     position: relative;
                     text-align: center;
@@ -598,6 +718,39 @@ body.two-col.bp{
                         width: 10px;
                         height: 30px;
                     }
+					/*.dishes_iconON{*/
+						/*background: url(/images/sprites/icon-sprite.png);*/
+						/*background-position: 29px -162px;*/
+						/*height: 20px;*/
+						/*padding: 0px 0px 0px 19px;*/
+						/*margin: 4px 0px 0 15px;*/
+						/*font-size: 14px;*/
+						/*font-weight: bold;*/
+						/*color: #464646;*/
+						/*text-shadow: 0px 1px white;*/
+					/*}*/
+					/*.places_iconOn{*/
+						/*background: url(/images/sprites/icon-sprite.png);*/
+						/*background-position: 29px -200px;*/
+						/*height: 20px;*/
+						/*padding: 0px 0px 0px 20px;*/
+						/*margin: 4px 0px 0 14px;*/
+						/*font-size: 14px;*/
+						/*font-weight: bold;*/
+						/*color: #464646;*/
+						/*text-shadow: 0px 1px white;*/
+					/*}*/
+					/*.dishes_iconOff{*/
+						/*background: url(/images/sprites/icon-sprite.png);*/
+						/*background-position: 29px -181px;*/
+						/*height: 20px;*/
+						/*padding: 0px 0px 0px 19px;*/
+						/*margin: 4px 0px 0 15px;*/
+						/*font-size: 14px;*/
+						/*font-weight: bold;*/
+						/*color: #888;*/
+						/*text-shadow: 0px 1px white;*/
+					/*}*/
                     img{
                         padding-top:7px;
                     }
@@ -606,21 +759,49 @@ body.two-col.bp{
 
                 #restaurant_icon.on{
                    margin-left: -4px;
+
                 }
 
-                #restaurant_icon.off{
+                #restaurant_icon.off, #all_results_icon{
                     margin-left: -4px;
-                    background: url("/images/sprites/button-sprite.png") no-repeat scroll -72px -5px transparent;
-                }
-                #dishes_icon.off{
 
                     background: url("/images/sprites/button-sprite.png") no-repeat scroll -72px -5px transparent;
-                    img{
-                       @include opacity(.6)
+                }
+
+                                                                             0
+
+
+                #dishes_icon.on{
+                    #food_icon_image{
+                        background: url(/images/sprites/icon-sprite.png) no-repeat 0 -166px;
+                        width: 23px;
                     }
+
+                }
+
+                #dishes_icon.off{
+                    margin-left: -4px;
+                    color: $gray;
+                    border-right: 1px solid #dcdcdc;
+					font-size:14px;
+					text-shadow:0px 1px #f9f9f9;
+					cursor:pointer;
+
+                    #food_icon_image{
+                        background: url(/images/sprites/icon-sprite.png) no-repeat 0 -185px;
+                        width: 23px;
+                    }
+
+                    background: url("/images/sprites/button-sprite.png") no-repeat scroll -72px -5px transparent;
+
+
+                    /*img{*/
+                       /*@include opacity(.6)*/
+                    /*}*/
                 }
 
                 #dishes_icon.on{
+                    margin-left: -4px;
                     background: url("/images/sprites/button-sprite.png") no-repeat scroll -72px -40px transparent;
                     #left_side{
                         background: url("/images/sprites/button-sprite.png") no-repeat scroll 0px -40px transparent;
@@ -660,6 +841,16 @@ body.two-col.bp{
 
 
 
+                    #comment_wrapper.sending{
+                        #input_comment{
+                            background-color: #ecebe9;
+                            textarea{
+                                background-color: #ecebe9;
+                                color: #999999;
+                            }
+                        }
+
+                    }
                     #comment_wrapper{
                         @include container;
                         float: none;
@@ -669,6 +860,24 @@ body.two-col.bp{
                         padding: 8px 16px 0 10px;
                         $content-columns: ceil(15);
                         @include column($content-columns, true);
+                        position: relative;
+
+                        #fb_twitter_checkboxes{
+                            position: absolute;
+                            width: 100px;
+                            height: 30px;
+                            right:30px;
+                            top:10px;
+                            #inline_fb{
+                                @include inline-block;
+                                width: 40px;
+                                height: 21px;
+                                background: url("/images/sprites/icon-sprite.png") no-repeat 20px -1079px;
+
+
+                                /*padding: 0 10px 3px 16px;*/
+                            }
+                        }
 
 
 
@@ -686,12 +895,15 @@ body.two-col.bp{
                             border-left:1px solid #ccc;
                             margin:7px 0 8px 0;
                             /*padding:5px 5px 5px 8px;*/
+                            //background-color: #ecebe9;
 
                             textarea{
                                 width: 596px;
                                 border: none;
                                 overflow: hidden;
                                 height: 20px;
+                                //background-color: #ecebe9;
+                                //color: #999999;
                                 /*resize: none;*/
                             }
 
@@ -744,24 +956,17 @@ body.two-col.bp{
                         @include column($content-columns, true);
                         padding: 6px 44px 0 2px;
 						height:140px;
-						overflow: hidden;
+						/*overflow: hidden;*/
                         img{
                             @include border-radius(5px);
                         }
 
                         #image_thumbnail_middle_size{
-                            width:141px;
-                            height:141px;
-                            overflow:hidden;
+                            width: 141px;
+                            height: 141px;
+                            overflow: hidden;
                             @include border-radius(3px);
-                            /*border:1px solid $light_gray;*/
-
-
-                            img{
-                                /*@include opacity(.2);*/
-
-
-                            }
+                            cursor: pointer;
                         }
 
 
@@ -803,7 +1008,6 @@ body.two-col.bp{
                             background: url(/images/sprites/button-sprite.png) no-repeat 0 -491px;
                         }
 
-
                         .follow_button.unfollow:hover{
                             background: url(/images/sprites/button-sprite.png) no-repeat -95px -523px;
                         }
@@ -817,7 +1021,7 @@ body.two-col.bp{
                         }
 
                         #rating{
-                            padding-bottom:5px;
+                            padding:0;
 							font-size: 14px;
 							line-height: 21px;
                         }
@@ -874,7 +1078,7 @@ body.two-col.bp{
                 }
             }
 
-            #reviews_wrapper.users_saved, #reviews_wrapper.search_index, #reviews_wrapper.users_following,#reviews_wrapper.users_followers, #reviews_wrapper.users_show, #reviews_wrapper.users, #reviews_wrapper.menu_items, #reviews_wrapper.restaurants_index, #reviews_wrapper.user_saved_menu_items_index, .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved{
+            #reviews_wrapper.users_saved, #reviews_wrapper.search_index, #reviews_wrapper.users_following,#reviews_wrapper.users_followers, #reviews_wrapper.users_show, #reviews_wrapper.users, #reviews_wrapper.restaurants_index, #reviews_wrapper.user_saved_menu_items_index, .restaurant_menu_item_wrapper.user_saved_menu_items_show_menu_items_saved{
                 border-top: none;
 				margin-top:0px;
 				padding-top:0px;
@@ -882,7 +1086,9 @@ body.two-col.bp{
 
             }
 
-
+            #reviews_wrapper.menu_items{
+                border-top: none;
+            }
 
             #reviews_wrapper.restaurants_index .restaurant_menu_item_wrapper.restaurants_index:first-of-type{
                 border-top: none !important;
@@ -895,6 +1101,8 @@ body.two-col.bp{
             #reviews_wrapper{
                 border-top: 3px solid $light_gray;
                 padding:17px 0 0 8px;
+
+
 
 
 
@@ -1038,9 +1246,10 @@ body.two-col.bp{
                             $content-columns: ceil(2);
                             @include column($content-columns, true);
                             padding:0 15px 0 0;
-                            img{
-                                @include border-radius(3px);
-                            }
+                            overflow: hidden;
+                            width:69px;
+                            height:84px;
+                            @include border-radius(3px);
                         }
                         .desc_block_2_col{
                             $content-columns: ceil(11);
@@ -1166,8 +1375,7 @@ body.two-col.bp{
                 }
 
                 #reviews_wrapper_bloc_wrapper{
-                    @include clearfix;
-					overflow: visible;
+                    @include container;
                 }
                 .reviews_wrapper_block:first-of-type{
                     border-top: 1px solid $light_gray;
@@ -1551,6 +1759,14 @@ body.two-col.bp{
     @include sprites($add_photos_counter_position);
 }
 
+#comment_wrapper.sending{
+    .submit_wrapper{
+        .text{
+            left: 15px;
+            color:#999999;
+        }
+    }
+}
 
 .submit_wrapper{
     width: 98px;
@@ -1567,7 +1783,6 @@ body.two-col.bp{
         text-shadow:1px 1px 1px #ffffff;
         font-size: 14px;
         cursor: pointer;
-
     }
 
     .left_rounder{
@@ -1575,7 +1790,6 @@ body.two-col.bp{
         width: 8px;
         background: url("/images/sprites/button-sprite.png") no-repeat 0px -75px;
         float: left;
-
     }
 
     .submit_button{
@@ -1594,4 +1808,11 @@ body.two-col.bp{
 
 .gray{
     color: $gray;
+}
+
+#spinner{
+    dispay:none !important;
+    position:absolute;
+    z-index:100;
+
 }

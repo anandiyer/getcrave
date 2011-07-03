@@ -1,13 +1,10 @@
 disher_review_wrapper = $("#reviews_wrapper")
 
-
-
 window.is_logged_in = () ->
     if $(".fb_login a.not_signed").length == 0
         true
     else
         false
-
 
 close_labels_selectbox = () ->
     $(".label_div_wrapper").slideUp("fast")
@@ -36,17 +33,12 @@ window.show_dialog = (title = "Please sign in", content) ->
     $(".modal_window .modal_title h1").empty().text(title)
     $(".modal_window .clone_me").empty().html(content) if content
 
-
-
 window.show_modal = (modal_id) ->
     $('#mask').css({ 'display' : 'block', opacity : 0})
 
     $('#mask').fadeTo("fast",0.6).height($(document).height())
     $('#'+modal_id).fadeIn("fast")
     window.pl_all($("form.uuid").attr("rel"))
-
-
-
 
 window.modal_window = () ->
 
@@ -91,8 +83,6 @@ window.gmap = (lat, long, zoom = 10, coor_array = [[lat,long]]) ->
 #        g_notice("Lang Lat", ll[0]+"<br />"+ll[1])
         new google.maps.Marker({position: new google.maps.LatLng(ll[0], ll[1]), map: map })
 
-
-
 before_send = (obj) ->
     obj.fadeTo("slow", .5)
 
@@ -104,6 +94,7 @@ after_send = (obj, html) ->
 #window.menu_item_photos_uploaded = ()->
 #    alert 1
 window.update_reviews = (id_of_menu_item, limits = $(".two-col").attr("rel")) ->
+    cl "update_reviews"
     obj = $("#reviews_wrapper #update_place")
     $.ajax({url: "/items/"+id_of_menu_item+"/show_reviews?limit="+limits,
     beforeSend: () -> before_send(obj),
@@ -111,13 +102,20 @@ window.update_reviews = (id_of_menu_item, limits = $(".two-col").attr("rel")) ->
 
 
 
+
+
+window.spinner_hide = (obj) ->
+    $("#spinner").hide()
+
+window.spinner_show = (obj) ->
+    offset = $(obj).offset()
+    $("#spinner").show().css("left",offset.left).css("top",offset.top+2)
+
+
 window.g_notice = (type, text) ->
     $.gritter.add({title:type, text:text});
 
-
 window.save_helpfull = () ->
-
-
 
 window.unsave_menu_item = (id) ->
 
@@ -144,8 +142,9 @@ window.save_menu_item = (mid, saved_item_id) ->
 
 
 window.add_review = (id_of_menu_item, msg) ->
+
     update_reviews(id_of_menu_item)
-#    $.gritter.add({title:"Notification", text:msg});
+#    $("#comment_wrapper #submit_block .text").text("Submit")
 
     $("#comment_wrapper").slideUp("slow",() ->
         $(this).empty()
@@ -153,7 +152,11 @@ window.add_review = (id_of_menu_item, msg) ->
         couner_reviews = $("#text_column #rating span").text()
         $("#text_column #rating span").html(parseInt(couner_reviews)+1)
         $("#comment_wrapper").slideDown("normal")
+        $("#comment_wrapper").removeClass("sending")
     )
+
+
+
 
 
 window.set_gmap = (zoom = 10) ->
@@ -185,6 +188,8 @@ window.make_unfollow = () ->
     $(".submit.submit_wrapper").removeClass("follow").addClass("unfollow").find(".text").text("Unfollow")
 #    g_notice("Notification", "Now you are following!")
 window.gallery_init = () ->
+    cl "newq init"
+    $("#image_thumbnail_middle_size").unbind("click")
     $('#gallery a').lightBox
         overlayBgColor: '#000'
         overlayOpacity: 0.4
@@ -225,30 +230,30 @@ search_bind = () ->
 
     $("#navigation_wrap_search #submit_block").click () ->  $(@).parents("form").submit()
 
-    if $("a #restaurant_icon.off.restbutton.search_index").length > 0 || $("a #dishes_icon.off.dishbutton.search_index").length > 0
-        loc = window.location.search
+#    if $("a #restaurant_icon.off.restbutton.search_index").length > 0 || $("a #dishes_icon.off.dishbutton.search_index").length > 0
+#        loc = window.location.search
+#
+#        if loc.indexOf("search_restaurants=true") < 0
+#            restaurant_search = loc+"&search_restaurants=true"
+#        else
+#            restaurant_search = loc
+#        $("a #restaurant_icon.off.restbutton.search_index").click (e) ->
+#            cl 2222
+#            e.preventDefault()
+#            window.location = restaurant_search
 
-        if loc.indexOf("search_restaurants=true") < 0
-            restaurant_search = loc+"&search_restaurants=true"
-        else
-            restaurant_search = loc
-        $("a #restaurant_icon.off.restbutton.search_index").click (e) ->
-            cl 2222
-            e.preventDefault()
-            window.location = restaurant_search
 
 
-
-        $("a #dishes_icon.off.dishbutton.search_index").click (e) ->
-            $("#navigation_wrap_search form").submit()
-            e.preventDefault()
+#        $("a #dishes_icon.off.dishbutton.search_index").click (e) ->
+#            $("#navigation_wrap_search form").submit()
+#            e.preventDefault()
 
 
 window.thumbnail_resizing = () ->
     if $("#image_thumbnail_middle_size").length > 0
 
         if parseInt($("#gallery #photos_counter").text()) > 0
-           cl source =  $("#gallery a").first().attr("href")
+           source =  $("#gallery a").first().attr("href")
            img = $("#image_thumbnail_middle_size img")
            $(img).attr("src", source)
 
@@ -264,6 +269,9 @@ window.thumbnail_resizing = () ->
                 attr = "width"
 
             $(img).attr("height", "140px").css("opacity", 1)
+            make_clickable_menu_item_image()
+
+
 
 
 
@@ -275,11 +283,80 @@ window.update_after_adding_item = (place_name) ->
     $.ajax({url: url, context: document.body, success: (msg) => $("#update_place_restaurants").fadeTo("fast",.6).delay(500).html(msg).delay(500).fadeTo("fast",1)});
 
 
-$(document).ready ->
 
+
+select_all_checked_labels = () ->
+    labels_array = []
+
+    within = $("#distance_inputs input:checked").val()
+
+    $(".labels_inputs input:checked").each () ->
+        labels_array.push($(this).next("label").text())
+
+    path = []
+
+    if labels_array.length > 0
+        path.push("labels="+labels_array.join("+"))
+
+
+    if within && within.length > 0
+        path.push("within="+within)
+
+    category = $("#buttons_wrapper .on").attr("id").replace("_icon","")
+    path.push("category="+category)
+    queary = window.location.search.split("&")[0].split("=")[1]
+    path.push("q="+queary)
+    path.push("lat="+$("body").attr("data-latitude"))
+    path.push("long="+$("body").attr("data-longitude"))
+
+    path_total = "/search?"+path.join("&")
+    $.ajax({url: path_total, type: "get", context: document.body})
+
+
+    $("#result_for_text").text(path)
+
+
+
+filter_bind = () ->
+    $("#filters a").click (e) ->
+        obj = $("#toggled_filters")
+        $(obj).slideToggle "fast", () ->
+            $("#triangle").toggleClass("on")
+            if $(this).is(":visible")
+                $('.labels_inputs').columnize({columns: 3, cache: false}} if $(".labels_inputs .column").length == 0
+        e.preventDefault()
+
+    $("#distance_inputs input").live "click", () -> select_all_checked_labels()
+    $(".labels_inputs input").live "click", () -> select_all_checked_labels()
+
+
+
+columnizing = () ->
+    $('.labels_inputs').columnize({columns: 4, cache: false}} if $(".labels_inputs .column").length == 0
+    filter_bind()
+
+
+#avatar_click_to_plupload = () ->
+#    if $("#gallery").is(":hidden")
+##        cl "face to upload"
+#        $("#image_thumbnail_middle_size").click () ->
+#            $("#plupload").click()
+
+make_clickable_menu_item_image = () ->
+    cl "face to gallery"
+
+    $("#image_thumbnail_middle_size").unbind("click")
+
+    $("#image_thumbnail_middle_size").click () ->
+        $("#gallery").find("a").first().click()
+
+$(document).ready ->
     search_bind()
     top_nav_bind()
     thumbnail_resizing()
+#    avatar_click_to_plupload()
+
+    columnizing() if window.location.href.indexOf("search") > 0 || window.location.href.indexOf("/items/location") > 0
 
 
     $("#navigation .left_corner").live "click", () ->
@@ -324,13 +401,8 @@ $(document).ready ->
         $(@).parents("form").find("#submit_block").show()
 
 
-#    $(document).ajaxSend (event, request, settings) ->
-#        if settings.type == 'post'
-#            settings.data = (settings.data ? settings.data + "&" : "") + "authenticity_token=" + encodeURIComponent( AUTH_TOKEN )
-#            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-#
-#    $.ajaxSetup({ beforeSend: (xhr) ->  xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))})
-
+    #for respond_to :js
+    $.ajaxSetup 'beforeSend': (xhr) -> xhr.setRequestHeader("Accept", "text/javascript")
 
 
 #   $('textarea').autoResize({onResize : () -> $(this).css({opacity:0.8}), animateCallback : () -> $(@).css({opacity:1}), animateDuration : 300, extraSpace : 40});
@@ -348,10 +420,7 @@ $(document).ready ->
             .submit()
 
 
-
     $(".label_div ul li").live "click", (event) ->
-
-
         id = $(@).attr("id")
         $("#labels form")
             .find("input#menu_label_association_menu_label_id")
@@ -391,7 +460,61 @@ $(document).ready ->
 
 
 
+    $("#toggled_filters")
+        .ajaxStart () ->
+            $("#get_nearby_loading").show()
+            $("#update_place_restaurants").fadeTo("slow",.5)
+            $("#toggled_filters input").attr('disabled', "true");
+
+
+
+    $("form#new_menu_item_rating").ajaxStart () ->
+        cl "ajax start comment_wrapper"
+        $("#comment_wrapper").addClass("sending")
+        $("#comment_wrapper #submit_block .text").text("Submitting")
+
+
+		#   google maps in homepage neary
+
+		   set_gmap(13) if $("#map").length >0
+
+
     $(document).ajaxComplete (event, xhr, settings) ->
+
+        cl "ajax complete 111"
+        cl settings.url
+        $("#get_nearby_loading").hide()
+        $("#update_place_restaurants").fadeTo("fast",1)
+
+        $("#comment_wrapper").removeClass("sending")
+        $("#comment_wrapper #submit_block .text").text("Submit")
+
+#        if settings.url.indexOf("&restaurant_id") > 0
+#            cl 2222222222222222222
+
+#        #menu items update reviews  || #restaurant menu items #index
+        if settings.url.indexOf("show_reviews") > 0 || settings.url.indexOf("&restaurant_id") > 0
+            cl "show_reviews or menu items index"
+            new_limits = $("#show_more_button").data("next")
+            $("#show_more_button").attr("data-next",new_limits*2)
+
+            $('div[id^="update_place"]').html(xhr.responseText)
+#            $('#update_place_restaurants').html(xhr.responseText)
+
+        if settings.url.indexOf("ratings") > 0
+            if xhr.responseText == "no_token"
+                cl "no token"
+                window.location = "/auth/facebook"
+
+        if settings.url.indexOf("search") > 0
+            $("#get_nearby_loading").hide()
+
+            $("#toggled_filters input").removeAttr('disabled');
+            $("#update_place_restaurants")
+                .fadeTo("slow",1)
+                .html(xhr.responseText)
+
+
         if settings.url == "/menu_label_associations"
             if xhr.responseText.indexOf('Warning') < 0 && xhr.responseText.indexOf("sign in") < 0
                 $(".birdy_update").html(xhr.responseText)
@@ -401,9 +524,7 @@ $(document).ready ->
 #    $(document).ajaxError () -> $.gritter.add({title:"Error", text: "Ajax error!", image: "/images/error_icon.png", sticky: => true});
 
 
-#   google maps in homepage neary
 
-    set_gmap(13) if $("#map").length >0
 
 
 
@@ -479,38 +600,49 @@ $(document).ready ->
 
      $("#reviews_wrapper #show_more_button").live 'click', (e) ->
 
-        id_of_menu_item = $(this).data("itemid")
+        cl "11111111111"
+        cl id_of_menu_item = $(this).data("itemid")
         cl new_limits = $(this).data("next")
+        cl "11111111111"
 
         if $(".menu_items_location").length > 0 || $(".restaurants_index").length > 0
+           cl 594
            lat = $("body").data("latitude")
            long = $("body").data("longitude")
 
            obj = $("#update_place_restaurants")
 
            if $(".menu_items_location").length > 0
+            cl 601
             path = "/menu_items/show_menu_items_nearby?lat="+lat+"&long="+long+"&limit="+new_limits
            else
+            cl 604
             path = "/restaurants/show_restaurants_nearby?lat="+lat+"&long="+long+"&limit="+new_limits
+
+
+
 
         else if $(".menu_items_location").length > 0
             obj = $("#reviews_wrapper #update_place")
             path = "/menu_items/"+id_of_menu_item+"/show_reviews?limit="+new_limits
+            cl 612
         else if $(".user_saved_menu_items_index").length > 0
             obj = $("#update_place_restaurants")
             path = "/saved/show_menu_items_saved?limit="+new_limits
+            cl 617
+        else if $(".menu_items").length > 0
+            cl 619
+            obj = $("#update_place")
+            path = "/items/"+id_of_menu_item+"/show_reviews?limit="+new_limits
+
+        else if $(".menu_items_index").length > 0
+            cl 644
+            obj = $("#update_place")
+            path = "/items"+"?limit="+new_limits+"&&restaurant_id="+$("#current_info_wrapper").attr("data-restaudat_id")
 
 
-
-        $.ajax({url: path,
-        before_send: () -> before_fade(obj),
-        success: (html) ->
-            after_send(obj, html)
-            $("#show_more_button").attr("data-next",new_limits*2)
-            set_gmap(13)
-#            $.get('/menu_items/update_map')
-
-        });
+        $.ajax(url: path)
+        e.preventDefault()
 
 
     $("input[type=text]").focus () ->

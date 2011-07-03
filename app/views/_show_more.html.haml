@@ -1,4 +1,9 @@
-- @show_more_step  ||= ITEMS_PER_PAGE
-=link_to("#limit="+(@show_more_step*2).to_s) do
-  #show_more_button{:data =>{:step => @show_more_step, :next => @show_more_step*2, :itemid => params[:id]}}
+- if @current_menu_item_reviews
+  - @next = @current_menu_item_reviews.count+ITEMS_PER_PAGE
+- elsif @menu_items
+  - @next = @menu_items.count+ITEMS_PER_PAGE
+
+
+=link_to("#") do
+  #show_more_button{:data =>{:next => @next, :itemid => params[:id]}}
     Show more

@@ -5,6 +5,21 @@ module ApplicationHelper
     controller.controller_name+"_"+controller.action_name
   end
 
+  def title action_and_controller_name
+    if action_and_controller_name == "menu_items_show"
+      str = @menu_item.name
+    elsif action_and_controller_name == "menu_items_index"
+      str = @restaurant.name
+    elsif action_and_controller_name == "users_following_reviews"
+      str = "foodies"
+    elsif action_and_controller_name.include?("users_")
+      str = @user.user_name+"'s profile"
+    else
+      str = "so what's good here?"
+    end
+    "сrave - #{str}"
+  end
+
   def navigation_selected act_name
 
     class_name = "not"

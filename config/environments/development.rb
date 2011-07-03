@@ -24,7 +24,8 @@ Crave::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
 
 
-  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+#  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+
 
 end
 

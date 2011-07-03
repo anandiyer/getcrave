@@ -1,0 +1,42 @@
+- if  controller.controller_name == "menu_items" || (@controller.controller_name == "search" && !params[:search_restaurants] && !params[:search_dishes])
+  - all_results_status = "on"
+  - @dish_button_status = "off"
+  - @rest_button_status = "off"
+
+- else
+  - if  controller.controller_name == "menu_items" || (@controller.controller_name == "search" && params[:search_restaurants] && !params[:search_dishes])
+    - @rest_button_status = "on"
+    - all_results_status = "off"
+    - @dish_button_status = "off"
+  - else
+    - @dish_button_status = "on"
+    - @rest_button_status = "off"
+    - all_results_status = "off"
+
+#buttons_wrapper
+  - if all_results_status == "on"
+    #all_results_icon{:class => all_results_status+" restbutton "+class_name_from_path}
+      #left_side &nbsp;
+      #all_results_icon_image
+      All results
+  - else
+    =link_to "/search?q="+params[:q] do
+      #all_results_icon{:class => all_results_status+" restbutton "+class_name_from_path}
+        #left_side &nbsp;
+        #all_results_icon_image
+        All results
+
+
+  - if @rest_button_status == "on"
+    = render :partial => "/place_button"
+  - else
+    = link_to "/search?q="+params[:q]+"&search_restaurants=true" do
+      = render :partial => "/place_button"
+
+  - if @dish_button_status == "on"
+    = render :partial => "/food_button"
+
+  - else
+    = link_to "/search?q="+params[:q]+"&search_dishes=true" do
+      = render :partial => "/food_button"
+

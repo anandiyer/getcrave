@@ -1,11 +1,12 @@
 
 
 #navigation
-
   .fb_login
     - if current_user
       #user_small_thumb_logo
-        =image_tag(current_user.small_thumbnail, :width => "30", :height => "30")
+        - small_thumbnail = image_tag(current_user.small_thumbnail, :width => "30", :height => "30")
+        = link_to(small_thumbnail, current_user)
+
 
       #{link_to( "Hey, #{current_user.user_name}", user_path(current_user.friendly_id) )} | #{link_to( "Sign Out", signout_path, :rel => current_user.id, :class => "current_user")}
     - else

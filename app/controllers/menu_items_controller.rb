@@ -33,7 +33,7 @@ class MenuItemsController < ApplicationController
 
 
     if !cookies[:lat] && !cookies[:long]
-      how_much = 15
+      how_much = 60
       cookies[:lat] = {
         :value => params[:lat],
         :expires => how_much.minutes.from_now.utc
@@ -45,8 +45,6 @@ class MenuItemsController < ApplicationController
       }
     end
 
-
-
     respond_to do |format|
       format.html # location.html.haml
       format.xml { render :xml => @menu_items.to_xml(:methods => :distance, :include => [:restaurant, :menu_item_avg_rating_count]) }
@@ -55,14 +53,21 @@ class MenuItemsController < ApplicationController
   end
 
   def params_4_index_and_show_menu_items_of_place
-     # FIXME - handle restaurant = nil case
+    # TODO - handle restaurant = nil case
+    # @restaurant = @restaurant ? @restaurant : Restaurant.find(params[:place_name])
+    
+    if !@restaurant && params[:place_name]
+      @restaurant = Restaurant.find(params[:place_name])
+    elsif params[:restaurant_id]
+      @restaurant = Restaurant.find(params[:restaurant_id])
+    end
+    
+    @conditions = "restaurants.id = #{@restaurant.id}"
 
-    @restaurant = @restaurant ? @restaurant : Restaurant.find(params[:place_name])
-    @menu_items = MenuItem.find_by_sql(["SELECT menu_items.* FROM menu_items
-      LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id
-      WHERE menu_items.restaurant_id = ?
-      ORDER BY (menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, LOWER(menu_items.name) ASC", 
-      @restaurant.id])
+    @menu_items = MenuItem.find(:all,
+      :conditions => @conditions,
+      :joins => " INNER JOIN restaurants ON restaurants.id = menu_items.restaurant_id LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id",
+      :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, LOWER(menu_items.name) ASC")
 
   end
   
@@ -95,7 +100,8 @@ class MenuItemsController < ApplicationController
   # GET /menu_items.xml
   def index
     # Assuming that no menu has more than 500 items - this is the MAX
-    @limit = 500
+    @limit = 500 
+    #ITEMS_PER_PAGE
 
     if params[:limit] && !params[:limit].empty?
       @limit = params[:limit].to_i
@@ -103,12 +109,11 @@ class MenuItemsController < ApplicationController
 
     params_4_index_and_show_menu_items_of_place
 
-
-    
     respond_to do |format|
       format.html # location.html.haml
       format.xml  { render :xml => @menu_items.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count])}
       format.json  { render :json => @menu_items.to_json(:include => [:restaurant, :menu_item_avg_rating_count]) }
+      format.js  { render :partial => "/items_grouped_by_stars" }
     end
     
     # Now find the menu items for each of those restaurants
@@ -124,7 +129,7 @@ class MenuItemsController < ApplicationController
     params_4_show_n_show_reviews
 
     respond_to do |format|
-      format.html # _unused_show.html.haml
+      format.html # show.html.haml
       format.xml  { render :xml => @menu_item.to_xml( :include => {:restaurant => {}, 
         :menu_item_avg_rating_count => {}, 
         :menu_item_ratings => {:include => :user},
@@ -280,7 +285,6 @@ class MenuItemsController < ApplicationController
         format.xml  { render :xml => @menu_item, :status => :created, :location => @menu_item }
         format.json { render :json => @menu_item, :status => :created, :location => @menu_item }
         format.js  { render :js => "window.update_after_adding_item("+params[:menu_item][:restaurant_id].to_s+")"}
-
       end
     end
   end
@@ -351,8 +355,7 @@ class MenuItemsController < ApplicationController
       :limit => ITEMS_PER_PAGE)
 
     #FIXME - need to get all the menu item attributes like ratings, photos etc.
-    @menu_item = MenuItem.find(params[:id],
-      :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings])
+    @menu_item = MenuItem.find(params[:id], :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings])
 
   end
 

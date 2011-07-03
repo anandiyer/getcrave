@@ -11,11 +11,11 @@ module MenuItemsHelper
     MenuItem.find(menu_item_id).menu_item_photos.count.to_s
   end
 
-def get_photo_url_4_thumbnail menu_item_id
+def get_photo_url_4_thumbnail menu_item_id, size = "middle"
   if MenuItem.find(menu_item_id).menu_item_photos.any?
     MenuItem.find(menu_item_id).menu_item_photos.first.photo
   else
-    "temp_image.png"
+    size == "middle" ? "temp_image.png" : "item_rest_temp_image.png"
   end
 end
 

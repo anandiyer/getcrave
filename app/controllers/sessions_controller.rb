@@ -1,6 +1,13 @@
 class SessionsController < ApplicationController
   def create
     auth = request.env["omniauth.auth"]
+    token =  auth['credentials']['token']
+
+    if !token
+      render :status => 404 and return #for bots
+    end
+
+
     unless @auth = Authorization.find_from_hash(auth)
       
       # Create a new user or add an auth to existing user, depending on
@@ -24,12 +31,23 @@ class SessionsController < ApplicationController
         current_user.telephone = auth['user_info']['phone'] 
         current_user.save
       end
-      
+
       @auth = Authorization.create_from_hash(auth, current_user)
 
     end
+
     # Log the authorizing user in.
-    self.current_user = @auth.user
+    begin
+      self.current_user = @auth.user
+    rescue NoMethodError
+      redirect_to root_path
+    end
+
+    if @auth.token.blank?
+      a_find = Authorization.find_from_hash(auth)
+      a_find.token = token
+      a_find.save
+    end
 
     # If coming from an iPhone, redirect to another page with the user_id
     # TODO: turning off autoredirects while in alpha
@@ -43,6 +61,8 @@ class SessionsController < ApplicationController
         redirect_to request.env['omniauth.origin'] || search_index_path
       end
     end
+
+
   end
   
   def destroy

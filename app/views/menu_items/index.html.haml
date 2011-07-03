@@ -2,8 +2,8 @@
 #content
   #current_content_block
     #bread_crumbs
-      =link_to("← "+"back to results", "#")
-    #current_info_wrapper.restaurant{:data => {:latitude=> @restaurant.latitude, :longitude => @restaurant.longitude}}
+      /=link_to("← "+"back to results", "#")
+    #current_info_wrapper.restaurant{:data => {:latitude=> @restaurant.latitude, :longitude => @restaurant.longitude, :restaudat_id => params[:restaurant_id]}}
       #img_column.himportant
         =image_tag "temp_image.png"
         #icons_img_wrapper
@@ -50,5 +50,4 @@
       #update_place_restaurants{:class => class_name_from_path}
         = render :partial => "/items_grouped_by_stars"
 
-      = render :partial => "restaurants/modal_add_item"
 
