@@ -72,6 +72,7 @@ Crave::Application.routes.draw do
   resources :menu_item_prices
   resources :search
   
+  match '/activity', :to => 'users#following_reviews'
   match '/foodies', :to => 'users#following_reviews'
   match '/auth/:provider/callback', :to => 'sessions#create'  
   match '/signout' => 'sessions#destroy', :as => :signout

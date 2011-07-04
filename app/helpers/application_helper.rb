@@ -11,7 +11,7 @@ module ApplicationHelper
     elsif action_and_controller_name == "menu_items_index"
       str = @restaurant.name
     elsif action_and_controller_name == "users_following_reviews"
-      str = "foodies"
+      str = "activity"
     elsif (action_and_controller_name.include?("users_") && (@user))
       str = @user.user_name+"'s profile"
     else
