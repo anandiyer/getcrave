@@ -7,7 +7,7 @@
         - if @mi_rating.user_id?
           .reviews_wrapper_block
             .review_image_col
-              =image_tag "reviews_avatar_temp.png"
+              = render :partial => "/menu_items/small_thumbnail"
               #click &nbsp;
 
             .review_desc_col_wrapper

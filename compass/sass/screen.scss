@@ -326,14 +326,14 @@ body.two-col.bp{
                 }
                 li{
                     padding-right:13px;
-                    padding-top:1px;
+                    padding-top:3px;
                     .left_corner{
                         cursor: pointer;
                         float: left;
                         height: 27px;
                         width: 28px;
                         margin-left: -25px;
-                        margin-top: -1px;
+                        margin-top: -3px;
                         .icon_corner{
                             width:17px;
                             height: 20px;
@@ -367,32 +367,48 @@ body.two-col.bp{
                      }
                 }
 
-                li.foodies.selected .icon_corner{
-                    background:url(/images/sprites/icon-sprite.png) no-repeat 0 -77px;
-
+				li.leaderboard.selected .icon_corner{
+                    background:url(/images/sprites/icon-sprite.png) no-repeat 0 -36px;
                 }
-                li.foodies{
-                 .left_corner{
-                    width:38px;
-                     .icon_corner{
-                         width:24px;
-                         height: 22px;
-                         background:url(/images/sprites/icon-sprite.png) no-repeat 0 -100px;
-                     }
+                li.leaderboard{
+                     .left_corner{
+                    	width:38px;
+						.icon_corner{
+							width: 24px;
+							height: 20px;
+                    		background:url(/images/sprites/icon-sprite.png) no-repeat 0 -78px;
+                    }
+				}
+			}
+
+                li.activity.selected .icon_corner{
+					width: 24px;
+					height: 20px;
+                    background:url(/images/sprites/icon-sprite.png) no-repeat 0 -121px;
+					}
+                }
+
+                li.activity{ 
+					.left_corner{
+                    	width:35px;
+						.icon_corner{
+							width: 24px;
+							height: 20px;
+                    		background:url(/images/sprites/icon-sprite.png) no-repeat 0 -141px;
+                    }
+				}
                  }
 
-                }
-
                 li.profile.selected .icon_corner{
-                    background:url(/images/sprites/icon-sprite.png) no-repeat 0 -120px !important;
+                    background:url(/images/sprites/icon-sprite.png) no-repeat 0 -1290px !important;
                 }
 
                 li.profile{
                     .left_corner{
                         width:34px;
                         .icon_corner{
-                            background:url(/images/sprites/icon-sprite.png) no-repeat 0 -141px;
-                        }
+                            background:url(/images/sprites/icon-sprite.png) no-repeat 0 -1269px;
+                        
                     }
                 }
             }
@@ -832,7 +848,9 @@ body.two-col.bp{
 
 
             #current_content_block{
-                @include container;
+                width: 620px;
+				margin: 10px 0 0 0;
+				overflow: hidden;
 
                 #bread_crumbs_user{
                     height: 10px;
@@ -853,7 +871,6 @@ body.two-col.bp{
                     @include column($content-columns, true);
                     padding-bottom: 9px;
                     padding-right: 16px;
-                    border-bottom: 3px solid $light_gray;
 
 
 
@@ -934,7 +951,7 @@ body.two-col.bp{
                 }
                 #current_info_wrapper.restaurant{
                     /*position: relative;*/
-                    height: 163px;
+                    height: 110px;
 
                     .phone_number{
                         padding: 20px 0 0 0;
@@ -967,6 +984,7 @@ body.two-col.bp{
                 }
                 #current_info_wrapper{
                     @include container;
+					padding-bottom:10px;
                     #img_column{
                         $content-columns: ceil(3);
                         // true means it's the last column in the row
@@ -984,6 +1002,7 @@ body.two-col.bp{
                             overflow: hidden;
                             @include border-radius(3px);
                             cursor: pointer;
+							margin-bottom:10px;
                         }
 
 
@@ -1038,9 +1057,9 @@ body.two-col.bp{
                         }
 
                         #rating{
-                            padding:0;
+                            padding: 0;
 							font-size: 14px;
-							line-height: 21px;
+							line-height: 30px;
                         }
                         #desc_wrap_rest{
                             #description{
@@ -1058,13 +1077,13 @@ body.two-col.bp{
                         #desc_wrap{
                            /*@include container;*/
                            padding: 5px 0 5px 0;
-                           margin-top: 42px;
+                           margin-top: 3px;
                            border-top:1px solid $light_gray;
                            width: 457px;
                            font-size:12px;
 
                            div{
-                                padding:0 0 5px 0;
+                                padding:0 0 0px 0;
                            }
                            #labels{
                                @include container;
@@ -1116,7 +1135,6 @@ body.two-col.bp{
                 padding:0px 0 0 0px;
             }
             #reviews_wrapper{
-                border-top: 3px solid $light_gray;
                 padding:17px 0 0 8px;
 
 
@@ -1140,7 +1158,7 @@ body.two-col.bp{
                     .star_sm{
                         width: 150px;
                         @include container;
-                        margin: 0 0 5px 0;
+                        margin: 0 0 5px 0px;
                     }
                     table{
                         padding: 0px;
@@ -1259,6 +1277,7 @@ body.two-col.bp{
                                 font-weight: bold;
 
                             }
+						
                         }
                         .img_column_mi_1_col{
                             $content-columns: ceil(2);
@@ -1272,7 +1291,7 @@ body.two-col.bp{
                         .desc_block_2_col{
                             $content-columns: ceil(11);
                             @include column($content-columns, true);
-                            padding:10px 21px 10px 10px;
+                            padding:0px 21px 10px 10px;
                             h1{
                                 color: $blue;
                                 padding:0 0 3px 0;
@@ -1297,26 +1316,37 @@ body.two-col.bp{
 
 
             #reviews_wrapper{
-                margin: 18px 0 0 0;
-                padding:8px;
+                margin: 10px 0 0 0;
+                padding:0px;
                 $content-columns: ceil(15);
-                @include column($content-columns, true);
+                width:620px;
                 /*position: relative;*/
                 h3.review{
-                    font-size: 23px;
-                    margin-bottom:6px;
+                    font-size: 24px;
+					margin-bottom: 6px;
+					font-weight: lighter;
+					padding-top: 10px;
+					border-top: 3px solid #ECECEC;
+					padding-left: 10px;
                 }
 
                 #select_box_hint{
-                    width: 140px;
-                    height:30px;
-                    position: absolute;
-                    z-index: 1001;
-                    cursor: pointer;
-                    top:43px;
-                    left: 69px;
-                    background-color: transparent;
+                   	width: 140px;
+					height: 30px;
+					position: absolute;
+					z-index: 1001;
+					cursor: pointer;
+					top: 153px;
+					left: 69px;
+					background-color: transparent;
+					margin: 10px 0 0 65px;
                 }
+				.add-dish {
+					background: #EAEAEA;
+					padding: 3px 10px;
+					float: right;
+					margin-top: -40px;
+				}
 
 
                 #show_more_button{
@@ -1337,6 +1367,7 @@ body.two-col.bp{
                     width: 200px;
                     @include clearfix;
                     float: none;
+					padding-left: 10px;
 
                     #before_sort_by{
                         width: 50px;
@@ -1352,7 +1383,7 @@ body.two-col.bp{
                         vertical-align: middle;
                         background: url("/images/select_box.png") no-repeat 0 0;
                         width: 140px;
-                        margin: 4px 0 0 0;
+                        margin: 4px 5px 0 0;
                         height: 30px;
                         background-color: #fff;
                         input{
@@ -1412,7 +1443,7 @@ body.two-col.bp{
                         font-size: 14px;
                         float: left;
 						font-weight:bold;
-						width:455px;
+						width:415px;
 						line-height: 21px;
                         a{
                             text-decoration: none;
@@ -1423,17 +1454,22 @@ body.two-col.bp{
 
                     .review_image_col{
                         $content-columns: ceil(1);
-                        padding-right:28px;
-                        @include column($content-columns, true);
+                        margin-right: 10px;
+						display: inline;
+						float: left;
+						width: 85px;
+						overflow: hidden;
+						height: 85px;
+						background: #F4F4F4;
+						border-radius: 5px;
 
                         img{
-                            @include border-radius(3px);
                         }
 
                     }
                     .review_desc_col_wrapper{
                         @include column($content-columns, true);
-                        width: 545px;
+                        width: 508px;
 
                         .before_start{
                             line-height:24px;
@@ -1625,15 +1661,27 @@ body.two-col.bp{
 
 
 .plus, .birdy{
-    @include inline-block;
-    @include sprites($plus_position, 14px, 9px);
-    float: none;
+	display: -moz-inline-box;
+	-moz-box-orient: vertical;
+	display: inline-block;
+	vertical-align: middle;
+	background-image: url("/images/sprites/icon-sprite.png");
+	background-repeat: no-repeat;
+	background-position: 0 -581px;
+	width: 14px;
+	height: 16px;
+	float: left;
+	float: none;
 }
 
 .birdy{
-    @include sprites($birdy_position, 14px, 9px);
-     float: none;
-
+	background-image: url("/images/sprites/icon-sprite.png");
+	background-repeat: no-repeat;
+	background-position: 0 -554px;
+	width: 14px;
+	height: 14px;
+	float: left;
+	float: none;
 }
 
 .i{

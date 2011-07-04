@@ -1,5 +1,6 @@
 - if current_user
-  = link_to "Don't see what you're looking for? Add it.", "#", :class => 'activate_modal', :name => "modal_window"
+  .add-dish
+    = link_to "Don't see what you're looking for? Add it.", "#", :class => 'activate_modal', :name => "modal_window"
 
 
   - @restaurant = Restaurant.find(params[:restaurant_id])

@@ -1,7 +1,7 @@
 - content_for :opengraph_meta_tags, opengraph_meta_tags_for(@restaurant)
 #content
   #current_content_block
-    #bread_crumbs
+    -#bread_crumbs
       /=link_to("← "+"back to results", "#")
     #current_info_wrapper.restaurant{:data => {:latitude=> @restaurant.latitude, :longitude => @restaurant.longitude, :restaudat_id => params[:restaurant_id]}}
       #img_column.himportant
@@ -22,10 +22,10 @@
             %p= @restaurant.street_address
             %p= @restaurant.neighborhood
             %p= "#{@restaurant.city}, #{@restaurant.state} #{@restaurant.zip}"
-            .phone_number
-              / .col1_pn
-              / %p (415) 927 1849
-              /  %p= link_to "www.siet.com"
+            -# .phone_number
+              -# / .col1_pn
+              -# / %p (415) 927 1849
+              -# /  %p= link_to "www.siet.com"
               .col2_pn
                 :erb
                   <%= like_button_for @restaurant, :layout => :button_count, :width => 150, :show_faces => false %>                
