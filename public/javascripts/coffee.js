@@ -206,7 +206,7 @@
     }
   };
   window.make_unfollow = function() {
-    return $(".submit.submit_wrapper").removeClass("follow").addClass("unfollow").find(".text").text("Unfollow");
+    return $(".submit.submit_wrapper").removeClass("follow").addClass("unfollow").find(".text").text("Search");
   };
   window.gallery_init = function() {
     cl("newq init");
