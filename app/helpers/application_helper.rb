@@ -26,7 +26,7 @@ module ApplicationHelper
     class_name = "selected" if act_name == "nearby" && class_name_from_path == "menu_items_location"
     class_name = "selected" if act_name == "saved" && class_name_from_path == "users_saved"
     class_name = "selected" if act_name == "profile" && class_name_from_path == "users_show"
-    class_name = "selected" if act_name == "activity" && class_name_from_path == "users_show"
+    class_name = "selected" if act_name == "activity" && class_name_from_path == "users_following_reviews"
     class_name = "selected" if act_name == "leaderboard" && class_name_from_path == ""
 
 #    act_name == "nearby" && class_name_from_path == "restaurants_index" ? "selected" : "notselected"
