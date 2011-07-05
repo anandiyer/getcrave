@@ -118,9 +118,10 @@ Ext.regModel('savedDish',
     fields: ['menu_item','menu_item_avg_rating_count','avg_rating',{
         name: 'rating',
         convert: function(value, record) {
-            if(record.get('menu_item').menu_item_avg_rating_count.avg_rating) {
+            if(record.get('menu_item').menu_item_avg_rating_count) {
                 return record.get('menu_item').menu_item_avg_rating_count.avg_rating.toString();
             } else {
+                console.log('one is UNRATED');
                 return "unrated";
             }
         }
@@ -151,6 +152,8 @@ var dishStore = new Ext.data.Store({
         }
         if(rating==1) {
             return "<img src='../images/rating-stars/rating-dish-1.png'>";
+        } else {
+            return "unrated";
         }
     },
     proxy: {
@@ -165,7 +168,7 @@ var dishStore = new Ext.data.Store({
 
 var savedDishStore = new Ext.data.Store({
     model: 'savedDish',
-    sorters: [{property: 'arating', direction: 'ASC'}],
+    sorters: [{property: 'rating', direction: 'DESC'}],
     getGroupString : function(record) {
         rating = parseInt(record.get('rating'));
         if(rating==5) {
@@ -182,6 +185,8 @@ var savedDishStore = new Ext.data.Store({
         }
         if(rating==1) {
             return "<img src='../images/rating-stars/rating-dish-1.png'>";
+        } else {
+            return "?";
         }
     },
     proxy: {

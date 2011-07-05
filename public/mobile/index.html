@@ -101,6 +101,18 @@
     </tpl>
 </textarea>
 
+<textarea id="reviewDishTemplate" class="x-hidden-display">
+    <tpl for=".">
+        <div class="adish">
+            <img src="../images/no-image-default.png" class="dishImg">
+                <span class="dishname">{review}</span>
+            </div>
+            <span class="chevrony"></span>
+            </span>
+        </div>
+    </tpl>
+</textarea>
+
 
 <script type="text/javascript" src="sencha-touch.js"></script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -110,6 +122,7 @@
 <script type="text/javascript" src="dishes.js"></script>
 <script type="text/javascript" src="restaurants.js"></script>
 <script type="text/javascript" src="search.js"></script>
+<script type="text/javascript" src="profile.js"></script>
 
 <script type="text/javascript">
     Ext.setup({
@@ -132,7 +145,7 @@
                if(urlPrefixSet) {
                    console.log('setting proxy url');
                    dishStore.proxy.url = urlPrefix+encodeURIComponent('/items/location.json?distance=yes&lat=37.77867&limit=25&long=-122.39127');
-                   places.proxy.url = urlPrefix+encodeURIComponent('/places.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude);
+                   places.proxy.url = urlPrefix+encodeURIComponent('/places.json?lat=37.77867&limit=25&long=-122.39127');
                } else {
                    console.log('in production');
                    dishStore.proxy.url = 'http://getcrave.com/items/location.json?lat='+position.coords.latitude+'&distance=yes&limit=25&long='+position.coords.longitude;
@@ -224,12 +237,28 @@
                id:'savedList',
                scroll:'vertical',
                hideOnMaskTap: false,
+               width:'100%',
+               height:'100%',
                clearSectionOnDeactivate:true
+           });
+           savedList.on('itemtap', function(dataView, index, item, e) {
+               thisId = dishStore.findRecord("name",$(".dishname", item).text()).data.id;
+               Ext.Ajax.request({
+                   url: (urlPrefix+'/items/'+thisId+'.json'),
+                   reader: {
+                        type: 'json'
+                   },
+                   success: function(response) {
+                       dishDisplay(response);
+                   }
+               });
+               Ext.getCmp('mainPnl').setActiveItem(0);
            });
 
            var infoPnl = new Ext.Panel({
                html: '',
-               id: 'infoPnl'
+               id: 'infoPnl',
+               width:'100%'
            });
 
            var restMapPnl = new Ext.Panel ({
@@ -291,12 +320,40 @@
                if(target == "nearBy") {
                }
                if(target == "me") {
-                   justLoggedIn();
+                   // The process of becoming a badass javascript programmer is paved with endless acts of idiocy
+                   var amiLoggedIn = isLoggedIn();
+                   if(amiLoggedIn) {
+                       if(urlPrefixSet) {
+                           myDishStoreUrl = urlPrefix+encodeURIComponent('/users/'+localStorage.getItem("uid")+'.json');
+                       } else {
+                           myDishStoreUrl = 'http://getcrave.com/users/'+localStorage.getItem("uid")+'.json';
+                       }
+                       Ext.Ajax.request({
+                           url: (myDishStoreUrl),
+                           reader: {
+                                type: 'json'
+                           },
+                           success: function(response) {
+                               var responseObject = eval('(' + response.responseText + ')');
+                               $(".userPic").html('<img src="'+responseObject.user.user_profile_pic_url+'">');
+                               $(".userInfoPnl").html('<span class="userName">'+responseObject.user.user_name+'</span>');
+                               //loop through ratings
+                               //add each one as data store item to myDishStore
+                               var ratingsArray = new Array();
+                               for(g=0;g<responseObject.user.menu_item_ratings.length;g++) {
+                                   var newRating = responseObject.user.menu_item_ratings[g]
+                                   ratingsArray[g] = {id: newRating.id, rating: newRating.rating, review: newRating.review, menu_item_id: newRating.menu_item_id};
+                                   myDishStore.loadData({id: newRating.id.toString()});
+                               }
+                               console.log('whole store');
+                               console.log(myDishStore);
+                           }
+                       });
+                   }
                }
                console.log(b);
                console.log(e);
                if(target == "saved") {
-//                   Ext.getCmp('mainPnl').setActiveItem(savedPnl);
                    if(urlPrefixSet) {
                        savedDishStore.proxy.url = urlPrefix+encodeURIComponent('/users/'+localStorage.getItem("uid")+'/saved.json');
                    } else {
@@ -304,7 +361,8 @@
                    }
                    console.log(savedDishStore.proxy.url);
                    savedDishStore.load(function() {
-                       console.log('dish store loaded');
+                       console.log('saved dish store loaded');
+                       console.log(savedDishStore);
                });
                }
            }
@@ -333,6 +391,8 @@
                    direction: 'normal'
                },
                scroll:'vertical',
+               width:'100%',
+               height:'100%',
                dockedItems:[
                    {
                        dock:'top',
@@ -348,25 +408,11 @@
                ]
            });
 
-           var profilePnl = new Ext.Panel({
-               html:'<div class="fancyImage"><img class="logoutButton" src="../images/profile-cold-food.png"></div><div class="explanation">Rate & Save Dishes, Follow Foodies</div><a href="/auth/facebook" class="loginButton"></a>',
-               id: 'profilePnl',
-               scroll:'vertical',
-               dockedItems:[
-                   {
-                       dock:'top',
-                       xtype:'toolbar',
-                       ui:'light',
-                       title:'<img class="cravelogo" src="../images/crave-logo-horizontal-white.png">',
-                       items:[{text:'Back',ui:'back', handler:backHandler}]
-                   }
-               ]
-           });
-
            var savedPnl = new Ext.Panel({
                id: 'savedPnl',
                items: [savedList],
-               scroll:'vertical',
+               width:'100%',
+               height:'100%',
                dockedItems:[
                    {
                        dock:'top',
@@ -466,7 +512,11 @@
                        iconCls:'nearBy',
                        id:'listPnlTab',
                        items:[listPnl]
-                   },{title:'saved',iconCls:'saved',items:[savedPnl]},{title:'me',iconCls:'me',items:[profilePnl]},{width:0,items:[placePnl]},{width:0,items:[newDishForm]},{width:0,items:[reviewFormPnl   ]},{width:0,items:[filterListPnl]}],
+                   },
+                   {title:'saved',iconCls:'saved',items:[savedPnl]},
+                   {title:'me',iconCls:'me',handler:sessionHandler,items:[profilePnl]},
+                   placePnl,{width:0,items:[newDishForm]},{width:0,items:[reviewFormPnl]},{width:0,items:[filterListPnl]}
+               ],
                tabBar: {
                    dock: 'bottom',
                    ui: 'dark',

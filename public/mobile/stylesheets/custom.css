@@ -86,6 +86,7 @@ font-weight: lighter;
     padding:5px;
     margin:12px auto;
 }
+.dishInfo {background-color: white;}
 .dishinfo, #reviewPnl {
 	padding: 12px;
 	border: 1px solid;
@@ -364,3 +365,6 @@ text-rendering: optimizeLegibility;
 }
 
 .filtersButton {background-image:url('../../images/filter-icon.png');}
+
+userTopPnl {background-color:#fff;}
+.userPic, .userInfoPnl {float:left;}

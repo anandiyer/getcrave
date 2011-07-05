@@ -1,6 +1,6 @@
 var backHandler = function(b,e) {
-    if(b.getText() == "Back") {
-        Ext.getCmp('mainPnl').setActiveItem(0);
+    if(b.getText() == "Back" || b.getText() == "Cancel") {
+        Ext.getCmp('mainPnl').setActiveItem(1);
     }
 }
 var rateHandler = function(b,e) {

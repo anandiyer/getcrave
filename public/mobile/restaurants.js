@@ -103,8 +103,10 @@ function placeDisplay(record, index) {
     console.log(urlPrefix+'/places/'+record.data.id+'/items.json');
     singleRestaurantStore.proxy.url = (urlPrefix+'/places/'+record.data.id+'/items.json');
 
+    console.log('set to 4');
+    Ext.getCmp('mainPnl').setActiveItem(4);
     singleRestaurantStore.load(function(){
-        Ext.getCmp('mainPnl').setActiveItem(2);
+        console.log('store loaded');
         totalRatings = 0;
         singleRestaurantStore.each(function() {
            console.log(this.data.rating_count);
@@ -403,5 +405,5 @@ aRestaurantList.on('itemtap', function(dataView, index, item, e) {
             dishDisplay(response);
         }
     });
-    Ext.getCmp('mainPnl').setActiveItem(1);
+    Ext.getCmp('mainPnl').setActiveItem(0);
 });
