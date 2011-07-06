@@ -33,7 +33,9 @@ class SessionsController < ApplicationController
       # TODO: we shouldn't have to do this if the user is simply
       # assocating their account with another provider. Do this
       # only for first time account creators
-      Notifier.signup_email(@auth.user).deliver
+      if ((auth['provider'] == 'facebook') && (@auth.user))
+        Notifier.signup_email(@auth.user).deliver
+      end
     end
 
     # Log the authorizing user in.
