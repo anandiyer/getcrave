@@ -38,17 +38,20 @@ class SessionsController < ApplicationController
       end
     end
 
-    # Log the authorizing user in.
-    begin
-      self.current_user = @auth.user
-    rescue NoMethodError
-      redirect_to root_path
-    end
+    # Since FB is the only supported auth mechanism right now...
+    if (auth['provider'] == 'facebook')
+      # Log the authorizing user in.
+      begin
+        self.current_user = @auth.user
+      rescue NoMethodError
+        redirect_to root_path
+      end
 
-    if @auth.token.blank?
-      a_find = Authorization.find_from_hash(auth)
-      a_find.token = token
-      a_find.save
+      if @auth.token.blank?
+        a_find = Authorization.find_from_hash(auth)
+        a_find.token = token
+        a_find.save
+      end
     end
 
     # If coming from an iPhone, redirect to another page with the user_id
