@@ -95,8 +95,8 @@ class UsersController < ApplicationController
     respond_to do |format|
 
       format.html # _unused_show.html.haml
-      format.xml  { render :xml => @user.to_xml( :include => :menu_item_ratings ) }
-      format.json  { render :json => @user.to_json( :include => :menu_item_ratings ) }
+      format.xml  { render :xml => @user.to_xml( :include => {:menu_item_ratings => {:include => {:menu_item => {:include => [:restaurant]} }}})}
+      format.json  { render :json => @user.to_json( :include => {:menu_item_ratings => {:include => {:menu_item => {:include => [:restaurant]} }}})}
     end
   end
 
