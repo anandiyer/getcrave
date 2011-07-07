@@ -13,7 +13,7 @@ module MenuItemsHelper
 
 def get_photo_url_4_thumbnail menu_item_id, size = "middle"
   if MenuItem.find(menu_item_id).menu_item_photos.any?
-    MenuItem.find(menu_item_id).menu_item_photos.first.photo
+    "http://src.sencha.io/113/85/" + MenuItem.find(menu_item_id).menu_item_photos.first.photo
   else
     size == "middle" ? "temp_image.png" : "item_rest_temp_image.png"
   end

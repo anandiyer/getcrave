@@ -253,7 +253,8 @@ window.thumbnail_resizing = () ->
     if $("#image_thumbnail_middle_size").length > 0
 
         if parseInt($("#gallery #photos_counter").text()) > 0
-           source =  $("#gallery a").first().attr("href")
+           source1 =  $("#gallery a").first().attr("href")
+           source = "http://src.sencha.io/150/150/" + source1
            img = $("#image_thumbnail_middle_size img")
            $(img).attr("src", source)
 
@@ -268,7 +269,7 @@ window.thumbnail_resizing = () ->
             else
                 attr = "width"
 
-            $(img).attr("height", "140px").css("opacity", 1)
+            $(img).attr(attr, "140px").css("opacity", 1)
             make_clickable_menu_item_image()
 
 

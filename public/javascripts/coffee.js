@@ -206,7 +206,7 @@
     }
   };
   window.make_unfollow = function() {
-    return $(".submit.submit_wrapper").removeClass("follow").addClass("unfollow").find(".text").text("Search");
+    return $(".submit.submit_wrapper").removeClass("follow").addClass("unfollow").find(".text").text("Unfollow");
   };
   window.gallery_init = function() {
     cl("newq init");
@@ -263,10 +263,11 @@
     });
   };
   window.thumbnail_resizing = function() {
-    var img, source;
+    var img, source, source1;
     if ($("#image_thumbnail_middle_size").length > 0) {
       if (parseInt($("#gallery #photos_counter").text()) > 0) {
-        source = $("#gallery a").first().attr("href");
+        source1 = $("#gallery a").first().attr("href");
+        source = "http://src.sencha.io/150/150/" + source1;
         img = $("#image_thumbnail_middle_size img");
         $(img).attr("src", source);
         return $("#image_thumbnail_middle_size img").load(function() {
@@ -279,7 +280,7 @@
           } else {
             attr = "width";
           }
-          $(img).attr("height", "140px").css("opacity", 1);
+          $(img).attr(attr, "140px").css("opacity", 1);
           return make_clickable_menu_item_image();
         });
       }
