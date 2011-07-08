@@ -4,6 +4,8 @@
     .b
       - if @menu_item
         %h1= link_to @menu_item.name, @menu_item
+        .b.i
+          = link_to "@ "+@menu_item.restaurant.name, @menu_item.restaurant
         .b.i= @menu_item.description
       - else
         %h1 title
