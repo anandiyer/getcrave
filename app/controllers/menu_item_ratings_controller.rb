@@ -110,10 +110,6 @@ class MenuItemRatingsController < ApplicationController
 
       if current_user
         @menu_item_rating.user_id = current_user.id
-      else
-#      TODO: destroy this line after restore facebook auth
-        unknown_user = User.find_or_create_by_user_name("Unknown user")
-        @menu_item_rating.user_id = unknown_user.id
       end
 
       respond_to { |format|
