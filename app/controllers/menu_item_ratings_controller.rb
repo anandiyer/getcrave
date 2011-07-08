@@ -94,7 +94,7 @@ class MenuItemRatingsController < ApplicationController
   # POST /menu_item_ratings
   # POST /menu_item_ratings.xml
   def create
-      if params[:facebook][:boolean] == "1"
+      if params[:facebook] && params[:facebook][:boolean] == "1"
 
         if current_user.authorizations.first.token.blank?
           session[:user_id] = nil
