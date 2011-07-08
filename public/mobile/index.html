@@ -330,6 +330,7 @@
                        } else {
                            myDishStoreUrl = 'http://getcrave.com/users/'+localStorage.getItem("uid")+'.json';
                        }
+                       loggedinProfilePnl.setLoading(true);
                        Ext.Ajax.request({
                            url: (myDishStoreUrl),
                            reader: {
@@ -350,6 +351,7 @@
                                    myDishStore.loadData(ratingsArray);
                                    //refresh myDishList here
                                }
+                               loggedinProfilePnl.setLoading(false);
                                console.log('whole store');
                                console.log(myDishStore);
                                myDishList.refresh();
