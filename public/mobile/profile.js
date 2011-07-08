@@ -111,6 +111,8 @@ var loggedinProfilePnl = new Ext.Panel({
 var signoutHandler = function(b,e) {
     if(b.getText() == "Sign Out") {
         localStorage.setItem("uid","");
+        $("#signOutButton").css("display","none");
+
         Ext.getCmp("profilePnl").setActiveItem(1);
     }
 }
@@ -128,7 +130,7 @@ var profilePnl = new Ext.Panel({
             xtype:'toolbar',
             ui:'light',
             title:'<img class="cravelogo" src="../images/crave-logo-horizontal-white.png">',
-            items:[{text:'Sign Out',ui:'normal', handler:signoutHandler}]
+            items:[{text:'Sign Out',id:'signOutButton',ui:'normal', handler:signoutHandler}]
         }
     ],
     cardSwitchAnimation: 'pop',
