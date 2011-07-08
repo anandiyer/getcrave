@@ -21,9 +21,9 @@ class ApplicationController < ActionController::Base
   end
 
   def check_auth_fb
-
+    is_mobile = params[:mobile] ? true : false 
     title = "Please sign in!"
-    if !signed_in?
+    if !signed_in? && !is_mobile
       render :js => "window.show_dialog(\"#{title}\")"
     end
   end
