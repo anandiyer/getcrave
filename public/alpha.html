@@ -35,10 +35,13 @@
         }
 
         function error(msg) {
-            var s = document.querySelector('#status');
-            s.innerHTML = typeof msg == 'string' ? msg : "failed";
-            s.className = 'fail';
-            // console.log(arguments);
+//            var s = document.querySelector('#status');
+//            s.innerHTML = typeof msg == 'string' ? msg : "failed";
+//            s.className = 'fail';
+			  path = "/items/location?lat=37.77868&long=-122.39151"
+			  window.location = path
+			  console.log("geolocation failed");
+			  console.log(msg.code); 
         }
 
         if (navigator.geolocation) {
