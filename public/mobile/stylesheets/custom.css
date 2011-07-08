@@ -366,5 +366,7 @@ text-rendering: optimizeLegibility;
 
 .filtersButton {background-image:url('../../images/filter-icon.png');}
 
-userTopPnl {background-color:#fff;}
+.userTopPnl {background-color:#fff;}
 .userPic, .userInfoPnl {float:left;}
+
+.reviewCount {clear:both;}

@@ -8,60 +8,35 @@ Ext.regModel('User',
 {
     fields: ['user_name']
 });
-/*
-Ext.regModel("User", {
-    fields: [
-        'user', {
-        name: 'user_name',
-        convert: function(value, record) {
-            if(record.get('user').user_name) {
-                return record.get('user').user_name.toString();
-            } else {
-                return "unknown";
-            }
-        }
-    }, {
-        name: 'user_profile_pic_url',
-        convert: function(value, record) {
-            if(record.get('user').user_profile_pic_url) {
-                return record.get('user').user_profile_pic_url.toString();
-            } else {
-                return "unknown";
-            }
-        }
-    }
-    ]//,
 
-    //hasMany: {model: 'MyRatings', name: 'menu_item_ratings'}
-});
-*/
 Ext.regModel('MyRatings',
 {
-    fields: ['review','id','menu_item_id','rating']
+    fields: ['id','review','menu_item_id','rating','name','restaurant_name']
 });
 
 var myDishStore = new Ext.data.Store({
     model: 'MyRatings',
-    data:[]
-/* [{
-rating: 4,
-menu_item_id: 254296,
-review: "This is a tender, tasty meat on a small, crunchy slice of bread",
-id: 621
-},
-{
-rating: 5,
-menu_item_id: 254158,
-review: "Awesome fusion dish usually prepared with love by its namesake's grillmistress",
-id: 622
-},
-{
-rating: 3,
-menu_item_id: 137323,
-review: "Order without tortilla or rice for 4HB compliance",
-id: 660
-}
-] */
+    sorters: [{property: 'arating', direction: 'DESC'}],
+    getGroupString : function(record) {
+        rating = parseInt(record.get('rating'));
+        if(rating==5) {
+            return "<img src='../images/rating-stars/rating-dish-5.png'>";
+        }
+        if(rating==4) {
+            return "<img src='../images/rating-stars/rating-dish-4.png'>";
+        }
+        if(rating==3) {
+            return "<img src='../images/rating-stars/rating-dish-3.png'>";
+        }
+        if(rating==2) {
+            return "<img src='../images/rating-stars/rating-dish-2.png'>";
+        }
+        if(rating==1) {
+            return "<img src='../images/rating-stars/rating-dish-1.png'>";
+        } else {
+            return "unrated";
+        }
+    }
 });
 
 reviewTemplate = new Ext.XTemplate.from('reviewDishTemplate');
@@ -76,12 +51,14 @@ var myDishList = new Ext.List({
     id:'myDishList',
     scroll:'vertical',
     width:'100%',
-    height:'100%',
+    height:300,
     hideOnMaskTap: false,
     clearSectionOnDeactivate:true
 });
 myDishList.on('itemtap', function(dataView, index, item, e) {
+    console.log($(".dishname", item).text());
     thisId = myDishStore.findRecord("name",$(".dishname", item).text()).data.id;
+    console.log(thisId);
     Ext.Ajax.request({
         url: (urlPrefix+'/items/'+thisId+'.json'),
         reader: {
@@ -94,19 +71,28 @@ myDishList.on('itemtap', function(dataView, index, item, e) {
     Ext.getCmp('mainPnl').setActiveItem(0);
 });
 
-
-var profileInfoPnl = new Ext.Panel({
-    html:'<div class="userTopPnl"><div class="userPic"></div><div class="userInfoPnl"></div></div>',
-    id: 'profileInfoPnl',
-    height:100,
-    width:'100%'
-});
-
 var blankPnl = new Ext.Panel({
     html:'',
     id: 'profileInfoPnl',
-    scroll:'none',
     height:'100%',
+    width:'100%'
+});
+
+var myDishListPnl = new Ext.Panel({
+    items:[myDishList,blankPnl],
+    id: 'myDishListPnl',
+    layout: {
+        type: 'card'
+    },
+    width:'100%',
+    height:'100%'
+});
+
+
+var profileInfoPnl = new Ext.Panel({
+    html:'<div class="userTopPnl"><div class="userPic"></div><div class="userInfoPnl"><div class="profileUsername"></div><div class="reviewCount"></div></div></div>',
+    id: 'profileInfoPnl',
+    height:100,
     width:'100%'
 });
 
