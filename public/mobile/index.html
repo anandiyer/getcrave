@@ -328,7 +328,7 @@
                        if(urlPrefixSet) {
                            myDishStoreUrl = urlPrefix+encodeURIComponent('/users/'+localStorage.getItem("uid")+'.json');
                        } else {
-                           myDishStoreUrl = 'http://getcrave.com/users/'+localStorage.getItem("uid")+'.json';
+                           myDishStoreUrl = 'http://getcrave.com/users/'+localStorage.getItem("uid")+'.json?page=1';
                        }
                        loggedinProfilePnl.setLoading(true);
                        Ext.Ajax.request({
