@@ -5,12 +5,14 @@
   - @current_menu_item_reviews = @menu_item.menu_item_ratings.order("created_at DESC").page(params[:page] ? params[:page] : 1).per(params[:limit] ? params[:limit] : ITEMS_PER_PAGE)
 
   - @current_menu_item_reviews.each do |@mi_rating|
+    - anchorname = @mi_rating.id.to_s
     - user = User.find(@mi_rating.user_id)
     - if @mi_rating.user_id?
       .reviews_wrapper_block
-        .review_image_col
-          = link_to(image_tag(user.small_thumbnail), user)
-          #click &nbsp;
+        %a.anchor{:name => anchorname}
+          .review_image_col
+            = link_to(image_tag(user.small_thumbnail), user)
+            #click &nbsp;
 
         .review_desc_col_wrapper
           .before_start
