@@ -29,8 +29,8 @@ class MenuItemRatingsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml { render :xml => @menu_item_ratings }
-      format.json { render :json => @menu_item_ratings }
+      format.xml { render :xml => @menu_item_ratings.to_xml(:include => {:menu_item => {:include => [:restaurant, :menu_item_photos]} }) }
+      format.json { render :json => @menu_item_ratings.to_json(:include => {:menu_item => {:include => [:restaurant, :menu_item_photos]} })}
     end
   end
 
