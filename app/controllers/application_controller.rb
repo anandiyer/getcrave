@@ -1,42 +1,48 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-
-  helper_method :is_almazom?
-
-
-  def is_almazom?
-    request.server_port == 3006
-  end
-
+  before_filter :is_authorized?
+  helper_method :current_user, :signed_in?, :check_auth_fb, :is_authorized?
 
   protected
 
   def current_user
-#TODO: fix me
-#    if is_almazom?
-#      @current_user ||= User.where(:user_name => "almazom_new_user").first
-#    else
     @current_user ||= User.find_by_id(session[:user_id])
-#    end
+  end
+  
+  def is_authorized?
+    if (request.request_uri.include?'/auth/')
+      is_auth_path = true
+    else
+      is_auth_path = false
+    end
+
+    if (request.domain.include?('heroku'))
+      is_heroku = true
+    else
+      is_heroku = false
+    end
+      
+    if ((request.request_uri.include?'/mobile/') || (params[:mobile]))
+      is_mobile = true
+    else
+      is_mobile = false
+    end
+
+    if !signed_in? && !is_mobile && !is_auth_path && !is_heroku
+      redirect_to("/index.html") and return
+    end
   end
 
   def check_auth_fb
-
     title = "Please sign in!"
-    if !signed_in?
+    if !signed_in? && !is_mobile?
       render :js => "window.show_dialog(\"#{title}\")"
     end
   end
 
-
-
   def signed_in?
-#    true
-#    TODO: UNTIL FACEBOOCK NOT WORK
     !!current_user
   end
-
-  helper_method :current_user, :signed_in?, :check_auth_fb
 
   def current_user=(user)
     @current_user = user

@@ -2,6 +2,12 @@
   #update_place_restaurants{:class => class_name_from_path}
     #reviews_wrapper_bloc_wrapper
 
+      - if @menu_item_ratings.count == 0
+        You're not following anyone yet :( Here's a list of cravers you may want to follow:
+        - @users ||= User.find(:all, :order => 'user_ratings_count DESC', :limit => ITEMS_PER_PAGE)
+        #reviews_wrapper{:class => class_name_from_path}
+          #update_place_restaurants{:class => class_name_from_path}
+            =render :partial => "following_users"
       - @menu_item_ratings.each do |@mi_rating|
         - @menu_item = @mi_rating.menu_item
         - if @mi_rating.user_id?

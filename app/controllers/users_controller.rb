@@ -35,6 +35,8 @@ class UsersController < ApplicationController
       
       respond_to do |format|
         format.html
+        format.xml  { render :xml => @menu_item_ratings.to_xml }
+        format.json  { render :json => @menu_item_ratings.to_json }
       end
     end
   end
@@ -95,8 +97,8 @@ class UsersController < ApplicationController
     respond_to do |format|
 
       format.html # _unused_show.html.haml
-      format.xml  { render :xml => @user.to_xml( :include => {:menu_item_ratings => {:include => {:menu_item => {:include => [:restaurant]} }}})}
-      format.json  { render :json => @user.to_json( :include => {:menu_item_ratings => {:include => {:menu_item => {:include => [:restaurant]} }}})}
+      format.xml  { render :xml => @user.to_xml}
+      format.json  { render :json => @user.to_json}
     end
   end
 
@@ -170,7 +172,7 @@ class UsersController < ApplicationController
   private
 
   def params_4_show_and_saved
-    @user = User.find(params[:id], :include => :menu_item_ratings)
+    @user = User.find(params[:id])
   end
 
   protected

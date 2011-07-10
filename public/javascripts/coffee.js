@@ -188,7 +188,7 @@
     }
     cl("set map");
     ar = [];
-    if ($(".menu_items_location").length > 0 || $(".search_index").length > 0 || $(".restaurants_index").length > 0 || $(".user_saved_menu_items_index").length > 0) {
+    if ($(".menu_items_nearby").length > 0 || $(".search_index").length > 0 || $(".restaurants_index").length > 0 || $(".user_saved_menu_items_index").length > 0) {
       $(".restaurant_menu_item_wrapper").each(function() {
         var lat, long;
         lat = $(this).data("latitude");
@@ -370,7 +370,7 @@
     search_bind();
     top_nav_bind();
     thumbnail_resizing();
-    if (window.location.href.indexOf("search") > 0 || window.location.href.indexOf("/items/location") > 0) {
+    if (window.location.href.indexOf("search") > 0 || window.location.href.indexOf("/items/nearby") > 0) {
       columnizing();
     }
     $("#navigation .left_corner").live("click", function() {

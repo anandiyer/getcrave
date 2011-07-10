@@ -23,12 +23,9 @@ class MenuItemsController < ApplicationController
   respond_to :js, :only => [:show_menu_items_of_place, :show_menu_items_nearby]
 
   layout "general"
-  
-  def nearby_loading
 
-  end
 
-  def location
+  def nearby
     params_4_location_and_show_menu_item_nearby
 
 
@@ -199,7 +196,6 @@ class MenuItemsController < ApplicationController
 #          temp.save did not work (())
 #          TODO: Anand? can you refactor me?
 
-         p "insert into temp_image"
           TempImage.find_by_sql("INSERT INTO temp_images(hash, image_name) VALUES ('"+params[:uuid]+"', '"+url+"')")
 
           render :nothing => true
@@ -355,7 +351,8 @@ class MenuItemsController < ApplicationController
       :limit => ITEMS_PER_PAGE)
 
     #FIXME - need to get all the menu item attributes like ratings, photos etc.
-    @menu_item = MenuItem.find(params[:id], :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings])
+    @menu_item = MenuItem.find(params[:id], 
+      :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings])
 
   end
 

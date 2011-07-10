@@ -16,7 +16,6 @@ Crave::Application.routes.draw do
   resources :helpful, :as => "menu_item_rating_helpfuls", :controller => "menu_item_rating_helpfuls"
 
   resources :items, :as => "menu_items", :controller => "menu_items" do
-
     resources :ratings, :as => "menu_item_ratings", :controller => "menu_item_ratings" do
       collection do
         get 'avg_rating'
@@ -28,7 +27,7 @@ Crave::Application.routes.draw do
       post 'upload_photo'
     end
     collection do
-      get 'search', 'location', 'show_menu_items_nearby' ,'show_menu_items_of_place' , 'nearby_loading', 'food_by_foursquare_venue'
+      get 'search', 'nearby', 'show_menu_items_nearby' ,'show_menu_items_of_place' , 'nearby_loading', 'food_by_foursquare_venue'
     end
   end
 

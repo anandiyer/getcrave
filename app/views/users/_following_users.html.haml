@@ -1,12 +1,20 @@
-- if @following || @followers
+- if @following || @followers || @users
   %table
-    - @followers ? items = @followers : items = @following
+    - if (@followers)
+      - items = @followers
+    - elsif (@following)
+      - items = @following
+    - else
+      - items = @users
 
     - items.each do |@user_f|
-      - user = User.find(@followers ? @user_f.user_id : @user_f.following_user_id)
+      - if @following || @followers
+        - user = User.find(@followers ? @user_f.user_id : @user_f.following_user_id)
+      - else
+        - user = @user_f       
       %tr
 
-        %td.thumbnail= image_tag "reviews_avatar_temp.png"
+        %td.thumbnail= link_to(image_tag(user.small_thumbnail), user)
         %td.name= link_to user.user_name, user
         %td.reviews
           .reviews_couner_3_col

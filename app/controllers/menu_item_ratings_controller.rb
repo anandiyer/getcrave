@@ -29,8 +29,8 @@ class MenuItemRatingsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml { render :xml => @menu_item_ratings }
-      format.json { render :json => @menu_item_ratings }
+      format.xml { render :xml => @menu_item_ratings.to_xml(:include => {:menu_item => {:include => [:restaurant, :menu_item_photos]} }) }
+      format.json { render :json => @menu_item_ratings.to_json(:include => {:menu_item => {:include => [:restaurant, :menu_item_photos]} })}
     end
   end
 
@@ -70,42 +70,37 @@ class MenuItemRatingsController < ApplicationController
 
 
   def send_to_fb_wall
-      menu_item_id = params[:menu_item_rating][:menu_item_id]
-      menu_item = MenuItem.find(menu_item_id)
-      name = menu_item.name
-      link = "http://getcrave.com/items/"+params[:menu_item_rating][:menu_item_id]
-      message = "I just craved the #{name} - "+link
-      picture = menu_item.thumbnail.index("amazonaws").nil? ? "http://getcrave.com/images/"+menu_item.thumbnail : menu_item.thumbnail
-      desc = menu_item.description ? menu_item.description : "Have you ever been to a restaurant and asked, “So, what’s good here?” We help people find the food they like."
+    menu_item_id = params[:menu_item_rating][:menu_item_id]
+    
+    menu_item = MenuItem.find_by_id(menu_item_id)
+    menu_item_friendly_id = menu_item.friendly_id
+    name = menu_item.name
+    
+    review = params[:menu_item_rating][:review] ? params[:menu_item_rating][:review] : "I just craved " + name
+    
+    menu_item_rating_id = @menu_item_rating.id.to_s
+    link = "http://getcrave.com/items/"+menu_item_friendly_id+"#"+menu_item_rating_id
+    message = review + " - " + link 
+    picture = menu_item.thumbnail.index("amazonaws").nil? ? "http://getcrave.com/images/"+menu_item.thumbnail : menu_item.thumbnail
+    desc = menu_item.description ? menu_item.description : "Have you ever been to a restaurant and asked, “So, what’s good here?” We help people find the food they like."
 
-      token = current_user.authorizations.first.token
+    #TODO: be careful - we need to check to see if this is the FB authorization
+    token = current_user.authorizations.first.token
 
-      me = FbGraph::User.me(token)
-      me.feed!(
+    me = FbGraph::User.me(token)
+    me.feed!(
           :message => message,
           :picture => picture,
           :link => link,
           :name => name,
           :description => desc
-      )
+    )
 
   end
 
   # POST /menu_item_ratings
   # POST /menu_item_ratings.xml
   def create
-      if params[:facebook][:boolean] == "1"
-
-        if current_user.authorizations.first.token.blank?
-          session[:user_id] = nil
-          session[:redirect_to] = nil
-          render :text => "no_token"
-          return
-        else
-          send_to_fb_wall
-        end
-      end
-
       @menu_item_rating = MenuItemRating.new(params[:menu_item_rating])
 
       if current_user
@@ -114,6 +109,19 @@ class MenuItemRatingsController < ApplicationController
 
       respond_to { |format|
         if @menu_item_rating.save
+          
+          if params[:facebook] && params[:facebook][:boolean] == "1"
+
+            if current_user.authorizations.first.token.blank?
+              session[:user_id] = nil
+              session[:redirect_to] = nil
+              render :text => "no_token"
+              return
+            else
+              send_to_fb_wall
+            end
+          end
+          
           format.html { redirect_to(@menu_item_rating, :notice => 'Menu item rating was successfully created.') }
           format.xml { render :xml => @menu_item_rating, :status => :created, :location => @menu_item_rating }
           format.json { render :json => @menu_item_rating, :status => :created, :location => @menu_item_rating }

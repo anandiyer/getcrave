@@ -26,7 +26,7 @@
       .left_corner
         .icon_corner
       - if cookies[:lat]
-        = link_to "Nearby", "/items/location?lat=#{cookies[:lat]}&long="+cookies[:long]
+        = link_to "Nearby", "/items/nearby?lat=#{cookies[:lat]}&long="+cookies[:long]
       - else
         =link_to "Nearby", nearby_path
 

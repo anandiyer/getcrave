@@ -25,7 +25,7 @@
     = stylesheet_link_tag "jquery.lightbox-0.5.css"
 
     -#columnizing
-    = javascript_include_tag  "plugins/autocolumn.min.js" if %w{menu_items_location restaurants_index search_index}.include?(class_name_from_path)
+    = javascript_include_tag  "plugins/autocolumn.min.js" if %w{menu_items_nearby restaurants_index search_index}.include?(class_name_from_path)
 
     -#autocomplete
     = javascript_include_tag "plugins/ui/jquery.ui.core.js","plugins/ui/jquery.ui.widget.js","plugins/ui/jquery.ui.position.js","plugins/ui/jquery.ui.autocomplete.js"
