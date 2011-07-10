@@ -16,8 +16,11 @@ class ApplicationController < ActionController::Base
       is_auth_path = false
     end
 
+    p "HERE! blooming-water"
+    p request.domain
+
+
     if (request.domain.include?('blooming-water-228'))
-      p "HERE! blooming-water"
       is_blooming_water_domain = true
     else
       is_blooming_water_domain = false
