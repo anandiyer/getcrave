@@ -865,7 +865,7 @@ body.two-col.bp{
             #current_content_block{
                 width: 620px;
 				margin: 10px 0 0 0;
-				overflow: hidden;
+
 
                 #bread_crumbs_user{
                     height: 10px;
@@ -968,6 +968,9 @@ body.two-col.bp{
                 #current_info_wrapper.restaurant{
                     /*position: relative;*/
                     height: 110px;
+					border-bottom: 3px solid #ECECEC;
+					padding-bottom: 30px;
+					width: 620px;
 
                     .phone_number{
                         padding: 20px 0 0 0;
@@ -979,6 +982,8 @@ body.two-col.bp{
                         .col1_pn{
                             $content-columns: ceil(3);
                             @include column($content-columns, true);
+							height:30px;
+							border:1px solid;
                         }
                         .col2_pn{
                             $content-columns: ceil(12);
@@ -1080,6 +1085,7 @@ body.two-col.bp{
                         }
                         #desc_wrap_rest{
                             #description{
+								padding-bottom:5px;
                                 p{
                                     padding:0;
                                     margin: 0;
@@ -1343,7 +1349,7 @@ body.two-col.bp{
 					margin-bottom: 6px;
 					font-weight: lighter;
 					padding-top: 10px;
-					border-top: 3px solid #ECECEC;
+					/*border-top: 3px solid #ECECEC;*/
 					padding-left: 10px;
                 }
 
@@ -1353,8 +1359,8 @@ body.two-col.bp{
 					position: absolute;
 					z-index: 1001;
 					cursor: pointer;
-					top: 153px;
-					left: 69px;
+					top: 370px;
+					left: 138px;
 					background-color: transparent;
 					margin: 10px 0 0 65px;
                 }
