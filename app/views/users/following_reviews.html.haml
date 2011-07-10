@@ -8,6 +8,7 @@
         #reviews_wrapper{:class => class_name_from_path}
           #update_place_restaurants{:class => class_name_from_path}
             =render :partial => "following_users"
+      Most recent reviews from cravers you are following...
       - @menu_item_ratings.each do |@mi_rating|
         - @menu_item = @mi_rating.menu_item
         - if @mi_rating.user_id?

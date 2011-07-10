@@ -37,6 +37,7 @@ group :development, :test do
   gem "haml"
   gem "haml-rails"
   gem "faraday"
+  gem 'ruby-debug' 
 end
 
 group :production do

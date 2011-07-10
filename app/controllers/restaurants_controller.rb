@@ -1,6 +1,5 @@
 class RestaurantsController < ApplicationController
 
-
   layout "general"
 
   def index
