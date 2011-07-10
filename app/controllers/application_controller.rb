@@ -16,14 +16,10 @@ class ApplicationController < ActionController::Base
       is_auth_path = false
     end
 
-    p "HERE! blooming-water"
-    p request.domain
-
-
-    if (request.domain.include?('blooming-water-228'))
-      is_blooming_water_domain = true
+    if (request.domain.include?('heroku'))
+      is_heroku = true
     else
-      is_blooming_water_domain = false
+      is_heroku = false
     end
       
     if ((request.request_uri.include?'/mobile/') || (params[:mobile]))
@@ -32,7 +28,7 @@ class ApplicationController < ActionController::Base
       is_mobile = false
     end
 
-    if !signed_in? && !is_mobile && !is_auth_path && !is_blooming_water_domain
+    if !signed_in? && !is_mobile && !is_auth_path && !is_heroku
       redirect_to("/index.html") and return
     end
   end
