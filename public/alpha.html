@@ -29,7 +29,7 @@
 
 			latitude=position.coords.latitude
 			longitude=position.coords.longitude
-			path = "/items/location?lat="+latitude+"&long="+longitude
+			path = "/items/nearby?lat="+latitude+"&long="+longitude
 			window.location = path
 			s.className = 'success'
         }
@@ -38,7 +38,7 @@
 //            var s = document.querySelector('#status');
 //            s.innerHTML = typeof msg == 'string' ? msg : "failed";
 //            s.className = 'fail';
-			  path = "/items/location?lat=37.77868&long=-122.39151"
+			  path = "/items/nearby?lat=37.77868&long=-122.39151"
 			  window.location = path
 			  console.log("geolocation failed");
 			  console.log(msg.code); 

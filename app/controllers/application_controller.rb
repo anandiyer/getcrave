@@ -8,15 +8,7 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find_by_id(session[:user_id])
   end
-
-  def is_mobile?
-    return ((request.request_uri.include?'/mobile/') || (params[:mobile]))
-  end
-
-  def is_blooming_water_domain?
-    return (request.domain.include?('blooming-water-228'))
-  end
-
+  
   def is_authorized?
     if (request.request_uri.include?'/auth/')
       is_auth_path = true
@@ -24,13 +16,20 @@ class ApplicationController < ActionController::Base
       is_auth_path = false
     end
 
-    p signed_in?
-    p is_mobile?
-    p is_auth_path
-    p is_blooming_water_domain?
+    if (request.domain.include?('blooming-water-228'))
+      is_blooming_water_domain = true
+    else
+      is_blooming_water_domain = false
+    end
+      
+    if ((request.request_uri.include?'/mobile/') || (params[:mobile]))
+      is_mobile = true
+    else
+      is_mobile = false
+    end
 
-    if !signed_in? && !is_mobile? && !is_auth_path && !is_blooming_water_domain?
-      redirect_to '/index.html'
+    if !signed_in? && !is_mobile && !is_auth_path && !is_blooming_water_domain
+      redirect_to("/index.html") and return
     end
   end
 

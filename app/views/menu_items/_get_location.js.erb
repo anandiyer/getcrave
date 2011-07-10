@@ -10,7 +10,7 @@ function success(position) {
 // console.log(position.coords.latitude)
 // console.log(position.coords.longitude)
     if(window.location.port!=3006){
-        window.location = "/items/location?lat="+position.coords.latitude+"&long="+position.coords.longitude
+        window.location = "/items/nearby?lat="+position.coords.latitude+"&long="+position.coords.longitude
     }else{
         error("Error!")
     }
@@ -19,5 +19,5 @@ function success(position) {
 function error(msg) {
   console.log(arguments);
     // Redirect to Crave's home :)
-    window.location = "/items/location?lat=37.77868&long=-122.39151"
+    window.location = "/items/nearby?lat=37.77868&long=-122.39151"
 }

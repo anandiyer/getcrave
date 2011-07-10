@@ -164,8 +164,8 @@ window.set_gmap = (zoom = 10) ->
 
     ar = []
 #    if restaurants || menu items page
-    if $(".menu_items_location").length > 0 || $(".search_index").length > 0 || $(".restaurants_index").length > 0 || $(".user_saved_menu_items_index").length > 0
-#        cl "if $(.menu_items_location).length > 0 || $(.restaurants_index) .length > 0"
+    if $(".menu_items_nearby").length > 0 || $(".search_index").length > 0 || $(".restaurants_index").length > 0 || $(".user_saved_menu_items_index").length > 0
+#        cl "if $(.menu_items_nearby).length > 0 || $(.restaurants_index) .length > 0"
 
         $(".restaurant_menu_item_wrapper").each () ->
             lat =  $(@).data("latitude")
@@ -357,7 +357,7 @@ $(document).ready ->
     thumbnail_resizing()
 #    avatar_click_to_plupload()
 
-    columnizing() if window.location.href.indexOf("search") > 0 || window.location.href.indexOf("/items/location") > 0
+    columnizing() if window.location.href.indexOf("search") > 0 || window.location.href.indexOf("/items/nearby") > 0
 
 
     $("#navigation .left_corner").live "click", () ->
