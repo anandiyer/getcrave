@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
     end
 
     if (request.domain.include?('blooming-water-228'))
+      p "HERE! blooming-water"
       is_blooming_water_domain = true
     else
       is_blooming_water_domain = false
