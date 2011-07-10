@@ -147,11 +147,11 @@
            navigator.geolocation.getCurrentPosition(function(position) {
                if(urlPrefixSet) {
                    console.log('setting proxy url');
-                   dishStore.proxy.url = urlPrefix+encodeURIComponent('/items/location.json?distance=yes&lat=37.77867&limit=25&long=-122.39127');
+                   dishStore.proxy.url = urlPrefix+encodeURIComponent('/items/nearby.json?distance=yes&lat=37.77867&limit=25&long=-122.39127');
                    places.proxy.url = urlPrefix+encodeURIComponent('/places.json?lat=37.77867&limit=25&long=-122.39127');
                } else {
                    console.log('in production');
-                   dishStore.proxy.url = 'http://getcrave.com/items/location.json?lat='+position.coords.latitude+'&distance=yes&limit=25&long='+position.coords.longitude;
+                   dishStore.proxy.url = 'http://getcrave.com/items/nearby.json?lat='+position.coords.latitude+'&distance=yes&limit=25&long='+position.coords.longitude;
                    places.proxy.url = 'http://getcrave.com/places.json?lat='+position.coords.latitude+'&limit=25&long='+position.coords.longitude;
                }
                console.log(dishStore.proxy.url);
@@ -325,10 +325,13 @@
                    // The process of becoming a badass javascript programmer is paved with endless acts of idiocy
                    var amiLoggedIn = isLoggedIn();
                    if(amiLoggedIn) {
+                       console.log('/users/'+localStorage.getItem("uid")+'/ratings.json?page=1');
                        if(urlPrefixSet) {
-                           myDishStoreUrl = urlPrefix+encodeURIComponent('/users/'+localStorage.getItem("uid")+'.json');
+                           myDishStoreUrl = '/wg/proxy.php?url='+encodeURIComponent('http://getcrave.com/users/'+localStorage.getItem("uid")+'/ratings.json?page=1&mobile=1');
+                           myProfileUrl = urlPrefix+encodeURIComponent('/users/'+localStorage.getItem("uid")+'.json');
                        } else {
-                           myDishStoreUrl = 'http://getcrave.com/users/'+localStorage.getItem("uid")+'.json?page=1';
+                           myDishStoreUrl = 'http://getcrave.com/users/'+localStorage.getItem("uid")+'/ratings.json?page=1&mobile=1';
+                           myProfileUrl = 'http://getcrave.com/users/'+localStorage.getItem("uid")+'.json';
                        }
                        loggedinProfilePnl.setLoading(true);
                        Ext.Ajax.request({
@@ -337,10 +340,10 @@
                                 type: 'json'
                            },
                            success: function(response) {
+                               console.log('uh');
+                               console.log(myDishStoreUrl);
+                               console.log(response)
                                var responseObject = eval('(' + response.responseText + ')');
-                               $(".userPic").html('<img src="'+responseObject.user.user_profile_pic_url+'?type=large" width="100" height="100">');
-                               $(".reviewCount").html(responseObject.user.user_ratings_count+" reviews");
-                               $(".profileUsername").html('<span class="userName">'+responseObject.user.user_name+'</span>');
                                //loop through ratings
                                //add each one as data store item to myDishStore
                                var ratingsArray = new Array();
@@ -355,6 +358,18 @@
                                console.log('whole store');
                                console.log(myDishStore);
                                myDishList.refresh();
+                           }
+                       });
+                       Ext.Ajax.request({
+                           url: (myProfileUrl),
+                           reader: {
+                                type: 'json'
+                           },
+                           success: function(response) {
+                               var responseObject = eval('(' + response.responseText + ')');
+                               $(".userPic").html('<img src="'+responseObject.user.user_profile_pic_url+'?type=large" width="100" height="100">');
+                               $(".reviewCount").html(responseObject.user.user_ratings_count+" reviews");
+                               $(".profileUsername").html('<span class="userName">'+responseObject.user.user_name+'</span>');
                            }
                        });
                    }
