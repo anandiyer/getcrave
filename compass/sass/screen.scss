@@ -116,7 +116,7 @@ body.two-col.bp{
             font-weight: bold;
             position: absolute;
             top:8px;
-            left: 642px;
+            left: 554px;
         }
     }
 
@@ -449,20 +449,35 @@ body.two-col.bp{
                  font-size: 14px;
             }
             input#q{
-                left: 18px;
-                width: 365px;
+                left: 10px;
+				width: 282px;
 				font-family: helvetica neue,helvetica,arial,sans-serif;
+				padding: 5px;
+				border: 1px solid #BEBEBE;
+				top: 8px;
+				-webkit-box-shadow: inset 1px 1px 0px 0px #ddd;
+				-moz-box-shadow: inset 1px 1px 0px 0px #ddd;
+				box-shadow: inset 1px 1px 0px 0px #ddd;
+
             }
             input.second_search_input{
-                left: 438px;
-                width: 166px;
+                left: 333px;
+                width: 200px;
 				font-family: helvetica neue,helvetica,arial,sans-serif;
+				padding: 5px;
+				border: 1px solid #BEBEBE;
+				top: 8px;
+				-webkit-box-shadow: inset 1px 1px 0px 0px #ddd;
+				-moz-box-shadow: inset 1px 1px 0px 0px #ddd;
+				box-shadow: inset 1px 1px 0px 0px #ddd;
+				background-color: #F4F4F4;
             }
 
             div#in{
                 position: absolute;
                 top:14px;
-                left:403px;
+                left:313px;
+				font-size: 13px;
             }
         }
     }
@@ -1838,7 +1853,7 @@ body.two-col.bp{
 }
 
 .submit_wrapper{
-    width: 98px;
+    width: 78px;
     height: 33px;
     position: relative;
     cursor: pointer;
@@ -1848,7 +1863,7 @@ body.two-col.bp{
     .text{
         position: absolute;
         top: 5px;
-        left: 25px;
+        left: 16px;
         text-shadow:1px 1px 1px #ffffff;
         font-size: 14px;
         cursor: pointer;
@@ -1863,9 +1878,9 @@ body.two-col.bp{
 
     .submit_button{
         float: right;
-        width: 90px;
+        width: 70px;
         height: 33px;
-        background: url("/images/sprites/button-sprite.png") no-repeat -131px -75px;
+        background: url("/images/sprites/button-sprite.png") no-repeat -151px -75px;
     }
 
 }
