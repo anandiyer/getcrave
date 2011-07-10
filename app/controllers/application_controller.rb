@@ -10,16 +10,14 @@ class ApplicationController < ActionController::Base
   end
 
   def is_mobile?
-    ((request.request_uri.include?'/mobile/') || (params[:mobile]))
+    return ((request.request_uri.include?'/mobile/') || (params[:mobile]))
+  end
+
+  def is_blooming_water_domain?
+    return (request.domain.include?('blooming-water-228'))
   end
 
   def is_authorized?
-#    if request.domain.include?('blooming-water-228')
-#      is_domain = true
-#    else
-#      is_domain = false
-#    end
-    
     if (request.request_uri.include?'/auth/')
       is_auth_path = true
     else
@@ -29,9 +27,9 @@ class ApplicationController < ActionController::Base
     p signed_in?
     p is_mobile?
     p is_auth_path
+    p is_blooming_water_domain?
 
-    if !signed_in? && !is_mobile? && !is_auth_path
-      # && !is_domain
+    if !signed_in? && !is_mobile? && !is_auth_path && !is_blooming_water_domain?
       redirect_to '/index.html'
     end
   end
