@@ -15,6 +15,14 @@ class ApplicationController < ActionController::Base
     else
       is_auth_path = false
     end
+    
+    if (request.request_uri.include?'foursquare')
+      p "HERE!!"
+      is_foursquare_checkin_path = true
+    else
+      p "HERE 1!!"
+      is_foursquare_checkin_path = false
+    end
 
     if (request.domain.include?('heroku'))
       is_heroku = true
@@ -28,7 +36,7 @@ class ApplicationController < ActionController::Base
       is_mobile = false
     end
 
-    if !signed_in? && !is_mobile && !is_auth_path && !is_heroku
+    if !signed_in? && !is_mobile && !is_auth_path && !is_heroku && !is_foursquare_checkin_path
       redirect_to("/index.html") and return
     end
   end
