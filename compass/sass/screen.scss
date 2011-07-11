@@ -998,6 +998,7 @@ body.two-col.bp{
                             /*height: 200px;*/
 
                         }
+						
                     }
                     /*border-bottom: 3px solid $light_gray;*/
 
@@ -1092,6 +1093,10 @@ body.two-col.bp{
                                 }
                             }
                         }
+						.col2_pn{
+							border: 1px solid;
+							height: 20px;
+							}
                         #social{
                             position: absolute;
                             z-index: 100px;
