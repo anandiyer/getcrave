@@ -20,24 +20,32 @@ class UsersController < ApplicationController
   def following_reviews
     # 1. find all the people this user is following
     # 2. find all those users reviews ordered reverse chronologically
-    
-    @user_id = params[:id] ? params[:id] : current_user.id;
-    
+
+    @conditions = ""
+    @joins = ""
+
+    if (params[:id] && !params[:all])
+      @user_id = params[:id] 
+    elsif current_user
+      @user_id = current_user.id
+    end
+
     if (@user_id)
       @conditions = "user_followings.user_id = #{@user_id}"
+      @joins = "INNER JOIN user_followings ON user_followings.following_user_id = menu_item_ratings.user_id"
+    end      
 
-      @menu_item_ratings = MenuItemRating.paginate(:all,
+    @menu_item_ratings = MenuItemRating.paginate(:all,
       :page => params[:page],
       :per_page => ITEMS_PER_PAGE,
-      :joins => 'INNER JOIN user_followings ON user_followings.following_user_id = menu_item_ratings.user_id',
+      :joins => @joins,
       :conditions => @conditions,
       :order => 'updated_at DESC')
       
-      respond_to do |format|
+    respond_to do |format|
         format.html
         format.xml  { render :xml => @menu_item_ratings.to_xml(:include => { :user => {}, :menu_item => {:include => [:menu_item_avg_rating_count, :restaurant, :menu_item_photos]} } ) }
         format.json  { render :json => @menu_item_ratings.to_json(:include => { :user => {}, :menu_item => {:include => [:menu_item_avg_rating_count, :restaurant, :menu_item_photos]} } )}
-      end
     end
   end
 
