@@ -11,7 +11,7 @@ class Authorization < ActiveRecord::Base
   end
 
   def self.create_from_hash(hash, user = nil)
-    "create Authorization---------------------------"
+    p "create Authorization---------------------------"
 
     p token = hash['credentials']['token']
     p user ||= User.create_from_hash!(hash)
@@ -21,7 +21,6 @@ class Authorization < ActiveRecord::Base
     p auth.valid?
 
     if !auth.valid?
-      p "25"
       a_find = Authorization.find_from_hash(hash)
       a_find.token = token
       a_find.save

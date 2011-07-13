@@ -84,18 +84,18 @@ class MenuItemRatingsController < ApplicationController
     picture = menu_item.thumbnail.index("amazonaws").nil? ? "http://getcrave.com/images/"+menu_item.thumbnail : menu_item.thumbnail
     desc = menu_item.description ? menu_item.description : "Have you ever been to a restaurant and asked, “So, what’s good here?” We help people find the food they like."
 
-    #TODO: be careful - we need to check to see if this is the FB authorization
-    token = current_user.authorizations.first.token
-
-    me = FbGraph::User.me(token)
-    me.feed!(
+    auth = Authorization.find(:first, :conditions => {:user_id => current_user.id, :provider => 'facebook'})
+    
+    if (auth && !auth.token.empty?)
+      me = FbGraph::User.me(auth.token)
+      me.feed!(
           :message => message,
           :picture => picture,
           :link => link,
           :name => name,
           :description => desc
-    )
-
+          )
+    end
   end
 
   # POST /menu_item_ratings
@@ -111,15 +111,7 @@ class MenuItemRatingsController < ApplicationController
         if @menu_item_rating.save
           
           if params[:facebook] && params[:facebook][:boolean] == "1"
-
-            if current_user.authorizations.first.token.blank?
-              session[:user_id] = nil
-              session[:redirect_to] = nil
-              render :text => "no_token"
-              return
-            else
-              send_to_fb_wall
-            end
+            send_to_fb_wall
           end
           
           format.html { redirect_to(@menu_item_rating, :notice => 'Menu item rating was successfully created.') }
