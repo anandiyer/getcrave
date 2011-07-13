@@ -55,7 +55,7 @@ var searchHandler = function(b,e) {
     backHandler();
     dishSearchStore.proxy.extraParams.q = labelString;
     var dfb = Ext.getCmp('distanceFilterButton').getPressed();
-    dishSearchStore.proxy.extraParams.d = dfb.filter_value;
+    dishSearchStore.proxy.extraParams.within = dfb.filter_value;
     dishSearchStore.load();
     console.log(dishSearchStore.proxy.url);
     Ext.getCmp('listPnl').setActiveItem(searchPnl);
@@ -68,14 +68,14 @@ var distancePnl = function() {
     items.push({
       text: d + " miles",
       ui: 'round',
-      width: 62,
+      width: 64,
       filter_value: d
     });
   });
   items.push({
     text: "All",
     pressed: true,
-    width: 40,
+    width: 35,
     ui: 'round'
   });
   return new Ext.Panel({
@@ -111,7 +111,7 @@ var filterListPnl = new Ext.Panel({
     xtype: 'panel',
     cls: 'framePanel',
     layout: 'fit',
-    height: 800,
+    height: 880,
     dockedItems: [{
       dock : 'top',
       xtype: 'toolbar',
@@ -199,6 +199,7 @@ Ext.regModel('savedDish',
 
 var dishStore = new Ext.data.Store({
     model: 'Dish',
+    clearOnPageLoad: false,
     sorters: [{property: 'arating', direction: 'ASC'}],
     getGroupString : function(record) {
         rating = parseInt(record.get('rating'));
