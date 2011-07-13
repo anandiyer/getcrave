@@ -14,7 +14,8 @@
         #photos_icon &nbsp;
     #text_column
       %h1.current_title= @user.user_name
-
+      - if current_user.id == @user.id
+        = link_to "Edit your profie", edit_user_path(current_user.id)
 
       #rating
         =  @user.menu_item_ratings.count
