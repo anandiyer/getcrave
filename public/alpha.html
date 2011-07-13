@@ -44,11 +44,30 @@
 			  console.log(msg.code); 
         }
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(success, error);
-        } else {
-            error('Sorry, your browser is not supported by crave yet :(');
-        }
+		var ffversion;
+		var ieversion;
+		if (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) { 
+			//test for Firefox/x.x or Firefox x.x (ignoring remaining digits);
+		 	ffversion=new Number(RegExp.$1)
+		}
+		if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) { 
+			//test for MSIE x.x;
+			ieversion=new Number(RegExp.$1)
+		}
+		
+		// Reject any IEversion of FFversion < 4
+		if (ieversion <= 10 || ffversion < 4) {
+			error('Sorry, your browser is not supported by crave yet :(');
+			path = "/sorry.html"
+			window.location = path
+		} else {
+        	if (navigator.geolocation) {
+            	navigator.geolocation.getCurrentPosition(success, error);
+        	} else {
+				path = "/sorry.html"
+				window.location = path
+        	}
+		}
     </script>
 
 	<div id="background">

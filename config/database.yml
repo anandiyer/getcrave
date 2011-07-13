@@ -13,7 +13,7 @@
 development:
   adapter: postgresql
   encoding: utf-8
-  database: getcrave_bak
+  database: getcrave_dev
   template: template_postgis
   pool: 5
   username: postgres
