@@ -17,10 +17,8 @@ class ApplicationController < ActionController::Base
     end
     
     if (request.request_uri.include?'foursquare')
-      p "HERE!!"
       is_foursquare_checkin_path = true
     else
-      p "HERE 1!!"
       is_foursquare_checkin_path = false
     end
 

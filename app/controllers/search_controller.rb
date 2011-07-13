@@ -57,8 +57,8 @@ class SearchController < ApplicationController
 
       respond_to do |format|
         format.html
-#        format.xml  { render :xml => @results.to_xml }
-#        format.json  { render :json => @results.to_json }
+        format.xml  { render :xml => @results.to_xml }
+        format.json  { render :json => @results.to_json }
         format.js  { render :partial => partial_2_show}
       end
     end
