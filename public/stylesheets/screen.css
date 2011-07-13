@@ -1480,7 +1480,7 @@ body.two-col.bp #content_wrap #content #current_content_block #current_info_wrap
   width: 112.875px;
   padding: 6px 44px 0 2px;
   height: 140px;
-  /*overflow: hidden;*/
+  overflow: hidden;
   /*.add_photos_inline{*/
   /*@extend .photos_inline;*/
   /*@include sprites($add_photos_counter_position);*/
