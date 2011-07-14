@@ -9,6 +9,14 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by_id(session[:user_id])
   end
   
+  def is_mobile
+      if ((request.request_uri.include?'/mobile/') || (params[:mobile]))
+        return true
+      else
+        return false
+      end
+  end
+  
   def is_authorized?
     if (request.request_uri.include?'/auth/')
       is_auth_path = true
@@ -27,12 +35,6 @@ class ApplicationController < ActionController::Base
     else
       is_heroku = false
     end
-      
-    if ((request.request_uri.include?'/mobile/') || (params[:mobile]))
-      is_mobile = true
-    else
-      is_mobile = false
-    end
 
     if !signed_in? && !is_mobile && !is_auth_path && !is_heroku && !is_foursquare_checkin_path
       redirect_to("/index.html") and return
@@ -41,7 +43,7 @@ class ApplicationController < ActionController::Base
 
   def check_auth_fb
     title = "Please sign in!"
-    if !signed_in? && !is_mobile?
+    if !signed_in? && !is_mobile
       render :js => "window.show_dialog(\"#{title}\")"
     end
   end
