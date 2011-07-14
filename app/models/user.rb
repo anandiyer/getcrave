@@ -31,6 +31,18 @@ class User < ActiveRecord::Base
     UserFollowing.where(:following_user_id => self.id).all
   end
 
+  def following_count
+    UserFollowing.where(:user_id => self.id).all.count
+  end
+
+  def followers_count
+    UserFollowing.where(:following_user_id => self.id).all.count
+  end
+  
+  def saved_count
+    self.user_saved_menu_items.count
+  end
+
   def reviews
     self.menu_item_ratings
   end

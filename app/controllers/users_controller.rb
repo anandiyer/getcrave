@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users }
-      format.xml  { render :json => @users }
+      format.json  { render :json => @users }
     end
   end
 
@@ -69,11 +69,21 @@ class UsersController < ApplicationController
     params_4_show_and_saved
 #    @followers = UserFollowing.where(:following_user_id => 12).all
     @followers = UserFollowing.where(:following_user_id => params[:id])
+    
+    respond_to do |format|
+      format.xml  { render :xml => @followers.to_xml( :include => :user ) }
+      format.json  { render :json => @followers.to_json( :include => :user ) }
+    end
   end
 
   def following
     params_4_show_and_saved
     @following = User.find(params[:id]).user_followings
+    
+    respond_to do |format|
+      format.xml  { render :xml => @following.to_xml( :include => :user ) }
+      format.json  { render :json => @following.to_json( :include => :user ) }
+    end
   end
 
 #  to show current user save items
@@ -105,8 +115,8 @@ class UsersController < ApplicationController
     respond_to do |format|
 
       format.html # _unused_show.html.haml
-      format.xml  { render :xml => @user.to_xml}
-      format.json  { render :json => @user.to_json}
+      format.xml  { render :xml => @user.to_xml(:methods => [:following_count, :followers_count, :saved_count] )}
+      format.json  { render :json => @user.to_json(:methods => [:following_count, :followers_count, :saved_count] ) }
     end
   end
 
