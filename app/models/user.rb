@@ -14,7 +14,6 @@ class User < ActiveRecord::Base
       :email => hash['user_info']['email'])
   end
 
-
   def is_following? following_user_id
     self.user_followings.where(:following_user_id => following_user_id).any?
   end

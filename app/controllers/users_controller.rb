@@ -67,8 +67,14 @@ class UsersController < ApplicationController
 
   def followers
     params_4_show_and_saved
-#    @followers = UserFollowing.where(:following_user_id => 12).all
-    @followers = UserFollowing.where(:following_user_id => params[:id])
+    
+    @user_id = params[:id]
+    @conditions = "following_user_id = #{@user_id}"
+
+    @followers = UserFollowing.paginate(
+      :page => params[:page],
+      :per_page => ITEMS_PER_PAGE,
+      :conditions => @conditions)
     
     respond_to do |format|
       format.xml  { render :xml => @followers.to_xml( :include => :user ) }
@@ -78,11 +84,20 @@ class UsersController < ApplicationController
 
   def following
     params_4_show_and_saved
-    @following = User.find(params[:id]).user_followings
+    
+    @user_id = params[:id]
+    @conditions = "user_id = #{@user_id}"
+    
+    @following = UserFollowing.paginate(
+      :page => params[:page],
+      :per_page => ITEMS_PER_PAGE,
+      :conditions => @conditions)
+    
+#    @following = User.find(params[:id]).user_followings
     
     respond_to do |format|
-      format.xml  { render :xml => @following.to_xml( :include => :user ) }
-      format.json  { render :json => @following.to_json( :include => :user ) }
+      format.xml  { render :xml => @following.to_xml( :methods => [:following_user] ) }
+      format.json  { render :json => @following.to_json( :methods => [:following_user] ) }
     end
   end
 
