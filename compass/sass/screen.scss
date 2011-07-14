@@ -1311,7 +1311,6 @@ body.two-col.bp{
                             $content-columns: ceil(2);
                             @include column($content-columns, true);
                             padding:0 15px 0 0;
-                            overflow: hidden;
                             width:69px;
                             height:84px;
                             @include border-radius(3px);
