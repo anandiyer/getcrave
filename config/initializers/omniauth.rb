@@ -10,9 +10,10 @@ FS_APP_SECRET = FS_CONFIG['app_secret']
 Rails.application.config.middleware.use OmniAuth::Builder do
   # This cert location is only for Heroku
 
-
   provider :facebook, FB_APP_ID, FB_APP_SECRET,
-    { :display => 'page', :client_options => {:ssl => {:ca_file => "/usr/lib/ssl/certs/ca-certificates.crt"}}}
+    { :display => 'page', 
+      :scope => 'publish_stream,email,offline_access',
+      :client_options => {:ssl => {:ca_file => "/usr/lib/ssl/certs/ca-certificates.crt"}}}
       
   provider :foursquare, FS_APP_ID, FS_APP_SECRET,
     { :display => 'page', :client_options => {:ssl => {:ca_file => "/usr/lib/ssl/certs/ca-certificates.crt"}}}
