@@ -1007,7 +1007,7 @@ body.two-col.bp{
                 #current_info_wrapper{
                     @include container;
 					padding-bottom:10px;
-					overflow:visible;
+					/*overflow:visible;*/
                     #img_column{
                         $content-columns: ceil(3);
                         // true means it's the last column in the row
@@ -1314,6 +1314,7 @@ body.two-col.bp{
                             width:69px;
                             height:84px;
                             @include border-radius(3px);
+							overflow:hidden;
                         }
                         .desc_block_2_col{
                             $content-columns: ceil(11);
