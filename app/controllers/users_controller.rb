@@ -77,6 +77,7 @@ class UsersController < ApplicationController
       :conditions => @conditions)
     
     respond_to do |format|
+      format.html 
       format.xml  { render :xml => @followers.to_xml( :include => :user ) }
       format.json  { render :json => @followers.to_json( :include => :user ) }
     end
@@ -96,6 +97,7 @@ class UsersController < ApplicationController
 #    @following = User.find(params[:id]).user_followings
     
     respond_to do |format|
+      format.html
       format.xml  { render :xml => @following.to_xml( :methods => [:following_user] ) }
       format.json  { render :json => @following.to_json( :methods => [:following_user] ) }
     end
