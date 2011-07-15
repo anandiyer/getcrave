@@ -15,7 +15,8 @@
     #text_column
       %h1.current_title= @user.user_name
       - if current_user.id == @user.id
-        = link_to "Edit your profile", "http://secure.getcrave.com/users/1/edit"
+        - url = "http://secure.getcrave.com/users/" + @user.id.to_s + "/edit"
+        = link_to "Edit your profile", url
 
       #rating
         =  @user.menu_item_ratings.count
