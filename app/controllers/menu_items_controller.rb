@@ -44,8 +44,8 @@ class MenuItemsController < ApplicationController
 
     respond_to do |format|
       format.html # location.html.haml
-      format.xml { render :xml => @menu_items.to_xml(:methods => :distance, :include => [:restaurant, :menu_item_avg_rating_count]) }
-      format.json { render :json => @menu_items.to_json(:methods => :distance, :include => [:restaurant, :menu_item_avg_rating_count]) }
+      format.xml { render :xml => @menu_items.to_xml(:methods => :distance, :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_photos]) }
+      format.json { render :json => @menu_items.to_json(:methods => :distance, :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_photos]) }
     end
   end
 
@@ -108,8 +108,8 @@ class MenuItemsController < ApplicationController
 
     respond_to do |format|
       format.html # location.html.haml
-      format.xml  { render :xml => @menu_items.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count])}
-      format.json  { render :json => @menu_items.to_json(:include => [:restaurant, :menu_item_avg_rating_count]) }
+      format.xml  { render :xml => @menu_items.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count, :menu_item_photos])}
+      format.json  { render :json => @menu_items.to_json(:include => [:restaurant, :menu_item_avg_rating_count, :menu_item_photos]) }
       format.js  { render :partial => "/items_grouped_by_stars" }
     end
     
@@ -336,8 +336,8 @@ class MenuItemsController < ApplicationController
       
     respond_to do |format|
         format.html # search.html.erb
-        format.xml  { render :xml => @menu_items.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count])}
-        format.json  { render :json => @menu_items.to_json(:include => [:restaurant, :menu_item_avg_rating_count]) }
+        format.xml  { render :xml => @menu_items.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count, :menu_item_photos])}
+        format.json  { render :json => @menu_items.to_json(:include => [:restaurant, :menu_item_avg_rating_count, :menu_item_photos]) }
     end
   end
 
@@ -353,7 +353,7 @@ class MenuItemsController < ApplicationController
 
     #FIXME - need to get all the menu item attributes like ratings, photos etc.
     @menu_item = MenuItem.find(params[:id], 
-      :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings])
+      :include => [:restaurant, :menu_item_avg_rating_count, :menu_item_ratings, :menu_item_photos])
 
   end
 
