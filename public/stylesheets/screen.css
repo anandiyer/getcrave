@@ -1317,7 +1317,7 @@ body.two-col.bp #content_wrap #content #current_content_block #comment_wrapper_w
   width: 604.375px;
   padding-bottom: 9px;
   padding-right: 16px;
-  margin: 30px auto 0;
+  margin: 10px auto 0;
 }
 /* line 147, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.3/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html body.two-col.bp #content_wrap #content #current_content_block #comment_wrapper_wrapper {
@@ -1469,7 +1469,7 @@ body.two-col.bp #content_wrap #content #current_content_block #current_info_wrap
   margin: 0 auto;
   overflow: hidden;
   *zoom: 1;
-  padding-bottom: 10px;
+  padding-bottom: 25px;
   /*overflow:visible;*/
 }
 /* line 1011, ../../compass/sass/screen.scss */

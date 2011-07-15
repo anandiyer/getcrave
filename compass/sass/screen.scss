@@ -886,7 +886,7 @@ body.two-col.bp{
                     @include column($content-columns, true);
                     padding-bottom: 9px;
                     padding-right: 16px;
-					margin: 30px auto 0;
+					margin: 10px auto 0;
 
 
 
@@ -1006,7 +1006,7 @@ body.two-col.bp{
                 }
                 #current_info_wrapper{
                     @include container;
-					padding-bottom:10px;
+					padding-bottom:25px;
 					/*overflow:visible;*/
                     #img_column{
                         $content-columns: ceil(3);
