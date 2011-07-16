@@ -132,8 +132,9 @@ class UsersController < ApplicationController
     respond_to do |format|
 
       format.html # _unused_show.html.haml
-      format.xml  { render :xml => @user.to_xml(:methods => [:following_count, :followers_count, :saved_count] )}
-      format.json  { render :json => @user.to_json(:methods => [:following_count, :followers_count, :saved_count] ) }
+      format.xml  { render :xml => @user.to_xml(:methods => [:following_count, :followers_count, :saved_count]) }
+      format.json  { render :json => @user.to_json(:methods => [:following_count, :followers_count, :saved_count],
+        :include => [:authorizations])  }
     end
   end
 
