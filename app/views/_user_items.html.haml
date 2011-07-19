@@ -21,7 +21,11 @@
           #click &nbsp;
 
         .review_desc_col_wrapper
-          %h1= link_to @menu_item.name, @menu_item
+          %h1
+            = link_to @menu_item.name, @menu_item
+            @
+            = link_to @menu_item.restaurant.name, @menu_item.restaurant
+          
           .before_start
             .data_review
               =@mi_rating.updated_at.strftime("%b %d, %Y")
