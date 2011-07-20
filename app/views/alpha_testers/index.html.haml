@@ -10,7 +10,8 @@
 
   - @alpha_testers.each do |alpha_tester|
     %tr
-      %td= alpha_tester.facebook_id
+      - @url = "http://facebook.com/profile.php?id=" + alpha_tester.facebook_id.to_s
+      %td= link_to alpha_tester.facebook_id, @url
       %td= alpha_tester.authorized
       %td= link_to 'Show', alpha_tester
       %td= link_to 'Edit', edit_alpha_tester_path(alpha_tester)
