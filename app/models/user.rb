@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   has_many :menu_item_ratings
   has_many :user_saved_menu_items
   has_many :user_followings
+  has_many :menu_item_photos
+  has_many :menu_label_associations
   has_friendly_id :user_name, :use_slug => true
   attr_accessible :user_name, :user_profile_pic_url, :email, :telephone
   validates_uniqueness_of :user_name
