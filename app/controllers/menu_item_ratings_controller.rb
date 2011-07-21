@@ -68,8 +68,22 @@ class MenuItemRatingsController < ApplicationController
     @menu_item_rating = MenuItemRating.find(params[:id])
   end
 
+  def send_to_twitter
+    # Only send to Twitter if in fact, this user's twitter account exists
+    auth = Authorization.find(:first, :conditions => {:user_id => current_user.id, :provider => 'twitter'})
+    
+    if (!auth || auth.token.empty?)
+      return
+
+  end
 
   def send_to_fb_wall
+    # Only send to FB wall if in fact, this user's FB account exists
+    auth = Authorization.find(:first, :conditions => {:user_id => current_user.id, :provider => 'facebook'})
+    
+    if (!auth || auth.token.empty?)
+      return
+    
     menu_item_id = params[:menu_item_rating][:menu_item_id]
     
     menu_item = MenuItem.find_by_id(menu_item_id)
@@ -84,8 +98,6 @@ class MenuItemRatingsController < ApplicationController
     picture = menu_item.thumbnail.index("amazonaws").nil? ? "http://getcrave.com/images/"+menu_item.thumbnail : menu_item.thumbnail
     desc = menu_item.description ? menu_item.description : "Have you ever been to a restaurant and asked, “So, what’s good here?” We help people find the food they like."
 
-    auth = Authorization.find(:first, :conditions => {:user_id => current_user.id, :provider => 'facebook'})
-    
     if (auth && !auth.token.empty?)
       me = FbGraph::User.me(auth.token)
       me.feed!(

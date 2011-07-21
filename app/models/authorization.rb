@@ -13,10 +13,17 @@ class Authorization < ActiveRecord::Base
   def self.create_from_hash(hash, user = nil)
     "create Authorization---------------------------"
 
-    p token = hash['credentials']['token']
-    p user ||= User.create_from_hash!(hash)
+    if (hash['provider'] == 'facebook')
+      p user ||= User.create_from_hash_facebook!(hash)
+    elsif (hash['provider'] == 'twitter')
+      p user ||= User.create_from_hash_twitter!(hash)
+    end
 
-    auth = Authorization.create(:user => user, :uid => hash['uid'], :provider => hash['provider'], :token => token)
+    auth = Authorization.create(:user => user, 
+      :uid => hash['uid'], 
+      :provider => hash['provider'], 
+      :token => hash['credentials']['token'])
+
     p auth.errors
     p auth.valid?
 

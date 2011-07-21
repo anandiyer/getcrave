@@ -9,12 +9,19 @@ class User < ActiveRecord::Base
   attr_accessible :user_name, :user_profile_pic_url, :email, :telephone
   validates_uniqueness_of :user_name
   
-  def self.create_from_hash!(hash)
+  def self.create_from_hash_facebook!(hash)
     @url = "http://graph.facebook.com/" + hash['uid'] + "/picture"
+    
     create(:user_name => hash['user_info']['name'], 
       :user_profile_pic_url => @url,
       :email => hash['user_info']['email'])
   end
+
+  def self.create_from_hash_twitter!(hash)
+    create(:user_name => hash['user_info']['name'], 
+      :user_profile_pic_url => hash['user_info']['image'])
+  end
+
 
   def is_following? following_user_id
     self.user_followings.where(:following_user_id => following_user_id).any?

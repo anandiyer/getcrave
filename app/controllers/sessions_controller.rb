@@ -7,12 +7,12 @@ class SessionsController < ApplicationController
       render :status => 404 and return #for bots
     end
 
-
     unless @auth = Authorization.find_from_hash(auth)
       
       # Create a new user or add an auth to existing user, depending on
       # whether there is already a user signed in.
-      if (auth['provider'] == 'facebook')
+      
+      if ((auth['provider'] == 'facebook') || (auth['provider'] == 'twitter'))
         @authuid = auth['uid'].to_i
         @conditions = " facebook_id = #{@authuid}"
         @tester = AlphaTester.find(:first, :conditions => @conditions)
@@ -21,13 +21,12 @@ class SessionsController < ApplicationController
           redirect_to '/request.html'
           return
         end
-
       elsif (auth['provider'] == 'foursquare')
         # Let's save this user's phone number if available
         current_user.telephone = auth['user_info']['phone'] 
         current_user.save
       end
-
+      
       @auth = Authorization.create_from_hash(auth, current_user)
   
       # TODO: we shouldn't have to do this if the user is simply
@@ -38,8 +37,8 @@ class SessionsController < ApplicationController
       end
     end
 
-    # Since FB is the only supported auth mechanism right now...
-    if (auth['provider'] == 'facebook')
+    # Twitter & Facebook are the only supported auth mechanisms right now
+    if ((auth['provider'] == 'facebook') || (auth['provider'] == 'twitter'))
       # Log the authorizing user in.
       begin
         self.current_user = @auth.user

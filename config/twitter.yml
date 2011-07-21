@@ -1,0 +1,7 @@
+production:
+    app_id: VBceNcZBxLIiU5TIA3F0Q
+    app_secret: zDybOv91H6LVcYErEimJLjudowx4AumCjpzagmRo94
+
+development:
+    app_id: VBceNcZBxLIiU5TIA3F0Q
+    app_secret: zDybOv91H6LVcYErEimJLjudowx4AumCjpzagmRo94

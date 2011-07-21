@@ -15,9 +15,9 @@ development:
   encoding: utf-8
   database: getcrave_dev
   template: template_postgis
+  host: /tmp/
   pool: 5
   username: postgres
-  password: hpavtc13
 
 #  adapter: mysql2
 #  encoding: utf8

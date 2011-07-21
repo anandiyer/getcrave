@@ -6,12 +6,10 @@ gem 'rails', '3.0.7'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-gem "rmagick", "2.13.1", :require => "RMagick"
 gem 'spatial_adapter' # To handle PostGIS datatypes
 gem 'geokit'
 gem 'friendly_id', "~> 3.2.1"
 gem 'sunspot_rails', "~> 1.2.1"
-gem 'omniauth'
 gem 'jquery-rails', '>= 0.2.6'
 gem "haml"
 gem "haml-rails"
@@ -22,6 +20,7 @@ gem "uuidtools"
 gem 'aws-s3', '0.6.2', :require => 'aws/s3'
 gem 'will_paginate', "~> 3.0.pre2"
 gem 'kaminari'
+gem 'omniauth'
 
 gem "fb_graph" #for fb share
 

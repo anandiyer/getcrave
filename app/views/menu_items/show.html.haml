@@ -78,9 +78,11 @@
         Have you tried this?
       =form_for(MenuItemRating.new, :remote => true) do |f|
         #fb_twitter_checkboxes
-          Share on:
-          #inline_fb
-            = check_box("facebook","boolean")
+          - if Authorization.where(:user_id => user_id, :provider => 'facebook').exists?
+            Share on:
+            #inline_fb
+              = check_box("facebook","boolean")
+            /= check_box("twitter","boolean")
         =f.hidden_field :rating
         =f.hidden_field :menu_item_id, :value =>@menu_item.id
         .star_gray{:id => @menu_item.id, :data =>{:model => "user_menu_item_ratings"}} &nbsp;
