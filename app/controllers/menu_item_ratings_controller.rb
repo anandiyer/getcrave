@@ -74,6 +74,9 @@ class MenuItemRatingsController < ApplicationController
     
     if (!auth || auth.token.empty?)
       return
+    end
+    
+    #TODO
 
   end
 
