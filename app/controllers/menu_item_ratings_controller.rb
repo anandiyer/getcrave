@@ -77,6 +77,7 @@ class MenuItemRatingsController < ApplicationController
 
   end
 
+
   def send_to_fb_wall
     # Only send to FB wall if in fact, this user's FB account exists
     auth = Authorization.find(:first, :conditions => {:user_id => current_user.id, :provider => 'facebook'})
