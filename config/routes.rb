@@ -70,6 +70,7 @@ Crave::Application.routes.draw do
   resources :ingredients
   resources :menu_item_prices
   resources :search
+  resources :user_followings
   
   match '/activity', :to => 'users#following_reviews'
   match '/foodies', :to => 'users#following_reviews'
