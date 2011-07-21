@@ -83,6 +83,7 @@ class MenuItemRatingsController < ApplicationController
     
     if (!auth || auth.token.empty?)
       return
+    end
     
     menu_item_id = params[:menu_item_rating][:menu_item_id]
     
