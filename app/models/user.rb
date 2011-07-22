@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :menu_label_associations
   has_friendly_id :user_name, :use_slug => true
   attr_accessible :user_name, :user_profile_pic_url, :email, :telephone
+  attr_accessor :this_user
   validates_uniqueness_of :user_name
   
   def self.create_from_hash_facebook!(hash)
@@ -22,6 +23,21 @@ class User < ActiveRecord::Base
       :user_profile_pic_url => hash['user_info']['image'])
   end
 
+  def followed_by_current_user
+    if this_user
+      self.user_followings.where(:following_user_id => this_user.id).any?
+    else
+      return false
+    end
+  end
+
+  def following_current_user
+    if this_user
+      this_user.user_followings.where(:following_user_id => self.id).any?
+    else
+      return false
+    end
+  end
 
   def is_following? following_user_id
     self.user_followings.where(:following_user_id => following_user_id).any?
@@ -50,7 +66,7 @@ class User < ActiveRecord::Base
   def saved_count
     self.user_saved_menu_items.count
   end
-
+  
   def reviews
     self.menu_item_ratings
   end

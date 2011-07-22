@@ -129,11 +129,13 @@ class UsersController < ApplicationController
   def show
     params_4_show_and_saved
 
+    @user.this_user = User.find_by_id(params[:current_user_id].to_i)
+
     respond_to do |format|
 
       format.html # _unused_show.html.haml
-      format.xml  { render :xml => @user.to_xml(:methods => [:following_count, :followers_count, :saved_count]) }
-      format.json  { render :json => @user.to_json(:methods => [:following_count, :followers_count, :saved_count],
+      format.xml  { render :xml => @user.to_xml(:methods => [:following_count, :followers_count, :saved_count, :followed_by_current_user, :following_current_user]) }
+      format.json  { render :json => @user.to_json(:methods => [:following_count, :followers_count, :saved_count, :followed_by_current_user, :following_current_user],
         :include => [:authorizations])  }
     end
   end
