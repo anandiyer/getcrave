@@ -40,15 +40,7 @@
     %h3.review
       Menu
 
-    #select_box_hint &nbsp;
-    #sorting
-      #before_sort_by
-        Sort by:
-      #sort_by
-        =text_field(:select, :sorttype, :value => "Newest", :disabled => true)
-        %ul
-          -["Rating", "Other"].each do |x|
-            %li= x
+
 
     #reviews_wrapper{:class => class_name_from_path}
       = render :partial => "restaurants/modal_add_item"

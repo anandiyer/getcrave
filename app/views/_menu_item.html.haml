@@ -4,8 +4,16 @@
     .b
       - if @menu_item
         %h1= link_to @menu_item.name, @menu_item
-        .b.i
-          = link_to "@ "+@menu_item.restaurant.name, @menu_item.restaurant
+        #stars_wrap
+          - begin
+            - if @menu_item.menu_item_avg_rating_count
+              - avg = @menu_item.menu_item_avg_rating_count.avg_rating
+            - else
+              - avg = 0
+          - rescue
+            - avg = 0
+          #star_average{:class => "star_sm stars_"+stars_class_normalize(avg), :data =>{:rating => avg}} &nbsp;
+
         .b.i= @menu_item.description
       - else
         %h1 title

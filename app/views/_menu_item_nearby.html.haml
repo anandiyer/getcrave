@@ -1,14 +1,21 @@
 - restaurant = @menu_item.restaurant
 .restaurant_menu_item_wrapper{:data => {:latitude => restaurant.latitude, :longitude => restaurant.longitude}, :class => controller.controller_name+"_"+controller.action_name}
-  .numbers
-    = @counter.next
   = render :partial => "/menu_items/small_thumbnail"
   .desc_block_2_col
     .b
-      %h1= link_to @menu_item.name, @menu_item
-    -#.b.i= @menu_item.description
-    .b.i
-      = link_to "@ "+restaurant.name, restaurant
+      %h1
+        = link_to @menu_item.name, @menu_item
+        @
+        = link_to restaurant.name, restaurant
+      #stars_wrap
+        - begin
+          - if @menu_item.menu_item_avg_rating_count
+            - avg = @menu_item.menu_item_avg_rating_count.avg_rating
+          - else
+            - avg = 0
+        - rescue
+          - avg = 0
+        #star_average{:class => "star_sm stars_"+stars_class_normalize(avg), :data =>{:rating => avg}} &nbsp;
     .b.i= restaurant.address_full
   .save_n_review_3_col
     = render :partial => "/save"
