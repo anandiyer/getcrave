@@ -11,7 +11,8 @@
       .reviews_wrapper_block
         %a.anchor{:name => anchorname}
           .review_image_col
-            = link_to(image_tag(user.small_thumbnail), user)
+            - @picurl = 'http://src.sencha.io/85/' + user.user_profile_pic_url + '?type=large'
+            = link_to(image_tag(@picurl), user)
             #click &nbsp;
 
         .review_desc_col_wrapper

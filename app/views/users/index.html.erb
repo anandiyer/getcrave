@@ -1,5 +1,7 @@
 <h1>Listing users</h1>
 
+Total number of reviews: <%= MenuItemRating.count %><br />
+
 <table>
   <tr>
     <th>User name</th>
@@ -17,7 +19,6 @@
     <td><%= user.user_name %></td>
     <td><%= user.user_ratings_count.to_s %></td>
     <td><%= user.created_at.to_s %></td>
-    <td><%= user.updated_at.to_s %></td>
     <td><%= user.authorizations.count.to_s %></td>
     <td><%= user.menu_item_photos.count.to_s %></td>
     <td><%= user.menu_label_associations.count.to_s %></td>

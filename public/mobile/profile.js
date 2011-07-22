@@ -278,9 +278,8 @@ Crave.create_profile_panel = function(mine) {
   });
 
   var profileLoginPnl = new Ext.Panel({
-    html:'<div class="fancyImage"><img class="logoutButton" src="../images/profile-cold-food.png"></div><div class="explanation">Rate & Save Dishes, Follow Foodies</div><a href="http://getcrave.com/auth/facebook" class="loginButton"></a>',
-    id: 'profileLoginPnl',
-    scroll:'vertical'
+    html:'<div class="loginPanel"><img src="../images/profile-cold-food.png"><div class="explanation">Rate & Save Dishes, Follow Foodies</div><a href="http://getcrave.com/auth/facebook" class="loginButton"></a></div>',
+    height: '100%'
   });
 
   var backButton = new Ext.Button({
@@ -354,7 +353,11 @@ Crave.create_profile_panel = function(mine) {
           html = html + '<div class="userInfo"><div class="userName">' + user.user_name+ '</div>';
           html = html + '<div class="reviewCount">' + user.user_ratings_count + ' reviews</div>';
           if (!mine && isLoggedIn()) { //can't follow if not logged in yet
-            html = html + '<button id="followButton" onclick="Crave.follow_user(' + user_id + ');" class="follow"><b>+</b> Follow</button>';
+            if (user.followed_by_current_user) {
+              html = html + '<button onclick="Crave.follow_user_toggle(' + user_id + ', this);" class="follow">- Unfollow</button>';
+            } else {
+              html = html + '<button onclick="Crave.follow_user_toggle(' + user_id + ', this);" class="follow">+ Follow</button>';
+            }
           }
           userInfoPanel.update(html);
           userInfoPanel.el.down('.saved').dom.innerHTML = user.saved_count;
@@ -382,7 +385,41 @@ Crave.create_profile_panel = function(mine) {
 };
 
 
-Crave.follow_user = function(user_id) {
+Crave.follow_user_toggle = function(user_id, button) {
   //TODO: actually follow somebody
-  $("#followButton")[0].innerHTML = "- Unfollow";
+  var following = (button.innerHTML[0] === '-');
+  
+  if (following) {
+    Ext.Ajax.request({
+      method: "DELETE",
+      url: '/user_followings.json',
+      jsonData:{
+        user_following: {
+          user_id: Crave.currentUserId(),
+          following_user_id: user_id
+        }
+      },
+      failure: Crave.handle_failure,
+      success: function(response, options) {
+        debugger;
+        button.innerHTML = "+ Follow";
+      }
+    })
+  } else {
+    Ext.Ajax.request({
+      method: "POST",
+      url: '/user_followings.json',
+      jsonData:{
+        user_following: {
+          user_id: Crave.currentUserId(),
+          following_user_id: user_id
+        }
+      },
+      failure: Crave.handle_failure,
+      success: function(response, options) {
+        debugger;
+        button.innerHTML = "- Unfollow";
+      }
+    })
+  }
 }
