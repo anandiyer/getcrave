@@ -19,12 +19,14 @@
 
         #desc_wrap_rest
           #description
-            %p= @restaurant.street_address
+            %p= "#{@restaurant.street_address} (#{@restaurant.cross_street})"
             %p= @restaurant.neighborhood
             %p= "#{@restaurant.city}, #{@restaurant.state} #{@restaurant.zip}"
-            -# .phone_number
+            %p= @restaurant.telephone
+            -#.phone_number
+              -# %p= @restaurant.telephone
               -# / .col1_pn
-              -# / %p (415) 927 1849
+
               -# /  %p= link_to "www.siet.com"
               .col2_pn
                 :erb

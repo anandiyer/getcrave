@@ -53,7 +53,13 @@ class UserFollowingsController < ApplicationController
   def create
     @user_following = UserFollowing.new(params[:user_following])
     
-    Notifier.follow_user_email(current_user, User.find(params[:user_following][:following_user_id])).deliver
+    if (params[:user_following][:user_id])
+      @user = User.find(params[:user_following][:user_id])
+    else
+      @user = current_user
+    end
+    
+    Notifier.follow_user_email(@user, User.find(params[:user_following][:following_user_id])).deliver
 
     respond_to do |format|
       if @user_following.save

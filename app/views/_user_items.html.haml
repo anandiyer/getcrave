@@ -38,9 +38,7 @@
           .review_body_head
             =@mi_rating.review
 
-          .helpful_block
-            .before_answer_block.gray
-              = @mi_rating.menu_item_rating_helpfuls.count.to_s
-              foodies found this helpful
+          =render :partial => "/helpful"
+
 =will_paginate(@current_menu_item_reviews)
 
