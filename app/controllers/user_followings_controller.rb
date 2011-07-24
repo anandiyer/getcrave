@@ -98,15 +98,21 @@ class UserFollowingsController < ApplicationController
   def destroy
     #TODO: a user can only unfollow someone they are following
 
+    if (params[:id])
+      #    UserFollowing.find(params[:id])
+      @user_following = UserFollowing.where(:user_id => current_user.id, 
+        :following_user_id => params[:id]).first
+        @user_following.destroy
+    else
+      @user_following = UserFollowing.where(:user_id => params[:user_id], 
+        :following_user_id => params[:following_user_id]).first
+        @user_following.destroy
+    end
 
-#    UserFollowing.find(params[:id])
-    p @user_following = UserFollowing.where(:user_id => current_user.id, :following_user_id => params[:id]).first
-    @user_following.destroy
-#
     respond_to do |format|
-#      format.html { redirect_to(user_followings_url) }
-#      format.xml  { head :ok }
-#      format.json  { head :ok }
+      format.html { redirect_to(user_followings_url) }
+      format.xml  { head :ok }
+      format.json  { head :ok }
       format.js  { head :ok }
     end
   end
