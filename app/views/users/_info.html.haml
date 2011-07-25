@@ -25,6 +25,8 @@
         photos,
         = @user.menu_label_associations.count
         labels
+      .i
+        = @user.bio
 
       - @fb_auth = @user.authorizations.where(:provider => 'facebook').first
       - @twitter_auth = @user.authorizations.where(:provider => 'twitter').first
@@ -39,8 +41,6 @@
       - if @foursquare_auth
         - @url = "http://foursquare.com/"
         = link_to "Foursquare", @url
-      .i
-        = @user.bio
 
       - if current_user && user_to_follow != current_user
         - form_for(UserFollowing.new, :remote => true) do |f|
