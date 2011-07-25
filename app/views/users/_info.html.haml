@@ -17,8 +17,6 @@
       - if current_user.id == @user.id
         - url = "http://secure.getcrave.com/users/" + @user.id.to_s + "/edit"
         = link_to "Edit your profile", url
-      - url = "http://secure.getcrave.com/users/" + @user.id.to_s + "/edit"
-      = link_to "Edit your profile", url
 
       #rating
         = @user.menu_item_ratings.count
