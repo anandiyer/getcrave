@@ -18,6 +18,10 @@
     <%= f.text_field :email %> <br />
     <%= f.label :telephone %>
     <%= f.text_field :telephone %> <br />
+    <%= f.label :user_profile_pic_url %>
+    <%= f.text_field :user_profile_pic_url %> <br />
+    <%= f.label :bio %>
+    <%= f.text_field :bio %> <br />
   </div>
 
 
@@ -29,6 +33,8 @@
   <p>
 	<% if !Authorization.where(:user_id => @user.id, :provider => 'foursquare').exists? %>
 		<a href="/auth/foursquare"><img src="/images/signinwith-foursquare.png" /></a>
+    <% else %>
+        You have connected your foursquare account to crave.
 	<% end %>
   </p>
 <% end %>

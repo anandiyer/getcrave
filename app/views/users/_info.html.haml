@@ -17,11 +17,32 @@
       - if current_user.id == @user.id
         - url = "http://secure.getcrave.com/users/" + @user.id.to_s + "/edit"
         = link_to "Edit your profile", url
+      - url = "http://secure.getcrave.com/users/" + @user.id.to_s + "/edit"
+      = link_to "Edit your profile", url
 
       #rating
-        =  @user.menu_item_ratings.count
-        reviews
-      -#i can not follow myself
+        = @user.menu_item_ratings.count
+        reviews,
+        = @user.menu_item_photos.count
+        photos,
+        = @user.menu_label_associations.count
+        labels
+
+      - @fb_auth = @user.authorizations.where(:provider => 'facebook').first
+      - @twitter_auth = @user.authorizations.where(:provider => 'twitter').first
+      - @foursquare_auth = @user.authorizations.where(:provider => 'foursquare').first
+
+      - if @fb_auth
+        - @url = "http://facebook.com/profile.php?id=" + @fb_auth.uid.to_s
+        = link_to "Facebook", @url
+      - if @twitter_auth
+        - @url = "http://twitter.com/"
+        = link_to "Twitter", @url
+      - if @foursquare_auth
+        - @url = "http://foursquare.com/"
+        = link_to "Foursquare", @url
+      .i
+        = @user.bio
 
       - if current_user && user_to_follow != current_user
         - form_for(UserFollowing.new, :remote => true) do |f|

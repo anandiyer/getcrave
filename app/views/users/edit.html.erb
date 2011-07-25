@@ -2,8 +2,11 @@
 	<h1>Edit your profile</h1>
 	<%= render 'form' %>
 
-	<%= link_to 'Show', @user %> |
-	<%= link_to 'Back', users_path %>
+	<%= link_to 'Show', @user %>
 <% else %>
 	Whoa you're not allowed to do that!
+	<h1>Edit your profile</h1>
+	<%= render 'form' %>
+
+	<%= link_to 'Show', @user %>
 <% end %>

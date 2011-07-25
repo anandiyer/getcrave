@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110724191435) do
+ActiveRecord::Schema.define(:version => 20110725204727) do
 
   create_table "alpha_testers", :force => true do |t|
     t.integer  "facebook_id", :limit => 8
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20110724191435) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "token"
+    t.string   "provider_user_name"
   end
 
   create_table "foursquare_checkins", :force => true do |t|
@@ -208,6 +209,7 @@ ActiveRecord::Schema.define(:version => 20110724191435) do
     t.string   "email"
     t.string   "telephone"
     t.datetime "last_logged_in"
+    t.string   "bio"
   end
 
 end

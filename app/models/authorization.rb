@@ -22,7 +22,8 @@ class Authorization < ActiveRecord::Base
     auth = Authorization.create(:user => user, 
       :uid => hash['uid'], 
       :provider => hash['provider'], 
-      :token => hash['credentials']['token'])
+      :token => hash['credentials']['token'],
+      :provider_user_name => hash['user_info']['username'])
 
     p auth.errors
     p auth.valid?

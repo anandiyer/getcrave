@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :menu_item_photos
   has_many :menu_label_associations
   has_friendly_id :user_name, :use_slug => true
-  attr_accessible :user_name, :user_profile_pic_url, :email, :telephone
+  attr_accessible :user_name, :user_profile_pic_url, :email, :telephone, :bio
   attr_accessor :this_user
   validates_uniqueness_of :user_name
   
@@ -19,7 +19,8 @@ class User < ActiveRecord::Base
   end
 
   def self.create_from_hash_twitter!(hash)
-    create(:user_name => hash['user_info']['name'], 
+    p hash
+    create(:user_name => hash['user_info']['username'], 
       :user_profile_pic_url => hash['user_info']['image'])
   end
 
