@@ -1,7 +1,9 @@
 - if !@results || @results.count == 0
   No matching results :(
 
-- @results.each_with_index do |@menu_item, @counter|
+- @results.each_with_index do |menu_item, counter|
+  - @menu_item = menu_item
+  - @counter = counter
 
   - @stars = "0"
   - begin

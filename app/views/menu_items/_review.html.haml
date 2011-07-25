@@ -4,7 +4,8 @@
   - all_current_reviews = @menu_item.menu_item_ratings
   - @current_menu_item_reviews = @menu_item.menu_item_ratings.order("created_at DESC").page(params[:page] ? params[:page] : 1).per(params[:limit] ? params[:limit] : ITEMS_PER_PAGE)
 
-  - @current_menu_item_reviews.each do |@mi_rating|
+  - @current_menu_item_reviews.each do |mi_rating|
+    - @mi_rating = mi_rating
     - anchorname = @mi_rating.id.to_s
     - user = User.find(@mi_rating.user_id)
     - if @mi_rating.user_id?

@@ -11,7 +11,8 @@
     - review_limit = params[:limit].to_i
 
   - @current_menu_item_reviews_limits = @current_menu_item_reviews.first(review_limit)
-  - @current_menu_item_reviews_limits.each do |@mi_rating|
+  - @current_menu_item_reviews_limits.each do |mi_rating|
+    - @mi_rating = mi_rating
     - user = @user
     - @menu_item = @mi_rating.menu_item
     - if @mi_rating.user_id?

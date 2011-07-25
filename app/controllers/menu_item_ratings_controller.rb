@@ -101,7 +101,8 @@ class MenuItemRatingsController < ApplicationController
     link = "http://getcrave.com/items/"+menu_item_friendly_id+"#"+menu_item_rating_id
     message = review + " - " + link 
     picture = menu_item.thumbnail.index("amazonaws").nil? ? "http://getcrave.com/images/"+menu_item.thumbnail : menu_item.thumbnail
-    desc = menu_item.description ? menu_item.description : "Have you ever been to a restaurant and asked, “So, what’s good here?” We help people find the food they like."
+    desc = menu_item.description ? menu_item.description : 
+      "Have you ever been to a restaurant or a bar and asked, \'so, what\'s good here\?"
 
     if (auth && !auth.token.empty?)
       me = FbGraph::User.me(auth.token)

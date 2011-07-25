@@ -1,30 +1,30 @@
-- restaurant = @menu_item.restaurant
-.restaurant_menu_item_wrapper{:data => {:latitude => restaurant.latitude, :longitude => restaurant.longitude}, :class => controller.controller_name+"_"+controller.action_name}
-  = render :partial => "/menu_items/small_thumbnail"
-  .desc_block_2_col
-    .b
-      %h1
-        = link_to @menu_item.name, @menu_item
-        @
-        = link_to restaurant.name, restaurant
-      #stars_wrap
-        - begin
-          - if @menu_item.menu_item_avg_rating_count
-            - avg = @menu_item.menu_item_avg_rating_count.avg_rating
-          - else
+- if (@menu_item)
+  - restaurant = @menu_item.restaurant
+  .restaurant_menu_item_wrapper{:data => {:latitude => restaurant.latitude, :longitude => restaurant.longitude}, :class => controller.controller_name+"_"+controller.action_name}
+    = render :partial => "/menu_items/small_thumbnail"
+    .desc_block_2_col
+      .b
+        %h1
+          = link_to @menu_item.name, @menu_item
+          @
+          = link_to restaurant.name, restaurant
+        #stars_wrap
+          - begin
+            - if @menu_item.menu_item_avg_rating_count
+              - avg = @menu_item.menu_item_avg_rating_count.avg_rating
+            - else
+              - avg = 0
+          - rescue
             - avg = 0
-        - rescue
-          - avg = 0
-        #star_average{:class => "star_sm stars_"+stars_class_normalize(avg), :data =>{:rating => avg}} &nbsp;
-    .b.i= restaurant.address_full
-  .save_n_review_3_col
-    = render :partial => "/save"
-  .review_counter_for_item
+          #star_average{:class => "star_sm stars_"+stars_class_normalize(avg), :data =>{:rating => avg}} &nbsp;
+      .b.i= restaurant.address_full
+    .save_n_review_3_col
+      = render :partial => "/save"
+    .review_counter_for_item
 
-    - if !@menu_item.menu_item_avg_rating_count.nil?
-      - review = @menu_item.menu_item_avg_rating_count.count
-
-    - else
-      - review = 0
-    .number_rev= review
-    reviews
+      - if !@menu_item.menu_item_avg_rating_count.nil?
+        - review = @menu_item.menu_item_avg_rating_count.count
+      - else
+        - review = 0
+      .number_rev= review
+      reviews

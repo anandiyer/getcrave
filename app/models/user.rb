@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
 
   def followed_by_current_user
     if this_user
-      self.user_followings.where(:following_user_id => this_user.id).any?
+      this_user.user_followings.where(:following_user_id => self.id).any?
     else
       return false
     end
@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
 
   def following_current_user
     if this_user
-      this_user.user_followings.where(:following_user_id => self.id).any?
+      self.user_followings.where(:following_user_id => this_user.id).any?
     else
       return false
     end

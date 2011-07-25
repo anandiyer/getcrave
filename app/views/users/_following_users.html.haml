@@ -7,7 +7,8 @@
     - else
       - items = @users
 
-    - items.each do |@user_f|
+    - items.each do |user_f|
+      - @user_f = user_f
       - if @following || @followers
         - user = User.find(@followers ? @user_f.user_id : @user_f.following_user_id)
       - else

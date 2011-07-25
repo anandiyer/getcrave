@@ -52,6 +52,10 @@ class SessionsController < ApplicationController
         a_find.save
       end
     end
+    
+    #Save last_logged_in time
+    self.current_user.last_logged_in = Time.now
+    self.current_user.save
 
     # If coming from an iPhone, redirect to another page with the user_id
     # TODO: turning off autoredirects while in alpha

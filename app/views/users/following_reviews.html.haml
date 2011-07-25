@@ -8,9 +8,10 @@
         #reviews_wrapper{:class => class_name_from_path}
           #update_place_restaurants{:class => class_name_from_path}
             =render :partial => "following_users"
-      - @menu_item_ratings.each do |@mi_rating|
+      - @menu_item_ratings.each do |mi_rating|
+        - @mi_rating = mi_rating
         - @menu_item = @mi_rating.menu_item
-        - if @mi_rating.user_id?
+        - if mi_rating.user_id?
           .reviews_wrapper_block
             .review_image_col
               = render :partial => "/menu_items/small_thumbnail"
@@ -26,7 +27,7 @@
                 .data_review
                   =@mi_rating.updated_at.strftime("%b %d, %Y")
 
-              -rating = @mi_rating.rating ? @mi_rating.rating : 0
+              -rating = mi_rating.rating ? mi_rating.rating : 0
               .star_sm{:class => "star_sm stars_"+stars_class_normalize(@mi_rating.rating), :id => @mi_rating.id, :data => {:rating => rating, :model => "menu_item_ratings"}} &nbsp;
               %em
                 by 

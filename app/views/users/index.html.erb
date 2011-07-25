@@ -7,7 +7,7 @@ Total number of reviews: <%= MenuItemRating.count %><br />
     <th>User name</th>
     <th>Reviews</th>
     <th>Created</th>
-    <th>Updated</th>
+    <th>LastLogin</th>
     <th>Auths</th>
     <th>Photos</th>
     <th>Labels</th>
@@ -19,6 +19,7 @@ Total number of reviews: <%= MenuItemRating.count %><br />
     <td><%= user.user_name %></td>
     <td><%= user.user_ratings_count.to_s %></td>
     <td><%= user.created_at.to_s %></td>
+    <td><%= user.last_logged_in.to_s %></td>
     <td><%= user.authorizations.count.to_s %></td>
     <td><%= user.menu_item_photos.count.to_s %></td>
     <td><%= user.menu_label_associations.count.to_s %></td>

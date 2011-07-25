@@ -20,7 +20,7 @@ gem "uuidtools"
 gem 'aws-s3', '0.6.2', :require => 'aws/s3'
 gem 'will_paginate', "~> 3.0.pre2"
 gem 'kaminari'
-gem 'omniauth'
+gem 'omniauth', ">= 0.1.6"
 
 gem "fb_graph" #for fb share
 
@@ -36,7 +36,7 @@ group :development, :test do
   gem "haml"
   gem "haml-rails"
   gem "faraday"
-  gem 'ruby-debug' 
+  gem 'ruby-debug19' 
 end
 
 group :production do

@@ -1,5 +1,7 @@
 #reviews_wrapper_bloc_wrapper
-  - @restaurants.each_with_index do |@restaurant, @counter|
+  - @restaurants.each_with_index do |restaurant, counter|
+    - @resturant = restaurant
+    - @counter = counter
     = render :partial => "restaurants/restaurant_nearby"
 
 = will_paginate @restaurants

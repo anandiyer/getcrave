@@ -7,17 +7,17 @@ module ApplicationHelper
 
   def title action_and_controller_name
     if action_and_controller_name == "menu_items_show"
-      str = @menu_item.name
+      @str = @menu_item.name
     elsif action_and_controller_name == "menu_items_index"
-      str = @restaurant.name
+      @str = @restaurant.name
     elsif action_and_controller_name == "users_following_reviews"
-      str = "activity"
+      @str = "activity"
     elsif (action_and_controller_name.include?("users_") && (@user))
-      str = @user.user_name+"'s profile"
+      @str = @user.user_name+"'s profile"
     else
-      str = "so what's good here?"
+      @str = "so what's good here?"
     end
-    "сrave - #{str}"
+    return "crave - #{@str}"
   end
 
   def navigation_selected act_name
