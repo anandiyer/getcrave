@@ -1,12 +1,11 @@
-- restaurant = @restaurant
-.restaurant_menu_item_wrapper{:data => {:latitude => restaurant.latitude, :longitude => restaurant.longitude}, :class => "restaurants_index"}
+.restaurant_menu_item_wrapper{:data => {:latitude => @restaurant.latitude, :longitude => @restaurant.longitude}, :class => "restaurants_index"}
 
   .img_column_mi_1_col
     =image_tag "item_rest_temp_image.png"
   .desc_block_2_col
     .b
       %h1= link_to @restaurant.name, @restaurant
-    .b.i= restaurant.address_full
+    .b.i= @restaurant.address_full
   -#.save_n_review_3_col= render :partial => "/save"
   .review_counter_for_item
 
