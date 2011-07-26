@@ -19,7 +19,7 @@
 
         #desc_wrap_rest
           #description
-            %p= "#{@restaurant.street_address} (#{@restaurant.cross_street})"
+            %p= "#{@restaurant.street_address} #{@restaurant.cross_street}"
             %p= @restaurant.neighborhood
             %p= "#{@restaurant.city}, #{@restaurant.state} #{@restaurant.zip}"
             %p= @restaurant.telephone
@@ -28,13 +28,13 @@
               -# / .col1_pn
 
               -# /  %p= link_to "www.siet.com"
-              .col2_pn
-                :erb
-                  <%= like_button_for @restaurant, :layout => :button_count, :width => 150, :show_faces => false %>         
+              -#.col2_pn
+                -#:erb
+                  -#<%= like_button_for @restaurant, :layout => :button_count, :width => 150, :show_faces => false %>         
 
-          #fb-root
-          %script{:src => "http://connect.facebook.net/en_US/all.js#xfbml=1"}
-          %fb:send{:font => "arial", :href => "http://getcrave.com/places/" + @restaurant.friendly_id}
+          -#fb-root
+          -#%script{:src => "http://connect.facebook.net/en_US/all.js#xfbml=1"}
+          -#%fb:send{:font => "arial", :href => "http://getcrave.com/places/" + @restaurant.friendly_id}
 
   #reviews_wrapper.restaurant
     %h3.review
