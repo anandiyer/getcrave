@@ -31,6 +31,7 @@ class MenuLabelAssociationsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @menu_label_association }
+      format.json  { render :json => @menu_label_association }
     end
   end
 
@@ -52,14 +53,15 @@ class MenuLabelAssociationsController < ApplicationController
       if !any_exist
         @menu_label_association = MenuLabelAssociation.new(params[:menu_label_association])
 
-
         if @menu_label_association.save
           format.html { redirect_to(@menu_label_association, :notice => 'Menu label association was successfully created.') }
           format.xml { render :xml => @menu_label_association, :status => :created, :location => @menu_label_association }
+          format.json { render :json => @menu_label_association, :status => :created, :location => @menu_label_association }
           format.js { render :partial => "menu_items/labels_list" }
         end
       else
         format.js { render :js => "window.g_notice('Sorry','You have already up-voted this label')" }
+        format.json  { render :json => "Already upvoted this label", :status => :unprocessable_entity }
       end
     end
   end
