@@ -30,7 +30,7 @@ class Authorization < ActiveRecord::Base
 
     if !auth.valid?
       a_find = Authorization.find_from_hash(hash)
-      a_find.token = token
+      a_find.token = hash['credentials']['token']
       a_find.save
       return a_find
     end

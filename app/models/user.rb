@@ -20,8 +20,9 @@ class User < ActiveRecord::Base
 
   def self.create_from_hash_twitter!(hash)
     p hash
-    create(:user_name => hash['user_info']['username'], 
-      :user_profile_pic_url => hash['user_info']['image'])
+    create(:user_name => hash['user_info']['nickname'], 
+      :user_profile_pic_url => hash['user_info']['image'],
+      :bio => hash['user_info']['description'])
   end
 
   def followed_by_current_user
