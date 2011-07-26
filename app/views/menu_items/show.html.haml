@@ -42,9 +42,10 @@
         -if @menu_item.menu_item_avg_rating_count
           %span= @menu_item.menu_item_avg_rating_count.count
           Reviews 
-      
-      :erb
-        <%= like_button_for @menu_item, :layout => :button_count, :width => 250, :show_faces => false %>
+
+        :erb
+          <% @url = "http://getcrave.com/items/" + @menu_item.friendly_id %>
+          <fb:like href="<%= @url %>" send="false" width="350" show_faces="false" font=""></fb:like>
         
       #desc_wrap
 
@@ -101,11 +102,4 @@
 - else
   #reviews_wrapper{:class => controller.controller_name}
     #update_place
-
-
-
-
-
-
-    -#= render :partial => "/sidebar"
 
