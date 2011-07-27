@@ -12,7 +12,7 @@
 	<meta property="og:site_name" content="crave"/> 
 	
 	<link rel="shortcut icon" href="/images/favicon.ico" > 
-	<link rel="stylesheet" href="/stylesheets/main.css" type="text/css" />
+	<link rel="stylesheet" href="stylesheets/main.css" type="text/css" />
 	
 	<script type="text/javascript">
 	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -29,14 +29,17 @@
 <body id="body">
 	<div id="background">
 		<div id="content">
-		<div class="logo"><img src="/images/crave-logo.png"></div>                                                        
+		<div class="iphone"><img src="/images/iphone-app.png" /></div>                                                    
+		<div id="right-column">  
+		<center>
+		<div class="logo"><img src="/images/crave-logo-linen.png"></div>	  
         <div class="explanation">
 			<div class="slogan">&ldquo;So, what&rsquo;s good here?&rdquo;</div>                                                           
 			<div class="description">We help you find the best food.                                                                                              		
-		</div>
+		</div></div>
 		<br />
 		
-		
+		<div class="signup-area">
 		<label class="request" for="mce-EMAIL">Request an invite!</label><br/>
 		<div class="ss-form-container">                                                        
  			<div class="ss-form">
@@ -77,14 +80,17 @@
        					</div>
 					             
 				</div>
-				
+				<div class="buttons">
+					<div class="facebook" onclick="location.href='/auth/facebook?redirect_to=/alpha.html';" style="cursor:pointer;">Connect with Facebook</a></div>
+					<div class="twitter" onclick="location.href='/auth/twitter?redirect_to=/alpha.html';" style="cursor:pointer;">Connect with Twitter</div>
+				</div>
+				</div></div>
 			</div>
 			
  		</div>
 
 		<div id="fb-root">
-		<a href="/auth/facebook?redirect_to=/alpha.html"><img src="images/fb_login_icon.png" style="margin:25px 0 0 20px;"></img></a>
-		<br /><br /><br />
+		<br />
 		<script src="http://connect.facebook.net/en_US/all.js#appId=207859815920359&amp;xfbml=1"></script>
 		<script>FB.init({ appId:'207859815920359', cookie:true,status:true, xfbml:true });</script><fb:like href="getcrave.com" send="false" width="350" show_faces="true" font=""></fb:like>
 		</div>
