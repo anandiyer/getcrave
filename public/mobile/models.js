@@ -18,12 +18,8 @@ Ext.regModel('Dish',
                 return "unrated";
             }
         }
-      },{
-        name: 'restaurant_name',
-        convert: function(value, record) {
-            return record.get('restaurant').name.toString();
-        }
-    }]
+      }
+    ]
 });
 
 Ext.regModel('savedDish',
@@ -35,29 +31,48 @@ Ext.regModel('savedDish',
     }
 });
 
+Crave.dishTemplateConfig = {
+  distDisplay: function(miles) {
+    if (miles === undefined) {
+      return "";
+    }
+    var feet = Math.round(miles * 5280);
+    if(feet<1000) {
+      return feet+" feet";
+    } else {
+      return parseFloat(miles).toFixed(1)+' miles';
+    }
+  },
+  //right now this just grabs the first image
+  photo_url: Crave.photo_url,
+  render_dish: function(menu_item) {
+    return Crave.dishTemplate.apply(menu_item);
+  }
+};
 
+Crave.dishTemplate = new Ext.XTemplate.from('dishesTemplate', Crave.dishTemplateConfig);
+
+Crave.savedDishTemplate = Ext.XTemplate.from("savedDishTemplate", Crave.dishTemplateConfig);
+
+Ext.regModel('Restaurant', {
+  fields: ['city', 'distance', 'name', 'id', 'country', 'created_at', 'state', 'street_address', 'telephone', 'twitter', 'zip']
+});
+
+Ext.regModel('User', {
+  fields: ['facebook_id', 'id', 'user_ratings_count', 'user_profile_pic_url', 'user_name', 'twitter_id']
+});
+
+Ext.regModel('FollowUser', {
+  fields: ['user_name', 'id', 'user_id', 'following_user_id', 'user', "following_user"]
+});
 
 //activity.js
 
 Ext.regModel("MenuItemRating", {
-  fields: ["user", "rating","created_at", "updated_at", "review", "id", "user_id", "menu_item_id", "menu_item"],
-  belongsTo: [{
-    model: 'Dish',
-    name: 'menu_item',
-    belongsTo: {
-      model: 'Restaurant',
-      name: 'restaurant'
-    }
-  },{
-    model: 'User',
-    name: 'user'
-  }]
+  fields: ["user", "rating", "created_at", "updated_at", "review", "id", "user_id", "menu_item_id", 'menu_item']
 });
 
 
-Ext.regModel('Restaurant', {
-  fields: ['name', 'id']
-});
 
 
 //used in restaurants.js
@@ -86,17 +101,7 @@ Ext.regModel('RestaurantDish',
                 return "";
             }
         }
-    },{
-        name: 'restaurant_name',
-        convert: function(value, record) {
-            return record.get('restaurant').name.toString();
-        }
     }]
-});
-
-Ext.regModel('Restaurants',
-{
-    fields: ['distance','name','id']
 });
 
 Ext.regModel('DishSearch',
@@ -104,18 +109,3 @@ Ext.regModel('DishSearch',
   fields: ['name','id','price','description','restaurant_id']
 });
 
-Ext.regModel('User', {
-  fields: ['facebook_id', 'id', 'user_ratings_count', 'user_profile_pic_url', 'user_name', 'twitter_id']
-});
-
-Ext.regModel('FollowUser', {
-  fields: ['user_name', 'id', 'user_id', 'following_user_id', 'user', "following_user"],
-  belongsTo: [{
-    model: 'User',
-    name: 'user'
-  },{
-    model: 'User',
-    name: "following_user",
-    foreign_key: 'following_user_id'
-  }]
-});

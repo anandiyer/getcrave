@@ -1,5 +1,20 @@
 //mine is true for the "my profile" panel and false for the other people's one.
-Crave.create_profile_panel = function(mine) {
+Crave.buildProfilePanel = function(mine) {
+  
+  var setupBackStack = function(subPanel) {
+    Crave.back_stack.push({
+      panel: profilePnl,
+      user_id: profilePnl.displayed_user_id,
+      callback: function(backInfo) {
+        if (!mine) {
+          //they just returned to the "other" profile panel via the back button, which means they were on someone else's profile
+          profilePnl.load_user_data(backInfo.user_id);
+        }
+        profilePnl.setActiveItem(subPanel);
+      }
+    });
+  }
+  
   var userDishStore = new Ext.data.Store({
       model: 'MenuItemRating',
       clearOnPageLoad: false,
@@ -9,13 +24,9 @@ Crave.create_profile_panel = function(mine) {
         url: '',
         reader: {
           type:'json',
-          record:'menu_item_rating'
+          model: 'MenuItemRating',
+          record: 'menu_item_rating'
         }
-      },
-      sorters: [{property: 'rating', direction: 'DESC'}],
-      getGroupString : function(record) {
-          var rating = parseInt(record.get('rating'));
-          return Crave.ratingDisplay(rating);
       }
   });
 
@@ -23,27 +34,38 @@ Crave.create_profile_panel = function(mine) {
       itemTpl: new Ext.XTemplate.from('profileRatingTemplate'),
       itemSelector: '.arating',
       singleSelect: true,
-      grouped: true,
+      grouped: false,
       indexBar: false,
       store: userDishStore,
-      loadingText: undefined,
+      loadingText: "Loading",
       scroll: false,
       clearSectionOnDeactivate:true,
       listeners: {
         itemtap:  function(dataView, index, item, e) {
           var record = userDishStore.getAt(index);
-          Crave.back_stack.push(makeBackStack());
+          setupBackStack(userProfilePnl);
           Crave.show_menu_item(record.data.id);
         }
       },
       plugins: [new Ext.plugins.ListPagingPlugin()]
   });
 
+  
 
-  var savedDishStore = new Ext.data.Store({
+  var savedDishList = null;
+  var savedDishStore = null;
+  if (mine) {
+    savedDishList = new Ext.Panel({
+      html: "Nothing to see here"
+    });
+  } else {
+    savedDishStore = new Ext.data.Store({
       model: 'savedDish',
       clearOnPageLoad: false,
-      sorters: [{property: 'rating', direction: 'DESC'}],
+      sorters: [{
+        property: 'rating', 
+        direction: 'DESC'
+      }],
       getGroupString : function(record) {
         try {
           var rating = parseInt(record.data.menu_item.menu_item_avg_rating_count.avg_rating);
@@ -53,38 +75,40 @@ Crave.create_profile_panel = function(mine) {
         }
       },
       proxy: {
-         type:'ajax',
-         url:'',
-         reader: {
-             type:'json',
-             model: 'savedDish',
-             record:'user_saved_menu_item'
-         }
+        type:'ajax',
+        url:'',
+        reader: {
+          type:'json',
+          model: 'savedDish',
+          record:'user_saved_menu_item'
+        }
       }
-  });
+    });
+    savedDishList = new Ext.List({
+      itemTpl: Crave.savedDishTemplate,
+      itemSelector: '.adish',
+      singleSelect: true,
+      grouped: true,
+      indexBar: false,
+      store: savedDishStore, //dishes.js
+      scroll:'vertical',
+      hideOnMaskTap: false,
+      width:'100%',
+      height:'100%',
+      clearSectionOnDeactivate:true,
+      listeners: {
+        itemtap: function(dataView, index, item, e) {
+          var dish_id = savedDishStore.getAt(index).data.menu_item.id;
+          setupBackStack(savedDishList);
+          Crave.show_menu_item(dish_id);
+        }
+      },
+      plugins: [new Ext.plugins.ListPagingPlugin()]
+    });
+  }
+    
 
-
-  var savedDishList = new Ext.List({
-    itemTpl: Ext.XTemplate.from(savedDishTemplate),
-    itemSelector: '.adish',
-    singleSelect: true,
-    grouped: true,
-    indexBar: false,
-    store: savedDishStore, //dishes.js
-    scroll:'vertical',
-    hideOnMaskTap: false,
-    width:'100%',
-    height:'100%',
-    clearSectionOnDeactivate:true,
-    listeners: {
-      itemtap: function(dataView, index, item, e) {
-        var dish_id = savedDishStore.getAt(index).data.menu_item.id;
-        Crave.back_stack.push(makeBackStack());
-        Crave.show_menu_item(dish_id);
-      }
-    },
-    plugins: [new Ext.plugins.ListPagingPlugin()]
-  });
+  
 
   var followerStore = new Ext.data.Store({
     model: "FollowUser",
@@ -139,17 +163,7 @@ Crave.create_profile_panel = function(mine) {
     listeners: {
       itemtap: function(dataView, index, item, e) {
         var record = followerStore.getAt(this.displayIndexToRecordIndex(index));
-        Crave.back_stack.push({
-          panel: profilePnl,
-          user_id: profilePnl.displayed_user_id,
-          callback: function(backInfo) {
-            if (!mine) {
-              //they just returned to the "other" profile panel via the back button, which means they were on someone else's profile
-              profilePnl.load_user_data(backInfo.user_id);
-            }
-            profilePnl.setActiveItem(followerList);
-          }
-        });
+        setupBackStack(followerList);
         Crave.show_user_profile(record.data.user_id);
       }
     },
@@ -173,17 +187,7 @@ Crave.create_profile_panel = function(mine) {
     listeners: {
       itemtap: function(dataView, index, item, e) {
         var record = followerStore.getAt(this.displayIndexToRecordIndex(index));
-        Crave.back_stack.push({
-          panel: profilePnl,
-          user_id: profilePnl.displayed_user_id,
-          callback: function(backInfo) {
-            if (!mine) {
-              //they just returned to the "other" profile panel via the back button, which means they were on someone else's profile
-              profilePnl.load_user_data(backInfo.user_id);
-            }
-            profilePnl.setActiveItem(followingList);
-          }
-        });
+        setupBackStack(followingList);
         Crave.show_user_profile(record.data.following_user_id);
       }
     },
@@ -208,17 +212,21 @@ Crave.create_profile_panel = function(mine) {
         flex: 1,
         text: "<span class='chevrony'></span><span class='number saved'></span><span class='text'>Saved</span>",
         handler: function() {
-          profilePnl.setActiveItem(savedDishList);
-          Crave.back_stack.push({
-            fn: function() {
-              profilePnl.setActiveItem(userProfilePnl);
-              if (Crave.back_stack.length === 0) {
-                backButton.hide();
+          if (mine) {
+            Crave.viewport.setActiveItem(Crave.savedPanel, {type: 'slide', direction: 'right'});
+          } else {
+            profilePnl.setActiveItem(savedDishList, 'pop');
+            Crave.back_stack.push({
+              fn: function() {
+                profilePnl.setActiveItem(userProfilePnl, 'pop');
+                if (Crave.back_stack.length === 0) {
+                  backButton.hide();
+                }
               }
-            }
-          });
-          backButton.show();
-          settingsButton.hide();  
+            });
+            backButton.show();
+            settingsButton.hide();  
+          }
         }
       },{
         flex: 1,
@@ -228,13 +236,13 @@ Crave.create_profile_panel = function(mine) {
           followerStore.load();
           Crave.back_stack.push({
             fn: function() {
-              profilePnl.setActiveItem(userProfilePnl);
+              profilePnl.setActiveItem(userProfilePnl, 'pop');
               if (Crave.back_stack.length === 0) {
                 backButton.hide();
               }
             }
           });
-          profilePnl.setActiveItem(followingList);
+          profilePnl.setActiveItem(followingList, 'pop');
           backButton.show();
           settingsButton.hide();  
         }
@@ -246,13 +254,13 @@ Crave.create_profile_panel = function(mine) {
           followerStore.load();
           Crave.back_stack.push({
             fn: function() {
-              profilePnl.setActiveItem(userProfilePnl);
+              profilePnl.setActiveItem(userProfilePnl, 'pop');
               if (Crave.back_stack.length === 0) {
                 backButton.hide();
               }
             }
           });
-          profilePnl.setActiveItem(followerList);
+          profilePnl.setActiveItem(followerList, 'pop');
           backButton.show();
           settingsButton.hide();  
         }
@@ -291,7 +299,7 @@ Crave.create_profile_panel = function(mine) {
 
   var settingsButton = new Ext.Button({
     text:'Settings',
-    hidden: !(mine && isLoggedIn()),
+    hidden: !(mine && Crave.isLoggedIn()),
     ui:'normal',
     handler: function(b,e) {
       Crave.viewport.setActiveItem(Crave.settingsPanel, {type: 'slide', direction: 'left'});
@@ -312,7 +320,7 @@ Crave.create_profile_panel = function(mine) {
     items:[profileLoginPnl, userProfilePnl, savedDishList, followerList, followingList],
     height:'100%',
     width:'100%',
-    activeItem: isLoggedIn() ? 1 : 0,
+    activeItem: Crave.isLoggedIn() ? 1 : 0,
     dockedItems: Crave.create_titlebar({
       items:[backButton, {
          xtype : 'spacer'
@@ -320,22 +328,27 @@ Crave.create_profile_panel = function(mine) {
     }),
     listeners: {
       activate: function(p) {
-        if (!isLoggedIn()){
-          p.setActiveItem(profileLoginPnl);
-          return;          
-        } 
         if (mine) {
-          p.setActiveItem(userProfilePnl);
-          p.load_user_data(Crave.currentUserId());
+          if (!Crave.isLoggedIn()){
+            p.setActiveItem(profileLoginPnl);
+          } else { 
+            //make sure the user data is loaded
+            //this will do nothign on subsequest calls
+            p.load_user_data(Crave.currentUserId());
+          }
         }
         userDishList.refresh();  //herp derp 
       }
     },
     load_user_data: function(user_id) {
+  
+      profilePnl.setActiveItem(userProfilePnl, 'pop');
+      userProfilePnl.scroller.scrollTo({ x: 0, y: 0 });
+  
       if (profilePnl.displayed_user_id === user_id) {
         return;
       }
-      profilePnl.setActiveItem(userProfilePnl, 'pop');
+
       profilePnl.setLoading(true);
       //load basic info
       Ext.Ajax.request({
@@ -346,13 +359,15 @@ Crave.create_profile_panel = function(mine) {
         },
         success: function(response, options) {
           profilePnl.setLoading(false);
+          profilePnl.setActiveItem(userProfilePnl, 'pop');
+          userProfilePnl.scroller.scrollTo({ x: 0, y: 0 });
           profilePnl.displayed_user_id = user_id;
           var user = Ext.decode(response.responseText).user;
           var html = '<div class="userTopPnl"><div class="userPic">';
-          html = html + '<img src="'+user.user_profile_pic_url+'?type=large"></div>'
+          html = html + '<img onload="Crave.squareFitImage(this);" src="'+user.user_profile_pic_url+'?type=large"></div>'
           html = html + '<div class="userInfo"><div class="userName">' + user.user_name+ '</div>';
           html = html + '<div class="reviewCount">' + user.user_ratings_count + ' reviews</div>';
-          if (!mine && isLoggedIn()) { //can't follow if not logged in yet
+          if (!mine && Crave.isLoggedIn()) { //can't follow if not logged in yet
             if (user.followed_by_current_user) {
               html = html + '<button onclick="Crave.follow_user_toggle(' + user_id + ', this);" class="follow">- Unfollow</button>';
             } else {
@@ -366,6 +381,7 @@ Crave.create_profile_panel = function(mine) {
           if (mine) {
             //set up the settings panel if we loaded our own profile, this saves us an ajax call later
             Crave.settingsPanel.set_user(user);
+            Crave.savedPanel.set_user(user);
           }
         },
         failure: Crave.handle_failure
@@ -377,8 +393,11 @@ Crave.create_profile_panel = function(mine) {
           page: 1
         }
       });
-      savedDishStore.proxy.url = "/users/" + user_id + "/saved.json";
-      savedDishStore.load();
+      
+      if (!mine) {
+        savedDishStore.proxy.url = "/users/" + user_id + "/saved.json";
+        savedDishStore.load();
+      }
     }
   });
   return profilePnl;
@@ -392,7 +411,7 @@ Crave.follow_user_toggle = function(user_id, button) {
   if (following) {
     Ext.Ajax.request({
       method: "DELETE",
-      url: '/user_followings.json',
+      url: '/following.json',
       jsonData:{
         user_following: {
           user_id: Crave.currentUserId(),
@@ -401,7 +420,6 @@ Crave.follow_user_toggle = function(user_id, button) {
       },
       failure: Crave.handle_failure,
       success: function(response, options) {
-        debugger;
         button.innerHTML = "+ Follow";
       }
     })
@@ -417,9 +435,95 @@ Crave.follow_user_toggle = function(user_id, button) {
       },
       failure: Crave.handle_failure,
       success: function(response, options) {
-        debugger;
         button.innerHTML = "- Unfollow";
       }
     })
+  }
+};
+
+
+//this is the main panel for the bottom tabs
+Crave.buildSavedPanel = function() {
+  var savedDishStore = new Ext.data.Store({
+    model: 'savedDish',
+    clearOnPageLoad: false,
+    autoLoad: Crave.isLoggedIn(),
+    sorters: [{
+      property: 'rating', 
+      direction: 'DESC'
+    }],
+    getGroupString : function(record) {
+      try {
+        var rating = parseInt(record.data.menu_item.menu_item_avg_rating_count.avg_rating);
+        return Crave.ratingDisplay(rating);
+      } catch (ex) {
+        return "unrated"
+      }
+    },
+    proxy: {
+      type:'ajax',
+      url: Crave.isLoggedIn() ? "/users/" + Crave.currentUserId() + "/saved.json" : "",
+      reader: {
+        type:'json',
+        model: 'savedDish',
+        record:'user_saved_menu_item'
+      }
+    }
+  });
+
+
+  var savedList = new Ext.List({
+    itemTpl: Crave.savedDishTemplate,
+    itemSelector: '.adish',
+    singleSelect: true,
+    grouped: true,
+    indexBar: false,
+    store: savedDishStore,
+    scroll:'vertical',
+    hideOnMaskTap: false,
+    width:'100%',
+    height:'100%',
+    clearSectionOnDeactivate:true,
+    listeners: {
+      itemtap: function(dataView, index, item, e) {
+        var dish_id = savedDishStore.getAt(index).data.menu_item.id;
+        Crave.back_stack.push({
+          panel: Crave.savedPanel
+        });
+        Crave.show_menu_item(dish_id);
+      }
+    },
+    plugins: [new Ext.plugins.ListPagingPlugin(), new Ext.plugins.PullRefreshPlugin()]
+  });
+  
+  Crave.savedPanel = new Ext.Panel({
+    dockedItems: Crave.create_titlebar({
+    }),
+    items: savedList,
+    listeners: {
+      activate: function() {
+        if (!Crave.isLoggedIn()) {
+          Crave.viewport.setActiveItem(Crave.myProfilePanel);
+        }
+      }
+    },
+    set_user: function(user) {
+      savedDishStore.proxy.url = "/users/" + user.id + "/saved.json";
+      savedDishStore.load();
+    }
+  });
+  
+  
+  return Crave.savedPanel;
+};
+
+
+Crave.squareFitImage = function(img) {
+  if (img.width > img.height) {
+    img.style.height = "100px";
+    img.style.width = "";
+  } else {
+    img.style.width = "100px";
+    img.style.height = "";
   }
 }

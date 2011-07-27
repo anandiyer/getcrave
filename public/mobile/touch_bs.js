@@ -36,6 +36,13 @@ TouchBS.get_date = function(date) {
              }
           }
       }
+      if (date[date.length-1] === 'Z') {
+        //UTC time in the db, but javascript will think that is in localtime, so we need to
+        //subtract the current localtime offset (which is in minutes)
+        //this will give us the real time with the right local tz offset
+        var real_date = new Date(d.getTime() - (d.getTimezoneOffset() * 60 * 1000));
+        return real_date;
+      }
       return d;
    }
 };
@@ -99,3 +106,54 @@ Ext.override(Ext.List, {
       return targetIndex;
   }
 });
+
+
+//taken from http://snippets.dzone.com/posts/show/2426
+TouchBS.rails_serializer = {
+ 
+  serialize : function(object) {
+    var values = []; 
+    var prefix = '';
+    
+    values = this.recursive_serialize(object, values, prefix);
+    
+    var param_string = values.join('&');
+    return param_string;
+  },
+  
+  recursive_serialize : function(object, values, prefix) {
+    for (var key in object) {
+      if (typeof object[key] == 'object') {
+        
+        if (prefix.length > 0) {
+          prefix += '['+key+']';         
+        } else {
+          prefix += key;
+        }
+        
+        values = this.recursive_serialize(object[key], values, prefix);
+        
+        var prefixes = prefix.split('[');
+        
+        if (prefixes.length > 1) {
+          prefix = prefixes.slice(0,prefixes.length-1).join('[');
+        } else {
+          prefix = prefixes[0];
+        }
+        
+      } else {
+        var value = encodeURIComponent(object[key]);
+        var prefixed_key;
+        if (prefix.length > 0) {
+          prefixed_key = prefix+'['+key+']'          
+        } else {
+          prefixed_key = key
+        }
+        prefixed_key = encodeURIComponent(prefixed_key);
+        if (value) values.push(prefixed_key + '=' + value);
+      }
+    }
+    return values;
+  }
+}
+

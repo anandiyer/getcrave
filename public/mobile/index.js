@@ -50,7 +50,7 @@ Ext.setup({
         "long": coords.longitude,
         limit: 25
       }
-
+      
       places.load();
       Crave.activityStore.load();
     }, function() {
@@ -80,7 +80,7 @@ Ext.setup({
     });
 
     var dishList = new Ext.List({
-      itemTpl: dishTemplate,
+      itemTpl: Crave.dishTemplate,
       itemSelector: '.adish',
       singleSelect: true,
       grouped: true,
@@ -171,8 +171,7 @@ Ext.setup({
     var restInfoPnl = new Ext.Panel({
       html: '',
       id: 'restInfoPnl',
-      height:'100%',
-      width:'100%'
+      flex: 1
     });
     var restPnl = new Ext.Panel({
       id: 'restPnl',
@@ -211,7 +210,7 @@ Ext.setup({
             Crave.back_stack.push({
               panel: detailPnl
             });
-            Crave.viewport.setActiveItem(reviewFormPnl);
+            Crave.viewport.setActiveItem(Crave.rateDishPanel);
           }
         }]
       })
@@ -245,7 +244,7 @@ Ext.setup({
             pressed: false,
             hidden: true,
             handler:function () {
-              listPnl.setActiveItem(dishPlacesList);
+              listPnl.setActiveItem(dishPlaceList);
             },
             ui: 'round',
             width: '110'
@@ -309,15 +308,15 @@ Ext.setup({
       }]
     });
 
-    Crave.myProfilePanel = Crave.create_profile_panel(true);
-    Crave.otherProfilePanel = Crave.create_profile_panel(false);
+    Crave.myProfilePanel = Crave.buildProfilePanel(true);
+    Crave.otherProfilePanel = Crave.buildProfilePanel(false);
 
     Crave.viewport = new Ext.Panel({
       fullscreen: true,
       layout: 'card',
       activeItem: 0,
-      items: [listPnl, Crave.activityPanel, Crave.myProfilePanel, detailPnl, filterListPnl,  
-        placePnl, newDishForm, reviewFormPnl,
+      items: [listPnl, Crave.buildSavedPanel(), Crave.activityPanel, Crave.myProfilePanel, detailPnl, filterListPnl,  
+        placePnl, newDishForm, Crave.buildRateDishPanel(),
         Crave.buildDishDisplayPanel(), Crave.buildSettingsPanel(),  Crave.otherProfilePanel],
       cardSwitchAnimation: 'slide',
       direction:'horizontal',
@@ -337,7 +336,7 @@ Ext.setup({
         },{
           text: "Saved",
           iconCls: 'saved',
-          hidden: true
+          card: Crave.savedPanel
         },{
           text: "Activity",
           iconCls: 'activity', 
@@ -348,8 +347,11 @@ Ext.setup({
           card: Crave.myProfilePanel
         }],
         listeners: {
-          change: function() {
+          change: function(tabbar, tab, card) {
             Crave.back_stack = []; //clear back stack when they explicitly click a tab
+            if(tab.text === "Me") {
+              Crave.myProfilePanel.setActiveItem(1); //reset to profile page since we cleared the back stack.  this is ugly
+            }
           }
         }
       })],
@@ -360,41 +362,6 @@ Ext.setup({
         }
       }
     });
-
-    $(".starcover").live("click",function(event) {
-      var rating = event.currentTarget.id.toString().replace("id-star","");
-      var ratingClasses = new Array("ratingOf0","ratingOf1", "ratingOf2","ratingOf3","ratingOf4","ratingOf5");
-      for(i=0;i<ratingClasses.length;i++) {
-        $(".starRating").removeClass(ratingClasses[i].toString());
-      }
-      if(rating==1) {
-        $(".starRating").addClass("ratingOf1");
-      }
-      if(rating==2) {
-        $(".starRating").addClass("ratingOf2");
-      }
-      if(rating==3) {
-        $(".starRating").addClass("ratingOf3");
-      }
-      if(rating==4) {
-        $(".starRating").addClass("ratingOf4");
-      }
-      if(rating==5) {
-        $(".starRating").addClass("ratingOf5");
-      }
-      Ext.getCmp("menuRating").setValue(rating);
-      console.log(Ext.getCmp("menuRating").getValue());
-    });
     $(".startuppic").remove();
   }
-});
-
-$(".newDish").live("click",function() {
-  //activate new dish form
-  Ext.getCmp('mainPnl').setActiveItem(3);
-  return false;
-});
-
-$(".logoutButton").live("click", function() {
-  localStorage.setItem("uid","");
 });
