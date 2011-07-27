@@ -34,13 +34,13 @@
 
       - if @fb_auth
         - @url = "http://facebook.com/profile.php?id=" + @fb_auth.uid.to_s
-        = link_to "Facebook", @url
+        = link_to(image_tag('/images/facebook_icon_mini.png', :width => '30px', :height => '30px'), @url)
       - if @twitter_auth
-        - @url = "http://twitter.com/"
-        = link_to "Twitter", @url
+        - @url = "http://twitter.com/" + @twitter_auth.provider_user_name
+        = link_to(image_tag('/images/twitter_logo-a.png', :width => '30px', :height => '30px'), @url)
       - if @foursquare_auth
-        - @url = "http://foursquare.com/"
-        = link_to "Foursquare", @url
+        - @url = "http://foursquare.com/user/" + @foursquare_auth.uid.to_s
+        = link_to(image_tag('/images/foursquare-128x128.png', :width => '30px', :height => '30px'), @url)
 
       - if current_user && user_to_follow != current_user
         - form_for(UserFollowing.new, :remote => true) do |f|
