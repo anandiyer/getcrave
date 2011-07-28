@@ -1,10 +1,19 @@
-- @foodies_for_current_dish ||= User.find(:all, :order => 'user_ratings_count DESC', :limit => ITEMS_PER_PAGE)
-
+- @foodies_for_current_dish ||= User.find(:all, :order => 'user_ratings_count DESC', :limit => ITEMS_SIDEBAR)
+- @foodies_of_the_week ||= User.find(:all)
+- @foodies_of_the_week.sort! { |a,b| b.count_ratings_this_week <=> a.count_ratings_this_week}
 #sidebar
   - if @controller.controller_name != "users"
     #map{:style => "width:298px; height:298px; border: 1px solid #ccc; margin-bottom:20px;"}
       =image_tag "map_temp.png"
   #foodies_wraper_wrapper
-    %h4 Top Foodies
+    %h4 Foodies of the Week
+    - if ITEMS_SIDEBAR > @foodies_of_the_week.count
+      - @count = @foodies_of_the_week.count - 1
+    - else
+      - @count = ITEMS_SIDEBAR - 1
+    -for i in 0 .. @count do
+      - @user = @foodies_of_the_week[i]
+      =render :partial => "/foodies_of_the_week"
+    %h4 Top Foodies All Time
     -for @user in @foodies_for_current_dish
       =render :partial => "/foodies"

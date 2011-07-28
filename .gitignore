@@ -16,3 +16,4 @@ tmp
 public/coffeescripts/coffee.js
 childprocess/
 rbx-require-relative/
+config/initializers/session_store.rb

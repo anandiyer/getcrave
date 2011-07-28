@@ -4,9 +4,8 @@ require File.expand_path('../application', __FILE__)
 # Initialize the rails application
 Crave::Application.initialize!
 
-puts Rails.env
-
 ITEMS_PER_PAGE = 25
+ITEMS_SIDEBAR = 10
 
 ActionMailer::Base.smtp_settings = {
   :user_name      => ENV['SENDGRID_USERNAME'],

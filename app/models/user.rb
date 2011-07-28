@@ -41,6 +41,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  def count_ratings_this_week
+    @now = Time.now
+    @beginning_of_week = @now.beginning_of_week
+    @user_id = self.id
+
+    @conditions = " user_id = #{@user_id} AND created_at > \'#{@beginning_of_week}\' AND created_at <= \'#{@now}\'"
+    
+    @menu_item_ratings = MenuItemRating.find(:all, :conditions => @conditions) 
+    
+    return (@menu_item_ratings.count)
+  end
+
   def is_following? following_user_id
     self.user_followings.where(:following_user_id => following_user_id).any?
   end
