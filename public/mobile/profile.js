@@ -37,14 +37,14 @@ Crave.buildProfilePanel = function(mine) {
       grouped: false,
       indexBar: false,
       store: userDishStore,
-      loadingText: "Loading",
+      loadingText: "Loading...",
       scroll: false,
       clearSectionOnDeactivate:true,
       listeners: {
         itemtap:  function(dataView, index, item, e) {
           var record = userDishStore.getAt(index);
           setupBackStack(userProfilePnl);
-          Crave.show_menu_item(record.data.id);
+          Crave.show_menu_item(record.data.menu_item_id);
         }
       },
       plugins: [new Ext.plugins.ListPagingPlugin()]
@@ -420,7 +420,7 @@ Crave.follow_user_toggle = function(user_id, button) {
       },
       failure: Crave.handle_failure,
       success: function(response, options) {
-        button.innerHTML = "+ Follow";
+        button.innerHTML = "Follow";
       }
     })
   } else {
@@ -435,7 +435,7 @@ Crave.follow_user_toggle = function(user_id, button) {
       },
       failure: Crave.handle_failure,
       success: function(response, options) {
-        button.innerHTML = "- Unfollow";
+        button.innerHTML = "Unfollow";
       }
     })
   }
@@ -493,7 +493,7 @@ Crave.buildSavedPanel = function() {
         Crave.show_menu_item(dish_id);
       }
     },
-    plugins: [new Ext.plugins.ListPagingPlugin(), new Ext.plugins.PullRefreshPlugin()]
+    plugins: [new Ext.plugins.ListPagingPlugin()]
   });
   
   Crave.savedPanel = new Ext.Panel({
