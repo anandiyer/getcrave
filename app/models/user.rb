@@ -42,8 +42,10 @@ class User < ActiveRecord::Base
   end
 
   def count_ratings_this_week
-    @now = Time.now
-    @beginning_of_week = @now.beginning_of_week
+    # Using UTC as everything in the dB is stored in UTC
+    @now = Time.now.utc
+    @beginning_of_week = @now.beginning_of_week.utc
+
     @user_id = self.id
 
     @conditions = " user_id = #{@user_id} AND created_at > \'#{@beginning_of_week}\' AND created_at <= \'#{@now}\'"
