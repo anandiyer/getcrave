@@ -67,13 +67,13 @@ var distancePnl = function() {
     items.push({
       text: d + " miles",
       ui: 'round',
+      pressed: d === '.5',
       width: 64,
       filter_value: d
     });
   });
   items.push({
     text: "All",
-    pressed: true,
     width: 35,
     ui: 'round'
   });
@@ -296,20 +296,76 @@ Crave.buildDishDisplayPanel = function() {
         
       }
     },{
+      text: 'test0r', 
+      handler: function() {
+        Ext.Ajax.request({ //post the association to the menu item
+          method: 'POST',
+          url :'/menu_item_photos.json',
+          jsonData: {
+            menu_item_photo: {
+              menu_item_id: Crave.dishDisplayPanel.current_menu_item.id,
+              photo: "http://getcrave.s3.amazonaws.com/mobile_uploads/user_31/photo_014.jpg", 
+              user_id: Crave.currentUserId()
+            }
+          },
+          success: function() {
+            console.log('photo successfuly uploaded and associated');
+          }, 
+          failure: TouchBS.handle_failure
+        });
+      }
+    },{
       text: "Take a Photo", 
       hidden: !Crave.phonegap,
       handler: function() {
-        
+        var menu_item_id = Crave.dishDisplayPanel.current_menu_item.id;
+        navigator.camera.getPicture(function(imageURI) { //get the photo
+          addSheet.hide();
+          Ext.Msg.alert("Thanks for the photo!", "Keep on Cravin'");
+          
+          Crave.uploadPhoto(imageURI, function(photo_url) { //upload it to s3
+            console.log("posting " + photo_url + "to menu_item_photos.json");
+            Ext.Ajax.request({ //post the association to the menu item
+              method: 'POST',
+              url :'/menu_item_photos.json',
+              jsonData: {
+                menu_item_photo: {
+                  menu_item_id: menu_item_id,
+                  photo: photo_url, 
+                  user_id: Crave.currentUserId()
+                }
+              },
+              success: function() {
+                console.log('photo successfuly uploaded and associated');
+              }, 
+              failure: TouchBS.handle_failure
+            });
+          });
+          
+        }, function (message) {
+          //Photo capture failed, usually this is because they clicked cancel
+          addSheet.hide();
+        }, { 
+          quality: 50, 
+          destinationType: Camera.DestinationType.FILE_URI,
+          sourceType : Camera.PictureSourceType.CAMERA
+        });
       }
     },{
       text: "Use an Existing Photo", 
       hidden: !Crave.phonegap,
       handler: function() {
-        
+        navigator.camera.getPicture(Crave.uploadPhoto, function (message) {
+          alert('Failed because: ' + message);
+        }, { 
+          quality: 50, 
+          destinationType: Camera.DestinationType.FILE_URI,
+          sourceType : Camera.PictureSourceType.PHOTOLIBRARY 
+        });
       }
     },{
       text: 'Cancel',
-      ui: 'confirm',
+      ui: 'action',
       handler: function() {
         addSheet.hide();
       }
@@ -329,7 +385,12 @@ Crave.buildDishDisplayPanel = function() {
       }, {
         text: "Add", 
         handler: function() {
-          addSheet.show();
+          if (Crave.isLoggedIn()) {
+            addSheet.show();
+          } else {
+            Crave.viewport.setActiveItem(Crave.myProfilePanel);
+          }
+          
         }
       }]
     }),
@@ -408,14 +469,7 @@ Crave.buildDishDisplayPanel = function() {
         xtype: 'toolbar',
         cls: 'title clickable',
         style: 'margin: 0;',
-        title: 'Address',
-        listeners: {  
-          afterrender: function(c){
-            c.el.on('click', function(){
-              alert('address details go here?')
-            });
-          }
-        }
+        title: 'Address'
       }],
       items: [{
         id: 'dishMap',
@@ -429,14 +483,23 @@ Crave.buildDishDisplayPanel = function() {
           zoom : 17,
           mapTypeId : google.maps.MapTypeId.ROADMAP,
           disableDefaultUI: true,
-          navigationControl: false
+          navigationControl: false,
+          draggable: false
         }
       },{
         xtype: 'panel', 
         id: 'dishAddress', 
         tpl: '<div class="dishAddress">{street_address}<br/>{city}, {state} {zip}</div>',
         data: {}
-      }]
+      }],
+      listeners: {  
+        afterrender: function(c){
+          c.el.on('click', function(){
+            var mi = Crave.dishDisplayPanel.current_menu_item;
+            window.open('http://maps.google.com/maps?ll=' + [mi.restaurant.latitude, mi.restaurant.longitude].join(','))
+          });
+        }
+      }
     }]
     
   });
@@ -486,8 +549,12 @@ Crave.buildDishDisplayPanel = function() {
       //Update ratings or hide if there aren't any
       if (menu_item.menu_item_ratings.length > 0) {
         Ext.getCmp('dishDisplayRating').update(menu_item.menu_item_ratings[0]);
-        Ext.getCmp('dishRatingPanel').getEl().down('.x-toolbar-title').dom.innerHTML = 'Reviews <span class="count">(' + menu_item.menu_item_ratings.length + ")</span>";
-        Ext.getCmp('dishRatingPanel').show();
+        var drp = Ext.getCmp('dishRatingPanel');
+        drp.getEl().down('.x-toolbar-title').dom.innerHTML = 'Reviews <span class="count">(' + menu_item.menu_item_ratings.length + ")</span>";
+        drp.show();
+        //var new_height = drp.getEl().down('.review').dom.clientHeight;
+        
+        drp.onResize();
         reviewStore.loadData(menu_item.menu_item_ratings);
       } else {
         Ext.getCmp('dishRatingPanel').hide();
@@ -554,4 +621,68 @@ Crave.photo_url = function(obj) {
   }
 
   return "../images/no-image-default.png";
+};
+
+
+Crave.uploadPhoto = function(imageURI, callback) {
+  var form = document.createElement('form');
+  form.setAttribute('action', "http://getcrave.s3.amazonaws.com/");
+  form.setAttribute('method', 'post');
+  form.setAttribute('enctype', 'multipart/form-data');
+  var params = {
+    acl: 'public-read',
+    AWSAccessKeyId: '1BMA7PKM3W1YE7FDW982',
+    Policy: "eyAiZXhwaXJhdGlvbiI6ICIyMDEyLTA3LTI4VDEyOjAwOjAwLjAwMFoiLAogICJjb25kaXRpb25zIjogWwogICAgeyJhY2wiOiAicHVibGljLXJlYWQiIH0sCiAgICB7ImJ1Y2tldCI6ICJnZXRjcmF2ZSIgfSwKICAgIFsic3RhcnRzLXdpdGgiLCAiJGtleSIsICJtb2JpbGVfdXBsb2Fkcy8iXSwKICBdCn0=",
+    Signature: "MTzckIty7C2TBjthXL9oDMibBpE="
+  };
+  
+//  for (var p in params) {
+//    var f = document.createElement('input');
+//    f.setAttribute('type', 'hidden');
+//    f.setAttribute('name', p);
+//    f.setAttribute('value', params[p]);
+//    form.appendChild(f);
+//  }
+//  alert("uploading2 " + imageURI);
+//  var file = document.createElement('input');
+//  file.setAttribute('type', 'file');
+//  file.setAttribute('name', 'file');
+//  var varpos = imageURI.indexOf('/var');
+//  
+//  file.setAttribute('value', imageURI.substring(varpos));
+//  form.appendChild(file);
+//  
+//  document.body.appendChild(form);
+//  form.submit();
+
+//  return;
+  //phonegap
+  var options = new FileUploadOptions();
+  options.fileKey="file";
+  options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+  options.mimeType="image/jpg";
+  params.key = 'mobile_uploads/user_' + Crave.currentUserId() + '/' + options.fileName;
+  alert("uploading " + params.key);
+  options.params = params;
+  
+  var win = function(r) {
+    console.log("Code = " + r.responseCode);
+    console.log("Response = " + r.response);
+    console.log("Sent = " + r.bytesSent);
+    console.log(params.key);
+    callback("http://getcrave.s3.amazonaws.com/" + params.key);
+    
+    
+  }
+
+  var fail = function(error) {
+      alert("An error has occurred: Code = " + error.code);
+  }
+
+
+  var ft = new FileTransfer();
+  ft.upload(imageURI, "http://getcrave.s3.amazonaws.com", win, fail, options);  
+  
+  
+  
 };

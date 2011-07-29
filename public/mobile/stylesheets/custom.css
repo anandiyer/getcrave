@@ -116,13 +116,12 @@ padding: .3em .3em;
 }
 
 .framePanel .x-toolbar.title.clickable .count {
-	height: 35px;
-	border-top-left-radius: 1em;
-	border-top-right-radius: 1em;
-	background: #DDD;
-	margin-bottom: .5em;
-	margin-left: -1px;
-	margin-top: -1px;
+  height: 35px;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  margin-bottom: .5em;
+  margin-left: -1px;
+  margin-top: -1px;
 }
 
 .framePanel .x-toolbar.x-docked-top  {
@@ -762,10 +761,11 @@ IMG.stars {
 }
 
 .arating .ratingListItem SPAN.review {
-	color: #333;
-	font-size: 14px;
-	line-height: 21px;
-	text-shadow: none;
+  color: #333;
+  font-size: 14px;
+  line-height: 21px;
+  text-shadow: none;
+  display:block;
 }
 
 .arating .ratingDescription A {
@@ -899,3 +899,8 @@ border-bottom-left-radius: 0.4em;*/
 	-webkit-box-shadow: inset 0px 1px 2px 0px #5f271d;
 }
 
+.x-button-cancel {
+  background-color: #547503;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #304402), color-stop(10%, #425C02), color-stop(65%, #547503), color-stop(100%, #557803));
+  background-image: linear-gradient(#304402,#425C02 10%,#547503 65%,#557803);
+}

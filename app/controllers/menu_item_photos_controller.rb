@@ -41,22 +41,6 @@ class MenuItemPhotosController < ApplicationController
     @menu_item_photo = MenuItemPhoto.find(params[:id])
   end
 
-  # POST /menu_item_photos
-  # POST /menu_item_photos.xml
-#  def create
-#    @menu_item_photo = MenuItemPhoto.new(params[:menu_item_photo])
-#
-#    respond_to do |format|
-#      if @menu_item_photo.save
-#        format.html { redirect_to(@menu_item_photo, :notice => 'Menu item photo was successfully created.') }
-#        format.xml  { render :xml => @menu_item_photo, :status => :created, :location => @menu_item_photo }
-#      else
-#        format.html { render :action => "new" }
-#        format.xml  { render :xml => @menu_item_photo.errors, :status => :unprocessable_entity }
-#      end
-#    end
-#  end
-
   def create
     if (params[:mobile])
       @menu_item_photo = MenuItemPhoto.new(params[:menu_item_photo])
