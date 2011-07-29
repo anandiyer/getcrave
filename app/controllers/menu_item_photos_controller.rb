@@ -58,30 +58,40 @@ class MenuItemPhotosController < ApplicationController
 #  end
 
   def create
-    fileUp = params[:upload]
-    orig_filename = fileUp['datafile'].original_filename
-
+    if (params[:mobile])
+      @menu_item_photo = MenuItemPhoto.new(params[:menu_item_photo])
+      
+      respond_to do |format|
+        if @menu_item_photo.save
+          format.xml  { render :xml => @menu_item_photo, :status => :created, :location => @menu_item_photo }
+          format.json  { render :json => @menu_item_photo, :status => :created, :location => @menu_item_photo }
+        else
+          format.xml  { render :xml => @menu_item_photo.errors, :status => :unprocessable_entity }
+          format.json  { render :json => @menu_item_photo.errors, :status => :unprocessable_entity }
+        end
+      end
+    else
+    
+      fileUp = params[:upload]
+      orig_filename = fileUp['datafile'].original_filename
 
 #    filename = sanitize_filename(orig_filename)
-    filename = orig_filename
+      filename = orig_filename
 
-    AWS::S3::S3Object.store(filename, fileUp['datafile'].read, BUCKET, :access => :public_read)
-    url = AWS::S3::S3Object.url_for(filename, BUCKET, :authenticated => false)
+      AWS::S3::S3Object.store(filename, fileUp['datafile'].read, BUCKET, :access => :public_read)
+      url = AWS::S3::S3Object.url_for(filename, BUCKET, :authenticated => false)
 
-    p "******************************************************"
-    p url
-    p "******************************************************"
-
-#    @image = Image.new(params[:image])
-#    @image.user = current_user
-#    @image.filename = filename
-#    @image.url = url;
-#    if @image.save
-#      flash[:success] = "Image saved! "
-#      render '/home'
-#    else
-#      render '/users/new_image'
-#    end
+      #    @image = Image.new(params[:image])
+      #    @image.user = current_user
+      #    @image.filename = filename
+      #    @image.url = url;
+      #    if @image.save
+      #      flash[:success] = "Image saved! "
+      #      render '/home'
+      #    else
+      #      render '/users/new_image'
+      #    end
+    end
   end
 
 
