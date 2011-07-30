@@ -43,9 +43,9 @@
           %span= @menu_item.menu_item_avg_rating_count.count
           Reviews 
 
-        -#:erb
-          -#<% @url = "http://getcrave.com/items/" + @menu_item.friendly_id %>
-          -#<fb:like href="<%= @url %>" send="false" width="350" show_faces="false" font=""></fb:like>
+        :erb
+          <% @url = "http://getcrave.com/items/" + @menu_item.friendly_id %>
+          <fb:like href="<%= @url %>" send="false" width="350" show_faces="false" font=""></fb:like>
         
       #desc_wrap
 
