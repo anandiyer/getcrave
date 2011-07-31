@@ -56,7 +56,7 @@ class MenuItem < ActiveRecord::Base
   end
   
   def opengraph_url
-    "http://getcrave.com/items/#{self.friendly_id}?mobile=true"
+    "http://getcrave.com/items/#{self.friendly_id}"
   end
   
   def latitude
