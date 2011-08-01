@@ -392,6 +392,7 @@ class MenuItemsController < ApplicationController
       # We have to add this to get the 'distance' and this also
       # sorts by distance as opposed to by rating
       @menu_items.sort_by_distance_from(@origin)
+      # FIXME: Re-sort by star rating
     end
   end
 end
