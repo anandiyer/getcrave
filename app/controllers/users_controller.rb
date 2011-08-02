@@ -52,9 +52,9 @@ class UsersController < ApplicationController
   def index
     if params[:limit] && !params[:limit].empty?
       @limit = params[:limit].to_i
-      @users = User.find(:all, :limit => @limit, :order => 'last_logged_in DESC')
+      @users = User.find(:all, :limit => @limit, :order => '(last_logged_in is NULL) DESC')
     else
-      @users = User.find(:all, :order => 'last_logged_in DESC')
+      @users = User.find(:all, :order => '(last_logged_in is NULL) DESC')
     end
     
     respond_to do |format|
