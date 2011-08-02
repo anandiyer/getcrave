@@ -23,7 +23,7 @@ class Authorization < ActiveRecord::Base
       :uid => hash['uid'], 
       :provider => hash['provider'], 
       :token => hash['credentials']['token'],
-      :provider_user_name => hash['user_info']['username'])
+      :provider_user_name => hash['user_info']['nickname'])
 
     p auth.errors
     p auth.valid?
