@@ -22,7 +22,10 @@ class MenuItemRatingsController < ApplicationController
     if (@menu_item)
       @menu_item_ratings = @menu_item.menu_item_ratings.find(:all)
     elsif (@user)
-      @menu_item_ratings = @user.menu_item_ratings.paginate(:all,:page => params[:page],:per_page => ITEMS_PER_PAGE)
+      @menu_item_ratings = @user.menu_item_ratings.paginate(:all,
+        :page => params[:page],
+        :per_page => ITEMS_PER_PAGE,
+        :order => 'created_at DESC')
     else
       @menu_item_ratings = MenuItemRating.all
     end
