@@ -10,6 +10,18 @@ class UserSavedMenuItemsController < ApplicationController
     render :partial => "/items_grouped_by_stars"
   end
 
+  def is_saved
+    @user_id = params[:user_id]
+    @menu_item_id = params[:menu_item_id]
+    
+    @conditions = " user_id = \'#{@user_id}\' AND menu_item_id = \'#{@menu_item_id}\'"
+    @user_saved_menu_item = UserSavedMenuItem.find(:first, :conditions => @conditions)
+    
+    respond_to do |format|
+      format.xml  { render :xml => @user_saved_menu_item }
+      format.json  { render :json => @user_saved_menu_item }
+    end
+  end
 
   # GET /user_saved_menu_items
   # GET /user_saved_menu_items.xml

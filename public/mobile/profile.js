@@ -1,3 +1,9 @@
+Crave.buildLoginPanel = function() {
+  return new Ext.Panel({
+    html:'<div class="loginPanel"><img src="../images/profile-cold-food.png"><div class="explanation">Rate & Save Dishes, Follow Foodies</div><a href="#" onclick="Crave.facebookLogin();" class="loginButton"></a></div>',
+    height: '100%'
+  });
+}
 //mine is true for the "my profile" panel and false for the other people's one.
 Crave.buildProfilePanel = function(mine) {
   
@@ -6,6 +12,7 @@ Crave.buildProfilePanel = function(mine) {
       panel: profilePnl,
       user_id: profilePnl.displayed_user_id,
       callback: function(backInfo) {
+        debugger;
         if (!mine) {
           //they just returned to the "other" profile panel via the back button, which means they were on someone else's profile
           profilePnl.load_user_data(backInfo.user_id);
@@ -18,6 +25,7 @@ Crave.buildProfilePanel = function(mine) {
   var userDishStore = new Ext.data.Store({
       model: 'MenuItemRating',
       clearOnPageLoad: false,
+      sorters: [{property: 'created_at', direction: 'desc'}],
       proxy: {
         type:'ajax',
         extraParams: {},
@@ -106,9 +114,6 @@ Crave.buildProfilePanel = function(mine) {
       plugins: [new Ext.plugins.ListPagingPlugin()]
     });
   }
-    
-
-  
 
   var followerStore = new Ext.data.Store({
     model: "FollowUser",
@@ -193,7 +198,7 @@ Crave.buildProfilePanel = function(mine) {
     },
     plugins: [new Ext.plugins.ListPagingPlugin()]
   });
-  
+  var profilePnl = null;
   var userInfoPanel = new Ext.Panel({
     xtype: 'panel',
     html: '<div class="userTopPnl"></div>',
@@ -275,6 +280,7 @@ Crave.buildProfilePanel = function(mine) {
     layout: {
       type: 'vbox'
     },
+    cls: 'magic-scroll',
     scroll: 'vertical',
     height:'100%',
     width:'100%',
@@ -285,10 +291,7 @@ Crave.buildProfilePanel = function(mine) {
     }
   });
 
-  var profileLoginPnl = new Ext.Panel({
-    html:'<div class="loginPanel"><img src="../images/profile-cold-food.png"><div class="explanation">Rate & Save Dishes, Follow Foodies</div><a href="#" onclick="Crave.facebookLogin();" class="loginButton"></a></div>',
-    height: '100%'
-  });
+  var profileLoginPnl = Crave.buildLoginPanel();
 
   var backButton = new Ext.Button({
     text: "Back",
@@ -313,7 +316,7 @@ Crave.buildProfilePanel = function(mine) {
     }
   });
 
-  var profilePnl = new Ext.Panel({
+  profilePnl = new Ext.Panel({
     title:'Me',
     iconCls:'me',
     layout: 'card',
@@ -337,7 +340,9 @@ Crave.buildProfilePanel = function(mine) {
             p.load_user_data(Crave.currentUserId());
           }
         }
-        userDishList.refresh();  //herp derp 
+        if (p.getActiveItem() === userProfilePnl) {
+          userDishList.refresh();  //herp derp
+        }
       }
     },
     load_user_data: function(user_id) {
@@ -404,8 +409,7 @@ Crave.buildProfilePanel = function(mine) {
 
 
 Crave.follow_user_toggle = function(user_id, button) {
-  //TODO: actually follow somebody
-  var following = (button.innerHTML[0] === '-');
+  var following = (button.innerHTML[0] === 'U'); //ghetto
   
   if (following) {
     Ext.Ajax.request({
@@ -494,15 +498,18 @@ Crave.buildSavedPanel = function() {
     },
     plugins: [new Ext.plugins.ListPagingPlugin()]
   });
+
+  var savedLoginPanel = Crave.buildLoginPanel();
   
   Crave.savedPanel = new Ext.Panel({
-    dockedItems: Crave.create_titlebar({
-    }),
-    items: savedList,
+    layout: 'card',
+    activeItem: Crave.isLoggedIn() ? 0 : 1,
+    dockedItems: Crave.create_titlebar({}),
+    items: [savedList, savedLoginPanel],
     listeners: {
       activate: function() {
         if (!Crave.isLoggedIn()) {
-          Crave.viewport.setActiveItem(Crave.myProfilePanel);
+          Crave.savedPanel.setActiveItem(savedLoginPanel);
         }
       }
     },
@@ -511,7 +518,6 @@ Crave.buildSavedPanel = function() {
       savedDishStore.load();
     }
   });
-  
   
   return Crave.savedPanel;
 };
@@ -529,7 +535,6 @@ Crave.squareFitImage = function(img) {
 
 
 Crave.facebookLogin = function() { 
-  
   if (Crave.phonegap) {
     /* On Facebook Login */
     var my_client_id  = "207859815920359",

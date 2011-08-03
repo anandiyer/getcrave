@@ -54,7 +54,7 @@ Crave::Application.routes.draw do
   
   resources :saved, :as => "user_saved_menu_items", :controller => "user_saved_menu_items" do 	
     collection do
-      get "show_menu_items_saved"
+      get "show_menu_items_saved", "is_saved"
     end
   end
   

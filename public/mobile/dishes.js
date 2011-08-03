@@ -233,6 +233,7 @@ Crave.buildDishDisplayPanel = function() {
   var imageCarousel = new Ext.Carousel({
     height: 100,
     width: '100%',
+    hidden: true,
     items: [{
         xtype: 'panel',
         html: '<p>No Image Available</p>'
@@ -255,7 +256,14 @@ Crave.buildDishDisplayPanel = function() {
   });
   
   var marker = null;
-  
+  var addButtonHandler = function() {
+    if (Crave.isLoggedIn()) {
+      addSheet.show();
+    } else {
+      Crave.viewport.setActiveItem(Crave.myProfilePanel);
+    }
+  };
+
   var reviewsPanel = new Ext.Panel({
     layout: 'fit',
     dockedItems: Crave.create_titlebar({
@@ -263,6 +271,9 @@ Crave.buildDishDisplayPanel = function() {
         text: 'Back',
         ui: 'back',
         handler: Crave.back_handler
+      },{
+        text: "Add",
+        handler: addButtonHandler
       }]
     }),
     items: new Ext.List({
@@ -288,7 +299,20 @@ Crave.buildDishDisplayPanel = function() {
     var menu_item_id = Crave.dishDisplayPanel.current_menu_item.id; //get a closure on this for later
     var user_id = Crave.currentUserId(); //this too, in case they log out real quick (unlikely)
     addSheet.hide();
-    Ext.Msg.wait("Please wait", "Uploading photo");
+    TouchBS.wait("Uploading photo...");
+    var fail_handler = function() {
+      TouchBS.stop_waiting();
+      Ext.Msg.show({
+        title: "Can't upload",
+        msg: "We're having problems uploading your photo, probably because of network conditions.  Try again?",
+        buttons: Ext.MessageBox.YESNO,
+        fn: function(btn) {
+          if (btn === 'yes') {
+            uploadHandler(imageURI);
+          } 
+        }
+      });
+    }
     Crave.uploadPhoto(imageURI, function(photo_url) { //upload it to s3
       //console.log("posting " + photo_url + "to menu_item_photos.json, mi=" + menu_item_id + " user=" + user_id);
       Ext.Ajax.request({ //post the association to the menu item
@@ -302,22 +326,15 @@ Crave.buildDishDisplayPanel = function() {
           }
         },
         success: function() {
+          TouchBS.stop_waiting();
           Ext.Msg.alert("Thanks for the photo!", "Keep on Cravin'");
-        }, 
-        failure: function() {
-          Ext.Msg.show({
-            title: "Can't upload",
-            msg: "We're having problems uploading your photo, probably because of network conditions.  Try again?",
-            buttons: Ext.MessageBox.YESNO,
-            fn: function(btn) {
-              if (btn === 'yes') {
-                uploadHandler(imageURI);
-              } 
-            }
+          Crave.dishDisplayPanel.load_dish_data(menu_item_id, function() {
+            imageCarousel.setActiveItem(imageCarousel.items.length-1);
           });
-        }
+        }, 
+        failure: fail_handler
       });
-    }); 
+    }, fail_handler); 
   }
   
   
@@ -346,6 +363,7 @@ Crave.buildDishDisplayPanel = function() {
           destinationType: Camera.DestinationType.FILE_URI,
           sourceType: Camera.PictureSourceType.CAMERA,
           correctOrientation: true,
+          saveToPhotoAlbum: true,
           targetWidth: 800,
           targetHeight: 600
         });
@@ -375,7 +393,6 @@ Crave.buildDishDisplayPanel = function() {
     }]
   });
 
-  
   var dishPanel = new Ext.Panel({
     layout: 'vbox',
     width: '100%',
@@ -387,14 +404,7 @@ Crave.buildDishDisplayPanel = function() {
         handler: Crave.back_handler
       }, {
         text: "Add", 
-        handler: function() {
-          if (Crave.isLoggedIn()) {
-            addSheet.show();
-          } else {
-            Crave.viewport.setActiveItem(Crave.myProfilePanel);
-          }
-          
-        }
+        handler: addButtonHandler
       }]
     }),
     items: [imageCarousel,{
@@ -402,8 +412,10 @@ Crave.buildDishDisplayPanel = function() {
       width: '100%',
       id: 'dishDetailHeader',
       height: 100,
-      tpl: '<div class="dishInfo"><b>{name}</b><br/>' +
-           '@ {restaurant.name}<br>' +
+      tpl: '<div class="dishInfo">'+
+           '<div onclick="Crave.dishDisplayPanel.toggle_saved();" class="savedFlag {[values.saved ? "saved" : ""]}">Save</div>' +
+           '<b>{name}</b><br/>' +
+           '@ <a href="#" onclick="Crave.dishDisplayPanel.setup_back_stack(0);Crave.show_restaurant({restaurant.id});">{restaurant.name}</a><br>' +
            '<tpl if="menu_item_avg_rating_count">' +
            '{[Crave.ratingDisplay(values.menu_item_avg_rating_count.avg_rating)]}' +
            '{menu_item_avg_rating_count.count} ratings</div>' + 
@@ -499,7 +511,7 @@ Crave.buildDishDisplayPanel = function() {
         afterrender: function(c){
           c.el.on('click', function(){
             var mi = Crave.dishDisplayPanel.current_menu_item;
-            window.open('http://maps.google.com/maps?ll=' + [mi.restaurant.latitude, mi.restaurant.longitude].join(','))
+            window.open('http://maps.google.com/maps?ll=' + [mi.restaurant.latitude, mi.restaurant.longitude].join(','));
           });
         }
       }
@@ -511,20 +523,20 @@ Crave.buildDishDisplayPanel = function() {
     layout: 'card', 
     items: [dishPanel, reviewsPanel],
     activeItem: 0, 
-    load_dish_data: function(dish_id) {
+    load_dish_data: function(dish_id, callback) {
       dishPanel.setLoading('Loading');
       Ext.Ajax.request({
         method: "GET",
         url: '/items/' + dish_id + '.json',
         success: function(response, options) {
           var menu_item = Ext.decode(response.responseText).menu_item;
-          Crave.dishDisplayPanel.load_dish(menu_item);
+          Crave.dishDisplayPanel.load_dish(menu_item, callback);
           //and we're done
           dishPanel.setLoading(false);
         }
       });
     },
-    load_dish: function(menu_item) {
+    load_dish: function(menu_item, callback) {
       Crave.dishDisplayPanel.current_menu_item = menu_item;    
       //Set up the image carousel at the top
       if (menu_item.menu_item_photos) {
@@ -566,7 +578,10 @@ Crave.buildDishDisplayPanel = function() {
         //var new_height = drp.getEl().down('.review').dom.clientHeight;
         
         drp.onResize();
-        reviewStore.loadData(menu_item.menu_item_ratings);
+        //Sencha sucks and they modify this in place to become an array of records instead of an array of {}s
+        //I hate them
+        var ratingsData = TouchBS.clone(menu_item.menu_item_ratings);
+        reviewStore.loadData(ratingsData);
       } else {
         Ext.getCmp('dishRatingPanel').hide();
       }
@@ -598,6 +613,9 @@ Crave.buildDishDisplayPanel = function() {
       Ext.getCmp('dishAddress').update(menu_item.restaurant);
 
       dishPanel.scroller.scrollTo({x: 0, y: 0});
+      if (callback) {
+        callback(menu_item);
+      }
     },
     setup_back_stack: function(subPanel) {
       Crave.back_stack.push({
@@ -610,6 +628,45 @@ Crave.buildDishDisplayPanel = function() {
           Crave.dishDisplayPanel.setActiveItem(subPanel, {type: 'slide', direction: 'right'});
         }
       });
+    },
+    toggle_saved: function() {
+      var savedFlag = this.el.down(".savedFlag");
+      var saved = this.current_menu_item.saved_by_current_user;
+      if (saved) {
+        Ext.Ajax.request({
+          method: "DELETE",
+          url: '/user_saved_menu_item.json',
+          jsonData:{
+            user_following: {
+              user_id: Crave.currentUserId(),
+              menu_item_id: this.current_menu_item.id
+            }
+          },
+          failure: Crave.handle_failure,
+          success: function(response, options) {
+            savedFlag.dom.innerHTML = "Save";
+            savedFlag.removeCls('saved');
+            this.current_menu_item.saved_by_current_user = false;
+          }
+        });
+      } else {
+        Ext.Ajax.request({
+          method: "POST",
+          url: '/user_saved_menu_items.json',
+          jsonData:{
+            user_saved_menu_item: {
+              user_id: Crave.currentUserId(),
+              menu_item_id: this.current_menu_item.id
+            }
+          },
+          failure: Crave.handle_failure,
+          success: function(response, options) {
+            savedFlag.dom.innerHTML = "Remove";
+            savedFlag.addCls('saved');
+            this.current_menu_item.saved_by_current_user = true;
+          }
+        });
+      }
     }
   })
   return Crave.dishDisplayPanel; 
@@ -618,7 +675,7 @@ Crave.buildDishDisplayPanel = function() {
 Crave.dishImageLoaded = function(img) {
   var y = img.height / 2;
   img.style["-webkit-transform"] = "translate(0, -" + y + "px)";
-}
+};
 
 //obj is something with a photo, so far either a menu item or a user
 Crave.photo_url = function(obj, placeholder) {
@@ -650,7 +707,7 @@ Crave.photo_for = function(obj, placeholder) {
 }
 
 
-Crave.uploadPhoto = function(imageURI, callback) {
+Crave.uploadPhoto = function(imageURI, callback, fail_callback) {
   var form = document.createElement('form');
   form.setAttribute('action', "http://getcrave.s3.amazonaws.com/");
   form.setAttribute('method', 'post');
@@ -699,10 +756,7 @@ Crave.uploadPhoto = function(imageURI, callback) {
     callback("http://getcrave.s3.amazonaws.com/" + params.key);
   }
 
-  var fail = function(error) {
-    alert("An error has occurred while uploading: Code = " + error.code);
-  }
 
   var ft = new FileTransfer();
-  ft.upload(imageURI, "http://getcrave.s3.amazonaws.com", win, fail, options);  
+  ft.upload(imageURI, "http://getcrave.s3.amazonaws.com", win, fail_callback, options);  
 };
