@@ -7,6 +7,7 @@ class MenuLabelsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @menu_labels }
+      format.json  { render :json => @menu_labels }
     end
   end
 
@@ -18,6 +19,7 @@ class MenuLabelsController < ApplicationController
     respond_to do |format|
       format.html # _unused_show.html.haml
       format.xml  { render :xml => @menu_label }
+      format.json  { render :json => @menu_label }
     end
   end
 
@@ -29,6 +31,7 @@ class MenuLabelsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @menu_label }
+      format.json  { render :json => @menu_label }
     end
   end
 
@@ -46,9 +49,11 @@ class MenuLabelsController < ApplicationController
       if @menu_label.save
         format.html { redirect_to(@menu_label, :notice => 'Menu label was successfully created.') }
         format.xml  { render :xml => @menu_label, :status => :created, :location => @menu_label }
+        format.json  { render :json => @menu_label, :status => :created, :location => @menu_label }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @menu_label.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @menu_label.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -62,9 +67,11 @@ class MenuLabelsController < ApplicationController
       if @menu_label.update_attributes(params[:menu_label])
         format.html { redirect_to(@menu_label, :notice => 'Menu label was successfully updated.') }
         format.xml  { head :ok }
+        format.json  { head :ok }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @menu_label.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @menu_label.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -73,11 +80,12 @@ class MenuLabelsController < ApplicationController
   # DELETE /menu_labels/1.xml
   def destroy
     @menu_label = MenuLabel.find(params[:id])
-    @menu_label.destroy
+    #@menu_label.destroy
 
     respond_to do |format|
       format.html { redirect_to(menu_labels_url) }
       format.xml  { head :ok }
+      format.json  { head :ok }
     end
   end
 end
