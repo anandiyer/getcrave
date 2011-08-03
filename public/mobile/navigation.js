@@ -122,4 +122,29 @@ Crave.back_handler = function() {
     Crave.viewport.setActiveItem(0, 'pop');
   }
   
-}
+};
+
+Crave.show_image = function(image_url, anim) {
+  var image = new Image();
+  image.src = image_url;
+  image.setAttribute('class', 'lightbox');
+  image.onload = function() {
+    var width, height, style;
+    if (image.width > image.height) {
+      style = "width: 100%";
+    } else {
+      style = "height: 100%",
+      height = "90%";
+    }
+    var sheet = new Ext.Sheet({
+      centered: true,
+      modal: true,
+      height: height,
+      width: "90%",
+      html: "<img src='" + image_url + "' style='margin: 0 auto; display:block; " + style + "'>",
+      bodyStyle: 'padding: 0 0 12px 0; border-radius: 0;',
+      hideOnMaskTap: true
+    });
+    sheet.show(anim);
+  }  
+};

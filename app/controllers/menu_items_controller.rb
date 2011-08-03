@@ -384,7 +384,7 @@ class MenuItemsController < ApplicationController
          :origin => @origin,
          :conditions => @conditions,
          :joins => " LEFT OUTER JOIN menu_item_avg_rating_count ON menu_item_avg_rating_count.menu_item_id = menu_items.id",
-         :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, menu_item_avg_rating_count.count DESC",
+         :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, menu_item_avg_rating_count.count DESC, distance ASC",
          # :include => :menu_item_avg_rating_count, 
          :limit => @limit)
 

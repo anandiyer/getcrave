@@ -451,6 +451,6 @@ class Array
       e.class.send(:attr_accessor, distance_attribute_name) if !e.respond_to?("#{distance_attribute_name}=")
       e.send("#{distance_attribute_name}=", e.distance_to(origin,opts))
     end
-    self.sort!{|a,b|a.send(distance_attribute_name) <=> b.send(distance_attribute_name)}
+    #self.sort!{|a,b|a.send(distance_attribute_name) <=> b.send(distance_attribute_name)}
   end
 end
