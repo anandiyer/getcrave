@@ -6,13 +6,11 @@ Crave.buildLoginPanel = function() {
 }
 //mine is true for the "my profile" panel and false for the other people's one.
 Crave.buildProfilePanel = function(mine) {
-  
   var setupBackStack = function(subPanel) {
     Crave.back_stack.push({
       panel: profilePnl,
       user_id: profilePnl.displayed_user_id,
       callback: function(backInfo) {
-        debugger;
         if (!mine) {
           //they just returned to the "other" profile panel via the back button, which means they were on someone else's profile
           profilePnl.load_user_data(backInfo.user_id);
@@ -157,6 +155,7 @@ Crave.buildProfilePanel = function(mine) {
     itemSelector: '.followUser',
     singleSelect: true,
     grouped: true,
+    profile_panel_title: "Followers",
     cls: 'followList',
     data: {user: {}},
     cardSwitchAnimation: 'pop',
@@ -178,6 +177,7 @@ Crave.buildProfilePanel = function(mine) {
   //people i'm following
   var followingList = new Ext.List({
     itemTpl: followTemplate,
+    profile_panel_title: "Following",
     cls: 'followList',
     itemSelector: '.followUser',
     singleSelect: true,
@@ -330,20 +330,28 @@ Crave.buildProfilePanel = function(mine) {
       },settingsButton]
     }),
     listeners: {
+      cardswitch: function(p, newCard, oldCard) {
+        p.set_title(newCard.profile_panel_title);
+      },
       activate: function(p) {
         if (mine) {
           if (!Crave.isLoggedIn()){
             p.setActiveItem(profileLoginPnl);
+            settingsButton.hide();
           } else { 
             //make sure the user data is loaded
             //this will do nothign on subsequest calls
             p.load_user_data(Crave.currentUserId());
+            settingsButton.show();
           }
         }
         if (p.getActiveItem() === userProfilePnl) {
           userDishList.refresh();  //herp derp
         }
       }
+    },
+    set_title: function(title) {
+      profilePnl.dockedItems.get(0).set_title(title);
     },
     load_user_data: function(user_id) {
       profilePnl.setActiveItem(userProfilePnl, 'pop');
@@ -503,13 +511,17 @@ Crave.buildSavedPanel = function() {
   
   Crave.savedPanel = new Ext.Panel({
     layout: 'card',
+    width: '100%',
+    height: '100%',
     activeItem: Crave.isLoggedIn() ? 0 : 1,
     dockedItems: Crave.create_titlebar({}),
     items: [savedList, savedLoginPanel],
     listeners: {
-      activate: function() {
+      activate: function(p) {
         if (!Crave.isLoggedIn()) {
           Crave.savedPanel.setActiveItem(savedLoginPanel);
+        } else {
+          Crave.savedPanel.setActiveItem(savedList);
         }
       }
     },
@@ -552,7 +564,7 @@ Crave.facebookLogin = function() {
          localStorage.setItem('uid', uid);
          Crave.myProfilePanel.load_user_data(uid);
          
-         //TODO: go back to whatever called the login thing? 
+         //TODO: go back to whatever called the login thing?
          client_browser.close();
       }  
     };
