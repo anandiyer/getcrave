@@ -39,6 +39,15 @@ Crave.ratingDisplay = function(rating) {
   } catch(ex) {
     return "Unrated";
   }
+};
+
+Crave.distDisplay = function(miles) {
+  var feet = Math.round(miles * 5280);
+  if(feet<1000) {
+    return feet+" feet";
+  } else {
+    return parseFloat(miles).toFixed(1)+' miles';
+  }
 }
 
 Crave.magic_scroll_handler = function(comp,target,options) {
@@ -56,13 +65,15 @@ Crave.magic_scroll_handler = function(comp,target,options) {
 }
 
 //call this and then put it in dockedItems[]
+//config.title is the title, or it will be the logo
 //config.items is any buttons you want (back button, etc)
 Crave.create_titlebar = function(config) {
+  var title = config.title || '<img class="cravelogo" src="../images/crave-logo-horizontal-white.png">';
   return {
     dock:'top',
     xtype:'toolbar',
     ui:'light',
-    title:'<img class="cravelogo" src="../images/crave-logo-horizontal-white.png">',
+    title: title,
     layout: {
       type: 'hbox',
       pack:'justify'
