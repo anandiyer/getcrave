@@ -30,6 +30,15 @@ class SearchController < ApplicationController
             fulltext(params[:q])
             paginate :page => 1, :per_page => ITEMS_PER_PAGE
         end
+         
+        @results = @search.results
+
+        respond_to do |format|
+          format.html
+          format.xml  { render :xml => @results.to_xml }
+          format.json  { render :json => @results.to_json }
+          format.js  { render :partial => partial_2_show}
+        end
         
       elsif (params[:search_dishes] || params[:category] == "dishes")
         
@@ -41,6 +50,15 @@ class SearchController < ApplicationController
           order_by :avg_rating, :desc
           order_by :num_ratings, :desc
         end
+            
+        @results = @search.results
+
+        respond_to do |format|
+          format.html
+          format.xml  { render :xml => @results.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count, :menu_item_photos]) }
+          format.json  { render :json => @results.to_json(:include =>  [:restaurant, :menu_item_avg_rating_count, :menu_item_photos]) }
+          format.js  { render :partial => partial_2_show}
+        end
         
       else
         # default search mode, search both Restaurants and Menu Items
@@ -51,16 +69,17 @@ class SearchController < ApplicationController
           fulltext(q)
           paginate :page => 1, :per_page => ITEMS_PER_PAGE
         end
+        
+        @results = @search.results
+
+        respond_to do |format|
+          format.html
+          format.xml  { render :xml => @results.to_xml }
+          format.json  { render :json => @results.to_json }
+          format.js  { render :partial => partial_2_show}
+        end
       end
 
-      @results = @search.results
-
-      respond_to do |format|
-        format.html
-        format.xml  { render :xml => @results.to_xml }
-        format.json  { render :json => @results.to_json }
-        format.js  { render :partial => partial_2_show}
-      end
     end
   end
 end
