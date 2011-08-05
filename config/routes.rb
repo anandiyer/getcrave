@@ -1,4 +1,6 @@
 Crave::Application.routes.draw do 
+  resources :user_vote_cities
+
   resources :foursquare_checkins
 
   resources :alpha_testers

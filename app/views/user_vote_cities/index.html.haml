@@ -1,0 +1,29 @@
+%h1 Listing user_vote_cities
+
+%table
+  %tr
+    %th Email
+    %th City
+    %th State
+    %th Country
+    %th Latitude
+    %th Longitude
+    %th
+    %th
+    %th
+
+  - @user_vote_cities.each do |user_vote_city|
+    %tr
+      %td= user_vote_city.email
+      %td= user_vote_city.city
+      %td= user_vote_city.state
+      %td= user_vote_city.country
+      %td= user_vote_city.latitude
+      %td= user_vote_city.longitude
+      %td= link_to 'Show', user_vote_city
+      %td= link_to 'Edit', edit_user_vote_city_path(user_vote_city)
+      %td= link_to 'Destroy', user_vote_city, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New User vote city', new_user_vote_city_path

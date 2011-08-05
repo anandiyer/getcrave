@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Email:
+  = @user_vote_city.email
+%p
+  %b City:
+  = @user_vote_city.city
+%p
+  %b State:
+  = @user_vote_city.state
+%p
+  %b Country:
+  = @user_vote_city.country
+%p
+  %b Latitude:
+  = @user_vote_city.latitude
+%p
+  %b Longitude:
+  = @user_vote_city.longitude
+
+= link_to 'Edit', edit_user_vote_city_path(@user_vote_city)
+\|
+= link_to 'Back', user_vote_cities_path
