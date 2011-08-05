@@ -113,8 +113,29 @@ FORM.framePanel .label {
 
 FORM.framePanel .x-field {
   border: none;
-  margin-bottom: 8px;
-  width: 95%;
+  margin-bottom: 0px;
+}
+
+FORM.framePanel .x-field INPUT, FORM.framePanel .x-field TEXTAREA {
+  padding-left: 1em;
+  border-radius: 0;
+  border: 1px solid #ccc;
+}
+
+FORM.framePanel .x-field:first-child INPUT,
+FORM.framePanel .x-field:first-child TEXTAREA,
+FORM.framePanel .x-field.first INPUT,
+FORM.framePanel .x-field.first TEXTAREA {
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+FORM.framePanel .x-field:last-child INPUT,
+FORM.framePanel .x-field:last-child TEXTAREA,
+FORM.framePanel .x-field.last INPUT,
+FORM.framePanel .x-field.last TEXTAREA {
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
 }
 
 FORM.framePanel .x-form-field-container {
@@ -122,11 +143,8 @@ FORM.framePanel .x-form-field-container {
   padding: 0;
 }
 
-FORM.framePanel INPUT {
-  padding-left: 1em;
-}f
 
-.requiredField INPUT {
+.requiredField INPUT, .requiredField TEXTAREA {
   border: 2px dotted red !important;
 }
 
@@ -281,6 +299,13 @@ text-shadow: 1px 1px white;
 line-height: 21px;
 }
 
+DIV.x-button.listButton {
+  color: #069;
+  font-weight: normal;
+  margin: 4px;
+  font-family: helvetica,sans-serif;
+}
+
 .distanceFigure {
 display: block;
 color: #5D5D5D;
@@ -307,7 +332,10 @@ font-weight: lighter;
     padding:5px;
     margin:12px auto;
 }
-.dishInfo {background-color: white;}
+.dishInfo {
+  background-color: white;
+  min-height: 100px;
+}
 .dishInfo A {
   color: #01669a;
   text-decoration: none;
@@ -1009,19 +1037,19 @@ background-image: linear-gradient(#EFEFEF,#D9D9D9 50%,#CCC 51%,#DDD);
 }
 
 .x-list-paging .x-list-paging-msg {
-text-align: center;
-color: #069;
-padding-top: 15px;
--webkit-border-radius: 6px;
-border-radius: 6px;
-font-size: 16px;
-text-shadow: 0px 1px #ffffff;
+  text-align: center;
+  color: #069;
+  padding-top: 15px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  font-size: 16px;
+  text-shadow: 0px 1px #ffffff;
 }
 
 .x-list-paging {
-height: 50px;
-background: #F1F1F1;
-border-top: 1px solid #CCC;
+  height: 50px;
+  background: #F1F1F1;
+  border-top: 1px solid #CCC;
 }
 
 .x-toolbar-light .x-button, .x-toolbar-light .x-button.x-button-back::after, .x-toolbar-light .x-button.x-button-forward::after, .x-toolbar .x-toolbar-light .x-button, .x-toolbar .x-toolbar-light .x-button.x-button-back::after, .x-toolbar .x-toolbar-light .x-button.x-button-forward::after, .x-toolbar-light .x-field-select .x-input-text, .x-toolbar-light .x-field-select .x-input-text.x-button-back::after, .x-toolbar-light .x-field-select .x-input-text.x-button-forward::after, .x-toolbar .x-toolbar-light .x-field-select .x-input-text, .x-toolbar .x-toolbar-light .x-field-select .x-input-text.x-button-back::after, .x-toolbar .x-toolbar-light .x-field-select .x-input-text.x-button-forward::after, .x-toolbar-light .x-field-select::before, .x-toolbar-light .x-field-select::before.x-button-back::after, .x-toolbar-light .x-field-select::before.x-button-forward::after, .x-toolbar .x-toolbar-light .x-field-select::before, .x-toolbar .x-toolbar-light .x-field-select::before.x-button-back::after, .x-toolbar .x-toolbar-light .x-field-select::before.x-button-forward::after {

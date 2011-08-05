@@ -23,8 +23,6 @@ var places = new Ext.data.Store({
    }
 });
 
-
-
 var singleRestaurantStore = new Ext.data.Store({
     model: 'Dish',
     sorters: [{property: 'arating', direction: 'ASC'}],
@@ -46,6 +44,7 @@ function placeDisplay(restaurant_id) {
   singleRestaurantStore.proxy.url = ('/places/'+restaurant_id+'/items.json');
 
   Crave.viewport.setActiveItem(placePnl);
+  placePnl.scroller.scrollTo({x: 0, y: 0});
   singleRestaurantStore.load(function(){
     var totalRatings = 0;
     singleRestaurantStore.each(function() {
@@ -57,6 +56,37 @@ function placeDisplay(restaurant_id) {
       }
     });
     $("#restaurantTotalRatings").html(totalRatings);
+
+//    var addButton = Ext.DomHelper.append(aRestaurantList.getTargetEl(), {
+//      tag: 'div',
+//      cls: 'x-list-item',
+//      children: [{
+//          tag: 'div',
+//          cls: 'x-list-item-body',
+//          children: [{
+//            tag: 'div',
+//            cls: "addMenuItemButton x-button",
+//            children: [{
+//              tag: 'span',
+//              cls: 'x-button-label',
+//              html: '+ Add a Menu Item'
+//            }]
+//          }]
+//      }]
+//    });
+
+    var b = new Ext.Button({
+      cls: 'listButton',
+      renderTo: aRestaurantList.getTargetEl(),
+      text: "+ Add a Menu Item",
+      handler:  function() {
+        Crave.back_stack.push({
+          panel: placePnl
+        });
+        Crave.viewport.setActiveItem(Crave.newDishPanel);
+      }
+    });
+
   });
 
   Ext.Ajax.request({
