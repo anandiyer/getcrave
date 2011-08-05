@@ -177,6 +177,18 @@ Ext.override(Ext.plugins.PullRefreshPlugin, {
   }
 });
 
+TouchBS.get_address_component_type = function(address_components, type) {
+  for (var j=0; j < address_components.length; j++) {
+    var address_component = address_components[j];
+    if (address_component.types[0] === type) {
+      //bingo
+      return address_component;
+    }
+  }
+  
+  return null;
+}
+
 TouchBS.wait = function(msg) {
   Ext.getBody().mask(msg, 'x-mask-loading');
 };
@@ -231,13 +243,18 @@ TouchBS.formatted_phone_number = function(phone) {
 //I use these 2 lines instead of Ext.Viewport.init beacuse on iphone it is all wigged out
 //because it's trying to do a bunch of crazy stuff to fix blackberry and galaxy tab
 //PS sencha touch is garbage
-TouchBS.init_viewport = function(cb, scope) {
-  if (Ext.is.iOS && Ext.is.Phone) {
-    Ext.Viewport.updateOrientation();
-    Ext.Viewport.scrollToTop();
-    if (cb)
-      cb.apply(scope || window);
-  } else {
-    Ext.Viewport.init(cb, scope);
-  }
-};
+if (Ext.is.iOS) {
+  Ext.Viewport.init = function(fn, scope) {
+    var me = this;
+
+    me.updateOrientation();
+
+    this.initialHeight = window.innerHeight;
+    this.initialOrientation = this.orientation;
+    this.scrollToTop();
+     if (fn) {
+        fn.apply(scope || window);
+    }
+    return; 
+  };
+}

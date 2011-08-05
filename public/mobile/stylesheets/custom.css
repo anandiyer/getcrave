@@ -34,8 +34,10 @@ body {
 
 .startuppic {
   position: absolute;
-  top: 0;
   left: 0;
+  top: 0;
+  width: 100%;
+  text-align: center;
 }
 
 .x-button img {
@@ -85,12 +87,47 @@ padding: .3em .3em;
 
 /** frame panel thing used on the filters screen and probably elsewhere **/
 .framePanel {
-	margin: .5em .5em .4em .5em;
-	border-radius: 1em;
-	background: white;
-	padding-bottom: .75em;
-	font-size: 14px;
-	border: 1px solid #B2B2B2;
+  margin: .5em .5em .4em .5em;
+  border-radius: 1em;
+  background: white;
+  padding-bottom: .75em;
+  font-size: 14px;
+  border: 1px solid #B2B2B2;
+}
+
+FORM.framePanel {
+  padding: 0;
+  background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #F8F7F5), color-stop(1, #ECEBE7) )
+}
+
+FORM.framePanel DIV.x-panel-body {
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  border: none;
+}
+
+FORM.framePanel .label {
+  background: transparent;
+}
+
+FORM.framePanel .x-field {
+  border: none;
+  margin-bottom: 8px;
+  width: 95%;
+}
+
+FORM.framePanel .x-form-field-container {
+  margin: 0;
+  padding: 0;
+}
+
+FORM.framePanel INPUT {
+  padding-left: 1em;
+}f
+
+.requiredField INPUT {
+  border: 2px dotted red !important;
 }
 
 .framePanel .x-toolbar.title {
@@ -145,11 +182,16 @@ padding: .3em .3em;
   border-radius: 1em;
 }
 
+.framePanel .x-toolbar.x-toolbar-fancy .x-button {
+  border-right: 1px solid #414141;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,white), color-stop(1%,#8D8D8D), color-stop(50%,#5E5E5E), color-stop(51%,#4C4C4C), color-stop(100%,#414141));
+  color: #ccc;
+}
 .framePanel .x-toolbar.x-toolbar-fancy .x-button.x-button-pressed{
   background-color: #E8553A;
   /*background-image: -webkit-linear-gradient(top, #E8553A 0%,#E1371A 100%);*/
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #E8553A), color-stop(100%, #E1371A));
-  -moz-box-shadow: inset 0px 0px 3px 3px #333333;
+
   border-top: 1px solid #B13320;
 }
 
@@ -507,12 +549,11 @@ input[type="search"]::-webkit-search-cancel-button {
   background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #F8F7F5), color-stop(1, #ECEBE7) );
   border-top: 1px solid white;
   height: 45px;
-
 }
 
 .x-field input, .x-field textarea, .x-field select, .x-field .x-field-slider {
 -webkit-border-radius: 0;
-border-radius: 20px;
+border-radius: 16px;
 padding: .4em;
 border: 0;
 word-wrap:break-word;

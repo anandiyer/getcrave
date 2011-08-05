@@ -1,6 +1,6 @@
 Ext.setup({
   glossOnIcon: false,
-  fullscreen: false,
+  fullscreen: true,
   onReady: function(){
     Crave.app_version = "1.0";
     
@@ -222,15 +222,17 @@ Ext.setup({
     Crave.otherProfilePanel = Crave.buildProfilePanel(false);
     Crave.buildSavedPanel();
 
-    TouchBS.init_viewport(function() {
+    
       Crave.viewport = new Ext.Panel({
         layout: 'card',
         fullscreen: true,
         activeItem: Crave.nearbyPanel,
-        items: [Crave.activityPanel, Crave.nearbyPanel, Crave.savedPanel,  Crave.myProfilePanel, detailPnl, Crave.buildFilterPanel(),
+        items: [Crave.activityPanel, Crave.nearbyPanel, 
+          Crave.savedPanel,  Crave.myProfilePanel, 
+          detailPnl, Crave.buildFilterPanel(),
           placePnl, newDishForm, Crave.buildRateDishPanel(),
           Crave.buildDishDisplayPanel(), Crave.buildSettingsPanel(),  
-          Crave.otherProfilePanel, Crave.buildSearchResultsPanel()],
+          Crave.otherProfilePanel, Crave.buildSearchResultsPanel(), Crave.buildCityVotePanel()],
         cardSwitchAnimation: 'slide',
         direction:'horizontal',
         dockedItems: [new Ext.TabBar({
@@ -276,35 +278,61 @@ Ext.setup({
           }
         }
       });
-    });
   }
 });
 
+Crave.alreadyCheckedCity = false;
 
 Crave.updateLocation = function(callback) {
+  var position_callback = function(coords) {
+    Crave.checkSupportedCity(coords, function(supported, city) {
+      if (!supported) {
+        coords = { //force sanfran
+          latitude: 37.77494,
+          longitude: -122.41958
+        }
+          
+        if (!Crave.alreadyCheckedCity) { //don't badger the nice people
+          Crave.alreadyCheckedCity = true; 
+          Ext.Msg.show({
+            title: "Not Here yet.", 
+            msg: "Sorry, we're not available in " + city + " yet.  Do you want to vote for Crave to come to " + city + "?",
+            buttons: Ext.MessageBox.YESNO,
+            fn: function(btn) {
+              if (btn === 'yes') {
+                Crave.cityVotePanel.set_city(city);
+                Crave.viewport.setActiveItem(Crave.cityVotePanel);
+              }
+            }
+          });
+        }
+      }
+
+      //either way, set the coords and callback whoever wanted updateLocation
+      Crave.latest_position = coords;
+      if (callback) {
+        callback(coords);
+      }
+    });   
+  };
+  
   navigator.geolocation.getCurrentPosition(function(position) {
     var coords = position.coords;
-    if(window.location.toString().indexOf("local")>-1) {
-      coords = {
-        latitude: 37.77867,
-        longitude: -122.39127
-      };
-    }
-    Crave.latest_position = coords;
+//    if(window.location.toString().indexOf("local")>-1) {
+//      coords = {
+//        latitude: 37.77867,
+//        longitude: -122.39127
+//      };
+//    }
+    position_callback(coords);
     
-    if (callback) {
-      callback(coords);
-    }
   }, function() {
     //failure handler
     console.log("no location available: using sanfran");
     Ext.Msg.alert("No Location", "We couldn't find your location so we're showing results near San Fransisco.")
-    Crave.latest_position = {
+    position_callback({
       latitude: 37.77494,
       longitude: -122.41958
-    };
-    if (callback) {
-      callback(Crave.latest_position);
-    }
+    });
   });
 }
