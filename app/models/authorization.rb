@@ -15,14 +15,17 @@ class Authorization < ActiveRecord::Base
 
     if (hash['provider'] == 'facebook')
       p user ||= User.create_from_hash_facebook!(hash)
+      secret = ''
     elsif (hash['provider'] == 'twitter')
       p user ||= User.create_from_hash_twitter!(hash)
+      secret = hash['credentials']['secret']
     end
 
     auth = Authorization.create(:user => user, 
       :uid => hash['uid'], 
       :provider => hash['provider'], 
       :token => hash['credentials']['token'],
+      :secret => secret,
       :provider_user_name => hash['user_info']['nickname'])
 
     p auth.errors
@@ -31,6 +34,7 @@ class Authorization < ActiveRecord::Base
     if !auth.valid?
       a_find = Authorization.find_from_hash(hash)
       a_find.token = hash['credentials']['token']
+      a_find.secret = hash['credentials']['secret']
       a_find.save
       return a_find
     end

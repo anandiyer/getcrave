@@ -75,12 +75,37 @@ class MenuItemRatingsController < ApplicationController
     # Only send to Twitter if in fact, this user's twitter account exists
     auth = Authorization.find(:first, :conditions => {:user_id => current_user.id, :provider => 'twitter'})
     
-    if (!auth || auth.token.empty?)
+    if (!auth || auth.token.empty? || auth.secret.empty?)
       return
     end
     
-    #TODO
+    Twitter.configure do |config|
+      config.consumer_key = TWITTER_APP_ID
+      config.consumer_secret = TWITTER_APP_SECRET
+      config.oauth_token = auth.token
+      # TODO: Secret is not saved right now
+      config.oauth_token_secret = auth.secret
+    end
 
+    menu_item_id = params[:menu_item_rating][:menu_item_id]
+    
+    menu_item = MenuItem.find_by_id(menu_item_id)
+    menu_item_friendly_id = menu_item.friendly_id
+    name = menu_item.name
+    
+    review = "I just craved " + name 
+  
+    if (!menu_item.restaurant.twitter.empty?)
+      review = review + " @" + menu_item.restaurant.twitter
+    end
+    
+    menu_item_rating_id = @menu_item_rating.id.to_s
+    link = "http://getcrave.com/items/"+menu_item_friendly_id+"#"+menu_item_rating_id
+    message = review + " - " + link
+
+    client = Twitter.client.new() 
+    client.update(message)
+    
   end
 
 
@@ -107,16 +132,12 @@ class MenuItemRatingsController < ApplicationController
     desc = menu_item.description ? menu_item.description : 
       "Have you ever been to a restaurant or a bar and asked, \'so, what\'s good here\?"
 
-    if (auth && !auth.token.empty?)
-      me = FbGraph::User.me(auth.token)
-      me.feed!(
-          :message => message,
+    me = FbGraph::User.me(auth.token)
+    me.feed!(:message => message,
           :picture => picture,
           :link => link,
           :name => name,
-          :description => desc
-          )
-    end
+          :description => desc)
   end
 
   # POST /menu_item_ratings

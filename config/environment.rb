@@ -1,6 +1,16 @@
 # Load the rails application
 require File.expand_path('../application', __FILE__)
 
+FB_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/facebook.yml")[RAILS_ENV]
+FS_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/foursquare.yml")[RAILS_ENV]
+TWITTER_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/twitter.yml")[RAILS_ENV]
+FB_APP_ID = FB_CONFIG['app_id']
+FB_APP_SECRET = FB_CONFIG['app_secret']
+FS_APP_ID = FS_CONFIG['app_id']
+FS_APP_SECRET = FS_CONFIG['app_secret']
+TWITTER_APP_ID = TWITTER_CONFIG['app_id']
+TWITTER_APP_SECRET = TWITTER_CONFIG['app_secret']
+
 # Initialize the rails application
 Crave::Application.initialize!
 
@@ -38,3 +48,4 @@ CALLER_ID = "+14153478834"
 
 #CALLER_PIN only needed to send using sandbox number. Looks like 9999-9999
 CALLER_PIN = "8298-5096"
+

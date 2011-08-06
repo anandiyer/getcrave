@@ -1,13 +1,3 @@
-FB_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/facebook.yml")[RAILS_ENV]
-FS_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/foursquare.yml")[RAILS_ENV]
-TWITTER_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/twitter.yml")[RAILS_ENV]
-FB_APP_ID = FB_CONFIG['app_id']
-FB_APP_SECRET = FB_CONFIG['app_secret']
-FS_APP_ID = FS_CONFIG['app_id']
-FS_APP_SECRET = FS_CONFIG['app_secret']
-TWITTER_APP_ID = TWITTER_CONFIG['app_id']
-TWITTER_APP_SECRET = TWITTER_CONFIG['app_secret']
-
 # OmniAuth.config.full_host = "http://localhost"
 
 Rails.application.config.middleware.use OmniAuth::Builder do

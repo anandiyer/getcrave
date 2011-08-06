@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   def create
     auth = request.env["omniauth.auth"]
     token =  auth['credentials']['token']
+    secret = auth['credentials']['secret']
 
     if !token
       render :status => 404 and return #for bots
@@ -46,11 +47,12 @@ class SessionsController < ApplicationController
         redirect_to root_path
       end
 
-      if @auth.token.blank?
+      if (@auth.token.blank? || @auth.secret.blank?)
         a_find = Authorization.find_from_hash(auth)
         a_find.token = token
+        a_find.secret = secret
         a_find.save
-      end
+      end    
     end
     
     #Save last_logged_in time
