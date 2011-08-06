@@ -156,6 +156,10 @@ class MenuItemRatingsController < ApplicationController
             send_to_fb_wall
           end
           
+          if params[:twitter] && params[:twitter][:boolean] == "1"
+            send_to_twitter
+          end
+          
           format.html { redirect_to(@menu_item_rating, :notice => 'Menu item rating was successfully created.') }
           format.xml { render :xml => @menu_item_rating, :status => :created, :location => @menu_item_rating }
           format.json { render :json => @menu_item_rating, :status => :created, :location => @menu_item_rating }
