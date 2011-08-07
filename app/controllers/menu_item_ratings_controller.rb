@@ -83,7 +83,6 @@ class MenuItemRatingsController < ApplicationController
       config.consumer_key = TWITTER_APP_ID
       config.consumer_secret = TWITTER_APP_SECRET
       config.oauth_token = auth.token
-      # TODO: Secret is not saved right now
       config.oauth_token_secret = auth.secret
     end
 
@@ -103,8 +102,14 @@ class MenuItemRatingsController < ApplicationController
     link = "http://getcrave.com/items/"+menu_item_friendly_id+"#"+menu_item_rating_id
     message = review + " - " + link
 
-    client = Twitter.client.new() 
-    client.update(message)
+    client = Twitter::Client.new
+    begin
+      client.update(message)
+      return true
+    rescue Exception => e
+      p "Unable to send to twitter: #{e.to_s}"
+      return false
+    end
     
   end
 
