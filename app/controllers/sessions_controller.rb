@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
   def create
-    auth = request.env["omniauth.auth"]
-    token =  auth['credentials']['token']
-    secret = auth['credentials']['secret']
+    @omniauth = request.env["omniauth.auth"]
+    token =  @omniauth['credentials']['token']
+    secret = @omniauth['credentials']['secret']
 
     if !token
       render :status => 404 and return #for bots
@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       # Create a new user or add an auth to existing user, depending on
       # whether there is already a user signed in.
       
-      if ((auth['provider'] == 'facebook') || (auth['provider'] == 'twitter'))
+      if ((@omniauth['provider'] == 'facebook') || (@omniauth['provider'] == 'twitter'))
         @authuid = auth['uid'].to_i
         @conditions = " facebook_id = #{@authuid}"
         @tester = AlphaTester.find(:first, :conditions => @conditions)
@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
           redirect_to '/request.html'
           return
         end
-      elsif (auth['provider'] == 'foursquare')
+      elsif (@omniauth['provider'] == 'foursquare')
         # Let's save this user's phone number if available
         current_user.telephone = auth['user_info']['phone'] 
         current_user.save
@@ -33,17 +33,16 @@ class SessionsController < ApplicationController
       # TODO: we shouldn't have to do this if the user is simply
       # assocating their account with another provider. Do this
       # only for first time account creators
-      if ((auth['provider'] == 'facebook') && (@auth.user))
+      if ((@omniauth['provider'] == 'facebook') && (@auth.user))
         Notifier.signup_email(@auth.user).deliver
       end
     end
 
     # Twitter & Facebook are the only supported auth mechanisms right now
-    if ((auth['provider'] == 'facebook') || (auth['provider'] == 'twitter'))
+    if ((@omniauth['provider'] == 'facebook') || (@omniauth['provider'] == 'twitter'))
       # Log the authorizing user in.
       begin
         self.current_user = @auth.user
-        p "debugging: " + @auth.user
       rescue NoMethodError
         redirect_to root_path
       end
@@ -59,6 +58,8 @@ class SessionsController < ApplicationController
     #Save last_logged_in time
     self.current_user.last_logged_in = Time.now
     self.current_user.save
+    
+    p "debugging " + self.current_user.user_name
 
     # If coming from an iPhone, redirect to another page with the user_id
     # TODO: turning off autoredirects while in alpha
