@@ -8,13 +8,13 @@ class SessionsController < ApplicationController
       render :status => 404 and return #for bots
     end
 
-    unless @auth = Authorization.find_from_hash(auth)
+    unless @auth = Authorization.find_from_hash(@omniauth)
       
       # Create a new user or add an auth to existing user, depending on
       # whether there is already a user signed in.
       
       if ((@omniauth['provider'] == 'facebook') || (@omniauth['provider'] == 'twitter'))
-        @authuid = auth['uid'].to_i
+        @authuid = @omniauth['uid'].to_i
         @conditions = " facebook_id = #{@authuid}"
         @tester = AlphaTester.find(:first, :conditions => @conditions)
 
@@ -24,11 +24,11 @@ class SessionsController < ApplicationController
         end
       elsif (@omniauth['provider'] == 'foursquare')
         # Let's save this user's phone number if available
-        current_user.telephone = auth['user_info']['phone'] 
+        current_user.telephone = @omniauth['user_info']['phone'] 
         current_user.save
       end
       
-      @auth = Authorization.create_from_hash(auth, current_user)
+      @auth = Authorization.create_from_hash(@omniauth, current_user)
   
       # TODO: we shouldn't have to do this if the user is simply
       # assocating their account with another provider. Do this
@@ -48,7 +48,7 @@ class SessionsController < ApplicationController
       end
 
       if (@auth.token.blank? || @auth.secret.blank?)
-        a_find = Authorization.find_from_hash(auth)
+        a_find = Authorization.find_from_hash(@omniauth)
         a_find.token = token
         a_find.secret = secret
         a_find.save
