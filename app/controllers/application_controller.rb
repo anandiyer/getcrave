@@ -49,6 +49,8 @@ class ApplicationController < ActionController::Base
   end
 
   def signed_in?
+    p "debugging"
+    p current_user
     !!current_user
   end
 
