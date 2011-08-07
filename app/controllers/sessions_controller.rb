@@ -42,7 +42,7 @@ class SessionsController < ApplicationController
     if ((@omniauth['provider'] == 'facebook') || (@omniauth['provider'] == 'twitter'))
       # Log the authorizing user in.
       begin
-        current_user = @auth.user
+        self.current_user = @auth.user
       rescue NoMethodError
         redirect_to root_path
       end
@@ -56,16 +56,16 @@ class SessionsController < ApplicationController
     end
     
     #Save last_logged_in time
-    current_user.last_logged_in = Time.now
-    current_user.save
+    self.current_user.last_logged_in = Time.now
+    self.current_user.save
     
-    p "debugging " + current_user.user_name
+    p "debugging " + self.current_user.user_name
 
     # If coming from an iPhone, redirect to another page with the user_id
     # TODO: turning off autoredirects while in alpha
 
     if ((session[:redirect_to]) && (session[:redirect_to].include? 'mobile'))
-      redirect_to "/mobile/uid/?uid=" + current_user.id.to_s
+      redirect_to "/mobile/uid/?uid=" + self.current_user.id.to_s
     else
       if (session[:redirect_to] && !session[:redirect_to].empty?)
         redirect_to session[:redirect_to]
