@@ -61,7 +61,7 @@ class SessionsController < ApplicationController
 
     # If coming from an iPhone, redirect to another page with the user_id
     # TODO: turning off autoredirects while in alpha
-    p "debugging: "+ session[:redirect_to]
+
     if ((session[:redirect_to]) && (session[:redirect_to].include? 'mobile'))
       redirect_to "/mobile/uid/?uid=" + current_user.id.to_s
     else
