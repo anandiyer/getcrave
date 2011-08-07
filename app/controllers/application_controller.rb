@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
     end
 
     if !signed_in? && !is_mobile && !is_auth_path && !is_heroku && !is_foursquare_checkin_path
-      redirect_to("/index.html") and return
+      redirect_to("/") and return
     end
   end
 
