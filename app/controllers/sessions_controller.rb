@@ -43,6 +43,7 @@ class SessionsController < ApplicationController
       # Log the authorizing user in.
       begin
         self.current_user = @auth.user
+        p "debugging: " + @auth.user
       rescue NoMethodError
         redirect_to root_path
       end
@@ -68,7 +69,7 @@ class SessionsController < ApplicationController
       if (session[:redirect_to] && !session[:redirect_to].empty?)
         redirect_to session[:redirect_to]
       else
-        redirect_to request.env['omniauth.origin'] || activity_path
+        redirect_to activity_path
       end
     end
   end
