@@ -21,6 +21,7 @@ gem 'aws-s3', '0.6.2', :require => 'aws/s3'
 gem 'will_paginate', "~> 3.0.pre2"
 gem 'kaminari'
 gem 'omniauth', ">= 0.1.6"
+gem 'twitter'
 
 gem "fb_graph" #for fb share
 
