@@ -45,10 +45,10 @@ Ext.setup({
     }
     updateNearby();
     Crave.activityStore.load();
-    if (Crave.phonegap) {
-      document.addEventListener('resume', updateNearby, false);
-    }
-    
+//    if (Crave.phonegap) { //I guess they don't want this afterall?
+//      document.addEventListener('resume', updateNearby, false);
+//    }
+//
     var placesList = new Ext.List({
       itemTpl: restaurantTemplate,
       itemSelector: '.aplace',
@@ -222,62 +222,68 @@ Ext.setup({
     Crave.otherProfilePanel = Crave.buildProfilePanel(false);
     Crave.buildSavedPanel();
 
-    
-      Crave.viewport = new Ext.Panel({
-        layout: 'card',
-        fullscreen: true,
-        activeItem: Crave.nearbyPanel,
-        items: [Crave.activityPanel, Crave.nearbyPanel, 
-          Crave.savedPanel,  Crave.myProfilePanel, 
-          detailPnl, Crave.buildFilterPanel(),
-          placePnl, Crave.buildNewDishPanel(), Crave.buildRateDishPanel(),
-          Crave.buildDishDisplayPanel(), Crave.buildSettingsPanel(),  
-          Crave.otherProfilePanel, Crave.buildSearchResultsPanel(), Crave.buildCityVotePanel()],
+
+    Crave.viewport = new Ext.Panel({
+      layout: 'card',
+      activeItem: Crave.nearbyPanel,
+      items: [Crave.activityPanel, Crave.nearbyPanel,
+        Crave.savedPanel,  Crave.myProfilePanel,
+        detailPnl, Crave.buildFilterPanel(),
+        placePnl, Crave.buildNewDishPanel(), Crave.buildRateDishPanel(),
+        Crave.buildDishDisplayPanel(), Crave.buildSettingsPanel(),
+        Crave.otherProfilePanel, Crave.buildSearchResultsPanel()],
+      cardSwitchAnimation: 'slide',
+      direction:'horizontal',
+      dockedItems: [new Ext.TabBar({
+        dock: 'bottom',
+        //xtype: 'toolbar',
         cardSwitchAnimation: 'slide',
-        direction:'horizontal',
-        dockedItems: [new Ext.TabBar({
-          dock: 'bottom',
-          //xtype: 'toolbar',
-          cardSwitchAnimation: 'slide',
-          id: 'mainTabbar',
-          ui: 'dark',
-          layout: {
-            pack: 'center'
-          },
-          items: [{
-            text: "Activity",
-            iconCls: 'activity',
-            card: Crave.activityPanel
-          },{
-            text: 'Nearby',
-            iconCls: 'nearBy',
-            card: Crave.nearbyPanel
-          },{
-            text: "Saved",
-            iconCls: 'saved',
-            card: Crave.savedPanel
-          },{
-            text: "Me",
-            iconCls: 'me',
-            card: Crave.myProfilePanel
-          }],
-          listeners: {
-            change: function(tabbar, tab, card) {
-              Crave.back_stack = []; //clear back stack when they explicitly click a tab
-              if(tab.text === "Me") {
-                Crave.myProfilePanel.setActiveItem(1); //reset to profile page since we cleared the back stack.  this is ugly
-              }
+        id: 'mainTabbar',
+        ui: 'dark',
+        layout: {
+          pack: 'center'
+        },
+        items: [{
+          text: "Activity",
+          iconCls: 'activity',
+          card: Crave.activityPanel
+        },{
+          text: 'Nearby',
+          iconCls: 'nearBy',
+          card: Crave.nearbyPanel
+        },{
+          text: "Saved",
+          iconCls: 'saved',
+          card: Crave.savedPanel
+        },{
+          text: "Me",
+          iconCls: 'me',
+          card: Crave.myProfilePanel
+        }],
+        listeners: {
+          change: function(tabbar, tab, card) {
+            Crave.back_stack = []; //clear back stack when they explicitly click a tab
+            if(tab.text === "Me") {
+              Crave.myProfilePanel.setActiveItem(1); //reset to profile page since we cleared the back stack.  this is ugly
             }
           }
-        })],
-        listeners: {
-          afterlayout: function(viewport) {
-            var tb = Ext.getCmp('mainTabbar');
-            tb.cardLayout = viewport.layout;
-            $(".startuppic").remove();
-          }
         }
-      });
+      })],
+      listeners: {
+        afterlayout: function(viewport) {
+          var tb = Ext.getCmp('mainTabbar');
+          tb.cardLayout = viewport.layout;
+          $(".startuppic").remove();
+        }
+      }
+    });
+
+    Crave.real_viewport = new Ext.Panel({
+      fullscreen: true,
+      layout: 'card',
+      activeItem: Crave.viewport,
+      items: [Crave.viewport, Crave.buildCityVotePanel()]
+    });
   }
 });
 
@@ -285,31 +291,35 @@ Crave.alreadyCheckedCity = false;
 
 Crave.updateLocation = function(callback) {
   var position_callback = function(coords) {
+    Crave.latest_position = coords;
     Crave.checkSupportedCity(coords, function(supported, city) {
-      if (!supported) {
-        coords = { //force sanfran
-          latitude: 37.77494,
-          longitude: -122.41958
-        }
-          
-        if (!Crave.alreadyCheckedCity) { //don't badger the nice people
-          Crave.alreadyCheckedCity = true; 
-          Ext.Msg.show({
-            title: "Not Here yet.", 
-            msg: "Sorry, we're not available in " + city + " yet.  Do you want to vote for Crave to come to " + city + "?",
-            buttons: Ext.MessageBox.YESNO,
-            fn: function(btn) {
-              if (btn === 'yes') {
-                Crave.cityVotePanel.set_city(city);
-                Crave.viewport.setActiveItem(Crave.cityVotePanel);
-              }
-            }
-          });
-        }
+      if (!supported && !Crave.alreadyCheckedCity) {
+        Crave.cityVotePanel.set_city(city);
+        Crave.real_viewport.setActiveItem(Crave.cityVotePanel);
+        return;
+//        coords = { //force sanfran
+//          latitude: 37.77494,
+//          longitude: -122.41958
+//        }
+//
+//        if (!Crave.alreadyCheckedCity) { //don't badger the nice people
+//          Crave.alreadyCheckedCity = true;
+//          Ext.Msg.show({
+//            title: "Not Here yet.",
+//            msg: "Sorry, we're not available in " + city + " yet.  Do you want to vote for Crave to come to " + city + "?",
+//            buttons: Ext.MessageBox.YESNO,
+//            fn: function(btn) {
+//              if (btn === 'yes') {
+//                Crave.cityVotePanel.set_city(city);
+//                Crave.real_viewport.setActiveItem(Crave.cityVotePanel);
+//              }
+//            }
+//          });
+//        }
       }
 
-      //either way, set the coords and callback whoever wanted updateLocation
-      Crave.latest_position = coords;
+      //We have a good fix in San Fran, so never send them to the vote page
+      Crave.alreadyCheckedCity = true;
       if (callback) {
         callback(coords);
       }
@@ -318,6 +328,7 @@ Crave.updateLocation = function(callback) {
   
   navigator.geolocation.getCurrentPosition(function(position) {
     var coords = position.coords;
+    //spoof san fran for testing
 //    if(window.location.toString().indexOf("local")>-1) {
 //      coords = {
 //        latitude: 37.77494,
