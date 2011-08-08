@@ -34,7 +34,11 @@ Crave::Application.routes.draw do
   end
 
   resources :places, :as => "restaurants", :controller => "restaurants" do
-    resources :items, :as => "menu_items", :controller => "menu_items"
+    resources :items, :as => "menu_items", :controller => "menu_items" do
+      collection do
+        get 'admin'
+      end
+    end
     collection do
       get 'search', 'show_restaurants_nearby'
     end

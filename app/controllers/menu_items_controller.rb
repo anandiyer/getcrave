@@ -22,8 +22,17 @@ class MenuItemsController < ApplicationController
 
   respond_to :js, :only => [:show_menu_items_of_place, :show_menu_items_nearby]
 
-  layout "general"
+  layout "general", :except => [:admin]
 
+  def admin
+    params_4_index_and_show_menu_items_of_place
+
+    respond_to do |format|
+      format.html # admin.html.haml
+      format.xml  { render :xml => @menu_items.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count, :menu_item_photos])}
+      format.json  { render :json => @menu_items.to_json(:include => [:restaurant, :menu_item_avg_rating_count, :menu_item_photos]) }
+    end
+  end
 
   def nearby
     params_4_location_and_show_menu_item_nearby
@@ -306,6 +315,7 @@ class MenuItemsController < ApplicationController
   # DELETE /menu_items/1
   # DELETE /menu_items/1.xml
   def destroy
+    
     @menu_item = MenuItem.find(params[:id])
     @menu_item.destroy
 

@@ -90,12 +90,13 @@ class MenuItemRatingsController < ApplicationController
     
     menu_item = MenuItem.find_by_id(menu_item_id)
     menu_item_friendly_id = menu_item.friendly_id
-    name = menu_item.name
     
-    review = "I just craved " + name 
+    review = "I just craved " + menu_item.name + " @"
   
     if (!menu_item.restaurant.twitter.empty?)
-      review = review + " @" + menu_item.restaurant.twitter
+      review = review + menu_item.restaurant.twitter
+    else
+      review = review + " " + menu_item.restaurant.name
     end
     
     menu_item_rating_id = @menu_item_rating.id.to_s

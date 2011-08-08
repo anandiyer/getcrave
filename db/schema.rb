@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110806234244) do
+ActiveRecord::Schema.define(:version => 20110807223956) do
 
   create_table "alpha_testers", :force => true do |t|
     t.integer  "facebook_id", :limit => 8
@@ -222,6 +222,7 @@ ActiveRecord::Schema.define(:version => 20110806234244) do
     t.string   "telephone"
     t.datetime "last_logged_in"
     t.string   "bio"
+    t.boolean  "admin"
   end
 
 end

@@ -1,0 +1,39 @@
+%h1 Listing menu_items
+
+%table
+  %tr
+    %th id
+    %th restaurant_id
+    %th name
+    %th description
+    %th user_id
+    %th price
+    %th labels
+    %th ratings
+    %th photos
+    %th SHOW
+    %th EDIT
+    %th DESTROY
+    %th created_at
+    %th updated_at
+
+  - @menu_items.each do |m|
+    %tr
+      %td= m.id
+      %td= m.restaurant_id
+      %td= m.name
+      %td= m.description
+      %td= m.user_id
+      %td= m.price
+      %td= m.menu_label_associations.count
+      %td= m.menu_item_ratings.count
+      %td= m.menu_item_photos.count
+      %td= link_to 'Show', m
+      %td= link_to 'Edit', edit_menu_item_path(m)
+      %td= link_to 'Destroy', m, :confirm => 'Are you sure?', :method => :delete
+      %td= m.created_at
+      %td= m.updated_at
+
+%br
+
+= link_to 'New Item', new_menu_item_path
