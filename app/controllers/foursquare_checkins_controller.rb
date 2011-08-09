@@ -81,7 +81,6 @@ class FoursquareCheckinsController < ApplicationController
       @uid = @checkin.user_id
       @conditions = "provider = \'#{@provider}\' AND uid = \'#{@uid}\'"
       @auth = Authorization.find(:first, :conditions => @conditions)
-      @user = User.find(:first, :)
 
       # If we have this user's phone number saved, send them a text
       if @auth && @auth.user.telephone && @auth.user.get_foursquare_recommendations
