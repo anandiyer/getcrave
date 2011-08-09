@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110807223956) do
+ActiveRecord::Schema.define(:version => 20110809040424) do
 
   create_table "alpha_testers", :force => true do |t|
     t.integer  "facebook_id", :limit => 8
@@ -217,12 +217,13 @@ ActiveRecord::Schema.define(:version => 20110807223956) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "user_profile_pic_url"
-    t.integer  "user_ratings_count",   :default => 0
+    t.integer  "user_ratings_count",             :default => 0
     t.string   "email"
     t.string   "telephone"
     t.datetime "last_logged_in"
     t.string   "bio"
     t.boolean  "admin"
+    t.boolean  "get_foursquare_recommendations", :default => false
   end
 
 end

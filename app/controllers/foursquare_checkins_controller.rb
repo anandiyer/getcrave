@@ -46,7 +46,6 @@ class FoursquareCheckinsController < ApplicationController
     posted_json = request.body.read
     
     pj = JSON.parse(posted_json)
-    p pj
     
     @checkin = FoursquareCheckin.new()
 #    @checkin.data = posted_json
@@ -61,8 +60,6 @@ class FoursquareCheckinsController < ApplicationController
       @checkin.user_id = pj["user"]["id"]
     end
     
-    @checkin.save
-    
     # Get the top item at this foursquare venue
     @foursquare_venue_id = @checkin.venue_id
     @conditions = "restaurants.foursquare_venue_id = \'#{@foursquare_venue_id}\'"
@@ -73,9 +70,8 @@ class FoursquareCheckinsController < ApplicationController
       :order => "(menu_item_avg_rating_count.avg_rating IS NULL) ASC, menu_item_avg_rating_count.avg_rating DESC, menu_item_avg_rating_count.count DESC",
       :include => :restaurant)
       
-    p "DEBUGGING"
-    p @menu_item
-    
+    @checkin.save
+      
     if (@menu_item)    
       @body = "While you're at " + @menu_item.restaurant.name + " try the " + @menu_item.name +
         ". " + "http://getcrave.com/items/" + @menu_item.id.to_s
@@ -85,9 +81,10 @@ class FoursquareCheckinsController < ApplicationController
       @uid = @checkin.user_id
       @conditions = "provider = \'#{@provider}\' AND uid = \'#{@uid}\'"
       @auth = Authorization.find(:first, :conditions => @conditions)
+      @user = User.find(:first, :)
 
       # If we have this user's phone number saved, send them a text
-      if @auth && @auth.user.telephone
+      if @auth && @auth.user.telephone && @auth.user.get_foursquare_recommendations
         @phone = @auth.user.telephone
 
         # SMS
@@ -102,9 +99,6 @@ class FoursquareCheckinsController < ApplicationController
         resp = account.request("/#{API_VERSION}/Accounts/#{ACCOUNT_SID}/SMS/Messages",
             "POST", t)
           
-        p "response"
-        p resp.code
-        p resp.body
       end
     end
 

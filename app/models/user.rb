@@ -5,8 +5,9 @@ class User < ActiveRecord::Base
   has_many :user_followings
   has_many :menu_item_photos
   has_many :menu_label_associations
+  has_many :foursquare_checkins
   has_friendly_id :user_name, :use_slug => true
-  attr_accessible :user_name, :user_profile_pic_url, :email, :telephone, :bio
+  attr_accessible :user_name, :user_profile_pic_url, :email, :telephone, :bio, :get_foursquare_recommendations
   attr_accessor :this_user
   validates_uniqueness_of :user_name
   
