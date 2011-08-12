@@ -26,7 +26,8 @@ class SessionsController < ApplicationController
         
         # This is for the mobile use case - we have to get the uid first
         # before we associate the 4s auth with that user acccount
-        if ((session[:redirect_to]) && (session[:redirect_to].include? 'mobile') && (session[:user_id]))
+        if (((session[:redirect_to]) && (session[:redirect_to].include? 'mobile') && (session[:user_id])) ||
+            !current_user)
           current_user = User.find_by_id(session[:user_id].to_i)
         end
         
