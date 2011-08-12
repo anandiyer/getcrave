@@ -31,9 +31,11 @@ class SessionsController < ApplicationController
         end
         
         # Let's save this user's phone number if available
-        current_user.telephone = @omniauth['user_info']['phone'] 
-        current_user.get_forusquare_recommendations = true
-        current_user.save
+        p "DEBUGGING"
+        p self.current_user
+        self.current_user.telephone = @omniauth['user_info']['phone'] 
+        self.current_user.get_foursquare_recommendations = true
+        self.current_user.save
       end
       
       @auth = Authorization.create_from_hash(@omniauth, current_user)
