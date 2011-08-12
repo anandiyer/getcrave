@@ -54,6 +54,7 @@ class SessionsController < ApplicationController
       # Log the authorizing user in.
       begin
         self.current_user = @auth.user
+        current_user = @auth.user
       rescue NoMethodError
         redirect_to root_path
       end
