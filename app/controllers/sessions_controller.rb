@@ -24,6 +24,10 @@ class SessionsController < ApplicationController
         end
       elsif (@omniauth['provider'] == 'foursquare')
         
+        p "DEBUGGING"
+        p self.current_user
+        p current_user
+        
         # This is for the mobile use case - we have to get the uid first
         # before we associate the 4s auth with that user acccount
         if (((session[:redirect_to]) && (session[:redirect_to].include? 'mobile') && (session[:user_id])) ||
@@ -32,9 +36,7 @@ class SessionsController < ApplicationController
         end
         
         # Let's save this user's phone number if available
-        p "DEBUGGING"
-        p self.current_user
-        p current_user
+
         current_user.telephone = @omniauth['user_info']['phone'] 
         current_user.get_foursquare_recommendations = true
         current_user.save
