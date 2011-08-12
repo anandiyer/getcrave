@@ -5,6 +5,8 @@
 	<meta name="description" content="Have you ever been to a restaurant and asked, &ldquo;So, what&rsquo;s good here?&rdquo; We help people find the food they like.">
 	<link rel="shortcut icon" href="/images/favicon.ico" > 
 	<link rel="stylesheet" href="/stylesheets/main.css" type="text/css" />
+	<link rel="stylesheet" href="http://launchrock.com/api/lr.api.0.2.plain.css">
+	<script src="http://launchrock.com/api/lr.api.0.5-min.js"></script>
 	<script type="text/javascript">
 	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -20,55 +22,60 @@
 <body id="body">
 	<div id="background">
 		<div id="content">
-		<div class="logo"><img src="/images/crave-logo.png"></div>                                                        
+		<div class="logo"><img src="/images/crave-logo-linen.png"></div>                                                        
         <div class="explanation">
 	<div class="whoa">Whoa there! Not so fast...</div>                                                                                                                               
-	<div class="description">We're in beta right now, but if you leave us your email address below we promise to invite you soon.</div>
-	<br />
-	<label class="request" for="mce-EMAIL">Request an invite! </label><br/>
-	<div class="ss-form-container">                                                        
- 		<div class="ss-form">
-			<form action="https://spreadsheets.google.com/spreadsheet/formResponse?formkey=dFp2OUpmeVpobk9TQUFCNFdrU2dEamc6MQ&amp;ifq" method="POST" id="ss-form"> 
-	<br /> 
-	<div class="errorbox-good"> 
-	<div class="ss-item ss-item-required ss-text"><div class="ss-form-entry">                                                          
-	<input type="text" name="entry.9.single" placeholder="you@example.com"value="" id="required-email"></div></div></div>                           
-	<br> 
-	<input type="hidden" name="pageNumber" value="0"> 
-	<input type="hidden" name="backupCache" value=""> 
-	<div class="ss-item ss-navigate"><div class="ss-form-entry"> 
-	<input type="submit" name="submit" value="Submit" class="btn"> </div></div></form>                                  
-	<script type="text/javascript"> 
-
-	      (function() {
-	var divs = document.getElementById('ss-form').
-	getElementsByTagName('div');
-	var numDivs = divs.length;
-	for (var j = 0; j < numDivs; j++) {
-	if (divs[j].className == 'errorbox-bad') {
-	divs[j].lastChild.firstChild.lastChild.focus();
-	return;
-	}
-	}
-	for (var i = 0; i < numDivs; i++) {
-	var div = divs[i];
-	if (div.className == 'ss-form-entry' &&
-	div.firstChild &&
-	div.firstChild.className == 'ss-q-title') {
-	div.lastChild.focus();
-	return;
-	}
-	}
-	})();
-	      </script></div> 
-	<div class="ss-footer"><div class="ss-attribution"></div> 
-	
-	</div>
+	<div class="description-alpha">We're in beta right now, but if you leave us your email address below we promise to invite you soon.</div>
+	<label class="request-alpha" for="mce-EMAIL">Request an invite! </label><br/>
+	<div id="container">
        </div>
  
                                                                                                                                                             
 	</div>
 	</div>
  </div>
+	<script>
+	$(document).ready(function(){
+	    LR.lrInstance = new LrInstance('container',{
+
+	        tagLine: "",
+	        description: "",
+	        refCodeUrl: "http://getcrave.com/?ref=",
+	        lrDomain: "getcrave.com",
+	        apiKey: "83e5c2e67a20d34e824c9e49cb1d1b2c",
+	        inviteList: "Launching soon. Enter your email to join our invite list:"
+	    });        
+
+	    // Handles events related to signup form, form validations
+	    // and submitting the form to the server:
+	    LR.signupForm = new SignupForm({
+	        secondaryPostLocation: ""
+	    });
+
+
+	    // Handles rendering the post submit content:
+	    LR.postSubmit = new PostSignupForm('pagesubmit',{
+	        twitterHandle: "usecrave",
+	        twitterMessage: "crave is launching soon and I'm one of the first in line! Join me. #launch",
+	        newUserHeaderText: "Thanks! Want to get an early invite?",
+	        newUserParagraphText: "Invite at least 3 friends using the link below. The more friends you invite, the sooner you'll get access.<br/><br/>",
+	        newUserParagraphText3: "Or share this link wherever you want!",
+	        returningUserHeaderText: "Welcome Back!",
+	        returningUserParagraphText: "Invite 3 friends using the link below. The more friends you invite, the sooner you'll get access!",
+	        returningUserParagraphText3: "Or share this link wherever you want!",
+	        statsPreText: "Your live stats: ",
+	        footerLinks: "<a href='http://twitter.com/usecrave'>Follow Us on Twitter</a>"
+	,showDescription: true,
+	showTagLine: true,
+	showHeaderText: true,
+	showParagraphText: true,
+	showStats: true,
+	showShareButtons: true,
+	showFooterLinks: true    });
+
+
+	});
+
+	    </script>
 </body>
 </html>
