@@ -23,8 +23,15 @@ class SessionsController < ApplicationController
           return
         end
       elsif (@omniauth['provider'] == 'foursquare')
+        # This is for the mobile use case - we have to get the uid first
+        # before we associate the 4s auth with that user acccount
+        current_user = User.find_by_id(session[:user_id].to_i)
+        p "HERE"
+        p current_user
+        
         # Let's save this user's phone number if available
         current_user.telephone = @omniauth['user_info']['phone'] 
+        current_user.get_foursquare_recommendations = true
         current_user.save
       end
       
@@ -43,6 +50,7 @@ class SessionsController < ApplicationController
       # Log the authorizing user in.
       begin
         self.current_user = @auth.user
+        current_user = @auth.user
       rescue NoMethodError
         redirect_to root_path
       end
@@ -58,8 +66,6 @@ class SessionsController < ApplicationController
     #Save last_logged_in time
     self.current_user.last_logged_in = Time.now
     self.current_user.save
-    
-    p "debugging " + self.current_user.user_name
 
     # If coming from an iPhone, redirect to another page with the user_id
     # TODO: turning off autoredirects while in alpha
