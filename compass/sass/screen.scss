@@ -1014,12 +1014,14 @@ body.two-col.bp{
 					padding-bottom:25px;
 					/*overflow:visible;*/
                     #img_column{
-                        $content-columns: ceil(3);
-                        // true means it's the last column in the row
-                        @include column($content-columns, true);
-                        padding: 6px 44px 0 2px;
-						height:140px;
-						/*overflow: hidden;*/
+                        display: inline;
+						float: left;
+						margin-right: 10px;
+						width: 140px;
+						padding: 0;
+						height: 140px;
+						overflow: hidden;
+						border-radius: 5px;
                         img{
                             @include border-radius(5px);
                         }
