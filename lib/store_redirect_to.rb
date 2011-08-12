@@ -11,7 +11,7 @@ class StoreRedirectTo
     if signin || signout
       redirect = request.params['redirect_to'] || request.referer
       request.session['redirect_to'] = redirect if redirect
-      request.session['user_id'] = request.params['user_id']
+      request.session['user_id'] = request.params['user_id'] if request.params['user_id']
     end
 
     @app.call(env)

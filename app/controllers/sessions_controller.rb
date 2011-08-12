@@ -23,11 +23,6 @@ class SessionsController < ApplicationController
           return
         end
       elsif (@omniauth['provider'] == 'foursquare')
-        
-        p "DEBUGGING"
-        p self.current_user
-        p current_user
-        
         # This is for the mobile use case - we have to get the uid first
         # before we associate the 4s auth with that user acccount
         if (!current_user)
