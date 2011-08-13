@@ -196,11 +196,16 @@ TouchBS.get_address_component_type = function(address_components, type) {
 }
 
 TouchBS.wait = function(msg) {
-  Ext.getBody().mask(msg, 'x-mask-loading');
+  if (TouchBS.wait_mask) {
+    TouchBS.wait_mask.destroy();
+  }
+  TouchBS.wait_mask = new Ext.LoadMask(Ext.getBody(), {msg: msg});
+  TouchBS.wait_mask.show();
 };
 
 TouchBS.stop_waiting = function() {
-  Ext.getBody().unmask();
+  TouchBS.wait_mask.destroy();
+  TouchBS.wait_mask = null;
 };
 
 
@@ -257,7 +262,7 @@ if (Ext.is.iOS) {
 
     this.initialHeight = window.innerHeight;
     this.initialOrientation = this.orientation;
-    if (!PhoneGap) {
+    if (typeof(PhoneGap) === 'undefined') {
       this.scrollToTop();
     }
     if (fn) {
@@ -266,3 +271,72 @@ if (Ext.is.iOS) {
     return; 
   };
 }
+
+TouchBS.BetterPagingPlugin = Ext.extend(Ext.plugins.ListPagingPlugin, {
+  onListUpdate: function() {
+    var ret = TouchBS.BetterPagingPlugin.superclass.onListUpdate.call(this);
+
+    //we dont' support the "total" property yet
+    //should probably be something like
+    //this.list.store.currentPage == this.list.store.getTotalCount() / this.list.store.pageSize
+    var count = this.list.store.getCount();
+    if (count > 0 && (count % this.list.store.pageSize === 0))
+      this.el.show();
+    else
+      this.el.hide();
+
+    return ret;
+  }
+});
+
+
+Ext.override(Ext.data.Store, {
+  getTotalCount: function() {
+    var total = this.proxy.reader.jsonData[this.proxy.reader.totalProperty];
+    if (typeof(total) === 'undefined') {
+      return this.getCount();
+    } else {
+      return total;
+    }
+  }
+});
+
+/**
+ * @class Ext.plugins.ListPagingPlugin
+ * @extends Ext.util.Observable
+ * This plugin adds pull to refresh functionality to the List.
+ */
+TouchBS.NoResultsPlugin = Ext.extend(Ext.util.Observable, {
+  init: function(list) {
+    this.list = list;
+    list.onBeforeLoad = Ext.util.Functions.createInterceptor(list.onBeforeLoad, this.onBeforeLoad, this);
+    this.mon(list, 'update', this.onListUpdate, this);
+  },
+  onListUpdate : function() {
+    if (!this.rendered) {
+        this.render();
+    }
+
+    this.el.appendTo(this.list.getTargetEl());
+    if (this.list.store.getCount() > 0) {
+      this.el.hide();
+    } else {
+      this.el.show();
+    }
+  },
+  render : function() {
+    var list = this.list,
+        targetEl = list.getTargetEl(),
+        html = '';
+
+    html += '<div class="x-list-noresult-title">' + this.title + '</div>';
+    html += '<div class="x-list-noresult-message">' + this.message +'</div>';
+
+    this.el = targetEl.createChild({
+      cls: 'x-list-noresult ',
+      html: html
+    });
+
+    this.rendered = true;
+  }
+});

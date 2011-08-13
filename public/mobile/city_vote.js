@@ -3,7 +3,7 @@
 Crave.checkSupportedCity = function(coords, callback) {
   var geocoder = new google.maps.Geocoder();
   geocoder.geocode({location: new google.maps.LatLng(coords.latitude, coords.longitude)}, function(results, status) {
-    var supported = false, city = "Unknown city";
+    var supported = false, city = "Unknown city", state = "";
     if (status === google.maps.GeocoderStatus.OK) { //bad response means we don't know, so assume its bad??
       for (var i = 0; i<results.length; i++) {
         var result = results[i];
@@ -14,6 +14,10 @@ Crave.checkSupportedCity = function(coords, callback) {
           if (city_component) {
             city = city_component.long_name;
           }
+          var state_component = TouchBS.get_address_component_type(result.address_components, 'administrative_area_level_1');
+          if (city_component) {
+            state = state_component.short_name;
+          }
           if (city === 'San Francisco') {
             supported = true;
             break;
@@ -21,7 +25,7 @@ Crave.checkSupportedCity = function(coords, callback) {
         }
       }
     }
-    callback(supported, city); 
+    callback(supported, city, state);
   });
 };
 
@@ -45,7 +49,7 @@ Crave.buildCityVotePanel = function() {
     items:  [{
       xtype: 'panel',
       cls: 'label',
-      style: 'text-align: center;',
+      style: 'text-align: center;margin-bottom: 6px;',
       html: "Let us know your city and email, and we'll let you know when we launch there."
     },email_field,city_field, {
       xtype: 'button',
@@ -56,6 +60,11 @@ Crave.buildCityVotePanel = function() {
     }],
     listeners: {
       beforesubmit: function() {
+        if (email_field.getValue() === '___setgps') {
+          Crave.spoof_location = true;
+          Crave.real_viewport.setActiveItem(Crave.viewport);
+          return;
+        }
         if (!email_field.getValue()) {
           email_field.el.addCls('requiredField');
         } else {
@@ -67,11 +76,12 @@ Crave.buildCityVotePanel = function() {
                 "email":email_field.getValue(),
                 "latitude":Crave.latest_position.latitude,
                 "longitude":Crave.latest_position.longitude,
-                "city": city_field.getValue()
+                "city": Crave.latest_position.city,
+                "state": Crave.latest_position.state
                 }
             },
             success: function() {
-              Ext.Msg.alert("Thanks", "Thanks for your vote!");
+              Ext.Msg.alert("Thanks for voting!", "We'll let you know when we launch in your area.");
             },
             failure: TouchBS.handle_failure
           });
@@ -83,8 +93,11 @@ Crave.buildCityVotePanel = function() {
   Crave.cityVotePanel = new Ext.Panel({
     bodyCls: 'cityVoteBody',
     items: form,
-    set_city: function(city) {
-      city_field.setValue(city);
+    listeners: {
+      activate: function() {
+
+        city_field.setValue(Crave.latestPositionText());
+      }
     }
   });
   

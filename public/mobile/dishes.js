@@ -3,24 +3,25 @@ Ext.regModel('MenuLabel', {
 });
 
 var dishStore = new Ext.data.Store({
-    model: 'Dish',
-    clearOnPageLoad: false,
-    sorters: [
-      {property: 'arating', direction: 'DESC'},
-      {property: 'distance', direction: 'ASC'}
-    ],
-    getGroupString : function(record) {
-        return Crave.ratingDisplay(record.get('rating'));
-    },
-    proxy: {
-       type:'ajax',
-       url: '/items/nearby.json',
-       reader: {
-           type:'json',
-           record:'menu_item'
-       }
+  model: 'Dish',
+  clearOnPageLoad: false,
+  sorters: [
+    {property: 'rating', direction: 'DESC'},
+    {property: 'distance', direction: 'ASC'}
+  ],
+  getGroupString : function(record) {
+    return Crave.ratingDisplay(record.get('rating'));
+  },
+  proxy: {
+    type:'ajax',
+    url: '/items/nearby.json',
+    reader: {
+      type:'json',
+      record:'menu_item'
     }
+  }
 });
+
 Crave.buildNewDishPanel = function() {
   var submitForm = function() {
     var menu_item = form.getValues();
@@ -92,16 +93,43 @@ Crave.buildNewDishPanel = function() {
 Crave.buildDishDisplayPanel = function() {
   
   var imageCarousel = new Ext.Carousel({
+    cls: 'dishCarousel',
     height: 100,
     width: '100%',
     hidden: true,
     items: [{
         xtype: 'panel',
         html: '<p>No Image Available</p>'
-    },{
-        xtype: 'panel',
-        html: '<p>No Image Available</p>'
-    }]
+    }],
+    listeners: {
+      render: function(c) {
+        c.el.on('click', function() {
+          var images = c.el.query('IMG');
+          imageCarousel.bs_expanded = !c.bs_expanded;
+          for (var i=0; i<images.length; i++) {
+            var img = images[i];
+            if (imageCarousel.bs_expanded) {
+              img.style.webkitTransform = "translate(0, 0)";
+              //45 is the height of the title bar
+              imageCarousel.setHeight(Math.min(img.height, dishPanel.getHeight()-45));
+            } else {
+              img.style.webkitTransform = "translate(0, -" + img.height/2 + "px)";
+              setTimeout(function() {
+                imageCarousel.setHeight(100, true);
+              }, 333/2); //setting this to half the transition period so it looks better
+            }
+          }
+          //Crave.show_image('http://src.sencha.io/' +photo.photo, {type: 'slide', direction: 'down'});
+        });
+      },
+      cardswitch: function(carousel, newCard, oldCard, anim) {
+         if (imageCarousel.bs_expanded) {
+           var img = newCard.el.down('IMG').dom;
+           //45 is the height of the title bar
+           imageCarousel.setHeight(Math.min(img.height, dishPanel.getHeight()-45));
+         }
+      }
+    }
   });
   
   
@@ -156,11 +184,12 @@ Crave.buildDishDisplayPanel = function() {
   
   //receive the image from phonegap, upload it, and associate with the correct menu item
   var uploadHandler = function(imageURI) { //get the photo
-    console.log('got a photo at: ' + imageURI);
-    var menu_item_id = Crave.dishDisplayPanel.current_menu_item.id; //get a closure on this for later
-    var user_id = Crave.currentUserId(); //this too, in case they log out real quick (unlikely)
     addSheet.hide();
     TouchBS.wait("Uploading photo...");
+
+    var menu_item_id = Crave.dishDisplayPanel.current_menu_item.id; //get a closure on this for later
+    var user_id = Crave.currentUserId(); //this too, in case they log out real quick (unlikely)
+
     var fail_handler = function() {
       TouchBS.stop_waiting();
       Ext.Msg.show({
@@ -173,7 +202,8 @@ Crave.buildDishDisplayPanel = function() {
           } 
         }
       });
-    }
+    };
+
     Crave.uploadPhoto(imageURI, function(photo_url) { //upload it to s3
       //console.log("posting " + photo_url + "to menu_item_photos.json, mi=" + menu_item_id + " user=" + user_id);
       Ext.Ajax.request({ //post the association to the menu item
@@ -187,10 +217,10 @@ Crave.buildDishDisplayPanel = function() {
           }
         },
         success: function() {
-          TouchBS.stop_waiting();
-          Ext.Msg.alert("Thanks for the photo!", "Keep on Cravin'");
           Crave.dishDisplayPanel.load_dish_data(menu_item_id, function() {
             imageCarousel.setActiveItem(imageCarousel.items.length-1);
+            TouchBS.stop_waiting();
+            Ext.Msg.alert("Thanks for the photo!", "Keep on Cravin'");
           });
         }, 
         failure: fail_handler
@@ -219,6 +249,7 @@ Crave.buildDishDisplayPanel = function() {
       text: "Take a Photo", 
       hidden: !Crave.phonegap,
       handler: function() {
+        TouchBS.wait("Please wait");
         navigator.camera.getPicture(uploadHandler, function (message) {
           //Photo capture failed, usually this is because they clicked cancel
           addSheet.hide();
@@ -236,6 +267,7 @@ Crave.buildDishDisplayPanel = function() {
       text: "Use an Existing Photo", 
       hidden: !Crave.phonegap,
       handler: function() {
+        TouchBS.wait("Please wait");
         navigator.camera.getPicture(uploadHandler, function (message) {
           //Photo capture failed, usually this is because they clicked cancel
           addSheet.hide();
@@ -265,6 +297,7 @@ Crave.buildDishDisplayPanel = function() {
     }
   });
 
+  
   var dishPanel = new Ext.Panel({
     width: '100%',
     scroll: 'vertical',
@@ -274,7 +307,7 @@ Crave.buildDishDisplayPanel = function() {
         ui: 'iback',
         handler: Crave.back_handler
       }, {
-        text: "Add", 
+        text: "Add",
         handler: addButtonHandler
       }]
     }),
@@ -288,113 +321,121 @@ Crave.buildDishDisplayPanel = function() {
            '@ <a href="#" onclick="Crave.dishDisplayPanel.setup_back_stack(0);Crave.show_restaurant({restaurant.id});">{restaurant.name}</a><br>' +
            '<tpl if="menu_item_avg_rating_count">' +
            '{[Crave.ratingDisplay(values.menu_item_avg_rating_count.avg_rating)]}' +
-           '{menu_item_avg_rating_count.count} ratings</div>' + 
+           '{menu_item_avg_rating_count.count} ratings</div>' +
            '</tpl>',
       data: {restaurant: {}}
-    },{
+    },{ //these frame panels need to be wrapped in a panel with side padding
+        //because Ext freaks out if a panel has side margin
       xtype: 'panel',
-      cls: 'framePanel',
-      width: '100%',
-      id: 'dishLabelsPanel',
-      dockedItems: [{
-        dock : 'top',
-        xtype: 'toolbar',
-        cls: 'title clickable',
-        title: 'Dish Labels'
-      }],
-      tpl: '<div class="dishLabels">{[values.labels.join(", ")]}</div>',
-      data: {labels: []},
-      listeners: {
-        afterrender: function(c){
-          c.el.on('click', function(){
-            if (!Crave.isLoggedIn()) {
-              Crave.viewport.setActiveItem(Crave.myProfilePanel);
-              return;
-            }
-            Crave.dishDisplayPanel.setup_back_stack(dishPanel);
-            labelsPanel.set_menu_item(Crave.dishDisplayPanel.current_menu_item);
-            Crave.dishDisplayPanel.setActiveItem(labelsPanel, {type: 'slide', direction: 'left'});
-          });
-        }
-      }
-    },{
-      xtype: 'panel',
-      cls: 'framePanel',
-      width: '100%',
-      id: 'dishDescriptionPanel',
-      dockedItems: [{
-        dock : 'top',
-        xtype: 'toolbar',
-        cls: 'title',
-        title: 'Description'
-      }],
-      tpl: '<div class="dishDescription">{description}</div>',
-      data: {}
-    },{
-      xtype: 'panel',
-      cls: 'framePanel',
-      width: '100%',
-      id: 'dishRatingPanel',
-      dockedItems: [{
-        dock : 'top',
-        xtype: 'toolbar',
-        cls: 'title clickable',
-        title: 'Reviews'
-      }],
-      tpl: new Ext.XTemplate.from('dishRatingTemplate', {
-        getBackPanelIndex: function() {
-          return Crave.dishDisplayPanel.items.indexOf(dishPanel);
-        }
-      }),
-      data: {user: {}},
-      listeners: {  
-        afterrender: function(c){
-          c.el.on('click', function(){
-            Crave.dishDisplayPanel.setup_back_stack(dishPanel);
-            Crave.dishDisplayPanel.setActiveItem(reviewsPanel, {type: 'slide', direction: 'left'});
-          });
-        }
-      }
-    },{
-      xtype: 'panel', 
-      cls: 'framePanel',
-      width: '100%',
-      dockedItems: [{
-        dock : 'top',
-        xtype: 'toolbar',
-        cls: 'title clickable',
-        style: 'margin: 0;',
-        title: 'Address'
-      }],
+      bodyStyle: "padding: 0 .5em 0 .5em;",
       items: [{
-        id: 'dishMap',
-        xtype: 'map',
-        useCurrentLocation: false,
-        height: 125,
+        xtype: 'panel',
+        cls: 'framePanel',
         width: '100%',
-        mapOptions : {
-          center : new google.maps.LatLng(37.774518,-122.420101),  //SF
-          //not really centering here, just putting it in top right corner
-          zoom : 17,
-          mapTypeId : google.maps.MapTypeId.ROADMAP,
-          disableDefaultUI: true,
-          navigationControl: false,
-          draggable: false
+        id: 'dishLabelsPanel',
+        dockedItems: [{
+          dock : 'top',
+          xtype: 'toolbar',
+          cls: 'title clickable',
+          title: 'Dish Labels'
+        }],
+        tpl: '<div class="dishLabels">{[values.labels.join(", ")]}</div>',
+        data: {labels: []},
+        listeners: {
+          afterrender: function(c){
+            c.el.on('click', function(){
+              if (!Crave.isLoggedIn()) {
+                Crave.viewport.setActiveItem(Crave.myProfilePanel);
+                return;
+              }
+              Crave.dishDisplayPanel.setup_back_stack(dishPanel);
+              labelsPanel.set_menu_item(Crave.dishDisplayPanel.current_menu_item);
+              Crave.dishDisplayPanel.setActiveItem(labelsPanel, {type: 'slide', direction: 'left'});
+            });
+          }
         }
       },{
-        xtype: 'panel', 
-        id: 'dishAddress', 
-        tpl: '<div class="dishAddress">{street_address}<br/>{city}, {state} {zip}</div>',
+        xtype: 'panel',
+        cls: 'framePanel',
+        width: '100%',
+        id: 'dishDescriptionPanel',
+        dockedItems: [{
+          dock : 'top',
+          xtype: 'toolbar',
+          cls: 'title',
+          title: 'Description'
+        }],
+        tpl: '<div class="dishDescription">{description}</div>',
         data: {}
-      }],
-      listeners: {  
-        afterrender: function(c){
-          c.el.on('click', function(){
-            var mi = Crave.dishDisplayPanel.current_menu_item;
-            window.open(Crave.restaurant_map_url(mi.restaurant));
-          });
+      },{
+        xtype: 'panel',
+        cls: 'framePanel',
+        width: '100%',
+        id: 'dishRatingPanel',
+        dockedItems: [{
+          dock : 'top',
+          xtype: 'toolbar',
+          cls: 'title clickable',
+          title: 'Reviews'
+        }],
+        tpl: new Ext.XTemplate.from('dishRatingTemplate', {
+          getBackPanelIndex: function() {
+            return Crave.dishDisplayPanel.items.indexOf(dishPanel);
+          }
+        }),
+        data: {user: {}},
+        listeners: {
+          afterrender: function(c){
+            c.el.on('click', function(comp, target){
+              if (target instanceof HTMLAnchorElement) {
+                return; //they clicked on the link to a person so dont do anything
+              }
+              Crave.dishDisplayPanel.setup_back_stack(dishPanel);
+              Crave.dishDisplayPanel.setActiveItem(reviewsPanel, {type: 'slide', direction: 'left'});
+            });
+          }
         }
-      }
+      },{
+        xtype: 'panel',
+        cls: 'framePanel',
+        width: '100%',
+        dockedItems: [{
+          dock : 'top',
+          xtype: 'toolbar',
+          cls: 'title clickable',
+          style: 'margin: 0;',
+          title: 'Address'
+        }],
+        items: [{
+          id: 'dishMap',
+          xtype: 'map',
+          useCurrentLocation: false,
+          height: 125,
+          width: '100%',
+          mapOptions : {
+            center : new google.maps.LatLng(37.774518,-122.420101),  //SF
+            //not really centering here, just putting it in top right corner
+            zoom : 17,
+            mapTypeId : google.maps.MapTypeId.ROADMAP,
+            disableDefaultUI: true,
+            navigationControl: false,
+            draggable: false
+          }
+        },{
+          xtype: 'panel',
+          id: 'dishAddress',
+          tpl: '<div class="dishAddress">{street_address}<br/>{city}, {state} {zip}</div>',
+          data: {}
+        }],
+        listeners: {
+          afterrender: function(c){
+            c.el.on('click', function(){
+              var mi = Crave.dishDisplayPanel.current_menu_item;
+              window.open(Crave.restaurant_map_url(mi.restaurant));
+            });
+          }
+        }
+      }]
     }]
   });
   
@@ -446,23 +487,18 @@ Crave.buildDishDisplayPanel = function() {
           items.push(new Ext.Panel({
             cls: 'dishCarouselImage', 
             html: '<img onload="Crave.dishImageLoaded(this);" src="http://src.sencha.io/' + photo.photo + '">',
-            listeners: {
-              render: function(c) {
-                c.el.on('click', function() {
-                  Crave.show_image('http://src.sencha.io/' +photo.photo, {type: 'slide', direction: 'down'});
-                });
-              }
-            }
+            
           }));
         });
         imageCarousel.removeAll();
         if (items.length > 0) {
+          imageCarousel.setHeight(100);
           imageCarousel.add(items);
           imageCarousel.show();
-          imageCarousel.doLayout();
         } else {
           imageCarousel.hide();
         }
+        imageCarousel.doLayout();
       }
       //Dish header is easy, so is description
       Ext.getCmp('dishDetailHeader').update(menu_item);
@@ -479,9 +515,12 @@ Crave.buildDishDisplayPanel = function() {
       var drp = Ext.getCmp('dishRatingPanel');
       if (menu_item.menu_item_ratings.length > 0) {
         drp.show();
-        drp.update(menu_item.menu_item_ratings[0]);
         drp.getEl().down('.x-toolbar-title').dom.innerHTML = 'Reviews <span class="count">(' + menu_item.menu_item_ratings.length + ")</span>";
-        drp.doComponentLayout();
+        
+        drp.update({user:{}});
+        drp.doLayout();
+        drp.update(menu_item.menu_item_ratings[0]);
+        dishPanel.doComponentLayout();
         
         //Sencha sucks and they modify this in place to become an array of records instead of an array of {}s
         //I hate them
@@ -540,6 +579,7 @@ Crave.buildDishDisplayPanel = function() {
     },
     toggle_saved: function() {
       var savedFlag = this.el.down(".savedFlag");
+      TouchBS.wait("Please wait...");
       if (this.current_menu_item.user_saved_menu_item_id) {
         Ext.Ajax.request({
           method: "DELETE",
@@ -547,6 +587,7 @@ Crave.buildDishDisplayPanel = function() {
           failure: Crave.handle_failure,
           scope: this,
           success: function(response, options) {
+            TouchBS.stop_waiting();
             savedFlag.dom.innerHTML = "Save";
             savedFlag.removeCls('saved');
             this.current_menu_item.saved_by_current_user = false;
@@ -565,6 +606,7 @@ Crave.buildDishDisplayPanel = function() {
           scope: this,
           failure: Crave.handle_failure,
           success: function(response, options) {
+            TouchBS.stop_waiting();
             var saved_menu_item = Ext.decode(response.responseText).user_saved_menu_item;
             savedFlag.dom.innerHTML = "Saved";
             savedFlag.addCls('saved');
@@ -579,7 +621,13 @@ Crave.buildDishDisplayPanel = function() {
 
 Crave.dishImageLoaded = function(img) {
   var y = img.height / 2;
-  img.style["-webkit-transform"] = "translate(0, -" + y + "px)";
+  //img.style["-webkit-transform"] = "translate(0, -" + y + "px)";
+
+  img.style.webkitTransition = "";
+  img.style.webkitTransform = "translate(0, -" + y + "px)";
+  setTimeout(function() {
+    img.style.webkitTransition = "-webkit-transform .3s ease-in";
+  }, 100);
 };
 
 //obj is something with a photo, so far either a menu item or a user

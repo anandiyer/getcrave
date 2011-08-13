@@ -9,6 +9,7 @@ Ext.setup({
     if(window.location.toString().indexOf("local")>-1) {
       //urlPrefix = '/wg/proxy.php?url=http://blooming-water-228.heroku.com';
       urlPrefix = '/cravecomp';
+      Crave.spoof_location = true;
       local = true;
     }
 
@@ -24,7 +25,7 @@ Ext.setup({
       }
     }, this);
     
-    updateNearby = function() {
+    var updateNearby = function() {
       Crave.updateLocation(function(coords) {
         dishStore.proxy.extraParams = {
           "lat": coords.latitude,
@@ -32,7 +33,9 @@ Ext.setup({
           distance: "yes",
           limit: 25
         }
-        dishStore.load();
+        dishStore.load(function() {
+          dishList.refresh();
+        });
         
         places.proxy.extraParams = {
           "lat": coords.latitude,
@@ -43,23 +46,25 @@ Ext.setup({
 
       });
     }
+
     updateNearby();
     Crave.activityStore.load();
+    
 //    if (Crave.phonegap) { //I guess they don't want this afterall?
 //      document.addEventListener('resume', updateNearby, false);
 //    }
 //
     var placesList = new Ext.List({
       itemTpl: restaurantTemplate,
-      itemSelector: '.aplace',
+      itemSelector: '.x-list-item',
       singleSelect: true,
       grouped: false,
       store: places,
       scroll: 'vertical',
-      cls: 'magic-scroll',
+      cls: 'magic-scroll highlightPressed',
       hideOnMaskTap: false,
       clearSectionOnDeactivate:true,
-      plugins: [new Ext.plugins.ListPagingPlugin(), new Ext.plugins.PullRefreshPlugin({
+      plugins: [new TouchBS.BetterPagingPlugin(), new Ext.plugins.PullRefreshPlugin({
         refreshFn: function(cb, scope) {
           Crave.updateLocation(function(coords) {
             places.proxy.extraParams.lat = coords.latitude;
@@ -82,17 +87,17 @@ Ext.setup({
 
     var dishList = new Ext.List({
       itemTpl: Crave.dishTemplate,
-      itemSelector: '.adish',
+      itemSelector: '.x-list-item',
       singleSelect: true,
       grouped: true,
       indexBar: false,
       store: dishStore,
       id:'dishesNearbyList',
-      cls: 'magic-scroll',
+      cls: 'magic-scroll highlightPressed',
       scroll:'vertical',
       hideOnMaskTap: false,
       clearSectionOnDeactivate:true,
-      plugins: [new Ext.plugins.ListPagingPlugin(), new Ext.plugins.PullRefreshPlugin({
+      plugins: [new TouchBS.BetterPagingPlugin(), new Ext.plugins.PullRefreshPlugin({
         refreshFn: function(cb, scope) {
           Crave.updateLocation(function(coords) {
             dishStore.proxy.extraParams.lat = coords.latitude;
@@ -123,6 +128,7 @@ Ext.setup({
         id: 'searchBox',
         ui: 'search',
         placeHolder: 'Search for dish, restaurant or diet...',
+        autoCorrect: false,
         listeners: {
           change: function() {
             var searchValue = Ext.getCmp("searchBox").getValue();
@@ -143,11 +149,11 @@ Ext.setup({
             //get active button, do appropriate search, set card in searchPnl
             if(Ext.getCmp('placesButton').pressed) {
               Crave.viewport.setActiveItem(Crave.searchResultsPanel);
-              Crave.searchResultsPanel.setActiveItem(2);
+              Crave.searchResultsPanel.setActiveItem(1, false);
             }
             if(Ext.getCmp('dishesButton').pressed) {
               Crave.viewport.setActiveItem(Crave.searchResultsPanel);
-              Crave.searchResultsPanel.setActiveItem(1);
+              Crave.searchResultsPanel.setActiveItem(0, false);
             }
           }
         }
@@ -160,7 +166,7 @@ Ext.setup({
       items: [dishList,placesList,newRestaurant],
       layout: 'card',
       width:'100%',
-      activeItem: 0,
+      activeItem: 1,
       height:'100%',
       dockedItems: [{
         id: 'topPanel',
@@ -182,24 +188,26 @@ Ext.setup({
           xtype:'segmentedbutton',
           cls: 'filterButtons',
           items:[{
-            text:'Food',
-            id:'dishesButton',
-            pressed:true,
-            handler:function () {
-              Crave.nearbyPanel.setActiveItem(dishList);
-            },
-            ui:'round',
-            width:'100'
-          },{
             text:'Places',
             id:'placesButton',
-            pressed:false,
+            cls: 'placesButton',
+            pressed: true,
             handler:function () {
               Crave.nearbyPanel.setActiveItem(placesList);
             },
             ui:'round',
             width:'100'
-          }]
+          },{
+            text:'Food',
+            id:'dishesButton',
+            cls: 'dishesButton',
+            pressed: false,
+            handler:function () {
+              Crave.nearbyPanel.setActiveItem(dishList);
+            },
+            ui:'round',
+            width:'100'
+          },]
         },{
           xtype:'button',
           iconCls:'filtersButton',
@@ -232,12 +240,12 @@ Ext.setup({
         placePnl, Crave.buildNewDishPanel(), Crave.buildRateDishPanel(),
         Crave.buildDishDisplayPanel(), Crave.buildSettingsPanel(),
         Crave.otherProfilePanel, Crave.buildSearchResultsPanel()],
-      cardSwitchAnimation: 'slide',
       direction:'horizontal',
+      cardSwitchAnimation: 'slide',
       dockedItems: [new Ext.TabBar({
         dock: 'bottom',
         //xtype: 'toolbar',
-        cardSwitchAnimation: 'slide',
+        cardSwitchAnimation: false,
         id: 'mainTabbar',
         ui: 'dark',
         layout: {
@@ -264,7 +272,10 @@ Ext.setup({
           change: function(tabbar, tab, card) {
             Crave.back_stack = []; //clear back stack when they explicitly click a tab
             if(tab.text === "Me") {
-              Crave.myProfilePanel.setActiveItem(1); //reset to profile page since we cleared the back stack.  this is ugly
+              if (Crave.isLoggedIn()) {
+                Crave.myProfilePanel.setActiveItem(1); //reset to profile page since we cleared the back stack.  this is ugly
+              }
+
             }
           }
         }
@@ -288,62 +299,59 @@ Ext.setup({
 });
 
 Crave.alreadyCheckedCity = false;
-
+Crave.latest_position = {};
+Crave.latestPositionText = function() {
+  var text = Crave.latest_position.city;
+  if (Crave.latest_position.state) {
+    text = text + ", " + Crave.latest_position.state;
+  }
+  return text;
+}
 Crave.updateLocation = function(callback) {
   var position_callback = function(coords) {
-    Crave.latest_position = coords;
-    Crave.checkSupportedCity(coords, function(supported, city) {
-      if (!supported && !Crave.alreadyCheckedCity) {
-        Crave.cityVotePanel.set_city(city);
-        Crave.real_viewport.setActiveItem(Crave.cityVotePanel);
-        return;
-//        coords = { //force sanfran
-//          latitude: 37.77494,
-//          longitude: -122.41958
-//        }
-//
-//        if (!Crave.alreadyCheckedCity) { //don't badger the nice people
-//          Crave.alreadyCheckedCity = true;
-//          Ext.Msg.show({
-//            title: "Not Here yet.",
-//            msg: "Sorry, we're not available in " + city + " yet.  Do you want to vote for Crave to come to " + city + "?",
-//            buttons: Ext.MessageBox.YESNO,
-//            fn: function(btn) {
-//              if (btn === 'yes') {
-//                Crave.cityVotePanel.set_city(city);
-//                Crave.real_viewport.setActiveItem(Crave.cityVotePanel);
-//              }
-//            }
-//          });
-//        }
-      }
+    //first store the position for later
+    Crave.latest_position.latitude = coords.latitude;
+    Crave.latest_position.longitude = coords.longitude;
+    
+    Crave.checkSupportedCity(coords, function(supported, city, state) {
+      Crave.latest_position.city = city;
+      Crave.latest_position.state = state;
 
-      //We have a good fix in San Fran, so never send them to the vote page
+      if (!supported && !Crave.alreadyCheckedCity) {
+        Crave.real_viewport.setActiveItem(Crave.cityVotePanel);
+      }
+      
       Crave.alreadyCheckedCity = true;
       if (callback) {
-        callback(coords);
+        callback(Crave.latest_position);
       }
-    });   
+    });
   };
+
+  if (Crave.spoof_location) {
+    position_callback({
+      latitude: 37.77494,
+      longitude: -122.41958
+    });
+    return;
+  }
   
   navigator.geolocation.getCurrentPosition(function(position) {
     var coords = position.coords;
-    //spoof san fran for testing
-//    if(window.location.toString().indexOf("local")>-1) {
-//      coords = {
-//        latitude: 37.77494,
-//        longitude: -122.41958
-//      };
-//    }
     position_callback(coords);
     
   }, function() {
     //failure handler
     console.log("no location available: using sanfran");
-    Ext.Msg.alert("No Location", "We couldn't find your location so we're showing results near San Fransisco.")
-    position_callback({
-      latitude: 37.77494,
-      longitude: -122.41958
-    });
+    if (Crave.latest_position.latitude) {
+      Ext.Msg.alert("No Location", "We couldn't find your location so we're using your last known position.")
+      position_callback(Crave.latest_position);
+    } else {
+      Ext.Msg.alert("No Location", "We couldn't find your location so we're showing results near San Fransisco.")
+      position_callback({
+        latitude: 37.77494,
+        longitude: -122.41958
+      });
+    }
   });
 }

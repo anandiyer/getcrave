@@ -1,6 +1,11 @@
 //this is a better way to build these panels because if everything uses this style the js include order doesn't matter
 Crave.buildSettingsPanel = function() {
   Crave.settingsPanel = new Ext.Panel({
+    layout: {
+      type: 'vbox',
+      align: 'stretch'
+    },
+    height: '100%',
     scroll: 'vertical',
     dockedItems: Crave.create_titlebar({
       items:[{
@@ -9,12 +14,16 @@ Crave.buildSettingsPanel = function() {
         handler: Crave.back_handler
       }]
     }),
+    bodyStyle: 'padding: 4px;',
     items: [{
-      layout: 'vbox',
       cls: 'framePanel',
+      layout: {
+        type: 'vbox',
+        align: 'stretch'
+      },
       items: [{
          cls: 'settingItem header',
-         html: '<img src="../images/facebook.png"><span class="title">Facebook</span>'
+         html: '<img src="../images/fb-settings-icon@2x.png"><div class="title">Facebook</div>'
       },{
         layout: 'hbox',
         cls: 'settingItem',
@@ -28,57 +37,91 @@ Crave.buildSettingsPanel = function() {
           id: 'facebookToggle',
           name: 'facebook_toggle',
           value : 0,
+          suppress_change: true,
           listeners: {
-            afterrender: function() {
-              this.actually_rendered = true;
-              //i hate ext, why would they fire the change event on the initial load
-            },
-            change: function(slider, thumb, newValue, oldValue) {
-              if (this.actually_rendered) {
-                alert('tell the server about this');
+            change: function(slider, thumb, newValue, oldValue)  {
+              console.log(newValue);
+              if (this.suppress_change) {
+                this.suppress_change = false;
+              } else {
+                Ext.Msg.alert("Server", "This needs to be implemented");
               }
             }
           }
         }]
       }]
     },{
-      layout: 'vbox',
+      layout: {
+        type: 'vbox',
+        align: 'stretch'
+      },
       cls: 'framePanel',
       items: [{
          cls: 'settingItem header',
-         html: '<img src="../images/foursquare.png"><span class="title">Foursquare</span>'
+         html: '<img src="../images/foursquare.png"><div class="title">Foursquare</div>'
       },{
-        layout: 'hbox',
-        cls: 'settingItem',
+        xtype: 'panel', 
+        id: 'foursquareContainer', 
+        height: 48,
+        layout: 'card', 
+        activeItem: 0,
         items: [{
-          flex: 1.5,
-          xtype: 'panel',
-          html: "Receive recommendations when I check in"
-        },{
-          flex: 1,
-          xtype: 'togglefield',
-          id: 'foursquareToggle',
-          name: 'foursquare_toggle',
-          value : 0,
+          cls: 'settingItem',
+          style: 'padding-top: 6px;',
+          html: "<div class='title'>Login with Foursquare<span class='chevrony'></span></div>",
           listeners: {
-            afterrender: function() {
-              this.actually_rendered = true;
-              //i hate ext, why would they fire the change event on the initial load
-            },
-            change: function(slider, thumb, newValue, oldValue) {
-              if (this.actually_rendered && newValue === 1) {
-                location.href="/auth/foursquare";
-              }
+            render: function(c) {
+              c.el.on('click', Crave.foursquareLogin);
             }
           }
+        },{
+          layout: 'hbox',
+          cls: 'settingItem',
+          items: [{
+            flex: 1.5,
+            xtype: 'panel',
+            html: "Receive recommendations when I check in"
+          },{
+            flex: 1,
+            xtype: 'togglefield',
+            id: 'foursquareToggle',
+            name: 'foursquare_toggle',
+            value : 0,
+            suppress_change: true,
+            listeners: {
+              change: function(slider, thumb, newValue, oldValue) {
+                if (this.suppress_change) {
+                  this.suppress_change = false;
+                } else {
+                  TouchBS.wait("Updating preferences");
+                  Ext.Ajax.request({
+                    url: '/users/' + Crave.currentUserId() + '.json',
+                    method: 'PUT',
+                    jsonData: {
+                      user: {
+                        get_foursquare_recommendations: newValue
+                      }
+                    },
+                    failure: TouchBS.handle_failure,
+                    success: function() {
+                      TouchBS.stop_waiting();
+                    }
+                  });
+                }
+              }
+            }
+          }]
         }]
       }]
     },{
-      layout: 'vbox',
+      layout: {
+        type: 'vbox',
+        align: 'stretch'
+      },
       cls: 'framePanel',
       items: [{
          cls: 'settingItem header',
-         html: "<span class='title'>Send Feedback</span><span class='chevrony'></span>",
+         html: "<div class='title'>Send Feedback</span><span class='chevrony'></div>",
          listeners: {
           afterrender: function(c){
             c.el.on('click', function(){
@@ -88,26 +131,21 @@ Crave.buildSettingsPanel = function() {
         }
       },{
          cls: 'settingItem header',
-         html: "<span class='title'>Terms Of Service</span><span class='chevrony'></span>"
+         html: "<div class='title'>Terms Of Service</span><span class='chevrony'></div>"
       },{
          cls: 'settingItem header last',
-         html: "<span class='title'>Version</span><span class='version'>1.0</span>"
+         html: "<div class='title'>Version</span><span class='version'>1.0</div>"
       }]
     },{
-      cls: 'framePanel',
-      items: [{
-        cls: 'settingItem header last',
-        bodyStyle: 'text-align: center',
-        html: "<span id='signoutText' class='title'>Sign Out</span>"
-      }],
-      listeners: {
-        afterrender: function(c){
-          c.el.on('click', function(){
-            Crave.sign_out();
-            Crave.back_stack = [];
-            Crave.viewport.setActiveItem(Crave.myProfilePanel);
-          });
-        }
+      xtype: 'button',
+      text: "Sign out",
+      style: 'margin-top: .5em; background: white;',
+      height: 44,
+      width: '100%',
+      handler: function() {
+        Crave.sign_out();
+        Crave.back_stack = [];
+        Crave.viewport.setActiveItem(Crave.myProfilePanel);
       }
     }], 
     listeners: {
@@ -129,29 +167,42 @@ Crave.buildSettingsPanel = function() {
   });
   
   Crave.settingsPanel.set_user = function(user) {
-    var fbValue = 0;
-    var fsValue = 0;
+    var fbValue = false;
+    var fsValue = false;
 
     Ext.each(user.authorizations, function(auth) {
-      if (auth.provider === 'facebook')
-        fbValue = 1;
-      else if (auth.provider === 'foursquare')
-        fsValue = 1;
+      if (auth.provider === 'facebook') {
+        fbValue = true;
+      }
+      if (auth.provider === 'foursquare') {
+        fsValue = true;
+      }
     });
 
     var fbToggle = Ext.getCmp('facebookToggle');
     var fsToggle = Ext.getCmp('foursquareToggle');
+    
     if (fbToggle.rendered) {
+      fbToggle.suppress_change = true;
       fbToggle.setValue(fbValue);
-      fsToggle.setValue(fsValue);
     } else {
       fbToggle.value = fbValue;
-      fsToggle.value = fsValue;
     }
     
+    if (fsToggle.rendered) {
+      fsToggle.suppress_change = true;
+      fsToggle.setValue(user.get_foursquare_recommendations);
+    } else {
+      fsToggle.value = user.get_foursquare_recommendations;
+    }
+    
+    if (fsValue) {
+      Ext.getCmp('foursquareContainer').setActiveItem(fsValue ? 1 : 0, false)
+    }
+      
+
     Crave.settingsPanel.user_loaded = true;
   }
-  
   return Crave.settingsPanel;
 }
 

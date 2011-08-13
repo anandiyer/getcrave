@@ -34,6 +34,7 @@ Crave.buildLabelListPanel = function(title) {
   var list = new Ext.List({
       scroll: false,
       loadingText: "Loading",
+      cls: 'labelList',
       itemTpl : '<span class="labelname">{menu_label}</span>',
       grouped : false,
       multiSelect: true,
@@ -58,6 +59,9 @@ Crave.buildLabelListPanel = function(title) {
     items: list,
     getSelectedRecords: function() {
       return list.getSelectedRecords();
+    },
+    setSelectedRecords: function(records) {
+      return list.getSelectionModel().select(records, false, true);
     },
     get_filters: function() {
       var filters = list.getSelectedRecords();
@@ -84,6 +88,7 @@ Crave.buildAddLabelPanel = function(config) {
   var labelsPanel = new Ext.Panel({
     width: '100%',
     scroll: 'vertical',
+    bodyStyle: 'padding: 0 .5em 0 .5em;',
     dockedItems: Crave.create_titlebar({
       title: "Add a Label",
       items: [{

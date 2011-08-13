@@ -1,5 +1,6 @@
 Crave.show_user_profile = function(user_id) {
   Crave.viewport.setActiveItem(Crave.otherProfilePanel);
+  Crave.otherProfilePanel.setActiveItem(1, false);
   Crave.otherProfilePanel.load_user_data(user_id);
 };
 
@@ -56,6 +57,9 @@ Crave.magic_scroll_handler = function(comp,target,options) {
     return;
   }
   var magic_scrollers = this.ownerCt.el.query('.magic-scroll');
+  if (this.ownerCt.el.hasCls('magic-scroll')) {
+    magic_scrollers.push(this.ownerCt.el);
+  }
   Ext.each(magic_scrollers, function(magic) {
     if (magic) {
       var panel = Ext.getCmp(magic.getAttribute('id'));
@@ -68,7 +72,8 @@ Crave.magic_scroll_handler = function(comp,target,options) {
 //config.title is the title, or it will be the logo
 //config.items is any buttons you want (back button, etc)
 Crave.create_titlebar = function(config) {
-  var title = config.title || '<img class="cravelogo" src="../images/crave-logo-horizontal-white.png">';
+  var default_title = '<img class="cravelogo" src="../images/crave-logo-horizontal-white@2x.png">';
+  var title = config.title || default_title;
   return {
     dock:'top',
     xtype:'toolbar',
@@ -86,7 +91,7 @@ Crave.create_titlebar = function(config) {
       }
     },
     set_title: function(title) {
-       var theTitle = title || '<img class="cravelogo" src="../images/crave-logo-horizontal-white.png">';
+       var theTitle = title || default_title;
        this.setTitle(theTitle);
     }
   }
