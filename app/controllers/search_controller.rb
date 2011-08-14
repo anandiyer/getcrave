@@ -9,6 +9,11 @@ class SearchController < ApplicationController
 # Right now, we cannot really fine-tune by distance, so we're ignoring 
 # the 'within' query string parameter
 
+    if (params[:lat] && params[:long])
+      @origin = [params[:lat].to_f, params[:long].to_f]
+    end
+
+
     if (params[:q] && !params[:q].empty?)
       
       q = params[:q]
@@ -33,10 +38,14 @@ class SearchController < ApplicationController
          
         @results = @search.results
 
+        if (@origin)
+          @results.sort_by_distance_from(@origin)
+        end
+
         respond_to do |format|
           format.html
-          format.xml  { render :xml => @results.to_xml }
-          format.json  { render :json => @results.to_json }
+          format.xml  { render :xml => @results.to_xml(:methods => :distance) }
+          format.json  { render :json => @results.to_json(:methods => :distance) }
           format.js  { render :partial => partial_2_show}
         end
         
@@ -52,11 +61,14 @@ class SearchController < ApplicationController
         end
             
         @results = @search.results
+        if (@origin)
+          @results.sort_by_distance_from(@origin)
+        end
 
         respond_to do |format|
           format.html
-          format.xml  { render :xml => @results.to_xml(:include =>  [:restaurant, :menu_item_avg_rating_count, :menu_item_photos]) }
-          format.json  { render :json => @results.to_json(:include =>  [:restaurant, :menu_item_avg_rating_count, :menu_item_photos]) }
+          format.xml  { render :xml => @results.to_xml(:methods => :distance, :include =>  [:restaurant, :menu_item_avg_rating_count, :menu_item_photos]) }
+          format.json  { render :json => @results.to_json(:methods => :distance, :include =>  [:restaurant, :menu_item_avg_rating_count, :menu_item_photos]) }
           format.js  { render :partial => partial_2_show}
         end
         
