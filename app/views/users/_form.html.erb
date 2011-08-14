@@ -20,11 +20,25 @@
     <%= f.text_field :telephone %> <br />
     <%= f.label :bio %>
     <%= f.text_field :bio %> <br />
+
+
+	<% if Authorization.where(:user_id => @user.id, :provider => 'facebook').exists? %>
+		<%= f.label :auto_post_to_facebook %>
+		<%= f.check_box :auto_post_to_facebook %> <br />
+	<% end %>
+	
+	<% if Authorization.where(:user_id => @user.id, :provider => 'twitter').exists? %>
+		<%= f.label :auto_post_to_twitter %>
+		<%= f.check_box :auto_post_to_twitter %> <br />
+	<% end %>
+	
 	<% if !Authorization.where(:user_id => @user.id, :provider => 'foursquare').exists? %>
 		<a href="/auth/foursquare"><img src="/images/signinwith-foursquare.png" /></a>
 	<% else %>
 		<%= f.label :get_foursquare_recommendations %>
     	<%= f.check_box :get_foursquare_recommendations %> <br />
+		<%= f.label :auto_post_to_foursquare %>
+    	<%= f.check_box :auto_post_to_foursquare %> <br />
 	<% end %>
   </div>
 

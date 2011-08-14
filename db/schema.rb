@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110809040424) do
+ActiveRecord::Schema.define(:version => 20110814224612) do
 
   create_table "alpha_testers", :force => true do |t|
     t.integer  "facebook_id", :limit => 8
@@ -155,16 +155,16 @@ ActiveRecord::Schema.define(:version => 20110809040424) do
     t.string   "cross_street"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "latitude_longitude"
+    t.point    "latitude_longitude",  :limit => nil
     t.float    "latitude"
     t.float    "longitude"
-    t.text     "geom"
+    t.point    "geom",                :limit => nil, :srid => 32661
     t.string   "twitter"
     t.integer  "telephone",           :limit => 8
     t.string   "foursquare_venue_id"
   end
 
-  add_index "restaurants", ["latitude_longitude"], :name => "index_restaurants_on_latitude_longitude"
+  add_index "restaurants", ["latitude_longitude"], :name => "index_restaurants_on_latitude_longitude", :spatial => true
 
   create_table "slugs", :force => true do |t|
     t.string   "name"
@@ -224,6 +224,9 @@ ActiveRecord::Schema.define(:version => 20110809040424) do
     t.string   "bio"
     t.boolean  "admin"
     t.boolean  "get_foursquare_recommendations", :default => false
+    t.boolean  "auto_post_to_facebook",          :default => false
+    t.boolean  "auto_post_to_twitter",           :default => false
+    t.boolean  "auto_post_to_foursquare",        :default => false
   end
 
 end

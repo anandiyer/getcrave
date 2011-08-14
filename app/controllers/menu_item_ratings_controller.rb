@@ -158,13 +158,17 @@ class MenuItemRatingsController < ApplicationController
       respond_to { |format|
         if @menu_item_rating.save
           
-          if params[:facebook] && params[:facebook][:boolean] == "1"
+          if (params[:facebook] == "yes")
             send_to_fb_wall
           end
           
-          if params[:twitter] && params[:twitter][:boolean] == "1"
+          if (params[:twitter] == "yes")
             send_to_twitter
           end
+
+#          if (params[:foursquare] == "yes")
+#           send_to_foursquare
+#         end
           
           format.html { redirect_to(@menu_item_rating, :notice => 'Menu item rating was successfully created.') }
           format.xml { render :xml => @menu_item_rating, :status => :created, :location => @menu_item_rating }
