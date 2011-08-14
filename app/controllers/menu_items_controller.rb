@@ -9,8 +9,13 @@ module Geokit
   module Mappable
     def to_lat_lng
       return self if instance_of?(Geokit::LatLng) || instance_of?(Geokit::GeoLoc)
-      return LatLng.new(self.restaurant.send(self.restaurant.class.lat_column_name),
-        self.restaurant.send(self.restaurant.class.lng_column_name)) if self.class.respond_to?(:acts_as_mappable)
+      if (self.class.name == 'Restaurant')
+        return LatLng.new(self.send(self.class.lat_column_name),
+          self.send(self.class.lng_column_name)) if self.class.respond_to?(:acts_as_mappable)
+      else
+        return LatLng.new(self.restaurant.send(self.restaurant.class.lat_column_name),
+          self.restaurant.send(self.restaurant.class.lng_column_name)) if self.class.respond_to?(:acts_as_mappable)
+      end
       nil
     end
   end 
