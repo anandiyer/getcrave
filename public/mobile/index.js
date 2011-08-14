@@ -141,7 +141,9 @@ Ext.setup({
               return;
             }
             Crave.searchResultsPanel.set_search_params({
-              q: searchValue
+              q: searchValue,
+			  lat: Crave.latest_position.latitude,
+	          "long": Crave.latest_position.longitude
             });
             Crave.back_stack.push({
               panel: Crave.nearbyPanel
