@@ -86,7 +86,7 @@
               = check_box_tag("facebook","yes", @auth.user.auto_post_to_facebook)
           - if Authorization.where(:user_id => user_id, :provider => 'twitter').exists?
             #inline_twitter
-              = check_box("twitter","yes", @auth.user.auto_post_to_twitter)
+              = check_box_tag("twitter","yes", @auth.user.auto_post_to_twitter)
         =f.hidden_field :rating
         =f.hidden_field :menu_item_id, :value =>@menu_item.id
         .star_gray{:id => @menu_item.id, :data =>{:model => "user_menu_item_ratings"}} &nbsp;
