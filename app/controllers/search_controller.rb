@@ -38,10 +38,6 @@ class SearchController < ApplicationController
          
         @results = @search.results
 
-        if (@origin)
-          @results.sort_by_distance_from(@origin)
-        end
-
         respond_to do |format|
           format.html
           format.xml  { render :xml => @results.to_xml(:methods => :distance) }
