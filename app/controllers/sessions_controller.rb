@@ -26,8 +26,6 @@ class SessionsController < ApplicationController
         # This is for the mobile use case - we have to get the uid first
         # before we associate the 4s auth with that user acccount
         current_user = User.find_by_id(session[:user_id].to_i)
-        p "HERE"
-        p current_user
         
         # Let's save this user's phone number if available
         current_user.telephone = @omniauth['user_info']['phone'] 
@@ -54,14 +52,14 @@ class SessionsController < ApplicationController
       rescue NoMethodError
         redirect_to root_path
       end
-
-      if (@auth.token.blank? || @auth.secret.blank?)
-        a_find = Authorization.find_from_hash(@omniauth)
-        a_find.token = token
-        a_find.secret = secret
-        a_find.save
-      end    
     end
+
+    if (@auth.token.blank? || @auth.secret.blank?)
+      a_find = Authorization.find_from_hash(@omniauth)
+      a_find.token = token
+      a_find.secret = secret
+      a_find.save
+    end    
     
     #Save last_logged_in time
     self.current_user.last_logged_in = Time.now

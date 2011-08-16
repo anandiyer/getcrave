@@ -19,6 +19,8 @@ class Authorization < ActiveRecord::Base
     elsif (hash['provider'] == 'twitter')
       p user ||= User.create_from_hash_twitter!(hash)
       secret = hash['credentials']['secret']
+    elsif (hash['provider'] == 'foursquare')
+      secret = hash['credentials']['secret']
     end
 
     auth = Authorization.create(:user => user, 

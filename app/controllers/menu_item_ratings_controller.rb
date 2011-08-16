@@ -145,6 +145,38 @@ class MenuItemRatingsController < ApplicationController
           :name => name,
           :description => desc)
   end
+  
+  def send_to_foursquare
+    auth = Authorization.find(:first, 
+    :conditions => {:user_id => current_user.id, :provider => 'foursquare'})
+    
+    if (!auth || auth.token.empty?)
+      return
+    end
+    
+    menu_item_id = params[:menu_item_rating][:menu_item_id]
+    menu_item = MenuItem.find_by_id(menu_item_id)
+    
+    foursquare_venue_id = menu_item.restaurant.foursquare_venue_id
+    
+    if (foursquare_venue_id.blank?)
+      return
+    end
+    
+    menu_item_friendly_id = menu_item.friendly_id
+    name = menu_item.name
+    
+    review = "I craved the " + name + ": " + params[:menu_item_rating][:review]
+    
+    menu_item_rating_id = @menu_item_rating.id.to_s
+    link = "http://getcrave.com/items/"+menu_item_friendly_id+"#"+menu_item_rating_id
+    
+    oauth = Foursquare::OAuth.new(FS_APP_ID, FS_APP_SECRET)
+    oauth.authorize_from_access(auth.token, auth.secret)
+    foursquare = Foursquare::Base.new(oauth)
+    
+    foursquare.addtip :vid => foursquare_venue_id, :tip => review, :url => link
+  end
 
   # POST /menu_item_ratings
   # POST /menu_item_ratings.xml
@@ -166,9 +198,9 @@ class MenuItemRatingsController < ApplicationController
             send_to_twitter
           end
 
-#          if (params[:foursquare] == "yes")
-#           send_to_foursquare
-#         end
+          if (params[:foursquare] == "yes")
+           send_to_foursquare
+         end
           
           format.html { redirect_to(@menu_item_rating, :notice => 'Menu item rating was successfully created.') }
           format.xml { render :xml => @menu_item_rating, :status => :created, :location => @menu_item_rating }

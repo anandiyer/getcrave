@@ -932,6 +932,14 @@ body.two-col.bp{
                                 background: url("/images/sprites/icon-sprite.png") no-repeat 20px -1058px;
                                 /*padding: 0 10px 3px 16px;*/
                             }
+                           #inline_foursquare{
+                                @include inline-block;
+                                width: 40px;
+                                height: 21px;
+                                right: 5px;
+                                background: url("/images/sprites/icon-sprite.png") no-repeat 20px -1315px;
+                                /*padding: 0 10px 3px 16px;*/
+                            }
                         }
 
 
