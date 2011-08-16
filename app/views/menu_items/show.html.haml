@@ -87,7 +87,7 @@
           - if Authorization.where(:user_id => user_id, :provider => 'twitter').exists?
             #inline_twitter
               = check_box_tag("twitter","yes", @auth.user.auto_post_to_twitter)
-          - if Authorization.where(:user_id => user_id, :provider => 'twitter').exists?
+          - if Authorization.where(:user_id => user_id, :provider => 'foursquare').exists?
             #inline_foursquare
               = check_box_tag("foursquare","yes", @auth.user.auto_post_to_foursquare)
         =f.hidden_field :rating

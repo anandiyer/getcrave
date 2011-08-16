@@ -148,7 +148,7 @@ class MenuItemRatingsController < ApplicationController
   
   def send_to_foursquare
     auth = Authorization.find(:first, 
-    :conditions => {:user_id => current_user.id, :provider => 'foursquare'})
+      :conditions => {:user_id => current_user.id, :provider => 'foursquare'})
     
     if (!auth || auth.token.empty?)
       return
