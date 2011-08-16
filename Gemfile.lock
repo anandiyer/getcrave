@@ -53,6 +53,7 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
+    crack (0.1.8)
     cucumber (1.0.2)
       builder (>= 2.1.2)
       diff-lcs (>= 1.1.2)
@@ -83,6 +84,10 @@ GEM
       httpclient (>= 2.2.0.2)
       rack-oauth2 (>= 0.8.0)
     ffi (1.0.9)
+    foursquare (0.3.4)
+      hashie (>= 0.1.8)
+      httparty (>= 0.4.3)
+      oauth (>= 0.3.5)
     friendly_id (3.2.1.1)
       babosa (~> 0.3.0)
     fssm (0.2.7)
@@ -98,6 +103,8 @@ GEM
       railties (~> 3.0)
     hashie (1.0.0)
     hpricot (0.8.4)
+    httparty (0.7.8)
+      crack (= 0.1.8)
     httpclient (2.2.1)
     i18n (0.5.0)
     jquery-rails (1.0.12)
@@ -269,6 +276,7 @@ DEPENDENCIES
   erb2haml
   faraday
   fb_graph
+  foursquare
   friendly_id (~> 3.2.1)
   geokit
   gritter
