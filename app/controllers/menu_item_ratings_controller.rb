@@ -173,7 +173,7 @@ class MenuItemRatingsController < ApplicationController
     
     client = Foursquare2::Client.new(:oauth_token => auth.token)
 
-    client.addtip :venueId => foursquare_venue_id, :text => review, :url => link
+    client.add_tip(:venueId => foursquare_venue_id, :text => review, :url => link)
   end
 
   # POST /menu_item_ratings
