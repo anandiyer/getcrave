@@ -22,7 +22,7 @@ gem 'will_paginate', "~> 3.0.pre2"
 gem 'kaminari'
 gem 'omniauth', ">= 0.1.6"
 gem 'twitter'
-
+gem 'foursquare'
 gem "fb_graph" #for fb share
 
 group :development, :test do
