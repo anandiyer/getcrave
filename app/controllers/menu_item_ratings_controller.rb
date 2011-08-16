@@ -171,11 +171,9 @@ class MenuItemRatingsController < ApplicationController
     menu_item_rating_id = @menu_item_rating.id.to_s
     link = "http://getcrave.com/items/"+menu_item_friendly_id+"#"+menu_item_rating_id
     
-    oauth = Foursquare::OAuth.new(FS_APP_ID, FS_APP_SECRET)
-    oauth.authorize_from_access(auth.token, auth.secret)
-    foursquare = Foursquare::Base.new(oauth)
-    
-    foursquare.addtip :vid => foursquare_venue_id, :tip => review, :url => link
+    client = Foursquare2::Client.new(:oauth_token => auth.token)
+
+    foursquare.addtip :venueId => foursquare_venue_id, :text => review, :url => link
   end
 
   # POST /menu_item_ratings
