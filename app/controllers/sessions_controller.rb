@@ -4,6 +4,9 @@ class SessionsController < ApplicationController
     token =  @omniauth['credentials']['token']
     secret = @omniauth['credentials']['secret']
 
+    p "DEBUGGING"
+    p @omniauth
+
     if !token
       render :status => 404 and return #for bots
     end
