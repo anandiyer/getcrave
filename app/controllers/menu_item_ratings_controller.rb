@@ -25,7 +25,7 @@ class MenuItemRatingsController < ApplicationController
       @menu_item_ratings = @user.menu_item_ratings.paginate(:all,
         :page => params[:page],
         :per_page => ITEMS_PER_PAGE,
-        :order => 'created_at DESC')
+        :order => 'created_at ASC')
     else
       @menu_item_ratings = MenuItemRating.all
     end
