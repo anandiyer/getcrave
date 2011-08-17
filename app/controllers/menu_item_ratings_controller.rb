@@ -27,7 +27,7 @@ class MenuItemRatingsController < ApplicationController
         :per_page => ITEMS_PER_PAGE,
         :order => 'created_at DESC')
     else
-      @menu_item_ratings = MenuItemRating.all
+      @menu_item_ratings = MenuItemRating.find(:all, :order => 'created_at DESC')
     end
 
     respond_to do |format|
