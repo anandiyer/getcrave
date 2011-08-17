@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="stylesheets/apple.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/custom.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/iphone_toggle_button.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/iphone_alerts.css" type="text/css" />
     <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png"/>
     <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-72.png" sizes="72x72"/>
     <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-114.png" sizes="114x114"/>
@@ -26,9 +27,10 @@
     var Crave = {};
     </script>
 
-        <!-- Phone Gap includes (uncomment when builing in xcode) 
+        <!-- Phone Gap includes (uncomment when builing in xcode) -->
         <script type="text/javascript" charset="utf-8" src="phonegap-1.0.0.js"></script>
         <script type="text/javascript" charset="utf-8" src="ChildBrowser.js"></script>
+        <script type="text/javascript" charset="utf-8" src="SMSComposer.js"></script>
 
         <script type="text/javascript" charset="utf-8">
           function onBodyLoad()
@@ -90,13 +92,14 @@
       <div class="dishListinfo">
         <span class="dishname">{name}</span>
         <span class="restAddress">{street_address}<br>{city}</span>
-        <span class="distanceFigure">{[this.distDisplay(values.distance)]}</span>
+        <span class="distanceFigure">{[Crave.distDisplay(values.distance)]}</span>
       </div>
       <span class="chevrony"></span>
     </div>
 </tpl>
 </textarea>
 
+<!-- list of dishes on the restaurant detail page -->
 <textarea id="restDishTemplate" style="display:none">
     <tpl for=".">
         <div class="adish">
@@ -104,19 +107,21 @@
             <div class="dishListinfo">
                 <span class="dishname">{name}</span>
                 <span class="restaurantName">{rating_count}</span>
+                <span class=""description">{description}</span>
             </div>
             <span class="chevrony"></span>
        </div>
     </tpl>
 </textarea>
 
-<textarea id="reviewDishTemplate" style="display:none">
+<textarea id="dishSearchTemplate" style="display:none">
     <tpl for=".">
         <div class="adish">
             <img src="{[Crave.photo_url(values)]}" class="dishImg" style="height: 60px;">
             <div class="dishListinfo">
-                <span class="dishname">{name}</span>
-                <span class="restaurantName">@{restaurant.name}</span>
+              <span class="dishname">{name}</span>
+              <span class="restaurantName">@{restaurant.name}</span>
+              <span class="distanceFigure">{[Crave.ratingDisplay(values.rating)]}{[Crave.distDisplay(values.distance)]}</span>
             </div>
             <span class="chevrony"></span>
             </span>
@@ -203,7 +208,7 @@
       <img src="../images/no-image-place.png" class="dishImg" style="height: 60px;">
       <div class="dishListinfo">
         <span class="dishname">{name}</span>
-        <span class="distanceFigure">{[this.distDisplay(values.distance)]}</span>
+        <span class="distanceFigure">{[Crave.distDisplay(values.distance)]}</span>
       </div>
       <span class="chevrony"></span>
     </tpl>

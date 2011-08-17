@@ -24,6 +24,20 @@ Ext.setup({
         options.params.mobile = "true";
       }
     }, this);
+ 
+    //get user info in case we need their name, etc. 
+    if (Crave.isLoggedIn()) {
+      Ext.Ajax.request({
+        method: "GET",
+        url: '/users/' + Crave.currentUserId() + '.json',
+        params: {
+          current_user_id: Crave.currentUserId()
+        },
+        success: function(response, options) {
+          Crave.current_user = Ext.decode(response.responseText).user;
+        }
+      });
+    }
     
     var updateNearby = function() {
       Crave.updateLocation(function(coords) {
@@ -116,6 +130,35 @@ Ext.setup({
       Crave.back_stack.push({panel: Crave.nearbyPanel});
       Crave.show_menu_item(thisId);
     });
+    
+    var doSearch = function() {
+      var searchValue = Ext.getCmp("searchBox").getValue();
+      if (searchValue === "___setuid") {
+        localStorage.setItem('uid', 31);
+        Ext.Msg.alert("loged in", "way2go h4x0r");
+        return;
+      }
+      if (searchValue === "") {
+        return;
+      }
+      Crave.searchResultsPanel.set_search_params({
+        q: searchValue
+      });
+      Crave.back_stack.push({
+        panel: Crave.nearbyPanel
+      });
+      //get active button, do appropriate search, set card in searchPnl
+      if(Ext.getCmp('placesButton').pressed) {
+        Crave.viewport.setActiveItem(Crave.searchResultsPanel);
+        Crave.searchResultsPanel.setActiveItem(1, false);
+      }
+      if(Ext.getCmp('dishesButton').pressed) {
+        Crave.viewport.setActiveItem(Crave.searchResultsPanel);
+        Crave.searchResultsPanel.setActiveItem(0, false);
+      }
+      return false;
+    };
+    
 
     var searchForm = new Ext.form.FormPanel({ //Search form goes here
       cls: 'searchForm',
@@ -128,38 +171,11 @@ Ext.setup({
         id: 'searchBox',
         ui: 'search',
         placeHolder: 'Search for dish, restaurant or diet...',
-        autoCorrect: false,
-        listeners: {
-          change: function() {
-            var searchValue = Ext.getCmp("searchBox").getValue();
-            if (searchValue === "___setuid") {
-              localStorage.setItem('uid', 31);
-              Ext.Msg.alert("loged in", "way2go h4x0r");
-              return;
-            }
-            if (searchValue === "") {
-              return;
-            }
-            Crave.searchResultsPanel.set_search_params({
-              q: searchValue,
-			  lat: Crave.latest_position.latitude,
-	          "long": Crave.latest_position.longitude
-            });
-            Crave.back_stack.push({
-              panel: Crave.nearbyPanel
-            });
-            //get active button, do appropriate search, set card in searchPnl
-            if(Ext.getCmp('placesButton').pressed) {
-              Crave.viewport.setActiveItem(Crave.searchResultsPanel);
-              Crave.searchResultsPanel.setActiveItem(1, false);
-            }
-            if(Ext.getCmp('dishesButton').pressed) {
-              Crave.viewport.setActiveItem(Crave.searchResultsPanel);
-              Crave.searchResultsPanel.setActiveItem(0, false);
-            }
-          }
-        }
-      }]
+        autoCorrect: false
+      }],
+      listeners: {
+        beforesubmit: doSearch
+      }
     });
 
     //intentionally not using var to make this global
