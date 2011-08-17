@@ -169,7 +169,7 @@ class MenuItemRatingsController < ApplicationController
     menu_item_rating_id = @menu_item_rating.id.to_s
     link = "http://getcrave.com/items/"+menu_item_friendly_id+"#"+menu_item_rating_id
     
-    review = "Check out my crave of " + name + " - " + link
+    review = "Check out my crave of the " + name + " - " + link
     
     client = Foursquare2::Client.new(:oauth_token => auth.token,
       :ssl => { :verify => OpenSSL::SSL::VERIFY_PEER, :ca_file => '/usr/lib/ssl/certs/ca-certificates.crt' })
