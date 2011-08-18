@@ -1,7 +1,9 @@
 Crave.buildLoginPanel = function() {
   return new Ext.Panel({
+    layout: 'fit',
     html:'<div class="loginPanel"><img src="../images/dishes-profile-cold@2x.png"><div class="explanation">Rate & Save Dishes, Follow Foodies</div><a href="#" onclick="Crave.facebookLogin();" class="loginButton"></a></div>',
-    height: '100%'
+    height: '100%',
+    width: '100%'
   });
 }
 //mine is true for the "my profile" panel and false for the other people's one.
@@ -117,9 +119,8 @@ Crave.buildProfilePanel = function(mine) {
           }
         }
       },
-      plugins: [new TouchBS.BetterPagingPlugin(), new TouchBS.NoResultsPlugin({
-          title: "You haven't saved any items yet.",
-          message: "Save items that look delicious so that you can try them later."
+      plugins: [new Ext.plugins.PullRefreshPlugin({}), new TouchBS.BetterPagingPlugin(), new TouchBS.NoResultsPlugin({
+          title: "This user hasn't saved anything yet."
       })]
     });
   }
@@ -196,8 +197,8 @@ Crave.buildProfilePanel = function(mine) {
       }
     },
     plugins: [new TouchBS.BetterPagingPlugin(), new TouchBS.NoResultsPlugin({
-          title: "You don't have any followers yet.",
-          message: "Crave some dishes and follow others."
+          title: mine ? "You don't have any followers yet." : "This user isn't followed by anyone yet",
+          message: mine ? "Crave some dishes and follow others." : "You can be the first!"
       })]
   });
   
@@ -265,8 +266,8 @@ Crave.buildProfilePanel = function(mine) {
       }
     },
     plugins: [new TouchBS.BetterPagingPlugin(), new TouchBS.NoResultsPlugin({
-          title: "You aren't following anyone yet.",
-          message: "Follow other users on crave and discover amazing food!"
+          title: mine ? "You aren't following anyone yet." : "This user isn't following anytone yet",
+          message: mine ? "Follow other users on crave and discover amazing food!" : ""
       })]
   });
 
@@ -352,7 +353,7 @@ Crave.buildProfilePanel = function(mine) {
     listeners: {
       activate: function() {
         userDishList.refresh();  //herp derp
-        if (mine) {
+        if (mine && Crave.isLoggedIn()) {
           settingsButton.show();
         }
       }
@@ -404,8 +405,8 @@ Crave.buildProfilePanel = function(mine) {
       activate: function(p) {
         if (mine) {
           if (!Crave.isLoggedIn()){
-            p.setActiveItem(profileLoginPnl, false);
             settingsButton.hide();
+            p.setActiveItem(profileLoginPnl, false);
           } else { 
             //make sure the user data is loaded
             //this will do nothign on subsequest calls
@@ -415,7 +416,11 @@ Crave.buildProfilePanel = function(mine) {
 
         //proxy this event so that the settings button gets shown and hidden appropriately
         p.getActiveItem().fireEvent('activate');
+        p.getActiveItem().doComponentLayout();
       }
+    },
+    login_callback: function() {
+      this.load_user_data(Crave.currentUserId());
     },
     set_title: function(title) {
       profilePnl.dockedItems.get(0).set_title(title);
@@ -564,7 +569,7 @@ Crave.buildSavedPanel = function() {
         Crave.show_menu_item(dish_id);
       }
     },
-    plugins: [new TouchBS.BetterPagingPlugin()]
+    plugins: [new TouchBS.BetterPagingPlugin(), new Ext.plugins.PullRefreshPlugin({})]
   });
 
   var savedLoginPanel = Crave.buildLoginPanel();
@@ -579,11 +584,17 @@ Crave.buildSavedPanel = function() {
     listeners: {
       activate: function(p) {
         if (!Crave.isLoggedIn()) {
-          Crave.savedPanel.setActiveItem(savedLoginPanel);
+          Crave.savedPanel.setActiveItem(savedLoginPanel, false);
         } else {
-          Crave.savedPanel.setActiveItem(savedList);
+          Crave.savedPanel.setActiveItem(savedList, false);
         }
+        Crave.savedPanel.getActiveItem().doComponentLayout();
       }
+    },
+    login_callback: function() {
+      this.setActiveItem(savedList);
+      savedDishStore.proxy.url = "/users/" + Crave.currentUserId() + "/saved.json";
+      savedDishStore.load();
     },
     set_user: function(user) {
       savedDishStore.proxy.url = "/users/" + user.id + "/saved.json";
@@ -622,10 +633,12 @@ Crave.facebookLogin = function() {
       if (match) { 
          var uid = match[1];
          localStorage.setItem('uid', uid);
-         Crave.myProfilePanel.load_user_data(uid);
          
-         //TODO: go back to whatever called the login thing?
          client_browser.close();
+         var ai = Crave.viewport.getActiveItem();
+         
+         if (ai.login_callback)
+           ai.login_callback();
       }  
     };
     if(client_browser != null) {
@@ -657,6 +670,6 @@ Crave.foursquareLogin = function() {
       window.plugins.childBrowser.showWebPage("http://secure.getcrave.com/auth/foursquare?redirect_to=mobile&user_id=" + Crave.currentUserId());
     }
   } else {
-    location.href = "http://getcrave.com/auth/foursquare";
+    location.href = "http://secure.getcrave.com/auth/foursquare?redirect_to=mobile";
   }
 }

@@ -228,12 +228,12 @@ FORM.framePanel .x-form-field-container {
 }
 
 .framePanel .settingItem.header {
-  border-bottom: 1px solid #ccc;
+  border-top: none;
   padding: 12px 4px 4px 8px;
 }
 
-.framePanel .settingItem.header.last {
-  border-bottom: none;
+.framePanel .settingItem.header.borderTop {
+  border-top: 1px solid #ccc;
 }
 
 .framePanel .settingItem.header IMG {
@@ -256,7 +256,13 @@ FORM.framePanel .x-form-field-container {
 .framePanel .settingItem {
   padding: .5em;
   width: 100%;
+  border-top: 1px solid #ccc;
 }
+
+.framePanel .settingItem.first {
+  border-top: none;
+}
+
 
 .framePanel .settingItem .chevrony {
   margin-top: 0px;
@@ -634,7 +640,6 @@ input[type=search]::-webkit-search-results-decoration {
   padding: 1em;
   background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0, #F8F7F5), color-stop(1, #ECEBE7) );
   border-top: 1px solid white;
-  height: 45px;
 }
 
 .x-field input, .x-field textarea, .x-field select, .x-field .x-field-slider {
@@ -1027,17 +1032,70 @@ IMG.stars {
     -webkit-background-size: 200px 35px;
 }
 
-.rateDishPanel .x-panel, 
-.rateDishPanel .x-form-field-container, 
-.rateDishPanel .x-panel-body {
-  padding: 0;
-  margin: 0;
-  background: white;
+.rateDishPanel .x-panel.reviewSharePanel {
+  background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0%,#eee), color-stop(50%, #ddd), color-stop(51%, #ccc), color-stop(100%, #ddd) );
 }
+
+.rateDishPanel .x-panel.reviewSharePanel .x-panel, .rateDishPanel .x-panel.reviewSharePanel .x-panel-body {
+  background: transparent;
+}
+
+.rateDishPanel .x-panel.reviewSharePanel SPAN{
+  height: 41px;
+  color: #333;
+  font-weight: bold;
+  font-size: 14px;
+  padding-top: 8px;
+  padding-left: 2px;
+}
+
+.rateDishPanel .x-panel.reviewSharePanel .x-panel-body {
+  background: transparent;
+  padding: 4px;
+}
+
+.rateDishPanel .x-panel.reviewSharePanel .shareButton {
+  border-radius: 6px;
+  height: 100%;
+  margin-right: 4px;
+  padding: 0;
+  width: 51px;
+  border: none;
+  float: right !important;
+  z-index: 1000;
+  -webkit-background-size: 100% 100%;
+}
+
+.rateDishPanel FORM, .rateDishPanel FORM .x-panel-body {
+  background: white;
+  padding: 0;
+}
+
 .rateDishPanel .reviewField {
   width: 100%;
   border-radius: 0px;
-  height: 100px;
+}
+
+.shareButton.facebookShare {
+  background: url("../images/facebook-off@2x.png") no-repeat !important;
+}
+
+.shareButton.facebookShare.x-button-pressed {
+  background: url("../images/facebook-on@2x.png") no-repeat !important;
+}
+.shareButton.foursquareShare {
+  background: url("../images/foursquare-off@2x.png") no-repeat !important;
+}
+
+.shareButton.foursquareShare.x-button-pressed {
+  background: url("../images/foursquare-on@2x.png") no-repeat !important;
+}
+.shareButton.twitterShare {
+  background: url("../images/twitter-off@2x.png") no-repeat !important;
+}
+
+.shareButton.twitterShare.x-button-pressed {
+  background: url("../images/twitter-on@2x.png") no-repeat !important;
 }
 
 .ratingOf0 {
@@ -1237,7 +1295,7 @@ FORM.cityVoteForm {
   margin: 0;
 }
 
-FORM.cityVoteForm .x-button {
+.x-button.submitButton {
   margin-top: 8px;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,white), color-stop(1%,#6ccbbf), color-stop(50%,#5ebbb0), color-stop(51%,#54b3a8), color-stop(100%,#5cbaae));
   color: white;

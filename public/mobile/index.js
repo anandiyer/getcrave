@@ -54,6 +54,7 @@ Ext.setup({
         places.proxy.extraParams = {
           "lat": coords.latitude,
           "long": coords.longitude,
+          distance: 'yes',
           limit: 25
         }
         places.load();
@@ -159,20 +160,20 @@ Ext.setup({
       return false;
     };
     
-
+    var searchBox = new Ext.form.Search({
+      xtype: 'searchfield',
+      name: 'searchString',
+      inputType: 'search',
+      useClearIcon:true,
+      id: 'searchBox',
+      ui: 'search',
+      placeHolder: 'Search for a place',
+      autoCorrect: false
+    });
     var searchForm = new Ext.form.FormPanel({ //Search form goes here
       cls: 'searchForm',
       layout: 'auto',
-      items: [{
-        xtype: 'searchfield',
-        name: 'searchString',
-        inputType: 'search',
-        useClearIcon:true,
-        id: 'searchBox',
-        ui: 'search',
-        placeHolder: 'Search for dish, restaurant or diet...',
-        autoCorrect: false
-      }],
+      items: [searchBox],
       listeners: {
         beforesubmit: doSearch
       }
@@ -211,6 +212,7 @@ Ext.setup({
             cls: 'placesButton',
             pressed: true,
             handler:function () {
+              searchBox.setPlaceHolder("Search for a place");
               Crave.nearbyPanel.setActiveItem(placesList);
             },
             ui:'round',
@@ -221,6 +223,7 @@ Ext.setup({
             cls: 'dishesButton',
             pressed: false,
             handler:function () {
+              searchBox.setPlaceHolder("Search for a dish");
               Crave.nearbyPanel.setActiveItem(dishList);
             },
             ui:'round',
@@ -270,13 +273,13 @@ Ext.setup({
           pack: 'center'
         },
         items: [{
-          text: "Activity",
-          iconCls: 'activity',
-          card: Crave.activityPanel
-        },{
           text: 'Nearby',
           iconCls: 'nearBy',
           card: Crave.nearbyPanel
+        },{
+          text: "Activity",
+          iconCls: 'activity',
+          card: Crave.activityPanel
         },{
           text: "Saved",
           iconCls: 'saved',
@@ -324,7 +327,8 @@ Crave.latestPositionText = function() {
     text = text + ", " + Crave.latest_position.state;
   }
   return text;
-}
+};
+
 Crave.updateLocation = function(callback) {
   var position_callback = function(coords) {
     //first store the position for later
