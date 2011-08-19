@@ -72,8 +72,15 @@ class MenuItemRatingsController < ApplicationController
   end
 
   def send_to_twitter
+    # For API requests we have to get the current user from the menu_item_rating param
+    if (!current_user || current_user.nil?)
+      user = @menu_item_rating.user
+    else
+      user = current_user
+    end
+    
     # Only send to Twitter if in fact, this user's twitter account exists
-    auth = Authorization.find(:first, :conditions => {:user_id => current_user.id, :provider => 'twitter'})
+    auth = Authorization.find(:first, :conditions => {:user_id => user.id, :provider => 'twitter'})
     
     if (!auth || auth.token.empty? || auth.secret.empty?)
       return
@@ -91,13 +98,15 @@ class MenuItemRatingsController < ApplicationController
     menu_item = MenuItem.find_by_id(menu_item_id)
     menu_item_friendly_id = menu_item.friendly_id
     
-    review = "I just craved " + menu_item.name + " @"
+    review = "Check out my review of the " + menu_item.name + " @"
   
     if (!menu_item.restaurant.twitter.empty?)
       review = review + menu_item.restaurant.twitter
     else
       review = review + " " + menu_item.restaurant.name
     end
+    
+    review = review + " on crave"
     
     menu_item_rating_id = @menu_item_rating.id.to_s
     link = "http://getcrave.com/items/"+menu_item_friendly_id+"#"+menu_item_rating_id
@@ -116,9 +125,17 @@ class MenuItemRatingsController < ApplicationController
 
 
   def send_to_fb_wall
-    # Only send to FB wall if in fact, this user's FB account exists
-    auth = Authorization.find(:first, :conditions => {:user_id => current_user.id, :provider => 'facebook'})
     
+    # For API requests we have to get the current user from the menu_item_rating param
+    if (!current_user || current_user.nil?)
+      user = @menu_item_rating.user
+    else
+      user = current_user
+    end
+    
+    auth = Authorization.find(:first, :conditions => {:user_id => user.id, :provider => 'facebook'})
+    
+    # Only send to FB wall if in fact, this user's FB account exists
     if (!auth || auth.token.empty?)
       return
     end
@@ -129,7 +146,8 @@ class MenuItemRatingsController < ApplicationController
     menu_item_friendly_id = menu_item.friendly_id
     name = menu_item.name
     
-    review = params[:menu_item_rating][:review] ? params[:menu_item_rating][:review] : "I just craved " + name
+    review = params[:menu_item_rating][:review] ? 
+      params[:menu_item_rating][:review] : "Check out my review of the " + name + " on crave"
     
     menu_item_rating_id = @menu_item_rating.id.to_s
     link = "http://getcrave.com/items/"+menu_item_friendly_id+"#"+menu_item_rating_id
@@ -147,8 +165,15 @@ class MenuItemRatingsController < ApplicationController
   end
   
   def send_to_foursquare
+    # For API requests we have to get the current user from the menu_item_rating param
+    if (!current_user || current_user.nil?)
+      user = @menu_item_rating.user
+    else
+      user = current_user
+    end
+  
     auth = Authorization.find(:first, 
-      :conditions => {:user_id => current_user.id, :provider => 'foursquare'})
+      :conditions => {:user_id => user.id, :provider => 'foursquare'})
     
     if (!auth || auth.token.empty?)
       return
@@ -169,7 +194,7 @@ class MenuItemRatingsController < ApplicationController
     menu_item_rating_id = @menu_item_rating.id.to_s
     link = "http://getcrave.com/items/"+menu_item_friendly_id+"#"+menu_item_rating_id
     
-    review = "Check out my crave of the " + name + " - " + link
+    review = "Check out my review of the " + name + " on crave - " + link
     
     client = Foursquare2::Client.new(:oauth_token => auth.token,
       :ssl => { :verify => OpenSSL::SSL::VERIFY_PEER, :ca_file => '/usr/lib/ssl/certs/ca-certificates.crt' })
