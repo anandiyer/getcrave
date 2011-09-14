@@ -45,7 +45,11 @@ class FoursquareCheckinsController < ApplicationController
     
     posted_json = request.body.read
     
+    p posted_json
+    
     pj = JSON.parse(posted_json)
+    
+    p pj
     
     @checkin = FoursquareCheckin.new()
 #    @checkin.data = posted_json
