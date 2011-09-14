@@ -42,15 +42,11 @@ class FoursquareCheckinsController < ApplicationController
 
   # POST /foursquare_checkins
   # POST /foursquare_checkins.xml
-  def create
-    
-    p params
-    p params["checkin"]
-    p params["user"]
-    
+  def create    
     @checkin = FoursquareCheckin.new()
     
     if (params["checkin"])
+      p params["checkin"]["id"]
       @checkin.checkin_id = params["checkin"]["id"]
       if (params["checkin"]["venue"])
         @checkin.venue_id = params["checkin"]["venue"]["id"]
