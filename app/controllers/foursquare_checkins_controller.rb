@@ -1,4 +1,5 @@
 require 'twiliolib'
+require 'uri'
 
 class FoursquareCheckinsController < ApplicationController
   # GET /foursquare_checkins
@@ -44,10 +45,11 @@ class FoursquareCheckinsController < ApplicationController
   def create
     
     posted_json = request.body.read
+    decoded_json = URI.decode(posted_json)
     
-    p posted_json
+    p decoded_json
     
-    pj = JSON.parse(posted_json)
+    pj = JSON.parse(decoded_json)
     
     p pj
     
