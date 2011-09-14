@@ -44,28 +44,16 @@ class FoursquareCheckinsController < ApplicationController
   # POST /foursquare_checkins.xml
   def create
     
-    posted_json = request.body.read
-    decoded_json = URI.decode(posted_json)
-    
-    p params
-    
-    p decoded_json
-    
-    pj = JSON.parse(decoded_json)
-    
-    p pj
-    
     @checkin = FoursquareCheckin.new()
-#    @checkin.data = posted_json
     
-    if (pj["checkin"])
-      @checkin.checkin_id = pj["checkin"]["id"]
-      if (pj["checkin"]["venue"])
-        @checkin.venue_id = pj["checkin"]["venue"]["id"]
+    if (params["checkin"])
+      @checkin.checkin_id = params["checkin"]["id"]
+      if (params["checkin"]["venue"])
+        @checkin.venue_id = params["checkin"]["venue"]["id"]
       end
     end
-    if (pj["user"])
-      @checkin.user_id = pj["user"]["id"]
+    if (params["user"])
+      @checkin.user_id = params["user"]["id"]
     end
     
     # Get the top item at this foursquare venue
