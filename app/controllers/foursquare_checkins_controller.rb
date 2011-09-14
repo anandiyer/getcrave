@@ -45,6 +45,8 @@ class FoursquareCheckinsController < ApplicationController
   def create
     
     p params
+    p params["checkin"]
+    p params["user"]
     
     @checkin = FoursquareCheckin.new()
     
