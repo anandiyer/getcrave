@@ -46,17 +46,21 @@ class FoursquareCheckinsController < ApplicationController
     @checkin = FoursquareCheckin.new()
     
     if (params["checkin"])
+      checkin_json = JSON.parse(params["checkin"])
+      
       p "DEBUGGING"
-      p params
-      p params["checkin"]
-      p params["checkin"]["id"]
-      @checkin.checkin_id = params["checkin"]["id"]
-      if (params["checkin"]["venue"])
-        @checkin.venue_id = params["checkin"]["venue"]["id"]
+      p checkin_json
+
+      @checkin.checkin_id = checkin_json["id"]
+      if (checkin_json["venue"])
+        @checkin.venue_id = checkin_json["venue"]["id"]
       end
     end
     if (params["user"])
-      @checkin.user_id = params["user"]["id"]
+      user_json = JSON.parse(params["user"])
+      p "DEBUGGING"
+      p user_json
+      @checkin.user_id = user_json["id"]
     end
     
     # Get the top item at this foursquare venue
