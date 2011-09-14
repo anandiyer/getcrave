@@ -48,9 +48,6 @@ class FoursquareCheckinsController < ApplicationController
     if (params["checkin"])
       checkin_json = JSON.parse(params["checkin"])
       
-      p "DEBUGGING"
-      p checkin_json
-
       @checkin.checkin_id = checkin_json["id"]
       if (checkin_json["venue"])
         @checkin.venue_id = checkin_json["venue"]["id"]
@@ -58,8 +55,6 @@ class FoursquareCheckinsController < ApplicationController
     end
     if (params["user"])
       user_json = JSON.parse(params["user"])
-      p "DEBUGGING"
-      p user_json
       @checkin.user_id = user_json["id"]
     end
     
