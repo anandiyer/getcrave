@@ -46,6 +46,9 @@ class FoursquareCheckinsController < ApplicationController
     @checkin = FoursquareCheckin.new()
     
     if (params["checkin"])
+      p "DEBUGGING"
+      p params
+      p params["checkin"]
       p params["checkin"]["id"]
       @checkin.checkin_id = params["checkin"]["id"]
       if (params["checkin"]["venue"])
