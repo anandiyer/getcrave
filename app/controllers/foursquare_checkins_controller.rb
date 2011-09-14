@@ -47,6 +47,8 @@ class FoursquareCheckinsController < ApplicationController
     posted_json = request.body.read
     decoded_json = URI.decode(posted_json)
     
+    p params
+    
     p decoded_json
     
     pj = JSON.parse(decoded_json)
