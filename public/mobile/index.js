@@ -4,11 +4,11 @@ Ext.setup({
   onReady: function(){
     Crave.app_version = "1.0";
     
-    urlPrefix = "https://secure.getcrave.com";
+    urlPrefix = "http://getcrave.com";
     var local = false;
     if(window.location.toString().indexOf("local")>-1) {
       //urlPrefix = '/wg/proxy.php?url=http://blooming-water-228.heroku.com';
-      urlPrefix = '/cravecomp';
+      urlPrefix = '/';
       Crave.spoof_location = true;
       local = true;
     }
