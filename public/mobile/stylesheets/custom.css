@@ -22,11 +22,11 @@ body {
   -webkit-background-size: .6em 1em;
   width: 8px;
   height: 15px;
-  margin: 28px 3px 0 0;
+  margin: 22px 3px 0 0;
 }
 .adish {overflow:hidden;}
 .dishListinfo {float:left;margin:0;font-size:14px;color:#282828;line-height: 20px;width: 210px;}
-.dishImg {display:block;float:left;width:60px;margin:3px;-webkit-border-radius:5px;margin-right:10px;}
+.dishImg {display:block;float:left;width:50px;margin:3px;-webkit-border-radius:5px;margin-right:10px;padding:0px;}
 .dishname {font-weight:bold;}
 .restaurantName {display:block;}
 .distanceFigure {display:block;color:#5d5d5d;}
@@ -67,7 +67,7 @@ padding: .3em .3em;
 /*don't hightlight selected list items ever */
 .x-list .x-list-item, .x-list .x-list-item.x-item-selected {
   border-top: solid 1px #CCC;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, white), color-stop(100%, #F1F1F1));
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(45%,#ffffff), color-stop(100%,#f1f1f1));
   color: black;
 }
 
@@ -90,7 +90,7 @@ padding: .3em .3em;
 
 .highlightPressed.x-list .x-list-item.x-item-pressed, .highlightSelected.x-list .x-list-item.x-item-selected {
   border-top-color: #ccc;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, white), color-stop(100%, #FFFCCC));
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #edecec), color-stop(100%, #d8d8d8));
 }
 
 /** frame panel thing used on the filters screen and probably elsewhere **/
@@ -232,6 +232,7 @@ FORM.framePanel .x-form-field-container {
 .framePanel .settingItem.header {
   border-top: none;
   padding: 12px 4px 4px 8px;
+  margin-top:0px;
 }
 
 .framePanel .settingItem.header.borderTop {
@@ -241,9 +242,9 @@ FORM.framePanel .x-form-field-container {
 .framePanel .settingItem.header IMG {
   float: left;
   position: relative;
-  top: -8px;
-  height: 32px;
-  max-width: 32px;
+  top: 0px;
+  height: 24px;
+  max-width: 24px;
   margin-right: 6px;
 }
 
@@ -627,6 +628,7 @@ border-bottom-left-radius: 0.4em;*/
 }
 .x-toolbar.x-docked-top {
 border-bottom: .1em solid #73271A;
+
 }
 
 
@@ -789,6 +791,16 @@ border-top: 1px solid #ffffff;
 }
 .loginButton {
     background: url("../../images/facebook-button@2x.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    width: 302px;
+    height: 36px;
+    border: none;
+    margin: 12px auto;
+    display:block;
+}
+
+.loginButtonTwitter {
+    background: url("../../images/twitter-button@2x.png") no-repeat;
     -webkit-background-size: 100% 100%;
     width: 302px;
     height: 36px;
@@ -977,7 +989,7 @@ IMG.stars {
   min-height: 80px;
 }
 .arating .ratingListItem {
-  padding-left: 68px;
+  padding-left: 60px;
 }
 
 .arating .ratingListItem SPAN.review {
@@ -992,7 +1004,7 @@ IMG.stars {
   color: #01669a;
   text-decoration: none;
   -webkit-touch-callout: inherit;
-  -webkit-tap-highlight-color: red;
+  -webkit-tap-highlight-color: #ccc;
 }
 
 .arating .ratingDescription A:hover {
@@ -1337,5 +1349,17 @@ text-align: left;
 }
 .x-list-noresult-message {
 }
+
+
+.x-carousel-indicator-dark span.x-carousel-indicator-active {
+background-color: rgba(255, 255, 255, 0.3);
+background-image: none;
+}
+
+.x-sheet .x-sheet-body .x-button {
+margin-bottom: 0.5em;
+height: 40px;
+}
+
 
 

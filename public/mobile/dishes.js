@@ -453,7 +453,7 @@ Crave.buildDishDisplayPanel = function() {
           dock : 'top',
           xtype: 'toolbar',
           cls: 'title clickable',
-          style: 'margin: 0;',
+          style: 'margin: -1px, -1px,0,0;',
           title: 'Address'
         }],
         items: [{
@@ -712,7 +712,7 @@ Crave.photo_url = function(obj, placeholder) {
 Crave.photo_for = function(obj, placeholder) {
   var photo_url = Crave.photo_url(obj, placeholder);
   if (photo_url) {
-    return '<img src='+photo_url+' class="dishImg" style="height: 60px;">';
+    return '<img src='+photo_url+' class="dishImg" style="height: 50px;">';
   } else {
     return "";
   }
