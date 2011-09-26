@@ -19,11 +19,14 @@ class SessionsController < ApplicationController
       if ((@omniauth['provider'] == 'facebook') || (@omniauth['provider'] == 'twitter'))
         @authuid = @omniauth['uid'].to_i
         @conditions = " facebook_id = #{@authuid}"
-        @tester = AlphaTester.find(:first, :conditions => @conditions)
+        
+        if ((session[:redirect_to]) && (!session[:redirect_to].include? 'mobile'))
+          @tester = AlphaTester.find(:first, :conditions => @conditions)
 
-        if (!@tester || !@tester.authorized)
-          redirect_to '/request.html'
-          return
+          if (!@tester || !@tester.authorized)
+            redirect_to '/request.html'
+            return
+          end
         end
       elsif (@omniauth['provider'] == 'foursquare')
         # This is for the mobile use case - we have to get the uid first
