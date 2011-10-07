@@ -8,6 +8,7 @@
     %th Country
     %th Latitude
     %th Longitude
+    %th Created
     %th
     %th
     %th
@@ -20,6 +21,7 @@
       %td= user_vote_city.country
       %td= user_vote_city.latitude
       %td= user_vote_city.longitude
+      %td= user_vote_city.created_at
       %td= link_to 'Show', user_vote_city
       %td= link_to 'Edit', edit_user_vote_city_path(user_vote_city)
       %td= link_to 'Destroy', user_vote_city, :confirm => 'Are you sure?', :method => :delete
