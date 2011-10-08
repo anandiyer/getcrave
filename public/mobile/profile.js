@@ -647,7 +647,7 @@ Crave.twitterLogin = function() {
       window.plugins.childBrowser.showWebPage("http://getcrave.com/auth/twitter?redirect_to=mobile");
     }
   } else {
-    location.href = "http://getcrave.com/auth/twitter";
+    location.href = "http://getcrave.com/auth/twitter?redirect_to=mobile";
   }
 }
 
@@ -679,7 +679,7 @@ Crave.facebookLogin = function() {
       window.plugins.childBrowser.showWebPage("http://getcrave.com/auth/facebook?redirect_to=mobile");
     }
   } else {
-    location.href = "http://getcrave.com/auth/facebook";
+    location.href = "http://getcrave.com/auth/facebook?redirect_to=mobile";
   }
 }
 
